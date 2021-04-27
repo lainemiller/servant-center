@@ -8,9 +8,19 @@ import { ProgressNotesComponent } from './components/progress-notes/progress-not
 import { TransportRequestFormComponent } from './components/transport-request-form/transport-request-form.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { VeteranComponent } from './components/veteran/veteran.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin
+import listPlugin from '@fullcalendar/list';
+import timeGridPlugin from '@fullcalendar/timegrid';
+
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin,
+  listPlugin,
+  timeGridPlugin
+]);
 
 @NgModule({
   declarations: [
@@ -23,12 +33,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }),
-    AppRoutingModule
+    AppRoutingModule,
+    FullCalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
