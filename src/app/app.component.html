@@ -1,5 +1,13 @@
 <div class="main-title">
   <img src="assets/scLogo.webp" alt="The Servant Center">
   <h1 >Welcome to the Servant Center landing page!</h1>
+  <button (click)="toggleIsOpen()">open/close active day</button>
+
+  <mwl-calendar-month-view
+    [viewDate]="viewDate"
+    [events]="events"
+    [activeDayIsOpen]="activeDayIsOpen"
+  >
+  </mwl-calendar-month-view>
 </div>
 
