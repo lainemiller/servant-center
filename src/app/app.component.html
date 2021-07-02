@@ -1,10 +1,47 @@
-<div class="main-title">
-  <img src="assets/scLogo.webp" alt="The Servant Center">
-  <h1 >Welcome to the Servant Center landing page!</h1>
-  <!-- <button (click)="toggleIsOpen()">open/close active day</button> -->
+<nb-layout>
 
+  <nb-layout-header fixed>
+  MyServantCenter
+  </nb-layout-header>
 
-  <app-calendar></app-calendar>
+  <nb-sidebar>
+    <div>
+      <nav>
+        <span>
+          <h3 (click)='redirectHome()'>Dashboard</h3>
+        </span>
+        <span>
+          <h3 (click)='redirectAssessment()'>Assessment</h3>
+        </span>
+        <span>
+          <h3 (click)='redirectPlan()'>Treatment Plan</h3>
+        </span>
+        <span>
+          <h3 (click)='redirectTracker()'>Health Tracker</h3>
+        </span>
+        <span>
+          <h3 (click)='redirectProfile()'>Profile</h3>
+        </span>
+      </nav>
+    </div>
+  </nb-sidebar>
 
-</div>
+  <nb-layout-column>
+    <!-- <div class="main-title">
+      <img src="assets/scLogo.webp" alt="The Servant Center">
+      <h1 >Welcome to the Servant Center landing page!</h1>
+      <button (click)="toggleIsOpen()">open/close active day</button>
+    
+    
+      <app-calendar></app-calendar>
+    
+    </div> -->
+    
+    <router-outlet></router-outlet>
+  </nb-layout-column>
 
+  <nb-layout-footer fixed>
+  Temp Footer
+  </nb-layout-footer>
+
+</nb-layout>

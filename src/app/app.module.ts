@@ -13,6 +13,10 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 import listPlugin from '@fullcalendar/list';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonModule } from '@nebular/theme';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
+
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -34,7 +38,13 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FullCalendarModule
+    FullCalendarModule,
+    BrowserAnimationsModule,
+    NbThemeModule.forRoot({ name: 'default' }),
+    NbLayoutModule,
+    NbSidebarModule.forRoot(),
+    NbButtonModule,
+    NbEvaIconsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11,4 +11,23 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
   //Service to handle any http(s) requests
+
+  //get upcoming events
+  getUpcomingEvents() {
+
+  }
+
+  getUpcomingEventsSC() {
+
+  }
+
+  //get info from veteran's file
+  getVetInfo() {
+
+  }
+
+  //get list of goals for a vet
+  getVetGoals() {
+
+  }
 }
