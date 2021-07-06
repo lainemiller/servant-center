@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { CaseWorkerComponent } from './components/case-worker/case-worker.component';
 import { ProgressNotesComponent } from './components/progress-notes/progress-notes.component';
 import { TransportRequestFormComponent } from './components/transport-request-form/transport-request-form.component';
-import { CalendarComponent } from './components/calendar/calendar.component';
 import { VeteranComponent } from './components/veteran/veteran.component';
 import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
@@ -14,9 +13,8 @@ import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 import listPlugin from '@fullcalendar/list';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonModule, NbIconModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -32,7 +30,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     CaseWorkerComponent,
     ProgressNotesComponent,
     TransportRequestFormComponent,
-    CalendarComponent,
     VeteranComponent
   ],
   imports: [
@@ -44,7 +41,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     NbLayoutModule,
     NbSidebarModule.forRoot(),
     NbButtonModule,
-    NbEvaIconsModule
+    NbEvaIconsModule,
+    NbIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

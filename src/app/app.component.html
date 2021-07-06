@@ -1,26 +1,27 @@
 <nb-layout>
 
-  <nb-layout-header fixed>
-  MyServantCenter
+  <nb-layout-header fixed class="main-header">
+    <h2>MyServantCenter</h2>
   </nb-layout-header>
 
-  <nb-sidebar>
+  <nb-sidebar tag="left">
+    <!-- <button nbButton status="basic" size="small" (click)="toggleCompact()"><nb-icon icon="menu-outline"></nb-icon></button> -->
     <div>
       <nav>
         <span>
-          <h3 (click)='redirectHome()'>Dashboard</h3>
+          <h5 (click)='redirectHome()' class="dashboard"><nb-icon icon="calendar-outline" status="danger" size="large"></nb-icon> Dashboard</h5>
         </span>
         <span>
-          <h3 (click)='redirectAssessment()'>Assessment</h3>
+          <h5 (click)='redirectAssessment()' class="assessment"><nb-icon icon="file-text-outline" status="warning" size="medium"></nb-icon> Assessment</h5>
         </span>
         <span>
-          <h3 (click)='redirectPlan()'>Treatment Plan</h3>
+          <h5 (click)='redirectPlan()' class="plan"><nb-icon icon="star-outline" status="primary" size="medium"></nb-icon> Treatment Plan</h5>
         </span>
         <span>
-          <h3 (click)='redirectTracker()'>Health Tracker</h3>
+          <h5 (click)='redirectTracker()' class="tracker"><nb-icon icon="heart-outline" status="success" size="medium"></nb-icon> Health Tracker</h5>
         </span>
         <span>
-          <h3 (click)='redirectProfile()'>Profile</h3>
+          <h5 (click)='redirectProfile()' class="profile"><nb-icon icon="person-outline" status="info" size="medium"></nb-icon> Profile</h5>
         </span>
       </nav>
     </div>

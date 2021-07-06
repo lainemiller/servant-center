@@ -1,5 +1,41 @@
+@import '../themes';
+
 .main-title {
   text-align: center;
   margin-top: 4em;
   font-family: 'Courier New', Courier, monospace;
+}
+
+.dashboard {
+  color: nb-theme(color-danger-default);
+}
+
+.assessment {
+  color: nb-theme(color-warning-default);
+}
+
+.plan {
+  color: nb-theme(color-primary-default);
+}
+
+.tracker {
+  color: nb-theme(color-success-default);
+}
+
+.profile {
+  color: nb-theme(color-info-default);
+}
+
+.main-header {
+  color: nb-theme(text-alternate-color);
+}
+
+nb-layout {
+  nb-layout-header {
+    background: nb-theme(background-primary-color-2);
+
+    h2 {
+      color: nb-theme(text-alternate-color);
+    }
+  }
 }

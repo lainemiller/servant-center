@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NbSidebarService } from '@nebular/theme';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 
 export class AppComponent {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private sidebarService: NbSidebarService) {}
 
   redirectHome() {
     this.router.navigate(['/home']);
@@ -25,5 +26,9 @@ export class AppComponent {
   }
   redirectProfile() {
     this.router.navigate(['/profile']);
+  }
+
+  toggleCompact() {
+    this.sidebarService.toggle(false, 'left');
   }
 }
