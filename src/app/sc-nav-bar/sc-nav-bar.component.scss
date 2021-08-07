@@ -1,5 +1,10 @@
+mat-sidenav-container {
+  z-index: 0;
+}
+
 .sidenav-container {
   height: 100%;
+  z-index: 0;
 }
 
 .sidenav {
@@ -14,4 +19,11 @@
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+#main-nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }
