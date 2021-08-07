@@ -12,12 +12,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { ScMainBodyComponent } from './sc-main-body/sc-main-body.component';
+import { ScDashboardComponent } from './sc-dashboard/sc-dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ScNavBarComponent,
-    ScMainBodyComponent
+    ScMainBodyComponent,
+    ScDashboardComponent
   ],
   imports: [
     BrowserModule,
