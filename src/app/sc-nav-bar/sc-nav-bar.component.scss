@@ -27,3 +27,23 @@ mat-sidenav-container {
   left: 0;
   right: 0;
 }
+
+.header-bar {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+
+  width: 100%;
+  height: 64px;
+  background-color: red;
+  color: white;
+  background-image: linear-gradient(rgb(41, 42, 102) 0%, rgb(130, 129, 176) 49%, rgb(41, 42, 102) 100%);
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+  img {
+    height: 40px
+  }
+}

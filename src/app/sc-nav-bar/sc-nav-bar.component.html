@@ -1,7 +1,18 @@
-
+<mat-toolbar class="header-bar">
+  <img id="u13_img" class="img " src="https://d1icd6shlvmxi6.cloudfront.net/gsc/48II62/fa/40/79/fa4079610b9a4606bb28a30f61084310/images/veteran_landing_page/u13.png?token=e861e8cfb487cdb6332fc6e4e0a10a87b170633f152f6ba3e5e2ba8532a5e61f">
+  <span>MyServantCenter</span>
+  <span class="spacer"></span>
+  <button
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      (click)="drawer.toggle()"
+      *ngIf="isHandset$ | async">
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+</mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav-content>
-    <!-- Add Content Here -->
     <app-sc-main-body></app-sc-main-body>
   </mat-sidenav-content>
   <mat-sidenav #drawer class="sidenav" fixedInViewport
@@ -9,11 +20,8 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false"
       [fixedTopGap]="64">
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+    <mat-nav-list *ngFor="let option of navOptions">
+      <a mat-list-item attr.href="{{option.url}}" attr.style="color: {{option.color}};"><img attr.src="{{option.icon}}">&nbsp;{{option.name | uppercase}}</a>
     </mat-nav-list>
   </mat-sidenav>
 </mat-sidenav-container>
