@@ -3,7 +3,6 @@ mat-sidenav-container {
 }
 
 .sidenav-container {
-  height: 100%;
   z-index: 0;
 }
 
@@ -15,21 +14,12 @@ mat-sidenav-container {
   background: inherit;
 }
 
-.mat-toolbar.mat-primary {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
 
-#main-nav-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+.sc-body {
+  margin-top: 64px;
 }
 
 .header-bar {
-  overflow: hidden;
   position: fixed;
   top: 0;
   z-index: 100;

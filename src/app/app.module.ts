@@ -13,13 +13,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { ScMainBodyComponent } from './sc-main-body/sc-main-body.component';
 import { ScDashboardComponent } from './sc-dashboard/sc-dashboard.component';
+import { ScDashboardWidgetComponent } from './sc-dashboard-widget/sc-dashboard-widget.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ScNavBarComponent,
     ScMainBodyComponent,
-    ScDashboardComponent
+    ScDashboardComponent,
+    ScDashboardWidgetComponent
   ],
   imports: [
     BrowserModule,

@@ -12,16 +12,16 @@
   </button>
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav-content>
-    <app-sc-main-body></app-sc-main-body>
-  </mat-sidenav-content>
   <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false"
-      [fixedTopGap]="64">
-    <mat-nav-list *ngFor="let option of navOptions">
-      <a mat-list-item attr.href="{{option.url}}" attr.style="color: {{option.color}};"><img attr.src="{{option.icon}}">&nbsp;{{option.name | uppercase}}</a>
-    </mat-nav-list>
-  </mat-sidenav>
+  [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+  [mode]="(isHandset$ | async) ? 'over' : 'side'"
+  [opened]="(isHandset$ | async) === false"
+  [fixedTopGap]="64">
+  <mat-nav-list *ngFor="let option of navOptions">
+    <a mat-list-item attr.href="{{option.url}}" attr.style="color: {{option.color}};"><img attr.src="{{option.icon}}">&nbsp;{{option.name | uppercase}}</a>
+  </mat-nav-list>
+</mat-sidenav>
+<mat-sidenav-content class="sc-body">
+  <app-sc-main-body></app-sc-main-body>
+</mat-sidenav-content>
 </mat-sidenav-container>
