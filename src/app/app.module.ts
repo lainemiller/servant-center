@@ -13,6 +13,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 import listPlugin from '@fullcalendar/list';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { SectionHeaderComponent } from './components/section-header/section-header.component';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -29,7 +30,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ProgressNotesComponent,
     TransportRequestFormComponent,
     CalendarComponent,
-    VeteranComponent
+    VeteranComponent,
+    SectionHeaderComponent
   ],
   imports: [
     BrowserModule,

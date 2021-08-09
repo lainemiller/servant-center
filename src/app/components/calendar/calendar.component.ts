@@ -25,7 +25,7 @@ export class CalendarComponent implements OnInit {
   calendarOptions2: CalendarOptions = {
     initialView: 'timeGridWeek',
     dateClick: this.handleDateClick.bind(this),
-    weekends: false,
+    weekends: true,
     events: [
       {title: 'Meeting 1', date: subBusinessDays(new Date(), 1)},
       {title: '2 Meeting', date: new Date()},
