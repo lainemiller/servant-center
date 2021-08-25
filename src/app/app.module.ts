@@ -14,6 +14,7 @@ import { MatListModule } from '@angular/material/list';
 import { ScMainBodyComponent } from './sc-main-body/sc-main-body.component';
 import { ScDashboardComponent } from './sc-dashboard/sc-dashboard.component';
 import { ScDashboardWidgetComponent } from './sc-dashboard-widget/sc-dashboard-widget.component';
+import { ScHealthTrackerComponent } from './sc-health-tracker/sc-health-tracker.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ScDashboardWidgetComponent } from './sc-dashboard-widget/sc-dashboard-w
     ScNavBarComponent,
     ScMainBodyComponent,
     ScDashboardComponent,
-    ScDashboardWidgetComponent
+    ScDashboardWidgetComponent,
+    ScHealthTrackerComponent
   ],
   imports: [
     BrowserModule,
