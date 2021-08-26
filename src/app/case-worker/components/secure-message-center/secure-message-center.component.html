@@ -1,0 +1,23 @@
+<app-item-header [title]="title" color="blue"></app-item-header>
+<div class="container">
+  <p-tabView>
+    <p-tabPanel [header]="tab.header" *ngFor="let tab of tabs">
+      <p-table [value]="tableValues" styleClass="p-datatable-striped">
+        <ng-template pTemplate="header">
+          <tr>
+            <th [pSortableColumn]="col.field" *ngFor="let col of columns">
+              {{col.header}} <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-tableValue>
+          <tr>
+            <td *ngFor="let col of columns">
+              {{tableValue[col.field]}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+  </p-tabView>
+</div>

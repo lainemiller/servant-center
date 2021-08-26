@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ScDashboardComponent } from './sc-dashboard/sc-dashboard.component';
-import { ScMainBodyComponent } from './sc-main-body/sc-main-body.component';
 
 const routes: Routes = [
-  // { path: '', component: ScDashboardComponent },
-  // { path: 'assessment', component: ScAssessmentComponent },
-  // { path: 'treatment-plan', component: ScTreatmentPlanComponent },
-  // { path: 'health-tracker', component: ScHealthTracker },
-  // { path: 'profile', component: ScProfile }
+  { path: 'case-worker', loadChildren: () => import('./case-worker/case-worker.module').then(m => m.CaseWorkerModule) },
+  {
+    path: 'veteran',
+    loadChildren: () => import('./veteran/veteran.module').then(m => m.VeteranModule),
+  },
+  { path: '**', redirectTo: 'veteran' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
