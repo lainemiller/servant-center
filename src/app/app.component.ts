@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavOptions } from './shared/models/nav-options-model';
 
 @Component({
   selector: 'app-root',
@@ -8,38 +7,4 @@ import { NavOptions } from './shared/models/nav-options-model';
 })
 export class AppComponent {
   title = 'servant-center';
-  assetPath = "/assets/images/";
-  example: NavOptions[] = [
-    {
-      name: "dashboard",
-      url: "/",
-      icon: this.assetPath + "dashboard.svg",
-      color: "#A00000"
-    },
-    {
-      name: "assessment",
-      url: "/assessment",
-      icon: this.assetPath + 'assessment.svg',
-      color: "#CC5600"
-    },
-    {
-      name: "treatment plan",
-      url: "/treatment-plan",
-      icon: this.assetPath + 'treatment.svg',
-      color: "#31326D"
-    },
-    {
-      name: "health tracker",
-      url: "/health-tracker",
-      icon: this.assetPath + 'health.svg',
-      color: "#28714D"
-    },
-    {
-      name: "profile",
-      url: "/profile",
-      icon: this.assetPath + 'profile.svg',
-      color: "#0D5DA6"
-    }
-  ];
-
 }
