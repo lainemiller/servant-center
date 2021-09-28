@@ -14,8 +14,8 @@
     <div class="p-field p-col-12 p-md-8">
     <p-calendar formControlName=date [inline]=false [showIcon]=true placeholder="Appointment Date (mm/dd/yyyy)"></p-calendar></div>
     <div class="p-field p-col-12 p-md-4">
-    <p-calendar formControlName=time [timeOnly]=true placeholder="Time" [showIcon]=true icon="pi pi-angle-down"></p-calendar></div></div>
-    <div class="p-field p-fluid">
+      <p-dropdown [options]="cities" formControlName="selectedCity"></p-dropdown>
+      <div class="p-field p-fluid">
       <input type="text" pInputText formControlName=address placeholder="Address"></div>
       <div class="p-fluid p-formgrid p-grid">
       <div class="p-field p-col-8 p-md-5">
