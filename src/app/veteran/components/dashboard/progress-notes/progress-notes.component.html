@@ -1,0 +1,35 @@
+<app-item-header [title]="title"></app-item-header>
+<div class="progress-notes--container">
+  <p-toolbar>
+    <div class="p-toolbar-group-left">
+  <button type="button" pButton icon="fas fa-plus-circle" label="Add Notes" class="p-button-outlined"></button></div>
+  <div class="p-toolbar-group-right">
+  <input type="text" pInputText placeholder="Search" class="p-mr-2">
+  <button type="button" pButton icon="fas fa-external-link-alt" class="p-button-text" style="font-size: 20px;"></button></div>
+  </p-toolbar>
+  <div class="progress-notes--group p-mt-4 p-grid">
+    <div class="p-shadow-2 p-col-12 progress-note" *ngFor="let progressNote of progressNotes; let i = index;">
+      <div class="inputSwitch-container p-col-12">
+      <p-toolbar>
+        <div class="p-toolbar-group-left">
+      <span class="p-mr-2">Open</span>
+      <p-inputSwitch [(ngModel)]="progressNote.goalState" class="open-close-switch"></p-inputSwitch>
+      <span class="p-ml-2">Closed</span>
+    </div>
+    <div class="p-toolbar-group-right">
+      <button type="button" pButton icon="fas fa-cog" class="p-button-text settings-button" style="font-size: 30px;"></button>
+    </div>
+    </p-toolbar>
+    </div>
+      <div class="p-col-12 goal-header p-d-flex p-jc-between">
+        <div class="goal-header--title">{{progressNote.goalTitle}}</div>
+        <div class="goal-header--date">Added {{progressNote.addedDate}}</div>
+      </div>
+      <div class="p-col-12 goal-content">
+        <p class="goal-description" id="goal-desc--{{i}}">{{progressNote.goalDescription}}</p>
+        <p-toggleButton offIcon="fas fa-chevron-down" onIcon="fas fa-chevron-up" styleClass="p-button-text" (click)="expandOrCollapse(i)"></p-toggleButton>
+      </div>
+    </div>
+
+  </div>
+</div>

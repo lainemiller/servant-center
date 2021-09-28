@@ -1,0 +1,15 @@
+p {
+  white-space: pre-line;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 15px;
+  height: 55px;
+  background-color: green;
+  background-image: linear-gradient(rgb(41, 42, 102) 0%, rgb(130, 129, 176) 49%, rgb(41, 42, 102) 100%);
+  width: 100%;
+  margin-top: 20px;
+  color: white;
+}

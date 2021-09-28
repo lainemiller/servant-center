@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  min-width: fit-content;
+}
+
+.button-container {
+  width: 100%;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+}

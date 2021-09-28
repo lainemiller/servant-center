@@ -1,0 +1,59 @@
+.progress-notes--container{
+  margin: 0 15px;
+  padding: 20px 20px;
+  background: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(183, 183, 183, 1);
+  height: 372px;
+}
+
+:host::ng-deep.p-toolbar {
+  padding: 0px;
+  padding-bottom: 0px;
+  background: #fff;
+  border: none;
+}
+
+.progress-notes--group{
+  padding:0 20px;
+  height: 250px;
+  overflow-y: scroll;
+}
+
+.progress-note {
+  border-radius: 25px;
+  margin-bottom:10px;
+  .goal-description {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: #222222;
+    line-height: 22px;
+    max-height: 30px;
+    overflow-y: hidden;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    &.expand {
+      max-height: 50px;
+      overflow-y: scroll;
+    }
+  }
+
+  .goal-header {
+    font-family: 'Roboto Light', 'Roboto Regular', 'Roboto', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    &--title{
+      font-size: 22px;
+    }
+    &--date{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: #7B7B7B;
+    }
+  }
+}
+
