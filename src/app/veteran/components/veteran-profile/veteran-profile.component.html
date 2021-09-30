@@ -1,3 +1,4 @@
+<input name="name" value="{{name}}">
 <div class="p-grid">
   <div class="p-col-12">
     <app-item-header title="Veteran Profile"></app-item-header>
@@ -8,18 +9,18 @@
         </div> <br>
         <div class="p-fluid p-formgrid p-grid">
           <div class="p-field p-col-12 p-md-3">
-            <input type="text" pInputText formControlName=recordNo placeholder="Record #">
+            <input type="text" class="disable" pInputText formControlName=recordNo placeholder="Record #" >
           </div>
           <div class="p-field p-col-12 p-md-3">
-            <p-calendar formControlName=intakeDOB [inline]=false [showIcon]=true placeholder="Intake Date (mm/dd/yyyy)"></p-calendar></div>
+            <p-calendar formControlName=intakeDOB class="disable" [inline]=false [showIcon]=true placeholder="Intake Date (mm/dd/yyyy)" ></p-calendar></div>
         <div class="p-field p-col-12 p-md-3">
-          <input type="text" pInputText formControlName=caseManager placeholder="Case Manager">
+          <input type="text" class="disable" pInputText formControlName=caseManager placeholder="Case Manager" >
         </div>
     </div>
 
     <div class="p-fluid p-formgrid p-grid">
       <div class="p-field p-col-12 p-md-3">
-        <input type="text" pInputText formControlName=firstName placeholder="First Name">
+        <input type="text" value="{{veteran?.firstName}}" pInputText formControlName=firstName placeholder="First Name">
       </div>
       <div class="p-field p-col-12 p-md-3">
         <input type="text" pInputText formControlName=lastName placeholder="Last Name">
@@ -38,7 +39,7 @@
       </div>
       <!-- DropDown -->
       <div class="p-field p-col-12 p-md-3">
-        <p-dropdown [options]="states" formControlName="selectedState" optionLabel="name" placeholder="Select a State">
+        <p-dropdown [options]="states"  formControlName="selectedState" optionLabel="name" placeholder="{{veteran?.state}}">
         </p-dropdown>
       </div>
       <ng-template pTemplate="selectedItem">
