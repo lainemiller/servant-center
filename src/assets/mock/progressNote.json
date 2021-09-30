@@ -1,0 +1,32 @@
+[
+    {
+      "goalState": true,
+      "goalTitle": "Goal Title 1",
+      "addedDate": "12/12/2020",
+      "goalDescription": "Lorem pravin dolor sit amet consectetur, adipisicing elit. Ab, earum.Atque cum odit veniam illo in illum ducimus cupiditate nemo harum perferendis,molestias, totam eligendi consectetur vel quasi perspiciatis ad!"
+    },
+    {
+        "goalState": true,
+        "goalTitle": "Goal Title 1",
+        "addedDate": "12/12/2020",
+        "goalDescription": "Lorem pravin dolor sit amet consectetur, adipisicing elit. Ab, earum.Atque cum odit veniam illo in illum ducimus cupiditate nemo harum perferendis,molestias, totam eligendi consectetur vel quasi perspiciatis ad!"
+      },
+      {
+        "goalState": false,
+        "goalTitle": "csk",
+        "addedDate": "12/12/2020",
+        "goalDescription": "Lorem pravin dolor sit amet consectetur, adipisicing elit. Ab, earum.Atque cum odit veniam illo in illum ducimus cupiditate nemo harum perferendis,molestias, totam eligendi consectetur vel quasi perspiciatis ad!"
+      },
+      {
+        "goalState": true,
+        "goalTitle": "csk",
+        "addedDate": "12/12/2020",
+        "goalDescription": "Lorem pravin dolor sit amet consectetur, adipisicing elit. Ab, earum.Atque cum odit veniam illo in illum ducimus cupiditate nemo harum perferendis,molestias, totam eligendi consectetur vel quasi perspiciatis ad!"
+      },
+      {
+        "goalState": false,
+        "goalTitle": "rcb",
+        "addedDate": "12/12/2020",
+        "goalDescription": "Lorem pravin dolor sit amet consectetur, adipisicing elit. Ab, earum.Atque cum odit veniam illo in illum ducimus cupiditate nemo harum perferendis,molestias, totam eligendi consectetur vel quasi perspiciatis ad!"
+      }
+  ]
