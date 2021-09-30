@@ -28,7 +28,8 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { KeysPipe } from '../case-worker/components/resident-search/rs-initial-assessment/ia-form-page-three/ia-form-page-three.component';
-
+import {TooltipModule} from 'primeng/tooltip';
+import {HttpClientModule} from '@angular/common/http';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -56,7 +57,9 @@ const MODULES = [
     CheckboxModule,
     InputSwitchModule,
     ToolbarModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    TooltipModule,
+    HttpClientModule
 ];
 
 const COMPONENTS = [
@@ -68,7 +71,7 @@ const COMPONENTS = [
 
 @NgModule({
   declarations: [
-    ...COMPONENTS
+    ...COMPONENTS,
   ],
   imports: [
     CommonModule,
