@@ -1,0 +1,102 @@
+.header {
+  margin-bottom: 30px;
+  display: flex;
+}
+
+.header-title {
+  margin-right: 20px;
+  width: auto;
+}
+
+.header-sub {
+  width: 50%;
+}
+
+.fas {
+  color: #0d89ec;
+}
+
+.chat {
+  padding-top: 10px;
+}
+
+.title {
+  font-family: "Roboto";
+  font-size: 40px;
+  font-weight: 250;
+  color: black;
+}
+
+.title-name {
+  font-family: "Roboto";
+  font-size: 40px;
+  font-weight: 400;
+  color: black;
+}
+
+.title-img {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  margin-right: 20px;
+}
+
+.last-login {
+  padding-top: 20px;
+  font-style: italic;
+  font-weight: lighter;
+}
+
+::ng-deep .p-tooltip .p-tooltip-text {
+  background-color: white;
+  color: blue;
+  font-size: small;
+}
+
+:host ::ng-deep .fc .fc-toolbar .fc-button.fc-listWeek-button.fc-button-active {
+  background: #2196f3;
+  border-color: #2196f3;
+  color: #ffffff;
+}
+// :host
+//   ::ng-deep
+//   .fc
+//   .fc-toolbar
+//   .fc-button.fc-listWeek-button.fc-button-active:hover {
+//   background: #0d89ec;
+//   border-color: #0d89ec;
+//   color: #ffffff;
+// }
+
+// :host ::ng-deep .calendar-container {
+//   padding: 30px;
+//   border-width: 1px;
+//   border-style: solid;
+//   border-color: #ced4da;
+//   background: #ffffff;
+//   margin: 0 15px;
+// }
+
+// :host ::ng-deep .fc .fc-toolbar .fc-button.fc-listWeek-button {
+//   background: #ffffff;
+//   border: 1px solid #ced4da;
+//   color: #495057;
+//   transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+//     box-shadow 0.2s;
+// }
+
+@media only screen and (max-width: 600px) {
+  .title-img {
+    margin-top: 10px;
+  }
+
+  .header {
+    display: block;
+  }
+
+  .header-sub {
+    width: 80%;
+
+    margin-left: 70px;
+  }
+}

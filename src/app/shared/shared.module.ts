@@ -28,11 +28,13 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { KeysPipe } from '../case-worker/components/resident-search/rs-initial-assessment/ia-form-page-three/ia-form-page-three.component';
-import {TooltipModule} from 'primeng/tooltip';
 import { ConsentDataComponent } from './components/consent-data/consent-data.component';
 import {HttpClientModule} from '@angular/common/http'
 import {DialogModule} from 'primeng/dialog';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {Tooltip, TooltipModule} from 'primeng/tooltip';
+import { WelcomeHeaderComponent } from './components/welcome-header/welcome-header.component';
+
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -65,19 +67,22 @@ const MODULES = [
     DialogModule,
     Ng2SearchPipeModule,
     HttpClientModule
+
 ];
 
 const COMPONENTS = [
   ItemHeaderComponent,
   HeaderComponent,
   FooterComponent,
+  WelcomeHeaderComponent,
   KeysPipe
 ]
 
 @NgModule({
   declarations: [
     ...COMPONENTS,
-    ConsentDataComponent
+    ConsentDataComponent,
+    WelcomeHeaderComponent
   ],
   imports: [
     CommonModule,
