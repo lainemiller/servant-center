@@ -30,8 +30,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { KeysPipe } from '../case-worker/components/resident-search/rs-initial-assessment/ia-form-page-three/ia-form-page-three.component';
 import {TooltipModule} from 'primeng/tooltip';
 import { ConsentDataComponent } from './components/consent-data/consent-data.component';
-import {DialogModule} from 'primeng/dialog';
 import {HttpClientModule} from '@angular/common/http'
+import {DialogModule} from 'primeng/dialog';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -62,6 +63,7 @@ const MODULES = [
     ToggleButtonModule,
     TooltipModule,
     DialogModule,
+    Ng2SearchPipeModule,
     HttpClientModule
 ];
 
