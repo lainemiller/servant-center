@@ -1,0 +1,17 @@
+{
+    "recordNo" : 123,
+    "intakeDate" : "12/2/2000" ,
+    "caseManager" : "hello",
+    "firstName" : "hai",
+    "lastName" : "bye",
+    "nickName" : "welcome",
+    "address1" : "kphb",
+    "city" : "hyd",
+    "state" : "telangana",
+    "zipcode" : 12344,
+    "dob" : "03/05/2001",
+    "ssn" : 214234,
+    "hmisis" : 12345432,
+    "emailId" : "kottoor@gmail.com",
+    "phoneNumber" : 1234567890
+}

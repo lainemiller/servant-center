@@ -31,6 +31,8 @@ import { KeysPipe } from '../case-worker/components/resident-search/rs-initial-a
 import { ConsentDataComponent } from './components/consent-data/consent-data.component';
 import {DialogModule} from 'primeng/dialog';
 import {HttpClientModule} from '@angular/common/http'
+import { TooltipModule } from 'primeng/tooltip';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -40,28 +42,30 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   interactionPlugin
 ]);
 const MODULES = [
-    InputTextModule,
-    ButtonModule,
-    CalendarModule,
-    DividerModule,
-    MenuModule,
-    DropdownModule,
-    FullCalendarModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TableModule,
-    TabViewModule,
-    TabMenuModule,
-    StepsModule,
-    CardModule,
-    InputTextareaModule,
-    RadioButtonModule,
-    CheckboxModule,
-    InputSwitchModule,
-    ToolbarModule,
-    ToggleButtonModule,
-    DialogModule,
-    HttpClientModule
+  InputTextModule,
+  ButtonModule,
+  CalendarModule,
+  DividerModule,
+  MenuModule,
+  DropdownModule,
+  FullCalendarModule,
+  FormsModule,
+  ReactiveFormsModule,
+  TableModule,
+  TabViewModule,
+  TabMenuModule,
+  StepsModule,
+  CardModule,
+  InputTextareaModule,
+  RadioButtonModule,
+  CheckboxModule,
+  InputSwitchModule,
+  ToolbarModule,
+  ToggleButtonModule,
+  TooltipModule,
+  DialogModule,
+  Ng2SearchPipeModule,
+  HttpClientModule
 ];
 
 const COMPONENTS = [
