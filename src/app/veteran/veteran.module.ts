@@ -13,7 +13,6 @@ import { TransportationRequestFormComponent } from './components/dashboard/trans
 
 
 
-
 @NgModule({
   declarations: [
     VeteranComponent,
@@ -23,13 +22,12 @@ import { TransportationRequestFormComponent } from './components/dashboard/trans
     TreatmentPlanComponent,
     HealthTrackerComponent,
     VeteranProfileComponent,
-    DashboardComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
     VeteranRoutingModule,
-    SharedModule,
-    
+    SharedModule
   ]
 })
 export class VeteranModule { }
