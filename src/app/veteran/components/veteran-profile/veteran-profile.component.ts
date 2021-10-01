@@ -4,7 +4,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { SelectItem } from 'primeng/api';
+import { VeteranprofileService } from '../../veteranprofile.service';
 
 interface State {
   name: string
@@ -20,8 +20,10 @@ export class VeteranProfileComponent implements OnInit {
   veteranProfileForm : FormGroup ;
   states: State[];
   selectedState: State;
+  veteran : any;
+  name : any;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder , private service:VeteranprofileService) {
     
     this.states = [
       {name: 'New York'},
@@ -33,24 +35,32 @@ export class VeteranProfileComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    console.log(this.name);
     this.buildForm();
+    let response = this.service.getVeteranProfileDetailsByRecordNumber();
+    response.subscribe((data)=>this.veteran=data)
   }
-
+  
   buildForm() {
     this.veteranProfileForm = this.formBuilder.group({
       recordNo : ['', Validators.required],
       intakeDOB: [null, Validators.required],
       caseManager : [null, Validators.required],
+      veteranId : [null, Validators.required],
       firstName: ['', Validators.required],
+      middleName : ['', Validators.required],
       lastName: ['', Validators.required],
       nickName: ['', Validators.required],
       veteranDiagnosis: ['', Validators.required],
       address1: ['', Validators.required],
+      address2: ['', Validators.required],
       city: ['', Validators.required],
       selectedState: ['', Validators.required],
+      country: ['', Validators.required],
       zipCode: ['', Validators.required],
       DOB: ['', Validators.required],
-      SSnnumber: ['', Validators.required],
+      POB: ['', Validators.required],
+      SSNNumber: ['', Validators.required],
       hmisIdNo: ['', Validators.required],
       emailId: ['', Validators.required],
       veteranSupports: ['', Validators.required],

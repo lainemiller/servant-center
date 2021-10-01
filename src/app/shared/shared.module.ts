@@ -65,7 +65,7 @@ const MODULES = [
   ToggleButtonModule,
   TooltipModule,
   DialogModule,
-  Ng2SearchPipeModule,
+   Ng2SearchPipeModule,
   HttpClientModule
 ];
 
