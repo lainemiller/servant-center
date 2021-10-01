@@ -1,4 +1,4 @@
-.progress-notes--container{
+.progress-notes--container {
   margin: 0 15px;
   padding: 20px 20px;
   background: #fff;
@@ -15,17 +15,17 @@
   border: none;
 }
 
-.progress-notes--group{
-  padding:0 20px;
+.progress-notes--group {
+  padding: 0 20px;
   height: 250px;
   overflow-y: scroll;
 }
 
 .progress-note {
   border-radius: 25px;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   .goal-description {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 16px;
@@ -42,18 +42,65 @@
   }
 
   .goal-header {
-    font-family: 'Roboto Light', 'Roboto Regular', 'Roboto', sans-serif;
+    font-family: "Roboto Light", "Roboto Regular", "Roboto", sans-serif;
     font-weight: 300;
     font-style: normal;
-    &--title{
+    &--title {
       font-size: 22px;
     }
-    &--date{
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 15px;
-    color: #7B7B7B;
+    &--date {
+      font-family: "Roboto", sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      color: #7b7b7b;
     }
   }
 }
 
+//for pop-out window
+.progress-notes--group-2 {
+  padding: 0 20px;
+ 
+ // overflow-y: scroll;
+}
+.progress-note-2 {
+  border-radius: 25px;
+  margin-bottom: 10px;
+  .goal-description {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: #222222;
+    line-height: 22px;
+    //max-height: 30px;
+    overflow-y: hidden;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    &.expand {
+      max-height: 50px;
+      overflow-y: scroll;
+    }
+  }
+
+  .goal-header {
+    font-family: "Roboto Light", "Roboto Regular", "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    &--title {
+      font-size: 22px;
+    }
+    &--date {
+      font-family: "Roboto", sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      color: #7b7b7b;
+    }
+  }
+}
+.progress-note-buttons {
+  margin-left: 10px;
+}
+.search-dialog{
+  width: 300px;
+}

@@ -2,34 +2,214 @@
 <div class="progress-notes--container">
   <p-toolbar>
     <div class="p-toolbar-group-left">
-  <button type="button" pButton icon="fas fa-plus-circle" label="Add Notes" class="p-button-outlined"></button></div>
-  <div class="p-toolbar-group-right">
-  <input type="text" pInputText placeholder="Search" class="p-mr-2">
-  <button type="button" pButton icon="fas fa-external-link-alt" class="p-button-text" style="font-size: 20px;"></button></div>
-  </p-toolbar>
-  <div class="progress-notes--group p-mt-4 p-grid">
-    <div class="p-shadow-2 p-col-12 progress-note" *ngFor="let progressNote of progressNotes; let i = index;">
-      <div class="inputSwitch-container p-col-12">
-      <p-toolbar>
-        <div class="p-toolbar-group-left">
-      <span class="p-mr-2">Open</span>
-      <p-inputSwitch [(ngModel)]="progressNote.goalState" class="open-close-switch"></p-inputSwitch>
-      <span class="p-ml-2">Closed</span>
+      <!-- modal for add progress note -->
+      <div class="progress-notes--addNoteModal">
+        <p-dialog
+          [(visible)]="display"
+          [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+          header="Add Progress Note"
+          [draggable]="false"
+          [modal]="true"
+          [style]="{ width: '45vw'}"
+        >
+          <form [formGroup]="progressNote" (ngSubmit)="onSubmit()">
+            <div class="p-fluid">
+              <div class="p-field p-col-12 p-sm-12">
+                <input
+                  type="text"
+                  formControlName="goalTitle"
+                  pInputText
+                  placeholder="Goal Title"
+                />
+              </div>
+              <div class="p-field p-col-12 p-sm-12">
+                <textarea
+                  [rows]="6"
+                  formControlName="goalDescription"
+                  pInputTextarea
+                  placeholder="Goal Description"
+                ></textarea>
+              </div>
+              <div class="p-field p-col-12 p-sm-12">
+                <label for="statusCheck">Goal Status</label>
+                <p-toolbar>
+                  <div class="p-toolbar-group-left">
+                    <span class="p-mr-2">Closed</span>
+                    <p-inputSwitch
+                      formControlName="goalState"
+                      id="statusCheck"
+                      class="open-close-switch"
+                    >
+                    </p-inputSwitch>
+                    <span class="p-ml-2">Open</span>
+                  </div>
+                </p-toolbar>
+              </div>
+            </div>
+            <div class="progress-note-buttons">
+              <button
+                type="submit"
+                pButton
+                label="Submit"
+                class="p-button-outlined"
+              ></button>
+              <button
+                type="button"
+                pButton
+                label="Cancel"
+                class="p-button-text p-button-secondary"
+              ></button>
+            </div>
+          </form>
+        </p-dialog>
+      </div>
+      <button
+        type="button"
+        pButton
+        icon="fas fa-plus-circle"
+        label="Add Notes"
+        class="p-button-outlined"
+        (click)="showDialog()"
+      ></button>
     </div>
     <div class="p-toolbar-group-right">
-      <button type="button" pButton icon="fas fa-cog" class="p-button-text settings-button" style="font-size: 30px;"></button>
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        pInputText
+        placeholder="Search"
+        class="p-mr-2"
+      />
+      <!-- modal for pop-out -->
+      <div>
+        <p-dialog
+          header="Progress Notes"
+          [(visible)]="displayList"
+          [modal]="true"
+          [draggable]="false"
+          [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+          [style]="{ width: '75vw'}"
+          [contentStyle]="{minHeight: '500px'}"
+        >
+          <p-toolbar>
+            <div class="p-toolbar-group-left">
+              <button
+                type="button"
+                pButton
+                icon="fas fa-plus-circle"
+                label="Add Notes"
+                class="p-button-outlined p-ml-2 p-mt-1"
+                (click)="showDialog()"
+              ></button>
+            </div>
+            <div class="p-toolbar-group-right">
+              <input
+                type="text"
+                [(ngModel)]="searchText"
+                pInputText
+                placeholder="Search"
+                class="p-mr-2 p-mt-1 search-dialog"
+              />
+            </div>
+          </p-toolbar>
+          <div class="progress-notes--group-2 p-mt-4 p-grid">
+            <div
+              class="p-shadow-2 p-col-12 progress-note-2"
+              *ngFor="
+                let progressNote of progressNotes | filter: searchText;
+                let i = index
+              "
+            >
+              <div class="inputSwitch-container p-col-12">
+                <p-toolbar>
+                  <div class="p-toolbar-group-left">
+                    <span class="p-mr-2">Closed</span>
+                    <p-inputSwitch
+                      [(ngModel)]="progressNote.goalState"
+                    ></p-inputSwitch>
+                    <span class="p-ml-2">Open</span>
+                  </div>
+                  <div class="p-toolbar-group-right">
+                    <button
+                      type="button"
+                      pButton
+                      icon="fas fa-cog"
+                      class="p-button-text settings-button"
+                      style="font-size: 30px"
+                    ></button>
+                  </div>
+                </p-toolbar>
+              </div>
+              <div class="p-col-12 goal-header p-d-flex p-jc-between">
+                <div class="goal-header--title">
+                  {{ progressNote.goalTitle }}
+                </div>
+                <div class="goal-header--date">
+                  Added {{ progressNote.addedDate }}
+                </div>
+              </div>
+              <div class="p-col-12 goal-content">
+                <p class="goal-description">
+                  {{ progressNote.goalDescription }}
+                </p>
+                <!-- <p-toggleButton offIcon="fas fa-chevron-down" onIcon="fas fa-chevron-up" styleClass="p-button-text"
+                  (click)="expandOrCollapse(i)"></p-toggleButton> -->
+              </div>
+            </div>
+          </div>
+        </p-dialog>
+      </div>
+      <button
+        type="button"
+        pButton
+        icon="fas fa-external-link-alt"
+        (click)="showList()"
+        class="p-button-text"
+        style="font-size: 20px"
+      ></button>
     </div>
-    </p-toolbar>
-    </div>
+  </p-toolbar>
+  <div class="progress-notes--group p-mt-4 p-grid">
+    <div
+      class="p-shadow-2 p-col-12 progress-note"
+      *ngFor="
+        let progressNote of progressNotes | filter: searchText;
+        let i = index
+      "
+    >
+      <div class="inputSwitch-container p-col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-left">
+            <span class="p-mr-2">Closed</span>
+            <p-inputSwitch [(ngModel)]="progressNote.goalState"></p-inputSwitch>
+            <span class="p-ml-2">Open</span>
+          </div>
+          <div class="p-toolbar-group-right">
+            <button
+              type="button"
+              pButton
+              icon="fas fa-cog"
+              class="p-button-text settings-button"
+              style="font-size: 30px"
+            ></button>
+          </div>
+        </p-toolbar>
+      </div>
       <div class="p-col-12 goal-header p-d-flex p-jc-between">
-        <div class="goal-header--title">{{progressNote.goalTitle}}</div>
-        <div class="goal-header--date">Added {{progressNote.addedDate}}</div>
+        <div class="goal-header--title">{{ progressNote.goalTitle }}</div>
+        <div class="goal-header--date">Added {{ progressNote.addedDate }}</div>
       </div>
       <div class="p-col-12 goal-content">
-        <p class="goal-description" id="goal-desc--{{i}}">{{progressNote.goalDescription}}</p>
-        <p-toggleButton offIcon="fas fa-chevron-down" onIcon="fas fa-chevron-up" styleClass="p-button-text" (click)="expandOrCollapse(i)"></p-toggleButton>
+        <p class="goal-description" id="goal-desc--{{ i }}">
+          {{ progressNote.goalDescription }}
+        </p>
+        <p-toggleButton
+          offIcon="fas fa-chevron-down"
+          onIcon="fas fa-chevron-up"
+          styleClass="p-button-text"
+          (click)="expandOrCollapse(i)"
+        ></p-toggleButton>
       </div>
     </div>
-
   </div>
 </div>
