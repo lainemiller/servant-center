@@ -1,6 +1,6 @@
-<app-header></app-header>
+<app-header (toggleMenu)="toggleMenu()"></app-header>
 <div class="p-grid nested-grid">
-  <p-menu [model]=items class="p-col-12 p-lg-2" width="250px"></p-menu>
+  <p-menu [model]=items class="p-col-12 p-lg-2" width="250px" [hidden]="!displayMenu"></p-menu>
   <p-divider layout="vertical"  class="p-d-none p-d-lg-block p-col-fixed" width="10px"></p-divider>
   <div class="p-col">
     <router-outlet></router-outlet>
