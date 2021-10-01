@@ -1,43 +1,73 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-<p-dialog [(visible)]="display" [style]="{ width: '70vw' }">
-    <ng-template pTemplate="header">
-        <h1 class="header-title">Lorem ipsum delores
-        </h1>
-        <P class="header-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
-            Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Please read carefully.</P>
-        
-    </ng-template>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit
-        amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et
-        magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis
-        tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin
-        sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-        Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor
-        sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et
-        magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis
-        tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin
-        sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-        Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
+<p-dialog [breakpoints]="{'960px': '50vw', '640px': '90vw'}"  [(visible)]="display" [style]="{ width: '70vw' }">
+  <ng-template styleClass="dark-panel"  pTemplate="header">
+    <h1 class="header-title">Lorem ipsum delores</h1>
+    <P class="header-text"
+      >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod
+      bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra
+      justo commodo. Please read carefully.</P
+    >
+  </ng-template>
+  <p class="body">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod
+    bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra
+    justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus
+    et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum,
+    nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus
+    sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing
+    elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus
+    accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis
+    natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+    Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci,
+    sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit
+    amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor.
+    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
+    ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus
+    mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet,
+    consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida
+    dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales
+    pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient
+    montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra
+    vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+  </p>
 
-    <ng-template  pTemplate="footer">
-        <br>
-        <br>
-        <p class="footer-text">If you consent to the terms outlined above for electronic delivery, type your full name
-            in the box below and select the button marked “I Consent.”</p>
+  <ng-template pTemplate="footer">
+    <br />
+    <br />
+    <p class="footer-text">
+      If you consent to the terms outlined above for electronic delivery, type
+      your full name in the box below and select the button marked “I Consent.”
+    </p>
 
-        <h4 class="input-footer-heading"> ESIGNATURE</h4>
-        <div class="container">
-            <input class="input-text-one" type="text" placeholder="First,Last name" pInputText>
-            <input class="input-text-two" type="text" placeholder="Enter email" pInputText>
-        </div><br>
-        <p-button  (click)="display = false" label="I CONSENT" class="button-confirm"></p-button>
-        <button pButton type="button" (click)="display = false" label="cancel" class="p-button-text"></button>
-    </ng-template>
+    <h4 class="input-footer-heading">ESIGNATURE</h4>
+    <div class="container">
+      <input
+        class="input-text-one"
+        value="{{ vetran?.firstName }},{{ vetran?.lastName }}"
+        type="text"
+        pInputText
+      />
+      <input
+        class="input-text-two"
+        value="{{ vetran?.email }}"
+        type="text"
+        pInputText
+      />
+    </div>
+    <br />
+    <p-button
+      (click)="display = false"
+      label="I CONSENT"
+      class="button-confirm"
+    ></p-button>
+    <button
+      pButton
+      type="button"
+      (click)="display = false"
+      label="Cancel"
+      class="p-button-text"
+    ></button>
+  </ng-template>
 </p-dialog>
 
 <p-button type="button" (click)="showConsentForm()" label="Register"></p-button>
