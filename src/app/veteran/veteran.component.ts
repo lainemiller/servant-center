@@ -1,4 +1,5 @@
-import { Component, Host, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -50,7 +51,7 @@ export class VeteranComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  toggleMenu(): void{
-    this.displayMenu = !this.displayMenu
+  toggleMenu(): void {
+    this.displayMenu = !this.displayMenu;
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+
 import { ProgressNotesService } from 'src/app/veteran/services/progress-notes.service';
 
 @Component({
@@ -8,18 +9,18 @@ import { ProgressNotesService } from 'src/app/veteran/services/progress-notes.se
   styleUrls: ['./progress-notes.component.scss'],
 })
 export class ProgressNotesComponent implements OnInit {
-  title = 'PROGRESS NOTES';
-  display = false;
-  displayList = false;
-  status: any;
-  searchText = '';
-  progressNote: any;
-  d: any;
+  public title = 'PROGRESS NOTES';
+  public display = false;
+  public displayList = false;
+  public status: any;
+  public searchText = '';
+  public progressNote: any;
+  public d: any;
   constructor(
     private formBuilder: FormBuilder,
     private service: ProgressNotesService
   ) {}
-  progressNotes: any;
+  public progressNotes: any;
   ngOnInit(): void {
     //get data from backend
     this.service.getNotes().subscribe((data) => {
@@ -92,8 +93,13 @@ export class ProgressNotesComponent implements OnInit {
   }
   buildForm() {
     this.d =
-      new Date().getMonth() + 1 + '/' + new Date().getUTCDate() + '/' + new Date().getFullYear();
-      this.progressNote = this.formBuilder.group({
+      new Date().getMonth() +
+      1 +
+      '/' +
+      new Date().getUTCDate() +
+      '/' +
+      new Date().getFullYear();
+    this.progressNote = this.formBuilder.group({
       goalTitle: ['', Validators.required],
       goalDescription: ['', Validators.required],
       goalState: ['true', Validators.required],

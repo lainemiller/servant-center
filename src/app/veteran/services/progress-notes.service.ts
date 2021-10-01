@@ -1,19 +1,17 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProgressNotesService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
-
-  getNotes(){
-    return this.http.get("./assets/mock/progressNote.json");
+  getNotes() {
+    return this.http.get('./assets/mock/progressNote.json');
   }
 
-  postNotes(note:any){
-    return this.http.post<any>("./assets/mock/progressNote.json",note);
+  postNotes(note: any) {
+    return this.http.post<any>('./assets/mock/progressNote.json', note);
   }
 }

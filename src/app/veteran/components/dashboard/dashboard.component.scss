@@ -82,11 +82,7 @@
   border-color: #2196f3;
   color: #ffffff;
 }
-:host
-  ::ng-deep
-  .fc
-  .fc-toolbar
-  .fc-button.fc-listWeek-button.fc-button-active:hover {
+:host ::ng-deep .fc .fc-toolbar .fc-button.fc-listWeek-button.fc-button-active:hover {
   background: #0d89ec;
   border-color: #0d89ec;
   color: #ffffff;
@@ -105,8 +101,7 @@
   background: #ffffff;
   border: 1px solid #ced4da;
   color: #495057;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
-    box-shadow 0.2s;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
 @media only screen and (max-width: 600px) {

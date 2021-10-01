@@ -1,36 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 
 interface State {
-  name: string
+  name: string;
 }
 
 @Component({
   selector: 'app-veteran-profile',
   templateUrl: './veteran-profile.component.html',
-  styleUrls: ['./veteran-profile.component.scss']
+  styleUrls: ['./veteran-profile.component.scss'],
 })
-
 export class VeteranProfileComponent implements OnInit {
-  veteranProfileForm : FormGroup ;
+  veteranProfileForm: FormGroup;
   states: State[];
   selectedState: State;
 
   constructor(private formBuilder: FormBuilder) {
-    
     this.states = [
-      {name: 'New York'},
-      {name: 'Rome'},
-      {name: 'London'},
-      {name: 'Istanbul'},
-      {name: 'Paris'}
-  ];
-   }
+      { name: 'New York' },
+      { name: 'Rome' },
+      { name: 'London' },
+      { name: 'Istanbul' },
+      { name: 'Paris' },
+    ];
+  }
 
   ngOnInit(): void {
     this.buildForm();
@@ -38,9 +32,9 @@ export class VeteranProfileComponent implements OnInit {
 
   buildForm() {
     this.veteranProfileForm = this.formBuilder.group({
-      recordNo : ['', Validators.required],
+      recordNo: ['', Validators.required],
       intakeDOB: [null, Validators.required],
-      caseManager : [null, Validators.required],
+      caseManager: [null, Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       nickName: ['', Validators.required],
@@ -56,11 +50,9 @@ export class VeteranProfileComponent implements OnInit {
       veteranSupports: ['', Validators.required],
       phoneNumber: ['', Validators.required],
     });
-
   }
 
   onSubmit() {
     console.log(this.veteranProfileForm.value);
   }
-
 }
