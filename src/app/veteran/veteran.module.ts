@@ -11,9 +11,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProgressNotesComponent } from './components/dashboard/progress-notes/progress-notes.component';
 import { TransportationRequestFormComponent } from './components/dashboard/transportation-request-form/transportation-request-form.component';
 
-
-
-
 @NgModule({
   declarations: [
     VeteranComponent,
@@ -25,11 +22,6 @@ import { TransportationRequestFormComponent } from './components/dashboard/trans
     VeteranProfileComponent,
     DashboardComponent,
   ],
-  imports: [
-    CommonModule,
-    VeteranRoutingModule,
-    SharedModule,
-    
-  ]
+  imports: [CommonModule, VeteranRoutingModule, SharedModule],
 })
-export class VeteranModule { }
+export class VeteranModule {}

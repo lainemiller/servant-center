@@ -11,7 +11,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
   data:any;
   name:any;
   date:any;
-  imgSrc='';
+  image:any;
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     headerToolbar: {
@@ -28,8 +28,8 @@ export class CaseWorkerDashboardComponent implements OnInit {
        this.data= res;
        console.log(this.data)
      this.name= this.data.name;
-    this.date=this.data.lastLogin;
-    this.imgSrc= this.data.imgSrc;
+    this.date=this.data.date;
+    this.image= this.data.image;
       })
 
   }

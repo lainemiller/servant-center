@@ -44,13 +44,19 @@ export class VeteranComponent implements OnInit {
       styleClass: 'menu-items--text menu-item--5',
       routerLink: ['/veteran/profile'],
     },
+    {
+      label: 'LOGOUT',
+      icon: 'fas fa-sign-out-alt',
+      styleClass: 'menu-items--text menu-item--6',
+      routerLink: ['/veteran/'],
+    },
   ];
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  toggleMenu(): void{
-    this.displayMenu = !this.displayMenu
+  toggleMenu(): void {
+    this.displayMenu = !this.displayMenu;
   }
 }

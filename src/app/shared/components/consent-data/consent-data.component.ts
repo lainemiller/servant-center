@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Consent } from '../../consent';
+// import { Consent } from '../../consent';
 import { ConsentService } from '../../consent.service';
 
 @Component({
