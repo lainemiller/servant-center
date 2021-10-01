@@ -6,16 +6,10 @@
     color: rgba(255, 255, 255, 0.996078431372549);
     font-weight: 500;
     font-size: 18px;
-    margin-right: 20px;
   }
   img{
     height: 40px;
     width: 40px;
-  }
-  .title
-  {
-    border-left: 2px solid white;
-    padding-left: 20px;
   }
   .logo-div{
     display: inline-flex;
@@ -25,10 +19,4 @@
   color: #fff;
   font-size: 1.5rem;
   font-weight: 700;
-}
-.border-col
-{
-  background: -webkit-linear-gradient(
-    270deg
-    , rgba(227, 42, 47, 1) 0%, rgba(174, 36, 36, 1) 39%, rgba(178, 37, 37, 1) 70%, rgba(227, 42, 47, 1) 99%);
 }
