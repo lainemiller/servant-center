@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VeteranprofileService } from '../../veteranprofile.service';
 
 interface State {
-  name: string
+  name: string;
 }
 
 @Component({
@@ -16,10 +12,12 @@ interface State {
   styleUrls: ['./veteran-profile.component.scss']
 })
 
+
+
 export class VeteranProfileComponent implements OnInit {
-  veteranProfileForm : FormGroup ;
+  veteranProfileForm !: FormGroup ;
   states: State[];
-  selectedState: State;
+  selectedState!: State;
   veteran : any;
   name : any;
 

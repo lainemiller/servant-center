@@ -13,7 +13,6 @@ import { TransportationRequestFormComponent } from './components/dashboard/trans
 import { HttpClientModule } from '@angular/common/http';
 
 
-
 @NgModule({
   declarations: [
     VeteranComponent,
@@ -23,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     TreatmentPlanComponent,
     HealthTrackerComponent,
     VeteranProfileComponent,
-    DashboardComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
