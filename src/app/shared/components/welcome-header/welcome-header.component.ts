@@ -6,9 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./welcome-header.component.scss'],
 })
 export class WelcomeHeaderComponent implements OnInit {
-  @Input() name: any;
-  @Input() date: any;
-  @Input() image: any;
+  @Input() public name: any;
+  @Input() public date: any;
+  @Input() public image: any;
 
   constructor() {}
 
