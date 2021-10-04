@@ -8,9 +8,8 @@ describe('SecureMessageCenterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SecureMessageCenterComponent ]
-    })
-    .compileComponents();
+      declarations: [SecureMessageCenterComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
