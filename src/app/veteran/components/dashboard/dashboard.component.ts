@@ -8,10 +8,10 @@ import { VeteranDashboardService } from '../../services/veteran-dashboard.servic
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  name: any;
-  date: any;
-  data: any;
-  image: any;
+  public name: any;
+  public date: any;
+  public data: any;
+  public image: any;
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',

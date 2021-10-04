@@ -1,4 +1,5 @@
 import { Component, Host, HostListener, OnInit } from '@angular/core';
+
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -7,7 +8,7 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./veteran.component.scss'],
 })
 export class VeteranComponent implements OnInit {
-  displayMenu: boolean = true;
+  public displayMenu: boolean = true;
   @HostListener('window:resize')
   onWindowResize() {
     this.displayMenu = window.innerWidth > 768;
