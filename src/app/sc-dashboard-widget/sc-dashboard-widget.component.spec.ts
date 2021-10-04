@@ -8,9 +8,8 @@ describe('ScDashboardWidgetComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ScDashboardWidgetComponent ]
-    })
-    .compileComponents();
+      declarations: [ScDashboardWidgetComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

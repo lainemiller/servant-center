@@ -4,14 +4,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-cw-transport-request',
   templateUrl: './cw-transport-request.component.html',
-  styleUrls: ['./cw-transport-request.component.scss']
+  styleUrls: ['./cw-transport-request.component.scss'],
 })
 export class CwTransportRequestComponent implements OnInit {
   mobileMode = false;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
   transportRequestForm!: FormGroup;
-  states = [{ name: 'California', code: 'CA' },
-  { name: 'Texas', code: 'TX' },
+  states = [
+    { name: 'California', code: 'CA' },
+    { name: 'Texas', code: 'TX' },
   ];
 
   @HostListener('window:resize')
@@ -42,5 +43,4 @@ export class CwTransportRequestComponent implements OnInit {
       date: ['', Validators.required],
     });
   }
-
 }
