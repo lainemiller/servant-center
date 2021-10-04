@@ -1,92 +1,9 @@
-.header {
-  margin-bottom: 30px;
-  display: flex;
-}
-
-.header-title {
-  margin-right: 20px;
-  width: auto;
-}
-
-.header-sub {
-  width: 54%;
-}
-
-.fas {
-  color: #0d89ec;
-}
-
-.chat {
-  padding-top: 10px;
-}
-
-.title {
-  // font-family: "Roboto";
-  font-size: 40px;
-  font-weight: 250;
-  color: black;
-  font-family: "Roboto", sans-serif;
-}
-.name {
-  font-weight: 400;
-  color: black;
-  font-family: "Roboto", sans-serif;
-}
-.mark {
-  font-size: 40px;
-  font-weight: 250;
-  color: black;
-  font-family: "Roboto", sans-serif;
-}
-
-.title-img {
-  height: 50px;
-  width: 50px;
-  border-radius: 25px;
-  margin-right: 20px;
-}
-
-.last-login {
-  padding-top: 20px;
-  font-style: italic;
-  font-weight: lighter;
-}
-
-::ng-deep .p-tooltip .p-tooltip-text {
-  background-color: white;
-  color: blue;
-  font-size: small;
-}
-
-// .tooltip .ui-tooltip-text {
-//   width: 100em;
-// }
-
-// ::ng-deep .tooltip .ui-tooltip-text {
-//   width: 100em;
-
-//   background-color: wheat;
-// }
-// ::ng-deep {
-//   .p-tooltip {
-//       max-width: fit-content;
-//    }
-// }
-
-// .ui-tooltip-text.ui-shadow.ui-corner-all {
-//   background-color: red;
-// }
-
 :host ::ng-deep .fc .fc-toolbar .fc-button.fc-listWeek-button.fc-button-active {
   background: #2196f3;
   border-color: #2196f3;
   color: #ffffff;
 }
-:host
-  ::ng-deep
-  .fc
-  .fc-toolbar
-  .fc-button.fc-listWeek-button.fc-button-active:hover {
+:host ::ng-deep .fc .fc-toolbar .fc-button.fc-listWeek-button.fc-button-active:hover {
   background: #0d89ec;
   border-color: #0d89ec;
   color: #ffffff;
@@ -105,8 +22,7 @@
   background: #ffffff;
   border: 1px solid #ced4da;
   color: #495057;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
-    box-shadow 0.2s;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
 @media only screen and (max-width: 600px) {

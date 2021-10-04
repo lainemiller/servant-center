@@ -8,9 +8,8 @@ describe('IaFormPageFiveComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IaFormPageFiveComponent ]
-    })
-    .compileComponents();
+      declarations: [IaFormPageFiveComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

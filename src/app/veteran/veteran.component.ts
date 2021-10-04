@@ -1,4 +1,5 @@
-import { Component, Host, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -7,12 +8,11 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./veteran.component.scss'],
 })
 export class VeteranComponent implements OnInit {
-  displayMenu: boolean = true;
+  public displayMenu = true;
   @HostListener('window:resize')
   onWindowResize() {
     this.displayMenu = window.innerWidth > 768;
   }
-
   items: MenuItem[] = [
     {
       label: 'DASHBOARD',
@@ -50,7 +50,7 @@ export class VeteranComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  toggleMenu(): void{
-    this.displayMenu = !this.displayMenu
+  toggleMenu(): void {
+    this.displayMenu = !this.displayMenu;
   }
 }
