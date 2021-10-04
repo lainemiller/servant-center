@@ -5,6 +5,7 @@ import {
   Validators
 } from '@angular/forms';
 import { VeteranprofileService } from '../../veteranprofile.service';
+import { email, RxwebValidators } from '@rxweb/reactive-form-validators';
 
 interface State {
   name: string
@@ -17,56 +18,86 @@ interface State {
 })
 
 export class VeteranProfileComponent implements OnInit {
-  veteranProfileForm : FormGroup ;
+  veteranProfileForm: FormGroup;
   states: State[];
   selectedState: State;
-  veteran : any;
-  name : any;
+  veteran: any;
+  name: any;
+  selectedGender: any = null;
+  selectedMartialStatus: any = null;
+  @email() emailId: string;
 
-  constructor(private formBuilder: FormBuilder , private service:VeteranprofileService) {
-    
+  genders: any[] = [{ name: 'Female', key: 'A' }, { name: 'Male', key: 'M' }];
+  martialStatuses: any[] = [{ name: 'Single', key: 'S' }, { name: 'Married', key: 'M' }, { name: 'DIvorced', key: 'D' }, { name: 'Widowed', key: 'W' }];
+
+  constructor(private formBuilder: FormBuilder, private service: VeteranprofileService) {
+
     this.states = [
-      {name: 'New York'},
-      {name: 'Rome'},
-      {name: 'London'},
-      {name: 'Istanbul'},
-      {name: 'Paris'}
-  ];
-   }
+      { name: 'New York' },
+      { name: 'Rome' },
+      { name: 'London' },
+      { name: 'Istanbul' },
+      { name: 'Paris' }
+    ];
+  }
 
   ngOnInit(): void {
-    console.log(this.name);
     this.buildForm();
+    console.log(this.name);
+    this.selectedGender = this.genders[1];
+    this.selectedMartialStatus = this.martialStatuses[1];
     let response = this.service.getVeteranProfileDetailsByRecordNumber();
-    response.subscribe((data)=>this.veteran=data)
+    response.subscribe((data) => this.veteran = data)
   }
-  
+
   buildForm() {
     this.veteranProfileForm = this.formBuilder.group({
-      recordNo : ['', Validators.required],
-      intakeDOB: [null, Validators.required],
-      caseManager : [null, Validators.required],
-      veteranId : [null, Validators.required],
-      firstName: ['', Validators.required],
-      middleName : ['', Validators.required],
-      lastName: ['', Validators.required],
+      recordNo: [''],
+      intakeDOB: [null],
+      caseManager: [null, Validators.required],
+      veteranId: ['', Validators.required],
+      firstName: ['', Validators.required, Validators.minLength(4)],
+      middleName: [''],
+      lastName: ['', Validators.required, Validators.minLength(4)],
+      cfirstName: ['', Validators.required, Validators.minLength(4)],
+      cmiddleName: [''],
+      clastName: ['', Validators.required, Validators.minLength(4)],
       nickName: ['', Validators.required],
       veteranDiagnosis: ['', Validators.required],
       address1: ['', Validators.required],
       address2: ['', Validators.required],
       city: ['', Validators.required],
       selectedState: ['', Validators.required],
+      selectedGender: ['', Validators.required],
+      selectedMartialStatus: ['', Validators.required],
       country: ['', Validators.required],
       zipCode: ['', Validators.required],
       DOB: ['', Validators.required],
       POB: ['', Validators.required],
-      SSNNumber: ['', Validators.required],
+      SSNNumber: ['', RxwebValidators.mask({ mask: '999-99-9999' })],
       hmisIdNo: ['', Validators.required],
-      emailId: ['', Validators.required],
+      emailId: ['',Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
       veteranSupports: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
+      phoneNumber: ['', RxwebValidators.mask({ mask: '(999) 999-9999' })],
+      primaryLanguage: ['', Validators.required],
+      relegiousPreferences: ['', Validators.required],
+      hobbies: ['', Validators.required],
+      cStreet: ['', Validators.required],
+      cCity: ['', Validators.required],
+      cState: ['', Validators.required],
+      cZip: ['', RxwebValidators.mask({ mask: '99999-9999' })],
+      cHouseNumber: ['', Validators.required],
+      race: ['', Validators.required],
+      contactPersonRelationship: ['', Validators.required],
     });
 
+  }
+
+  get emailid() {
+    return this.veteranProfileForm.get('emailId');
+  }
+  get getControl() {
+    return this.veteranProfileForm.controls;
   }
 
   onSubmit() {
@@ -74,3 +105,7 @@ export class VeteranProfileComponent implements OnInit {
   }
 
 }
+
+
+
+

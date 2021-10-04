@@ -11,9 +11,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProgressNotesComponent } from './components/dashboard/progress-notes/progress-notes.component';
 import { TransportationRequestFormComponent } from './components/dashboard/transportation-request-form/transportation-request-form.component';
 import { HttpClientModule } from '@angular/common/http';
-
-
-
+import {RadioButtonModule} from 'primeng/radiobutton';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 @NgModule({
   declarations: [
     VeteranComponent,
@@ -29,7 +28,9 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     VeteranRoutingModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    RadioButtonModule,
+    RxReactiveFormsModule
   ]
 })
 export class VeteranModule { }

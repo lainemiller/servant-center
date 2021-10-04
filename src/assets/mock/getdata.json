@@ -1,0 +1,27 @@
+{
+    "recordNo" : 1,
+    "veteranId" : 100,
+    "intakeDOB" : "12/2/2000" ,
+    "caseManager" : "Rama",
+    "firstName" : "Navya",
+    "lastName" : "Kottoor",
+    "middleName" : "",
+    "cfirstName" : "Dania",
+    "clastName" : "Al esa",
+    "cmiddleName" : "",
+    "address1" : "kphb",
+    "city" : "hyd",
+    "state" : "telangana",
+    "zipcode" : 12344,
+    "dob" : "03/05/2001",
+    "ssn" : 214234,
+    "hmisis" : 12345432,
+    "emailId" : "kottoor@gmail.com",
+    "phoneNumber" : 1234567890,
+    "cStreet" : "Subhas Nagar",
+    "cCity" : "New York",
+    "cState" : "America",
+    "cZip" : "13333",
+    "cHouseNumber" : 1234321
+
+}
