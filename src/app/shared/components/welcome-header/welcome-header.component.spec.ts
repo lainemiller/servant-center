@@ -1,20 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CaseWorkerComponent } from './case-worker.component';
+import { WelcomeHeaderComponent } from './welcome-header.component';
 
-
-describe('CaseWorkerComponent', () => {
-  let component: CaseWorkerComponent;
-  let fixture: ComponentFixture<CaseWorkerComponent>;
+describe('WelcomeHeaderComponent', () => {
+  let component: WelcomeHeaderComponent;
+  let fixture: ComponentFixture<WelcomeHeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CaseWorkerComponent],
+      declarations: [WelcomeHeaderComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CaseWorkerComponent);
+    fixture = TestBed.createComponent(WelcomeHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

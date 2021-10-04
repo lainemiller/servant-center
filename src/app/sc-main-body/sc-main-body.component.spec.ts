@@ -8,9 +8,8 @@ describe('ScMainBodyComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ScMainBodyComponent ]
-    })
-    .compileComponents();
+      declarations: [ScMainBodyComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

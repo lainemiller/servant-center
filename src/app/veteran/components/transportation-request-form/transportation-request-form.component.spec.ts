@@ -8,9 +8,8 @@ describe('TransportationRequestFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TransportationRequestFormComponent ]
-    })
-    .compileComponents();
+      declarations: [TransportationRequestFormComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -58,12 +58,10 @@
     color: #822433;
 }
 
-
 :host ::ng-deep .p-dialog .p-dialog-header {
     position: relative;
     padding-bottom: 40px;
 }
-
 
 @media only screen and (max-width: 768px) {
     .header-title {
@@ -76,7 +74,7 @@
         font-size: 13px;
     }
 
-    .body{
+    .body {
         font-size: 13px;
     }
 
@@ -90,7 +88,7 @@
         left: 17px;
         top: 8px;
     }
-    
+
     .input-text-two {
         width: 130%;
         left: 18px;
@@ -106,11 +104,11 @@
         padding-bottom: 5px;
     }
 
-    :host ::ng-deep   .button-confirm {
+    :host ::ng-deep .button-confirm {
         left: 13px;
         bottom: 10px;
     }
-    
+
     .p-button-text {
         right: 100px;
         top: 20px;

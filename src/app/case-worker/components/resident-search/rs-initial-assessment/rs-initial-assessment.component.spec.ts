@@ -8,9 +8,8 @@ describe('RsInitialAssessmentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RsInitialAssessmentComponent ]
-    })
-    .compileComponents();
+      declarations: [RsInitialAssessmentComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
