@@ -1,5 +1,5 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,57 +13,57 @@ export class IaFormPageThreeComponent implements OnInit {
   medicalInformation!: FormGroup;
   ideation!: FormGroup;
   generalAppearanceList = [
-    {label: 'Well Groomed', value: 'well groomed'},
-    {label: 'Dirty', value: 'dirty'},
-    {label: 'Neat', value: 'neat'},
-    {label: 'Careless', value: 'careless'},
-    {label: 'Average', value: 'average'},
-    {label: 'Slim', value: 'slim'},
-    {label: 'Obese', value: 'obese'},
+    { label: 'Well Groomed', value: 'well groomed' },
+    { label: 'Dirty', value: 'dirty' },
+    { label: 'Neat', value: 'neat' },
+    { label: 'Careless', value: 'careless' },
+    { label: 'Average', value: 'average' },
+    { label: 'Slim', value: 'slim' },
+    { label: 'Obese', value: 'obese' },
   ];
 
   thoughtForumList = [
-    {label: 'Logical', value: 'logical'},
-    {label: 'Coherent', value: 'coherent'},
-    {label: 'Relevant', value: 'relevant'},
-    {label: 'Loose Associations', value: 'loose associations'},
-    {label: 'Confused', value: 'confused'},
-    {label: 'Incoherent', value: 'incoherent'},
-    {label: 'Flight of Ideas', value: 'flight of ideas'},
-    {label: 'Thought blocking', value: 'Thought blocking'},
+    { label: 'Logical', value: 'logical' },
+    { label: 'Coherent', value: 'coherent' },
+    { label: 'Relevant', value: 'relevant' },
+    { label: 'Loose Associations', value: 'loose associations' },
+    { label: 'Confused', value: 'confused' },
+    { label: 'Incoherent', value: 'incoherent' },
+    { label: 'Flight of Ideas', value: 'flight of ideas' },
+    { label: 'Thought blocking', value: 'Thought blocking' },
   ];
 
   moodList = [
-    {label: 'Depressed', value: 'depressed'},
-    {label: 'Elated', value: 'elated'},
-    {label: 'Angry', value: 'angry'},
-    {label: 'Happy', value: 'happy'},
-    {label: 'Neutral', value: 'neutral'},
+    { label: 'Depressed', value: 'depressed' },
+    { label: 'Elated', value: 'elated' },
+    { label: 'Angry', value: 'angry' },
+    { label: 'Happy', value: 'happy' },
+    { label: 'Neutral', value: 'neutral' },
   ];
 
   affectList = [
-    {label: 'Appropriate', value: 'appropriate'},
-    {label: 'Fearful', value: 'fearful'},
-    {label: 'Confused', value: 'confused'},
-    {label: 'Apathetic', value: 'apathetic'},
-    {label: 'Flat', value: 'flat'},
-    {label: 'Liable', value: 'liable'},
-    {label: 'Inappropriate', value: 'inappropriate'},
+    { label: 'Appropriate', value: 'appropriate' },
+    { label: 'Fearful', value: 'fearful' },
+    { label: 'Confused', value: 'confused' },
+    { label: 'Apathetic', value: 'apathetic' },
+    { label: 'Flat', value: 'flat' },
+    { label: 'Liable', value: 'liable' },
+    { label: 'Inappropriate', value: 'inappropriate' },
   ];
 
   ideationList = [
-    {label: 'Thoughts of Suicide', key: 'thoughtsOfSuicide'},
-    {label: 'Plan', key: 'suicidePlan'},
-    {label: 'Thoughts of Homicide', key: 'thoughtsOfHomicide'},
-    {label: 'Plan', key: 'homicidePlan'},
-    {label: 'Delusional', key: 'delusional'},
-    {label: 'Paranoid', key: 'paranoid'},
-    {label: 'Hallucinations', key: 'hallucinations'}
+    { label: 'Thoughts of Suicide', key: 'thoughtsOfSuicide' },
+    { label: 'Plan', key: 'suicidePlan' },
+    { label: 'Thoughts of Homicide', key: 'thoughtsOfHomicide' },
+    { label: 'Plan', key: 'homicidePlan' },
+    { label: 'Delusional', key: 'delusional' },
+    { label: 'Paranoid', key: 'paranoid' },
+    { label: 'Hallucinations', key: 'hallucinations' },
   ];
 
   memoryList = [
-    {label: 'Recent Memory', key: 'recentMemory'},
-    {label: 'Remote Memory', key: 'remoteMemory'}
+    { label: 'Recent Memory', key: 'recentMemory' },
+    { label: 'Remote Memory', key: 'remoteMemory' },
   ];
   constructor(private fb: FormBuilder, private router: Router) {}
 
@@ -79,8 +79,8 @@ export class IaFormPageThreeComponent implements OnInit {
       homicidePlan: [],
       delusional: [],
       paranoid: [],
-      hallucinations: []
-    })
+      hallucinations: [],
+    });
 
     this.mentalStatusAssessment = this.fb.group({
       orientation: this.fb.group({
@@ -91,13 +91,16 @@ export class IaFormPageThreeComponent implements OnInit {
       }),
       generalAppearance: [''],
       thoughtForum: [''],
-      mood: this.fb.group({ answeredByClient: [''], observedByInterviewer: [''] }),
+      mood: this.fb.group({
+        answeredByClient: [''],
+        observedByInterviewer: [''],
+      }),
       affect: [''],
       ideation: this.ideation,
       memory: this.fb.group({
         recentMemory: [],
-        remoteMemory: []
-      })
+        remoteMemory: [],
+      }),
     });
     this.medicalInformation = this.fb.group({
       primaryPhysicianName: [],
@@ -106,15 +109,15 @@ export class IaFormPageThreeComponent implements OnInit {
       hospital: [],
       physicianSpecialist: [],
       diagnosisAndCurrentTreatment: [],
-      currentMedication: []
-    })
+      currentMedication: [],
+    });
     this.buildForm();
   }
 
   buildForm() {
     this.page3Form = this.fb.group({
       mentalStatusAssessment: this.mentalStatusAssessment,
-      medicalInformation: this.medicalInformation
+      medicalInformation: this.medicalInformation,
     });
     console.log(this.page3Form.get(['mentalStatusAssessment', 'ideation']));
   }
@@ -124,21 +127,31 @@ export class IaFormPageThreeComponent implements OnInit {
   }
 
   get ideationControls() {
-    return (this.page3Form.get(['mentalStatusAssessment', 'ideation']) as FormGroup).controls;
+    return (
+      this.page3Form.get(['mentalStatusAssessment', 'ideation']) as FormGroup
+    ).controls;
   }
 
   get moodAnsweredByClient() {
-    return this.page3Form.get(['mentalStatusAssessment', 'mood', 'answeredByClient']) as FormControl;
+    return this.page3Form.get([
+      'mentalStatusAssessment',
+      'mood',
+      'answeredByClient',
+    ]) as FormControl;
   }
 
   get moodObservedByInterviewer() {
-    return this.page3Form.get(['mentalStatusAssessment', 'mood', 'observedByInterviewer']) as FormControl;
+    return this.page3Form.get([
+      'mentalStatusAssessment',
+      'mood',
+      'observedByInterviewer',
+    ]) as FormControl;
   }
 }
 
-@Pipe({name: 'keys'})
+@Pipe({ name: 'keys' })
 export class KeysPipe implements PipeTransform {
-  transform(value: any){
+  transform(value: any) {
     return Object.keys(value);
   }
 }

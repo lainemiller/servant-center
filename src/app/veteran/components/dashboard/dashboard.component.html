@@ -1,8 +1,18 @@
 <div class="p-grid">
   <div class="p-col-12">
-  <app-item-header title="CALENDAR"></app-item-header>
-  <full-calendar [options]="calendarOptions" class="calendar-container"></full-calendar>
+    <app-welcome-header
+      name="{{ name }}"
+      date="{{ date }}"
+      image="{{ image }}"
+    ></app-welcome-header>
+    <app-item-header title="CALENDAR"></app-item-header>
+    <full-calendar
+      [options]="calendarOptions"
+      class="calendar-container"
+    ></full-calendar>
   </div>
   <app-progress-notes class="p-col-12 p-lg-6"></app-progress-notes>
-  <app-transportation-request-form class="p-col-12 p-lg-6"></app-transportation-request-form>
+  <app-transportation-request-form
+    class="p-col-12 p-lg-6"
+  ></app-transportation-request-form>
 </div>

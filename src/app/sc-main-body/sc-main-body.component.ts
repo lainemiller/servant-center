@@ -3,11 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-sc-main-body',
   templateUrl: './sc-main-body.component.html',
-  styleUrls: ['./sc-main-body.component.scss']
+  styleUrls: ['./sc-main-body.component.scss'],
 })
 export class ScMainBodyComponent implements OnInit {
-
-  title = "Servant Center";
+  title = 'Servant Center';
 
   sampleBody = `
 
@@ -29,11 +28,9 @@ export class ScMainBodyComponent implements OnInit {
 
   Nulla interdum imperdiet nisi, sit amet pharetra ex tincidunt non. Donec efficitur luctus neque, sed tincidunt dui vehicula dignissim. Donec a vestibulum magna. Etiam id risus suscipit, iaculis odio quis, dignissim ex. Pellentesque condimentum, est eget egestas malesuada, diam arcu scelerisque neque, non maximus neque tortor eget libero. In scelerisque ipsum eu velit pulvinar varius. Duis imperdiet lorem dolor, porta dapibus odio vestibulum eget. Vivamus elit lectus, efficitur eu finibus sed, imperdiet sit amet velit. Donec in rutrum mi. Vestibulum congue turpis nisl, ac vulputate ligula varius id. Integer nec tortor maximus augue ullamcorper faucibus. Fusce venenatis sem sed libero malesuada scelerisque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel condimentum tortor. Donec ut maximus urna. Fusce tristique, enim eu lacinia semper, risus orci rhoncus est, eu viverra ipsum metus et leo.
 
-  Proin vel tortor a tellus suscipit volutpat. Aliquam mollis tempor euismod. Praesent ut justo at quam facilisis iaculis eu at est. Integer posuere pharetra luctus. Ut mollis viverra risus, in condimentum diam molestie vel. Pellentesque odio velit, lobortis id ullamcorper vitae, venenatis interdum sapien. Integer in velit interdum metus faucibus dapibus. In pharetra dignissim eros in egestas. Cras condimentum felis in luctus molestie. Etiam placerat nisi a leo facilisis, vitae dignissim erat fringilla. Sed consectetur sed diam non elementum. Mauris purus enim, tempor pretium lacus vel, congue accumsan dolor. `
+  Proin vel tortor a tellus suscipit volutpat. Aliquam mollis tempor euismod. Praesent ut justo at quam facilisis iaculis eu at est. Integer posuere pharetra luctus. Ut mollis viverra risus, in condimentum diam molestie vel. Pellentesque odio velit, lobortis id ullamcorper vitae, venenatis interdum sapien. Integer in velit interdum metus faucibus dapibus. In pharetra dignissim eros in egestas. Cras condimentum felis in luctus molestie. Etiam placerat nisi a leo facilisis, vitae dignissim erat fringilla. Sed consectetur sed diam non elementum. Mauris purus enim, tempor pretium lacus vel, congue accumsan dolor. `;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

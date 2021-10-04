@@ -1,31 +1,93 @@
 <app-item-header [title]="formTitle"></app-item-header>
 <div class="form-container">
   <form [formGroup]="transportRequestForm" (ngSubmit)="onSubmit()">
-  <div class="p-fluid p-formgrid p-grid">
-    <div class="p-field p-col-12 p-md-6">
-    <input type="text" pInputText formControlName=firstName placeholder="First Name"></div>
-    <div class="p-field p-col-12 p-md-6">
-    <input type="text" pInputText formControlName=lastName placeholder="Last Name"></div>
-  </div>
+    <div class="p-fluid p-formgrid p-grid">
+      <div class="p-field p-col-12 p-md-6">
+        <input
+          type="text"
+          pInputText
+          formControlName="firstName"
+          placeholder="First Name"
+        />
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input
+          type="text"
+          pInputText
+          formControlName="lastName"
+          placeholder="Last Name"
+        />
+      </div>
+    </div>
     <div class="p-field p-fluid">
-    <input type="text" pInputText formControlName=requestReason placeholder="Reason for request"></div>
+      <input
+        type="text"
+        pInputText
+        formControlName="requestReason"
+        placeholder="Reason for request"
+      />
+    </div>
     <p-divider></p-divider>
     <div class="p-fluid p-formgrid p-grid">
-    <div class="p-field p-col-12 p-md-8">
-    <p-calendar formControlName=date [inline]=false [showIcon]=true placeholder="Appointment Date (mm/dd/yyyy)"></p-calendar></div>
-    <div class="p-field p-col-12 p-md-4">
-    <p-calendar formControlName=time [timeOnly]=true placeholder="Time" [showIcon]=true icon="pi pi-angle-down"></p-calendar></div></div>
+      <div class="p-field p-col-12 p-md-8">
+        <p-calendar
+          formControlName="date"
+          [inline]="false"
+          [showIcon]="true"
+          placeholder="Appointment Date (mm/dd/yyyy)"
+        ></p-calendar>
+      </div>
+      <div class="p-field p-col-12 p-md-4">
+        <p-calendar
+          formControlName="time"
+          [timeOnly]="true"
+          placeholder="Time"
+          [showIcon]="true"
+          icon="pi pi-angle-down"
+        ></p-calendar>
+      </div>
+    </div>
     <div class="p-field p-fluid">
-      <input type="text" pInputText formControlName=address placeholder="Address"></div>
-      <div class="p-fluid p-formgrid p-grid">
+      <input
+        type="text"
+        pInputText
+        formControlName="address"
+        placeholder="Address"
+      />
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
       <div class="p-field p-col-8 p-md-5">
-    <input type="text" pInputText formControlName=city placeholder="City"></div>
-    <div class="p-field p-col-4 p-md-3">
-    <p-dropdown formControlName="state" [options]="states" placeholder="State" optionLabel=name></p-dropdown></div>
-    <div class="p-field p-col-6 p-md-4">
-    <input type="text" pInputText formControlName=zip placeholder="Zip"></div></div>
+        <input
+          type="text"
+          pInputText
+          formControlName="city"
+          placeholder="City"
+        />
+      </div>
+      <div class="p-field p-col-4 p-md-3">
+        <p-dropdown
+          formControlName="state"
+          [options]="states"
+          placeholder="State"
+          optionLabel="name"
+        ></p-dropdown>
+      </div>
+      <div class="p-field p-col-6 p-md-4">
+        <input type="text" pInputText formControlName="zip" placeholder="Zip" />
+      </div>
+    </div>
 
-      <button type="submit" pButton label="Submit" class="p-button-outlined"></button>
-      <button type="button" pButton label="Cancel" class="p-button-text p-button-secondary"></button>
+    <button
+      type="submit"
+      pButton
+      label="Submit"
+      class="p-button-outlined"
+    ></button>
+    <button
+      type="button"
+      pButton
+      label="Cancel"
+      class="p-button-text p-button-secondary"
+    ></button>
   </form>
-  </div>
+</div>

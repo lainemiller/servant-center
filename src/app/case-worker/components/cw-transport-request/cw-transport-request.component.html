@@ -3,43 +3,63 @@
   <form [formGroup]="transportRequestForm">
     <div class="p-fluid p-formgrid p-grid">
       <div class="p-field p-col-12 p-md-3">
-      <input type="text" pInputText formControlName=firstName placeholder="Resident's First Name"></div>
+        <input type="text" pInputText formControlName=firstName placeholder="Resident's First Name">
+      </div>
       <div class="p-field p-col-12 p-md-3">
-      <input type="text" pInputText formControlName=lastName placeholder="Resident's Last Name"></div>
+        <input type="text" pInputText formControlName=lastName placeholder="Resident's Last Name">
+      </div>
       <div class="p-field p-col-12 p-md-4">
-        <p-calendar formControlName=appointmentDate [touchUI]="mobileMode" [readonlyInput]="mobileMode" [inline]=false [showIcon]=true placeholder="Appointment Date (mm/dd/yyyy)"></p-calendar></div>
-        <div class="p-field p-col-12 p-md-2">
-        <p-calendar formControlName=time [timeOnly]=true placeholder="Time" [showIcon]=true icon="pi pi-angle-down"></p-calendar></div>
+        <p-calendar formControlName=appointmentDate [touchUI]="mobileMode" [readonlyInput]="mobileMode" [inline]=false
+          [showIcon]=true placeholder="Appointment Date (mm/dd/yyyy)"></p-calendar>
+      </div>
+      <div class="p-field p-col-12 p-md-2">
+        <p-calendar formControlName=time [timeOnly]=true placeholder="Time" [showIcon]=true icon="pi pi-angle-down">
+        </p-calendar>
+      </div>
     </div>
     <p-divider></p-divider>
     <div class="p-fluid p-formgrid p-grid">
       <div class="p-col-12 p-md-6">
         <div class="p-fluid p-formgrid p-grid">
-        <div class="p-field p-col-12">
-          <textarea pInputTextarea formControlName=reason [rows]="6" class="address-text-area" placeholder="Reason for request"></textarea></div>
           <div class="p-field p-col-12">
-            <input type="text" pInputText formControlName=coordinator placeholder="Transport Co-ordinator"></div>
-            <div class="p-field p-col-12">
-              <input type="text" pInputText formControlName=nursingNotified placeholder="Nursing Notified"></div>
-      </div></div>
+            <textarea pInputTextarea formControlName=reason [rows]="6" class="address-text-area"
+              placeholder="Reason for request"></textarea>
+          </div>
+          <div class="p-field p-col-12">
+            <input type="text" pInputText formControlName=coordinator placeholder="Transport Co-ordinator">
+          </div>
+          <div class="p-field p-col-12">
+            <input type="text" pInputText formControlName=nursingNotified placeholder="Nursing Notified">
+          </div>
+        </div>
+      </div>
       <div class="p-col-12 p-md-6">
         <div class="p-fluid p-formgrid p-grid">
-        <div class="p-field p-col-12">
-          <input type="text" pInputText formControlName=address placeholder="Address"></div>
-        <div class="p-field p-col-8 p-md-5">
-          <input type="text" pInputText formControlName=city placeholder="City"></div>
-        <div class="p-field p-col-4 p-md-3">
-          <p-dropdown formControlName="state" [options]="states" placeholder="State" optionLabel=name></p-dropdown></div>
-        <div class="p-field p-col-5 p-md-4">
-          <input type="text" pInputText formControlName=zip placeholder="Zip"></div>
+          <div class="p-field p-col-12">
+            <input type="text" pInputText formControlName=address placeholder="Address">
+          </div>
+          <div class="p-field p-col-8 p-md-5">
+            <input type="text" pInputText formControlName=city placeholder="City">
+          </div>
+          <div class="p-field p-col-4 p-md-3">
+            <p-dropdown formControlName="state" [options]="states" placeholder="State" optionLabel=name></p-dropdown>
+          </div>
+          <div class="p-field p-col-5 p-md-4">
+            <input type="text" pInputText formControlName=zip placeholder="Zip">
+          </div>
           <div class="p-field p-col-7 p-md-8">
-            <p-calendar formControlName=approvedDate [touchUI]="mobileMode" [readonlyInput]="mobileMode" [inline]=false [showIcon]=true placeholder="Date Approved"></p-calendar></div>
+            <p-calendar formControlName=approvedDate [touchUI]="mobileMode" [readonlyInput]="mobileMode" [inline]=false
+              [showIcon]=true placeholder="Date Approved"></p-calendar>
+          </div>
           <div class="p-field p-col-12 p-md-5">
-            <input type="text" pInputText formControlName=by placeholder="By"></div>
+            <input type="text" pInputText formControlName=by placeholder="By">
+          </div>
           <div class="p-field p-col-12 p-md-7">
-            <p-calendar formControlName=date [touchUI]="mobileMode" [readonlyInput]="mobileMode" [inline]=false [showIcon]=true placeholder="Date"></p-calendar></div>
+            <p-calendar formControlName=date [touchUI]="mobileMode" [readonlyInput]="mobileMode" [inline]=false
+              [showIcon]=true placeholder="Date"></p-calendar>
+          </div>
         </div>
-    </div>
+      </div>
     </div>
     <button type="submit" pButton label="Submit" class="p-button-outlined"></button>
     <button type="button" pButton label="Cancel" class="p-button-text p-button-secondary"></button>

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-transportation-request-form',
   templateUrl: './transportation-request-form.component.html',
-  styleUrls: ['./transportation-request-form.component.scss']
+  styleUrls: ['./transportation-request-form.component.scss'],
 })
 export class TransportationRequestFormComponent implements OnInit {
   formTitle = 'TRANSPORTATION REQUEST FORM';
@@ -37,5 +37,4 @@ export class TransportationRequestFormComponent implements OnInit {
   onSubmit(): void {
     console.log(this.transportRequestForm.value);
   }
-
 }

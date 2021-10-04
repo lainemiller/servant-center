@@ -1,61 +1,66 @@
 <div class="container">
-<div class="search-header"><span>RESIDENT SEARCH</span></div>
+  <div class="search-header"><span>RESIDENT SEARCH</span></div>
   <div class="search-form">
-  <form [formGroup]="residentSearchForm" (ngSubmit)="onSubmit()">
-  <div class="p-fluid p-formgrid p-grid">
-  <div class="p-field p-col-12 p-md-2">
-    <p-dropdown formControlName="type" [options]="options" placeholder="Option" optionLabel=name></p-dropdown></div>
-    <div class="p-field p-col-12 p-md-1" class="text-div">OR</div>
-    <div class="p-field p-col-12 p-md-3">
-      <input type="text" pInputText formControlName=firstName placeholder="Veteran's First Name"></div>
-      <div class="p-field p-col-12 p-md-3">
-      <input type="text" pInputText formControlName=lastName placeholder="Veteran's Last Name"></div>
-      <div class="p-field p-col-12 p-md-3">
-        <p-calendar formControlName=dob [inline]=false [showIcon]=true placeholder="BirthDay (mm/dd/yyyy)"></p-calendar></div>
-  </div>
-  <div class="p-d-flex p-jc-end p-mr-2">
-    <button pButton type="submit" label="Submit" class="p-button-outlined submit-button"></button>
-    <button pButton icon="fa fa-sync-alt" class="p-button-rounded p-button-text sync-button p-ml-1"></button>
-  </div>
-</form>
-</div>
-<div class="result-table">
-  <p-table [value]="tableValues" selectionMode="single" [(selection)]="selectedResident">
-    <ng-template pTemplate="header">
-      <tr>
-        <th [pSortableColumn]="col.field" *ngFor="let col of columns">
-          {{col.header}} <p-sortIcon [field]="col.field"></p-sortIcon>
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-tableValue>
-      <tr [pSelectableRow]="tableValue">
-        <td *ngFor="let col of columns">
-          {{tableValue[col.field]}}
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
-</div>
-<div class="resident-detail-container card" *ngIf="selectedResident">
-  <p-card>
-    <div class="p-grid p-col-12">
-      <div class="p-col-12 p-md-3">
-        <img src="" alt="" srcset="" width="150px" height="170px"  style="background-color: gray;">
+    <form [formGroup]="residentSearchForm" (ngSubmit)="onSubmit()">
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-2">
+          <p-dropdown formControlName="type" [options]="options" placeholder="Option" optionLabel=name></p-dropdown>
+        </div>
+        <div class="p-field p-col-12 p-md-1" class="text-div">OR</div>
+        <div class="p-field p-col-12 p-md-3">
+          <input type="text" pInputText formControlName=firstName placeholder="Veteran's First Name">
+        </div>
+        <div class="p-field p-col-12 p-md-3">
+          <input type="text" pInputText formControlName=lastName placeholder="Veteran's Last Name">
+        </div>
+        <div class="p-field p-col-12 p-md-3">
+          <p-calendar formControlName=dob [inline]=false [showIcon]=true placeholder="BirthDay (mm/dd/yyyy)">
+          </p-calendar>
+        </div>
       </div>
-      <div class="p-col-12 p-md-6">
-        <p class="card-resident-details">
-        <span class="card-resident-name">{{selectedResident.name}}</span><br>
-        <span>{{selectedResident.address}}</span><br>
-        <span>{{selectedResident.phoneNumber}}</span><br>
-        <span>{{selectedResident.email}}</span>
-        </p>
+      <div class="p-d-flex p-jc-end p-mr-2">
+        <button pButton type="submit" label="Submit" class="p-button-outlined submit-button"></button>
+        <button pButton icon="fa fa-sync-alt" class="p-button-rounded p-button-text sync-button p-ml-1"></button>
       </div>
-    </div>
-  </p-card>
-</div>
-<div class="p-mt-4 resident-search-nav">
-  <p-tabMenu [model]="tabMenuItems"></p-tabMenu>
-  <router-outlet></router-outlet>
-</div>
+    </form>
+  </div>
+  <div class="result-table">
+    <p-table [value]="tableValues" selectionMode="single" [(selection)]="selectedResident">
+      <ng-template pTemplate="header">
+        <tr>
+          <th [pSortableColumn]="col.field" *ngFor="let col of columns">
+            {{col.header}} <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-tableValue>
+        <tr [pSelectableRow]="tableValue">
+          <td *ngFor="let col of columns">
+            {{tableValue[col.field]}}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div class="resident-detail-container card" *ngIf="selectedResident">
+    <p-card>
+      <div class="p-grid p-col-12">
+        <div class="p-col-12 p-md-3">
+          <img src="" alt="" srcset="" width="150px" height="170px" style="background-color: gray;">
+        </div>
+        <div class="p-col-12 p-md-6">
+          <p class="card-resident-details">
+            <span class="card-resident-name">{{selectedResident.name}}</span><br>
+            <span>{{selectedResident.address}}</span><br>
+            <span>{{selectedResident.phoneNumber}}</span><br>
+            <span>{{selectedResident.email}}</span>
+          </p>
+        </div>
+      </div>
+    </p-card>
+  </div>
+  <div class="p-mt-4 resident-search-nav">
+    <p-tabMenu [model]="tabMenuItems"></p-tabMenu>
+    <router-outlet></router-outlet>
+  </div>
 </div>
