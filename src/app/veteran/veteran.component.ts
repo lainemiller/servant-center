@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, Host, HostListener, OnInit } from '@angular/core';
 
 import { MenuItem } from 'primeng/api';
 
@@ -9,11 +9,13 @@ import { MenuItem } from 'primeng/api';
 })
 export class VeteranComponent implements OnInit {
   public displayMenu = true;
+
   @HostListener('window:resize')
   onWindowResize() {
     this.displayMenu = window.innerWidth > 768;
   }
-  items: MenuItem[] = [
+
+  public items: MenuItem[] = [
     {
       label: 'DASHBOARD',
       icon: 'fa fa-tachometer-alt',
@@ -43,6 +45,12 @@ export class VeteranComponent implements OnInit {
       icon: 'fa fa-user-circle',
       styleClass: 'menu-items--text menu-item--5',
       routerLink: ['/veteran/profile'],
+    },
+    {
+      label: 'LOGOUT',
+      icon: 'fas fa-sign-out-alt',
+      styleClass: 'menu-items--text menu-item--6',
+      routerLink: ['/veteran/'],
     },
   ];
 
