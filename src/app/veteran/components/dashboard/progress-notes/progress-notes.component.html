@@ -2,7 +2,6 @@
 <div class="progress-notes--container">
   <p-toolbar>
     <div class="p-toolbar-group-left">
-<<<<<<< Updated upstream
       <!-- modal for add progress note -->
       <div class="progress-notes--addNoteModal">
         <p-dialog
@@ -64,15 +63,12 @@
           </form>
         </p-dialog>
       </div>
-=======
->>>>>>> Stashed changes
       <button
         type="button"
         pButton
         icon="fas fa-plus-circle"
         label="Add Notes"
         class="p-button-outlined"
-<<<<<<< Updated upstream
         (click)="showDialog()"
       ></button>
     </div>
@@ -163,20 +159,11 @@
           </div>
         </p-dialog>
       </div>
-=======
-      ></button>
-    </div>
-    <div class="p-toolbar-group-right">
-      <input type="text" pInputText placeholder="Search" class="p-mr-2" />
->>>>>>> Stashed changes
       <button
         type="button"
         pButton
         icon="fas fa-external-link-alt"
-<<<<<<< Updated upstream
         (click)="showList()"
-=======
->>>>>>> Stashed changes
         class="p-button-text"
         style="font-size: 20px"
       ></button>
@@ -185,14 +172,10 @@
   <div class="progress-notes--group p-mt-4 p-grid">
     <div
       class="p-shadow-2 p-col-12 progress-note"
-<<<<<<< Updated upstream
       *ngFor="
         let progressNote of progressNotes | filter: searchText;
         let i = index
       "
-=======
-      *ngFor="let progressNote of progressNotes; let i = index"
->>>>>>> Stashed changes
     >
       <div class="inputSwitch-container p-col-12">
         <p-toolbar>
