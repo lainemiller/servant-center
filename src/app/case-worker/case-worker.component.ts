@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 
 import { MenuItem } from 'primeng/api';
+
 import { DataService } from './services/data.service';
 
 @Component({
@@ -50,7 +51,7 @@ export class CaseWorkerComponent implements OnInit {
     },
   ];
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   toggleMenu(): void {
     this.displayMenu = !this.displayMenu;

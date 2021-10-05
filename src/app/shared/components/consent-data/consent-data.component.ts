@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { Consent } from '../../consent';
+
 import { ConsentService } from '../../consent.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { ConsentService } from '../../consent.service';
 })
 export class ConsentDataComponent implements OnInit {
   display: boolean = false;
+  vetran: any;
   consent: any;
 
   constructor(private service: ConsentService) {}

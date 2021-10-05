@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CalendarOptions } from '@fullcalendar/angular';
+
 import { DataService } from '../../services/data.service';
 
 @Component({
@@ -9,10 +10,23 @@ import { DataService } from '../../services/data.service';
   styleUrls: ['./case-worker-dashboard.component.scss'],
 })
 export class CaseWorkerDashboardComponent implements OnInit {
-  data: any;
-  name: any;
-  date: any;
-  imgSrc = '';
+  public data: any;
+  public name: any;
+  public date: any;
+  public image: any;
+
+  constructor(private service: DataService) {
+    this.service.getName().subscribe((res) => {
+      this.data = res;
+      console.log(this.data);
+      this.name = this.data.name;
+      this.date = this.data.date;
+      this.image = this.data.image;
+    });
+  }
+
+  ngOnInit(): void {}
+
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     headerToolbar: {
@@ -22,15 +36,4 @@ export class CaseWorkerDashboardComponent implements OnInit {
     },
     nowIndicator: true,
   };
-  constructor(private service: DataService) {
-    this.service.getName().subscribe((res) => {
-      this.data = res;
-      console.log(this.data);
-      this.name = this.data.name;
-      this.date = this.data.lastLogin;
-      this.imgSrc = this.data.imgSrc;
-    });
-  }
-
-  ngOnInit(): void {}
 }

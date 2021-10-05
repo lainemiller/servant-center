@@ -17,6 +17,7 @@
     width: 50%;
     left: 17px;
     top: 15px;
+    pointer-events: none;
 }
 
 .input-text-two {
@@ -24,6 +25,7 @@
     width: 50%;
     left: 50px;
     top: 15px;
+    pointer-events: none;
 }
 
 .input-footer-heading {
@@ -47,13 +49,73 @@
     position: absolute;
     top: 70px;
     width: 90%;
+    padding-top: 10px;
 }
 
 .header-title {
-    position: relative;
-    padding-bottom: 10px;
-    bottom: 10px;
     font-family: "Roboto", sans-serif;
-    //font-size: 34px;
+    font-size: 34px;
     color: #822433;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+    position: relative;
+    padding-bottom: 40px;
+}
+
+@media only screen and (max-width: 768px) {
+    .header-title {
+        font-size: 20px;
+    }
+
+    .header-text {
+        top: 40px;
+        width: 85%;
+        font-size: 13px;
+    }
+
+    .body {
+        font-size: 13px;
+    }
+
+    .footer-text {
+        font-size: 13px;
+        width: 115%;
+    }
+
+    .input-text-one {
+        width: 130%;
+        left: 17px;
+        top: 8px;
+    }
+
+    .input-text-two {
+        width: 130%;
+        left: 18px;
+        top: 12px;
+    }
+
+    .container {
+        height: 100px;
+    }
+
+    .input-footer-heading {
+        font-size: 11px;
+        padding-bottom: 5px;
+    }
+
+    :host ::ng-deep .button-confirm {
+        left: 13px;
+        bottom: 10px;
+    }
+
+    .p-button-text {
+        right: 100px;
+        top: 20px;
+        width: 190px;
+    }
+
+    :host ::ng-deep .p-dialog .p-dialog-header {
+        padding-bottom: 85px;
+    }
 }

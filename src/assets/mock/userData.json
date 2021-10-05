@@ -1,5 +1,5 @@
 {
-    "name":"Sam",
-    "date":"09/10/2021",
-    "image":"https://tse4.mm.bing.net/th/id/OIP.ixZ69lPCOZ3ZO5UqSHQGIAHaHa?pid=ImgDet&rs=1"
+  "name": "Sam",
+  "date": "09/10/2021",
+  "image": "../assets/images/user-profile.jpg"
 }

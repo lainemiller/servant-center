@@ -1,7 +1,6 @@
 {
-    "msgs":
-    [
-        {"chat":"abc", "from":"abc"},
-        {"chat":"bcs", "from":"cbd"}
-    ]
+  "msgs": [
+    { "chat": "abc", "from": "abc" },
+    { "chat": "bcs", "from": "cbd" }
+  ]
 }

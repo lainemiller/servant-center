@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   toggleMenuState(): void {
     this.menuState = !this.menuState;

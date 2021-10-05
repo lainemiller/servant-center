@@ -8,8 +8,6 @@ export class ConsentService {
   constructor(private http: HttpClient) {}
 
   public getRegisterUserDetailsById() {
-    return this.http.get(
-      'https://my-json-server.typicode.com/akashkumar64/testapi/user/1'
-    );
+    return this.http.get('./assets/mock/consent-data.json');
   }
 }
