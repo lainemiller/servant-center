@@ -8,13 +8,14 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./veteran.component.scss'],
 })
 export class VeteranComponent implements OnInit {
-  public displayMenu: boolean = true;
+  public displayMenu = true;
+
   @HostListener('window:resize')
   onWindowResize() {
     this.displayMenu = window.innerWidth > 768;
   }
 
-  items: MenuItem[] = [
+  public items: MenuItem[] = [
     {
       label: 'DASHBOARD',
       icon: 'fa fa-tachometer-alt',

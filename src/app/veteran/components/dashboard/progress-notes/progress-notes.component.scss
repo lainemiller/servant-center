@@ -69,35 +69,11 @@
   .goal-description {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
-    font-style: normal;
-    font-size: 16px;
-    color: #222222;
-    line-height: 22px;
-    //max-height: 30px;
-    overflow-y: hidden;
-    margin-bottom: 10px;
-    margin-top: 5px;
-    &.expand {
-      max-height: 50px;
-      overflow-y: scroll;
-    }
-  }
-
-  .goal-header {
-    font-family: "Roboto Light", "Roboto Regular", "Roboto", sans-serif;
-    font-weight: 300;
-    font-style: normal;
-    &--title {
-      font-size: 22px;
-    }
-    &--date {
-      font-family: "Roboto", sans-serif;
-      font-weight: 400;
-      font-size: 15px;
-      color: #7b7b7b;
-    }
+    font-size: 15px;
+    color: #7b7b7b;
   }
 }
+
 .progress-note-buttons {
   margin-left: 10px;
 }

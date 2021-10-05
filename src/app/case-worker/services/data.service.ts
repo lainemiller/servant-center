@@ -1,18 +1,14 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataService {
-
-  constructor(private http:HttpClient) {
-   }
-   getName()
-   {
+  constructor(private http: HttpClient) {}
+  getName() {
     return this.http.get('./assets/mock/userData.json');
-   }
-   getMsgCount()
-   {
-     return this.http.get('./assets/mock/msgs.json');
-   }
+  }
+  getMsgCount() {
+    return this.http.get('./assets/mock/msgs.json');
+  }
 }

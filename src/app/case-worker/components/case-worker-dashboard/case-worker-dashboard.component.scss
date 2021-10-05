@@ -3,11 +3,7 @@
   border-color: #2196f3;
   color: #ffffff;
 }
-:host
-  ::ng-deep
-  .fc
-  .fc-toolbar
-  .fc-button.fc-listWeek-button.fc-button-active:hover {
+:host ::ng-deep .fc .fc-toolbar .fc-button.fc-listWeek-button.fc-button-active:hover {
   background: #0d89ec;
   border-color: #0d89ec;
   color: #ffffff;
@@ -24,61 +20,52 @@
 
 :host ::ng-deep .fc .fc-toolbar .fc-button.fc-listWeek-button {
   background: #ffffff;
-    border: 1px solid #ced4da;
-    color: #495057;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  border: 1px solid #ced4da;
+  color: #495057;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
-.mb-30
-{
-margin-bottom: 30px;
+.mb-30 {
+  margin-bottom: 30px;
 }
-.header
-{
+.header {
   margin-bottom: 30px;
   display: flex;
 }
-.header-title
-{
+.header-title {
   margin-right: 20px;
   width: auto;
 }
-.header-sub
-{
-width:50%;
+.header-sub {
+  width: 50%;
 }
-.fas
-{
-  color:#0d89ec;
+.fas {
+  color: #0d89ec;
 }
-.chat
-{
-padding-top: 10px;
+.chat {
+  padding-top: 10px;
 }
-.title
-{
-  font-family: 'Roboto Thin', 'Roboto Regular', 'Roboto', sans-serif;
+.title {
+  font-family: "Roboto Thin", "Roboto Regular", "Roboto", sans-serif;
   font-weight: 250;
   font-size: 40px;
   color: #495057;
 }
-.title-name
-{
-  font-family: 'Roboto Thin', 'Roboto Regular', 'Roboto', sans-serif;
-  font-weight:400;
+.title-name {
+  font-family: "Roboto Thin", "Roboto Regular", "Roboto", sans-serif;
+  font-weight: 400;
   font-size: 40px;
   color: #495057;
 }
-.title-img{
+.title-img {
   height: 50px;
   width: 50px;
   border-radius: 25px;
   margin-right: 20px;
 }
 
-.last-sync
-{
-  font-family: 'Roboto', sans-serif;
-  padding-top:20px;
+.last-sync {
+  font-family: "Roboto", sans-serif;
+  padding-top: 20px;
   font-style: italic;
 }
 
@@ -89,15 +76,14 @@ padding-top: 10px;
 }
 
 @media only screen and (max-width: 600px) {
-  .title-img{
-margin-top:10px;
+  .title-img {
+    margin-top: 10px;
   }
-  .header{
+  .header {
     display: block;
   }
-.header-sub
-{
-  width: 80%;
-  margin-left:70px;
-}
+  .header-sub {
+    width: 80%;
+    margin-left: 70px;
+  }
 }

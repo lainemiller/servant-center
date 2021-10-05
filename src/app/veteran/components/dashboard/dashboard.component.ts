@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { CalendarOptions } from '@fullcalendar/angular';
+
 import { VeteranDashboardService } from '../../services/veteran-dashboard.service';
 
 @Component({
@@ -13,16 +15,6 @@ export class DashboardComponent implements OnInit {
   public data: any;
   public image: any;
 
-  calendarOptions: CalendarOptions = {
-    initialView: 'dayGridMonth',
-    headerToolbar: {
-      start: 'prev,next,today',
-      center: 'title',
-      end: 'dayGridMonth,timeGridWeek,listWeek',
-    },
-    nowIndicator: true,
-  };
-
   constructor(private service: VeteranDashboardService) {
     this.service.getName().subscribe((data) => {
       console.log(data);
@@ -34,4 +26,14 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth',
+    headerToolbar: {
+      start: 'prev,next,today',
+      center: 'title',
+      end: 'dayGridMonth,timeGridWeek,listWeek',
+    },
+    nowIndicator: true,
+  };
 }

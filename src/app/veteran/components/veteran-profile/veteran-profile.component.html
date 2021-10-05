@@ -4,77 +4,249 @@
     <div class="form-container">
       <form [formGroup]="veteranProfileForm" (ngSubmit)="onSubmit()">
         <div class="p-fluid p-formgrid p-grid">
-          <img src="assets/images/profile.svg" alt="Image" width="150">
-        </div> <br>
+          <img src="assets/images/profile.svg" alt="Image" width="150" />
+        </div>
+        <br />
         <div class="p-fluid p-formgrid p-grid">
           <div class="p-field p-col-12 p-md-3">
-            <input type="text" pInputText formControlName=recordNo placeholder="Record #">
+            <input
+              type="text"
+              class="disable"
+              pInputText
+              formControlName="recordNo"
+              placeholder="Record #"
+            />
           </div>
           <div class="p-field p-col-12 p-md-3">
-            <p-calendar formControlName=intakeDOB [inline]=false [showIcon]=true placeholder="Intake Date (mm/dd/yyyy)"></p-calendar></div>
-        <div class="p-field p-col-12 p-md-3">
-          <input type="text" pInputText formControlName=caseManager placeholder="Case Manager">
+            <p-calendar
+              formControlName="intakeDOB"
+              class="disable"
+              [inline]="false"
+              [showIcon]="true"
+              placeholder="Intake Date (mm/dd/yyyy)"
+            ></p-calendar>
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              class="disable"
+              pInputText
+              formControlName="caseManager"
+              placeholder="Case Manager"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              class="disable"
+              pInputText
+              formControlName="veteranId"
+              placeholder="Veteran Id"
+            />
+          </div>
         </div>
-    </div>
 
-    <div class="p-fluid p-formgrid p-grid">
-      <div class="p-field p-col-12 p-md-3">
-        <input type="text" pInputText formControlName=firstName placeholder="First Name">
-      </div>
-      <div class="p-field p-col-12 p-md-3">
-        <input type="text" pInputText formControlName=lastName placeholder="Last Name">
-      </div>
-      <div class="p-field p-col-12 p-md-3">
-        <input type="text" pInputText formControlName=nickName placeholder="Nick Name">
-      </div>
-    </div>
-
-    <div class="p-fluid p-formgrid p-grid">
-      <div class="p-field p-col-12 p-md-3">
-        <input type="text" pInputText formControlName=address1 placeholder="Address 1">
-      </div>
-      <div class="p-field p-col-12 p-md-3">
-        <input type="text" pInputText formControlName=city placeholder="City">
-      </div>
-      <!-- DropDown -->
-      <div class="p-field p-col-12 p-md-3">
-        <p-dropdown [options]="states" formControlName="selectedState" optionLabel="name" placeholder="Select a State">
-        </p-dropdown>
-      </div>
-      <ng-template pTemplate="selectedItem">
-        <div class="country-item country-item-value" *ngIf="selectedState">
-          <div>{{selectedState.name}}</div>
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              value="{{ veteran?.firstName }}"
+              pInputText
+              formControlName="firstName"
+              placeholder="First Name"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              value="{{ veteran?.firstName }}"
+              pInputText
+              formControlName="middleName"
+              placeholder="Middle Name"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              pInputText
+              formControlName="lastName"
+              placeholder="Last Name"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              pInputText
+              formControlName="nickName"
+              placeholder="Nick Name"
+            />
+          </div>
         </div>
-      </ng-template>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              pInputText
+              formControlName="address1"
+              placeholder="Address 1"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              pInputText
+              formControlName="city"
+              placeholder="City"
+            />
+          </div>
+          <!-- DropDown -->
+          <div class="p-field p-col-12 p-md-3">
+            <p-dropdown
+              [options]="states"
+              formControlName="selectedState"
+              optionLabel="name"
+              placeholder="Select a State"
+            >
+            </p-dropdown>
+          </div>
+          <ng-template pTemplate="selectedItem">
+            <div class="country-item country-item-value" *ngIf="selectedState">
+              <div>{{ selectedState.name }}</div>
+            </div>
+          </ng-template>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              pInputText
+              formControlName="country"
+              placeholder="Country"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              pInputText
+              formControlName="zipCode"
+              placeholder="Zip Code"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <p-calendar
+              formControlName="DOB"
+              [inline]="false"
+              [showIcon]="true"
+              placeholder="Date Of Birth (mm/dd/yyyy)"
+            >
+            </p-calendar>
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="number"
+              pInputText
+              formControlName="phoneNumber"
+              placeholder="Phone Number"
+            />
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-3">
+            <p-calendar
+              formControlName="POB"
+              [inline]="false"
+              [showIcon]="true"
+              placeholder="Place Of Birth (mm/dd/yyyy)"
+            >
+            </p-calendar>
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              pInputText
+              formControlName="SSNNumber"
+              placeholder="SSN #"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <p-radioButton
+              name="gender"
+              value="male"
+              formControlName="console"
+            ></p-radioButton>
+            <p-radioButton
+              name="gender"
+              value="female"
+              formControlName="console"
+            ></p-radioButton>
+            <p-radioButton
+              name="gender"
+              value="other"
+              formControlName="console"
+            ></p-radioButton>
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <p-radioButton
+              name="maritalStatus"
+              value="married"
+              formControlName="console"
+            ></p-radioButton>
+            <p-radioButton
+              name="maritalStatus"
+              value="single"
+              formControlName="console"
+            ></p-radioButton>
+            <p-radioButton
+              name="maritalStatus"
+              value="divorsed"
+              formControlName="console"
+            ></p-radioButton>
+            <p-radioButton
+              name="maritalStatus"
+              value="widowed"
+              formControlName="console"
+            ></p-radioButton>
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              pInputText
+              formControlName="race"
+              placeholder="Race"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              pInputText
+              formControlName="hmisIdNo"
+              placeholder="HMIS ID #"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="mail"
+              pInputText
+              formControlName="emailId"
+              placeholder="Email Id"
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          pButton
+          label="Update"
+          class="p-button-outlined"
+        ></button>
+        <p-button label="Cancel" styleClass="p-button-link"></p-button>
+      </form>
     </div>
-
-    <div class="p-fluid p-formgrid p-grid">
-      <div class="p-field p-col-12 p-md-3">
-        <input type="text" pInputText formControlName=zipCode placeholder="Zip Code">
-      </div>
-
-      <div class="p-field p-col-12 p-md-3">
-        <p-calendar formControlName=DOB [inline]=false [showIcon]=true placeholder="Date Of Birth (mm/dd/yyyy)"></p-calendar></div>
-      <div class="p-field p-col-12 p-md-3">
-        <input type="text" pInputText formControlName=SSNNumber placeholder="SSN #">
-      </div>
-    </div>
-
-    <div class="p-fluid p-formgrid p-grid">
-      <div class="p-field p-col-12 p-md-3">
-        <input type="text" pInputText formControlName=hmisIdNo placeholder="HMIS ID #">
-      </div>
-      <div class="p-field p-col-12 p-md-3">
-        <input type="mail" pInputText formControlName=emailId placeholder="Email Id">
-      </div>
-      <div class="p-field p-col-12 p-md-3">
-        <input type="number" pInputText formControlName=phoneNumber placeholder="Phone Number">
-      </div>
-    </div>
-
-    <button type="submit" pButton label="Update" class="p-button-outlined"></button>
-    <p-button label="Cancel" styleClass="p-button-link"></p-button>
-    </form>
   </div>
-</div>
 </div>

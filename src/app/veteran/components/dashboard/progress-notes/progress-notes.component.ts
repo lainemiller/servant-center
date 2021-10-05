@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+
 import { ProgressNotesService } from 'src/app/veteran/services/progress-notes.service';
 
 @Component({
@@ -8,71 +9,34 @@ import { ProgressNotesService } from 'src/app/veteran/services/progress-notes.se
   styleUrls: ['./progress-notes.component.scss'],
 })
 export class ProgressNotesComponent implements OnInit {
-  title = 'PROGRESS NOTES';
-  display = false;
-  displayList = false;
-  status: any;
-  searchText = '';
-  progressNote: any;
-  d: any;
+  public title = 'PROGRESS NOTES';
+  public display = false;
+  public displayList = false;
+  public status: any;
+  public searchText = '';
+  public progressNote: any;
+  public d: any;
+  public progressNotes: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private service: ProgressNotesService
   ) {}
-  progressNotes: any;
+
   ngOnInit(): void {
     //get data from backend
+
     this.service.getNotes().subscribe((data) => {
       this.progressNotes = data;
     });
+
     this.buildForm();
+
     this.status = [
       { name: 'Open', code: true },
+
       { name: 'Close', code: false },
     ];
-
-    // this.progressNotes = [
-    //   {
-    //     goalState: true,
-    //     goalTitle: 'Goal Title 1',
-    //     addedDate: '12/12/2020',
-    //     goalDescription: `Lorem pravin dolor sit amet consectetur, adipisicing elit. Ab, earum.
-    //                       Atque cum odit veniam illo in illum ducimus cupiditate nemo harum perferendis,
-    //                       molestias, totam eligendi consectetur vel quasi perspiciatis ad!`,
-    //   },
-    //   {
-    //     goalState: false,
-    //     goalTitle: 'Goal Title 2',
-    //     addedDate: '12/12/2020',
-    //     goalDescription: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab, earum.
-    //                       Atque cum odit veniam illo in illum ducimus cupiditate nemo harum perferendis,
-    //                       molestias, totam eligendi consectetur vel quasi perspiciatis ad!`,
-    //   },
-    //   {
-    //     goalState: false,
-    //     goalTitle: 'csk',
-    //     addedDate: '12/12/2020',
-    //     goalDescription: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab, earum.
-    //                       Atque cum odit veniam illo in illum ducimus cupiditate nemo harum perferendis,
-    //                       molestias, totam eligendi consectetur vel quasi perspiciatis ad!`,
-    //   },
-    //   {
-    //     goalState: false,
-    //     goalTitle: 'csk',
-    //     addedDate: '12/12/2020',
-    //     goalDescription: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab, earum.
-    //                       Atque cum odit veniam illo in illum ducimus cupiditate nemo harum perferendis,
-    //                       molestias, totam eligendi consectetur vel quasi perspiciatis ad!`,
-    //   },
-    //   {
-    //     goalState: false,
-    //     goalTitle: 'rcb',
-    //     addedDate: '3/12/2020',
-    //     goalDescription: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab, earum.
-    //                       Atque cum odit veniam illo in illum ducimus cupiditate nemo harum perferendis,
-    //                       molestias, totam eligendi consectetur vel quasi perspiciatis ad!`,
-    //   },
-    // ];
   }
 
   expandOrCollapse(index: any) {
@@ -90,6 +54,7 @@ export class ProgressNotesComponent implements OnInit {
   showList() {
     this.displayList = true;
   }
+
   buildForm() {
     this.d =
       new Date().getMonth() +
@@ -105,12 +70,13 @@ export class ProgressNotesComponent implements OnInit {
       addedDate: [this.d],
     });
   }
+  
   onSubmit() {
     console.log(this.progressNote.value);
     //send data to backend
-    this.service.postNotes(this.progressNote.value).subscribe((data) => {
-      console.log('Submitted');
-    });
+    // this.service.postNotes(this.progressNote.value).subscribe((data) => {
+    //   console.log('Submitted');
+    // });
     //get data from backend
     this.service.getNotes().subscribe((notes) => {
       console.log(notes);
