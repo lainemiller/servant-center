@@ -70,7 +70,16 @@ export class ProgressNotesComponent implements OnInit {
       addedDate: [this.d],
     });
   }
-  
+
+  get goalTitle(){
+    return this.progressNote.get('goalTitle');
+  }
+  get goalDescription(){
+    return this.progressNote.get('goalDescription');
+  }
+  get goalState(){
+    return this.progressNote.get('goalState');
+  }
   onSubmit() {
     console.log(this.progressNote.value);
     //send data to backend
@@ -84,6 +93,13 @@ export class ProgressNotesComponent implements OnInit {
     // this.progressNotes.push(this.progressNote.value)
     this.display = false;
     console.log(this.progressNotes);
+    this.progressNote.reset();
+  }
+  crossButton(){
+    this.progressNote.reset();
+  }
+  cancleIt(){
+    this.display = false;
     this.progressNote.reset();
   }
 }

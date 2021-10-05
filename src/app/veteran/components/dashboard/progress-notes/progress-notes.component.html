@@ -4,31 +4,18 @@
     <div class="p-toolbar-group-left">
       <!-- modal for add progress note -->
       <div class="progress-notes--addNoteModal">
-        <p-dialog
-          [(visible)]="display"
-          [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
-          header="Add Progress Note"
-          [draggable]="false"
-          [modal]="true"
-          [style]="{ width: '45vw' }"
-        >
+        <p-dialog [(visible)]="display" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" header="Add Progress Note"
+          [draggable]="false" [modal]="true" [style]="{ width: '45vw'}" (onHide)="crossButton()">
           <form [formGroup]="progressNote" (ngSubmit)="onSubmit()">
             <div class="p-fluid">
               <div class="p-field p-col-12 p-sm-12">
-                <input
-                  type="text"
-                  formControlName="goalTitle"
-                  pInputText
-                  placeholder="Goal Title"
-                />
+                <input type="text" formControlName="goalTitle" pInputText placeholder="Goal Title" />
+                <small class="error" *ngIf='goalTitle.invalid && goalTitle.touched'>Goal Title is required.</small>
               </div>
               <div class="p-field p-col-12 p-sm-12">
-                <textarea
-                  [rows]="6"
-                  formControlName="goalDescription"
-                  pInputTextarea
-                  placeholder="Goal Description"
-                ></textarea>
+                <textarea [rows]="6" formControlName="goalDescription" pInputTextarea
+                  placeholder="Goal Description"></textarea>
+                  <small class="error" *ngIf='goalDescription.invalid && goalDescription.touched'>Goal Description is required.</small>
               </div>
               <div class="p-field p-col-12 p-sm-12">
                 <label for="statusCheck">Goal Status</label>
@@ -43,22 +30,13 @@
                     </p-inputSwitch>
                     <span class="p-ml-2">Open</span>
                   </div>
+                  <small class="error" *ngIf='goalState.invalid && goalState.touched'>Goal Description is required.</small>
                 </p-toolbar>
               </div>
             </div>
             <div class="progress-note-buttons">
-              <button
-                type="submit"
-                pButton
-                label="Submit"
-                class="p-button-outlined"
-              ></button>
-              <button
-                type="button"
-                pButton
-                label="Cancel"
-                class="p-button-text p-button-secondary"
-              ></button>
+              <button type="submit" pButton [disabled]="progressNote.invalid" label="Submit" class="p-button-outlined"></button>
+              <button type="button" (click)="cancleIt()" pButton label="Cancel" class="p-button-text p-button-secondary"></button>
             </div>
           </form>
         </p-dialog>
