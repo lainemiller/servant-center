@@ -13,11 +13,11 @@ interface State {
   styleUrls: ['./veteran-profile.component.scss'],
 })
 export class VeteranProfileComponent implements OnInit {
-  veteranProfileForm!: FormGroup;
+  veteranProfileForm : FormGroup ;
   states: State[];
-  selectedState!: State;
-  veteran: any;
-  name: any;
+  selectedState: State;
+  veteran : any;
+  name : any;
 
   constructor(
     private formBuilder: FormBuilder,

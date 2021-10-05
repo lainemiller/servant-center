@@ -34,15 +34,13 @@
     top: 20px;
 }
 
+
 .button-confirm {
-    position: relative;
-    right: 640px;
+    float: left;
 }
 
 .p-button-text {
-    position: relative;
-    right: 650px;
-    top: 8px;
+    float: left;
 }
 
 .header-text {
@@ -69,7 +67,7 @@
     }
 
     .header-text {
-        top: 40px;
+        top: 45px;
         width: 85%;
         font-size: 13px;
     }
@@ -80,18 +78,19 @@
 
     .footer-text {
         font-size: 13px;
-        width: 115%;
+        width: 115%;;
+        padding-bottom: 40px;
     }
 
     .input-text-one {
         width: 130%;
-        left: 17px;
+        left: 22px;
         top: 8px;
     }
 
     .input-text-two {
         width: 130%;
-        left: 18px;
+        left: 22px;
         top: 12px;
     }
 
@@ -104,18 +103,18 @@
         padding-bottom: 5px;
     }
 
-    :host ::ng-deep .button-confirm {
-        left: 13px;
-        bottom: 10px;
+   .button-confirm {
+    padding: 8px 93px;
+    left: 4px;
     }
 
     .p-button-text {
-        right: 100px;
-        top: 20px;
-        width: 190px;
+        padding: 8px 93px;
+        left: 8px;
     }
 
+
     :host ::ng-deep .p-dialog .p-dialog-header {
-        padding-bottom: 85px;
+        padding-bottom: 90px;
     }
 }
