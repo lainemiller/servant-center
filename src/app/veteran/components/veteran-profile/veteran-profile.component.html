@@ -1,4 +1,3 @@
-<!-- <input type="email"  > -->
 <div class="p-grid">
   <div class="p-col-12">
     <app-item-header title="Veteran Profile"></app-item-header>
@@ -14,13 +13,8 @@
               placeholder="Record #">
           </div>
           <div class="p-field p-col-12 p-md-3">
-            <p-calendar
-              formControlName="intakeDOB"
-              class="disable"
-              [inline]="false"
-              [showIcon]="true"
-              placeholder="Intake Date (mm/dd/yyyy)"
-            ></p-calendar>
+            <p-calendar formControlName="intakeDOB" class="disable" [inline]="false" [showIcon]="true"
+              placeholder="Intake Date (mm/dd/yyyy)"></p-calendar>
           </div>
           <div class="p-field p-col-12 p-md-3">
             <input type="text" class="disable" value="{{veteran?.caseManager}}" pInputText formControlName=caseManager
@@ -36,8 +30,8 @@
           <div class="p-field p-col-12 p-md-3">
             <input type="text" pInputText formControlName="firstName" placeholder="First Name">
             <div *ngIf="getControl.firstName.touched && getControl.firstName.invalid" class="text-danger">
-              <div *ngIf="getControl.firstName.errors.required">First Name is required.</div>
-              <div *ngIf="getControl.firstName.errors?.minlength">Minimum 4 character are required.</div>
+              <div class="validations" *ngIf="getControl.firstName.errors?.required">First Name is required.</div>
+              <div class="validations" *ngIf="getControl.firstName.errors?.minlength">Minimum 4 character are required.</div>
             </div>
           </div>
 
@@ -48,10 +42,10 @@
           <div class="p-field p-col-12 p-md-3">
             <input type="text" value="{{veteran?.lastName}}" pInputText formControlName=lastName
               placeholder="Last Name">
-              <div *ngIf="getControl.lastName.touched && getControl.lastName.invalid" class="text-danger">
-                <div *ngIf="getControl.lastName.errors.required">Last Name is required.</div>
-                <div *ngIf="getControl.lastName.errors?.minlength">Minimum 4 character are required.</div>
-              </div>
+            <div *ngIf="getControl.lastName.touched && getControl.lastName.invalid" class="text-danger">
+              <div class="validations" *ngIf="getControl.lastName.errors?.required">Last Name is required.</div>
+              <div class="validations" *ngIf="getControl.lastName.errors?.minlength">Minimum 4 character are required.</div>
+            </div>
           </div>
           <div class="p-field p-col-12 p-md-3">
             <input type="text" value="{{veteran?.nickName}}" pInputText formControlName=nickName
@@ -64,8 +58,8 @@
           <div class="p-field p-col-12 p-md-3">
             <input type="text" pInputText formControlName=address1 placeholder="Address 1">
             <div *ngIf="getControl.lastName.touched && getControl.lastName.invalid" class="text-danger">
-              <div *ngIf="getControl.lastName.errors.required">Address 1 is required.</div>
-              <div *ngIf="getControl.lastName.errors?.minlength">Minimum 4 character are required.</div>
+              <div class="validations" *ngIf="getControl.lastName.errors?.required">Address 1 is required.</div>
+              <div class="validations" *ngIf="getControl.lastName.errors?.minlength">Minimum 4 character are required.</div>
             </div>
           </div>
           <div class="p-field p-col-12 p-md-3">
@@ -73,6 +67,10 @@
           </div>
           <div class="p-field p-col-12 p-md-3">
             <input type="text" pInputText formControlName=city placeholder="City">
+            <div *ngIf="getControl.city.touched && getControl.city.invalid" class="text-danger">
+              <div class="validations" *ngIf="getControl.city.errors?.required">city is required.</div>
+              <div class="validations" *ngIf="getControl.city.errors?.minlength">Minimum 4 character are required.</div>
+            </div>
           </div>
           <!-- DropDown -->
           <div class="p-field p-col-12 p-md-3">
@@ -91,15 +89,15 @@
           <div class="p-field p-col-12 p-md-3">
             <input type="text" pInputText formControlName=country placeholder="Country">
             <div *ngIf="getControl.country.touched && getControl.lastName.invalid" class="text-danger">
-              <div *ngIf="getControl.country.errors.required">country  is required.</div>
-              <div *ngIf="getControl.country.errors?.minlength">Minimum 4 character are required.</div>
+              <div class="validations" *ngIf="getControl.country.errors?.required">country is required.</div>
+              <div class="validations" *ngIf="getControl.country.errors?.minlength">Minimum 4 character are required.</div>
             </div>
           </div>
           <div class="p-field p-col-12 p-md-3">
             <input type="text" pInputText formControlName=zipCode placeholder="Zip Code">
             <div *ngIf="getControl.zipCode.touched && getControl.lastName.invalid" class="text-danger">
-              <div *ngIf="getControl.zipCode.errors.required">zipCode  is required.</div>
-              <div *ngIf="getControl.zipCode.errors?.minlength">Minimum 4 character are required.</div>
+              <div class="validations" *ngIf="getControl.zipCode.errors?.required">zipCode is required.</div>
+              <div class="validations" *ngIf="getControl.zipCode.errors?.minlength">Minimum 4 character are required.</div>
             </div>
           </div>
           <div class="p-field p-col-12 p-md-3">
@@ -115,42 +113,29 @@
 
         <div class="p-fluid p-formgrid p-grid">
           <div class="p-field p-col-12 p-md-3">
-            <!-- <input id="phoneNumber" type="number" name="phoneNumber" formControlName="phoneNumber" pInputText
-              placeholder="(989) 454-3452 "> -->
-
-            <!-- <div class="p-field p-col-12 p-md-3"> -->
             <input type="text" formControlName="phoneNumber" class="form-control" pInputText placeholder="Phone Number">
-            <!-- </div> -->
-            <!-- <small class="form-text text-danger" *ngIf="veteranProfileForm.controls.phoneNumber.errors">                    
-                  {{veteranProfileForm.controls.phoneNumber.errors.mask.message}}<br/></small>  -->
-
-            <!-- <p-message severity="error" text="Not a valid number" [@errorState]="form.dirty && !form.valid ? 'visible' : 'hidden'"></p-message> -->
-
-            <!-- <input type="number" pInputText formControlName=phoneNumber placeholder="Phone Number"> -->
           </div>
           <div class="p-field p-col-12 p-md-3">
-           <!-- <input type="email" name="email" class="form-control"
-            formControlName="email" >  -->
-            <input type="email"  formControlName="emailId" pInputText placeholder="Email Id"> 
+            <input type="email" formControlName="emailId" class="form-control" pInputText placeholder="Email Id">
             <div *ngIf="getControl.emailId.touched && getControl.emailId.invalid" class="text-danger">
-              <div *ngIf="getControl.emailId.errors.required">Email is required.</div>
-              <div *ngIf="getControl.emailId.errors.required">Email seems invalid.</div>
+              <div class="validations" *ngIf="getControl.emailId.errors?.required">Email is required.</div>
+              <div class="validations" *ngIf="getControl.emailId.errors?.required">Email seems invalid.</div>
             </div>
-            <!-- <input type="text" pInputText formControlName=address1 placeholder="Address 1">
-            <div *ngIf="getControl.lastName.touched && getControl.lastName.invalid" class="text-danger">
-              <div *ngIf="getControl.lastName.errors.required">Last Name is required.</div>
-              <div *ngIf="getControl.lastName.errors?.minlength">Minimum 4 character are required.</div>
-            </div> -->
-          </div>
 
-          <!-- <div class="p-field p-col-12 p-md-3">
-            <input type="text" value="{{veteran?.emailId}}" pInputText formControlName=emailId placeholder="Email Id">
-          </div> -->
+          </div>
           <div class="p-field p-col-12 p-md-3">
             <input type="text" pInputText formControlName=SSNNumber placeholder="SSN #">
+            <div *ngIf="getControl.SSNNumber.touched && getControl.SSNNumber.invalid" class="text-danger">
+              <div class="validations" *ngIf="getControl.SSNNumber.errors?.required">SSNNumber is required.</div>
+              <div class="validations" *ngIf="getControl.SSNNumber.errors?.required">SSNNumber seems invalid.</div>
+            </div>
           </div>
           <div class="p-field p-col-12 p-md-3">
             <input type="text" pInputText formControlName=hmisIdNo placeholder="HMIS ID #">
+            <div *ngIf="getControl.hmisIdNo.touched && getControl.hmisIdNo.invalid" class="text-danger">
+              <div class="validations" *ngIf="getControl.hmisIdNo.errors?.required">hmisIdNo is required.</div>
+              <div class="validations" *ngIf="getControl.hmisIdNo.errors?.required">hmisIdNo seems invalid.</div>
+            </div>
           </div>
         </div>
 
@@ -158,7 +143,7 @@
           <div *ngFor="let category of genders" class="p-field-checkbox">
             <p-radioButton [inputId]="category.key" name="selectedGender" [value]="category"
               formControlName="selectedGender" [disabled]="category.key === 'R'"></p-radioButton>
-            <label [for]="category.key">{{category.name}}</label>
+            <label [for]="category.key">{{category.name}}</label><br>
           </div>
           <div *ngFor="let category of martialStatuses" class="p-field-checkbox">
             <p-radioButton [inputId]="category.key" name="selectedMartialStatus" [value]="category"

@@ -73,7 +73,7 @@ export class VeteranProfileComponent implements OnInit {
       POB: ['', Validators.required],
       SSNNumber: ['', RxwebValidators.mask({ mask: '999-99-9999' })],
       hmisIdNo: ['', Validators.required],
-      emailId: [null,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
+      emailId: [null,Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
       veteranSupports: ['', Validators.required],
       phoneNumber: ['', RxwebValidators.mask({ mask: '(999) 999-9999' })],
       primaryLanguage: ['', Validators.required],
