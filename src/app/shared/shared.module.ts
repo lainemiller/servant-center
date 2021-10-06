@@ -14,7 +14,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DialogModule } from 'primeng/dialog';
-import { DividerModule } from "primeng/divider";
+import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
@@ -34,7 +34,7 @@ import { ConsentDataComponent } from './components/consent-data/consent-data.com
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ItemHeaderComponent } from './components/item-header/item-header.component';
-
+import { WelcomeHeaderComponent } from './components/welcome-header/welcome-header.component';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -76,11 +76,12 @@ const COMPONENTS = [
   FooterComponent,
   // WelcomeHeaderComponent,
   KeysPipe,
+  ConsentDataComponent,
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, ConsentDataComponent],
+  declarations: [...COMPONENTS],
   imports: [CommonModule, ...MODULES],
   exports: [...MODULES, ...COMPONENTS],
 })
-export class SharedModule { }
+export class SharedModule {}
