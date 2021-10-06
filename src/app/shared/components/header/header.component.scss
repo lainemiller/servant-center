@@ -1,23 +1,21 @@
-.header-container{
+.header-container {
   background: linear-gradient(180deg, rgba(41, 42, 102, 1) 0%, rgba(130, 129, 176, 1) 49%, rgba(41, 42, 102, 1) 100%);
   height: 56px;
-  h1{
-    font-family: 'Roboto Medium', 'Roboto Regular', 'Roboto', sans-serif;
+  h1 {
+    font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
     color: rgba(255, 255, 255, 0.996078431372549);
     font-weight: 500;
     font-size: 18px;
-    margin-right: 20px;
   }
-  img{
+  img {
     height: 40px;
     width: 40px;
   }
-  .title
-  {
+  .title {
     border-left: 2px solid white;
     padding-left: 20px;
   }
-  .logo-div{
+  .logo-div {
     display: inline-flex;
   }
 }
@@ -26,9 +24,12 @@
   font-size: 1.5rem;
   font-weight: 700;
 }
-.border-col
-{
+.border-col {
   background: -webkit-linear-gradient(
-    270deg
-    , rgba(227, 42, 47, 1) 0%, rgba(174, 36, 36, 1) 39%, rgba(178, 37, 37, 1) 70%, rgba(227, 42, 47, 1) 99%);
+    270deg,
+    rgba(227, 42, 47, 1) 0%,
+    rgba(174, 36, 36, 1) 39%,
+    rgba(178, 37, 37, 1) 70%,
+    rgba(227, 42, 47, 1) 99%
+  );
 }

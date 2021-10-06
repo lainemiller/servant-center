@@ -5,16 +5,22 @@
     <div class="form-container">
       <form [formGroup]="veteranProfileForm" (ngSubmit)="onSubmit()">
         <div class="p-fluid p-formgrid p-grid">
-          <img src="assets/images/profile.svg" alt="Image" width="150">
-        </div> <br>
+          <img src="assets/images/profile.svg" alt="Image" width="150" />
+        </div>
+        <br />
         <div class="p-fluid p-formgrid p-grid">
           <div class="p-field p-col-12 p-md-3">
             <input type="text" class="disable" value="{{veteran?.recordNo}}" pInputText formControlName=recordNo
               placeholder="Record #">
           </div>
           <div class="p-field p-col-12 p-md-3">
-            <p-calendar formControlName=intakeDOB class="disable" [inline]=false [showIcon]=true
-              placeholder="Intake Date (mm/dd/yyyy)"></p-calendar>
+            <p-calendar
+              formControlName="intakeDOB"
+              class="disable"
+              [inline]="false"
+              [showIcon]="true"
+              placeholder="Intake Date (mm/dd/yyyy)"
+            ></p-calendar>
           </div>
           <div class="p-field p-col-12 p-md-3">
             <input type="text" class="disable" value="{{veteran?.caseManager}}" pInputText formControlName=caseManager
@@ -128,7 +134,7 @@
             <input type="email"  formControlName="emailId" pInputText placeholder="Email Id"> 
             <div *ngIf="getControl.emailId.touched && getControl.emailId.invalid" class="text-danger">
               <div *ngIf="getControl.emailId.errors.required">Email is required.</div>
-              <div *ngIf="getControl.emailId.errors.emailId">Email seems invalid.</div>
+              <div *ngIf="getControl.emailId.errors.required">Email seems invalid.</div>
             </div>
             <!-- <input type="text" pInputText formControlName=address1 placeholder="Address 1">
             <div *ngIf="getControl.lastName.touched && getControl.lastName.invalid" class="text-danger">

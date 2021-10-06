@@ -1,12 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  Form,
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { range } from 'rxjs';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-treatment-plan',

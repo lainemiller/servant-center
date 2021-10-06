@@ -1,110 +1,136 @@
 <div class="page1-form-container p-mt-4">
   <form [formGroup]="page3Form" (ngSubmit)="onSubmit()" *ngIf="page3Form">
-  <h3>Mental Status Assessment</h3>
-  <div formGroupName="mentalStatusAssessment">
-    <h4>Orientation</h4>
-    <div formGroupName="orientation" class="p-fluid p-formgrid p-grid" >
-      <div class="p-field p-col-12 p-md-6">
-        <p-calendar formControlName=date [inline]=false [showIcon]=true placeholder="Date"></p-calendar></div>
-      <div class="p-field p-col-12 p-md-6">
-        <p-calendar formControlName=time [timeOnly]=true [inline]=false [showIcon]=true placeholder="Time"></p-calendar></div>
-      <div class="p-field p-col-12 p-md-6">
-        <input type="text" pInputText formControlName=place placeholder="Place"></div>
-      <div class="p-field p-col-12 p-md-6">
-        <input type="text" pInputText formControlName=person placeholder="Person"></div>
+    <h3>Mental Status Assessment</h3>
+    <div formGroupName="mentalStatusAssessment">
+      <h4>Orientation</h4>
+      <div formGroupName="orientation" class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-6">
+          <p-calendar formControlName=date [inline]=false [showIcon]=true placeholder="Date"></p-calendar>
+        </div>
+        <div class="p-field p-col-12 p-md-6">
+          <p-calendar formControlName=time [timeOnly]=true [inline]=false [showIcon]=true placeholder="Time">
+          </p-calendar>
+        </div>
+        <div class="p-field p-col-12 p-md-6">
+          <input type="text" pInputText formControlName=place placeholder="Place">
+        </div>
+        <div class="p-field p-col-12 p-md-6">
+          <input type="text" pInputText formControlName=person placeholder="Person">
+        </div>
       </div>
       <h4>General Appearance</h4>
-    <div class="p-fluid p-formgrid p-grid" >
-      <div class="p-col-12 p-formgroup-inline">
-        <div class="p-field-checkbox" *ngFor="let generalAppearance of generalAppearanceList">
-          <label for="{{generalAppearance.value}}--answered">{{generalAppearance.label}}</label>
-          <p-checkbox inputId="{{generalAppearance.value}}--answered" [name]=generalAppearance.value [value]=generalAppearance.value formControlName="generalAppearance"></p-checkbox>
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-col-12 p-formgroup-inline">
+          <div class="p-field-checkbox" *ngFor="let generalAppearance of generalAppearanceList">
+            <label for="{{generalAppearance.value}}--answered">{{generalAppearance.label}}</label>
+            <p-checkbox inputId="{{generalAppearance.value}}--answered" [name]=generalAppearance.value
+              [value]=generalAppearance.value formControlName="generalAppearance"></p-checkbox>
+          </div>
         </div>
-      </div>
       </div>
       <h4>Thought Forum</h4>
-    <div class="p-fluid p-formgrid p-grid" >
-      <div class="p-col-12 p-formgroup-inline">
-        <div class="p-field-checkbox" *ngFor="let thoughtForum of thoughtForumList">
-          <label for="{{thoughtForum.value}}--answered">{{thoughtForum.label}}</label>
-          <p-checkbox inputId="{{thoughtForum.value}}--answered" [name]=thoughtForum.value [value]=thoughtForum.value formControlName="thoughtForum"></p-checkbox>
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-col-12 p-formgroup-inline">
+          <div class="p-field-checkbox" *ngFor="let thoughtForum of thoughtForumList">
+            <label for="{{thoughtForum.value}}--answered">{{thoughtForum.label}}</label>
+            <p-checkbox inputId="{{thoughtForum.value}}--answered" [name]=thoughtForum.value [value]=thoughtForum.value
+              formControlName="thoughtForum"></p-checkbox>
+          </div>
         </div>
-      </div>
       </div>
       <h4>Mood</h4>
-    <div formGroupName="mood" class="p-fluid p-formgrid p-grid" >
-      <div class="p-col-12 p-formgroup-inline">
-        <label style="width: 160px;">Answered by client</label>
-        <div class="p-field-checkbox" *ngFor="let mood of moodList">
-          <label for="{{mood.value}}--answered">{{mood.label}}</label>
-          <p-checkbox inputId="{{mood.value}}--answered" [name]=mood.value [value]=mood.value [formControl]="moodAnsweredByClient"></p-checkbox>
+      <div formGroupName="mood" class="p-fluid p-formgrid p-grid">
+        <div class="p-col-12 p-formgroup-inline">
+          <label style="width: 160px;">Answered by client</label>
+          <div class="p-field-checkbox" *ngFor="let mood of moodList">
+            <label for="{{mood.value}}--answered">{{mood.label}}</label>
+            <p-checkbox inputId="{{mood.value}}--answered" [name]=mood.value [value]=mood.value
+              [formControl]="moodAnsweredByClient"></p-checkbox>
+          </div>
+        </div>
+        <div class="p-col-12 p-formgroup-inline">
+          <label style="width: 160px;">Observed by Interviewer</label>
+          <div class="p-field-checkbox" *ngFor="let mood of moodList">
+            <label for="{{mood.value}}--observed">{{mood.label}}</label>
+            <p-checkbox inputId="{{mood.value}}--observed" [name]=mood.value [value]=mood.value
+              [formControl]="moodAnsweredByClient"></p-checkbox>
+          </div>
         </div>
       </div>
-      <div class="p-col-12 p-formgroup-inline">
-        <label style="width: 160px;">Observed by Interviewer</label>
-        <div class="p-field-checkbox" *ngFor="let mood of moodList">
-          <label for="{{mood.value}}--observed">{{mood.label}}</label>
-          <p-checkbox inputId="{{mood.value}}--observed" [name]=mood.value [value]=mood.value [formControl]="moodAnsweredByClient"></p-checkbox>
+      <h4>Affect</h4>
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-col-12 p-formgroup-inline">
+          <div class="p-field-checkbox" *ngFor="let affect of affectList">
+            <label for="{{affect.value}}--answered">{{affect.label}}</label>
+            <p-checkbox inputId="{{affect.value}}--answered" [name]=affect.value [value]=affect.value
+              formControlName="affect"></p-checkbox>
+          </div>
+        </div>
+      </div>
+      <h4>Ideation</h4>
+      <div formGroupName="ideation" class="p-fluid p-formgrid p-grid">
+        <div *ngFor="let ideation of ideationList; let i = index;">
+          <div class="p-col-12 p-formgroup-inline">
+            <label class="p-mr-2 radiobutton-group-label" style="width: 145px;">{{ideation.label}}</label>
+            <div class="p-field-radiobutton">
+              <p-radioButton [name]=ideation.key [formControlName]=ideation.key value=true inputId="ideation-{{i}}-yes">
+              </p-radioButton>
+              <label for="ideation{{i}}-yes" class="p-ml-2">Yes</label>
+            </div>
+            <div class="p-field-radiobutton">
+              <p-radioButton [name]=ideation.key [formControlName]=ideation.key value=false inputId="ideation-{{i}}-no">
+              </p-radioButton>
+              <label for="ideation{{i}}-no" class="p-ml-2">No</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h4>Memory</h4>
+      <div formGroupName="memory" class="p-fluid p-formgrid p-grid">
+        <div *ngFor="let memory of memoryList; let i = index;">
+          <div class="p-col-12 p-formgroup-inline">
+            <label class="p-mr-2 radiobutton-group-label" style="width: 145px;">{{memory.label}}</label>
+            <div class="p-field-radiobutton">
+              <p-radioButton [name]=memory.key [formControlName]=memory.key value=true inputId="memory-{{i}}-intact">
+              </p-radioButton>
+              <label for="memory{{i}}-intact" class="p-ml-2">Intact</label>
+            </div>
+            <div class="p-field-radiobutton">
+              <p-radioButton [name]=memory.key [formControlName]=memory.key value=false
+                inputId="memory-{{i}}-notIntact"></p-radioButton>
+              <label for="ideation{{i}}-notIntact" class="p-ml-2">Not Intact</label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <h4>Affect</h4>
-    <div class="p-fluid p-formgrid p-grid" >
-      <div class="p-col-12 p-formgroup-inline">
-        <div class="p-field-checkbox" *ngFor="let affect of affectList">
-          <label for="{{affect.value}}--answered">{{affect.label}}</label>
-          <p-checkbox inputId="{{affect.value}}--answered" [name]=affect.value [value]=affect.value formControlName="affect"></p-checkbox>
-        </div>
+    <h3>Medical Information</h3>
+    <div class="p-fluid p-formgrid p-grid" formGroupName="medicalInformation">
+      <div class="p-field p-col-12">
+        <input type="text" pInputText formControlName=primaryPhysicianName placeholder="Name of Primary Physician">
       </div>
+      <div class="p-field p-col-12">
+        <input type="text" pInputText formControlName=phone placeholder="Phone">
       </div>
-    <h4>Ideation</h4>
-    <div formGroupName="ideation" class="p-fluid p-formgrid p-grid" >
-    <div *ngFor="let ideation of ideationList; let i = index;">
-      <div class="p-col-12 p-formgroup-inline">
-        <label class="p-mr-2 radiobutton-group-label" style="width: 145px;">{{ideation.label}}</label>
-        <div class="p-field-radiobutton">
-      <p-radioButton [name]=ideation.key [formControlName]=ideation.key value=true inputId="ideation-{{i}}-yes"></p-radioButton>
-        <label for="ideation{{i}}-yes" class="p-ml-2">Yes</label></div>
-        <div class="p-field-radiobutton">
-      <p-radioButton [name]=ideation.key [formControlName]=ideation.key value=false inputId="ideation-{{i}}-no"></p-radioButton>
-        <label for="ideation{{i}}-no" class="p-ml-2">No</label></div>
-        </div>
+      <div class="p-field p-col-12">
+        <input type="text" pInputText formControlName=clinic placeholder="Clinic">
+      </div>
+      <div class="p-field p-col-12">
+        <input type="text" pInputText formControlName=hospital placeholder="Hospital">
+      </div>
+      <div class="p-field p-col-12">
+        <input type="text" pInputText formControlName=physicianSpecialist placeholder="Physician Specialist">
+      </div>
+      <div class="p-field p-col-12">
+        <!-- textarea? -->
+        <input type="text" pInputText formControlName=diagnosisAndCurrentTreatment
+          placeholder="Diagnosis & current treatment">
+      </div>
+      <div class="p-field p-col-12">
+        <!-- textarea? -->
+        <input type="text" pInputText formControlName=currentMedication placeholder="Current Medication">
+      </div>
     </div>
-  </div>
-  <h4>Memory</h4>
-    <div formGroupName="memory" class="p-fluid p-formgrid p-grid" >
-    <div *ngFor="let memory of memoryList; let i = index;">
-      <div class="p-col-12 p-formgroup-inline">
-        <label class="p-mr-2 radiobutton-group-label" style="width: 145px;">{{memory.label}}</label>
-        <div class="p-field-radiobutton">
-      <p-radioButton [name]=memory.key [formControlName]=memory.key value=true inputId="memory-{{i}}-intact"></p-radioButton>
-        <label for="memory{{i}}-intact" class="p-ml-2">Intact</label></div>
-        <div class="p-field-radiobutton">
-      <p-radioButton [name]=memory.key [formControlName]=memory.key value=false inputId="memory-{{i}}-notIntact"></p-radioButton>
-        <label for="ideation{{i}}-notIntact" class="p-ml-2">Not Intact</label></div>
-        </div>
-    </div>
-  </div>
-  </div>
-  <h3>Medical Information</h3>
-  <div class="p-fluid p-formgrid p-grid" formGroupName="medicalInformation">
-    <div class="p-field p-col-12">
-      <input type="text" pInputText formControlName=primaryPhysicianName placeholder="Name of Primary Physician"></div>
-    <div class="p-field p-col-12">
-      <input type="text" pInputText formControlName=phone placeholder="Phone"></div>
-    <div class="p-field p-col-12">
-      <input type="text" pInputText formControlName=clinic placeholder="Clinic"></div>
-    <div class="p-field p-col-12">
-      <input type="text" pInputText formControlName=hospital placeholder="Hospital"></div>
-    <div class="p-field p-col-12">
-      <input type="text" pInputText formControlName=physicianSpecialist placeholder="Physician Specialist"></div>
-    <div class="p-field p-col-12">
-      <!-- textarea? -->
-      <input type="text" pInputText formControlName=diagnosisAndCurrentTreatment placeholder="Diagnosis & current treatment"></div>
-    <div class="p-field p-col-12">
-      <!-- textarea? -->
-      <input type="text" pInputText formControlName=currentMedication placeholder="Current Medication"></div>
-  </div>
   </form>
 </div>
 <div class="p-d-flex button-container p-mt-4">
@@ -114,4 +140,4 @@
   </div>
   <div class="p-jc-end">
     <button type="submit" pButton label="Next"></button>
-</div>
+  </div>

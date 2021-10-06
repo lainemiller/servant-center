@@ -1,18 +1,19 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { VeteranComponent } from './veteran.component';
-import { VeteranRoutingModule } from './veteran-routing.module';
+import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { AssessmentComponent } from './components/assessment/assessment.component';
-import { TreatmentPlanComponent } from './components/treatment-plan/treatment-plan.component';
-import { HealthTrackerComponent } from './components/health-tracker/health-tracker.component';
-import { VeteranProfileComponent } from './components/veteran-profile/veteran-profile.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProgressNotesComponent } from './components/dashboard/progress-notes/progress-notes.component';
 import { TransportationRequestFormComponent } from './components/dashboard/transportation-request-form/transportation-request-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { HealthTrackerComponent } from './components/health-tracker/health-tracker.component';
+import { TreatmentPlanComponent } from './components/treatment-plan/treatment-plan.component';
+import { VeteranProfileComponent } from './components/veteran-profile/veteran-profile.component';
+import { VeteranRoutingModule } from './veteran-routing.module';
+import { VeteranComponent } from './veteran.component';
+
 @NgModule({
   declarations: [
     VeteranComponent,
@@ -33,4 +34,4 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
     RxReactiveFormsModule
   ]
 })
-export class VeteranModule { }
+export class VeteranModule {}

@@ -10,7 +10,7 @@
           header="Add Progress Note"
           [draggable]="false"
           [modal]="true"
-          [style]="{ width: '45vw'}"
+          [style]="{ width: '45vw' }"
         >
           <form [formGroup]="progressNote" (ngSubmit)="onSubmit()">
             <div class="p-fluid">
@@ -78,7 +78,7 @@
         [(ngModel)]="searchText"
         pInputText
         placeholder="Search"
-        class="p-mr-2"
+        class="p-ml-2"
       />
       <!-- modal for pop-out -->
       <div>
@@ -88,8 +88,8 @@
           [modal]="true"
           [draggable]="false"
           [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
-          [style]="{ width: '75vw'}"
-          [contentStyle]="{minHeight: '500px'}"
+          [style]="{ width: '75vw' }"
+          [contentStyle]="{ minHeight: '500px' }"
         >
           <p-toolbar>
             <div class="p-toolbar-group-left">

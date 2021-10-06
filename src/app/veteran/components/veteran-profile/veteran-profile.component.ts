@@ -1,31 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { VeteranprofileService } from '../../veteranprofile.service';
 import { email, RxwebValidators } from '@rxweb/reactive-form-validators';
 
 interface State {
-  name: string
+  name: string;
 }
 
 @Component({
   selector: 'app-veteran-profile',
   templateUrl: './veteran-profile.component.html',
-  styleUrls: ['./veteran-profile.component.scss']
+  styleUrls: ['./veteran-profile.component.scss'],
 })
-
 export class VeteranProfileComponent implements OnInit {
-  veteranProfileForm: FormGroup;
+  veteranProfileForm!: FormGroup;
   states: State[];
-  selectedState: State;
+  selectedState!: State;
   veteran: any;
   name: any;
   selectedGender: any = null;
   selectedMartialStatus: any = null;
-  @email() emailId: string;
+  @email()
+  emailId!: string;
 
   genders: any[] = [{ name: 'Female', key: 'A' }, { name: 'Male', key: 'M' }];
   martialStatuses: any[] = [{ name: 'Single', key: 'S' }, { name: 'Married', key: 'M' }, { name: 'DIvorced', key: 'D' }, { name: 'Widowed', key: 'W' }];
@@ -55,10 +52,11 @@ export class VeteranProfileComponent implements OnInit {
       recordNo: [''],
       intakeDOB: [null],
       caseManager: [null, Validators.required],
+      country: [null, Validators.required],
       veteranId: ['', Validators.required],
       firstName: ['', Validators.required, Validators.minLength(4)],
       middleName: [''],
-      lastName: ['', Validators.required, Validators.minLength(4)],
+      lastName: [null, Validators.required, Validators.minLength(4)],
       cfirstName: ['', Validators.required, Validators.minLength(4)],
       cmiddleName: [''],
       clastName: ['', Validators.required, Validators.minLength(4)],
@@ -70,13 +68,12 @@ export class VeteranProfileComponent implements OnInit {
       selectedState: ['', Validators.required],
       selectedGender: ['', Validators.required],
       selectedMartialStatus: ['', Validators.required],
-      country: ['', Validators.required],
-      zipCode: ['', Validators.required],
+      zipCode: [null, Validators.required],
       DOB: ['', Validators.required],
       POB: ['', Validators.required],
       SSNNumber: ['', RxwebValidators.mask({ mask: '999-99-9999' })],
       hmisIdNo: ['', Validators.required],
-      emailId: ['',Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
+      emailId: [null,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
       veteranSupports: ['', Validators.required],
       phoneNumber: ['', RxwebValidators.mask({ mask: '(999) 999-9999' })],
       primaryLanguage: ['', Validators.required],
@@ -90,7 +87,6 @@ export class VeteranProfileComponent implements OnInit {
       race: ['', Validators.required],
       contactPersonRelationship: ['', Validators.required],
     });
-
   }
 
   get emailid() {
@@ -103,7 +99,6 @@ export class VeteranProfileComponent implements OnInit {
   onSubmit() {
     console.log(this.veteranProfileForm.value);
   }
-
 }
 
 

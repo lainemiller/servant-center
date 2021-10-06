@@ -16,9 +16,27 @@ export class ResidentSearchComponent implements OnInit {
   residentSearchForm!: FormGroup;
   constructor(private formBuilder: FormBuilder) {}
   tableValues = [
-    { name: 'name 1', email: 'test1@mail.com', birthdate: '12/12/2020', phoneNumber: '123-456-7890', address: '123, street name, city' },
-    { name: 'name 2', email: 'test2@mail.com', birthdate: '14/12/2020', phoneNumber: '123-456-7890', address: '123, street name, city' },
-    { name: 'name 3', email: 'test3@mail.com', birthdate: '16/12/2020', phoneNumber: '123-456-7890', address: '123, street name, city' },
+    {
+      name: 'name 1',
+      email: 'test1@mail.com',
+      birthdate: '12/12/2020',
+      phoneNumber: '123-456-7890',
+      address: '123, street name, city',
+    },
+    {
+      name: 'name 2',
+      email: 'test2@mail.com',
+      birthdate: '14/12/2020',
+      phoneNumber: '123-456-7890',
+      address: '123, street name, city',
+    },
+    {
+      name: 'name 3',
+      email: 'test3@mail.com',
+      birthdate: '16/12/2020',
+      phoneNumber: '123-456-7890',
+      address: '123, street name, city',
+    },
   ];
   columns = [
     { header: 'Name', field: 'name' },
@@ -26,15 +44,39 @@ export class ResidentSearchComponent implements OnInit {
     { header: 'Address', field: 'address' },
   ];
 
-tabMenuItems: MenuItem[] = [
-  {label: 'Initial Assessment', routerLink: ['./initial-assessment'], skipLocationChange: true},
-  {label: 'Treatment Plan', routerLink: ['./treatment-plan'], skipLocationChange: true},
-  {label: 'Weekly Progress notes', routerLink: ['./weekly-progress'], skipLocationChange: true},
-  {label: 'Consent Agreements', routerLink: ['./consent-agreements'], skipLocationChange: true},
-  {label: 'Financial', routerLink: ['./financial'], skipLocationChange: true},
-  {label: 'Medical', routerLink: ['./medical'], skipLocationChange: true},
-  {label: 'Other/Misc. Correspondence', routerLink: ['./misc'], skipLocationChange: true},
-];
+  tabMenuItems: MenuItem[] = [
+    {
+      label: 'Initial Assessment',
+      routerLink: ['./initial-assessment'],
+      skipLocationChange: true,
+    },
+    {
+      label: 'Treatment Plan',
+      routerLink: ['./treatment-plan'],
+      skipLocationChange: true,
+    },
+    {
+      label: 'Weekly Progress notes',
+      routerLink: ['./weekly-progress'],
+      skipLocationChange: true,
+    },
+    {
+      label: 'Consent Agreements',
+      routerLink: ['./consent-agreements'],
+      skipLocationChange: true,
+    },
+    {
+      label: 'Financial',
+      routerLink: ['./financial'],
+      skipLocationChange: true,
+    },
+    { label: 'Medical', routerLink: ['./medical'], skipLocationChange: true },
+    {
+      label: 'Other/Misc. Correspondence',
+      routerLink: ['./misc'],
+      skipLocationChange: true,
+    },
+  ];
   ngOnInit(): void {
     this.buildForm();
   }
@@ -44,7 +86,7 @@ tabMenuItems: MenuItem[] = [
       type: [''],
       firstName: [''],
       lastName: [''],
-      dob: []
+      dob: [],
     });
   }
   onSubmit(): void {}
