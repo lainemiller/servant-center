@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { VeteranprofileService } from '../../veteranprofile.service';
 import { email, RxwebValidators } from '@rxweb/reactive-form-validators';
+import { VeteranprofileService } from '../../services/veteranprofile.service';
 
 interface State {
   name: string;
@@ -13,6 +12,7 @@ interface State {
   templateUrl: './veteran-profile.component.html',
   styleUrls: ['./veteran-profile.component.scss'],
 })
+
 export class VeteranProfileComponent implements OnInit {
   veteranProfileForm!: FormGroup;
   states: State[];
@@ -24,27 +24,17 @@ export class VeteranProfileComponent implements OnInit {
   @email()
   emailId!: string;
 
-  genders: any[] = [
-    { name: 'Female', key: 'A' },
-    { name: 'Male', key: 'M' },
-  ];
-  martialStatuses: any[] = [
-    { name: 'Single', key: 'S' },
-    { name: 'Married', key: 'M' },
-    { name: 'DIvorced', key: 'D' },
-    { name: 'Widowed', key: 'W' },
-  ];
+  genders: any[] = [{ name: 'Female', key: 'A' }, { name: 'Male', key: 'M' }];
+  martialStatuses: any[] = [{ name: 'Single', key: 'S' }, { name: 'Married', key: 'M' }, { name: 'DIvorced', key: 'D' }, { name: 'Widowed', key: 'W' }];
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private service: VeteranprofileService
-  ) {
+  constructor(private formBuilder: FormBuilder, private service: VeteranprofileService) {
+
     this.states = [
       { name: 'New York' },
       { name: 'Rome' },
       { name: 'London' },
       { name: 'Istanbul' },
-      { name: 'Paris' },
+      { name: 'Paris' }
     ];
   }
 
@@ -54,7 +44,7 @@ export class VeteranProfileComponent implements OnInit {
     this.selectedGender = this.genders[1];
     this.selectedMartialStatus = this.martialStatuses[1];
     let response = this.service.getVeteranProfileDetailsByRecordNumber();
-    response.subscribe((data) => (this.veteran = data));
+    response.subscribe((data) => this.veteran = data)
   }
 
   buildForm() {
@@ -83,11 +73,7 @@ export class VeteranProfileComponent implements OnInit {
       POB: ['', Validators.required],
       SSNNumber: ['', RxwebValidators.mask({ mask: '999-99-9999' })],
       hmisIdNo: ['', Validators.required],
-      emailId: [
-        null,
-        Validators.required,
-        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
-      ],
+      emailId: [null,Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
       veteranSupports: ['', Validators.required],
       phoneNumber: ['', RxwebValidators.mask({ mask: '(999) 999-9999' })],
       primaryLanguage: ['', Validators.required],
@@ -114,3 +100,7 @@ export class VeteranProfileComponent implements OnInit {
     console.log(this.veteranProfileForm.value);
   }
 }
+
+
+
+

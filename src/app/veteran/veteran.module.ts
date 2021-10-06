@@ -6,7 +6,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProgressNotesComponent } from './components/dashboard/progress-notes/progress-notes.component';
 import { TransportationRequestFormComponent } from './components/dashboard/transportation-request-form/transportation-request-form.component';
 import { HttpClientModule } from '@angular/common/http';
-import {RadioButtonModule} from 'primeng/radiobutton';
+import { RadioButtonModule } from 'primeng/radiobutton';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { HealthTrackerComponent } from './components/health-tracker/health-tracker.component';
 import { TreatmentPlanComponent } from './components/treatment-plan/treatment-plan.component';
@@ -31,7 +31,7 @@ import { VeteranComponent } from './veteran.component';
     SharedModule,
     HttpClientModule,
     RadioButtonModule,
-    RxReactiveFormsModule
-  ]
+    RxReactiveFormsModule,
+  ],
 })
 export class VeteranModule {}
