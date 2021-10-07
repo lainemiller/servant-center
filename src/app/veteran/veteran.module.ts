@@ -25,8 +25,7 @@ import { VeteranComponent } from './veteran.component';
     VeteranProfileComponent,
     DashboardComponent,
   ],
-  imports: [
-    CommonModule,
+  imports: [ CommonModule,
     VeteranRoutingModule,
     SharedModule,
     HttpClientModule,

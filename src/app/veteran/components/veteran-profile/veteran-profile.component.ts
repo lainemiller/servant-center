@@ -12,7 +12,6 @@ interface State {
   templateUrl: './veteran-profile.component.html',
   styleUrls: ['./veteran-profile.component.scss'],
 })
-
 export class VeteranProfileComponent implements OnInit {
   veteranProfileForm!: FormGroup;
   states: State[];
