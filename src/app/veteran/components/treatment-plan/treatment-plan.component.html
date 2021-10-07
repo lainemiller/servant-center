@@ -1,206 +1,103 @@
+
 <div class="p-grid">
   <div class="p-col-12">
     <app-item-header title="TREATMENT PLAN"></app-item-header>
     <div class="form-container">
       <form [formGroup]="treatmentPlanForm" (ngSubmit)="onSubmit()">
-        <div class="p-fluid p-formgrid p-grid">
-          <div class="p-field p-col-12 p-md-3">
-            <input
-              type="text"
-              pInputText
-              formControlName="firstName"
-              placeholder="Resident's First Name"
-            />
-          </div>
-          <div class="p-field p-col-12 p-md-3">
-            <input
-              type="text"
-              pInputText
-              formControlName="lastName"
-              placeholder="Resident's Last Name"
-            />
-          </div>
-          <div class="p-field p-col-12 p-md-3">
-            <input
-              type="text"
-              pInputText
-              formControlName="recordNo"
-              placeholder="Record #"
-            />
-          </div>
-          <div class="p-field p-col-12 p-md-3">
-            <p-calendar
-              formControlName="dateOfBirth1"
-              [inline]="false"
-              [showIcon]="true"
-              placeholder="DOB (mm/dd/yyyy)"
-            ></p-calendar>
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-3">
+          <input type="text" pInputText formControlName=firstName placeholder="Resident's First Name"></div>
+        <div class="p-field p-col-12 p-md-3">
+          <input type="text" pInputText formControlName=lastName placeholder="Resident's Last Name"></div>
+        <div class="p-field p-col-12 p-md-3">
+          <input type="text" pInputText formControlName=recordNo placeholder="Record #"></div>
+        <div class="p-field p-col-12 p-md-3">
+          <p-calendar formControlName=dateOfBirth1 [inline]=false [showIcon]=true placeholder="DOB (mm/dd/yyyy)"></p-calendar></div>
+      </div>
+
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-3">
+          <p-calendar formControlName=dateOfBirth2 [inline]=false [showIcon]=true placeholder="DOB (mm/dd/yyyy)"></p-calendar></div>
+        <div class="p-field p-col-12 p-md-3">
+          <p-calendar formControlName=intakeDOB [inline]=false [showIcon]=true placeholder="Intake date (mm/dd/yyyy)"></p-calendar></div>
+        <div class="p-field p-col-12 p-md-3">
+          <input type="text" pInputText formControlName=hmisIdNo placeholder="HMIS ID#"></div>
+      </div>
+
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-6">
+          <span class="title">DIAGNOSES</span>
+          <textarea [rows]="10" formControlName=veteranDiagnosis pInputTextarea placeholder="Comment"></textarea>
+        </div>
+        <div class="p-field p-col-12 p-md-3">
+          <span class="title">SUPPORTS</span>
+          <textarea [rows]="10" formControlName=veteranSupports pInputTextarea placeholder="Comment"></textarea>
+        </div>
+        <div class="p-field p-col-12 p-md-3">
+          <span class="title">STRENGTHS</span>
+          <textarea [rows]="10" formControlName=veteranStrengths pInputTextarea placeholder="Comment"></textarea>
+        </div>
+      </div>
+
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12">
+          <div class="title-container">
+            <p>
+              <span>TREATMENT ISSUES & GOALS</span>
+            </p>
           </div>
         </div>
-
-        <div class="p-fluid p-formgrid p-grid">
-          <div class="p-field p-col-12 p-md-3">
-            <p-calendar
-              formControlName="dateOfBirth2"
-              [inline]="false"
-              [showIcon]="true"
-              placeholder="DOB (mm/dd/yyyy)"
-            ></p-calendar>
-          </div>
-          <div class="p-field p-col-12 p-md-3">
-            <p-calendar
-              formControlName="intakeDOB"
-              [inline]="false"
-              [showIcon]="true"
-              placeholder="Intake date (mm/dd/yyyy)"
-            ></p-calendar>
-          </div>
-          <div class="p-field p-col-12 p-md-3">
-            <input
-              type="text"
-              pInputText
-              formControlName="hmisIdNo"
-              placeholder="HMIS ID#"
-            />
-          </div>
+        <div class="p-field p-col-12 p-md-3">
+          <p-button label="Add" (click)='addNewField()'></p-button>
         </div>
-
-        <div class="p-fluid p-formgrid p-grid">
-          <div class="p-field p-col-12 p-md-6">
-            <span class="title">DIAGNOSES</span>
-            <textarea
-              [rows]="10"
-              formControlName="veteranDiagnosis"
-              pInputTextarea
-              placeholder="Comment"
-            ></textarea>
-          </div>
-          <div class="p-field p-col-12 p-md-3">
-            <span class="title">SUPPORTS</span>
-            <textarea
-              [rows]="10"
-              formControlName="veteranSupports"
-              pInputTextarea
-              placeholder="Comment"
-            ></textarea>
-          </div>
-          <div class="p-field p-col-12 p-md-3">
-            <span class="title">STRENGTHS</span>
-            <textarea
-              [rows]="10"
-              formControlName="veteranStrengths"
-              pInputTextarea
-              placeholder="Comment"
-            ></textarea>
-          </div>
+        <div class="p-field p-col-12 p-md-3">
+          <p-button label="Delete" (click)='deleteField()' [disabled]='delete'></p-button>
         </div>
+      </div>
 
-        <div class="p-fluid p-formgrid p-grid">
-          <div class="p-field p-col-12">
-            <div class="title-container">
-              <p>
-                <span>TREATMENT ISSUES & GOALS</span>
-              </p>
-            </div>
-          </div>
-          <div class="p-field p-col-12 p-md-3">
-            <p-button label="Add" (click)="addNewField()"></p-button>
-          </div>
-          <div class="p-field p-col-12 p-md-3">
-            <p-button
-              label="Delete"
-              (click)="deleteField()"
-              [disabled]="delete"
-            ></p-button>
-          </div>
-        </div>
-
-        <div
-          formArrayName="treatmentIssues"
-          *ngFor="let item of treatmentIssues.controls; let j = index"
-        >
-          <div [formGroupName]="j">
-            <div
-              *ngFor="let goal of treatmentGoals; let i = index"
-              style="background: #efefef"
-            >
-              <div class="p-field p-col-12">
-                <div class="p-grid">
-                  <div class="p-col-fixed bullents">{{ i + 1 }}</div>
-                  <div class="p-col heading">{{ goal.label }}</div>
-                </div>
+      <div formArrayName="treatmentIssues" *ngFor="let item of treatmentIssues.controls; let j = index;">
+        <div [formGroupName]="j">
+          <div *ngFor="let goal of treatmentGoals; let i=index" style="background: #efefef;">
+            <div class="p-field p-col-12">
+              <div class="p-grid">
+                <div class="p-col-fixed bullents">{{i+1}}</div>
+                <div class="p-col heading">{{goal.label}}</div>
               </div>
-              <div
-                [formArrayName]="goal.formName"
-                *ngFor="let item of goal.controls; let i = index"
-              >
-                <div [formGroupName]="i">
-                  <div class="p-grid p-align-start vertical-container">
-                    <div class="p-col">
-                      <div class="box">
-                        <input
-                          type="text"
-                          formControlName="goals"
-                          pInputText
-                          placeholder="Goal"
-                        />
-                      </div>
+            </div>
+            <div [formArrayName]="goal.formName" *ngFor="let item of goal.controls; let i = index;">
+              <div [formGroupName]="i">
+                <div class="p-grid p-align-start vertical-container">
+                  <div class="p-col">
+                    <div class="box">
+                      <input type="text" formControlName="goals" pInputText placeholder="Goal"></div>
                     </div>
-                    <div class="p-col">
-                      <div class="box">
-                        <input
-                          type="text"
-                          formControlName="plans"
-                          pInputText
-                          placeholder="Plan"
-                        />
-                      </div>
+                  <div class="p-col">
+                    <div class="box">
+                      <input type="text" formControlName="plans" pInputText placeholder="Plan"></div>
                     </div>
-                    <div class="p-col">
-                      <div class="box">
-                        <input
-                          type="text"
-                          formControlName="strategies"
-                          pInputText
-                          placeholder="Strategy"
-                        />
-                      </div>
+                  <div class="p-col">
+                    <div class="box">
+                      <input type="text" formControlName="strategies" pInputText placeholder="Strategy"></div>
                     </div>
-                    <div class="p-col">
-                      <div class="box">
-                        <p-calendar
-                          [inline]="false"
-                          formControlName="targetDate"
-                          [showIcon]="true"
-                          placeholder="Target date"
-                        ></p-calendar>
-                      </div>
+                  <div class="p-col">
+                    <div class="box">
+                      <p-calendar [inline]=false formControlName="targetDate" [showIcon]=true placeholder="Target date"></p-calendar></div>
                     </div>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="p-fluid p-formgrid p-grid">
-          <div class="p-field p-col-12">
-            <textarea
-              [rows]="5"
-              formControlName="veteranNotes"
-              pInputTextarea
-              placeholder="Notes"
-            ></textarea>
-          </div>
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12">
+          <textarea [rows]="5" formControlName=veteranNotes pInputTextarea placeholder="Notes"></textarea>
         </div>
+      </div>
 
-        <button
-          type="submit"
-          pButton
-          label="Submit"
-          class="p-button-outlined"
-        ></button>
-        <p-button label="Cancel" styleClass="p-button-link"></p-button>
+      <button type="submit" pButton label="Submit" class="p-button-outlined"></button>
+      <p-button label="Cancel" styleClass="p-button-link"></p-button>
       </form>
     </div>
   </div>
