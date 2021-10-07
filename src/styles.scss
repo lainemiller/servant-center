@@ -14,13 +14,17 @@ body {
   background-color: red !important;
 }
 
-.p-dialog .p-dialog-header {
+// consent modal - start
+
+#consent-modal .p-dialog-header {
   position: relative;
   padding-bottom: 40px;
 }
 
 @media (max-width: 768px) {
-  .p-dialog .p-dialog-header {
+  #consent-modal .p-dialog-header {
     padding-bottom: 85px;
   }
 }
+
+// consent modal - end
