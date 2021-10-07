@@ -74,5 +74,7 @@ export class VeteranComponent implements OnInit {
 
   toggleMenu(): void {
     this.displayMenu = !this.displayMenu;
+    console.log("abkh");
+    
   }
 }
