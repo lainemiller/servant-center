@@ -10,15 +10,12 @@ import { ConsentService } from '../../consent.service';
 export class ConsentDataComponent implements OnInit {
   display: boolean = false;
   vetran: any;
-  consent: any;
 
   constructor(private service: ConsentService) {}
 
   ngOnInit(): void {
     this.display = true;
     this.getVetranDetailsById();
-    //console.log(this.consent.email)
-    // console.log(this.service.getRegisterUserDetailsById())
   }
 
   showConsentForm() {
@@ -27,6 +24,8 @@ export class ConsentDataComponent implements OnInit {
 
   getVetranDetailsById() {
     let resp = this.service.getRegisterUserDetailsById();
-    resp.subscribe((data) => (this.consent = data));
+    resp.subscribe((data) => {
+      this.vetran = data;
+    });
   }
 }
