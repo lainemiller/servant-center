@@ -11,6 +11,7 @@
           [draggable]="false"
           [modal]="true"
           [style]="{ width: '45vw' }"
+          (onHide)="crossButton()"
         >
           <form [formGroup]="progressNote" (ngSubmit)="onSubmit()">
             <div class="p-fluid">
@@ -21,6 +22,11 @@
                   pInputText
                   placeholder="Goal Title"
                 />
+                <small
+                  class="error"
+                  *ngIf="goalTitle.invalid && goalTitle.touched"
+                  >Goal Title is required.</small
+                >
               </div>
               <div class="p-field p-col-12 p-sm-12">
                 <textarea
@@ -29,6 +35,11 @@
                   pInputTextarea
                   placeholder="Goal Description"
                 ></textarea>
+                <small
+                  class="error"
+                  *ngIf="goalDescription.invalid && goalDescription.touched"
+                  >Goal Description is required.</small
+                >
               </div>
               <div class="p-field p-col-12 p-sm-12">
                 <label for="statusCheck">Goal Status</label>
@@ -36,6 +47,7 @@
                   <div class="p-toolbar-group-left">
                     <span class="p-mr-2">Closed</span>
                     <p-inputSwitch
+                      [(ngModel)]="initialStatus"
                       formControlName="goalState"
                       id="statusCheck"
                       class="open-close-switch"
@@ -43,6 +55,11 @@
                     </p-inputSwitch>
                     <span class="p-ml-2">Open</span>
                   </div>
+                  <small
+                    class="error"
+                    *ngIf="goalState.invalid && goalState.touched"
+                    >Goal Description is required.</small
+                  >
                 </p-toolbar>
               </div>
             </div>
@@ -50,11 +67,13 @@
               <button
                 type="submit"
                 pButton
+                [disabled]="progressNote.invalid"
                 label="Submit"
                 class="p-button-outlined"
               ></button>
               <button
                 type="button"
+                (click)="cancleIt()"
                 pButton
                 label="Cancel"
                 class="p-button-text p-button-secondary"
@@ -180,9 +199,12 @@
       <div class="inputSwitch-container p-col-12">
         <p-toolbar>
           <div class="p-toolbar-group-left">
-            <span class="p-mr-2">Closed</span>
-            <p-inputSwitch [(ngModel)]="progressNote.goalState"></p-inputSwitch>
-            <span class="p-ml-2">Open</span>
+            <span class="p-mr-2">Open</span>
+            <p-inputSwitch
+              [(ngModel)]="progressNote.goalState"
+              class="open-close-switch"
+            ></p-inputSwitch>
+            <span class="p-ml-2">Closed</span>
           </div>
           <div class="p-toolbar-group-right">
             <button

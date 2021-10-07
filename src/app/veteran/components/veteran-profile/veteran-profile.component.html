@@ -6,12 +6,12 @@
         <div class="p-fluid p-formgrid p-grid">
           <img src="assets/images/profile.svg" alt="Image" width="150" />
         </div>
-        <br />
         <div class="p-fluid p-formgrid p-grid">
           <div class="p-field p-col-12 p-md-3">
             <input
               type="text"
               class="disable"
+              value="{{ veteran?.recordNo }}"
               pInputText
               formControlName="recordNo"
               placeholder="Record #"
@@ -30,6 +30,7 @@
             <input
               type="text"
               class="disable"
+              value="{{ veteran?.caseManager }}"
               pInputText
               formControlName="caseManager"
               placeholder="Case Manager"
@@ -39,27 +40,46 @@
             <input
               type="text"
               class="disable"
+              value="{{ veteran?.veteranId }}"
               pInputText
               formControlName="veteranId"
               placeholder="Veteran Id"
             />
           </div>
         </div>
-
         <div class="p-fluid p-formgrid p-grid">
           <div class="p-field p-col-12 p-md-3">
             <input
               type="text"
-              value="{{ veteran?.firstName }}"
               pInputText
               formControlName="firstName"
               placeholder="First Name"
             />
+            <div
+              *ngIf="
+                getControl.firstName.touched && getControl.firstName.invalid
+              "
+              class="text-danger"
+            >
+              <div
+                class="validations"
+                *ngIf="getControl.firstName.errors?.required"
+              >
+                First Name is required.
+              </div>
+              <div
+                class="validations"
+                *ngIf="getControl.firstName.errors?.minlength"
+              >
+                Minimum 4 character are required.
+              </div>
+            </div>
           </div>
+
           <div class="p-field p-col-12 p-md-3">
             <input
               type="text"
-              value="{{ veteran?.firstName }}"
+              value="{{ veteran?.middleName }}"
               pInputText
               formControlName="middleName"
               placeholder="Middle Name"
@@ -68,14 +88,33 @@
           <div class="p-field p-col-12 p-md-3">
             <input
               type="text"
+              value="{{ veteran?.lastName }}"
               pInputText
               formControlName="lastName"
               placeholder="Last Name"
             />
+            <div
+              *ngIf="getControl.lastName.touched && getControl.lastName.invalid"
+              class="text-danger"
+            >
+              <div
+                class="validations"
+                *ngIf="getControl.lastName.errors?.required"
+              >
+                Last Name is required.
+              </div>
+              <div
+                class="validations"
+                *ngIf="getControl.lastName.errors?.minlength"
+              >
+                Minimum 4 character are required.
+              </div>
+            </div>
           </div>
           <div class="p-field p-col-12 p-md-3">
             <input
               type="text"
+              value="{{ veteran?.nickName }}"
               pInputText
               formControlName="nickName"
               placeholder="Nick Name"
@@ -91,6 +130,31 @@
               formControlName="address1"
               placeholder="Address 1"
             />
+            <div
+              *ngIf="getControl.lastName.touched && getControl.lastName.invalid"
+              class="text-danger"
+            >
+              <div
+                class="validations"
+                *ngIf="getControl.lastName.errors?.required"
+              >
+                Address 1 is required.
+              </div>
+              <div
+                class="validations"
+                *ngIf="getControl.lastName.errors?.minlength"
+              >
+                Minimum 4 character are required.
+              </div>
+            </div>
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              pInputText
+              formControlName="address2"
+              placeholder="Address 2"
+            />
           </div>
           <div class="p-field p-col-12 p-md-3">
             <input
@@ -99,6 +163,20 @@
               formControlName="city"
               placeholder="City"
             />
+            <div
+              *ngIf="getControl.city.touched && getControl.city.invalid"
+              class="text-danger"
+            >
+              <div class="validations" *ngIf="getControl.city.errors?.required">
+                city is required.
+              </div>
+              <div
+                class="validations"
+                *ngIf="getControl.city.errors?.minlength"
+              >
+                Minimum 4 character are required.
+              </div>
+            </div>
           </div>
           <!-- DropDown -->
           <div class="p-field p-col-12 p-md-3">
@@ -125,6 +203,23 @@
               formControlName="country"
               placeholder="Country"
             />
+            <div
+              *ngIf="getControl.country.touched && getControl.lastName.invalid"
+              class="text-danger"
+            >
+              <div
+                class="validations"
+                *ngIf="getControl.country.errors?.required"
+              >
+                country is required.
+              </div>
+              <div
+                class="validations"
+                *ngIf="getControl.country.errors?.minlength"
+              >
+                Minimum 4 character are required.
+              </div>
+            </div>
           </div>
           <div class="p-field p-col-12 p-md-3">
             <input
@@ -133,6 +228,23 @@
               formControlName="zipCode"
               placeholder="Zip Code"
             />
+            <div
+              *ngIf="getControl.zipCode.touched && getControl.lastName.invalid"
+              class="text-danger"
+            >
+              <div
+                class="validations"
+                *ngIf="getControl.zipCode.errors?.required"
+              >
+                zipCode is required.
+              </div>
+              <div
+                class="validations"
+                *ngIf="getControl.zipCode.errors?.minlength"
+              >
+                Minimum 4 character are required.
+              </div>
+            </div>
           </div>
           <div class="p-field p-col-12 p-md-3">
             <p-calendar
@@ -144,17 +256,6 @@
             </p-calendar>
           </div>
           <div class="p-field p-col-12 p-md-3">
-            <input
-              type="number"
-              pInputText
-              formControlName="phoneNumber"
-              placeholder="Phone Number"
-            />
-          </div>
-        </div>
-
-        <div class="p-fluid p-formgrid p-grid">
-          <div class="p-field p-col-12 p-md-3">
             <p-calendar
               formControlName="POB"
               [inline]="false"
@@ -163,6 +264,44 @@
             >
             </p-calendar>
           </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              formControlName="phoneNumber"
+              class="form-control"
+              pInputText
+              placeholder="Phone Number"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="email"
+              formControlName="emailId"
+              class="form-control"
+              pInputText
+              placeholder="Email Id"
+            />
+            <div
+              *ngIf="getControl.emailId.touched && getControl.emailId.invalid"
+              class="text-danger"
+            >
+              <div
+                class="validations"
+                *ngIf="getControl.emailId.errors?.required"
+              >
+                Email is required.
+              </div>
+              <div
+                class="validations"
+                *ngIf="getControl.emailId.errors?.required"
+              >
+                Email seems invalid.
+              </div>
+            </div>
+          </div>
           <div class="p-field p-col-12 p-md-3">
             <input
               type="text"
@@ -170,45 +309,77 @@
               formControlName="SSNNumber"
               placeholder="SSN #"
             />
+            <div
+              *ngIf="
+                getControl.SSNNumber.touched && getControl.SSNNumber.invalid
+              "
+              class="text-danger"
+            >
+              <div
+                class="validations"
+                *ngIf="getControl.SSNNumber.errors?.required"
+              >
+                SSNNumber is required.
+              </div>
+              <div
+                class="validations"
+                *ngIf="getControl.SSNNumber.errors?.required"
+              >
+                SSNNumber seems invalid.
+              </div>
+            </div>
           </div>
           <div class="p-field p-col-12 p-md-3">
-            <p-radioButton
-              name="gender"
-              value="male"
-              formControlName="console"
-            ></p-radioButton>
-            <p-radioButton
-              name="gender"
-              value="female"
-              formControlName="console"
-            ></p-radioButton>
-            <p-radioButton
-              name="gender"
-              value="other"
-              formControlName="console"
-            ></p-radioButton>
+            <input
+              type="text"
+              pInputText
+              formControlName="hmisIdNo"
+              placeholder="HMIS ID #"
+            />
+            <div
+              *ngIf="getControl.hmisIdNo.touched && getControl.hmisIdNo.invalid"
+              class="text-danger"
+            >
+              <div
+                class="validations"
+                *ngIf="getControl.hmisIdNo.errors?.required"
+              >
+                hmisIdNo is required.
+              </div>
+              <div
+                class="validations"
+                *ngIf="getControl.hmisIdNo.errors?.required"
+              >
+                hmisIdNo seems invalid.
+              </div>
+            </div>
           </div>
-          <div class="p-field p-col-12 p-md-3">
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div *ngFor="let category of genders" class="p-field-checkbox">
             <p-radioButton
-              name="maritalStatus"
-              value="married"
-              formControlName="console"
+              [inputId]="category.key"
+              name="selectedGender"
+              [value]="category"
+              formControlName="selectedGender"
+              [disabled]="category.key === 'R'"
             ></p-radioButton>
+            <label [for]="category.key">{{ category.name }}</label
+            ><br />
+          </div>
+          <div
+            *ngFor="let category of martialStatuses"
+            class="p-field-checkbox"
+          >
             <p-radioButton
-              name="maritalStatus"
-              value="single"
-              formControlName="console"
+              [inputId]="category.key"
+              name="selectedMartialStatus"
+              [value]="category"
+              formControlName="selectedMartialStatus"
+              [disabled]="category.key === 'R'"
             ></p-radioButton>
-            <p-radioButton
-              name="maritalStatus"
-              value="divorsed"
-              formControlName="console"
-            ></p-radioButton>
-            <p-radioButton
-              name="maritalStatus"
-              value="widowed"
-              formControlName="console"
-            ></p-radioButton>
+            <label [for]="category.key">{{ category.name }}</label>
           </div>
         </div>
 
@@ -225,24 +396,120 @@
             <input
               type="text"
               pInputText
-              formControlName="hmisIdNo"
-              placeholder="HMIS ID #"
+              formControlName="primaryLanguage"
+              placeholder="Primary Language"
             />
           </div>
           <div class="p-field p-col-12 p-md-3">
             <input
-              type="mail"
+              type="text"
               pInputText
-              formControlName="emailId"
-              placeholder="Email Id"
+              formControlName="relegiousPreferences"
+              placeholder="Religious Preferences"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              pInputText
+              formControlName="hobbies"
+              placeholder="Hobbies"
+            />
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              value="{{ veteran?.cfirstName }}"
+              pInputText
+              formControlName="cfirstName"
+              placeholder="First Name"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              value="{{ veteran?.cmiddleName }}"
+              pInputText
+              formControlName="cmiddleName"
+              placeholder="Middle Name"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              value="{{ veteran?.clastName }}"
+              pInputText
+              formControlName="clastName"
+              placeholder="Last Name"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              value="{{ veteran?.contactPersonRelationship }}"
+              pInputText
+              formControlName="contactPersonRelationship"
+              placeholder="Contact person relationship"
+            />
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              value="{{ veteran?.cHouseNumber }}"
+              pInputText
+              formControlName="cHouseNumber"
+              placeholder="House Number"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              value="{{ veteran?.cStree }}"
+              pInputText
+              formControlName="cStreet"
+              placeholder="Street"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              value="{{ veteran?.cCity }}"
+              pInputText
+              formControlName="cCity"
+              placeholder="City"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              value="{{ veteran?.cState }}"
+              pInputText
+              formControlName="cState"
+              placeholder="State"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <input
+              type="text"
+              value="{{ veteran?.cZip }}"
+              pInputText
+              formControlName="cZip"
+              placeholder="Zip"
             />
           </div>
         </div>
 
         <button
-          type="submit"
+          type="update"
           pButton
           label="Update"
+          value="submit"
           class="p-button-outlined"
         ></button>
         <p-button label="Cancel" styleClass="p-button-link"></p-button>
