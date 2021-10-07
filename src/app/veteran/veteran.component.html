@@ -1,4 +1,5 @@
-<app-header></app-header>
+<app-header (toggleMenu)="toggleMenu()"></app-header>
+
 <div class="p-grid nested-grid">
   <p-menu [model]="items" class="p-col-12 p-lg-2" width="250px"></p-menu>
   <p-divider
@@ -7,6 +8,11 @@
     width="10px"
   ></p-divider>
   <div class="p-col">
+    <app-welcome-header
+      name="{{ name }}"
+      date="{{ date }}"
+      image="{{ image }}"
+    ></app-welcome-header>
     <router-outlet></router-outlet>
   </div>
 </div>
