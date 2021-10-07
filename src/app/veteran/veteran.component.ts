@@ -1,6 +1,7 @@
 import { Component, Host, HostListener, OnInit } from '@angular/core';
 
 import { MenuItem } from 'primeng/api';
+import { VeteranDashboardService } from './services/veteran-dashboard.service';
 
 @Component({
   selector: 'app-veteran',
@@ -8,6 +9,21 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./veteran.component.scss'],
 })
 export class VeteranComponent implements OnInit {
+  public name: any;
+  public date: any;
+  public data: any;
+  public image: any;
+
+  constructor(private service: VeteranDashboardService) {
+    this.service.getName().subscribe((data) => {
+      console.log(data);
+      this.data = data;
+      this.name = this.data.name;
+      this.date = this.data.date;
+      this.image = this.data.image;
+    });
+  }
+
   public displayMenu = true;
 
   @HostListener('window:resize')
@@ -50,15 +66,15 @@ export class VeteranComponent implements OnInit {
       label: 'LOGOUT',
       icon: 'fas fa-sign-out-alt',
       styleClass: 'menu-items--text menu-item--6',
-      routerLink: ['/veteran/'],
+      routerLink: ['/veteran/logout'],
     },
   ];
-
-  constructor() {}
 
   ngOnInit(): void {}
 
   toggleMenu(): void {
     this.displayMenu = !this.displayMenu;
+    console.log("abkh");
+    
   }
 }

@@ -99,7 +99,3 @@ export class VeteranProfileComponent implements OnInit {
     console.log(this.veteranProfileForm.value);
   }
 }
-
-
-
-
