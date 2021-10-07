@@ -17,7 +17,8 @@ export class ProgressNotesComponent implements OnInit {
   public progressNote: any;
   public d: any;
   public progressNotes: any;
-
+  public initialStatus=false;
+  
   constructor(
     private formBuilder: FormBuilder,
     private service: ProgressNotesService
@@ -31,12 +32,6 @@ export class ProgressNotesComponent implements OnInit {
     });
 
     this.buildForm();
-
-    this.status = [
-      { name: 'Open', code: true },
-
-      { name: 'Close', code: false },
-    ];
   }
 
   expandOrCollapse(index: any) {
@@ -66,7 +61,7 @@ export class ProgressNotesComponent implements OnInit {
     this.progressNote = this.formBuilder.group({
       goalTitle: ['', Validators.required],
       goalDescription: ['', Validators.required],
-      goalState: ['true', Validators.required],
+      goalState: ['false', Validators.required],
       addedDate: [this.d],
     });
   }
