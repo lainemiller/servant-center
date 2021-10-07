@@ -10,7 +10,6 @@ import { VeteranDashboardService } from '../../services/veteran-dashboard.servic
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-
   ngOnInit(): void {}
 
   calendarOptions: CalendarOptions = {
