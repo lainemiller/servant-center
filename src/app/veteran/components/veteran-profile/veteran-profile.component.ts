@@ -14,6 +14,7 @@ interface State {
 })
 export class VeteranProfileComponent implements OnInit {
   veteranProfileForm!: FormGroup;
+  submitted : boolean = false;
   states: State[];
   selectedState!: State;
   veteran: any;
@@ -24,16 +25,60 @@ export class VeteranProfileComponent implements OnInit {
   emailId!: string;
 
   genders: any[] = [{ name: 'Female', key: 'A' }, { name: 'Male', key: 'M' }];
-  martialStatuses: any[] = [{ name: 'Single', key: 'S' }, { name: 'Married', key: 'M' }, { name: 'DIvorced', key: 'D' }, { name: 'Widowed', key: 'W' }];
+  martialStatuses: any[] = [{ name: 'Single', key: 'S' }, { name: 'Married', key: 'M' }];
 
   constructor(private formBuilder: FormBuilder, private service: VeteranprofileService) {
 
     this.states = [
-      { name: 'New York' },
-      { name: 'Rome' },
-      { name: 'London' },
-      { name: 'Istanbul' },
-      { name: 'Paris' }
+      {name: 'Alabama'},
+      {name: 'Alaska'},
+      {name: 'Arizona'},
+      {name: 'Arkansas'},
+      {name: 'California'},
+      {name: 'Colorado'},
+      {name: 'Connecticut'},
+      {name: 'Delaware'},
+      {name: 'Florida'},
+      {name: 'Georgia'},
+      {name: 'Hawaii'},
+      {name: 'Idaho'},
+      {name: 'Illinois'},
+      {name: 'Indiana'},
+      {name: 'Iowa'},
+      {name: 'Kansas'},
+      {name: 'Kentucky'},
+      {name: 'Louisiana'},
+      {name: 'Maine'},
+      {name: 'Maryland'},
+      {name: 'Massachusetts'},
+      {name: 'Michigan'},
+      {name: 'Mississippi'},
+      {name: 'Missouri'},
+      {name: 'Montana'},
+      {name: 'Nebraska'},
+      {name: 'Nevada'},
+      {name: 'New Hampshire'},
+      {name: 'New Jersey'},
+      {name: 'New Mexico'},
+      {name: 'New York'},
+      {name: 'North Carolina'},
+      {name: 'North Dakota'},
+      {name: 'Ohio'},
+      {name: 'Oklahoma'},
+      {name: 'Oregon'},
+      {name: 'Pennsylvania'},
+      {name: 'Rhode Island'},
+      {name: 'South Carolina'},
+      {name: 'South Dakota'},
+      {name: 'Tennessee'},
+      {name: 'Texas'},
+      {name: 'Utah'},
+      {name: 'Vermont'},
+      {name: 'Virginia'},
+      {name: 'Washington'},
+      {name: 'West Virginia'},
+      {name: 'Wisconsin'},
+      {name: 'Wyoming'},
     ];
   }
 
@@ -44,6 +89,7 @@ export class VeteranProfileComponent implements OnInit {
     this.selectedMartialStatus = this.martialStatuses[1];
     let response = this.service.getVeteranProfileDetailsByRecordNumber();
     response.subscribe((data) => this.veteran = data)
+    console.log(response);
   }
 
   buildForm() {
@@ -53,9 +99,9 @@ export class VeteranProfileComponent implements OnInit {
       caseManager: [null, Validators.required],
       country: [null, Validators.required],
       veteranId: ['', Validators.required],
-      firstName: ['', Validators.required, Validators.minLength(4)],
+      firstName: ['', Validators.required, Validators.minLength(4),Validators.nullValidator],
       middleName: [''],
-      lastName: [null, Validators.required, Validators.minLength(4)],
+      lastName: ['', Validators.required, Validators.minLength(4)],
       cfirstName: ['', Validators.required, Validators.minLength(4)],
       cmiddleName: [''],
       clastName: ['', Validators.required, Validators.minLength(4)],
@@ -96,6 +142,8 @@ export class VeteranProfileComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
+    // console.log(this.response);
     console.log(this.veteranProfileForm.value);
   }
 }
