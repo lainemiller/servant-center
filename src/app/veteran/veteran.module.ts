@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { InputSwitchModule } from 'primeng/inputswitch';
 import { SharedModule } from '../shared/shared.module';
 import { AssessmentComponent } from './components/assessment/assessment.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -13,7 +15,8 @@ import { TreatmentPlanComponent } from './components/treatment-plan/treatment-pl
 import { VeteranProfileComponent } from './components/veteran-profile/veteran-profile.component';
 import { VeteranRoutingModule } from './veteran-routing.module';
 import { VeteranComponent } from './veteran.component';
-
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { ToolbarModule } from 'primeng/toolbar';
 @NgModule({
   declarations: [
     VeteranComponent,
@@ -25,12 +28,16 @@ import { VeteranComponent } from './veteran.component';
     VeteranProfileComponent,
     DashboardComponent,
   ],
-  imports: [ CommonModule,
+  imports: [
+    CommonModule,
     VeteranRoutingModule,
     SharedModule,
-    HttpClientModule,
-    RadioButtonModule,
-    RxReactiveFormsModule,
+    Ng2SearchPipeModule,
+    InputSwitchModule,
+    ToggleButtonModule,
+    ToolbarModule,
+    RxReactiveFormsModule
   ],
+  exports: [Ng2SearchPipeModule,InputSwitchModule,ToggleButtonModule,ToolbarModule],
 })
 export class VeteranModule {}
