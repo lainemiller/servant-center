@@ -8,6 +8,6 @@ export class VeteranprofileService {
    constructor(private http:HttpClient) { }
 
   public getVeteranProfileDetailsByRecordNumber() {
-     return this.http.get("./assets/mockdata/getdata.json");
+     return this.http.get("./assets/mock/getdata.json");
   }
 }

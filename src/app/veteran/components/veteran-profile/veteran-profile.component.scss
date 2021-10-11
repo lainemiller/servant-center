@@ -7,12 +7,74 @@
   border-color: rgba(183, 183, 183, 1);
 }
 
+
+
+#fields_margin1 {
+  margin-bottom: 15px;
+}
+// #fields_margin {
+//   margin-top: 5px;
+//   margin-bottom: 5px;
+// }
+
+#img_div {
+  margin-left: 6px;
+}
+
+#first_div {
+  margin-top: 20px;
+}
+
+#last_flex {
+  margin-bottom: 10px;
+}
+
+.validations {
+  color: red;
+}
+
+// .fieldset_legand {
+//   background: #fff;
+// }
+
+.field_set {
+  margin-top: 15px;
+  padding: 20px 20px;
+  background: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(183, 183, 183, 1);
+}
+
+.heading {
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 16px;
+  color: #a00000;
+}
+
+.title-container {
+  background-color: rgba(55, 66, 74, 1);
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 16px;
+  height: 43px;
+}
+
+p {
+  color: rgba(255, 255, 255, 0.996078431372549);
+  padding: 10px 0px 0px 20px;
+  text-decoration: none;
+}
+
 .title {
   font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
   font-weight: 600;
   font-style: normal;
   font-size: 16px;
-  color: #222222;
+  color: #a00000;
   line-height: 32px;
 }
 
@@ -31,62 +93,37 @@
   font-style: normal;
   font-size: 16px;
   height: 43px;
-  p {
-    color: rgba(255, 255, 255, 0.996078431372549);
-    padding: 10px 0px 0px 20px;
-    text-decoration: none;
-  }
-  
-  .title {
-    font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 16px;
-    color: #222222;
-    line-height: 32px;
-  }
-  
-  .heading {
-    font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 16px;
-    color: #A00000;
-  }
-  
-  .title-container {
-    background-color: rgba(55, 66, 74, 1);
-    font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 16px;
-    height: 43px;
-    p{
-      color: rgba(255, 255, 255, 0.996078431372549);
-      padding: 10px 0px 0px 20px;
-      text-decoration: none;
-    }
-  }
-  
-  .vertical-container {
-    border-radius: 4px;
-    margin: 10px 10px 10px 10px;
-  }
-  
-  .bullents{
-    background-color: #A00000;
-    color: #fff;
-    font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
-    font-weight: 600;
-    height: 20px;
-    width: 20px;
-    padding-left: 5px;
-    padding-top: 2px;
-    margin-left: 20px;
-    margin-top: 7px;
-    border-radius: 14px;
-  }
-  .disable{
-    pointer-events: none;
-  }
 }
+p {
+  color: rgba(255, 255, 255, 0.996078431372549);
+  padding: 10px 0px 0px 20px;
+  text-decoration: none;
+}
+
+.vertical-container {
+  border-radius: 4px;
+  margin: 10px 10px 10px 10px;
+}
+
+.bullents {
+  background-color: #a00000;
+  color: #fff;
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
+  font-weight: 600;
+  height: 20px;
+  width: 20px;
+  padding-left: 5px;
+  padding-top: 2px;
+  margin-left: 20px;
+  margin-top: 7px;
+  border-radius: 14px;
+}
+
+.disable {
+  pointer-events: none;
+}
+
+.p-radioButton {
+  margin-right: 10px;
+}
+
