@@ -127,7 +127,7 @@ export class VeteranProfileComponent implements OnInit {
 
   buildForm() {
     this.veteranProfileForm = this.formBuilder.group({
-      recordNo:[8],
+      recordNo:[this.recordNo],
       intakeDOB: [this.intakeDOB,Validators.required],
       caseManager: [this.caseManager, Validators.required],
       veteranId: [this.veteranId, Validators.required],

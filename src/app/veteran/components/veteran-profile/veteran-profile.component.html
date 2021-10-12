@@ -173,64 +173,6 @@
               />
             </div>
           </div>
-        </fieldset>
-        <!-- Person Info End -->
-
-        <!-- Contact Info -->
-        <fieldset class="field_set">
-          <legend class="fieldset_legand"  class="p-col heading"><span class="title">CONTACT INFORMATION</span></legend>
-          <div class="p-fluid  p-grid">
-            <div id="fields_margin" class="p-field p-col-12 p-md-4">
-              <span class="p-float-label">
-              <input
-              id="Email Id"
-                type="email"
-                formControlName="emailId"
-                class="form-control"
-                pInputText
-                mask="SA*@A*.SSS"
-             [showMaskTyped]="true" 
-              />
-              <label for="Email Id">Email Id</label>
-            </span>
-              <div
-                *ngIf="getControl.emailId.touched && getControl.emailId.invalid"
-                class="text-danger"
-              >
-                <small
-                  class="error"
-                  *ngIf="getControl.emailId.errors?.required"
-                >
-                  Email is required.
-                </small>
-                <small
-                  class="error"
-                  *ngIf="getControl.emailId.errors?.required"
-                >
-                  Email seems invalid.
-                </small>
-              </div>
-            </div>
-            <div id="fields_margin" class="p-field p-col-12 p-md-4">
-              <span class="p-float-label">
-              <input
-              id="Phone Number"
-                type="text"
-                formControlName="phoneNumber"
-                class="form-control"
-                mask="(000) 000-0000" prefix="+1" 
-                pInputText
-              />
-              <label for="Phone Number">Phone Number</label>
-            </span>
-            </div>
-          </div>
-        </fieldset>
-        <!-- Contact Info End -->
-
-        <!-- Personal Information -->
-        <fieldset class="field_set">
-          <legend class="fieldset_legand"  class="p-col heading">Personal Information :</legend>
           <div class="p-fluid p-grid">
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
@@ -327,11 +269,165 @@
             </div>
           </div>
         </fieldset>
-        <!-- Personal Info End -->
+        <!-- Person Info End -->
+
+        <!-- Contact Info -->
+        <fieldset class="field_set">
+          <legend class="fieldset_legand"  class="p-col heading"><span class="title">CONTACT INFORMATION</span></legend>
+          <div class="p-fluid  p-grid">
+            <div id="fields_margin" class="p-field p-col-12 p-md-4">
+              <span class="p-float-label">
+              <input
+              id="Email Id"
+                type="email"
+                formControlName="emailId"
+                class="form-control"
+                pInputText
+                mask="SA*@A*.SSS"
+             [showMaskTyped]="true" 
+              />
+              <label for="Email Id">Email Id</label>
+            </span>
+              <div
+                *ngIf="getControl.emailId.touched && getControl.emailId.invalid"
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.emailId.errors?.required"
+                >
+                  Email is required.
+                </small>
+                <small
+                  class="error"
+                  *ngIf="getControl.emailId.errors?.required"
+                >
+                  Email seems invalid.
+                </small>
+              </div>
+            </div>
+            <div id="fields_margin" class="p-field p-col-12 p-md-4">
+              <span class="p-float-label">
+              <input
+              id="Phone Number"
+                type="text"
+                formControlName="phoneNumber"
+                class="form-control"
+                mask="(000) 000-0000" prefix="+1" 
+                pInputText
+              />
+              <label for="Phone Number">Phone Number</label>
+            </span>
+            </div>
+          </div>
+          
+        </fieldset>
+        <!-- Contact Info End -->
+
+        <!-- Personal Information 
+        <fieldset class="field_set">
+          <legend class="fieldset_legand"  class="p-col heading">PERSONAL</legend>
+          <div class="p-fluid p-grid">
+            <div id="fields_margin" class="p-field p-col-12 p-md-4">
+              <span class="p-float-label">
+              <input
+              id="SSN #"
+                type="text"
+                pInputText
+                formControlName="SSNNumber"
+                mask ="000-000"
+              />
+              <label for="SSN #">SSN #</label>
+            </span>
+              <div
+                *ngIf="
+                  getControl.SSNNumber.touched && getControl.SSNNumber.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.SSNNumber.errors?.required"
+                >
+                  SSN # is required.
+                </small>
+                <small
+                  class="error"
+                  *ngIf="getControl.SSNNumber.errors?.required"
+                >
+                  SSN # seems invalid.
+                </small>
+              </div>
+            </div>
+            <div id="fields_margin" class="p-field p-col-12 p-md-4">
+              <span class="p-float-label">
+              <input
+              id="HMIS ID #"
+                type="text"
+                pInputText
+                formControlName="hmisIdNo"
+                mask ="000-000"
+              />
+              <label for="HMIS ID #">HMIS ID #</label>
+            </span>
+              <div
+                *ngIf="
+                  getControl.hmisIdNo.touched && getControl.hmisIdNo.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.hmisIdNo.errors?.required"
+                >
+                  hmisIdNo is required.
+                </small>
+                <small
+                  class="error"
+                  *ngIf="getControl.hmisIdNo.errors?.required"
+                >
+                  Hmis Id No seems invalid.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="p-fluid p-formgrid p-grid">
+            <div id="fields_margin" class="p-field p-col-12 p-md-4">
+              <span class="title">Gender</span>
+              <div *ngFor="let category of genders" class="p-field-checkbox">
+                <p-radioButton
+                  [inputId]="category.key"
+                  name="category"
+                  value="category"
+                  formControlName="selectedGender"
+                  [disabled]="category.key === 'R'"
+                ></p-radioButton>
+                <label [for]="category.key">{{ category.name }}</label>
+              </div>
+            </div>
+            <div id="fields_margin" class="p-field p-col-12 p-md-4">
+              <span class="title">Martial Status</span>
+              <div
+                *ngFor="let category of martialStatuses"
+                class="p-field-checkbox"
+              >
+                <p-radioButton
+                  [inputId]="category.key"
+                  name="selectedMartialStatus"
+                  [value]="category"
+                  formControlName="selectedMartialStatus"
+                  [disabled]="category.key === 'R'"
+                ></p-radioButton>
+                <label [for]="category.key">{{ category.name }}</label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        Personal Info End -->
 
         <!-- Address Info start -->
         <fieldset class="field_set">
-          <legend class="fieldset_legand"  class="p-col heading">Address Information :</legend>
+          <legend class="fieldset_legand"  class="p-col heading">ADDRESS INFORMATION</legend>
           <div class="p-fluid p-grid">
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <input
@@ -489,7 +585,7 @@
 
         <!-- Other Info start -->
         <fieldset class="field_set">
-          <legend class="fieldset_legand"  class="p-col heading">Other Information :</legend>
+          <legend class="fieldset_legand"  class="p-col heading">OTHER INFORMATION</legend>
           <div class="p-fluid p-grid">
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <input
@@ -532,7 +628,7 @@
         <!-- Contact Person's Information Start -->
         <fieldset class="field_set">
           <legend class="fieldset_legand"  class="p-col heading">
-            Contact Person's Information :
+            CONTACT PERSON'S INFORMATION :
           </legend>
           <div class="p-fluid  p-grid">
             <div class="p-field p-col-12 p-md-4">
@@ -577,7 +673,7 @@
 
         <!--  Contact Person's Address Start -->
         <fieldset id="last_flex" class="field_set">
-          <legend class="fieldset_legand"  class="p-col heading">Contact Person's Address :</legend>
+          <legend class="fieldset_legand"  class="p-col heading">CONTACT PERSON'S ADDRESS</legend>
           <div class="p-fluid  p-grid">
             <div class="p-field p-col-12 p-md-4">
               <input
