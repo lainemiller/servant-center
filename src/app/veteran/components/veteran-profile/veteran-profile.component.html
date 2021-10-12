@@ -279,11 +279,11 @@
               <span class="p-float-label">
               <input
               id="Email Id"
-                type="email"
+                type="text"
                 formControlName="emailId"
                 class="form-control"
                 pInputText
-                mask="SA*@A*.SSS"
+                mask="SA*@SS*.SS||SA*@SS*.SSS"
               />
               <label for="Email Id">Email Id</label>
             </span>
@@ -334,7 +334,7 @@
                 type="text"
                 pInputText
                 formControlName="SSNNumber"
-                mask ="000-000"
+                mask ="000-00-0000"
               />
               <label for="SSN #">SSN #</label>
             </span>
@@ -557,6 +557,7 @@
                 pInputText
                 formControlName="zipCode"
                 placeholder="Zip Code"
+                mask="00000-0000||00000"
               />
               <div
                 *ngIf="
@@ -726,8 +727,7 @@
                 pInputText
                 formControlName="cZip"
                 placeholder="Zip"
-                mask= "99999-9999"
-                [showMaskTyped]="true"
+                mask= "00000-0000||00000"
               />
             </div>
           </div>
