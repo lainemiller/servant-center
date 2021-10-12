@@ -21,7 +21,12 @@ import { RsMiscCorrespondenceComponent } from './components/resident-search/rs-m
 import { RsTreatmentPlanComponent } from './components/resident-search/rs-treatment-plan/rs-treatment-plan.component';
 import { RsWeeklyProgressNotesComponent } from './components/resident-search/rs-weekly-progress-notes/rs-weekly-progress-notes.component';
 import { SecureMessageCenterComponent } from './components/secure-message-center/secure-message-center.component';
-
+import { CardModule } from 'primeng/card';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { StepsModule } from 'primeng/steps';
+import { TableModule } from 'primeng/table';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { TabViewModule } from 'primeng/tabview';
 @NgModule({
   declarations: [
     CaseWorkerComponent,
@@ -44,6 +49,17 @@ import { SecureMessageCenterComponent } from './components/secure-message-center
     IaFormPageFourComponent,
     IaFormPageFiveComponent,
   ],
-  imports: [CommonModule, CaseWorkerRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    CaseWorkerRoutingModule,
+    SharedModule,
+    CardModule,
+    RadioButtonModule,
+    StepsModule,
+    TableModule,
+    TabMenuModule,
+    TabViewModule
+  ],
+  exports: [CardModule, RadioButtonModule, StepsModule, TableModule,TabMenuModule,TabViewModule],
 })
 export class CaseWorkerModule {}

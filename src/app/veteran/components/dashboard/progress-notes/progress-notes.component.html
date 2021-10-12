@@ -1,6 +1,6 @@
 <app-item-header [title]="title"></app-item-header>
 <div class="progress-notes--container">
-  <p-toolbar>
+  <p-toolbar id="progress-notes--mainToolbar">
     <div class="p-toolbar-group-left">
       <!-- modal for add progress note -->
       <div class="progress-notes--addNoteModal">
@@ -21,6 +21,7 @@
                   formControlName="goalTitle"
                   pInputText
                   placeholder="Goal Title"
+                  class="inputFromUser"
                 />
                 <small
                   class="error"
@@ -34,6 +35,7 @@
                   formControlName="goalDescription"
                   pInputTextarea
                   placeholder="Goal Description"
+                  class="inputFromUser"
                 ></textarea>
                 <small
                   class="error"
@@ -55,11 +57,11 @@
                     </p-inputSwitch>
                     <span class="p-ml-2">Open</span>
                   </div>
-                  <small
+                  <!-- <small
                     class="error"
                     *ngIf="goalState.invalid && goalState.touched"
                     >Goal Description is required.</small
-                  >
+                  > -->
                 </p-toolbar>
               </div>
             </div>
@@ -110,14 +112,15 @@
           [style]="{ width: '75vw' }"
           [contentStyle]="{ minHeight: '500px' }"
         >
-          <p-toolbar>
+        <div class="major">
+          <p-toolbar id="progress-notes--mainToolbar">
             <div class="p-toolbar-group-left">
               <button
                 type="button"
                 pButton
                 icon="fas fa-plus-circle"
                 label="Add Notes"
-                class="p-button-outlined p-ml-2 p-mt-1"
+                class="p-button-outlined p-ml-2 p-mt-1 addNotesButton"
                 (click)="showDialog()"
               ></button>
             </div>
@@ -131,6 +134,8 @@
               />
             </div>
           </p-toolbar>
+        </div>
+          
           <div class="progress-notes--group-2 p-mt-4 p-grid">
             <div
               class="p-shadow-2 p-col-12 progress-note-2"
@@ -140,7 +145,7 @@
               "
             >
               <div class="inputSwitch-container p-col-12">
-                <p-toolbar>
+                <p-toolbar id="progress-notes--mainToolbar">
                   <div class="p-toolbar-group-left">
                     <span class="p-mr-2">Closed</span>
                     <p-inputSwitch
@@ -171,8 +176,6 @@
                 <p class="goal-description">
                   {{ progressNote.goalDescription }}
                 </p>
-                <!-- <p-toggleButton offIcon="fas fa-chevron-down" onIcon="fas fa-chevron-up" styleClass="p-button-text"
-                  (click)="expandOrCollapse(i)"></p-toggleButton> -->
               </div>
             </div>
           </div>
@@ -197,7 +200,7 @@
       "
     >
       <div class="inputSwitch-container p-col-12">
-        <p-toolbar>
+        <p-toolbar id="progress-notes--mainToolbar">
           <div class="p-toolbar-group-left">
             <span class="p-mr-2">Open</span>
             <p-inputSwitch

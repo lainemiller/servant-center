@@ -7,13 +7,43 @@
   border-color: rgba(183, 183, 183, 1);
 }
 
-.title {
-  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
-  font-weight: 600;
-  font-style: normal;
-  font-size: 16px;
-  color: #222222;
-  line-height: 32px;
+
+
+#fields_margin1 {
+  margin-bottom: 15px;
+}
+// #fields_margin {
+//   margin-top: 5px;
+//   margin-bottom: 5px;
+// }
+
+#img_div {
+  margin-left: 6px;
+}
+
+#first_div {
+  margin-top: 20px;
+}
+
+#last_flex {
+  margin-bottom: 10px;
+}
+
+// .validations {
+//   color: red;
+// }
+
+// .fieldset_legand {
+//   background: #fff;
+// }
+
+.field_set {
+  margin-top: 15px;
+  padding: 20px 20px;
+  background: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(183, 183, 183, 1);
 }
 
 .heading {
@@ -39,12 +69,30 @@ p {
   text-decoration: none;
 }
 
+.error{
+color: red;
+}
+
+.veteranProfileForm
+
+.ng-touched.ng-invalid{
+  border: 1px solid red;
+}
+
 .title {
   font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
   font-weight: 600;
   font-style: normal;
   font-size: 16px;
-  color: #222222;
+  color: #a00000;
+  line-height: 32px;
+}
+
+.title1 {
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
+  font-style: normal;
+  font-size: 16px;
+  color: rgba(55, 66, 74, 1);
   line-height: 32px;
 }
 
@@ -96,3 +144,4 @@ p {
 .p-radioButton {
   margin-right: 10px;
 }
+

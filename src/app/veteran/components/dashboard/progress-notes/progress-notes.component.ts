@@ -18,7 +18,7 @@ export class ProgressNotesComponent implements OnInit {
   public d: any;
   public progressNotes: any;
   public initialStatus=false;
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private service: ProgressNotesService
@@ -33,7 +33,8 @@ export class ProgressNotesComponent implements OnInit {
 
     this.buildForm();
   }
-
+  
+  
   expandOrCollapse(index: any) {
     const elementSelector = '#goal-desc--' + index;
     const descElement = document.querySelector(elementSelector) as HTMLElement;
