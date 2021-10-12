@@ -16,15 +16,30 @@ body {
 
 // consent modal - start
 
-#consent-modal .p-dialog-header {
-  position: relative;
-  padding-bottom: 40px;
+#consent-modal .p-dialog .p-dialog-content {
+  overflow: hidden;
 }
 
+#consent-modal .p-dialog .p-dialog-title {
+  font-family: "Roboto", sans-serif;
+  font-size: 34px;
+  color: #822433;
+}
 @media (max-width: 768px) {
-  #consent-modal .p-dialog-header {
-    padding-bottom: 85px;
+  #consent-modal .p-dialog .p-dialog-title {
+    font-size: 20px;
   }
 }
 
 // consent modal - end
+
+//progress notes -start
+
+#progress-notes--mainToolbar .p-toolbar{
+  padding: 0px;
+  padding-bottom: 0px;
+  background: #fff;
+  border: none;
+}
+
+//progress notes -end
