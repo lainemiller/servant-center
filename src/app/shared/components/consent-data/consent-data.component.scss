@@ -13,6 +13,7 @@ input {
     justify-content: space-between;
     margin: 15px;
     width: 500px;
+    pointer-events: none;
 }
 
 .input-footer-heading {
@@ -24,27 +25,21 @@ input {
 }
 
 .header-text {
-    position: absolute;
-    top: 70px;
-    width: 820px;
-    padding-top: 10px;
+    position: relative;
+    bottom: 15px;
+    width: 846px;
 }
 
-.header-title {
-    font-family: "Roboto", sans-serif;
-    font-size: 34px;
-    color: #822433;
+.body {
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 130px;
 }
 
 @media (max-width: 1080px) {
-    .header-title {
-        font-size: 20px;
-    }
-
     .header-text {
-        top: 45px;
-        width: 85%;
         font-size: 13px;
+        width: 100%;
     }
 
     .body {
@@ -57,7 +52,7 @@ input {
 
     input {
         margin: 6px;
-        width: 95%;
+        width: 97%;
     }
 
     .container {
@@ -72,4 +67,8 @@ input {
     .footer-button {
         flex-direction: column;
     }
+}
+
+.contain{
+    height: 410px;
 }

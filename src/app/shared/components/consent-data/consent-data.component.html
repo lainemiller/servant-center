@@ -1,17 +1,17 @@
-<p-dialog
-  [breakpoints]="{ '960px': '50vw', '640px': '90vw' }"
+<div class="contain">
+  <p-dialog
+  header="Lorem ipsum delores"
+  [breakpoints]="{ '960px': '75vw', '640px': '110vw' }"
   [(visible)]="display"
   [style]="{ width: '70vw' }"
+  [draggable]="false"
   id="consent-modal"
 >
-  <ng-template pTemplate="header">
-    <h1 class="header-title">Lorem ipsum delores</h1>
-    <p class="header-text">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod
-      bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra
-      justo commodo. Please read carefully.
-    </p>
-  </ng-template>
+  <p class="header-text">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod
+    bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra
+    justo commodo. Please read carefully.
+  </p>
   <p class="body">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod
     bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra
@@ -36,43 +36,43 @@
     vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
   </p>
 
-  <ng-template pTemplate="footer">
-    <p class="footer-text">
-      If you consent to the terms outlined above for electronic delivery, type
-      your full name in the box below and select the button marked “I Consent.”
-    </p>
+  <p class="footer-text">
+    If you consent to the terms outlined above for electronic delivery, type
+    your full name in the box below and select the button marked “I Consent.”
+  </p>
 
-    <h4 class="input-footer-heading">ESIGNATURE</h4>
-    <div class="container">
-      <input
-        class="input-text-one"
-        value="{{ vetran?.firstName }},{{ vetran?.lastName }}"
-        type="text"
-        pInputText
-      />
-      <input
-        class="input-text-two"
-        value="{{ vetran?.email }}"
-        type="text"
-        pInputText
-      />
-    </div>
-    <div class="footer-button">
-      <button
-        pButton
-        (click)="display = false"
-        label="I CONSENT"
-        class="button-confirm"
-      ></button>
-      <button
-        pButton
-        type="button"
-        (click)="display = false"
-        label="Cancel"
-        class="p-button-text"
-      ></button>
-    </div>
-  </ng-template>
+  <h4 class="input-footer-heading">ESIGNATURE</h4>
+  <div class="container">
+    <input
+      class="input-text-one"
+      value="{{ vetran?.firstName }},{{ vetran?.lastName }}"
+      type="text"
+      pInputText
+    />
+    <input
+      class="input-text-two"
+      value="{{ vetran?.email }}"
+      type="text"
+      pInputText
+    />
+  </div>
+  <div class="footer-button">
+    <button
+      pButton
+      (click)="display = false"
+      label="I CONSENT"
+      class="button-confirm"
+    ></button>
+    <button
+      pButton
+      type="button"
+      (click)="display = false"
+      label="Cancel"
+      class="p-button-text"
+    ></button>
+  </div>
 </p-dialog>
 
 <p-button type="button" (click)="showConsentForm()" label="Register"></p-button>
+</div>
+
