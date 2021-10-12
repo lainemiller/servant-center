@@ -17,6 +17,8 @@ import { VeteranRoutingModule } from './veteran-routing.module';
 import { VeteranComponent } from './veteran.component';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ToolbarModule } from 'primeng/toolbar';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
 @NgModule({
   declarations: [
     VeteranComponent,
@@ -36,7 +38,11 @@ import { ToolbarModule } from 'primeng/toolbar';
     InputSwitchModule,
     ToggleButtonModule,
     ToolbarModule,
-    RxReactiveFormsModule
+    RxReactiveFormsModule,
+    HttpClientModule,
+    RadioButtonModule,
+    RxReactiveFormsModule,
+    NgxMaskModule.forRoot()
   ],
   exports: [Ng2SearchPipeModule,InputSwitchModule,ToggleButtonModule,ToolbarModule],
 })

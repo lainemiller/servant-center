@@ -29,9 +29,9 @@
   margin-bottom: 10px;
 }
 
-.validations {
-  color: red;
-}
+// .validations {
+//   color: red;
+// }
 
 // .fieldset_legand {
 //   background: #fff;
@@ -69,12 +69,30 @@ p {
   text-decoration: none;
 }
 
+.error{
+color: red;
+}
+
+.veteranProfileForm
+
+.ng-touched.ng-invalid{
+  border: 1px solid red;
+}
+
 .title {
   font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
   font-weight: 600;
   font-style: normal;
   font-size: 16px;
   color: #a00000;
+  line-height: 32px;
+}
+
+.title1 {
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
+  font-style: normal;
+  font-size: 16px;
+  color: rgba(55, 66, 74, 1);
   line-height: 32px;
 }
 
