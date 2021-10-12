@@ -1,6 +1,6 @@
 <app-item-header [title]="title"></app-item-header>
 <div class="progress-notes--container">
-  <p-toolbar>
+  <p-toolbar id="progress-notes--mainToolbar">
     <div class="p-toolbar-group-left">
       <!-- modal for add progress note -->
       <div class="progress-notes--addNoteModal">
@@ -113,7 +113,7 @@
           [contentStyle]="{ minHeight: '500px' }"
         >
         <div class="major">
-          <p-toolbar>
+          <p-toolbar id="progress-notes--mainToolbar">
             <div class="p-toolbar-group-left">
               <button
                 type="button"
@@ -145,7 +145,7 @@
               "
             >
               <div class="inputSwitch-container p-col-12">
-                <p-toolbar>
+                <p-toolbar id="progress-notes--mainToolbar">
                   <div class="p-toolbar-group-left">
                     <span class="p-mr-2">Closed</span>
                     <p-inputSwitch
@@ -200,7 +200,7 @@
       "
     >
       <div class="inputSwitch-container p-col-12">
-        <p-toolbar>
+        <p-toolbar id="progress-notes--mainToolbar">
           <div class="p-toolbar-group-left">
             <span class="p-mr-2">Open</span>
             <p-inputSwitch
