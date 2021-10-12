@@ -14,13 +14,21 @@ body {
   background-color: red !important;
 }
 
-.p-dialog .p-dialog-header {
-  position: relative;
-  padding-bottom: 40px;
+// consent modal - start
+
+#consent-modal .p-dialog .p-dialog-content {
+  overflow: hidden;
 }
 
+#consent-modal .p-dialog .p-dialog-title {
+  font-family: "Roboto", sans-serif;
+  font-size: 34px;
+  color: #822433;
+}
 @media (max-width: 768px) {
-  .p-dialog .p-dialog-header {
-    padding-bottom: 85px;
+  #consent-modal .p-dialog .p-dialog-title {
+    font-size: 20px;
   }
 }
+
+// consent modal - end
