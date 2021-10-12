@@ -25,7 +25,7 @@ export class VeteranProfileComponent implements OnInit {
   emailId!: string;
 
   genders: any[] = [{ name: 'Female', key: 'A' }, { name: 'Male', key: 'M' }];
-  martialStatuses: any[] = [{ name: 'Single', key: 'S' }, { name: 'Married', key: 'M' }];
+  martialStatuses: any[] = [{ name: 'Single', key: 'S' }, { name: 'Married', key: 'M' }, { name: 'DIvorced', key: 'D' }, { name: 'Widowed', key: 'W' }];
 
   constructor(private formBuilder: FormBuilder, private service: VeteranprofileService) {
 
