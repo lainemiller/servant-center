@@ -10,7 +10,9 @@ import { CalendarOptions } from '@fullcalendar/angular';
 export class CaseWorkerDashboardComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('case worker dashboard component');
+  }
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',

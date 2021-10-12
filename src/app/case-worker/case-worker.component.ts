@@ -16,10 +16,12 @@ export class CaseWorkerComponent implements OnInit {
   public login!: string;
   public profilePic!: string;
   items!: MenuItem[];
+
   @HostListener('window:resize')
   onWindowResize() {
     this.displayMenu = window.innerWidth > 768;
   }
+
   constructor(private service: DataService) {
     this.service.getMsgCount().subscribe((data:any)=>
     {
@@ -75,7 +77,9 @@ export class CaseWorkerComponent implements OnInit {
     ];
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('case worker component');
+  }
 
   toggleMenu(): void {
     this.displayMenu = !this.displayMenu;
