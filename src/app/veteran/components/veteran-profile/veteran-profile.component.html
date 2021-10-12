@@ -181,7 +181,7 @@
                 type="text"
                 pInputText
                 formControlName="SSNNumber"
-                mask ="000-000"
+                mask ="000-00-0000"
               />
               <label for="SSN #">SSN #</label>
             </span>
@@ -243,8 +243,8 @@
               <div *ngFor="let category of genders" class="p-field-checkbox">
                 <p-radioButton
                   [inputId]="category.key"
-                  name="category"
-                  value="category"
+                  name="selectedGender"
+                  [value]="category"
                   formControlName="selectedGender"
                   [disabled]="category.key === 'R'"
                 ></p-radioButton>
