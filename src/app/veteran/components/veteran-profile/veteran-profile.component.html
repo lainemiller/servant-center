@@ -15,10 +15,10 @@
           <div class="p-field p-col-12 p-md-4">
             <span  class="p-float-label">
             <input
-            id="Record #"
+              id="Record #"
               type="text"
               class="disable"
-              value="{{ veteran?.recordNo }}"
+              value="{{veteran.recordNo}}"
               pInputText
               formControlName="recordNo"
             />
@@ -27,14 +27,13 @@
           </div>
           <div class="p-field p-col-12 p-md-4">
             <span  class="p-float-label">
-            <p-calendar
-            id="Intake DOB"
-              formControlName="intakeDOB"
-              class="disable"
-              [inline]="false"
-              [showIcon]="true"
-              placeholder="Intake DOB(mm/dd/yyyy)"
-            ></p-calendar>
+            <p-calendar id="Intake DOB"
+            formControlName="intakeDOB"
+            [inline]="false"
+            [showIcon]="true"
+            class="disable"
+            placeholder="Intake DOB(mm/dd/yyyy)">
+            </p-calendar>
             <label for="Intake DOB"></label>
             </span>
           </div>
@@ -44,7 +43,7 @@
             id="Case Manager"
               type="text"
               class="disable"
-              value="{{ veteran?.caseManager }}"
+            
               pInputText
               formControlName="caseManager"
             />
@@ -57,7 +56,7 @@
               id="Veteran Id"
               type="text"
               class="disable"
-              value="{{ veteran?.veteranId }}"
+             
               pInputText
               formControlName="veteranId"
             />
@@ -75,7 +74,6 @@
               <input
                 id="First Name"
                 type="text"
-                value="{{ veteran?.firstName }}"
                 pInputText
                 formControlName="firstName"
               />
@@ -88,13 +86,13 @@
                 class="text-danger"
               >
                 <small
-                  class="validations"
+                  class="error"
                   *ngIf="getControl.firstName.errors?.required"
                 >
                   Please enter a valid first name.
                 </small>
                 <small
-                  class="validations"
+                  class="error"
                   *ngIf="getControl.firstName.errors?.minlength"
                 >
                   Minimum 4 characters are required for first name.
@@ -107,7 +105,6 @@
               <input
                 type="text"
                 id="Last Name"
-                value="{{ veteran?.middleName }}"
                 pInputText
                 formControlName="middleName"
               />
@@ -120,7 +117,6 @@
               required
               id="Last Name"
                 type="text"
-                value="{{ veteran?.lastName }}"
                 pInputText
                 formControlName="lastName"
               />
@@ -133,23 +129,17 @@
                 class="text-danger"
               >
                 <small
+                class="error"
                 *ngIf="getControl.lastName.errors?.required"
-                  class="validations"
                 >
                   Last Name is required.
                 </small>
                 <small
-                  class="validations"
+                  class="error"
                   *ngIf="getControl.lastName.errors?.minlength"
                 >
                   Minimum 4 character are required.
                 </small>
-                <!-- <small
-                  class="validations"
-                  *ngIf="getControl.lastName.errors?."
-                >
-                Last Name is required.
-                </small> -->
               </div>
             </div>
           </div>
@@ -159,7 +149,6 @@
               <input
                 id="Nick Name"
                 type="text"
-                value="{{ veteran?.nickName }}"
                 pInputText
                 formControlName="nickName"
               />
@@ -176,13 +165,12 @@
               </p-calendar>
             </div>
             <div class="p-field p-col-12 p-md-4">
-              <p-calendar
+              <input
+                type="text"
                 formControlName="POB"
-                [inline]="false"
-                [showIcon]="true"
-                placeholder="Place Of Birth (mm/dd/yyyy)"
-              >
-              </p-calendar>
+                pInputText
+                placeholder="Place Of Birth"
+              />
             </div>
           </div>
         </fieldset>
@@ -200,6 +188,7 @@
                 formControlName="emailId"
                 class="form-control"
                 pInputText
+                mask="SA*@A*.SSS"
               />
               <label for="Email Id">Email Id</label>
             </span>
@@ -208,13 +197,13 @@
                 class="text-danger"
               >
                 <small
-                  class="validations"
+                  class="error"
                   *ngIf="getControl.emailId.errors?.required"
                 >
                   Email is required.
                 </small>
                 <small
-                  class="validations"
+                  class="error"
                   *ngIf="getControl.emailId.errors?.required"
                 >
                   Email seems invalid.
@@ -228,6 +217,7 @@
                 type="text"
                 formControlName="phoneNumber"
                 class="form-control"
+                mask="(000) 000-0000" prefix="+1" 
                 pInputText
               />
               <label for="Phone Number">Phone Number</label>
@@ -248,6 +238,7 @@
                 type="text"
                 pInputText
                 formControlName="SSNNumber"
+                mask ="000-000"
               />
               <label for="SSN #">SSN #</label>
             </span>
@@ -258,13 +249,13 @@
                 class="text-danger"
               >
                 <small
-                  class="validations"
+                  class="error"
                   *ngIf="getControl.SSNNumber.errors?.required"
                 >
                   SSN # is required.
                 </small>
                 <small
-                  class="validations"
+                  class="error"
                   *ngIf="getControl.SSNNumber.errors?.required"
                 >
                   SSN # seems invalid.
@@ -278,6 +269,7 @@
                 type="text"
                 pInputText
                 formControlName="hmisIdNo"
+                mask ="000-000"
               />
               <label for="HMIS ID #">HMIS ID #</label>
             </span>
@@ -288,13 +280,13 @@
                 class="text-danger"
               >
                 <small
-                  class="validations"
+                  class="error"
                   *ngIf="getControl.hmisIdNo.errors?.required"
                 >
                   hmisIdNo is required.
                 </small>
                 <small
-                  class="validations"
+                  class="error"
                   *ngIf="getControl.hmisIdNo.errors?.required"
                 >
                   Hmis Id No seems invalid.
@@ -354,13 +346,13 @@
                 class="text-danger"
               >
                 <small
-                  class="validations"
+                  class="error"
                   *ngIf="getControl.lastName.errors?.required"
                 >
                   Address 1 is required.
                 </small>
                 <small
-                  class="validations"
+                  class="error"
                   *ngIf="getControl.lastName.errors?.minlength"
                 >
                   Minimum 4 character are required.
@@ -379,13 +371,13 @@
                 class="text-danger"
               >
                 <small
-                  class="validations"
+                  class="error"
                   *ngIf="getControl.city.errors?.required"
                 >
                   city is required.
                 </small>
                 <small
-                  class="validations"
+                  class="error"
                   *ngIf="getControl.city.errors?.minlength"
                 >
                   Minimum 4 character are required.
@@ -477,13 +469,13 @@
                 class="text-danger"
               >
                 <small
-                  class="validations"
+                  class="error"
                   *ngIf="getControl.zipCode.errors?.required"
                 >
                   zipCode is required.
                 </small>
                 <small
-                  class="validations"
+                  class="error"
                   *ngIf="getControl.zipCode.errors?.minlength"
                 >
                   Minimum 4 character are required.
@@ -545,7 +537,7 @@
             <div class="p-field p-col-12 p-md-4">
               <input
                 type="text"
-                value="{{ veteran?.cfirstName }}"
+                
                 pInputText
                 formControlName="cfirstName"
                 placeholder="First Name"
@@ -638,6 +630,8 @@
                 pInputText
                 formControlName="cZip"
                 placeholder="Zip"
+                mask= "99999-9999"
+                [showMaskTyped]="true"
               />
             </div>
           </div>
