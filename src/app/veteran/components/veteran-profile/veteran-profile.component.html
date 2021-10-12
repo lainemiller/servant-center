@@ -18,7 +18,7 @@
             id="Record #"
               type="text"
               class="disable"
-              value="{{ veteran?.recordNo }}"
+             
               pInputText
               formControlName="recordNo"
             />
@@ -27,14 +27,13 @@
           </div>
           <div class="p-field p-col-12 p-md-4">
             <span  class="p-float-label">
-            <p-calendar
-            id="Intake DOB"
-              formControlName="intakeDOB"
-              class="disable"
-              [inline]="false"
-              [showIcon]="true"
-              placeholder="Intake DOB(mm/dd/yyyy)"
-            ></p-calendar>
+            <p-calendar id="Intake DOB"
+            formControlName="intakeDOB"
+            [inline]="false"
+            [showIcon]="true"
+            class="disable"
+            placeholder="Intake DOB(mm/dd/yyyy)">
+            </p-calendar>
             <label for="Intake DOB"></label>
             </span>
           </div>
@@ -44,7 +43,7 @@
             id="Case Manager"
               type="text"
               class="disable"
-              value="{{ veteran?.caseManager }}"
+            
               pInputText
               formControlName="caseManager"
             />
@@ -57,7 +56,7 @@
               id="Veteran Id"
               type="text"
               class="disable"
-              value="{{ veteran?.veteranId }}"
+             
               pInputText
               formControlName="veteranId"
             />
@@ -75,7 +74,6 @@
               <input
                 id="First Name"
                 type="text"
-                value="{{ veteran?.firstName }}"
                 pInputText
                 formControlName="firstName"
               />
@@ -107,7 +105,6 @@
               <input
                 type="text"
                 id="Last Name"
-                value="{{ veteran?.middleName }}"
                 pInputText
                 formControlName="middleName"
               />
@@ -120,7 +117,6 @@
               required
               id="Last Name"
                 type="text"
-                value="{{ veteran?.lastName }}"
                 pInputText
                 formControlName="lastName"
               />
@@ -159,7 +155,6 @@
               <input
                 id="Nick Name"
                 type="text"
-                value="{{ veteran?.nickName }}"
                 pInputText
                 formControlName="nickName"
               />
@@ -176,13 +171,12 @@
               </p-calendar>
             </div>
             <div class="p-field p-col-12 p-md-4">
-              <p-calendar
+              <input
+                type="text"
                 formControlName="POB"
-                [inline]="false"
-                [showIcon]="true"
-                placeholder="Place Of Birth (mm/dd/yyyy)"
-              >
-              </p-calendar>
+                pInputText
+                placeholder="Place Of Birth"
+              />
             </div>
           </div>
         </fieldset>
@@ -200,6 +194,8 @@
                 formControlName="emailId"
                 class="form-control"
                 pInputText
+                mask="SA*@A*.SSS"
+             [showMaskTyped]="true" 
               />
               <label for="Email Id">Email Id</label>
             </span>
@@ -228,6 +224,7 @@
                 type="text"
                 formControlName="phoneNumber"
                 class="form-control"
+                mask="(000) 000-0000" prefix="+1" 
                 pInputText
               />
               <label for="Phone Number">Phone Number</label>
@@ -248,6 +245,7 @@
                 type="text"
                 pInputText
                 formControlName="SSNNumber"
+              mask ="000-000"
               />
               <label for="SSN #">SSN #</label>
             </span>
@@ -278,6 +276,7 @@
                 type="text"
                 pInputText
                 formControlName="hmisIdNo"
+                mask ="000-000"
               />
               <label for="HMIS ID #">HMIS ID #</label>
             </span>
@@ -638,6 +637,8 @@
                 pInputText
                 formControlName="cZip"
                 placeholder="Zip"
+                mask= "99999-9999"
+                [showMaskTyped]="true"
               />
             </div>
           </div>
