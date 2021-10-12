@@ -32,7 +32,7 @@ export class VeteranProfileComponent implements OnInit {
 
   recordNo: any;
   userName: any;
-  intakeDob: any;
+  intakeDOB: any;
   caseManager: any;
   veteranId: any;
   firstName: any;
@@ -75,19 +75,18 @@ export class VeteranProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.buildForm();
     console.log(this.name);
     this.selectedGender = this.genders[1];
     this.selectedMartialStatus = this.martialStatuses[1];
 
     this.service.getVeteranProfileDetailsByRecordNumber().subscribe((data) => {
+    
       this.veteran = data;
       this.recordNo = this.veteran.recordNo;
       this.userName = this.veteran.firstName;
       this.dob = this.veteran.dob;
-      this.intakeDob = this.veteran.intakeDOB;
+      this.intakeDOB = this.veteran.intakeDOB;
       this.userName = this.veteran.firstName;
-      this.intakeDob = this.veteran.intakeDOB;
       this.caseManager = this.veteran.caseManager;
       this.veteranId = this.veteran.veteranId;
       this.firstName = this.veteran.firstName;
@@ -122,13 +121,14 @@ export class VeteranProfileComponent implements OnInit {
       this.race = this.veteran.race;
       this.buildForm();
       console.log(this.veteranProfileForm.value);
+      console.log(this.recordNo);
     });
   }
 
   buildForm() {
     this.veteranProfileForm = this.formBuilder.group({
-      recordNo: [this.recordNo],
-      intakeDOB: [this.intakeDob],
+      recordNo:[8],
+      intakeDOB: [this.intakeDOB,Validators.required],
       caseManager: [this.caseManager, Validators.required],
       veteranId: [this.veteranId, Validators.required],
       firstName: [
@@ -140,28 +140,28 @@ export class VeteranProfileComponent implements OnInit {
         ],
       ],
       middleName: [this.middleName],
-      lastName: [this.lastName, Validators.required, Validators.minLength(4)],
+      lastName: [this.lastName, [Validators.required, Validators.minLength(4)]],
       nickName: [this.nickName, Validators.required],
       DOB: [this.dob, Validators.required],
       POB: [this.pob, Validators.required],
 
       emailId: [
         this.emailId,
-        Validators.required,
+        [Validators.required,
         Validators.pattern('/^[a-z]+[a-z0-9._]+@[a-z]+/.[a-z.]{2,5}$/'),
-      ],
+      ]],
       phoneNumber: [this.phoneNumber],
 
       cfirstName: [
         this.contactPersonFirstName,
-        Validators.required,
-        Validators.minLength(4),
+       [Validators.required,
+        Validators.minLength(4)]
       ],
       cmiddleName: [this.contactPersonMiddleName],
       clastName: [
         this.contactPersonLastName,
-        Validators.required,
-        Validators.minLength(4),
+        [Validators.required,
+        Validators.minLength(4)]
       ],
 
       address1: [this.address1, Validators.required],

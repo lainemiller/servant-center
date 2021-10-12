@@ -29,9 +29,9 @@
   margin-bottom: 10px;
 }
 
-.validations {
-  color: red;
-}
+// .validations {
+//   color: red;
+// }
 
 // .fieldset_legand {
 //   background: #fff;
@@ -67,6 +67,16 @@ p {
   color: rgba(255, 255, 255, 0.996078431372549);
   padding: 10px 0px 0px 20px;
   text-decoration: none;
+}
+
+.error{
+color: red;
+}
+
+.veteranProfileForm
+
+.ng-touched.ng-invalid{
+  border: 1px solid red;
 }
 
 .title {

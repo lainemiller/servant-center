@@ -1,4 +1,3 @@
-
 export const states = [
     {name: 'Alabama'},
     {name: 'Alaska'},
