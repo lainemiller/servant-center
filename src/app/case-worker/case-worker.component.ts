@@ -9,7 +9,7 @@ import { DataService } from './services/data.service';
 })
 export class CaseWorkerComponent implements OnInit {
   displayMenu: boolean = true;
-  public msgCount: number=1;
+  public msgCount: number = 1;
   public msgData: any;
   public userInfo: any;
   public name!: string;
@@ -23,26 +23,24 @@ export class CaseWorkerComponent implements OnInit {
   }
 
   constructor(private service: DataService) {
-    this.service.getMsgCount().subscribe((data:any)=>
-    {
-      this.msgData = data;
-      this.msgCount = this.msgData.msgs.length;
-      this.itemChange(this.msgCount);
-    },
-    (err:any)=>
-    {
-      this.itemChange(0);
-    })
+    this.service.getMsgCount().subscribe(
+      (data: any) => {
+        this.msgData = data;
+        this.msgCount = this.msgData.msgs.length;
+        this.itemChange(this.msgCount);
+      },
+      (err: any) => {
+        this.itemChange(0);
+      }
+    );
     this.service.getName().subscribe((data) => {
       this.userInfo = data;
       this.profilePic = this.userInfo.image;
       this.name = this.userInfo.name;
       this.login = this.userInfo.date;
     });
-  
   }
-  itemChange(msgs:number)
-  {
+  itemChange(msgs: number) {
     this.items = [
       {
         label: 'DASHBOARD',
@@ -83,5 +81,9 @@ export class CaseWorkerComponent implements OnInit {
 
   toggleMenu(): void {
     this.displayMenu = !this.displayMenu;
+  }
+  activeMenu(event: any) {
+    if(window.innerWidth < 768)
+      this.displayMenu = !this.displayMenu;
   }
 }
