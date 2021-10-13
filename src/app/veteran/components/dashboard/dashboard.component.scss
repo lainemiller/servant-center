@@ -59,7 +59,7 @@
 }
 
 :host ::ng-deep .fc .fc-toolbar .fc-button.fc-listWeek-button.fc-button-active {
-  background: #2196f3;
+  background: #f3212c;
   border-color: #2196f3;
   color: #ffffff;
 }
@@ -85,18 +85,8 @@
   transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
-@media only screen and (max-width: 600px) {
-  .title-img {
-    margin-top: 10px;
-  }
-
-  .header {
-    display: block;
-  }
-
-  .header-sub {
-    width: 80%;
-
-    margin-left: 70px;
+@media only screen and (max-width: 768px) {
+  :host ::ng-deep .fc .fc-toolbar-title {
+    font-size: 13px;
   }
 }

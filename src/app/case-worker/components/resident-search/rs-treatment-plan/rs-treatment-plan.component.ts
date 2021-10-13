@@ -10,6 +10,7 @@ export class RsTreatmentPlanComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('rs treatment plan component');
   }
 
 }

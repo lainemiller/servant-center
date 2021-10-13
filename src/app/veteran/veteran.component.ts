@@ -70,11 +70,17 @@ export class VeteranComponent implements OnInit {
     },
   ];
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('veteran component');
+  }
 
   toggleMenu(): void {
     this.displayMenu = !this.displayMenu;
     console.log("abkh");
     
+  }
+  activeMenu(event:any) {
+    if(window.innerWidth < 768)
+     this.displayMenu = !this.displayMenu;
   }
 }

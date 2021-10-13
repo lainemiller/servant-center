@@ -10,6 +10,7 @@ export class RsMiscCorrespondenceComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('rs misc component');
   }
 
 }

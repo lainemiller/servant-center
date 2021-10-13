@@ -10,6 +10,7 @@ export class ScDashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('sc dashboard component');
   }
 
 }

@@ -10,6 +10,7 @@ export class RsFinancialComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('rs financial component');
   }
 
 }

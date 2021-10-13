@@ -17,7 +17,7 @@ export class ProgressNotesComponent implements OnInit {
   public progressNote: any;
   public d: any;
   public progressNotes: any;
-  public initialStatus=false;
+  public initialStatus = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,11 +30,10 @@ export class ProgressNotesComponent implements OnInit {
     this.service.getNotes().subscribe((data) => {
       this.progressNotes = data;
     });
-
+    this.initialStatus = true;
     this.buildForm();
   }
-  
-  
+
   expandOrCollapse(index: any) {
     const elementSelector = '#goal-desc--' + index;
     const descElement = document.querySelector(elementSelector) as HTMLElement;
@@ -60,20 +59,27 @@ export class ProgressNotesComponent implements OnInit {
       '/' +
       new Date().getFullYear();
     this.progressNote = this.formBuilder.group({
-      goalTitle: ['', Validators.required],
-      goalDescription: ['', Validators.required],
-      goalState: ['false', Validators.required],
+      goalTitle: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z]+(.)*'),
+          Validators.maxLength(30),
+        ],
+      ],
+      goalDescription: ['', [Validators.required, Validators.maxLength(50)]],
+      goalState: ['true', Validators.required],
       addedDate: [this.d],
     });
   }
 
-  get goalTitle(){
+  get goalTitle() {
     return this.progressNote.get('goalTitle');
   }
-  get goalDescription(){
+  get goalDescription() {
     return this.progressNote.get('goalDescription');
   }
-  get goalState(){
+  get goalState() {
     return this.progressNote.get('goalState');
   }
   onSubmit() {
@@ -91,11 +97,13 @@ export class ProgressNotesComponent implements OnInit {
     console.log(this.progressNotes);
     this.progressNote.reset();
   }
-  crossButton(){
+  crossButton() {
+    this.initialStatus = true;
     this.progressNote.reset();
   }
-  cancleIt(){
+  cancleIt() {
     this.display = false;
+    this.initialStatus = true;
     this.progressNote.reset();
   }
 }

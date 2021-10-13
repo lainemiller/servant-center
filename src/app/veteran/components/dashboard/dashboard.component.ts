@@ -10,7 +10,9 @@ import { VeteranDashboardService } from '../../services/veteran-dashboard.servic
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('veteran dashboard component');
+  }
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',

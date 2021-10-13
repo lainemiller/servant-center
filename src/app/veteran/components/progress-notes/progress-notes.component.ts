@@ -9,5 +9,7 @@ export class ProgressNotesComponent implements OnInit {
   title = 'PROGRESS NOTES';
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('veteran progress notes component');
+  }
 }

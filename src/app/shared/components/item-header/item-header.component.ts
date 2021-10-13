@@ -10,5 +10,7 @@ export class ItemHeaderComponent implements OnInit {
   @Input() color: string = 'red';
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('item header component');
+  }
 }

@@ -8,5 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ScDashboardWidgetComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('sc dashboard widget component');
+  }
 }
