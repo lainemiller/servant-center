@@ -1,10 +1,11 @@
-<div class="contain">
-  <p-dialog
+<div class="consent-form-container">
+<p-dialog
   header="Lorem ipsum delores"
   [breakpoints]="{ '960px': '75vw', '640px': '110vw' }"
   [(visible)]="display"
   [style]="{ width: '70vw' }"
   [draggable]="false"
+  [modal]="true"
   id="consent-modal"
 >
   <p class="header-text">
@@ -75,4 +76,3 @@
 
 <p-button type="button" (click)="showConsentForm()" label="Register"></p-button>
 </div>
-
