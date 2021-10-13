@@ -60,8 +60,8 @@ export class ProgressNotesComponent implements OnInit {
       '/' +
       new Date().getFullYear();
     this.progressNote = this.formBuilder.group({
-      goalTitle: ['', Validators.required],
-      goalDescription: ['', Validators.required],
+      goalTitle: ['', [Validators.required,Validators.pattern("^[a-zA-Z]+(.)*"),Validators.maxLength(30)]],
+      goalDescription: ['', [Validators.required,Validators.maxLength(50)]],
       goalState: ['true', Validators.required],
       addedDate: [this.d],
     });
