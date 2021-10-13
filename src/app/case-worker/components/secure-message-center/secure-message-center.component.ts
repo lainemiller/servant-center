@@ -24,5 +24,7 @@ export class SecureMessageCenterComponent implements OnInit {
   ];
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('secure message center component');
+  }
 }

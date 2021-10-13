@@ -10,6 +10,7 @@ export class RsConsentAgreementsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('rs consent agreements component');
   }
 
 }

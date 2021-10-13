@@ -8,13 +8,6 @@
   height: 372px;
 }
 
-:host::ng-deep.p-toolbar {
-  padding: 0px;
-  padding-bottom: 0px;
-  background: #fff;
-  border: none;
-}
-
 .progress-notes--group {
   padding: 0 20px;
   height: 250px;
@@ -60,7 +53,7 @@
 //for pop-out window
 .progress-notes--group-2 {
   padding: 0 20px;
-
+  margin-bottom: 20px;
   // overflow-y: scroll;
 }
 .progress-note-2 {
@@ -84,6 +77,17 @@
 .error{
   color: brown;
 }
-// input.ng-invalid{
-//   border:1px solid brown;
-// }
+
+.inputFromUser.ng-touched.ng-invalid{
+  border: 1px solid red;
+}
+
+@media screen and (max-width: 780px){
+  .addNotesButton{
+    width: 300px;
+  }
+  .search-dialog {
+    width: 300px; 
+  }
+ 
+}

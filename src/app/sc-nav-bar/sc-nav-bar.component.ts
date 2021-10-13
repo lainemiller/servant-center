@@ -22,5 +22,7 @@ export class ScNavBarComponent implements OnInit {
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('sc nav bar component');
+  }
 }

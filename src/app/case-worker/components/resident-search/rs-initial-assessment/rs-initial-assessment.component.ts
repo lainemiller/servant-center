@@ -16,5 +16,7 @@ export class RsInitialAssessmentComponent implements OnInit {
   ];
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('rs initial assessment component');
+  }
 }

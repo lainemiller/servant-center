@@ -6,7 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CaseWorkerModule } from './case-worker/case-worker.module';
 import { SharedModule } from './shared/shared.module';
+import { VeteranModule } from './veteran/veteran.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +20,8 @@ import { SharedModule } from './shared/shared.module';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    VeteranModule,
+    CaseWorkerModule
   ],
   providers: [],
   bootstrap: [AppComponent],
