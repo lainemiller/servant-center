@@ -32,5 +32,7 @@ export class ScMainBodyComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('sc main component');
+  }
 }

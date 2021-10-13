@@ -10,6 +10,7 @@ export class RsMedicalComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('rs medical component');
   }
 
 }
