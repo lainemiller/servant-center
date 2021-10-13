@@ -27,63 +27,9 @@
 .mb-30 {
   margin-bottom: 30px;
 }
-.header {
-  margin-bottom: 30px;
-  display: flex;
-}
-.header-title {
-  margin-right: 20px;
-  width: auto;
-}
-.header-sub {
-  width: 50%;
-}
-.fas {
-  color: #0d89ec;
-}
-.chat {
-  padding-top: 10px;
-}
-.title {
-  font-family: "Roboto Thin", "Roboto Regular", "Roboto", sans-serif;
-  font-weight: 250;
-  font-size: 40px;
-  color: #495057;
-}
-.title-name {
-  font-family: "Roboto Thin", "Roboto Regular", "Roboto", sans-serif;
-  font-weight: 400;
-  font-size: 40px;
-  color: #495057;
-}
-.title-img {
-  height: 50px;
-  width: 50px;
-  border-radius: 25px;
-  margin-right: 20px;
-}
 
-.last-sync {
-  font-family: "Roboto", sans-serif;
-  padding-top: 20px;
-  font-style: italic;
-}
-
-::ng-deep .p-tooltip .p-tooltip-text {
-  background-color: white;
-  color: blue;
-  font-size: small;
-}
-
-@media only screen and (max-width: 600px) {
-  .title-img {
-    margin-top: 10px;
-  }
-  .header {
-    display: block;
-  }
-  .header-sub {
-    width: 80%;
-    margin-left: 70px;
+@media only screen and (max-width: 768px) {
+  :host ::ng-deep .fc .fc-toolbar-title {
+    font-size: 1.25em;
   }
 }

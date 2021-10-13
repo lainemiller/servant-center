@@ -9,7 +9,7 @@
 }
 
 .header-sub {
-  width: 600px;
+  width: 550px;
 }
 
 .fas {
@@ -59,18 +59,22 @@
   color: #ffffff;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .title-img {
     margin-top: 10px;
   }
-
   .header {
     display: block;
   }
+  .header-sub {
+    width: 600px;
+    margin-left: 100px;
+  }
+}
 
+@media only screen and (max-width: 600px) {
   .header-sub {
     width: 400px;
-
     margin-left: 70px;
   }
 }

@@ -10,6 +10,7 @@ export class CaseWorkerProfileComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('case worker profile component');
   }
 
 }

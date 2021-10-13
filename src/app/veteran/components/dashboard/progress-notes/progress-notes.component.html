@@ -22,12 +22,23 @@
                   pInputText
                   placeholder="Goal Title"
                   class="inputFromUser"
+           
                 />
                 <small
                   class="error"
-                  *ngIf="goalTitle.invalid && goalTitle.touched"
+                  *ngIf="goalTitle.errors?.required && goalTitle.touched"
                   >Goal Title is required.</small
                 >
+                <small
+                  class="error"
+                  *ngIf="goalTitle.errors?.pattern"
+                  >Goal Title should always start with alphabet.</small
+                >
+                <small
+                class="error"
+                *ngIf="goalTitle.errors?.maxlength"
+                >Goal Title should be at max of 30 characters.</small
+              >
               </div>
               <div class="p-field p-col-12 p-sm-12">
                 <textarea
@@ -39,9 +50,14 @@
                 ></textarea>
                 <small
                   class="error"
-                  *ngIf="goalDescription.invalid && goalDescription.touched"
+                  *ngIf="goalDescription.errors?.required && goalDescription.touched"
                   >Goal Description is required.</small
                 >
+                <small
+                class="error"
+                *ngIf="goalDescription.errors?.maxlength"
+                >Goal Description should be at max of 50 characters</small
+              >
               </div>
               <div class="p-field p-col-12 p-sm-12">
                 <label for="statusCheck">Goal Status</label>

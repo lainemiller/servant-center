@@ -10,6 +10,7 @@ export class HealthTrackerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('veteran health tracker component');
   }
 
 }

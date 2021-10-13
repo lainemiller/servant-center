@@ -12,5 +12,7 @@ export class WelcomeHeaderComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('welcome header component');
+  }
 }
