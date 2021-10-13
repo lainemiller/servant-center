@@ -17,7 +17,7 @@ export class ProgressNotesComponent implements OnInit {
   public progressNote: any;
   public d: any;
   public progressNotes: any;
-  public initialStatus=false;
+  public initialStatus=true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,7 +30,7 @@ export class ProgressNotesComponent implements OnInit {
     this.service.getNotes().subscribe((data) => {
       this.progressNotes = data;
     });
-
+   this.initialStatus=true;
     this.buildForm();
   }
   
@@ -62,7 +62,7 @@ export class ProgressNotesComponent implements OnInit {
     this.progressNote = this.formBuilder.group({
       goalTitle: ['', Validators.required],
       goalDescription: ['', Validators.required],
-      goalState: ['false', Validators.required],
+      goalState: ['true', Validators.required],
       addedDate: [this.d],
     });
   }
@@ -92,10 +92,15 @@ export class ProgressNotesComponent implements OnInit {
     this.progressNote.reset();
   }
   crossButton(){
+    this.initialStatus=true;
     this.progressNote.reset();
+    
   }
   cancleIt(){
     this.display = false;
+    this.initialStatus=true;
     this.progressNote.reset();
+   
   }
+  
 }
