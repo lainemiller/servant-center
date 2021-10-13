@@ -36,10 +36,7 @@
                   pInputTextarea
                   placeholder="Goal Description"
                   class="inputFromUser"
-                  maxlength="10"
-                  (keyup)="count_down($event)"
                 ></textarea>
-                <small id='count' style="float: right; font-family: Raleway; font-size:20px; font-weight:600; margin-top:-5px;">10</small>
                 <small
                   class="error"
                   *ngIf="goalDescription.invalid && goalDescription.touched"

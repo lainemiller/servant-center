@@ -102,24 +102,5 @@ export class ProgressNotesComponent implements OnInit {
     this.progressNote.reset();
    
   }
-  element:any
-  count=0;
-  count_down(obj:any){
-    console.log(obj)
-   this.count +=1;
-    
-     this.element = document.getElementById('count');
-
-    this.element.innerHTML = 10 - this.count;
-    if(this.count>10){
-      this.element.innerHTML = "Maximum limit reached";
-      this.element.style.color='brown'
-    }
-    // if(10 - this.count < 5){
-    //     this.element.style.color = "firebrick";
-    // }else{
-      
-    //     this.element.style.color = "#333";
-    // }
-  }
+  
 }
