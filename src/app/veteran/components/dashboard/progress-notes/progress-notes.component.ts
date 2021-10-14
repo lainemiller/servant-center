@@ -33,7 +33,8 @@ export class ProgressNotesComponent implements OnInit {
     this.initialStatus = true;
     this.buildForm();
   }
-
+  
+  
   expandOrCollapse(index: any) {
     const elementSelector = '#goal-desc--' + index;
     const descElement = document.querySelector(elementSelector) as HTMLElement;
