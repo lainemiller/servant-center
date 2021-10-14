@@ -37,7 +37,7 @@
                 <small
                 class="error"
                 *ngIf="goalTitle.errors?.maxlength"
-                >Goal Title should be at max of 30 characters.</small
+                >Goal Title should be at max of 50 characters.</small
               >
               </div>
               <div class="p-field p-col-12 p-sm-12">
@@ -56,7 +56,7 @@
                 <small
                 class="error"
                 *ngIf="goalDescription.errors?.maxlength"
-                >Goal Description should be at max of 50 characters</small
+                >Goal Description should be at max of 300 characters</small
               >
               </div>
               <div class="p-field p-col-12 p-sm-12">
@@ -136,7 +136,7 @@
                 pButton
                 icon="fas fa-plus-circle"
                 label="Add Notes"
-                class="p-button-outlined p-ml-2 p-mt-1 addNotesButton"
+                class="p-button-outlined addNotesButton"
                 (click)="showDialog()"
               ></button>
             </div>
@@ -146,7 +146,7 @@
                 [(ngModel)]="searchText"
                 pInputText
                 placeholder="Search"
-                class="p-mr-2 p-mt-1 search-dialog"
+                class="search-dialog"
               />
             </div>
           </p-toolbar>

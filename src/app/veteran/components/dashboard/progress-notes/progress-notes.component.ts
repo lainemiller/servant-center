@@ -64,10 +64,10 @@ export class ProgressNotesComponent implements OnInit {
         [
           Validators.required,
           Validators.pattern('^[a-zA-Z]+(.)*'),
-          Validators.maxLength(30),
+          Validators.maxLength(50),
         ],
       ],
-      goalDescription: ['', [Validators.required, Validators.maxLength(50)]],
+      goalDescription: ['', [Validators.required, Validators.maxLength(300)]],
       goalState: ['true', Validators.required],
       addedDate: [this.d],
     });

@@ -77,6 +77,8 @@ export class CaseWorkerComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('case worker component');
+    if(window.innerWidth < 768)
+      this.displayMenu = false;
   }
 
   toggleMenu(): void {
