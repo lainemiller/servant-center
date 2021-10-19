@@ -22,7 +22,8 @@
                   pInputText
                   placeholder="Goal Title"
                   class="inputFromUser"
-           
+                  appNoSpecialSymbols
+                  customAttr="startWithAlpha"
                 />
                 <small
                   class="error"
@@ -30,15 +31,16 @@
                   >Goal Title is required.</small
                 >
                 <small
-                  class="error"
-                  *ngIf="goalTitle.errors?.pattern"
-                  >Goal Title should always start with alphabet.</small
-                >
-                <small
                 class="error"
                 *ngIf="goalTitle.errors?.maxlength"
                 >Goal Title should be at max of 50 characters.</small
               >
+                <!-- <small
+                  class="error"
+                  *ngIf="goalTitle.errors?.pattern"
+                  >Goal Title should always start with alphabet.</small
+                >
+                 -->
               </div>
               <div class="p-field p-col-12 p-sm-12">
                 <textarea

@@ -17,6 +17,7 @@ export class NoSpecialSymbolsDirective {
   private textOnlyRegex: RegExp = new RegExp(/^[a-zA-Z]*$/);
   private textPeriodRegex: RegExp = new RegExp(/^[a-zA-Z.]*$/);
   private textAreaAllowedChars: RegExp = new RegExp(/^[a-zA-Z0-9,-.' @$?%()_‘’]*$/);
+  private startWithAlpha:RegExp= new RegExp(/^[a-zA-Z]+(.)*/);
   // tslint:disable-next-line:max-line-length
   private specialKeys: Array<string> = [ 'Backspace', 'Deconste', 'Tab', 'End', 'Home', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'Enter', 'Delete', 'Del', 'Left', 'Right'];
   private numberWithPeriodAndNegative: RegExp = new RegExp(/^[0-9.-]*$/);
@@ -30,7 +31,7 @@ export class NoSpecialSymbolsDirective {
 
   @HostListener('keydown', [ '$event' ])
   onKeyDown(event: KeyboardEvent): void {
-
+      console.log(event);
       // prevent 1st space char
       if ((event.code && event.code.toLowerCase() === 'space') && this.targetElmt.value.length <= 0) {
         event.preventDefault();
@@ -52,7 +53,11 @@ export class NoSpecialSymbolsDirective {
       const attrTxt = this.targetElmt.getAttribute('customAttr') || this.targetElmt.getAttribute('data-customAttr');
       const current: string = this.targetElmt.value.replace(/\n/g, '');  // remove new line character
       const next: string = current.concat(event.key);
-
+      console.log(attrTxt);
+      
+      if (next && attrTxt === 'startWithAlpha' && !String(next).match(this.startWithAlpha)) {
+        event.preventDefault();
+    }
       if (next && attrTxt === 'alphaNumeric' && !String(next).match(this.alphaNumeric)) {
           event.preventDefault();
       }
@@ -97,7 +102,7 @@ export class NoSpecialSymbolsDirective {
       }
     }
 
-  @HostListener('keyup', ['$event']) onKeyUp(event): void {
+  @HostListener('keyup', ['$event']) onKeyUp(event: HTMLElement | null): void {
     const ua = navigator.userAgent.toLowerCase();
     const isAndroid = ua.indexOf('android') > -1;
     if (isAndroid) {
@@ -133,7 +138,7 @@ export class NoSpecialSymbolsDirective {
   }
 
   @HostListener('drop', [ '$event' ])
-  onDrop(ev): void {
+  onDrop(ev: KeyboardEvent): void {
     ev.preventDefault();
   }
 
