@@ -82,12 +82,23 @@
   border: 1px solid red;
 }
 
+.addNotesButton{
+  margin-left: 12px;
+}
+.search-dialog {
+  margin-right: 15px;
+}
+
 @media screen and (max-width: 780px){
   .addNotesButton{
     width: 300px;
+    margin-left: 9%;
+    margin-top: 2%;
+    margin-bottom: 3%;
   }
   .search-dialog {
     width: 300px; 
+    margin-left: 9%;
   }
  
 }

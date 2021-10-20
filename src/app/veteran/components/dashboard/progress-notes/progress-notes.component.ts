@@ -33,7 +33,8 @@ export class ProgressNotesComponent implements OnInit {
     this.initialStatus = true;
     this.buildForm();
   }
-
+  
+  
   expandOrCollapse(index: any) {
     const elementSelector = '#goal-desc--' + index;
     const descElement = document.querySelector(elementSelector) as HTMLElement;
@@ -64,10 +65,10 @@ export class ProgressNotesComponent implements OnInit {
         [
           Validators.required,
           Validators.pattern('^[a-zA-Z]+(.)*'),
-          Validators.maxLength(30),
+          Validators.maxLength(50),
         ],
       ],
-      goalDescription: ['', [Validators.required, Validators.maxLength(50)]],
+      goalDescription: ['', [Validators.required, Validators.maxLength(300)]],
       goalState: ['true', Validators.required],
       addedDate: [this.d],
     });
