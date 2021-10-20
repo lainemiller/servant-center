@@ -21,7 +21,7 @@ import { VeteranModule } from './veteran/veteran.module';
     FormsModule,
     HttpClientModule,
     VeteranModule,
-    CaseWorkerModule,
+    CaseWorkerModule
   ],
   providers: [],
   bootstrap: [AppComponent],
