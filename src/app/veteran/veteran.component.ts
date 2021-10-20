@@ -72,6 +72,8 @@ export class VeteranComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('veteran component');
+    if(window.innerWidth < 768)
+      this.displayMenu = false;
   }
 
   toggleMenu(): void {

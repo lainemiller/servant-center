@@ -4,6 +4,8 @@
 
 .footer-text {
     text-align: left;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .container {
@@ -25,25 +27,28 @@ input {
 }
 
 .footer-button {
-    display: flex;
+   display: flex;
 }
 
 .header-text {
     position: relative;
     bottom: 15px;
-    width: 846px;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .body {
     overflow: scroll;
     overflow-x: hidden;
-    height: 130px;
+    height: 90px;
+    text-align: justify;
+    text-justify: inter-word;
+    padding-right: 12px;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 768px) {
     .header-text {
         font-size: 13px;
-        width: 100%;
     }
 
     .body {
@@ -71,8 +76,4 @@ input {
     .footer-button {
         flex-direction: column;
     }
-}
-
-.contain{
-    height: 410px;
 }
