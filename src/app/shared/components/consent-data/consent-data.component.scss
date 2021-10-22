@@ -1,11 +1,5 @@
-.consent-form-container{
+.consent-form-container {
     height: 580px;
-}
-
-.footer-text {
-    text-align: left;
-    text-align: justify;
-    text-justify: inter-word;
 }
 
 .container {
@@ -27,13 +21,22 @@ input {
 }
 
 .footer-button {
-   display: flex;
+    display: flex;
 }
 
 .body {
     overflow: scroll;
     overflow-x: hidden;
-    height: 130px;
+    height: 220px;
+    text-align: justify;
+    text-justify: inter-word;
+    padding-right: 12px;
+}
+
+.consent-body {
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 400px;
     text-align: justify;
     text-justify: inter-word;
     padding-right: 12px;
