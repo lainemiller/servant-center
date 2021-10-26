@@ -18,6 +18,7 @@ import { VeteranComponent } from './veteran.component';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ToolbarModule } from 'primeng/toolbar';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
     InputSwitchModule,
     ToggleButtonModule,
     ToolbarModule,
+    CheckboxModule,
     RxReactiveFormsModule,
     HttpClientModule,
     RadioButtonModule,
