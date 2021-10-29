@@ -1,5 +1,5 @@
 import { Component, Host, HostListener, OnInit } from '@angular/core';
-
+import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { VeteranDashboardService } from './services/veteran-dashboard.service';
 
@@ -14,7 +14,7 @@ export class VeteranComponent implements OnInit {
   public data: any;
   public image: any;
 
-  constructor(private service: VeteranDashboardService) {
+  constructor(private service: VeteranDashboardService,private route: ActivatedRoute) {
     this.service.getName().subscribe((data) => {
       console.log(data);
       this.data = data;
@@ -22,8 +22,17 @@ export class VeteranComponent implements OnInit {
       this.date = this.data.date;
       this.image = this.data.image;
     });
-  }
-
+  //   this.route.queryParams
+  //   .filter((params: { category: any; }) => params.category)
+  //   .subscribe((params: { category: any; }) => {
+  //     console.log(params); // { category: "fiction" }
+  //     //this.category = params.category;
+  //     // console.log(this.category); // fiction
+  //   }
+  // );
+}
+  
+  
   public displayMenu = true;
 
   @HostListener('window:resize')
@@ -71,6 +80,13 @@ export class VeteranComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    let searchParams = new URLSearchParams(window.location.href);
+    console.log(searchParams.get('access_token'));
+    let tokenn =searchParams.get('access_token');
+    if(tokenn)
+      localStorage.setItem('token',tokenn)
+    
+
     console.log('veteran component');
     if(window.innerWidth < 768)
       this.displayMenu = false;

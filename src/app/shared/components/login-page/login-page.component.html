@@ -1,0 +1,64 @@
+<!-- <div class="grand">
+    <div class="login-outerContainer">
+        <app-item-header [title]="title"></app-item-header>
+        <div class="login-container">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="p-fluid">
+                    <div class="p-field p-col-12 p-sm-12">
+                        <i class="fa fa-user icon" aria-hidden="true"></i>
+                        <input type="text" id="usernameInput" formControlName="username" pInputText placeholder="USERNAME"
+                            class="inputFromUser" />
+                        <small class="error" *ngIf="username.errors?.required && username.touched">Username is
+                            required.</small>
+                    </div>
+                    <div class="p-field p-col-12 p-sm-12">
+                        <i class="fa fa-lock icon"></i>
+                        <input type="password" formControlName="password" pInputText placeholder="PASSWORD"
+                            class="inputFromUser" />
+                        <small class="error" *ngIf="password.errors?.required && password.touched">Password is
+                            required.</small>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" pButton [disabled]="loginForm.invalid" label="LOGIN"
+                        class="p-button-outlined loginButton"></button><br>
+                    <a (click)="forgotpasswordbutton()">Forgot Password</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="grand">
+    <div class="login-outerContainer">
+        <app-item-header [title]="title"></app-item-header>
+        <div class="login-container">
+            <!-- <form [formGroup]="loginForm" (ngSubmit)="onSubmit()"> -->
+                <!-- <div class="p-fluid">
+                    <div class="p-field p-col-12 p-sm-12">
+                        <i class="fa fa-user icon" aria-hidden="true"></i>
+                        <input type="text" id="usernameInput" formControlName="username" pInputText placeholder="USERNAME"
+                            class="inputFromUser" />
+                        <small class="error" *ngIf="username.errors?.required && username.touched">Username is
+                            required.</small>
+                    </div>
+                    <div class="p-field p-col-12 p-sm-12">
+                        <i class="fa fa-lock icon"></i>
+                        <input type="password" formControlName="password" pInputText placeholder="PASSWORD"
+                            class="inputFromUser" />
+                        <small class="error" *ngIf="password.errors?.required && password.touched">Password is
+                            required.</small>
+                    </div>
+                </div> -->
+                <div class="loginn">
+                    <p>Click here to Login.</p>
+                    <button type="submit" pButton class="p-button-outlined " ><a 
+                            href={{logInUrl}}>Sign In</a>
+                    </button><br>
+                    
+                </div>
+            <!-- </form> -->
+        </div>
+    </div>
+</div>

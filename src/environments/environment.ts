@@ -3,7 +3,20 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  cognitoUserPoolId: "us-east-1_8wIG1UbUU",
+  cognitoAppClientId: "5igt34gtp2ok5mf02d9e4v30lb",
+
+  sso_api_username: '5igt34gtp2ok5mf02d9e4v30lb',
+  sso_api_pwd: '',
+
+  loginURL: 'https://servant-center.auth.us-east-1.amazoncognito.com/login?' +
+              'client_id=5igt34gtp2ok5mf02d9e4v30lb&response_type=code&'+
+              'redirect_uri=http://localhost:4200/veteran',
+
+  redirectURL: 'http://localhost:4200/veteran',
+
+  cognitoTokenURL: 'https://servant-center.auth.us-east-1.amazoncognito.com/oauth2/token',
 };
 
 /*
