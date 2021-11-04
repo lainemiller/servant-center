@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
-import { AuthenticateService } from './shared/services/authenticate.service';
 import { LoginPageComponent } from './shared/components/login-page/login-page.component';
 
 const routes: Routes = [
@@ -20,9 +19,6 @@ const routes: Routes = [
     path: 'veteran',
     loadChildren: () =>
       import('./veteran/veteran.module').then((m) => m.VeteranModule),
-    // resolve:{
-    //   access:AuthenticateService
-    // }
   },
   { path: '**', redirectTo: 'veteran' },
 ];

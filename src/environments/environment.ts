@@ -7,9 +7,6 @@ export const environment = {
   cognitoUserPoolId: "us-east-1_8wIG1UbUU",
   cognitoAppClientId: "5igt34gtp2ok5mf02d9e4v30lb",
 
-  sso_api_username: '5igt34gtp2ok5mf02d9e4v30lb',
-  sso_api_pwd: '',
-
   loginURL: 'https://servant-center.auth.us-east-1.amazoncognito.com/login?' +
               'client_id=5igt34gtp2ok5mf02d9e4v30lb&response_type=code&'+
               'redirect_uri=http://localhost:4200/veteran',
@@ -17,6 +14,19 @@ export const environment = {
   redirectURL: 'http://localhost:4200/veteran',
 
   cognitoTokenURL: 'https://servant-center.auth.us-east-1.amazoncognito.com/oauth2/token',
+  oauth: {
+    domain: "domain.auth.ap-northeast-1.amazoncognito.com",
+    scope: [
+        "phone",
+        "email",
+        "openid",
+        "profile",
+        "aws.cognito.signin.user.admin"
+    ],
+    redirectSignIn: "http://localhost:4200/veteran",
+    redirectSignOut: "http://localhost:4200/login",
+    responseType: "code"
+}
 };
 
 /*
