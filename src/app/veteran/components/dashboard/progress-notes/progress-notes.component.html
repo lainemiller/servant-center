@@ -35,12 +35,6 @@
                 *ngIf="goalTitle.errors?.maxlength"
                 >Goal Title should be at max of 50 characters.</small
               >
-                <!-- <small
-                  class="error"
-                  *ngIf="goalTitle.errors?.pattern"
-                  >Goal Title should always start with alphabet.</small
-                >
-                 -->
               </div>
               <div class="p-field p-col-12 p-sm-12">
                 <textarea
@@ -65,7 +59,7 @@
                 <label for="statusCheck">Goal Status</label>
                 <p-toolbar>
                   <div class="p-toolbar-group-left">
-                    <span class="p-mr-2">Closed</span>
+                    <span class="p-mr-2">Complete</span>
                     <p-inputSwitch
                       [(ngModel)]="initialStatus"
                       formControlName="goalState"
@@ -73,7 +67,7 @@
                       class="open-close-switch"
                     >
                     </p-inputSwitch>
-                    <span class="p-ml-2">Open</span>
+                    <span class="p-ml-2">In Progress</span>
                   </div>
                   <!-- <small
                     class="error"
@@ -165,20 +159,11 @@
               <div class="inputSwitch-container p-col-12">
                 <p-toolbar id="progress-notes--mainToolbar">
                   <div class="p-toolbar-group-left">
-                    <span class="p-mr-2">Closed</span>
+                    <span class="p-mr-2">Complete</span>
                     <p-inputSwitch
                       [(ngModel)]="progressNote.goalState"
                     ></p-inputSwitch>
-                    <span class="p-ml-2">Open</span>
-                  </div>
-                  <div class="p-toolbar-group-right">
-                    <button
-                      type="button"
-                      pButton
-                      icon="fas fa-cog"
-                      class="p-button-text settings-button"
-                      style="font-size: 30px"
-                    ></button>
+                    <span class="p-ml-2">In Progress</span>
                   </div>
                 </p-toolbar>
               </div>
@@ -220,21 +205,12 @@
       <div class="inputSwitch-container p-col-12">
         <p-toolbar id="progress-notes--mainToolbar">
           <div class="p-toolbar-group-left">
-            <span class="p-mr-2">Open</span>
+            <span class="p-mr-2">Complete</span>
             <p-inputSwitch
               [(ngModel)]="progressNote.goalState"
               class="open-close-switch"
             ></p-inputSwitch>
-            <span class="p-ml-2">Closed</span>
-          </div>
-          <div class="p-toolbar-group-right">
-            <button
-              type="button"
-              pButton
-              icon="fas fa-cog"
-              class="p-button-text settings-button"
-              style="font-size: 30px"
-            ></button>
+            <span class="p-ml-2">In Progress</span>
           </div>
         </p-toolbar>
       </div>
