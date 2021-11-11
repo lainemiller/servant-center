@@ -1,5 +1,6 @@
 import { Component, Host, HostListener, OnInit } from '@angular/core';
-
+import { ActivatedRoute } from '@angular/router';
+import { Auth } from '@aws-amplify/auth';
 import { MenuItem } from 'primeng/api';
 import { VeteranDashboardService } from './services/veteran-dashboard.service';
 
@@ -14,7 +15,7 @@ export class VeteranComponent implements OnInit {
   public data: any;
   public image: any;
 
-  constructor(private service: VeteranDashboardService) {
+  constructor(private service: VeteranDashboardService,private route: ActivatedRoute) {
     this.service.getName().subscribe((data) => {
       console.log(data);
       this.data = data;
@@ -22,8 +23,9 @@ export class VeteranComponent implements OnInit {
       this.date = this.data.date;
       this.image = this.data.image;
     });
-  }
-
+}
+  
+  
   public displayMenu = true;
 
   @HostListener('window:resize')
@@ -67,6 +69,7 @@ export class VeteranComponent implements OnInit {
       icon: 'fas fa-sign-out-alt',
       styleClass: 'menu-items--text menu-item--6',
       routerLink: ['/veteran/logout'],
+      command:() =>this.onLogoutClick()
     },
   ];
 
@@ -85,4 +88,11 @@ export class VeteranComponent implements OnInit {
     if(window.innerWidth < 768)
      this.displayMenu = !this.displayMenu;
   }
+  onLogoutClick() {
+
+    console.log("Logout Clicked");
+
+    Auth.signOut();
+  }
+
 }

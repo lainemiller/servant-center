@@ -19,6 +19,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MenuModule } from 'primeng/menu';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TooltipModule } from 'primeng/tooltip';
+import {PasswordModule} from 'primeng/password';
 
 import { KeysPipe } from '../case-worker/components/resident-search/rs-initial-assessment/ia-form-page-three/ia-form-page-three.component';
 import { ConsentDataComponent } from './components/consent-data/consent-data.component';
@@ -27,6 +28,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { ItemHeaderComponent } from './components/item-header/item-header.component';
 import { WelcomeHeaderComponent } from './components/welcome-header/welcome-header.component';
 import { NoSpecialSymbolsDirective } from './directives/no-special-symbols.directive';
+import { LoginPageComponent } from './components/login-page/login-page.component';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -51,6 +53,7 @@ const MODULES = [
   TooltipModule,
   DialogModule,
   HttpClientModule,
+  PasswordModule
 ];
 
 const COMPONENTS = [
@@ -64,7 +67,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, LoginPageComponent],
   imports: [CommonModule, ...MODULES],
   exports: [...MODULES, ...COMPONENTS],
 })
