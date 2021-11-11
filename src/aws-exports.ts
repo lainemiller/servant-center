@@ -6,8 +6,8 @@ const awsmobile = {
   oauth: {
     domain: 'servant-center.auth.us-east-1.amazoncognito.com',
     scope: ['email', 'openid'],
-    redirectSignIn: 'http://localhost:4200/veteran',
-    redirectSignOut: 'http://localhost:4200/login',
+    redirectSignIn: 'https://dd1w1wuqwe28t.cloudfront.net/veteran',
+    redirectSignOut: 'https://dd1w1wuqwe28t.cloudfront.net/login',
     responseType: 'token',
   },
 };

@@ -16,6 +16,7 @@ export class LoginPageComponent implements OnInit {
         this.router.navigate(['/veteran'], { replaceUrl: true });
       })
       .catch((err) => {
+        this.router.navigate(['/login'], { replaceUrl: true });
         console.log(err);
       });
   }
