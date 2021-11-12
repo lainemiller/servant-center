@@ -1,1 +1,484 @@
-<p>rs-treatment-plan works!</p>
+<div class="p-grid">
+    <div class="p-col-12">
+      <div class="form-container">
+        <form [formGroup]="treatmentPlanForm" (ngSubmit)="onSubmit()">
+          <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-3">
+              <input
+                type="text"
+                pInputText
+                formControlName="firstName"
+                placeholder="Resident's First Name"
+                appNoSpecialSymbols
+                customAttr="textOnly"
+                maxlength="20"
+              />
+              <div
+                *ngIf="
+                  treatmentPlanForm.get('firstName')?.invalid &&
+                  treatmentPlanForm.get('firstName')?.touched
+                "
+              >
+                <div
+                  *ngIf="getControl.firstName.errors?.required"
+                  class="form-error"
+                >
+                  <small>First Name is required.</small>
+                </div>
+              </div>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+              <input
+                type="text"
+                pInputText
+                formControlName="lastName"
+                placeholder="Resident's Last Name"
+                appNoSpecialSymbols
+                customAttr="textOnly"
+                maxlength="20"
+              />
+              <div
+                *ngIf="getControl.lastName.invalid && getControl.lastName.touched"
+              >
+                <div
+                  *ngIf="getControl.lastName.errors?.required"
+                  class="form-error"
+                >
+                  <small>Last Name is required.</small>
+                </div>
+              </div>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+              <input
+                type="text"
+                pInputText
+                formControlName="recordNo"
+                placeholder="Record #"
+                appNoSpecialSymbols
+                customAttr="numbersOnly"
+                maxlength="6"
+              />
+              <div
+                *ngIf="getControl.recordNo.invalid && getControl.recordNo.touched"
+              >
+                <div
+                  *ngIf="getControl.recordNo.errors?.required"
+                  class="form-error"
+                >
+                  <small>Record is required.</small>
+                </div>
+              </div>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+              <p-calendar
+                formControlName="dateOfBirth1"
+                [inline]="false"
+                [showIcon]="true"
+                [maxDate]="maxDateValue"
+                placeholder="DOB (mm/dd/yyyy)"
+              >
+              </p-calendar>
+              <div
+                *ngIf="
+                  getControl.dateOfBirth1.invalid &&
+                  getControl.dateOfBirth1.touched
+                "
+              >
+                <div
+                  *ngIf="getControl.dateOfBirth1.errors?.required"
+                  class="form-error"
+                >
+                  <small>Date of Birth is required.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-3">
+              <p-calendar
+                formControlName="dateOfBirth2"
+                [inline]="false"
+                [showIcon]="true"
+                [maxDate]="maxDateValue"
+                placeholder="DOB (mm/dd/yyyy)"
+              ></p-calendar>
+              <div
+                *ngIf="
+                  getControl.dateOfBirth2.invalid &&
+                  getControl.dateOfBirth2.touched
+                "
+              >
+                <div
+                  *ngIf="getControl.dateOfBirth2.errors?.required"
+                  class="form-error"
+                >
+                  <small>Date of Birth is required.</small>
+                </div>
+              </div>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+              <p-calendar
+                formControlName="intakeDOB"
+                [inline]="false"
+                [showIcon]="true"
+                [maxDate]="maxDateValue"
+                placeholder="Intake date (mm/dd/yyyy)"
+              ></p-calendar>
+              <div
+                *ngIf="
+                  getControl.intakeDOB.invalid && getControl.intakeDOB.touched
+                "
+              >
+                <div
+                  *ngIf="getControl.intakeDOB.errors?.required"
+                  class="form-error"
+                >
+                  <small>Intake DOB is required.</small>
+                </div>
+              </div>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+              <input
+                type="text"
+                pInputText
+                formControlName="hmisIdNo"
+                placeholder="HMIS ID#"
+                mask="000-000"
+              />
+              <div
+                *ngIf="getControl.hmisIdNo.invalid && getControl.hmisIdNo.touched"
+              >
+                <div
+                  *ngIf="getControl.hmisIdNo.errors?.required"
+                  class="form-error"
+                >
+                  <small>HMIS ID is required.</small>
+                </div>
+                <div
+                  *ngIf="
+                    getControl.hmisIdNo.invalid &&
+                    !getControl.hmisIdNo.errors?.required
+                  "
+                  class="form-error"
+                >
+                  <small>HMIS ID is not valid.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-6">
+              <span class="title">DIAGNOSES</span>
+              <textarea
+                [rows]="10"
+                formControlName="veteranDiagnosis"
+                pInputTextarea
+                placeholder="Comment"
+              ></textarea>
+              <div
+                *ngIf="
+                  getControl.veteranDiagnosis.invalid &&
+                  getControl.veteranDiagnosis.touched
+                "
+              >
+                <div
+                  *ngIf="getControl.veteranDiagnosis.errors?.required"
+                  class="form-error"
+                >
+                  <small>Veteran Diagnosis is required.</small>
+                </div>
+              </div>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+              <span class="title">SUPPORTS</span>
+              <textarea
+                [rows]="10"
+                formControlName="veteranSupports"
+                pInputTextarea
+                placeholder="Comment"
+              ></textarea>
+              <div
+                *ngIf="
+                  getControl.veteranSupports.invalid &&
+                  getControl.veteranSupports.touched
+                "
+              >
+                <div
+                  *ngIf="getControl.veteranSupports.errors?.required"
+                  class="form-error"
+                >
+                  <small>Comment is required.</small>
+                </div>
+              </div>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+              <span class="title">STRENGTHS</span>
+              <textarea
+                [rows]="10"
+                formControlName="veteranStrengths"
+                pInputTextarea
+                placeholder="Comment"
+              ></textarea>
+              <div
+                *ngIf="
+                  getControl.veteranStrengths.invalid &&
+                  getControl.veteranStrengths.touched
+                "
+              >
+                <div
+                  *ngIf="getControl.veteranStrengths.errors?.required"
+                  class="form-error"
+                >
+                  <small>Strength is required.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12">
+              <div class="title-container">
+                <p>
+                  <span>TREATMENT ISSUES & GOALS</span>
+                </p>
+              </div>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+              <p-button label="Add" (click)="addNewField()"></p-button>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+              <p-button
+                label="Delete"
+                (click)="deleteField()"
+                [disabled]="delete"
+              ></p-button>
+            </div>
+          </div>
+  
+          <div
+            formArrayName="treatmentIssues"
+            *ngFor="let item of treatmentIssues.controls; let j = index"
+          >
+            <div [formGroupName]="j">
+              <div
+                *ngFor="let goal of treatmentGoals; let i = index"
+                style="background: #efefef"
+              >
+                <div class="p-field p-col-12">
+                  <div class="p-grid">
+                    <div class="p-col-fixed bullents">{{ i + 1 }}</div>
+                    <div class="p-col heading">{{ goal.label }}</div>
+                  </div>
+                </div>
+                <div
+                  [formArrayName]="goal.formName"
+                  *ngFor="let item of goal.controls; let i = index"
+                >
+                  <div [formGroupName]="i">
+                    <div class="p-grid p-align-start vertical-container">
+                      <div class="p-col">
+                        <div class="box" *ngIf="goal.label === 'PHYSICAL HEALTH'">
+                          <input
+                            type="text"
+                            formControlName="goals"
+                            pInputText
+                            placeholder="Goal"
+                            id="goal{{ i }}a{{ j }}"
+                            appNoSpecialSymbols
+                            customAttr="textOnly"
+                            (focusout)="validate($event)"
+                            (keyup)="validate($event)"
+                          />
+                          <div
+                            [class.dis-none]="!error"
+                            class="goal{{ i }}a{{ j }} form-error"
+                          >
+                            <small>Goal is required.</small>
+                          </div>
+                        </div>
+                        <div class="box" *ngIf="goal.label === 'MENTAL HEALTH'">
+                          <input
+                            type="text"
+                            formControlName="goals"
+                            pInputText
+                            placeholder="Goal"
+                            id="goal{{ i }}{{ j }}a"
+                            appNoSpecialSymbols
+                            customAttr="textOnly"
+                            (focusout)="validate($event)"
+                            (keyup)="validate($event)"
+                          />
+                          <div
+                            [class.dis-none]="!error"
+                            class="goal{{ i }}{{ j }}a form-error"
+                          >
+                            <small>Goal is required.</small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="p-col">
+                        <div class="box" *ngIf="goal.label === 'PHYSICAL HEALTH'">
+                          <input
+                            type="text"
+                            formControlName="plans"
+                            pInputText
+                            placeholder="Plan"
+                            id="goal{{ i }}b{{ j }}"
+                            appNoSpecialSymbols
+                            customAttr="textOnly"
+                            (focusout)="validate($event)"
+                            (keyup)="validate($event)"
+                          />
+                          <div
+                            [class.dis-none]="!error"
+                            class="goal{{ i }}b{{ j }} form-error"
+                          >
+                            <small>Plan is required.</small>
+                          </div>
+                        </div>
+                        <div class="box" *ngIf="goal.label === 'MENTAL HEALTH'">
+                          <input
+                            type="text"
+                            formControlName="plans"
+                            pInputText
+                            placeholder="Plan"
+                            id="goal{{ i }}{{ j }}b"
+                            appNoSpecialSymbols
+                            customAttr="textOnly"
+                            (focusout)="validate($event)"
+                            (keyup)="validate($event)"
+                          />
+                          <div
+                            [class.dis-none]="!error"
+                            class="goal{{ i }}{{ j }}b form-error"
+                          >
+                            <small>Plan is required.</small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="p-col">
+                        <div class="box" *ngIf="goal.label === 'PHYSICAL HEALTH'">
+                          <input
+                            type="text"
+                            formControlName="strategies"
+                            pInputText
+                            placeholder="Strategy"
+                            id="goal{{ i }}{{ j }}c"
+                            appNoSpecialSymbols
+                            customAttr="textOnly"
+                            (focusout)="validate($event)"
+                            (keyup)="validate($event)"
+                          />
+                          <div
+                            [class.dis-none]="!error"
+                            class="goal{{ i }}{{ j }}c form-error"
+                          >
+                            <small>Strategy is required.</small>
+                          </div>
+                        </div>
+                        <div class="box" *ngIf="goal.label === 'MENTAL HEALTH'">
+                          <input
+                            type="text"
+                            formControlName="strategies"
+                            pInputText
+                            placeholder="Strategy"
+                            id="goal{{ i }}c{{ j }}"
+                            appNoSpecialSymbols
+                            customAttr="textOnly"
+                            (focusout)="validate($event)"
+                            (keyup)="validate($event)"
+                          />
+                          <div
+                            [class.dis-none]="!error"
+                            class="goal{{ i }}c{{ j }} form-error"
+                          >
+                            <small>Strategy is required.</small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="p-col">
+                        <div class="box" *ngIf="goal.label === 'PHYSICAL HEALTH'">
+                          <div>
+                            <p-calendar
+                              [inline]="false"
+                              formControlName="targetDate"
+                              inputId="goal{{ i }}d{{ j }}"
+                              [showIcon]="true"
+                              placeholder="Target date"
+                              (onSelect)="val($event)"
+                              (focusout)="getDate($event)"
+                              [maxDate]="maxDateValue"
+                            ></p-calendar>
+                          </div>
+                          <div
+                            [class.dis-none]="!error"
+                            class="goal{{ i }}d{{ j }} form-error"
+                          >
+                            <small>Target Date is required.</small>
+                          </div>
+                        </div>
+                        <div class="box" *ngIf="goal.label === 'MENTAL HEALTH'">
+                          <div>
+                            <p-calendar
+                              [inline]="false"
+                              formControlName="targetDate"
+                              inputId="goal{{ i }}{{ j }}d"
+                              [showIcon]="true"
+                              placeholder="Target date"
+                              (onSelect)="val($event)"
+                              (focusout)="getDate($event)"
+                              [maxDate]="maxDateValue"
+                            ></p-calendar>
+                          </div>
+                          <div
+                            [class.dis-none]="!error"
+                            class="goal{{ i }}{{ j }}d form-error"
+                          >
+                            <small>Target Date is required.</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12">
+              <textarea
+                [rows]="5"
+                formControlName="veteranNotes"
+                pInputTextarea
+                placeholder="Notes"
+              ></textarea>
+              <div
+                *ngIf="
+                  getControl.veteranNotes.invalid &&
+                  getControl.veteranNotes.touched
+                "
+              >
+                <small class="form-error"> This field is required.</small>
+              </div>
+            </div>
+          </div>
+  
+          <button
+            type="submit"
+            pButton
+            label="Submit"
+            class="p-button-outlined"
+          ></button>
+          <p-button
+            label="Cancel"
+            styleClass="p-button-link"
+            (click)="resetForm()"
+          ></p-button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
