@@ -11,4 +11,7 @@ export class DataService {
   getMsgCount() {
     return this.http.get('./assets/mock/msgs.json');
   }
+  getTreatmentPlanData() {
+    return this.http.get('./assets/mock/treatmentPlan-data.json');
+  }
 }
