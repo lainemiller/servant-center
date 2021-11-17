@@ -1,0 +1,35 @@
+[
+    {
+      "firstName": "name1",
+      "lastName": "sirname1",
+      "appointmentDate": "10/27/2021",
+      "time": "11:30",
+      "reason": "abc",
+      "coordinator": "",
+      "nursingNotified": "",
+      "address": "Chembur",
+      "city": "Mumbai",
+      "zip": "04050-1111",
+      "dateApproved": "",
+      "by": "",
+      "date": "",
+      "state": "California"
+    },
+    {
+      "firstName": "name2",
+      "lastName": "sirname2",
+      "appointmentDate": "10/31/2021",
+      "time": "11:00",
+      "reason": "xyz",
+      "coordinator": "",
+      "nursingNotified": "",
+      "address": "Vashi",
+      "city": " Navi Mumbai",
+      "zip": "04050-2222",
+      "dateApproved": "",
+      "by": "",
+      "date": "",
+      "state": "Texas"
+    }
+  ]
+  

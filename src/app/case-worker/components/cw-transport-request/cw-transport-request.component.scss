@@ -1,5 +1,5 @@
 .form-container {
-  margin: 0 15px;
+  margin: 0 25px;
   padding: 20px 20px;
   background: #fff;
   border-width: 1px;
@@ -8,5 +8,24 @@
 }
 
 .address-text-area {
-  width: 100%;
+  width: 0%;
+}
+
+.disable {
+  pointer-events: none;
+  margin-bottom: 10px;
+  background-color: #efefef;
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 32px;
+
+}
+
+#div {
+  margin-top: 10px;
+}
+
+.error {
+  color: red;
 }
