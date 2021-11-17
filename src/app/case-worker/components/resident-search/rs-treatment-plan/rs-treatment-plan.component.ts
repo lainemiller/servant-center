@@ -38,10 +38,13 @@ setForm()
       recordNo: this.data.recNo,
       dateOfBirth1:this.data.dob1,
       dateOfBirth2:this.data.dob2,
+      veteranDiagnosis: this.data.diagnoses,
+      veteranSupports: this.data.support,
+      veteranStrengths: this.data.strength,
       intakeDOB:this.data.intakeDate,
       hmisIdNo:this.data.hmisId,
-      treatmentIssues:this.data.treatmentIssues
-      
+      treatmentIssues:this.data.treatmentIssues,
+      veteranNotes:this.data.notes
     })
     console.log(this.treatmentPlanForm.value)
   })
