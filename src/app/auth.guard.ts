@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate,Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import Auth from '@aws-amplify/auth';
 import { Observable } from 'rxjs';
-// import { AuthenticateService } from './shared/services/authenticate.service';
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private router:Router){}
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    throw new Error('Method not implemented.');
+  constructor(private _router: Router) { }
+
+  canActivate(
+    next: ActivatedRouteSnapshot, 
+    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+
+    return Auth.currentAuthenticatedUser().then(() => { return true; })
+      .catch(() => {
+        this._router.navigate(['/login']);
+        return false;
+      });
+
+    return true;
+
   }
-//  canActivate():boolean{
-//     if(this.authService.loggedIn()){
-//       return true;
-//     }
-//     else{
-//       this.router.navigate(['/login']);
-//       return false;
-//     }
-//  }
-  
 }

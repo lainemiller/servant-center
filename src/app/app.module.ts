@@ -10,7 +10,6 @@ import { AuthGuard } from './auth.guard';
 import { CaseWorkerModule } from './case-worker/case-worker.module';
 import { SharedModule } from './shared/shared.module';
 import { VeteranModule } from './veteran/veteran.module';
-import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,9 +23,8 @@ import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
     HttpClientModule,
     VeteranModule,
     CaseWorkerModule,
-    AmplifyAngularModule
   ],
-  providers: [AuthGuard,AmplifyService],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
