@@ -4,6 +4,7 @@ import { Auth } from '@aws-amplify/auth';
 import { MenuItem } from 'primeng/api';
 import { VeteranDashboardService } from './services/veteran-dashboard.service';
 
+
 @Component({
   selector: 'app-veteran',
   templateUrl: './veteran.component.html',
@@ -69,7 +70,7 @@ export class VeteranComponent implements OnInit {
       icon: 'fas fa-sign-out-alt',
       styleClass: 'menu-items--text menu-item--6',
       routerLink: ['/veteran/logout'],
-      command:() =>this.onLogoutClick()
+      command:()=>this.onLogoutClick()
     },
   ];
 
@@ -88,11 +89,10 @@ export class VeteranComponent implements OnInit {
     if(window.innerWidth < 768)
      this.displayMenu = !this.displayMenu;
   }
-  onLogoutClick() {
 
-    console.log("Logout Clicked");
-
-    Auth.signOut();
+  onLogoutClick(){
+    Auth.signOut()
+    console.log("logout button clicked");
   }
-
+  
 }

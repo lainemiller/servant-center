@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth } from '@aws-amplify/auth';
 
@@ -9,15 +9,16 @@ import { Auth } from '@aws-amplify/auth';
 })
 export class LoginPageComponent implements OnInit {
   public title = 'LOGIN TO APPLICATION';
-  constructor(private router: Router) {
-    //currentAuthenticatedUser: when user comes to login page again
+  public logInUrl =
+    'https://servant-center.auth.us-east-1.amazoncognito.com/login?response_type=token&client_id=5igt34gtp2ok5mf02d9e4v30lb&redirect_uri=http://localhost:4200/veteran';
+
+  constructor(private router: Router, private zone: NgZone) {
     Auth.currentAuthenticatedUser()
       .then(() => {
         this.router.navigate(['/veteran'], { replaceUrl: true });
       })
       .catch((err) => {
-        this.router.navigate(['/login'], { replaceUrl: true });
-        console.log(err);
+        console.log(err, 'Not logined');
       });
   }
 

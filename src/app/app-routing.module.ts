@@ -16,6 +16,7 @@ const routes: Routes = [
       ),
   },
   {
+    // path: 'veteran',canActivate: [AuthGuard],
     path: 'veteran',
     loadChildren: () =>
       import('./veteran/veteran.module').then((m) => m.VeteranModule),
