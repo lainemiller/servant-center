@@ -1,4 +1,143 @@
-<p>assessment works!</p>
-<div class="container">
-
+<div class="p-grid">
+    <div class="p-col-12">
+      <app-item-header title="Assessment Form"></app-item-header>
+      <div class="form-container">
+        <form [formGroup]="assessmentForm" (ngSubmit)="onSubmit()">
+          <!-- Person Info start -->
+          <fieldset class="field_set">
+            <legend class="fieldset_legand" class="p-col heading">
+              <span class="heading">PERSON'S INFORMATION</span>
+            </legend>
+            <div class="p-fluid p-grid">
+              <div class="p-field p-col-12 p-md-4">
+                <label for="First Name" class="label-title">First Name</label>
+                <input id="First Name" type="text" pInputText maxlength="30" pattern="[a-zA-Z]+" appNoSpecialSymbols
+                  customAttr="textOnly" formControlName="firstName" />
+                <!-- <div *ngIf="
+                    getControl.firstName.touched && getControl.firstName.invalid
+                  " class="text-danger">
+                  <small class="error" *ngIf="getControl.firstName.errors?.required">
+                    first name is required.
+                  </small>
+                </div> -->
+              </div>
+  
+              <div id="fields_margin" class="p-field p-col-12 p-md-4">
+                <label class="label-title">Middle Name</label>
+                <input type="text" id="Last Name" pInputText appNoSpecialSymbols customAttr="textOnly" maxlength="30"
+                  formControlName="middleName" />
+                <!-- <div *ngIf="
+                    getControl.middleName.touched && getControl.middleName.invalid
+                  " class="text-danger">
+                  <small class="error" *ngIf="getControl.middleName.errors?.required">
+                    middle name is required.
+                  </small>
+                </div> -->
+              </div>
+  
+              <div id="fields_margin" class="p-field p-col-12 p-md-4">
+                <label class="label-title">Last Name</label>
+                <input required id="Last Name" type="text" pInputText appNoSpecialSymbols customAttr="textOnly"
+                  maxlength="30" formControlName="lastName" />
+                <!-- <div *ngIf="
+                    getControl.lastName.touched && getControl.lastName.invalid
+                  " class="text-danger">
+                  <small class="error" *ngIf="getControl.lastName.errors?.required">
+                    Last Name is required.
+                  </small>
+                </div> -->
+              </div>
+            </div>
+  
+            <div class="p-fluid p-grid">
+              <div id="fields_margin" class="p-field p-col-12 p-md-4">
+                <label class="label-title">Nick Name</label>
+                <input id="Nick Name" maxlength="30" appNoSpecialSymbols customAttr="textOnly" type="text" pInputText
+                  formControlName="nickName" />
+                <!-- <div *ngIf="
+                    getControl.nickName.touched && getControl.nickName.invalid
+                  " class="text-danger">
+                  <small class="error" *ngIf="getControl.nickName.errors?.required">
+                    Last Name is required.
+                  </small>
+                </div> -->
+              </div>
+              <div id="fields_margin" class="p-field p-col-12 p-md-4">
+                <label class="label-title">Date of Birth</label>
+                <p-calendar formControlName="DOB" [maxDate]="maxDateValue" [inline]="false" [showIcon]="true">
+                </p-calendar>
+                <!-- <div *ngIf="getControl.DOB.touched && getControl.DOB.invalid" class="text-danger">
+                  <small class="error" *ngIf="getControl.DOB.errors?.required">
+                    date of birth is required.
+                  </small>
+                </div> -->
+              </div>
+  
+              <div class="p-field p-col-12 p-md-4">
+                <label class="label-title">Place of Birth</label>
+                <input id="pob" type="text" pInputText maxlength="30" formControlName="POB" />
+                <!-- <div *ngIf="getControl.POB.touched && getControl.POB.invalid" class="text-danger">
+                  <small class="error" *ngIf="getControl.POB.errors?.required">
+                    Please enter a valid place of birth.
+                  </small>
+                </div> -->
+              </div>
+            </div>
+  
+            <div class="p-fluid p-grid">
+              <div id="fields_margin" class="p-field p-col-12 p-md-4">
+                <label class="label-title">SSN #</label>
+                <input id="SSN #" type="text" pInputText formControlName="SSNNumber" mask="000-00-0000" />
+                <!-- <small class="error" *ngIf="
+                    getControl.SSNNumber.touched &&
+                    getControl.SSNNumber.errors?.required
+                  ">
+                  SSN number is required.
+                </small>
+  
+                <small class="error" *ngIf="
+                    getControl.SSNNumber.touched &&
+                    getControl.SSNNumber.invalid &&
+                    !getControl.SSNNumber.errors?.required
+                  ">
+                  ssn number is invalid minimum 8 digits required.
+                </small> -->
+              </div>  
+              <div id="fields_margin" class="p-field p-col-12 p-md-4">
+                <label class="label-title">Select Gender</label>
+  
+                <p-dropdown inputId="select gender" [autoDisplayFirst]="false" [options]="genders"
+                  formControlName="selectedGenders" optionLabel="name">
+                </p-dropdown>
+  
+                <!-- <div *ngIf="
+                    getControl.selectedGenders.touched &&
+                    getControl.selectedGenders.invalid
+                  " class="text-danger">
+                  <small class="error" *ngIf="getControl.selectedGenders.errors?.required">
+                    select an option.
+                  </small>
+                </div> -->
+              </div>
+              <div id="fields_margin" class="p-field p-col-12 p-md-4">
+                <label class="label-title">Select Marital Status</label>
+                <p-dropdown inputId="maritalStatus" [autoDisplayFirst]="false" [options]="maritalStatus"
+                  formControlName="selectedMaritalStatus" optionLabel="name">
+                </p-dropdown>
+                <!-- <div *ngIf="
+                    getControl.selectedMaritalStatus.touched &&
+                    getControl.selectedMaritalStatus.invalid
+                  " class="text-danger">
+                  <small class="error" *ngIf="getControl.selectedMaritalStatus.errors?.required">
+                    select an option.
+                  </small>
+                </div> -->
+              </div>
+            </div>
+          </fieldset>
+          <button type="submit" pButton [disabled]="assessmentForm.invalid" label="Submit"
+          class="p-button-outlined"></button>
+        </form>
+      </div>
+    </div>
 </div>
