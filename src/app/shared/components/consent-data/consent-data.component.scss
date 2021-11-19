@@ -1,9 +1,5 @@
-.consent-form-container{
+.consent-form-container {
     height: 580px;
-}
-
-.footer-text {
-    text-align: left;
 }
 
 .container {
@@ -28,22 +24,27 @@ input {
     display: flex;
 }
 
-.header-text {
-    position: relative;
-    bottom: 15px;
-    width: 846px;
-}
-
 .body {
     overflow: scroll;
     overflow-x: hidden;
-    height: 130px;
+    height: 220px;
+    text-align: justify;
+    text-justify: inter-word;
+    padding-right: 12px;
 }
 
-@media (max-width: 1080px) {
+.consent-body {
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 400px;
+    text-align: justify;
+    text-justify: inter-word;
+    padding-right: 12px;
+}
+
+@media (max-width: 768px) {
     .header-text {
         font-size: 13px;
-        width: 100%;
     }
 
     .body {
@@ -71,8 +72,4 @@ input {
     .footer-button {
         flex-direction: column;
     }
-}
-
-.contain{
-    height: 410px;
 }

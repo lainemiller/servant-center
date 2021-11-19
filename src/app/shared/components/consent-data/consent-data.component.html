@@ -1,78 +1,335 @@
 <div class="consent-form-container">
-<p-dialog
-  header="Lorem ipsum delores"
-  [breakpoints]="{ '960px': '75vw', '640px': '110vw' }"
-  [(visible)]="display"
-  [style]="{ width: '70vw' }"
-  [draggable]="false"
-  [modal]="true"
-  id="consent-modal"
->
-  <p class="header-text">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod
-    bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra
-    justo commodo. Please read carefully.
-  </p>
-  <p class="body">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod
-    bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra
-    justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus
-    et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum,
-    nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus
-    sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing
-    elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus
-    accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis
-    natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-    Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci,
-    sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur
-    adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit
-    amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor.
-    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
-    ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus
-    mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet,
-    consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida
-    dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales
-    pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient
-    montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra
-    vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
-  </p>
+  <p-dialog
+    header="CONSENT AND UNDERSTANDING"
+    [breakpoints]="{ '960px': '75vw', '640px': '95vw' }"
+    [(visible)]="display"
+    [style]="{ width: '70vw' }"
+    [draggable]="false"
+    [modal]="true"
+    id="consent-modal"
+  >
+    <div class="body">
+      <p>
+        This consent is required by the Health Insurance Portability and
+        Accountability Act of 1996 to inform you of your rights for privacy with
+        respect to your health care information.
+      </p>
+      <h4>CONSENT RELATED TO PRIVACY NOTICE:</h4>
+      <p>
+        I have had a chance to review the Practice Privacy Notice as part of
+        this registration process. I understand that the terms of the Privacy
+        Notice may change and I may obtain these revised notices by contacting
+        The Servant Center by phone or in writing. I understand I have the right
+        to request how my protected health information (PHI) has been disclosed.
+        I also have the right to restrict how this information is disclosed.
+      </p>
+      <h4>CONSENT FOR CARE</h4>
+      <p>
+        I, with my signature, authorize The Servant Center, and any employee
+        working under the direction of the lead caregivers, to provide medical
+        care for me. This medical care may include services and supplies related
+        to my physical and/or mental health and may include (but not limited to)
+        preventative, diagnostic, therapeutic, rehabilitative, maintenance,
+        palliative care, counseling, assessment or review of physical or mental
+        status/function of the body and the sale or dispensing of drugs,
+        devices, equipment or other items required and in accordance with a
+        prescription. This consent includes contact and discussion with other
+        health care professionals for care and treatment.
+      </p>
+      <h4>CONSENT FOR RELEASE OF INFORMATION AND ASSIGNMENT OF BENEFITS</h4>
+      <p>
+        I also authorize The Servant Center to furnish information to the
+        identified insurance carrier(s) for any and all payment activities. I
+        consent to assign all payments for services directly to this practice. I
+        further consent to the use for any practice operational needs as
+        identified in the Practice Privacy Notice.
+      </p>
+    </div>
+    <p class="footer-text">
+      <a (click)="showDialog()"
+        ><b><u>Read Notice of Privacy Practices</u></b></a
+      >
+    </p>
+    <p-dialog
+      header="Notice of Privacy Practices"
+      [draggable]="false"
+      [(visible)]="display_two"
+      [style]="{ width: '50vw' }"
+    >
+      <div class="consent-body">
+        <p>
+          This Notice describes how medical information about you may be used
+          and disclosed and how you can get access to this information. Please
+          review it carefully.
+        </p>
+        <p>
+          Personally identifiable information about your health, your health
+          care, and your payment for health care is called Protected Health
+          Information. We must safeguard your Protected Health Information and
+          give you this Notice about our privacy practices that explains how,
+          when and why we may use or disclose your Protected Health Information.
+          Except in the situations set out in the Notice, we must use or
+          disclose only the minimum necessary Protected Health Information to
+          carry out the use or disclosure.
+        </p>
+        <p>
+          We must follow the practices described in this Notice, but we can
+          change our privacy practices and the terms of this Notice at any time.
+        </p>
+        <p>
+          If we revise the Notice, you may read the new version of the Notice of
+          Privacy Practices by asking for a copy at your next appointment.
+        </p>
+        <h3>
+          <u
+            >Uses and Disclosures of Your Protected Health Information That Do
+            Not Require Your Consent</u
+          >
+        </h3>
+        <p>
+          We may use and disclose your Protected Health Information as follows
+          without your permission:
+        </p>
+        <p>
+          <b>For treatment purposes.</b> We may disclose your health information
+          to doctors, nurses and others who provide your health care. For
+          example, your information may be shared with people performing lab
+          work or x-rays.
+        </p>
+        <p>
+          <b>To obtain payment.</b> We may disclose your health information in
+          order to collect payment for your health care. For instance, we may
+          release information to your insurance company.
+        </p>
+        <p>
+          <b>For health care operations.</b> We may use or disclose your health
+          information in order to perform business functions like employee
+          evaluations and improving the service we provide. We may disclose your
+          information to students training with us. We may use your information
+          to contact you to remind you of your appointment or to call you by
+          name in the waiting room when your doctor is ready to see you.
+        </p>
+        <p>
+          <b>When required by law.</b> We may be required to disclose your
+          Protected Health Information to law enforcement officers, courts or
+          government agencies. For example, we may have to report abuse, neglect
+          or certain physical injuries.
+        </p>
+        <p>
+          <b>For public health activities.</b> We may be required to report your
+          health information to government agencies to prevent or control
+          disease or injury. We also may have to report work-related illnesses
+          and injuries to your employer so that your workplace may be monitored
+          for safety.
+        </p>
+        <p>
+          <b>For health oversight activities.</b> We may be required to disclose
+          your health information to government agencies so that they can
+          monitor or license health care providers such as doctors and nurses.
+        </p>
+        <p>
+          <b>For activities related to death.</b> We may be required to disclose
+          your health information to coroners, medical examiners and funeral
+          directors so that they can carry out duties related to your death,
+          such as determining the cause of death or preparing your body for
+          burial. We also may disclose your information to those involved with
+          locating, storing or transplanting donor organs or tissue.
+        </p>
+        <p>
+          <b>To avert a threat to health or safety.</b> In order to avoid a
+          serious threat to health or safety, we may disclose health information
+          to law enforcement officers or other persons who might prevent or
+          lessen that threat.
+        </p>
+        <p>
+          <b>For specific government functions.</b> In certain situations, we
+          may disclose health information of military officers and veterans, to
+          correctional facilities, to government benefit programs, and for
+          national security reasons.
+        </p>
+        <p>
+          <b>For workers' compensation purposes.</b> We may disclose your health
+          information to government authorities under workers' compensation
+          laws.
+        </p>
+        <h3>
+          <u
+            >Uses and Disclosures of Your Protected Health Information That
+            Offer You an Opportunity to Object</u
+          >
+        </h3>
+        <p>
+          In the following situations, we may disclose some of your Protected
+          Health Information if we first inform you about the disclosure and you
+          do not object:
+        </p>
+        <p>
+          <b>In patient directories.</b> Your name, location and general health
+          condition may be listed in our patient directory for disclosure to
+          callers or visitors who ask for you by name. Additionally, your
+          religion may be shared with clergy.
+        </p>
+        <p>
+          <b>To your family, friends or others involved in your care.</b> We may
+          share with these people information related to their involvement in
+          your care or information to notify them as to your location or general
+          condition. We may release your health information to organizations
+          handling disaster relief efforts.
+        </p>
+        <h3>
+          <u
+            >Uses and Disclosures of Your Protected Health Information That
+            Require Your Consent</u
+          >
+        </h3>
+        <p>
+          The following uses and disclosures of your Protected Health
+          Information will be made only with your written permission, which you
+          may withdraw at any time:
+        </p>
+        <ul>
+          <li>For research purposes.</li>
+          <li>For marketing purposes.</li>
+          <li>Of psychotherapy notes.</li>
+          <li>For any other purposes not described in this Notice.</li>
+        </ul>
+        <h3><u>Your Rights Regarding Your Protected Health Information</u></h3>
+        <p>
+          You have the following rights related to your Protected Health
+          Information:
+        </p>
+        <p>
+          <b
+            >To inspect and request a copy of your Protected Health
+            Information.</b
+          >
+          You may look at and obtain a copy of your Protected Health Information
+          in most cases. You may not view or copy psychotherapy notes,
+          information collected for use in a legal or government action, and
+          information which you cannot access by law. If we use or maintain the
+          requested information electronically, you may request that information
+          in electronic format.
+        </p>
+        <p>
+          <b>To request that we correct your Protected Health Information.</b>
+          If you think that there is a mistake or a gap in our file of your
+          health information, you may ask us in writing to correct the file. We
+          may deny your request if we find that the file is correct and
+          complete, not created by us, or not allowed to be disclosed. If we
+          deny your request, we will explain our reasons for the denial and your
+          rights to have the request and denial and your written response added
+          to your file. If we approve your request, we will change the file,
+          report that change to you, and tell others that need to know about the
+          change in your file.
+        </p>
+        <p>
+          <b
+            >To request a restriction on the use or disclosure of your Protected
+            Health Information.</b
+          >
+          You may ask us to limit how we use or disclose your information, but
+          we generally do not have to agree to your request. An exception is
+          that we must agree to a request not to send Protected Health
+          Information to a health plan for purposes of payment or health care
+          operations if you have paid in full for the related product or
+          service. If we agree to all or part of your request, we will put our
+          agreement in writing and obey it except in emergency situations. We
+          cannot limit uses or disclosures that are required by law.
+        </p>
+        <p>
+          <b>To request confidential communication methods.</b> You may ask that
+          we contact you at a certain address or in a certain way. We must agree
+          to your request as long as it is reasonably easy for us to do so.
+        </p>
+        <p>
+          <b>To find out what disclosures have been made.</b> You may get a list
+          describing when, to whom, why, and what of your Protected Health
+          Information has been disclosed. We must respond to your request within
+          30 days of receiving it. We will only charge you for the list if you
+          request more than one list per year. The list will not include
+          disclosures made to you or for purposes of treatment, payment, health
+          care operations if we do not use electronic health records, our
+          patient directory, national security, law enforcement, and certain
+          health oversight activities.
+        </p>
+        <p>
+          <b>To receive notice if your records have been breached.</b> The
+          Servant Center will notify you if there has been an acquisition,
+          access, use or disclosure of your Protected Health Information in a
+          manner not allowed under the law and which we are required by law to
+          report to you. We will review any suspected breach to determine the
+          appropriate response under the circumstances.
+        </p>
+        <p>
+          <b>To obtain a paper copy of this Notice.</b> Upon your request, we
+          will give you a paper copy of this Notice.
+        </p>
+        <p>If you have any questions about these rights, please contact us.</p>
+        <h3><u>How to Complain about Our Privacy Practices</u></h3>
+        <p>
+          If you think we may have violated your privacy rights, or if you
+          disagree with a decision we made about your Protected Health
+          Information, you may file a complaint with our staff.
+        </p>
+        <p>
+          You may also file a complaint with the Secretary of the U.S.
+          Department of Health and Human Services by writing to 200 Independence
+          Avenue SW, Washington, D.C. 20201 or by calling 1-877-696-6775.
+        </p>
+        <p>
+          We will take no action against you if you make a complaint to either
+          or both of these persons.
+        </p>
+        <h3><u>Effective Date</u></h3>
+        <p>This Notice is effective on November 1, 2021</p>
+        <p>
+          We are required by law to maintain the privacy of, and provide
+          individuals with, this notice of our legal duties and privacy
+          practices with respect to protected health information. If you have
+          any objections to this form, please ask to speak with our HIPAA
+          Compliance Officer in person or by phone at our main phone number.
+        </p>
+        <p>
+          This signature is only acknowledgement that you have received this
+          notice of our Privacy Practices.
+        </p>
+      </div>
+    </p-dialog>
+    <h4 class="input-footer-heading">ESIGNATURE</h4>
+    <div class="container">
+      <input
+        class="input-text-one"
+        value="{{ vetran?.firstName }},{{ vetran?.lastName }}"
+        type="text"
+        pInputText
+      />
+      <input
+        class="input-text-two"
+        value="{{ vetran?.email }}"
+        type="text"
+        pInputText
+      />
+    </div>
+    <div class="footer-button">
+      <button
+        pButton
+        (click)="display = false"
+        label="I CONSENT"
+        class="button-confirm"
+      ></button>
+      <button
+        pButton
+        type="button"
+        (click)="display = false"
+        label="Cancel"
+        class="p-button-text"
+      ></button>
+    </div>
+  </p-dialog>
 
-  <p class="footer-text">
-    If you consent to the terms outlined above for electronic delivery, type
-    your full name in the box below and select the button marked “I Consent.”
-  </p>
-
-  <h4 class="input-footer-heading">ESIGNATURE</h4>
-  <div class="container">
-    <input
-      class="input-text-one"
-      value="{{ vetran?.firstName }},{{ vetran?.lastName }}"
-      type="text"
-      pInputText
-    />
-    <input
-      class="input-text-two"
-      value="{{ vetran?.email }}"
-      type="text"
-      pInputText
-    />
-  </div>
-  <div class="footer-button">
-    <button
-      pButton
-      (click)="display = false"
-      label="I CONSENT"
-      class="button-confirm"
-    ></button>
-    <button
-      pButton
-      type="button"
-      (click)="display = false"
-      label="Cancel"
-      class="p-button-text"
-    ></button>
-  </div>
-</p-dialog>
-
-<p-button type="button" (click)="showConsentForm()" label="Register"></p-button>
+  <p-button
+    type="button"
+    (click)="showConsentForm()"
+    label="Register"
+  ></p-button>
 </div>

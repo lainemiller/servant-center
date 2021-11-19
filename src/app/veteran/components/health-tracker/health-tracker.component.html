@@ -1,4 +1,281 @@
-<p>health-tracker works!</p>
-<div class="container">
+<div class="p-grid">
+    <div class="p-col-12">
+      <app-item-header title="HEALTH TRACKER"></app-item-header>
+      <div class="form-container">
+        <div class="p-p-4" style="background: #efefef;">
+            <div class="p-mb-3 subheader">Select which subjects you need to track:</div>
+            <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-3 p-field-checkbox">
+                <p-checkbox name="weight" label="Weight" [binary]="true" [(ngModel)]="showWeight"></p-checkbox></div>
+            <div class="p-col-12 p-md-3 p-field-checkbox">
+                <p-checkbox name="temperature" label="Temperature" [binary]="true" [(ngModel)]="showTemperature"></p-checkbox></div>
+            <div class="p-col-12 p-md-3 p-field-checkbox">
+                <p-checkbox name="bloodPressure" label="Blood Pressure" [binary]="true" [(ngModel)]="showBloodPressure"></p-checkbox></div>
+            <div class="p-col-12 p-md-3 p-field-checkbox">
+                <p-checkbox name="bmi" label="BMI" [binary]="true" [(ngModel)]="showBmi"></p-checkbox></div>
+            </div>
     
-</div>
+            <div class="p-fluid p-formgrid p-grid">
+            <div class="p-col-12 p-md-3 p-field-checkbox">
+                <p-checkbox name="drugScreen" label="Drug Screen" [binary]="true" [(ngModel)]="showDrugScreen"></p-checkbox></div>
+            <div class="p-col-12 p-md-3 p-field-checkbox">
+                <p-checkbox name="breathalyzer" label="Breathalyzer" [binary]="true" [(ngModel)]="showBreathalyzer"></p-checkbox></div>
+            <div class="p-col-12 p-md-3 p-field-checkbox">
+                <p-checkbox name="bloodSugar" label="Blood Sugar" [binary]="true" [(ngModel)]="showBloodSugar"></p-checkbox></div>
+            <div class="p-col-12 p-md-3 p-field-checkbox">
+                <p-checkbox name="other" label="Other" [binary]="true" [(ngModel)]="showOther"></p-checkbox></div>
+            </div>
+
+        </div>
+  
+        <form [formGroup]="healthTrackerForm" (ngSubmit)="onSubmit()">
+          <div class="form-group p-d-flex">
+            <div *ngIf="showWeight" class="p-col-3">
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <div class="title-container" style="background: #971f1f">
+                    <p>
+                      <span>Weight</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <p-calendar formControlName=weightDate [inline]=false [showIcon]=true placeholder="Date (mm/dd/yyyy)"></p-calendar>
+                </div>
+              </div>
+            
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <input type="text" pInputText formControlName=weightMeasurement placeholder="Measurement">
+                </div>
+              </div>
+
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <textarea [rows]="10" formControlName=weightComments pInputTextarea placeholder="Comment"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="showTemperature" class="p-col-3">
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <div class="title-container" style="background: #971f1f">
+                    <p>
+                      <span>Temperature</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <p-calendar formControlName=temperatureDate [inline]=false [showIcon]=true placeholder="Date (mm/dd/yyyy)"></p-calendar>
+                </div>
+              </div>
+            
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <input type="text" pInputText formControlName=temperatureMeasurement placeholder="Measurement">
+                </div>
+              </div>
+
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <textarea [rows]="10" formControlName=temperatureComments pInputTextarea placeholder="Comment"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="showBloodPressure" class="p-col-3">
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <div class="title-container" style="background: #971f1f">
+                    <p>
+                      <span>Blood Pressure</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <p-calendar formControlName=bloodPressureDate [inline]=false [showIcon]=true placeholder="Date (mm/dd/yyyy)"></p-calendar>
+                </div>
+              </div>
+            
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <input type="text" pInputText formControlName=bloodPressureMeasurement placeholder="Measurement">
+                </div>
+              </div>
+
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <textarea [rows]="10" formControlName=bloodPressureComments pInputTextarea placeholder="Comment"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="showBmi" class="p-col-3">
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <div class="title-container" style="background: #971f1f">
+                    <p>
+                      <span>BMI</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <p-calendar formControlName=bmiDate [inline]=false [showIcon]=true placeholder="Date (mm/dd/yyyy)"></p-calendar>
+                </div>
+              </div>
+            
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <input type="text" pInputText formControlName=bmiMeasurement placeholder="Measurement">
+                </div>
+              </div>
+
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <textarea [rows]="10" formControlName=bmiComments pInputTextarea placeholder="Comment"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="showDrugScreen" class="p-col-3">
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <div class="title-container" style="background: #971f1f">
+                    <p>
+                      <span>Drug Screen</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <p-calendar formControlName=drugScreenDate [inline]=false [showIcon]=true placeholder="Date (mm/dd/yyyy)"></p-calendar>
+                </div>
+              </div>
+            
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <input type="text" pInputText formControlName=drugScreenMeasurement placeholder="Measurement">
+                </div>
+              </div>
+
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <textarea [rows]="10" formControlName=drugScreenComments pInputTextarea placeholder="Comment"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="showBreathalyzer" class="p-col-3">
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <div class="title-container" style="background: #971f1f">
+                    <p>
+                      <span>Breathalyzer</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <p-calendar formControlName=breathalyzerDate [inline]=false [showIcon]=true placeholder="Date (mm/dd/yyyy)"></p-calendar>
+                </div>
+              </div>
+            
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <input type="text" pInputText formControlName=breathalyzerMeasurement placeholder="Measurement">
+                </div>
+              </div>
+
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <textarea [rows]="10" formControlName=breathalyzerComments pInputTextarea placeholder="Comment"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="showBloodSugar" class="p-col-3">
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <div class="title-container" style="background: #971f1f">
+                    <p>
+                      <span>Blood Sugar</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <p-calendar formControlName=bloodSugarDate [inline]=false [showIcon]=true placeholder="Date (mm/dd/yyyy)"></p-calendar>
+                </div>
+              </div>
+            
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <input type="text" pInputText formControlName=bloodSugarMeasurement placeholder="Measurement">
+                </div>
+              </div>
+
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <textarea [rows]="10" formControlName=bloodSugarComments pInputTextarea placeholder="Comment"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="showOther" class="p-col-3">
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <div class="title-container" style="background: #971f1f">
+                    <p>
+                      <span>Other</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <p-calendar formControlName=otherDate [inline]=false [showIcon]=true placeholder="Date (mm/dd/yyyy)"></p-calendar>
+                </div>
+              </div>
+            
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <input type="text" pInputText formControlName=otherMeasurement placeholder="Measurement">
+                </div>
+              </div>
+
+              <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  <textarea [rows]="10" formControlName=otherComments pInputTextarea placeholder="Comment"></textarea>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        
+  
+        <button type="submit" pButton label="Submit" class="p-button-outlined" style="margin-top: 10px;"></button>
+        <p-button label="Cancel" styleClass="p-button-link" style="margin-top: 10px;"></p-button>
+        </form>
+      </div>
+    </div>
+  </div>
