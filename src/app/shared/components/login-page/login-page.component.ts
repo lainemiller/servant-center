@@ -23,7 +23,7 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  navigateToDashboard(): void {
-    Auth.federatedSignIn();
-  }
+  // navigateToDashboard(): void {
+  //   Auth.federatedSignIn();
+  // }
 }
