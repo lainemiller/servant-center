@@ -255,7 +255,6 @@ export class VeteranProfileComponent implements OnInit {
   get emailid() {
     return this.veteranProfileForm.get('emailId');
   }
-
   get getControl() {
     return this.veteranProfileForm.controls;
   }
