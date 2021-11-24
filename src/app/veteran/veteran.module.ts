@@ -19,6 +19,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ToolbarModule } from 'primeng/toolbar';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { CheckboxModule } from 'primeng/checkbox';
+import {AccordionModule} from 'primeng/accordion';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { CheckboxModule } from 'primeng/checkbox';
     HttpClientModule,
     RadioButtonModule,
     RxReactiveFormsModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    AccordionModule
   ],
   exports: [Ng2SearchPipeModule,InputSwitchModule,ToggleButtonModule,ToolbarModule],
 })

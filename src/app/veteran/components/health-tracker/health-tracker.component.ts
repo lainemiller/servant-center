@@ -59,4 +59,8 @@ export class HealthTrackerComponent implements OnInit {
     //logic
   }
 
+  resetForm() {
+    this.buildForm();
+  }
+
 }
