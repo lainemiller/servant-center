@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { DataService } from './services/data.service';
+import Auth from '@aws-amplify/auth';
 
 @Component({
   selector: 'app-case-worker',
@@ -71,6 +72,7 @@ export class CaseWorkerComponent implements OnInit {
         icon: 'fas fa-sign-out-alt',
         styleClass: 'menu-items--text menu-item--6',
         routerLink: ['/case-worker/dashboard'],
+        command:() =>this.onLogoutClick()
       },
     ];
   }
@@ -88,4 +90,11 @@ export class CaseWorkerComponent implements OnInit {
     if(window.innerWidth < 768)
       this.displayMenu = !this.displayMenu;
   }
+  onLogoutClick() {
+
+    console.log("Logout Clicked");
+
+    Auth.signOut();
+  }
+
 }
