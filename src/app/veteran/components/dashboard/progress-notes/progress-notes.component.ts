@@ -16,7 +16,8 @@ export class ProgressNotesComponent implements OnInit {
   public searchText = '';
   public progressNote: any;
   public d: any;
-  public progressNotes: any;
+  public progressNotes:any=[];
+  public progress:any=[];
   public initialStatus = true;
 
   constructor(
@@ -28,8 +29,15 @@ export class ProgressNotesComponent implements OnInit {
     //get data from backend
 
     this.service.getNotes().subscribe((data) => {
-      this.progressNotes = data;
+      this.progress = data;  
+      let k=0;
+      for(let i=this.progress.length;i>0;i--){
+        this.progressNotes[k++]=this.progress[i-1];
+      }
+      console.log("abjhh",this.progress);
+      
     });
+    
     this.initialStatus = true;
     this.buildForm();
   }
@@ -84,7 +92,7 @@ export class ProgressNotesComponent implements OnInit {
     return this.progressNote.get('goalState');
   }
   onSubmit() {
-    console.log(this.progressNote.value);
+    //console.log(this.progressNote.value);
     //send data to backend
     // this.service.postNotes(this.progressNote.value).subscribe((data) => {
     //   console.log('Submitted');
@@ -95,7 +103,7 @@ export class ProgressNotesComponent implements OnInit {
     });
     // this.progressNotes.push(this.progressNote.value)
     this.display = false;
-    console.log(this.progressNotes);
+    //console.log(this.progressNotes);
     this.progressNote.reset();
   }
   crossButton() {

@@ -31,7 +31,7 @@ export class NoSpecialSymbolsDirective {
 
   @HostListener('keydown', [ '$event' ])
   onKeyDown(event: KeyboardEvent): void {
-      console.log(event);
+     // console.log(event);
       // prevent 1st space char
       if ((event.code && event.code.toLowerCase() === 'space') && this.targetElmt.value.length <= 0) {
         event.preventDefault();

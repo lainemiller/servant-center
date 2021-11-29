@@ -343,16 +343,129 @@
                 </div>    
             </p-accordionTab>
             <p-accordionTab header="Substance Abuse History">
-                Content 3    
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>History of Alcohol use :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.historyOfAlcohol}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>History of Drug use :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.historyOfDrugs}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Alcohol :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.alcohol}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Drugs :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.drugs}}</h3>  
+                    </div>
+                   
+                </div>   
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Tobacco :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.tobacco}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Caffeine :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.caffeine}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Last use of Drugs :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.lastUseOfDrug}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Last use of Alcohol :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.lastUseOfAlcohol}}</h3>  
+                    </div>
+                    
+                </div>  
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Current treatment :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.currentTreatment}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Inpatient or outpatient treatment programs :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.iOtreatment}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>History of withdrawal :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.historyOfWithdrawal}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Explain :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.explain}}</h3>  
+                    </div>
+                </div>   
             </p-accordionTab>
             <p-accordionTab header="Legal History / Issues">
-                Content 3    
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Charges pending :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.chargesPending}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Outstanding warrants :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.outstandingWarrants}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Name of the probation / parole officer :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.nameOfProbationOfficer}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Address of the probation / parole officer :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.addressOfProbationOfficer}}</h3>  
+                    </div>
+                </div>  
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Terms & conditions of the probation / parole :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.termsOfProbation}}</h3>  
+                    </div>
+                </div>
             </p-accordionTab>
             <p-accordionTab header="Preliminary Diagnosis">
-                Content 3    
+                      
             </p-accordionTab>
             <p-accordionTab header="Initial Treatment Goals">
-                Content 3    
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>What has happened in my life this past year?</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.happendPastyears}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Short term goals :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.stg}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Long term goals :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.ltg}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Strengths and resources :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.strengthResources}}</h3>  
+                    </div>
+                </div>    
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Preferences :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.preferences}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Needs :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.needs}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Supports :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.support}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for=""><h3>Additional comments :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.additionalComment}}</h3>  
+                    </div>
+                </div>  
             </p-accordionTab>
         </p-accordion>
       </div>
