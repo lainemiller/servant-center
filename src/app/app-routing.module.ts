@@ -19,11 +19,10 @@ const routes: Routes = [
       canActivate: [CaseWorkerGuard]
   },
   {
-    // path: 'veteran',canActivate: [AuthGuard],
     path: 'veteran',
     loadChildren: () =>
       import('./veteran/veteran.module').then((m) => m.VeteranModule),
-      canActivate: [VeteranGuard]
+      // canActivate: [AuthGuard]
   },
   { path: '**', redirectTo: 'veteran' },
 ];
