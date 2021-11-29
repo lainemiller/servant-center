@@ -9,10 +9,7 @@ import { Auth } from '@aws-amplify/auth';
 })
 export class LoginPageComponent implements OnInit {
   public title = 'LOGIN TO APPLICATION';
-  public logInUrl =
-    'https://servant-center.auth.us-east-1.amazoncognito.com/login?response_type=token&client_id=5igt34gtp2ok5mf02d9e4v30lb&redirect_uri=http://localhost:4200/veteran';
-
-  constructor(private router: Router, private zone: NgZone) {
+  constructor(private router: Router) {
     Auth.currentAuthenticatedUser()
       .then(() => {
         this.router.navigate(['/veteran'], { replaceUrl: true });
@@ -24,7 +21,7 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  navigateToDashboard(): void {
-    Auth.federatedSignIn();
-  }
+  // navigateToDashboard(): void {
+  //   Auth.federatedSignIn();
+  // }
 }

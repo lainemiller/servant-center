@@ -1,4 +1,473 @@
-<p>assessment works!</p>
-<div class="container">
-
+<div class="p-grid">
+    <div class="p-col-12">
+      <app-item-header title="Assessment Form"></app-item-header>
+      <div class="form-container">
+          <p-accordion>
+            <p-accordionTab header="Personal Information">
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3> First Name:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.firstName}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Middle Name:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.middleName}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Last Name:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.lastName}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Nick Name:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.nickName}}</h3>  
+                    </div>
+                </div>   
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Date of Birth: </h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.dob}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Place of Birth:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.pob}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>SSN#:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.ssn}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Age:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.age}}</h3>  
+                    </div>
+                </div>  
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Sex:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.sex}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Marital Status:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.maritalStatus}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Race:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.race}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Primary Language:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.primaryLang}}</h3>  
+                    </div>
+                </div>
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Contact Person:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.contactPerson}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Relationship:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.relation}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3> Address:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.address}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3> City:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.city}}</h3>  
+                    </div>
+                </div>   
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>State:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.state}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3> Zip Code:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.zipCode}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Phone Number:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.phone}}</h3>  
+                    </div>
+                </div>        
+            </p-accordionTab>
+            <p-accordionTab header="Financial">
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3> Income:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.income}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3> Type:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.type}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3> Back Account:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.bankAcc}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Name of Bank:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.bankName}}</h3>  
+                    </div>
+                </div>  
+                <div class="p-fluid p-ml-5 p-grid">
+                   
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3> Direct Deposit:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.directDeposit}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3> Other Assets:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.otherAssets}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3> VA Coverage:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.vaCoverage}}</h3>  
+                    </div>
+                </div> 
+            </p-accordionTab>
+            <p-accordionTab header="Employment and Education History ">
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Previous occupation:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.previousOccu}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Current occupation:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.currentOccu}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Work skills:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.workSkill}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Most recent job:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.mostRecentJob}}</h3>  
+                    </div>
+                   
+                </div> 
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Date:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.date}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Reason for leaving:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.reasonForLeaving}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Highest grade completed:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.highestGrade}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Name of school:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.nameOfSchool}}</h3>  
+                    </div>
+                    
+                </div>   
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Military:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.military}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Branch:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.branch}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Type of discharge:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.typeOfDischarge}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Dates of service:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.datesOfService}}</h3>  
+                    </div>
+                </div>    
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Location of service:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.locationOfService}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Other training and / or location:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.otherTraining}}</h3>  
+                    </div>
+                </div>
+            </p-accordionTab>
+            <p-accordionTab header="Social">
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Religious preference:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.religiousPref}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Hobbies / Interests:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.hobbies}}</h3>  
+                    </div> 
+                </div>
+            </p-accordionTab>
+            <p-accordionTab header="Family">
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Mother’s Full Name:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.motherName}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Mother Living / Deceased:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.mothersLiving}}</h3>  
+                    </div> 
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Father’s Full Name:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.fatherName}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Father Living / Deceased:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.fatherLiving}}</h3>  
+                    </div>
+                </div>
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Full name of spouse:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.spouseName}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Describe your childhood:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.describeChildhood}}</h3>  
+                    </div> 
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Describe your relationship with your parents:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.relationWithParent}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Describe your relationship with your siblings:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.relationWithSibling}}</h3>  
+                    </div>
+                </div>
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>What type of discipline did you have growing up ?</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.disciplin}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Any history of physical abuse ?</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.physicalAbuse}}</h3>  
+                    </div> 
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Any history of sexual abuse ?</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.sexualAbuse}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Any history of health problems, mental illness? </h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.healthIssues}}</h3>  
+                    </div>
+                </div>
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Have you ever been married ?</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.married}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Current marital status:</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.currentMaritalStatus}}</h3>  
+                    </div> 
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>What is your sexual orientation ?</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.sexualOrientation}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Are you currently sexually active ?</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.sexuallyActive}}</h3>  
+                    </div>
+                </div>
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Do you have any sexual problems or concerns ?</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.sexualProblems}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Have you ever been tested for HIV / AIDS ?</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.testedForHIV}}</h3>  
+                    </div> 
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>What were the results ?</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.resultForHIV}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Have you ever been tested for STD’s ?</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.testedForSTD}}</h3>  
+                    </div>
+                </div>
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>What were the results ?</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.resultForSTD}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>If you answered no, would you like to be tested for HIV / AIDS and STD’s ?</h3></label>
+                        <h3 class="h3-margin">{{assessDetails?.likeToTest}}</h3>  
+                    </div>
+                </div>
+            </p-accordionTab>
+            <p-accordionTab header="Mental Health">
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Diagnosis:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.diagnosis}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Current psychiatric treatment :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.currentPsychiatricTreatment}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Name of the psychiatrist / therapist:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.nameOfPsychiatrist}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Address of the psychiatrist / therapist:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.addressOfPsychiatrist}}</h3>  
+                    </div>
+                </div>   
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Does client need a psychiatric consult:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.psychiatricConsult}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Name of the physician completing psych evaluation:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.NameOfPhysician}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Address of the physician completing psych evaluation:</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.addressOfPhysician}}</h3>  
+                    </div>
+                </div>    
+            </p-accordionTab>
+            <p-accordionTab header="Substance Abuse History">
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>History of Alcohol use :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.historyOfAlcohol}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>History of Drug use :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.historyOfDrugs}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Alcohol :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.alcohol}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Drugs :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.drugs}}</h3>  
+                    </div>
+                   
+                </div>   
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Tobacco :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.tobacco}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Caffeine :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.caffeine}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Last use of Drugs :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.lastUseOfDrug}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Last use of Alcohol :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.lastUseOfAlcohol}}</h3>  
+                    </div>
+                    
+                </div>  
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Current treatment :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.currentTreatment}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Inpatient or outpatient treatment programs :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.iOtreatment}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>History of withdrawal :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.historyOfWithdrawal}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Explain :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.explain}}</h3>  
+                    </div>
+                </div>   
+            </p-accordionTab>
+            <p-accordionTab header="Legal History / Issues">
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Charges pending :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.chargesPending}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Outstanding warrants :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.outstandingWarrants}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Name of the probation / parole officer :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.nameOfProbationOfficer}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Address of the probation / parole officer :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.addressOfProbationOfficer}}</h3>  
+                    </div>
+                </div>  
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Terms & conditions of the probation / parole :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.termsOfProbation}}</h3>  
+                    </div>
+                </div>
+            </p-accordionTab>
+            <p-accordionTab header="Preliminary Diagnosis">
+                      
+            </p-accordionTab>
+            <p-accordionTab header="Initial Treatment Goals">
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>What has happened in my life this past year?</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.happendPastyears}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Short term goals :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.stg}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Long term goals :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.ltg}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Strengths and resources :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.strengthResources}}</h3>  
+                    </div>
+                </div>    
+                <div class="p-fluid p-ml-5 p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Preferences :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.preferences}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Needs :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.needs}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for=""><h3>Supports :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.support}}</h3>  
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for=""><h3>Additional comments :</h3> </label>
+                        <h3 class="h3-margin">{{assessDetails?.additionalComment}}</h3>  
+                    </div>
+                </div>  
+            </p-accordionTab>
+        </p-accordion>
+      </div>
+    </div>
 </div>
