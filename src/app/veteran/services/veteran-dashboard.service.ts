@@ -10,4 +10,8 @@ export class VeteranDashboardService {
   getName() {
     return this.http.get('./assets/mock/userData.json');
   }
+  getTreatmentData()
+  {
+    return this.http.get<any>('./assets/mock/treatmentPlan-data.json');
+  }
 }

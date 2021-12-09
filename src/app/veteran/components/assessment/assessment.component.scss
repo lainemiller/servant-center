@@ -1,27 +1,44 @@
-.form-container {
+.assessment-container {
     margin: 0 15px;
     padding: 20px 20px;
     background: #fff;
     border-width: 1px;
     border-style: solid;
     border-color: rgba(183, 183, 183, 1);
-  }
-.h3-margin{
-    position: relative;
-    bottom: 30px;
-    font-weight: lighter;
+    .section__answer {
+        position: relative;
+        bottom: 30px;
+        font-weight: 200;
+    }
+    .section__ques {
+        font-family: "Roboto Medium", "Roboto Regular", "Roboto";
+        font-weight: 500;
+    }
 }
-.p-fluid{
-    margin-bottom: -60px;
+
+.p-field {
+    margin-bottom: -50px;
 }
-:host ::ng-deep .p-accordion .p-accordion-header .p-accordion-header-link {
-  
-    color: black;
-    font-family: "Roboto Medium", "Roboto Regular", "Roboto";
-    font-weight: 500;
-   
-}
-label{
-    font-family:"Roboto Medium", "Roboto Regular", "Roboto";
-    font-weight: 500; 
+
+
+
+@media (max-width: 768px) {
+    .assessment-container__section {
+        margin-bottom: 10px;
+        position: relative;
+        right: 30px;
+        width: 100%;
+        font-size: 18px;
+        .p-field {
+            margin-bottom: -5px;
+            .section__ques {
+                margin-right: 8px;
+                display: inline;
+            }
+            .section__answer {
+                bottom: 0px;
+                display: inline;
+            }
+        }
+    }
 }
