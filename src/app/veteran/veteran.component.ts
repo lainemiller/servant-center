@@ -68,7 +68,6 @@ export class VeteranComponent implements OnInit {
       label: 'LOGOUT',
       icon: 'fas fa-sign-out-alt',
       styleClass: 'menu-items--text menu-item--6',
-      routerLink: ['/veteran/logout'],
       command:() =>this.onLogoutClick()
     },
   ];
@@ -77,6 +76,9 @@ export class VeteranComponent implements OnInit {
     console.log('veteran component');
     if(window.innerWidth < 768)
       this.displayMenu = false;
+
+      
+    
   }
 
   toggleMenu(): void {

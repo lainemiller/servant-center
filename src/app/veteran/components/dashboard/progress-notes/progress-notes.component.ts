@@ -16,8 +16,8 @@ export class ProgressNotesComponent implements OnInit {
   public searchText = '';
   public progressNote: any;
   public d: any;
-  public progressNotes:any=[];
-  public progress:any=[];
+  public progressNotes: any = [];
+  public progress: any = [];
   public initialStatus = true;
 
   constructor(
@@ -29,20 +29,17 @@ export class ProgressNotesComponent implements OnInit {
     //get data from backend
 
     this.service.getNotes().subscribe((data) => {
-      this.progress = data;  
-      let k=0;
-      for(let i=this.progress.length;i>0;i--){
-        this.progressNotes[k++]=this.progress[i-1];
+      this.progress = data;
+      let k = 0;
+      for (let i = this.progress.length; i > 0; i--) {
+        this.progressNotes[k++] = this.progress[i - 1];
       }
-      console.log("abjhh",this.progress);
-      
     });
-    
+
     this.initialStatus = true;
     this.buildForm();
   }
-  
-  
+
   expandOrCollapse(index: any) {
     const elementSelector = '#goal-desc--' + index;
     const descElement = document.querySelector(elementSelector) as HTMLElement;
@@ -82,14 +79,8 @@ export class ProgressNotesComponent implements OnInit {
     });
   }
 
-  get goalTitle() {
-    return this.progressNote.get('goalTitle');
-  }
-  get goalDescription() {
-    return this.progressNote.get('goalDescription');
-  }
-  get goalState() {
-    return this.progressNote.get('goalState');
+  get progressNoteForm() {
+    return this.progressNote.controls;
   }
   onSubmit() {
     //console.log(this.progressNote.value);

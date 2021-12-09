@@ -18,6 +18,7 @@ export class NoSpecialSymbolsDirective {
   private textPeriodRegex: RegExp = new RegExp(/^[a-zA-Z.]*$/);
   private textAreaAllowedChars: RegExp = new RegExp(/^[a-zA-Z0-9,-.' @$?%()_‘’]*$/);
   private startWithAlpha:RegExp= new RegExp(/^[a-zA-Z]+(.)*/);
+  private textWithSpace: RegExp = new RegExp(/[^a-zA-Z0-9 ]/);
   // tslint:disable-next-line:max-line-length
   private specialKeys: Array<string> = [ 'Backspace', 'Deconste', 'Tab', 'End', 'Home', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'Enter', 'Delete', 'Del', 'Left', 'Right'];
   private numberWithPeriodAndNegative: RegExp = new RegExp(/^[0-9.-]*$/);
@@ -65,6 +66,9 @@ export class NoSpecialSymbolsDirective {
         event.preventDefault();
       }
       if (next && attrTxt === 'textWithPeriod' && !String(next).match(this.textPeriodRegex)) {
+        event.preventDefault();
+      }
+      if (next && attrTxt === 'textWithSpace' && String(next).match(this.textWithSpace)) {
         event.preventDefault();
       }
       if (next && attrTxt === 'numbersOnly' && !String(next).match(this.numbers)) {
