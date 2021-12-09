@@ -35,3 +35,8 @@
   width: 13.5rem;
   border: none;
 }
+@media print {
+  p-menu {
+    display: none;
+  }
+}
