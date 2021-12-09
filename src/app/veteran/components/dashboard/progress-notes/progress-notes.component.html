@@ -27,12 +27,12 @@
                 />
                 <small
                   class="error"
-                  *ngIf="goalTitle.errors?.required && goalTitle.touched"
+                  *ngIf="progressNoteForm.goalTitle.errors?.required && progressNoteForm.goalTitle.touched"
                   >Goal Title is required.</small
                 >
                 <small
                 class="error"
-                *ngIf="goalTitle.errors?.maxlength"
+                *ngIf="progressNoteForm.goalTitle.errors?.maxlength"
                 >Goal Title should be at max of 50 characters.</small
               >
               </div>
@@ -46,12 +46,12 @@
                 ></textarea>
                 <small
                   class="error"
-                  *ngIf="goalDescription.errors?.required && goalDescription.touched"
+                  *ngIf="progressNoteForm.goalDescription.errors?.required && progressNoteForm.goalDescription.touched"
                   >Goal Description is required.</small
                 >
                 <small
                 class="error"
-                *ngIf="goalDescription.errors?.maxlength"
+                *ngIf="progressNoteForm.goalDescription.errors?.maxlength"
                 >Goal Description should be at max of 300 characters</small
               >
               </div>
@@ -69,11 +69,6 @@
                     </p-inputSwitch>
                     <span class="p-ml-2">In Progress</span>
                   </div>
-                  <!-- <small
-                    class="error"
-                    *ngIf="goalState.invalid && goalState.touched"
-                    >Goal Description is required.</small
-                  > -->
                 </p-toolbar>
               </div>
             </div>
@@ -96,6 +91,7 @@
           </form>
         </p-dialog>
       </div>
+      <!-- add note modal ends -->
       <button
         type="button"
         pButton
@@ -124,7 +120,7 @@
           [style]="{ width: '75vw' }"
           [contentStyle]="{ minHeight: '500px' }"
         >
-        <div class="major">
+        <div>
           <p-toolbar id="progress-notes--mainToolbar">
             <div class="p-toolbar-group-left">
               <button

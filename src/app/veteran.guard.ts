@@ -38,15 +38,6 @@ export class VeteranGuard implements CanActivate {
         this._router.navigate(['/login']);
         return false;
       });
-
-    // if(this.group=='Veteran'){
-    //   return true;
-    // }
-    // else{
-    //   this._router.navigate(['/login']);
-    //   return false;
-    // }
-
     return true;
   }
 }

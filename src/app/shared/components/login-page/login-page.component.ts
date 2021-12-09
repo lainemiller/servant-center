@@ -10,7 +10,6 @@ import { Auth } from '@aws-amplify/auth';
 export class LoginPageComponent implements OnInit {
   public title = 'LOGIN TO APPLICATION';
   constructor(private router: Router) {
-    //currentAuthenticatedUser: when user comes to login page again
     Auth.currentAuthenticatedUser()
       .then(() => {
         this.router.navigate(['/veteran'], { replaceUrl: true });

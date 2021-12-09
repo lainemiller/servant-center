@@ -59,3 +59,19 @@ body {
 {
   background-color: #efefef;
 }
+
+//Assessment form starts
+
+.p-accordion .p-accordion-header .p-accordion-header-link {
+  color: black;
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto";
+  font-weight: 500;
+}
+
+//Assessment form ends
+
+//veteran treatment plan start
+p-calendar.ng-touched.ng-invalid > .p-calendar > .p-inputtext {
+  border-color: #ed3629;
+}
+//veteran treatment plan ends

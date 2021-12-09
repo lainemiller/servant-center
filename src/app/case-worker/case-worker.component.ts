@@ -71,7 +71,6 @@ export class CaseWorkerComponent implements OnInit {
         label: 'LOGOUT',
         icon: 'fas fa-sign-out-alt',
         styleClass: 'menu-items--text menu-item--6',
-        routerLink: ['/case-worker/dashboard'],
         command:() =>this.onLogoutClick()
       },
     ];
