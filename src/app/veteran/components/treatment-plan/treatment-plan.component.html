@@ -1,104 +1,714 @@
-
 <div class="p-grid">
   <div class="p-col-12">
     <app-item-header title="TREATMENT PLAN"></app-item-header>
-    <div class="form-container">
+    <div *ngIf="formView" class="form-container">
       <form [formGroup]="treatmentPlanForm" (ngSubmit)="onSubmit()">
-      <div class="p-fluid p-formgrid p-grid">
-        <div class="p-field p-col-12 p-md-3">
-          <input type="text" pInputText formControlName=firstName placeholder="Resident's First Name"></div>
-        <div class="p-field p-col-12 p-md-3">
-          <input type="text" pInputText formControlName=lastName placeholder="Resident's Last Name"></div>
-        <div class="p-field p-col-12 p-md-3">
-          <input type="text" pInputText formControlName=recordNo placeholder="Record #"></div>
-        <div class="p-field p-col-12 p-md-3">
-          <p-calendar formControlName=dateOfBirth1 [inline]=false [showIcon]=true placeholder="DOB (mm/dd/yyyy)"></p-calendar></div>
-      </div>
-
-      <div class="p-fluid p-formgrid p-grid">
-        <div class="p-field p-col-12 p-md-3">
-          <p-calendar formControlName=dateOfBirth2 [inline]=false [showIcon]=true placeholder="DOB (mm/dd/yyyy)"></p-calendar></div>
-        <div class="p-field p-col-12 p-md-3">
-          <p-calendar formControlName=intakeDOB [inline]=false [showIcon]=true placeholder="Intake date (mm/dd/yyyy)"></p-calendar></div>
-        <div class="p-field p-col-12 p-md-3">
-          <input type="text" pInputText formControlName=hmisIdNo placeholder="HMIS ID#"></div>
-      </div>
-
-      <div class="p-fluid p-formgrid p-grid">
-        <div class="p-field p-col-12 p-md-6">
-          <span class="title">DIAGNOSES</span>
-          <textarea [rows]="10" formControlName=veteranDiagnosis pInputTextarea placeholder="Comment"></textarea>
-        </div>
-        <div class="p-field p-col-12 p-md-3">
-          <span class="title">SUPPORTS</span>
-          <textarea [rows]="10" formControlName=veteranSupports pInputTextarea placeholder="Comment"></textarea>
-        </div>
-        <div class="p-field p-col-12 p-md-3">
-          <span class="title">STRENGTHS</span>
-          <textarea [rows]="10" formControlName=veteranStrengths pInputTextarea placeholder="Comment"></textarea>
-        </div>
-      </div>
-
-      <div class="p-fluid p-formgrid p-grid">
-        <div class="p-field p-col-12">
-          <div class="title-container">
-            <p>
-              <span>TREATMENT ISSUES & GOALS</span>
-            </p>
-          </div>
-        </div>
-        <div class="p-field p-col-12 p-md-3">
-          <p-button label="Add" (click)='addNewField()'></p-button>
-        </div>
-        <div class="p-field p-col-12 p-md-3">
-          <p-button label="Delete" (click)='deleteField()' [disabled]='delete'></p-button>
-        </div>
-      </div>
-
-      <div formArrayName="treatmentIssues" *ngFor="let item of treatmentIssues.controls; let j = index;">
-        <div [formGroupName]="j">
-          <div *ngFor="let goal of treatmentGoals; let i=index" style="background: #efefef;">
-            <div class="p-field p-col-12">
-              <div class="p-grid">
-                <div class="p-col-fixed bullents">{{i+1}}</div>
-                <div class="p-col heading">{{goal.label}}</div>
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-3">
+            <span class="label-title">Resident's First Name</span>
+            <input
+              type="text"
+              class="userInput"
+              pInputText
+              formControlName="firstName"
+              appNoSpecialSymbols
+              customAttr="textOnly"
+              placeholder="Resident's First Name"
+            />
+            <div
+              *ngIf="
+                getControl.firstName.invalid && getControl.firstName.touched
+              "
+            >
+              <div
+                *ngIf="getControl.firstName.errors?.required"
+                class="form-error"
+              >
+                <small>FirstName is required.</small>
               </div>
             </div>
-            <div [formArrayName]="goal.formName" *ngFor="let item of goal.controls; let i = index;">
-              <div [formGroupName]="i">
-                <div class="p-grid p-align-start vertical-container">
-                  <div class="p-col">
-                    <div class="box">
-                      <input type="text" formControlName="goals" pInputText placeholder="Goal"></div>
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <span class="label-title">Resident's Last Name</span>
+            <input
+              type="text"
+              pInputText
+              formControlName="lastName"
+              appNoSpecialSymbols
+              customAttr="textOnly"
+              placeholder="Resident's Last Name"
+            />
+            <div
+              *ngIf="getControl.lastName.invalid && getControl.lastName.touched"
+            >
+              <div
+                *ngIf="getControl.lastName.errors?.required"
+                class="form-error"
+              >
+                <small>LastName is required.</small>
+              </div>
+            </div>
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <span class="label-title">Record #</span>
+            <input
+              type="text"
+              pInputText
+              formControlName="recordNo"
+              appNoSpecialSymbols
+              customAttr="numbersOnly"
+              placeholder="Record #"
+            />
+            <div
+              *ngIf="getControl.recordNo.invalid && getControl.recordNo.touched"
+            >
+              <div
+                *ngIf="getControl.recordNo.errors?.required"
+                class="form-error"
+              >
+                <small>Record is required.</small>
+              </div>
+            </div>
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <span class="label-title">Date Of Birth</span>
+            <p-calendar
+              formControlName="dateOfBirth1"
+              [inline]="false"
+              [showIcon]="true"
+              placeholder="DOB (mm/dd/yyyy)"
+            ></p-calendar>
+            <div
+              *ngIf="
+                getControl.dateOfBirth1.invalid &&
+                getControl.dateOfBirth1.touched
+              "
+            >
+              <div
+                *ngIf="getControl.dateOfBirth1.errors?.required"
+                class="form-error"
+              >
+                <small>DOB is required.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-3">
+            <span class="label-title">Intake Date</span>
+            <p-calendar
+              formControlName="intakeDOB"
+              [inline]="false"
+              [showIcon]="true"
+              placeholder="Intake date (mm/dd/yyyy)"
+            ></p-calendar>
+            <div
+              *ngIf="
+                getControl.intakeDOB.invalid && getControl.intakeDOB.touched
+              "
+            >
+              <div
+                *ngIf="getControl.intakeDOB.errors?.required"
+                class="form-error"
+              >
+                <small>Intake date is required.</small>
+              </div>
+            </div>
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <span class="label-title">HMIS ID </span>
+            <input
+              type="text"
+              pInputText
+              formControlName="hmisIdNo"
+              appNoSpecialSymbols
+              customAttr="numbersOnly"
+              placeholder="HMIS ID#"
+            />
+            <div
+              *ngIf="getControl.hmisIdNo.invalid && getControl.hmisIdNo.touched"
+            >
+              <div
+                *ngIf="getControl.hmisIdNo.errors?.required"
+                class="form-error"
+              >
+                <small>HMIS ID is required.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-6">
+            <span class="label-title">Diagnosis</span>
+            <textarea
+              [rows]="10"
+              formControlName="veteranDiagnosis"
+              class="userInput"
+              pInputTextarea
+              placeholder="Comment"
+            ></textarea>
+            <div
+              *ngIf="
+                getControl.veteranDiagnosis.invalid &&
+                getControl.veteranDiagnosis.touched
+              "
+            >
+              <div
+                *ngIf="getControl.veteranDiagnosis.errors?.required"
+                class="form-error"
+              >
+                <small>Veteran Diagnosis is required.</small>
+              </div>
+            </div>
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <span class="label-title">Supports</span>
+            <textarea
+              [rows]="10"
+              formControlName="veteranSupports"
+              class="userInput"
+              pInputTextarea
+              placeholder="Comment"
+            ></textarea>
+            <div
+              *ngIf="
+                getControl.veteranSupports.invalid &&
+                getControl.veteranSupports.touched
+              "
+            >
+              <div
+                *ngIf="getControl.veteranSupports.errors?.required"
+                class="form-error"
+              >
+                <small>Support is required.</small>
+              </div>
+            </div>
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <span class="label-title">Strengths</span>
+            <textarea
+              [rows]="10"
+              formControlName="veteranStrengths"
+              class="userInput"
+              pInputTextarea
+              placeholder="Comment"
+            ></textarea>
+            <div
+              *ngIf="
+                getControl.veteranStrengths.invalid &&
+                getControl.veteranStrengths.touched
+              "
+            >
+              <div
+                *ngIf="getControl.veteranStrengths.errors?.required"
+                class="form-error"
+              >
+                <small>Strength is required.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12">
+            <div class="title-container">
+              <p>
+                <span>TREATMENT ISSUES & GOALS</span>
+              </p>
+            </div>
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <p-button label="Add" (click)="addNewField()"></p-button>
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <p-button
+              label="Delete"
+              (click)="deleteField()"
+              [disabled]="delete"
+            ></p-button>
+          </div>
+        </div>
+
+        <div
+          formArrayName="treatmentIssues"
+          *ngFor="let item of treatmentIssues.controls; let j = index"
+        >
+          <div [formGroupName]="j">
+            <div
+              *ngFor="let goal of treatmentGoals; let i = index"
+              style="background: #efefef"
+            >
+              <div class="p-field p-col-12">
+                <div class="p-grid">
+                  <div class="p-col-fixed bullents bullents-margin">
+                    {{ i + 1 }}
+                  </div>
+                  <div class="p-col heading">{{ goal.label }}</div>
+                </div>
+              </div>
+              <div
+                [formArrayName]="goal.formName"
+                *ngFor="let item of goal.controls; let i = index"
+              >
+                <div [formGroupName]="i">
+                  <div class="p-grid p-align-start vertical-container">
+                    <div class="p-col">
+                      <div class="box" *ngIf="goal.label === 'PHYSICAL HEALTH'">
+                        <input
+                          type="text"
+                          formControlName="goals"
+                          pInputText
+                          class="userInput"
+                          placeholder="Goal"
+                          id="goal{{ i }}a{{ j }}"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}a{{ j }} form-error"
+                        >
+                          <small>Goal is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'MENTAL HEALTH'">
+                        <input
+                          type="text"
+                          formControlName="goals"
+                          pInputText
+                          class="userInput"
+                          placeholder="Goal"
+                          id="goal{{ i }}{{ j }}a"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}{{ j }}a form-error"
+                        >
+                          <small>Goal is required.</small>
+                        </div>
+                      </div>
                     </div>
-                  <div class="p-col">
-                    <div class="box">
-                      <input type="text" formControlName="plans" pInputText placeholder="Plan"></div>
+                    <div class="p-col">
+                      <div class="box" *ngIf="goal.label === 'PHYSICAL HEALTH'">
+                        <input
+                          type="text"
+                          formControlName="plans"
+                          pInputText
+                          class="userInput"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          placeholder="Plan"
+                          id="goal{{ i }}b{{ j }}"
+                          
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}b{{ j }} form-error"
+                        >
+                          <small>Plan is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'MENTAL HEALTH'">
+                        <input
+                          type="text"
+                          formControlName="plans"
+                          pInputText
+                          class="userInput"
+                          placeholder="Plan"
+                          id="goal{{ i }}{{ j }}b"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}{{ j }}b form-error"
+                        >
+                          <small>Plan is required.</small>
+                        </div>
+                      </div>
                     </div>
-                  <div class="p-col">
-                    <div class="box">
-                      <input type="text" formControlName="strategies" pInputText placeholder="Strategy"></div>
+                    <div class="p-col">
+                      <div class="box" *ngIf="goal.label === 'PHYSICAL HEALTH'">
+                        <input
+                          type="text"
+                          formControlName="strategies"
+                          pInputText
+                          class="userInput"
+                          placeholder="Strategy"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          id="goal{{ i }}{{ j }}c"
+                          
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}{{ j }}c form-error"
+                        >
+                          <small>Strategy is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'MENTAL HEALTH'">
+                        <input
+                          type="text"
+                          formControlName="strategies"
+                          pInputText
+                          class="userInput"
+                          placeholder="Strategy"
+                          id="goal{{ i }}c{{ j }}"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}c{{ j }} form-error"
+                        >
+                          <small>Strategy is required.</small>
+                        </div>
+                      </div>
                     </div>
-                  <div class="p-col">
-                    <div class="box">
-                      <p-calendar [inline]=false formControlName="targetDate" [showIcon]=true placeholder="Target date"></p-calendar></div>
+                    <div class="p-col">
+                      <div class="box" *ngIf="goal.label === 'PHYSICAL HEALTH'">
+                        <div>
+                          <p-calendar
+                            [inline]="false"
+                            formControlName="targetDate"
+                            inputId="goal{{ i }}d{{ j }}"
+                            [showIcon]="true"
+                            placeholder="Target date"
+                            (onSelect)="validateDate($event)"
+                            (focusout)="getDate($event)"
+                            [maxDate]="maxDateValue"
+                          ></p-calendar>
+                        </div>
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}d{{ j }} form-error"
+                        >
+                          <small>Target Date is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'MENTAL HEALTH'">
+                        <div>
+                          <p-calendar
+                            [inline]="false"
+                            formControlName="targetDate"
+                            inputId="goal{{ i }}{{ j }}d"
+                            [showIcon]="true"
+                            placeholder="Target date"
+                            (onSelect)="validateDate($event)"
+                            (focusout)="getDate($event)"
+                            [maxDate]="maxDateValue"
+                          ></p-calendar>
+                        </div>
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}{{ j }}d form-error"
+                        >
+                          <small>Target Date is required.</small>
+                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="p-fluid p-formgrid p-grid">
-        <div class="p-field p-col-12">
-          <textarea [rows]="5" formControlName=veteranNotes pInputTextarea placeholder="Notes"></textarea>
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12">
+            <textarea
+              [rows]="5"
+              formControlName="veteranNotes"
+              class="userInput"
+              pInputTextarea
+              placeholder="Notes"
+            ></textarea>
+            <div
+              *ngIf="
+                getControl.veteranNotes.invalid &&
+                getControl.veteranNotes.touched
+              "
+            >
+              <small class="form-error">Veteran notes is required.</small>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <button type="submit" pButton label="Submit" class="p-button-outlined"></button>
-      <p-button label="Cancel" styleClass="p-button-link"></p-button>
+        <button type="submit" pButton label="Summary" class="p-button"></button>
+        <p-button label="Cancel" styleClass="p-button-link" (click)="resetForm()"></p-button>
       </form>
+    </div>
+    <div *ngIf="!formView" class="form-container" id="print">
+      <header class="p-d-flex p-jc-between">
+        <div class="print-display">
+          <i class="fas fa-arrow-alt-circle-left btn-col"  (click)="showForm()"><span class="btn-text">Edit</span></i>
+        </div>
+        <div class="print-display">
+          <i class="fa fa-download btn-col"  (click)="downloadForm()"><span class="btn-text">Download</span></i>   
+        </div>
+      </header>
+      <div class="form-head margin-20">Treatment plan summary</div>
+      <body>
+        <div class="p-fluid p-formgrid p-grid margin-20">
+          <section class="p-field p-col-12 p-md-2">
+            <span class="form-head--data">Name: </span>
+            <span class="form-head--data__light">{{ formData.firstName}}  {{formData.lastName}}</span>
+          </section>
+          <section class="p-field p-col-12 p-md-2">
+            <span class="form-head--data">Record #: </span>
+            <span class="form-head--data__light">{{ formData.recordNo }}</span>
+          </section>
+          <section class="p-field p-col-12 p-md-2">
+            <span class="form-head--data">DOB: </span>
+            <span class="form-head--data__light">{{ formData.dateOfBirth1 }}</span>
+          </section>
+          <section class="p-field p-col-12 p-md-2">
+            <span class="form-head--data">Date: </span>
+            <span class="form-head--data__light">{{ formData.dateOfBirth1 }}</span>
+          </section>
+          <section class="p-field p-col-12 p-md-2">
+            <span class="form-head--data">IntakeDate: </span>
+            <span class="form-head--data__light">{{ formData.intakeDOB }}</span>
+          </section>
+          <section class="p-field p-col-12 p-md-2">
+            <span class="form-head--data">HMIS ID: </span>
+            <span class="form-head--data__light">{{ formData.hmisIdNo }}</span>
+          </section>
+        </div>
+        <div>
+          <div class="p-fluid p-formgrid p-grid">
+            <section class="p-field p-col-12 p-md-6">
+              <span class="form-subbox">DIAGNOSIS</span>
+              <div class="subbox__content">
+                {{  formData.veteranDiagnosis }}
+              </div>
+            </section>
+            <section class="p-field p-col-12 p-md-3">
+              <span class="form-subbox">SUPPORTS</span>
+              <div class="subbox__content">
+                {{ formData.veteranSupports }}
+              </div>
+            </section>
+            <section class="p-field p-col-12 p-md-3">
+              <span class="form-subbox">STRENGTHS</span>
+              <div class="subbox__content">
+                {{ formData.veteranStrengths }}
+              </div>
+            </section>
+          </div>
+          <div>
+            <div class="title-container">
+              <p>
+                <span>TREATMENT ISSUES & GOALS</span>
+              </p>
+            </div>
+            <div *ngFor="let item of treatmentArr; let j = index">
+              <div>
+                <div *ngFor="let goal of treatmentGoals; let k = index">
+                  <div class="p-field p-col-12 border-low">
+                    <section class="p-grid" style="margin:10px 0 20px 0">
+                      <span class="p-col-fixed bullents">{{ k + 1 }}</span>
+                      <div class="p-col heading">{{ goal.label }}</div>
+                    </section>
+                    <div *ngFor="let item of goal.controls; let i = index">
+                      <div class="p-fluid p-formgrid p-grid">
+                        <section class="p-field p-col-12 p-md-3">
+                          <div
+                            class="box"
+                            *ngIf="goal.label === 'PHYSICAL HEALTH'"
+                          >
+                            <span class="form-subbox">Goal {{ i + 1 }}</span>
+                            <div class="subbox__content">
+                              {{ treatmentArr[j].physicalHealth[i].goals }}
+                            </div>
+                          </div>
+                          <div
+                            class="box"
+                            *ngIf="goal.label === 'MENTAL HEALTH'"
+                          >
+                            <span class="form-subbox">Goal {{ i + 1 }}</span>
+                            <div class="subbox__content">
+                              {{ treatmentArr[j].mentalHealth[i].goals }}
+                            </div>
+                          </div>
+                        </section>
+                        <div class="p-field p-col-12 p-md-3">
+                          <div
+                            class="box"
+                            *ngIf="goal.label === 'PHYSICAL HEALTH'"
+                          >
+                            <span class="form-subbox"> Plan {{ i + 1 }}</span>
+                            <div class="subbox__content">
+                              {{ treatmentArr[j].physicalHealth[i].plans }}
+                            </div>
+                          </div>
+                          <div
+                            class="box"
+                            *ngIf="goal.label === 'MENTAL HEALTH'"
+                          >
+                            <span class="form-subbox">Plan {{ i + 1 }}</span>
+                            <div class="subbox__content">
+                              {{ treatmentArr[j].mentalHealth[i].plans }}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="p-field p-col-12 p-md-3">
+                          <div
+                            class="box"
+                            *ngIf="goal.label === 'PHYSICAL HEALTH'"
+                          >
+                            <span class="form-subbox">Strategy {{ i + 1 }}</span>
+                            <div class="subbox__content">
+                              {{ treatmentArr[j].physicalHealth[i].strategies }}
+                            </div>
+                          </div>
+                          <div
+                            class="box"
+                            *ngIf="goal.label === 'MENTAL HEALTH'"
+                          >
+                            <span class="form-subbox">Strategy {{ i + 1 }}</span>
+                            <div class="subbox__content">
+                              {{ treatmentArr[j].mentalHealth[i].strategies }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="p-field p-col-12 p-md-3">
+                          <div
+                            class="box"
+                            *ngIf="goal.label === 'PHYSICAL HEALTH'"
+                          >
+                            <span class="form-subbox">Target Date {{ i + 1 }}</span>
+                            <div class="subbox__content">
+                              {{
+                                treatmentArr[j].physicalHealth[i].targetDate
+                                  | date: "shortDate"
+                              }}
+                            </div>
+                          </div>
+                          <div
+                            class="box"
+                            *ngIf="goal.label === 'MENTAL HEALTH'"
+                          >
+                            <span class="form-subbox">Target Date {{ i + 1 }}</span>
+                            <div class="subbox__content">
+                              {{
+                                treatmentArr[j].mentalHealth[i].targetDate
+                                  | date: "shortDate"
+                              }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="blue-box print-display">
+              <span
+                >Please download PDF print, sign and scan and send to Client and
+                RN for signatures and to send back to you.
+              </span>
+            </div>
+            <div>
+              <div class="signature-container">Signature</div>
+              <div class="subbox__content">
+                We agree to carry out the responsibilities outlined inthis
+                Treatment Plan to the best of our ability.
+              </div>
+              <div>
+                <div class="p-fluid p-formgrid p-grid margin-10 border-low">
+                  <div class="p-field p-col-12 p-md-2">
+                    <div class="margin-10 form-subbox signature-container__heading">Client</div>
+                  </div>
+                  <div class="p-field p-col-12 p-md-4">
+                    <div class="border-bot"></div>
+                    <div class="signature-container__det">Name</div>
+                  </div>
+                  <div class="p-field p-col-12 p-md-3">
+                    <div class="border-bot"></div>
+                    <div class="signature-container__det">Signature</div>
+                  </div>
+                  <div class="p-field p-col-12 p-md-3">
+                    <div class="border-bot"></div>
+                    <div class="signature-container__det">Date</div>
+                  </div>
+                </div>
+
+                <div class="p-fluid p-formgrid p-grid margin-10 border-low">
+                  <div class="p-field p-col-12 p-md-2">
+                    <div class="margin-10 form-subbox signature-container__heading">
+                      Case Manager
+                    </div>
+                  </div>
+                  <div class="p-field p-col-12 p-md-4">
+                    <div class="border-bot"></div>
+                    <div class="signature-container__det">Name</div>
+                  </div>
+                  <div class="p-field p-col-12 p-md-3">
+                    <div class="border-bot"></div>
+                    <div class="signature-container__det">Signature</div>
+                  </div>
+                  <div class="p-field p-col-12 p-md-3">
+                    <div class="border-bot"></div>
+                    <div class="signature-container__det">Date</div>
+                  </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid margin-10 border-low">
+                  <div class="p-field p-col-12 p-md-2">
+                    <div class="margin-10 form-subbox signature-container__heading">RN</div>
+                  </div>
+                  <div class="p-field p-col-12 p-md-4">
+                    <div class="border-bot"></div>
+                    <div class="signature-container__det">Name</div>
+                  </div>
+                  <div class="p-field p-col-12 p-md-3">
+                    <div class="border-bot"></div>
+                    <div class="signature-container__det">Signature</div>
+                  </div>
+                  <div class="p-field p-col-12 p-md-3">
+                    <div class="border-bot"></div>
+                    <div class="signature-container__det">Date</div>
+                  </div>
+                </div>
+
+                <div class="margin-30">
+                  <div class="p-d-flex p-jc-between">
+                    <div class="print-display">
+                  <button pButton label="Save" class="p-button"></button>
+                  <p-button
+                  label="Cancel"
+                  (click)="resetForm()"
+                  styleClass="p-button-link"
+                ></p-button>
+                  </div>
+                  <div class="print-display">
+                    <i class="fa fa-download btn-col"  (click)="downloadForm()"><span class="btn-text">Download</span></i>   
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </body>
     </div>
   </div>
 </div>

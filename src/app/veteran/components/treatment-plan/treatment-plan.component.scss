@@ -58,7 +58,165 @@
   width: 20px;
   padding-left: 5px;
   padding-top: 2px;
-  margin-left: 20px;
   margin-top: 7px;
   border-radius: 14px;
+}
+.bullents-margin
+{
+  margin-left: 20px;
+}
+.form-error
+  {
+    color:red;
+  }
+  .hide-display
+  {
+    display: none;
+  }
+  .userInput.ng-touched.ng-invalid{
+    border: 1px solid red;
+  }
+  .form-head
+  {
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
+    font-size: 40px;
+    font-weight: 100;
+    color: black;
+  }
+.margin-30
+{
+  margin-top:30px;
+}
+.margin-20
+{
+  margin-top:20px;
+}
+
+.btn-text
+{
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif; 
+  font-weight: 500;
+   font-style: normal;
+  color:rgba(13, 93, 166, 1);
+  padding-left:5px;
+}
+.btn-col
+{
+  color:rgba(13, 93, 166, 1);
+}
+.form-head--data
+{
+  font-family: 'Roboto Condensed Bold', 'Roboto Condensed', 'Roboto', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 16px;
+  color: #31424A;
+}
+.form-head--data__light
+{
+  font-family: 'Roboto Condensed Bold', 'Roboto Condensed', 'Roboto', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  color: #31424A;
+}
+.form-subbox
+{
+  font-family: 'Roboto Medium', 'Roboto Regular', 'Roboto', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 16px;
+    color: #222222;
+}
+.subbox__content
+{
+  font-family: 'Roboto', sans-serif;
+  margin-top:10px;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  letter-spacing: normal;
+  color: #31424A;
+}
+.border
+{
+  border:2px solid red;
+}
+.margin-10
+{
+  margin-top:10px;
+}
+.blue-box
+{
+  
+  height: 50px;
+  box-sizing: border-box;
+  border-width: 2px 2px 2px 10px;
+  border-style: solid;
+  border-color: rgba(62, 166, 197, 1);
+  font-family: 'Roboto Bold', 'Roboto Regular', 'Roboto', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 15px;
+  color: #37424A;
+  padding:15px;
+}
+
+.signature-container
+{
+  font-family: 'Roboto Light', 'Roboto Regular', 'Roboto', sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 22px;
+  color: #37424A;
+  margin-top:10px;
+}
+.signature-container__heading
+{
+  font-size: 20px;
+  height: 40px;
+  text-align: right;
+  color:#3D4A50;
+}
+.border-bot
+{
+  height: 45px;
+  border-bottom: 1px solid grey;
+}
+.signature-container__det
+{
+  font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 13px;
+    font-style: italic;
+    letter-spacing: normal;
+    color: #31424A;
+}
+.border-low
+{
+  border-bottom: 1px solid grey;
+}
+@media only screen and (max-width: 767px) {
+.signature-container__heading{
+  text-align: left;
+}
+.blue-box
+{
+  padding:0; 
+}
+  }
+
+@media print {
+ .form-container
+ {
+   width: 100% !important;
+ }
+ .signature-container__heading{
+  text-align: left;
+}
+.print-display
+{
+  display: none;
+}
 }

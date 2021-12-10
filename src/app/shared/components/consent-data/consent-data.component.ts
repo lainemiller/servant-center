@@ -1,34 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ConsentService } from '../../consent.service';
+import { ConsentService } from '../../services/consent.service';
 
 import { Auth } from '@aws-amplify/auth';
 
-// class ConsentUserDetails{
-//   firstName:string | undefined
-//   lastName:string | undefined
-//   email:string | undefined
-//   consentReceived:Date | undefined
-// }
 @Component({
   selector: 'app-consent-data',
   templateUrl: './consent-data.component.html',
   styleUrls: ['./consent-data.component.scss'],
 })
-
-
 export class ConsentDataComponent implements OnInit {
   display: boolean = false;
-  display_two: boolean = false;
+  displayTwo: boolean = false;
   vetran: any;
-  // userDetails: ConsentUserDetails=new ConsentUserDetails() ;
-  details:any;
+  consentDetails: any;
+  userId: number = 0;
+  email:any;
 
   constructor(private service: ConsentService) {}
 
-  ngOnInit(): void {
-    this.display = true;
+  ngOnInit() {
     this.getVetranDetailsById();
+    Auth.currentAuthenticatedUser()
+    .then((user) => {
+      this.email =
+        user.signInUserSession.idToken.payload.email;
+        console.log(this.email)
+    })
+    
   }
 
   showConsentForm() {
@@ -36,35 +35,30 @@ export class ConsentDataComponent implements OnInit {
   }
 
   showDialog() {
-    this.display_two = true;
+    this.displayTwo = true;
   }
 
-  onConsentSubmit(){
-    this.display = false;
-    // let consentReceived="received";
-    // console.log("inside consent submit method",consentReceived)
-    // this.userDetails.firstName="akash"
-    // this.userDetails.lastName="kumar"
-    // this.userDetails.email="akash@gmail.com"
-    // var data=new Date();
-    // this.userDetails.consentReceived=data;
-    // console.log("check",this.userDetails)
-    // let response=this.service.consentConfirm(this.userDetails);
-    // response.subscribe((data)=>{this.details=data
-    //   console.log("on submit data"+data)
-    // })
+  onConsentSubmit() {
+    this.userId = 5;
+    // let response = this.service.consentConfirm(this.userId);
+    // response.subscribe();
   }
 
-  onConsentCancel(){
-       Auth.signOut();
-       console.log("consent not confirmed")
+  onConsentCancel() {
+    Auth.signOut();
   }
 
   getVetranDetailsById() {
-    let resp = this.service.getRegisterUserDetailsById();
+    const userId = '3';
+    let resp = this.service.getRegisterUserDetailsById(userId);
     resp.subscribe((data) => {
-      this.vetran = data;
-      console.log("check api",this.vetran.firstName)
+      this.consentDetails = data;
+      this.vetran = this.consentDetails.result[0];
+      if (this.vetran.consent_status) {
+        this.display = false;
+      } else {
+        this.display = true;
+      }
     });
   }
 }

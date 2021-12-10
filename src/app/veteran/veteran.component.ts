@@ -1,9 +1,11 @@
-import { Component, Host, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { Auth } from '@aws-amplify/auth';
 import { MenuItem } from 'primeng/api';
-import { VeteranDashboardService } from './services/veteran-dashboard.service';
 
+import { ClipBoardService } from '../shared/services/clip-board.service';
+import { VeteranDashboardService } from './services/veteran-dashboard.service';
 
 @Component({
   selector: 'app-veteran',
@@ -16,7 +18,11 @@ export class VeteranComponent implements OnInit {
   public data: any;
   public image: any;
 
-  constructor(private service: VeteranDashboardService,private route: ActivatedRoute) {
+  constructor(
+    private service: VeteranDashboardService,
+    private route: ActivatedRoute,
+    private clipboardService: ClipBoardService
+  ) {
     this.service.getName().subscribe((data) => {
       console.log(data);
       this.data = data;
@@ -24,9 +30,8 @@ export class VeteranComponent implements OnInit {
       this.date = this.data.date;
       this.image = this.data.image;
     });
-}
-  
-  
+  }
+
   public displayMenu = true;
 
   @HostListener('window:resize')
@@ -69,30 +74,27 @@ export class VeteranComponent implements OnInit {
       label: 'LOGOUT',
       icon: 'fas fa-sign-out-alt',
       styleClass: 'menu-items--text menu-item--6',
-      routerLink: ['/veteran/logout'],
-      command:()=>this.onLogoutClick()
+      command: () => this.onLogoutClick(),
     },
   ];
 
   ngOnInit(): void {
     console.log('veteran component');
-    if(window.innerWidth < 768)
-      this.displayMenu = false;
+    if (window.innerWidth < 768) this.displayMenu = false;
+
+    const userData = this.clipboardService.get('userData');
+
+    console.log('veteran component::userData:', userData);
   }
 
   toggleMenu(): void {
     this.displayMenu = !this.displayMenu;
-    console.log("abkh");
-    
+    console.log('abkh');
   }
-  activeMenu(event:any) {
-    if(window.innerWidth < 768)
-     this.displayMenu = !this.displayMenu;
+  activeMenu(event: any) {
+    if (window.innerWidth < 768) this.displayMenu = !this.displayMenu;
   }
-
-  onLogoutClick(){
-    Auth.signOut()
-    console.log("logout button clicked");
+  onLogoutClick() {
+    Auth.signOut();
   }
-  
 }

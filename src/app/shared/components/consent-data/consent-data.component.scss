@@ -1,30 +1,27 @@
-.consent-form-container {
+.consent-container {
     height: 580px;
 }
 
-.container {
+.consent-container__sign {
     background-color: rgb(227, 250, 250);
     display: flex;
     position: relative;
     bottom: 20px;
 }
 
-input {
+.consent-container__sign--input {
     justify-content: space-between;
     margin: 15px;
     width: 500px;
     pointer-events: none;
 }
 
-.input-footer-heading {
-    text-align: left;
-}
 
-.footer-button {
+.consent-container__button {
     display: flex;
 }
 
-.body {
+.consent-container__scroll {
     overflow: scroll;
     overflow-x: hidden;
     height: 220px;
@@ -33,7 +30,7 @@ input {
     padding-right: 12px;
 }
 
-.consent-body {
+.consent-container__scroll2 {
     overflow: scroll;
     overflow-x: hidden;
     height: 400px;
@@ -41,42 +38,40 @@ input {
     text-justify: inter-word;
     padding-right: 12px;
 }
-.u-link{
+.consent-container__footer--link{
     color: #2195f3;
 }
 
-.u-link{
-    color: #2195f3;
-}
+
 
 @media (max-width: 768px) {
-    .header-text {
+    .consent-container__scroll {
         font-size: 13px;
     }
 
-    .body {
+    .consent-container__scroll2 {
         font-size: 13px;
     }
 
-    .footer-text {
+    .consent-container__footer {
         font-size: 13px;
     }
 
-    input {
+    .consent-container__sign--input {
         margin: 6px;
         width: 97%;
     }
 
-    .container {
+    .consent-container__sign {
         flex-direction: column;
     }
 
-    .input-footer-heading {
+    .consent-container__heading {
         font-size: 11px;
         padding-bottom: 5px;
     }
 
-    .footer-button {
+    .consent-container__button {
         flex-direction: column;
     }
 }

@@ -1,98 +1,443 @@
 {
-    "firstName" : "Pravin",
-    "middleName" : "Bharat",
-    "lastName" : "Bhilare",
-    "nickName" : "Akshay",
-    "dob" : "10/12/2021",
-    "pob" : "Thane",
-    "ssn" :"7657JHG",
-    "age":"23",
-    "sex":"Male",
-    "maritalStatus":"Single",
-    "race":"White",
-    "primaryLang":"Marathi",
-    "contactPerson":"Bharat Bhilare",
-    "relation":"Father",
-    "address":"Flat 101,Manchester CHS,Thane,Maharashtra",
-    "city":"Thane",
-    "state":"Maharashtra",
-    "zipCode":"400604",
-    "phone":"6286581654",
-    "income":"300$ to 700$",
-    "type":"Employee",
-    "bankAcc":"Saving",
-    "bankName":"SBI",
-    "directDeposit":"Yes",
-    "otherAssets":"Investments",
-    "vaCoverage":"Yes",
-    "previousOccu":"Tester",
-    "currentOccu":"Software Devloper",
-    "workSkill":"MEAN",
-    "mostRecentJob":"TCS",
-    "date":"N/A",
-    "reasonForLeaving":"Less Salary",
-    "highestGrade":"BTech",
-    "nameOfSchool":"IIT Mumbai",
-    "military":"Yes",
-    "branch":"Army",
-    "typeOfDischarge":"Honorable",
-    "datesOfService":"1999-2010",
-    "locationOfService":"Kargil",
-    "otherTraining":"N/A",
-    "religiousPref":"Hindu",
-    "hobbies":"Cricket,Wandering",
-    "motherName":"Snehal Sudame",
-    "mothersLiving":"Yes",
-    "fatherName":"Rahul Sudame",
-    "fatherLiving":"Yes",
-    "spouseName":"N/A",
-    "describeChildhood":"ABC XYZ",
-    "relationWithParent":"Good",
-    "relationWithSibling":"Not bad",
-    "disciplin":"N/A",
-    "physicalAbuse":"No",
-    "sexualAbuse":"No",
-    "healthIssues":"No",
-    "married":"No",
-    "currentMaritalStatus":"Single",
-    "sexualOrientation":"heterosexual",
-    "sexuallyActive":"No",
-    "sexualProblems":"No",
-    "testedForHIV":"No",
-    "resultForHIV":"--",
-    "testedForSTD":"No",
-    "resultForSTD":"--",
-    "likeToTest":"No",
-    "diagnosis":"abcxyz",
-    "currentPsychiatricTreatment":"abcxyz",
-    "nameOfPsychiatrist":"james",
-    "addressOfPsychiatrist":"abs 12 chs 7728",
-    "psychiatricConsult":"Yes",
-    "NameOfPhysician":"niaj",
-    "addressOfPhysician":"ajh 23 mhg",
-    "historyOfAlcohol":"abc syx ahgs ahg",
-    "historyOfDrugs":"mkaj sjhg ajgj",
-    "alcohol":"N/A",
-    "drugs":"N/A",
-    "tobacco":"N/A",
-    "caffeine":"N/A",
-    "lastUseOfDrug":"No",
-    "lastUseOfAlcohol":"No",
-    "currentTreatment":"No",
-    "iOtreatment":"University",
-    "historyOfWithdrawal":"Yes",
-    "explain":"ABC XYZ PQR",
-    "chargesPending":"No",
-    "outstandingWarrants":"No",
-    "nameOfProbationOfficer":"The Rock",
-    "addressOfProbationOfficer":"India",
-    "termsOfProbation":"N/A",
-    "happendPastyears":"Played for india,foreign trip",
-    "stg":"Score 30 Centuries",
-    "ltg":"Win World Cup",
-    "strengthResources":"ABC XYZ PQR",
-    "preferences":"ABC XYZ",
-    "needs":"xna sjhg ajhg",
-    "support":"No Support needed",
-    "additionalComment":"No Comments"
+  "assessment_details": [
+    {
+      "header": "Personal Information",
+      "data": [
+        {
+          "key": "First Name",
+          "value": "pravin"
+        },
+        {
+          "key": "Last Name",
+          "value": "pravin"
+        },
+        {
+          "key": "Middle Name",
+          "value": "pravin"
+        },
+        {
+          "key": "Nick Name",
+          "value": "pravin"
+        },
+        {
+          "key": "Date of Birth",
+          "value": "21-02-2019"
+        },
+        {
+          "key": "Place of Birth",
+          "value": "Thane"
+        },
+        {
+          "key": "SSN#",
+          "value": "7697697"
+        },
+        {
+          "key": "age",
+          "value": "23"
+        },
+        {
+          "key": "Sex",
+          "value": "Male"
+        },
+        {
+          "key": "Marital Status",
+          "value": "Single"
+        },
+        {
+          "key": "Race",
+          "value": "White"
+        },
+        {
+          "key": "Primary Language",
+          "value": "Marathi"
+        },
+        {
+          "key": "Contact Person",
+          "value": "Bharat Bhilare"
+        },
+        {
+          "key": "RelationShip",
+          "value": "Father"
+        },
+        {
+          "key": "Address",
+          "value": "ujjjjjjjjjjhggggggg"
+        },
+        {
+          "key": "City",
+          "value": "Thane"
+        },
+        {
+          "key": "State",
+          "value": "Goa"
+        },
+        {
+          "key": "Zip Code",
+          "value": "300000"
+        },
+        {
+          "key": "Phone Number",
+          "value": "8887777656"
+        }
+      ]
+    },
+    {
+      "header": "Financial",
+      "data": [
+        {
+          "key": "Income",
+          "value": "300$ to 700$"
+        },
+        {
+          "key": "Type",
+          "value": "Employee"
+        },
+        {
+          "key": "Bank Account",
+          "value": "Saving"
+        },
+        {
+          "key": "Name Of Bank",
+          "value": "Baroda"
+        },
+        {
+          "key": "Direct Deposit",
+          "value": "Yes"
+        },
+        {
+          "key": "Other Assests",
+          "value": "Investment"
+        },
+        {
+          "key": "VA Coverage",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "header": "Emloyment and Education History",
+      "data": [
+        {
+          "key": "Previous occupation",
+          "value": "Tester"
+        },
+        {
+          "key": "Current occupation",
+          "value": "Software Devloper"
+        },
+        {
+          "key": "Work skills",
+          "value": "MEAN"
+        },
+        {
+          "key": "Most recent job",
+          "value": "TCS"
+        },
+        {
+          "key": "Date",
+          "value": "N/A"
+        },
+        {
+          "key": "Reason for leaving",
+          "value": "Less Salary"
+        },
+        {
+          "key": "Highest grade completed",
+          "value": "BTech"
+        },
+        {
+          "key": "Name of school",
+          "value": "IIT Mumbai"
+        },
+        {
+          "key": "Military",
+          "value": "Yes"
+        },
+        {
+          "key": "Branch",
+          "value": "Army"
+        },
+        {
+          "key": "Type of discharge",
+          "value": "Honorable"
+        },
+        {
+          "key": "Dates of service",
+          "value": "1999-2010"
+        },
+        {
+          "key": "Location of service",
+          "value": "Kargil"
+        },
+        {
+          "key": "Other training and / or location",
+          "value": "N/A"
+        }
+      ]
+    },
+    {
+      "header": "Social",
+      "data": [
+        {
+          "key": "Religious preference",
+          "value": "Hindu"
+        },
+        {
+          "key": "Hobbies / Interests",
+          "value": "Cricket,Wandering"
+        }
+      ]
+    },
+    {
+      "header": "Family",
+      "data": [
+        {
+          "key": "Mother’s Full Name",
+          "value": "Snehal Sudame"
+        },
+        {
+          "key": "Mother Living / Deceased",
+          "value": "Yes"
+        },
+        {
+          "key": "Father’s Full Name",
+          "value": "Rahul Sudame"
+        },
+        {
+          "key": "Father Living / Deceased",
+          "value": "Yes"
+        },
+        {
+          "key": "Full name of spouse",
+          "value": "N/A"
+        },
+        {
+          "key": "Describe your childhood",
+          "value": "ABC XYZ"
+        },
+        {
+          "key": "Describe your relationship with your parents",
+          "value": "Good"
+        },
+        {
+          "key": "Describe your relationship with your siblings",
+          "value": "Not bad"
+        },
+        {
+          "key": "What type of discipline did you have growing up ?",
+          "value": "N/A"
+        },
+        {
+          "key": "Any history of physical abuse ?",
+          "value": "No"
+        },
+        {
+          "key": "Any history of sexual abuse ?",
+          "value": "No"
+        },
+        {
+          "key": "Any history of health problems, mental illness?",
+          "value": "No"
+        },
+        {
+          "key": "Have you ever been married ?",
+          "value": "No"
+        },
+        {
+          "key": "Current marital status",
+          "value": "Single"
+        },
+        {
+          "key": "What is your sexual orientation ?",
+          "value": "heterosexual"
+        },
+        {
+          "key": "Are you currently sexually active ?",
+          "value": "No"
+        },
+        {
+          "key": "Do you have any sexual problems or concerns ?",
+          "value": "No"
+        },
+        {
+          "key": "Have you ever been tested for HIV / AIDS ?",
+          "value": "No"
+        },
+        {
+          "key": "What were the results ?",
+          "value": "--"
+        },
+        {
+          "key": "Have you ever been tested for STD’s ?",
+          "value": "No"
+        },
+        {
+          "key": "What were the results ?",
+          "value": "--"
+        },
+        {
+          "key": "If you answered no, would you like to be tested for HIV / AIDS and STD’s ?",
+          "value": "No"
+        }
+      ]
+    },
+    {
+      "header": "Mental Health",
+      "data": [
+        {
+          "key": "Diagnosis",
+          "value": "abcxyz"
+        },
+        {
+          "key": "Current treatment",
+          "value": "abcxyz"
+        },
+        {
+          "key": "Name of the psychiatrist / therapist",
+          "value": "james"
+        },
+        {
+          "key": "Address of the psychiatrist / therapist",
+          "value": "abs 12 chs 7728"
+        },
+        {
+          "key": "Does client need a psychiatric consult",
+          "value": "Yes"
+        },
+        {
+          "key": "Name of the physician completing psych evaluation",
+          "value": "niaj"
+        },
+        {
+          "key": "Address of the physician completing psych evaluation",
+          "value": "ajh 23 mhg"
+        }
+      ]
+    },
+    {
+      "header": "Substance Abuse History",
+      "data": [
+        {
+          "key": "History of Alcohol use",
+          "value": "abc syx ahgs ahg"
+        },
+        {
+          "key": "History of Drug use",
+          "value": "mkaj sjhg ajgj"
+        },
+        {
+          "key": "Alcohol",
+          "value": "N/A"
+        },
+        {
+          "key": "Drugs",
+          "value": "N/A"
+        },
+        {
+          "key": "Date",
+          "value": "N/A"
+        },
+        {
+          "key": "Tobacco",
+          "value": "N/A"
+        },
+        {
+          "key": "Caffeine",
+          "value": "N/A"
+        },
+        {
+          "key": "Last use of Drugs",
+          "value": "No"
+        },
+        {
+          "key": "Last use of Alcohol",
+          "value": "No"
+        },
+        {
+          "key": "Current treatment",
+          "value": "No"
+        },
+        {
+          "key": "Inpatient or outpatient treatment programs",
+          "value": "University"
+        },
+        {
+          "key": "History of withdrawal",
+          "value": "Yes"
+        },
+        {
+          "key": "Explain",
+          "value": "ABC XYZ PQR"
+        }
+      ]
+    },
+    {
+      "header": "Legal History / Issues",
+      "data": [
+        {
+          "key": "Charges pending",
+          "value": "No"
+        },
+        {
+          "key": "Outstanding warrants",
+          "value": "No"
+        },
+        {
+          "key": "Name of the probation / parole officer",
+          "value": "The Rock"
+        },
+        {
+          "key": "Address of the probation / parole officer",
+          "value": "India"
+        },
+        {
+          "key": "Terms & conditions of the probation / parole",
+          "value": "N/A"
+        }
+      ]
+    },
+    {
+        "header": "Preliminary Diagnosis",
+        "data": [
+         
+        ]
+      },
+      {
+        "header": "Initial Treatment Goals",
+        "data": [
+          {
+            "key": "What has happened in my life this past year?",
+            "value": "Played for india,foreign trip"
+          },
+          {
+            "key": "Short term goals",
+            "value": "Score 30 Centuries"
+          },
+          {
+            "key": "Long term goals",
+            "value": "Win World Cup"
+          },
+          {
+            "key": "Strengths and resources",
+            "value": "ABC XYZ PQR"
+          },
+          {
+            "key": "Preferences",
+            "value": "ABC XYZ"
+          },
+          {
+            "key": "Needs",
+            "value": "xna sjhg ajhg"
+          },
+          {
+            "key": "Supports",
+            "value": "No Support needed"
+          },
+          {
+            "key": "Additional comments",
+            "value": "No Comments"
+          }
+        ]
+      }
+  ]
 }

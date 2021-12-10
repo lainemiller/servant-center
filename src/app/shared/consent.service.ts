@@ -7,12 +7,15 @@ import { Injectable } from '@angular/core';
 export class ConsentService {
   constructor(private http: HttpClient) {}
 
-  public getRegisterUserDetailsById() {
-    return this.http.get('./assets/mock/consent-data.json');
-    // return this.http.get('http://localhost:9000/getUserDetails');
+  public getRegisterUserDetailsById(id:number) {
+    // dev
+    // return this.http.get('./assets/mock/consent-data.json');
+
+    //prod
+     return this.http.get('https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/consentForm/getUserDetails/'+id);
   }
 
-  public consentConfirm(consentReceived: any) {
-    return this.http.post('http://localhost:9000/consentConfirm',JSON.stringify(consentReceived),{responseType:'text' as 'json'});
+  public consentConfirm(userId: number) {
+    return this.http.post("https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/consentForm/acceptConsent/"+userId,{responseType:'text' as 'jason'});
   }
 }

@@ -1,4 +1,4 @@
-<div class="consent-form-container">
+<div class="consent-container">
   <p-dialog
     header="CONSENT AND UNDERSTANDING"
     [breakpoints]="{ '960px': '75vw', '640px': '95vw' }"
@@ -6,9 +6,10 @@
     [style]="{ width: '70vw' }"
     [draggable]="false"
     [modal]="true"
+    (onHide)="onConsentCancel()"
     id="consent-modal"
   >
-    <div class="body">
+    <div class="consent-container__scroll">
       <p>
         This consent is required by the Health Insurance Portability and
         Accountability Act of 1996 to inform you of your rights for privacy with
@@ -45,18 +46,18 @@
         identified in the Practice Privacy Notice.
       </p>
     </div>
-    <p class="footer-text">
+    <p class="consent-container__footer">
       <a (click)="showDialog()"
-        ><u class="u-link">Read Notice of Privacy Practices</u></a
+        ><u class="consent-container__footer--link">Read Notice of Privacy Practices</u></a
       >
     </p>
     <p-dialog
       header="Notice of Privacy Practices"
       [draggable]="false"
-      [(visible)]="display_two"
+      [(visible)]="displayTwo"
       [style]="{ width: '50vw' }"
     >
-      <div class="consent-body">
+      <div class="consent-container__scroll2">
         <p>
           This Notice describes how medical information about you may be used
           and disclosed and how you can get access to this information. Please
@@ -295,27 +296,26 @@
         </p>
       </div>
     </p-dialog>
-    <h4 class="input-footer-heading">ESIGNATURE</h4>
-    <div class="container">
+    <h4 class="consent-container__heading">ESIGNATURE</h4>
+    <div class="consent-container__sign">
       <input
-        class="input-text-one"
-        value="{{ vetran?.firstName }},{{ vetran?.lastName }}"
+        class="consent-container__sign--input"
+        value="{{ vetran?.first_name }}, {{ vetran?.last_name }}"
         type="text"
         pInputText
       />
       <input
-        class="input-text-two"
-        value="{{ vetran?.email }}"
+        class="consent-container__sign--input"
+        value="{{ email }}"
         type="text"
         pInputText
       />
     </div>
-    <div class="footer-button">
+    <div class="consent-container__button">
       <button
         pButton
         (click)="onConsentSubmit()"
         label="I CONSENT"
-        class="button-confirm"
       ></button>
       <button
         pButton
@@ -326,10 +326,4 @@
       ></button>
     </div>
   </p-dialog>
-
-  <p-button
-    type="button"
-    (click)="showConsentForm()"
-    label="Register"
-  ></p-button>
 </div>
