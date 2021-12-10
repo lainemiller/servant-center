@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ConsentService } from '../../consent.service';
+import { ConsentService } from '../../services/consent.service';
 
 @Component({
   selector: 'app-consent-data',
@@ -28,7 +28,8 @@ export class ConsentDataComponent implements OnInit {
   }
 
   getVetranDetailsById() {
-    let resp = this.service.getRegisterUserDetailsById();
+    const userId = '3';
+    let resp = this.service.getRegisterUserDetailsById(userId);
     resp.subscribe((data) => {
       this.vetran = data;
     });
