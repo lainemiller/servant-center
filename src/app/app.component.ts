@@ -1,10 +1,4 @@
-import { Component , NgZone} from '@angular/core';
-import { Router } from '@angular/router';
-
-import { Auth } from '@aws-amplify/auth';
-import { Hub } from '@aws-amplify/core';
-
-
+import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,9 +7,4 @@ import { Hub } from '@aws-amplify/core';
 export class AppComponent {
   title = 'servant-center';
   
-  ngOnInit(): void {
-    // console.log("check auth", Auth.currentAuthenticatedUser())
-  }
-  
- 
 }

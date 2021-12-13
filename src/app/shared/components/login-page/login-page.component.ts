@@ -22,7 +22,8 @@ export class LoginPageComponent {
         this.router.navigate(['/veteran'], { replaceUrl: true });
       })
       .catch((err) => {
-        console.log(err, 'Not logined');
+        this.router.navigate(['/login'], { replaceUrl: true });
+        console.log(err);
       });
   }
 
