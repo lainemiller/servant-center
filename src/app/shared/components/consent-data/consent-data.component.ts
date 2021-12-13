@@ -14,20 +14,16 @@ export class ConsentDataComponent implements OnInit {
   displayTwo: boolean = false;
   vetran: any;
   consentDetails: any;
-  userId: number = 0;
-  email:any;
+  userId: any = 0;
+  email: any;
 
   constructor(private service: ConsentService) {}
 
   ngOnInit() {
     this.getVetranDetailsById();
-    Auth.currentAuthenticatedUser()
-    .then((user) => {
-      this.email =
-        user.signInUserSession.idToken.payload.email;
-        console.log(this.email)
-    })
-    
+    Auth.currentAuthenticatedUser().then((user) => {
+      this.email = user.signInUserSession.idToken.payload.email;
+    });
   }
 
   showConsentForm() {
@@ -39,9 +35,9 @@ export class ConsentDataComponent implements OnInit {
   }
 
   onConsentSubmit() {
-    this.userId = 5;
-    // let response = this.service.consentConfirm(this.userId);
-    // response.subscribe();
+    this.userId = 7;
+    let response = this.service.consentConfirm(this.userId);
+    response.subscribe();
   }
 
   onConsentCancel() {
@@ -49,8 +45,8 @@ export class ConsentDataComponent implements OnInit {
   }
 
   getVetranDetailsById() {
-    const userId = '3';
-    let resp = this.service.getRegisterUserDetailsById(userId);
+    this.userId = 7;
+    let resp = this.service.getRegisterUserDetailsById(this.userId);
     resp.subscribe((data) => {
       this.consentDetails = data;
       this.vetran = this.consentDetails.result[0];
