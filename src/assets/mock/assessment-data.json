@@ -289,7 +289,7 @@
           "value": "abcxyz"
         },
         {
-          "key": "Current treatment",
+          "key": "Current psychiatric treatment",
           "value": "abcxyz"
         },
         {
@@ -301,7 +301,7 @@
           "value": "abs 12 chs 7728"
         },
         {
-          "key": "Does client need a psychiatric consult",
+          "key": "Does client need a psychiatric consult?",
           "value": "Yes"
         },
         {

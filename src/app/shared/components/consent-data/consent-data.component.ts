@@ -38,6 +38,7 @@ export class ConsentDataComponent implements OnInit {
     this.userId = 7;
     let response = this.service.consentConfirm(this.userId);
     response.subscribe();
+    this.display=false;
   }
 
   onConsentCancel() {
