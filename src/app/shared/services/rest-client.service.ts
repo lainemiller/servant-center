@@ -51,7 +51,7 @@ export class RestClientService {
   }
 
   get<T>(url: string, responseType?: any): Observable<T> {
-    return this.get<T>(url, {
+    return this.http.get<T>(url, {
       headers: this.headers,
       responseType: responseType,
     });

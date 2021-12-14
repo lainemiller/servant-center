@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { ConsentService } from '../../services/consent.service';
 
+import { Auth } from '@aws-amplify/auth';
+
 @Component({
   selector: 'app-consent-data',
   templateUrl: './consent-data.component.html',
@@ -9,14 +11,19 @@ import { ConsentService } from '../../services/consent.service';
 })
 export class ConsentDataComponent implements OnInit {
   display: boolean = false;
-  display_two: boolean = false;
+  displayTwo: boolean = false;
   vetran: any;
+  consentDetails: any;
+  userId: any = 0;
+  email: any;
 
   constructor(private service: ConsentService) {}
 
-  ngOnInit(): void {
-    this.display = true;
+  ngOnInit() {
     this.getVetranDetailsById();
+    Auth.currentAuthenticatedUser().then((user) => {
+      this.email = user.signInUserSession.idToken.payload.email;
+    });
   }
 
   showConsentForm() {
@@ -24,14 +31,31 @@ export class ConsentDataComponent implements OnInit {
   }
 
   showDialog() {
-    this.display_two = true;
+    this.displayTwo = true;
+  }
+
+  onConsentSubmit() {
+    this.userId = 7;
+    let response = this.service.consentConfirm(this.userId);
+    response.subscribe();
+    this.display=false;
+  }
+
+  onConsentCancel() {
+    Auth.signOut();
   }
 
   getVetranDetailsById() {
-    const userId = '3';
-    let resp = this.service.getRegisterUserDetailsById(userId);
+    this.userId = 7;
+    let resp = this.service.getRegisterUserDetailsById(this.userId);
     resp.subscribe((data) => {
-      this.vetran = data;
+      this.consentDetails = data;
+      this.vetran = this.consentDetails.result[0];
+      if (this.vetran.consent_status) {
+        this.display = false;
+      } else {
+        this.display = true;
+      }
     });
   }
 }

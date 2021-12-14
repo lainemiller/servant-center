@@ -95,8 +95,6 @@ export class VeteranComponent implements OnInit {
     if (window.innerWidth < 768) this.displayMenu = !this.displayMenu;
   }
   onLogoutClick() {
-    console.log('Logout Clicked');
-
     Auth.signOut();
   }
 }
