@@ -1,7 +1,10 @@
-import { Component, Host, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { Auth } from '@aws-amplify/auth';
 import { MenuItem } from 'primeng/api';
+
+import { ClipBoardService } from '../shared/services/clip-board.service';
 import { VeteranDashboardService } from './services/veteran-dashboard.service';
 
 @Component({
@@ -14,18 +17,27 @@ export class VeteranComponent implements OnInit {
   public date: any;
   public data: any;
   public image: any;
+  public userInfo: any;
+ 
 
-  constructor(private service: VeteranDashboardService,private route: ActivatedRoute) {
+  constructor(
+    private service: VeteranDashboardService,
+    private route: ActivatedRoute,
+    private clipboardService: ClipBoardService
+  ) {
     this.service.getName().subscribe((data) => {
-      console.log(data);
-      this.data = data;
-      this.name = this.data.name;
-      this.date = this.data.date;
-      this.image = this.data.image;
+      this.userInfo = data;
+      console.log(this.userInfo);
+      this.userInfo = this.userInfo.result;
+      this.name = this.userInfo[0].nick_name;
+      this.image = this.userInfo[0].photo;
+      if (this.image === null) {
+        this.image = '../assets/images/user-profile.jpg';
+      }
+      this.date = this.userInfo[0].last_login_date_time;
     });
-}
-  
-  
+  }
+
   public displayMenu = true;
 
   @HostListener('window:resize')
@@ -68,33 +80,27 @@ export class VeteranComponent implements OnInit {
       label: 'LOGOUT',
       icon: 'fas fa-sign-out-alt',
       styleClass: 'menu-items--text menu-item--6',
-      command:() =>this.onLogoutClick()
+      command: () => this.onLogoutClick(),
     },
   ];
 
   ngOnInit(): void {
     console.log('veteran component');
-    if(window.innerWidth < 768)
-      this.displayMenu = false;
+    if (window.innerWidth < 768) this.displayMenu = false;
 
-      
-    
+    const userData = this.clipboardService.get('userData');
+
+    console.log('veteran component::userData:', userData);
   }
 
   toggleMenu(): void {
     this.displayMenu = !this.displayMenu;
-    console.log("abkh");
-    
+    console.log('abkh');
   }
-  activeMenu(event:any) {
-    if(window.innerWidth < 768)
-     this.displayMenu = !this.displayMenu;
+  activeMenu(event: any) {
+    if (window.innerWidth < 768) this.displayMenu = !this.displayMenu;
   }
   onLogoutClick() {
-
-    console.log("Logout Clicked");
-
     Auth.signOut();
   }
-
 }
