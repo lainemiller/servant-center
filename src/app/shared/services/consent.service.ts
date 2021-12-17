@@ -7,28 +7,28 @@ import { RestClientService } from './rest-client.service';
   providedIn: 'root',
 })
 export class ConsentService {
-  constructor(private rs: RestClientService) {}
+  constructor(private restcs: RestClientService) {}
 
   private isDev = isDevMode();
   private consentAPI = environment.serviceUrl.consentGetUser;
   private consentConfirmAPI = environment.serviceUrl.consentUpdateUser;
 
   public getRegisterUserDetailsById(
-    endPoint: string,
+    endPoint: number,
     payload = {}
   ): Observable<any> {
     if (this.isDev) {
-      return this.rs.makeCall('./assets/mock/consent-data.json');
+      return this.restcs.makeCall('./assets/mock/consent-data.json');
     } else {
-      return this.rs.makeCall(this.consentAPI + endPoint);
+      return this.restcs.makeCall(this.consentAPI + endPoint);
     }
   }
 
-  public consentConfirm(endPoint: string, payload = {}): Observable<any> {
+  public consentConfirm(endPoint: number, payload = {}): Observable<any> {
     if (this.isDev) {
-      return this.rs.makeCall('./assets/mock/consent-data.json');
+      return this.restcs.makeCall('./assets/mock/consent-data.json');
     } else {
-      return this.rs.post(this.consentConfirmAPI + endPoint, payload);
+      return this.restcs.post(this.consentConfirmAPI + endPoint, payload);
     }
   }
 }

@@ -59,7 +59,7 @@
                 <label for="statusCheck">Goal Status</label>
                 <p-toolbar>
                   <div class="p-toolbar-group-left">
-                    <span class="p-mr-2">Complete</span>
+                    <span class="p-mr-2">In Progress</span>
                     <p-inputSwitch
                       [(ngModel)]="initialStatus"
                       formControlName="goalState"
@@ -67,7 +67,7 @@
                       class="open-close-switch"
                     >
                     </p-inputSwitch>
-                    <span class="p-ml-2">In Progress</span>
+                    <span class="p-ml-2">Complete</span>
                   </div>
                 </p-toolbar>
               </div>
@@ -155,11 +155,11 @@
               <div class="inputSwitch-container p-col-12">
                 <p-toolbar id="progress-notes--mainToolbar">
                   <div class="p-toolbar-group-left">
-                    <span class="p-mr-2">Complete</span>
+                    <span class="p-mr-2">In Progress</span>
                     <p-inputSwitch
                       [(ngModel)]="progressNote.goalState"
                     ></p-inputSwitch>
-                    <span class="p-ml-2">In Progress</span>
+                    <span class="p-ml-2">Complete</span>
                   </div>
                 </p-toolbar>
               </div>
@@ -180,6 +180,7 @@
           </div>
         </p-dialog>
       </div>
+       <!-- modal for pop-out ends -->
       <button
         type="button"
         pButton
@@ -201,12 +202,13 @@
       <div class="inputSwitch-container p-col-12">
         <p-toolbar id="progress-notes--mainToolbar">
           <div class="p-toolbar-group-left">
-            <span class="p-mr-2">Complete</span>
+            <span class="p-mr-2">In Progress</span>
             <p-inputSwitch
               [(ngModel)]="progressNote.goalState"
+              (onChange)="changed(i)"
               class="open-close-switch"
             ></p-inputSwitch>
-            <span class="p-ml-2">In Progress</span>
+            <span class="p-ml-2">Complete</span>
           </div>
         </p-toolbar>
       </div>

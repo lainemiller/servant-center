@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConsentService } from '../../services/consent.service';
 
 import { Auth } from '@aws-amplify/auth';
+import { ConsentResponse } from '../../models/ConsentResponse';
 
 @Component({
   selector: 'app-consent-data',
@@ -14,7 +15,7 @@ export class ConsentDataComponent implements OnInit {
   displayTwo: boolean = false;
   vetran: any;
   consentDetails: any;
-  userId: any = 0;
+  userId: number = 0;
   email: any;
 
   constructor(private service: ConsentService) {}
@@ -48,7 +49,7 @@ export class ConsentDataComponent implements OnInit {
   getVetranDetailsById() {
     this.userId = 7;
     let resp = this.service.getRegisterUserDetailsById(this.userId);
-    resp.subscribe((data) => {
+    resp.subscribe((data:ConsentResponse) => {
       this.consentDetails = data;
       this.vetran = this.consentDetails.result[0];
       if (this.vetran.consent_status) {

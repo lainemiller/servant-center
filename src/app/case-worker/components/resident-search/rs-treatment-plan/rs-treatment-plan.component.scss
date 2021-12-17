@@ -1,64 +1,64 @@
 .tag {
-    font-size: 60px;
-    font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
-    padding: 10px;
-  }
-  
-  .form-container {
-    margin: 0 15px;
-    padding: 20px 20px;
-    background: #fff;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgba(183, 183, 183, 1);
-  }
-  
-  .heading {
-    font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 16px;
-    color: #a00000;
-  }
-  
-  .title-container {
-    background-color: rgba(55, 66, 74, 1);
-    font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 16px;
-    height: 43px;
-    p {
-      color: rgba(255, 255, 255, 0.996078431372549);
-      padding: 10px 0px 0px 20px;
-      text-decoration: none;
-    }
-  }
-  
-  .vertical-container {
-    border-radius: 4px;
-    margin: 10px 10px 10px 10px;
-  }
-  
-  .bullents {
-    background-color: #a00000;
-    color: #fff;
-    font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
-    font-weight: 600;
-    height: 20px;
-    width: 20px;
-    padding-left: 5px;
-    padding-top: 2px;
-    margin-left: 20px;
-    margin-top: 7px;
-    border-radius: 14px;
-  }
+  font-size: 60px;
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
+  padding: 10px;
+}
 
-  .form-error
-  {
-    color:red;
+.form-container {
+  margin: 0 15px;
+  padding: 20px 20px;
+  background: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(183, 183, 183, 1);
+}
+
+.heading {
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 16px;
+  color: #a00000;
+}
+
+.title-container {
+  background-color: rgba(55, 66, 74, 1);
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 16px;
+  height: 43px;
+  p {
+    color: rgba(255, 255, 255, 0.996078431372549);
+    padding: 10px 0px 0px 20px;
+    text-decoration: none;
   }
-  .dis-none
-  {
-    display: none;
-  }
+}
+
+.vertical-container {
+  border-radius: 4px;
+  margin: 10px 10px 10px 10px;
+}
+
+.bullents {
+  background-color: #a00000;
+  color: #fff;
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
+  font-weight: 600;
+  height: 20px;
+  width: 20px;
+  padding-left: 5px;
+  padding-top: 2px;
+  margin-left: 20px;
+  margin-top: 7px;
+  border-radius: 14px;
+}
+
+.form-error
+{
+  color:red;
+}
+.hide-display
+{
+  display: none;
+}

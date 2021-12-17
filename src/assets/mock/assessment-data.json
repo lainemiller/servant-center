@@ -12,11 +12,11 @@
           "value": "pravin"
         },
         {
-          "key": "Middle Name",
+          "key": "Middle Initial",
           "value": "pravin"
         },
         {
-          "key": "Nick Name",
+          "key": "Nickname",
           "value": "pravin"
         },
         {
@@ -32,7 +32,7 @@
           "value": "7697697"
         },
         {
-          "key": "age",
+          "key": "Age",
           "value": "23"
         },
         {
@@ -56,11 +56,11 @@
           "value": "Bharat Bhilare"
         },
         {
-          "key": "RelationShip",
+          "key": "Relationship",
           "value": "Father"
         },
         {
-          "key": "Address",
+          "key": "Street Address",
           "value": "ujjjjjjjjjjhggggggg"
         },
         {
@@ -89,7 +89,7 @@
           "value": "300$ to 700$"
         },
         {
-          "key": "Type",
+          "key": "Income Type",
           "value": "Employee"
         },
         {
@@ -105,17 +105,25 @@
           "value": "Yes"
         },
         {
-          "key": "Other Assests",
+          "key": "Other Assets",
           "value": "Investment"
         },
         {
           "key": "VA Coverage",
           "value": "Yes"
+        },
+        {
+          "key": "Medicaid Coverage",
+          "value": "Yes"
+        },
+        {
+          "key": "Other Benefits Receiving",
+          "value": "Life insurance "
         }
       ]
     },
     {
-      "header": "Emloyment and Education History",
+      "header": "Employment and Education History",
       "data": [
         {
           "key": "Previous occupation",
