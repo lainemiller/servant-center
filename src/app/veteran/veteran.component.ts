@@ -17,6 +17,8 @@ export class VeteranComponent implements OnInit {
   public date: any;
   public data: any;
   public image: any;
+  public userInfo: any;
+ 
 
   constructor(
     private service: VeteranDashboardService,
@@ -24,11 +26,15 @@ export class VeteranComponent implements OnInit {
     private clipboardService: ClipBoardService
   ) {
     this.service.getName().subscribe((data) => {
-      console.log(data);
-      this.data = data;
-      this.name = this.data.name;
-      this.date = this.data.date;
-      this.image = this.data.image;
+      this.userInfo = data;
+      console.log(this.userInfo);
+      this.userInfo = this.userInfo.result;
+      this.name = this.userInfo[0].nick_name;
+      this.image = this.userInfo[0].photo;
+      if (this.image === null) {
+        this.image = '../assets/images/user-profile.jpg';
+      }
+      this.date = this.userInfo[0].last_login_date_time;
     });
   }
 
