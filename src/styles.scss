@@ -36,7 +36,7 @@ body {
 
 // consent modal - end
 
-//progress notes -start
+//progress notes starts
 
 #progress-notes--mainToolbar .p-toolbar {
   padding: 0px;
@@ -44,8 +44,24 @@ body {
   background: #fff;
   border: none;
 }
-
-//progress notes -end
+.p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
+  background: green;
+}
+.p-inputswitch:not(.p-disabled):hover .p-inputswitch-slider {
+  background: yellow;
+}
+.p-inputswitch.p-inputswitch-checked:not(.p-disabled) .p-inputswitch-slider {
+  background: green;
+}
+.p-inputswitch:not(.p-disabled) .p-inputswitch-slider {
+  background: yellow;
+}
+.p-inputswitch.p-focus .p-inputswitch-slider{
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem white;
+}
+//progress notes end
 
 .label-title {
   font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
