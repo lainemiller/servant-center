@@ -34,11 +34,16 @@ export class CaseWorkerComponent implements OnInit {
         this.itemChange(0);
       }
     );
-    this.service.getName().subscribe((data) => {
+    this.service.getUserData().subscribe((data) => {
       this.userInfo = data;
-      this.profilePic = this.userInfo.image;
-      this.name = this.userInfo.name;
-      this.login = this.userInfo.date;
+      console.log(this.userInfo);
+      this.userInfo = this.userInfo.result;
+      this.name = this.userInfo[0].nick_name;
+      this.profilePic = this.userInfo[0].photo;
+      if (this.profilePic === null) {
+        this.profilePic = '../assets/images/user-profile.jpg';
+      }
+      this.login = this.userInfo[0].last_login_date_time;
     });
   }
   itemChange(msgs: number) {
@@ -71,29 +76,25 @@ export class CaseWorkerComponent implements OnInit {
         label: 'LOGOUT',
         icon: 'fas fa-sign-out-alt',
         styleClass: 'menu-items--text menu-item--6',
-        command:() =>this.onLogoutClick()
+        command: () => this.onLogoutClick(),
       },
     ];
   }
 
   ngOnInit(): void {
     console.log('case worker component');
-    if(window.innerWidth < 768)
-      this.displayMenu = false;
+    if (window.innerWidth < 768) this.displayMenu = false;
   }
 
   toggleMenu(): void {
     this.displayMenu = !this.displayMenu;
   }
   activeMenu(event: any) {
-    if(window.innerWidth < 768)
-      this.displayMenu = !this.displayMenu;
+    if (window.innerWidth < 768) this.displayMenu = !this.displayMenu;
   }
   onLogoutClick() {
-
-    console.log("Logout Clicked");
+    console.log('Logout Clicked');
 
     Auth.signOut();
   }
-
 }

@@ -21,7 +21,7 @@ export class TreatmentPlanComponent implements OnInit {
   public formView = true;
   public treatmentArr: any;
   public formData:any;
-
+ public persons=['Client','Case Manager','RN']
   constructor(
     private formBuilder: FormBuilder,
     private service: VeteranDashboardService
@@ -67,6 +67,12 @@ export class TreatmentPlanComponent implements OnInit {
     this.treatmentIssuesForm = this.formBuilder.group({
       physicalHealth: this.initializeIssuesArray(),
       mentalHealth: this.initializeIssuesArray(),
+      substanceUse: this.initializeIssuesArray(),
+      housing: this.initializeIssuesArray(),
+      incomeLegal: this.initializeIssuesArray(),
+      relationships:this.initializeIssuesArray(),
+      education:this.initializeIssuesArray(),
+      benefits:this.initializeIssuesArray(),
     });
 
     this.treatmentGoals = [
@@ -79,6 +85,36 @@ export class TreatmentPlanComponent implements OnInit {
         label: 'MENTAL HEALTH',
         formName: 'mentalHealth',
         controls: this.mentalHealth.controls,
+      },
+      {
+        label: 'SUBSTANCE USE',
+        formName: 'substanceUse',
+        controls: this.substanceUse.controls,
+      },
+      {
+        label: 'HOUSING',
+        formName: 'housing',
+        controls: this.housing.controls,
+      },
+      {
+        label: 'INCOME / FINANCIAL / LEGAL',
+        formName: 'incomeLegal',
+        controls: this.incomeLegal.controls,
+      },
+      {
+        label: 'RELATIONSHIPS',
+        formName: 'relationships',
+        controls: this.relationships.controls,
+      },
+      {
+        label: 'EDUCATION',
+        formName: 'education',
+        controls: this.education.controls,
+      },
+      {
+        label: 'BENEFITS / MEDICAID / SNAP',
+        formName: 'benefits',
+        controls: this.benefits.controls,
       },
     ];
   }
@@ -100,7 +136,7 @@ export class TreatmentPlanComponent implements OnInit {
  
   initializeIssuesFormArray() {
     this.issuesArray = this.formBuilder.array([]);
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 1; i++) {
       this.issuesArray.push(this.initialiseIssuesFormGroup());
     }
     return this.issuesArray;
@@ -110,6 +146,12 @@ export class TreatmentPlanComponent implements OnInit {
     return this.formBuilder.group({
       physicalHealth: this.initializeIssuesArray(),
       mentalHealth: this.initializeIssuesArray(),
+      substanceUse: this.initializeIssuesArray(),
+      housing: this.initializeIssuesArray(),
+      incomeLegal: this.initializeIssuesArray(),
+      relationships: this.initializeIssuesArray(),
+      education: this.initializeIssuesArray(),
+      benefits: this.initializeIssuesArray(),
     });
   }
 
@@ -133,32 +175,37 @@ export class TreatmentPlanComponent implements OnInit {
   get physicalHealth(): FormArray {
     return this.treatmentIssuesForm.get('physicalHealth') as FormArray;
   }
+  get substanceUse(): FormArray {
+    return this.treatmentIssuesForm.get('substanceUse') as FormArray;
+  }
 
   get mentalHealth(): FormArray {
     return this.treatmentIssuesForm.get('mentalHealth') as FormArray;
   }
-
+  get housing(): FormArray {
+    return this.treatmentIssuesForm.get('housing') as FormArray;
+  }
+  get incomeLegal(): FormArray {
+    return this.treatmentIssuesForm.get('incomeLegal') as FormArray;
+  }
+  get relationships(): FormArray {
+    return this.treatmentIssuesForm.get('relationships') as FormArray;
+  }
+  get education(): FormArray {
+    return this.treatmentIssuesForm.get('education') as FormArray;
+  }
+  get benefits(): FormArray {
+    return this.treatmentIssuesForm.get('benefits') as FormArray;
+  }
   get treatmentIssues(): FormArray {
     return this.treatmentPlanForm.get('treatmentIssues') as FormArray;
   }
 
-  addNewField() {
-    this.issuesArray.push(this.initialiseIssuesFormGroup());
-    if (this.issuesArray.value.length > 3) {
-      this.delete = false;
-    }
-  }
+
   get getControl() {
     return this.treatmentPlanForm.controls;
   }
 
-  deleteField() {
-    this.issuesArray.value.pop();
-    this.issuesArray.removeAt(-1);
-    if (this.issuesArray.value.length === 3) {
-      this.delete = true;
-    }
-  }
   resetForm() {
     this.formView=true;
     this.showTopView();

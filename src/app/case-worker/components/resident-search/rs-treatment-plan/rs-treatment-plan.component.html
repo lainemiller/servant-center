@@ -1,20 +1,21 @@
 <div class="p-grid">
   <div class="p-col-12">
-    <div class="form-container">
+    <div  class="form-container">
       <form [formGroup]="treatmentPlanForm" (ngSubmit)="onSubmit()">
         <div class="p-fluid p-formgrid p-grid">
           <div class="p-field p-col-12 p-md-3">
             <span class="label-title">Resident's First Name</span>
             <input
               type="text"
+              class="userInput"
               pInputText
               formControlName="firstName"
-              placeholder="Resident's First Name"
               appNoSpecialSymbols
               customAttr="textOnly"
+              placeholder="Resident's First Name"
               class="disable-field"
               [readonly]=true
-            />
+            />            
           </div>
           <div class="p-field p-col-12 p-md-3">
             <span class="label-title">Resident's Last Name</span>
@@ -22,13 +23,13 @@
               type="text"
               pInputText
               formControlName="lastName"
-              placeholder="Resident's Last Name"
               appNoSpecialSymbols
               customAttr="textOnly"
-              maxlength="20"
+              placeholder="Resident's Last Name"
               class="disable-field"
               [readonly]=true
             />
+        
           </div>
           <div class="p-field p-col-12 p-md-3">
             <span class="label-title">Record #</span>
@@ -36,10 +37,9 @@
               type="text"
               pInputText
               formControlName="recordNo"
-              placeholder="Record #"
               appNoSpecialSymbols
               customAttr="numbersOnly"
-              maxlength="6"
+              placeholder="Record #"
               class="disable-field"
               [readonly]=true
             />
@@ -54,8 +54,10 @@
             [readonly]=true
             class="disable-field"
           />
+          </div>
         </div>
 
+        <div class="p-fluid p-formgrid p-grid">
           <div class="p-field p-col-12 p-md-3">
             <span class="label-title">Intake Date</span>
             <input
@@ -68,16 +70,27 @@
           />
           </div>
           <div class="p-field p-col-12 p-md-3">
-            <span class="label-title">HMIS ID</span>
+            <span class="label-title">HMIS ID </span>
             <input
               type="text"
               pInputText
               formControlName="hmisIdNo"
+              appNoSpecialSymbols
+              customAttr="numbersOnly"
               placeholder="HMIS ID#"
-              mask="000-000"
-              class="disable-field"
               [readonly]=true
+            class="disable-field"
             />
+            <div
+              *ngIf="getControl.hmisIdNo.invalid && getControl.hmisIdNo.touched"
+            >
+              <div
+                *ngIf="getControl.hmisIdNo.errors?.required"
+                class="form-error"
+              >
+                <small>HMIS ID is required.</small>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -87,6 +100,7 @@
             <textarea
               [rows]="10"
               formControlName="veteranDiagnosis"
+              class="userInput"
               pInputTextarea
               placeholder="Comment"
             ></textarea>
@@ -109,6 +123,7 @@
             <textarea
               [rows]="10"
               formControlName="veteranSupports"
+              class="userInput"
               pInputTextarea
               placeholder="Comment"
             ></textarea>
@@ -122,15 +137,16 @@
                 *ngIf="getControl.veteranSupports.errors?.required"
                 class="form-error"
               >
-                <small>Comment is required.</small>
+                <small>Support is required.</small>
               </div>
             </div>
           </div>
           <div class="p-field p-col-12 p-md-3">
-            <span class="label-title">Strength</span>
+            <span class="label-title">Strengths</span>
             <textarea
               [rows]="10"
               formControlName="veteranStrengths"
+              class="userInput"
               pInputTextarea
               placeholder="Comment"
             ></textarea>
@@ -158,16 +174,6 @@
               </p>
             </div>
           </div>
-          <div class="p-field p-col-12 p-md-3">
-            <p-button label="Add" (click)="addNewField()"></p-button>
-          </div>
-          <div class="p-field p-col-12 p-md-3">
-            <p-button
-              label="Delete"
-              (click)="deleteField()"
-              [disabled]="delete"
-            ></p-button>
-          </div>
         </div>
 
         <div
@@ -181,7 +187,9 @@
             >
               <div class="p-field p-col-12">
                 <div class="p-grid">
-                  <div class="p-col-fixed bullents">{{ i + 1 }}</div>
+                  <div class="p-col-fixed bullents bullents-margin">
+                    {{ i + 1 }}
+                  </div>
                   <div class="p-col heading">{{ goal.label }}</div>
                 </div>
               </div>
@@ -197,15 +205,16 @@
                           type="text"
                           formControlName="goals"
                           pInputText
+                          class="userInput"
                           placeholder="Goal"
                           id="goal{{ i }}a{{ j }}"
                           appNoSpecialSymbols
                           customAttr="textWithSpace"
-                          (focusout)="validate($event)"
-                          (keyup)="validate($event)"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
                         />
                         <div
-                          [class.dis-none]="!error"
+                          [class.hide-display]="!error"
                           class="goal{{ i }}a{{ j }} form-error"
                         >
                           <small>Goal is required.</small>
@@ -216,37 +225,161 @@
                           type="text"
                           formControlName="goals"
                           pInputText
+                          class="userInput"
                           placeholder="Goal"
                           id="goal{{ i }}{{ j }}a"
                           appNoSpecialSymbols
                           customAttr="textWithSpace"
-                          (focusout)="validate($event)"
-                          (keyup)="validate($event)"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
                         />
                         <div
-                          [class.dis-none]="!error"
+                          [class.hide-display]="!error"
                           class="goal{{ i }}{{ j }}a form-error"
                         >
                           <small>Goal is required.</small>
                         </div>
                       </div>
+                      <div class="box" *ngIf="goal.label === 'SUBSTANCE USE'">
+                        <input
+                          type="text"
+                          formControlName="goals"
+                          pInputText
+                          class="userInput"
+                          placeholder="Goal"
+                          id="goal{{ i }}{{ j }}b"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}{{ j }}b form-error"
+                        >
+                          <small>Goal is required.</small>
+                        </div>
+                      </div>
+
+                      <div class="box" *ngIf="goal.label === 'HOUSING'">
+                        <input
+                          type="text"
+                          formControlName="goals"
+                          pInputText
+                          class="userInput"
+                          placeholder="Goal"
+                          id="goal{{ i }}c{{ j }}"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}c{{ j }} form-error"
+                        >
+                          <small>Goal is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'INCOME / FINANCIAL / LEGAL'">
+                        <input
+                          type="text"
+                          formControlName="goals"
+                          pInputText
+                          class="userInput"
+                          placeholder="Goal"
+                          id="goal{{ i }}{{ j }}c"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}{{ j }}c form-error"
+                        >
+                          <small>Goal is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'RELATIONSHIPS'">
+                        <input
+                          type="text"
+                          formControlName="goals"
+                          pInputText
+                          class="userInput"
+                          placeholder="Goal"
+                          id="goal{{ i }}d{{ j }}"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}d{{ j }} form-error"
+                        >
+                          <small>Goal is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'EDUCATION'">
+                        <input
+                          type="text"
+                          formControlName="goals"
+                          pInputText
+                          class="userInput"
+                          placeholder="Goal"
+                          id="goal{{ i }}{{ j }}d"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}{{ j }}d form-error"
+                        >
+                          <small>Goal is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'BENEFITS / MEDICAID / SNAP'">
+                        <input
+                          type="text"
+                          formControlName="goals"
+                          pInputText
+                          class="userInput"
+                          placeholder="Goal"
+                          id="goal{{ i }}e{{ j }}"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}e{{ j }} form-error"
+                        >
+                          <small>Goal is required.</small>
+                        </div>
+                      </div>
                     </div>
+
                     <div class="p-col">
                       <div class="box" *ngIf="goal.label === 'PHYSICAL HEALTH'">
                         <input
                           type="text"
                           formControlName="plans"
                           pInputText
-                          placeholder="Plan"
-                          id="goal{{ i }}b{{ j }}"
+                          class="userInput"
                           appNoSpecialSymbols
                           customAttr="textWithSpace"
-                          (focusout)="validate($event)"
-                          (keyup)="validate($event)"
+                          placeholder="Plan"
+                          id="goal{{ i }}{{ j }}e"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
                         />
                         <div
-                          [class.dis-none]="!error"
-                          class="goal{{ i }}b{{ j }} form-error"
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}{{ j }}e form-error"
                         >
                           <small>Plan is required.</small>
                         </div>
@@ -256,16 +389,139 @@
                           type="text"
                           formControlName="plans"
                           pInputText
+                          class="userInput"
                           placeholder="Plan"
-                          id="goal{{ i }}{{ j }}b"
+                          id="goal{{ i }}f{{ j }}"
                           appNoSpecialSymbols
                           customAttr="textWithSpace"
-                          (focusout)="validate($event)"
-                          (keyup)="validate($event)"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
                         />
                         <div
-                          [class.dis-none]="!error"
-                          class="goal{{ i }}{{ j }}b form-error"
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}f{{ j }} form-error"
+                        >
+                          <small>Plan is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'SUBSTANCE USE'">
+                        <input
+                          type="text"
+                          formControlName="plans"
+                          pInputText
+                          class="userInput"
+                          placeholder="Plan"
+                          id="goal{{ i }}{{ j }}f"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}{{ j }}f form-error"
+                        >
+                          <small>Plan is required.</small>
+                        </div>
+                      </div>
+
+                      <div class="box" *ngIf="goal.label === 'HOUSING'">
+                        <input
+                          type="text"
+                          formControlName="plans"
+                          pInputText
+                          class="userInput"
+                          placeholder="Plan"
+                          id="goal{{ i }}g{{ j }}"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}g{{ j }} form-error"
+                        >
+                          <small>Plan is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'INCOME / FINANCIAL / LEGAL'">
+                        <input
+                          type="text"
+                          formControlName="plans"
+                          pInputText
+                          class="userInput"
+                          placeholder="Plan"
+                          id="goal{{ i }}gl{{ j }}"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}gl{{ j }} form-error"
+                        >
+                          <small>Plan is required.</small>
+                        </div>
+                      </div>
+
+                      <div class="box" *ngIf="goal.label === 'RELATIONSHIPS'">
+                        <input
+                          type="text"
+                          formControlName="plans"
+                          pInputText
+                          class="userInput"
+                          placeholder="Plan"
+                          id="goal{{ i }}{{ j }}h"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}{{ j }}h form-error"
+                        >
+                          <small>Plan is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'EDUCATION'">
+                        <input
+                          type="text"
+                          formControlName="plans"
+                          pInputText
+                          class="userInput"
+                          placeholder="Plan"
+                          id="goal{{ i }}i{{ j }}"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}i{{ j }} form-error"
+                        >
+                          <small>Plan is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'BENEFITS / MEDICAID / SNAP'">
+                        <input
+                          type="text"
+                          formControlName="plans"
+                          pInputText
+                          class="userInput"
+                          placeholder="Plan"
+                          id="goal{{ i }}{{ j }}i"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}{{ j }}i form-error"
                         >
                           <small>Plan is required.</small>
                         </div>
@@ -277,16 +533,17 @@
                           type="text"
                           formControlName="strategies"
                           pInputText
+                          class="userInput"
                           placeholder="Strategy"
-                          id="goal{{ i }}{{ j }}c"
                           appNoSpecialSymbols
                           customAttr="textWithSpace"
-                          (focusout)="validate($event)"
-                          (keyup)="validate($event)"
+                          id="goal{{ i }}{{ j }}j"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
                         />
                         <div
-                          [class.dis-none]="!error"
-                          class="goal{{ i }}{{ j }}c form-error"
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}{{ j }}j form-error"
                         >
                           <small>Strategy is required.</small>
                         </div>
@@ -296,16 +553,138 @@
                           type="text"
                           formControlName="strategies"
                           pInputText
+                          class="userInput"
                           placeholder="Strategy"
-                          id="goal{{ i }}c{{ j }}"
+                          id="goal{{ i }}k{{ j }}"
                           appNoSpecialSymbols
                           customAttr="textWithSpace"
-                          (focusout)="validate($event)"
-                          (keyup)="validate($event)"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
                         />
                         <div
-                          [class.dis-none]="!error"
-                          class="goal{{ i }}c{{ j }} form-error"
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}k{{ j }} form-error"
+                        >
+                          <small>Strategy is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'SUBSTANCE USE'">
+                        <input
+                          type="text"
+                          formControlName="strategies"
+                          pInputText
+                          class="userInput"
+                          placeholder="Strategy"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          id="goal{{ i }}{{ j }}k"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}{{ j }}k form-error"
+                        >
+                          <small>Strategy is required.</small>
+                        </div>
+                      </div>
+
+                      <div class="box" *ngIf="goal.label === 'HOUSING'">
+                        <input
+                          type="text"
+                          formControlName="strategies"
+                          pInputText
+                          class="userInput"
+                          placeholder="Strategy"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          id="goal{{ i }}{{ j }}y"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}{{ j }}y form-error"
+                        >
+                          <small>Strategy is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'INCOME / FINANCIAL / LEGAL'">
+                        <input
+                          type="text"
+                          formControlName="strategies"
+                          pInputText
+                          class="userInput"
+                          placeholder="Strategy"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          id="goal{{ i }}y{{ j }}"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}y{{ j }} form-error"
+                        >
+                          <small>Strategy is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'RELATIONSHIPS'">
+                        <input
+                          type="text"
+                          formControlName="strategies"
+                          pInputText
+                          class="userInput"
+                          placeholder="Strategy"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          id="goal{{ i }}{{ j }}z"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}{{ j }}z form-error"
+                        >
+                          <small>Strategy is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'EDUCATION'">
+                        <input
+                          type="text"
+                          formControlName="strategies"
+                          pInputText
+                          class="userInput"
+                          placeholder="Strategy"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          id="goal{{ i }}z{{ j }}"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}z{{ j }} form-error"
+                        >
+                          <small>Strategy is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'BENEFITS / MEDICAID / SNAP'">
+                        <input
+                          type="text"
+                          formControlName="strategies"
+                          pInputText
+                          class="userInput"
+                          placeholder="Strategy"
+                          appNoSpecialSymbols
+                          customAttr="textWithSpace"
+                          id="goal{{ i }}a{{ j }}c"
+                          (focusout)="validateInput($event)"
+                          (keyup)="validateInput($event)"
+                        />
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}a{{ j }}c form-error"
                         >
                           <small>Strategy is required.</small>
                         </div>
@@ -317,17 +696,17 @@
                           <p-calendar
                             [inline]="false"
                             formControlName="targetDate"
-                            inputId="goal{{ i }}d{{ j }}"
+                            inputId="goal{{ i }}d{{ j }}g"
                             [showIcon]="true"
                             placeholder="Target date"
-                            (onSelect)="val($event)"
+                            (onSelect)="validateDate($event)"
                             (focusout)="getDate($event)"
                             [maxDate]="maxDateValue"
                           ></p-calendar>
                         </div>
                         <div
-                          [class.dis-none]="!error"
-                          class="goal{{ i }}d{{ j }} form-error"
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}d{{ j }}g form-error"
                         >
                           <small>Target Date is required.</small>
                         </div>
@@ -337,17 +716,138 @@
                           <p-calendar
                             [inline]="false"
                             formControlName="targetDate"
-                            inputId="goal{{ i }}{{ j }}d"
+                            inputId="goal{{ i }}m{{ j }}d"
                             [showIcon]="true"
                             placeholder="Target date"
-                            (onSelect)="val($event)"
+                            (onSelect)="validateDate($event)"
                             (focusout)="getDate($event)"
                             [maxDate]="maxDateValue"
                           ></p-calendar>
                         </div>
                         <div
-                          [class.dis-none]="!error"
-                          class="goal{{ i }}{{ j }}d form-error"
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}m{{ j }}d form-error"
+                        >
+                          <small>Target Date is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'SUBSTANCE USE'">
+                        <div>
+                          <p-calendar
+                            [inline]="false"
+                            formControlName="targetDate"
+                            inputId="goal{{ i }}d{{ j }}v"
+                            [showIcon]="true"
+                            placeholder="Target date"
+                            (onSelect)="validateDate($event)"
+                            (focusout)="getDate($event)"
+                            [maxDate]="maxDateValue"
+                          ></p-calendar>
+                        </div>
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}d{{ j }}v form-error"
+                        >
+                          <small>Target Date is required.</small>
+                        </div>
+                      </div>
+
+                      <div class="box" *ngIf="goal.label === 'HOUSING'">
+                        <div>
+                          <p-calendar
+                            [inline]="false"
+                            formControlName="targetDate"
+                            inputId="goal{{ i }}d{{ j }}t"
+                            [showIcon]="true"
+                            placeholder="Target date"
+                            (onSelect)="validateDate($event)"
+                            (focusout)="getDate($event)"
+                            [maxDate]="maxDateValue"
+                          ></p-calendar>
+                        </div>
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}d{{ j }}t form-error"
+                        >
+                          <small>Target Date is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'INCOME / FINANCIAL / LEGAL'">
+                        <div>
+                          <p-calendar
+                            [inline]="false"
+                            formControlName="targetDate"
+                            inputId="goal{{ i }}d{{ j }}u"
+                            [showIcon]="true"
+                            placeholder="Target date"
+                            (onSelect)="validateDate($event)"
+                            (focusout)="getDate($event)"
+                            [maxDate]="maxDateValue"
+                          ></p-calendar>
+                        </div>
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}d{{ j }}u form-error"
+                        >
+                          <small>Target Date is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'RELATIONSHIPS'">
+                        <div>
+                          <p-calendar
+                            [inline]="false"
+                            formControlName="targetDate"
+                            inputId="goal{{ i }}d{{ j }}w"
+                            [showIcon]="true"
+                            placeholder="Target date"
+                            (onSelect)="validateDate($event)"
+                            (focusout)="getDate($event)"
+                            [maxDate]="maxDateValue"
+                          ></p-calendar>
+                        </div>
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}d{{ j }}w form-error"
+                        >
+                          <small>Target Date is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'EDUCATION'">
+                        <div>
+                          <p-calendar
+                            [inline]="false"
+                            formControlName="targetDate"
+                            inputId="goal{{ i }}d{{ j }}k"
+                            [showIcon]="true"
+                            placeholder="Target date"
+                            (onSelect)="validateDate($event)"
+                            (focusout)="getDate($event)"
+                            [maxDate]="maxDateValue"
+                          ></p-calendar>
+                        </div>
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}d{{ j }}k form-error"
+                        >
+                          <small>Target Date is required.</small>
+                        </div>
+                      </div>
+                      <div class="box" *ngIf="goal.label === 'BENEFITS / MEDICAID / SNAP'">
+                        <div>
+                          <p-calendar
+                            [inline]="false"
+                            formControlName="targetDate"
+                            inputId="goal{{ i }}d{{ j }}h"
+                            [showIcon]="true"
+                            placeholder="Target date"
+                            (onSelect)="validateDate($event)"
+                            (focusout)="getDate($event)"
+                            [maxDate]="maxDateValue"
+                          ></p-calendar>
+                        </div>
+                        <div
+                          [class.hide-display]="!error"
+                          class="goal{{ i }}d{{ j }}h form-error"
                         >
                           <small>Target Date is required.</small>
                         </div>
@@ -359,12 +859,13 @@
             </div>
           </div>
         </div>
-
+        
         <div class="p-fluid p-formgrid p-grid">
           <div class="p-field p-col-12">
             <textarea
               [rows]="5"
               formControlName="veteranNotes"
+              class="userInput"
               pInputTextarea
               placeholder="Notes"
             ></textarea>
@@ -374,16 +875,12 @@
                 getControl.veteranNotes.touched
               "
             >
-              <small class="form-error"> This field is required.</small>
+              <small class="form-error">Veteran notes is required.</small>
             </div>
           </div>
         </div>
-        <button
-          type="submit"
-          pButton
-          label="Submit"
-          class="p-button-outlined"
-        ></button>
+
+        <button type="submit" pButton label="Submit" class="p-button"></button>
         <p-button
           label="Cancel"
           styleClass="p-button-link"

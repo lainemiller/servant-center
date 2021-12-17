@@ -14,4 +14,8 @@ export class DataService {
   getTreatmentPlanData() {
     return this.http.get('./assets/mock/treatmentPlan-data.json');
   }
+  getUserData()
+  {
+    return this.http.get('https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/uiLayout/getCaseWorkerDetails/3');
+  }
 }
