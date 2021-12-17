@@ -24,7 +24,7 @@ export class ConsentService {
     }
   }
 
-  public consentConfirm(endPoint: string, payload = {}): Observable<any> {
+  public consentConfirm(endPoint: number, payload = {}): Observable<any> {
     if (this.isDev) {
       return this.restcs.makeCall('./assets/mock/consent-data.json');
     } else {

@@ -15,7 +15,7 @@ export class ConsentDataComponent implements OnInit {
   displayTwo: boolean = false;
   vetran: any;
   consentDetails: any;
-  userId: any = 0;
+  userId: number = 0;
   email: any;
 
   constructor(private service: ConsentService) {}
