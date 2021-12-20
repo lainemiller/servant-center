@@ -1,21 +1,31 @@
 <app-item-header [title]="formTitle"></app-item-header>
 <div class="form-container">
-  <form [formGroup]="transportRequestForm" (ngSubmit)="onSubmit()">
+  <form
+    *ngIf="transportRequestForm"
+    [formGroup]="transportRequestForm"
+    (ngSubmit)="onSubmit()"
+  >
     <div class="p-fluid p-formgrid p-grid">
       <div class="p-field p-col-12 p-md-6">
+        <label for="firstName" class="label-title">First Name</label>
         <input
           type="text"
           pInputText
-          formControlName="firstName"
+          value="{{ veteranData?.firstName }}"
           placeholder="First Name"
+          formControlName="firstName"
+          class="disable"
         />
       </div>
       <div class="p-field p-col-12 p-md-6">
+        <label for="lastName" class="label-title">Last Name</label>
         <input
           type="text"
           pInputText
-          formControlName="lastName"
+          value="{{ veteranData?.lastName }}"
           placeholder="Last Name"
+          formControlName="lastName"
+          class="disable"
         />
       </div>
     </div>
@@ -23,57 +33,125 @@
       <input
         type="text"
         pInputText
-        formControlName="requestReason"
+        formControlName="reason"
         placeholder="Reason for request"
+        maxlength="30"
+        appNoSpecialSymbols
+        customAttr="textOnly"
+        class="inputFromUser"
       />
+      <small class="error" *ngIf="reason?.invalid && reason?.touched"
+        >reason is required.</small
+      >
     </div>
     <p-divider></p-divider>
-    <div class="p-fluid p-formgrid p-grid">
-      <div class="p-field p-col-12 p-md-8">
-        <p-calendar
-          formControlName="date"
-          [inline]="false"
-          [showIcon]="true"
-          placeholder="Appointment Date (mm/dd/yyyy)"
-        ></p-calendar>
-      </div>
-      <div class="p-field p-col-12 p-md-4">
-        <p-calendar
-          formControlName="time"
-          [timeOnly]="true"
-          placeholder="Time"
-          [showIcon]="true"
-          icon="pi pi-angle-down"
-        ></p-calendar>
-      </div>
+    <!-- <div class="p-fluid p-formgrid p-grid"> -->
+    <div class="p-field p-fluid">
+      <p-calendar
+        formControlName="appointmentDate"
+        [inline]="false"
+        [showIcon]="true"
+        placeholder="Appointment Date (mm/dd/yyyy)"
+        class="inputFromUser"
+        [minDate]="minDateValue"
+      ></p-calendar>
+      <small
+        class="error"
+        *ngIf="appointmentDate?.invalid && appointmentDate?.touched"
+        >appointment date is required.</small
+      >
     </div>
     <div class="p-field p-fluid">
+      <p-calendar
+        formControlName="time"
+        [timeOnly]="true"
+        hourFormat="12"
+        placeholder="Time"
+        [showIcon]="true"
+        icon="pi pi-angle-down"
+        class="inputFromUser"
+        formControlName="time"
+      ></p-calendar>
+      <small class="error" *ngIf="time?.invalid && time?.touched"
+        >time is required.</small
+      >
+    </div>
+    <!-- </div> -->
+    <div class="p-field p-fluid">
+      <!-- <label for="address1" class="label-title">Destination Address</label> -->
       <input
         type="text"
         pInputText
-        formControlName="address"
-        placeholder="Address"
+        placeholder="Destination Address"
+        formControlName="destinationAddress"
+        maxlength="30"
+        appNoSpecialSymbols
+        customAttr="textOnly"
+        class="inputFromUser"
       />
+      <small
+        class="error"
+        *ngIf="destinationAddress?.invalid && destinationAddress?.touched"
+        >destination address is required.</small
+      >
     </div>
     <div class="p-fluid p-formgrid p-grid">
       <div class="p-field p-col-8 p-md-5">
+        <!-- <label for="city" class="label-title">City</label> -->
         <input
           type="text"
           pInputText
-          formControlName="city"
+          maxlength="30"
+          appNoSpecialSymbols
+          customAttr="textOnly"
+          class="inputFromUser"
           placeholder="City"
+          formControlName="city"
         />
+        <small class="error" *ngIf="city?.invalid && city?.touched"
+          >city is required.</small
+        >
       </div>
       <div class="p-field p-col-4 p-md-3">
-        <p-dropdown
+        <!-- <label for="state" class="label-title">State</label> -->
+        <!-- <input
+          type="text"
+          pInputText
+          value="{{ veteranData?.state }}"
+          placeholder="State"
           formControlName="state"
+         
+        /> -->
+        <p-dropdown
+          [autoDisplayFirst]="false"
           [options]="states"
+          formControlName="selectedState"
           placeholder="State"
           optionLabel="name"
-        ></p-dropdown>
+          class="inputFromUser"
+        >
+        </p-dropdown>
+        <small
+          class="error"
+          *ngIf="control.selectedState?.invalid && control.selectedState?.touched"
+         
+          >state is required.</small
+        >
       </div>
       <div class="p-field p-col-6 p-md-4">
-        <input type="text" pInputText formControlName="zip" placeholder="Zip" />
+        <!-- <label for="zipcode" class="label-title"> Zipcode</label> -->
+        <input
+          type="text"
+          pInputText
+          placeholder="Zip"
+          mask="00000-0000||00000"
+          value="{{ veteranData?.zipcode }}"
+          formControlName="zipcode"
+          class="inputFromUser"
+        />
+        <small class="error" *ngIf="zipcode?.invalid && zipcode?.touched"
+          >zipcode is required.</small
+        >
       </div>
     </div>
 
@@ -82,11 +160,13 @@
       pButton
       label="Submit"
       class="p-button-outlined"
+      [disabled]="transportRequestForm.invalid"
     ></button>
     <button
       type="button"
       pButton
       label="Cancel"
+      (click)="reset()"
       class="p-button-text p-button-secondary"
     ></button>
   </form>

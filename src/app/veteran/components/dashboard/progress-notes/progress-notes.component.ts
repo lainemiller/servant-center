@@ -18,7 +18,7 @@ export class ProgressNotesComponent implements OnInit {
   public d: any;
   public progressNotes: any = [];
   public progress: any = [];
-  public initialStatus = true;
+  public initialStatus = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,10 +36,11 @@ export class ProgressNotesComponent implements OnInit {
       }
     });
 
-    this.initialStatus = true;
+    this.initialStatus = false;
     this.buildForm();
   }
-
+  
+  
   expandOrCollapse(index: any) {
     const elementSelector = '#goal-desc--' + index;
     const descElement = document.querySelector(elementSelector) as HTMLElement;
@@ -100,6 +101,9 @@ export class ProgressNotesComponent implements OnInit {
   crossButton() {
     this.initialStatus = true;
     this.progressNote.reset();
+  }
+  changed(id:any){
+    console.log("status changed for id",id); 
   }
   cancleIt() {
     this.display = false;

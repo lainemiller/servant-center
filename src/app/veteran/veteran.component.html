@@ -1,4 +1,4 @@
-<app-header (toggleMenu)="toggleMenu()"></app-header>
+<app-header (toggleMenu)="toggleMenu()" id="prnt"></app-header>
 
 <div class="p-grid nested-grid">
   <p-menu [model]="items" class="p-col-12 p-lg-2" width="250px" [hidden]="!displayMenu" (click)='activeMenu($event)'></p-menu>
