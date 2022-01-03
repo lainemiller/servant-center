@@ -66,12 +66,58 @@
   line-height: 36px;
 }
 
+.error {
+  color: rgba(255, 0, 0, 0.993);
+  font-size: 15px;
+}
+
+.inputFromUser.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+
 :host ::ng-deep .resident-search-nav .p-tabmenu-nav {
   justify-content: space-between;
+  margin-top: 60px;
+
   @media screen and (max-width: 768px) {
     flex-wrap: wrap;
     .p-tabmenuitem {
       width: 100%;
     }
   }
+}
+
+// .image{
+//   display: block;
+//   margin-left: auto;
+//   margin-right: auto;
+// }
+
+// .image:hover{
+//   transform: scale(1.2);
+// }
+
+.card-resident-name {
+  font-size: 21px;
+}
+// .card-resident-details:hover{
+//   transform: scale(1.2);
+// }
+
+// .cardbox:hover{
+//   transform: scale(1.2);
+// align-items: center;
+// }
+
+.search-header-details {
+  padding-top: 20px;
+  padding-left: 10px;
+  height: 60px;
+  color: #fff;
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 18px;
+  border-radius: 14px 14px 0px 0px;
+  background-image: linear-gradient(270deg, rgb(130, 129, 176) 0%, rgb(41, 42, 102) 100%);
 }

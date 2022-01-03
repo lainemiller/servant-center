@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { CaseWorkerRoutingModule } from './case-worker-routing.module';
@@ -27,6 +27,7 @@ import { StepsModule } from 'primeng/steps';
 import { TableModule } from 'primeng/table';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { TabViewModule } from 'primeng/tabview';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
 @NgModule({
   declarations: [
     CaseWorkerComponent,
@@ -58,8 +59,10 @@ import { TabViewModule } from 'primeng/tabview';
     StepsModule,
     TableModule,
     TabMenuModule,
-    TabViewModule
+    TabViewModule,
+    NgxMaskModule.forRoot()
   ],
   exports: [CardModule, RadioButtonModule, StepsModule, TableModule,TabMenuModule,TabViewModule],
+  providers: [DatePipe]
 })
 export class CaseWorkerModule {}

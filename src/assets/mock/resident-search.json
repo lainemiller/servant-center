@@ -1,0 +1,66 @@
+[
+    {
+      "photo": "null",
+      "firstName": "apeksha",
+      "lastName": "horambe",
+      "birthDate": "12-10-2021",
+      "address": "mumbai",
+      "phoneNumber": "123-456-7890",
+      "email": "apeksha@mail.com"
+    },
+    {
+      "photo": "null",
+      "firstName": "arpita",
+      "lastName": "maurya",
+      "birthDate": "12-13-2021",
+      "address": "noida",
+      "phoneNumber": "786-456-7890",
+      "email": "arpita@mail.com"
+    },
+    {
+      "photo": "null",
+      "firstName": "pravin",
+      "lastName": "bhilare",
+      "birthDate": "12-15-2021",
+      "address": "thane",
+      "phoneNumber": "987-456-7890",
+      "email": "pravin@mail.com"
+    },
+    {
+      "photo": "null",
+      "firstName": "mayuri",
+      "lastName": "horambe",
+      "birthDate": "12-18-2021",
+      "address": "ratnagiri",
+      "phoneNumber": "111-456-7890",
+      "email": "mahi@mail.com"
+    },
+    {
+      "photo": "null",
+      "firstName": "apeksha",
+      "lastName": "potale",
+      "birthDate": "12-19-2021",
+      "address": "kokan",
+      "phoneNumber": "999-456-7890",
+      "email": "mishti@mail.com"
+    },
+    {
+      "photo": "null",
+      "firstName": "apeksha",
+      "lastName": "potale",
+      "birthDate": "12-19-2021",
+      "address": "kokan",
+      "phoneNumber": "999-456-7890",
+      "email": "apu@mail.com"
+    },
+    {
+      "photo": "null",
+      "firstName": "anuja",
+      "lastName": "masekar",
+      "birthDate": "12-11-2021",
+      "address": "devnar",
+      "phoneNumber": "987-456-7890",
+      "email": "ajuna@mail.com"
+    }
+  ]
+  
