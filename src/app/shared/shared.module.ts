@@ -20,6 +20,7 @@ import { MenuModule } from 'primeng/menu';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TooltipModule } from 'primeng/tooltip';
 import {PasswordModule} from 'primeng/password';
+import { ToolbarModule } from 'primeng/toolbar';
 
 import { KeysPipe } from '../case-worker/components/resident-search/rs-initial-assessment/ia-form-page-three/ia-form-page-three.component';
 import { ConsentDataComponent } from './components/consent-data/consent-data.component';
@@ -53,7 +54,8 @@ const MODULES = [
   TooltipModule,
   DialogModule,
   HttpClientModule,
-  PasswordModule
+  PasswordModule,
+  ToolbarModule
 ];
 
 const COMPONENTS = [

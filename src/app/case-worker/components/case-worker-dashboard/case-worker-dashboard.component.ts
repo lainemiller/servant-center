@@ -16,6 +16,12 @@ export class CaseWorkerDashboardComponent implements OnInit {
   public totalEvents: any = [];
   public tagName = 'Appointment';
   public eventsForm!:FormGroup;
+  public eventTitle!:string;
+  public eventDate!:string;
+  public eventDes!:string;
+  public eventStartTime!:string;
+  public eventEndTime!:string;
+  public displayEvent=false
   constructor(private service: CalendarEventsService, private formBuilder: FormBuilder) {
     this.service.getEvents().subscribe(data =>{
       this.totalEvents=data;
@@ -44,10 +50,7 @@ endTime:['', Validators.required]
   }
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
-    selectable: true,
-    dateClick: function (info) {
-      alert('Date: ' + info.dateStr);
-    },
+    eventClick: this.showEventDetail.bind(this),
     headerToolbar: {
       start: 'prev,next',
       center: 'title',
@@ -85,9 +88,11 @@ endTime:['', Validators.required]
   crossButton() {
  this.eventsForm.reset();
   }
-  showEventDetail(arg:any) {
-    console.log(arg)
-    console.log(arg.jsEvent.target)
-    
-  }
+  showEventDetail(arg: any) {
+    this.displayEvent= true;
+    console.log(arg);
+    this.eventTitle= arg.event._def.title;
+    this.eventDate= arg.event.start;
+    this.eventDes =arg.event._def.extendedProps.description;
+     }
 }

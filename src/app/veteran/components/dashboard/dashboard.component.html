@@ -9,6 +9,7 @@
               #tab
               [model]="items"
               (click)="changeTag(tab)"
+              [activeItem]="items[0]"
             ></p-tabMenu>
           </div>
           <div>
@@ -17,6 +18,7 @@
             >
           </div>
         </div>
+        <!-- modal for add event / appointment starts -->
         <div class="calendar-header__addEvent">
           <p-dialog
             header="Add an {{ tagName }}"
@@ -33,7 +35,7 @@
                     dateFormat="yy-mm-dd"
                     formControlName="eventDate"
                     dataType="string"
-                    placeholder="{{tagName}} Date"
+                    placeholder="Date (yyyy-mm-dd)"
                   >
                   </p-calendar>
                   <div
@@ -94,21 +96,22 @@
                 </div>
                 <div class="p-field p-col-12 p-sm-12">
                   <textarea
-                  placeholder="Description"
-                  [rows]="5"
-                  formControlName="eventDescription"
-                  [cols]="50"
-               
-                  pInputTextarea
-                ></textarea>
-                <div
-                *ngIf="
-                  getControl.eventDescription.touched &&
-                  getControl.eventDescription.invalid"
-              
-              ><small class="form-error">
-                Event Description is required.
-              </small></div>
+                    placeholder="Description"
+                    [rows]="5"
+                    formControlName="eventDescription"
+                    [cols]="50"
+                    pInputTextarea
+                  ></textarea>
+                  <div
+                    *ngIf="
+                      getControl.eventDescription.touched &&
+                      getControl.eventDescription.invalid
+                    "
+                  >
+                    <small class="form-error">
+                      Event Description is required.
+                    </small>
+                  </div>
                 </div>
               </div>
               <div class="button--margin">
@@ -122,8 +125,38 @@
             </form>
           </p-dialog>
         </div>
+        <!-- modal for add event / appointment ends -->
       </header>
 
+      <!-- "modal for event details starts" -->
+      <p-dialog
+        header="Event Details"
+        [(visible)]="displayEvent"
+        [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+        [draggable]="false"
+        [modal]="true"
+        [style]="{ width: '430px' }"
+      >
+        <header>
+          <p-toolbar id="progress-notes--mainToolbar">
+            <div class="p-toolbar-group-left">
+              <div class="calendar-event--title">{{ eventTitle }}</div>
+            </div>
+            <div class="p-toolbar-group-right">
+              <div class="calendar-event--date">
+                On {{ eventDate | date: "shortDate" }}
+              </div>
+            </div>
+          </p-toolbar>
+        </header>
+        <p-divider></p-divider>
+        <div>
+          <p class="event-description">
+            {{ eventDes }}
+          </p>
+        </div>
+      </p-dialog>
+      <!-- "modal for event details ends" -->
       <full-calendar
         [options]="calendarOptions"
         class="calendar-container"
