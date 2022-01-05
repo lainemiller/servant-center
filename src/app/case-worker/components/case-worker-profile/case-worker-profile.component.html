@@ -47,7 +47,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.firstName.errors?.required"
                 >
-                  first name is required.
+                  First name is required.
                 </small>
               </div>
             </div>
@@ -75,7 +75,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.middleName.errors?.required"
                 >
-                  middle name is required.
+                  Middle name is required.
                 </small>
               </div>
             </div>
@@ -87,6 +87,7 @@
                 id="Last Name"
                 type="text"
                 pInputText
+                value="{{ veteran?.lastName }}"
                 appNoSpecialSymbols
                 customAttr="textOnly"
                 maxlength="30"
@@ -151,7 +152,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.DOB.errors?.required"
                 >
-                  date of birth is required.
+                  Date of birth is required.
                 </small>
               </div>
             </div>
@@ -207,7 +208,7 @@
                   !getControl.SSNNumber.errors?.required
                 "
               >
-                ssn number is invalid minimum 8 digits required.
+                SSN number is invalid minimum 8 digits required.
               </small>
             </div>
 
@@ -238,7 +239,7 @@
                   !getControl.hmisIdNo.errors?.required
                 "
               >
-                hmis id is invalid.
+                HMIS ID is invalid.
               </small>
             </div>
 
@@ -265,7 +266,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.selectedGenders.errors?.required"
                 >
-                  select an option.
+                  Select an option.
                 </small>
               </div>
             </div>
@@ -301,7 +302,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.selectedMaritalStatus.errors?.required"
                 >
-                  select an option.
+                  Select an option.
                 </small>
               </div>
             </div>
@@ -441,7 +442,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.city.errors?.required"
                 >
-                  city is required.
+                  City is required.
                 </small>
               </div>
             </div>
@@ -468,7 +469,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.selectedState.errors?.required"
                 >
-                  select an option.
+                  Select an option.
                 </small>
               </div>
             </div>
@@ -501,7 +502,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.country.errors?.required"
                 >
-                  country is required.
+                  Country is required.
                 </small>
               </div>
             </div>
@@ -525,7 +526,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.address2.errors?.required"
                 >
-                  address 2 is required.
+                  Address 2 is required.
                 </small>
               </div>
             </div>
@@ -545,7 +546,7 @@
                   getControl.zipCode.errors?.required
                 "
               >
-                zip code is required.
+                Zip code is required.
               </small>
 
               <small
@@ -603,7 +604,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.selectedprimaryLanguage.errors?.required"
                 >
-                  select an option.
+                  Select an option.
                 </small>
               </div>
             </div>
@@ -629,7 +630,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.selectedRelegion.errors?.required"
                 >
-                  select an option.
+                  Select an option.
                 </small>
               </div>
             </div>
@@ -685,7 +686,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.cfirstName.errors?.required"
                 >
-                  first name is required.
+                  First name is required.
                 </small>
               </div>
             </div>
@@ -769,7 +770,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.selectedRelationship.errors?.required"
                 >
-                  select an option.
+                  Select an option.
                 </small>
               </div>
 

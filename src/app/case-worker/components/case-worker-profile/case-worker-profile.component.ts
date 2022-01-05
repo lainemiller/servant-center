@@ -27,10 +27,10 @@ export class CaseWorkerProfileComponent implements OnInit {
   public genderArray: any = [];
   public caseWorkerProfileForm!: FormGroup;
   public veteran: any;
-  public submitted: boolean = false;
-  public image: any;
+  // public submitted: boolean = false;
+  //public image: any;
   public states!: DropDown[];
-  input!: String;
+  //input!: String;
   public relegions!: DropDown[];
   public languages!: DropDown[];
   public maritalStatus!: DropDown[];
@@ -43,15 +43,7 @@ export class CaseWorkerProfileComponent implements OnInit {
   public customPatterns = { '0': { pattern: new RegExp('[a-zA-Z]') } };
   public genders!: DropDown[];
   public selectedRelationship: any;
-  public contactPersonCity: any;
-  contactPersonState: any;
-  contactPersonZip: any;
-  contactPersonPhoneNumber: any;
-  contactPersonHouseNumber: any;
-  contactPersonRelationship: any;
   selectedRace: any;
-  contactPersonStreetName: any;
-  name: any;
   maxDateValue!: Date;
 
   constructor(
@@ -81,14 +73,10 @@ export class CaseWorkerProfileComponent implements OnInit {
 
   setForm() {
     this.service.getProfileData().subscribe((data) => {
-      console.log(data);
-
       this.profileDetails = data;
       this.veteran = this.profileDetails.result[0];
       console.log('Check Profile', this.veteran);
       this.buildForm();
-
-      console.log(this.veteran.city);
       this.caseWorkerProfileForm.patchValue({
         firstName: this.veteran.firstName,
         middleName: this.veteran.middleName,
@@ -165,20 +153,17 @@ export class CaseWorkerProfileComponent implements OnInit {
     });
   }
 
-  get emailid() {
-    return this.caseWorkerProfileForm.get('emailId');
-  }
 
   get getControl() {
     return this.caseWorkerProfileForm.controls;
   }
 
   onSubmit() {
-    this.submitted = true;
     console.log(this.caseWorkerProfileForm.value);
   }
 
   resetForm() {
     this.buildForm();
+    this.setForm();
   }
 }
