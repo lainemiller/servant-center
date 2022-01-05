@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { CaseWorkerRoutingModule } from './case-worker-routing.module';
@@ -60,8 +60,9 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
     TableModule,
     TabMenuModule,
     TabViewModule,
-    NgxMaskModule.forRoot(),
+    NgxMaskModule.forRoot()
   ],
   exports: [CardModule, RadioButtonModule, StepsModule, TableModule,TabMenuModule,TabViewModule],
+  providers: [DatePipe]
 })
 export class CaseWorkerModule {}

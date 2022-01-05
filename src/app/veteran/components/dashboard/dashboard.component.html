@@ -1,10 +1,134 @@
 <div class="p-grid">
   <div class="p-col-12">
     <app-item-header title="CALENDAR"></app-item-header>
-    <full-calendar
-      [options]="calendarOptions"
-      class="calendar-container"
-    ></full-calendar>
+    <div class="calendar-header">
+      <header class="p-grid header--margin">
+        <div class="calendar-header__top">
+          <div>
+            <p-tabMenu
+              #tab
+              [model]="items"
+              (click)="changeTag(tab)"
+            ></p-tabMenu>
+          </div>
+          <div>
+            <i class="fa btn-col" (click)="addEvent()"
+              ><span class="btn-text">+ Add new</span></i
+            >
+          </div>
+        </div>
+        <div class="calendar-header__addEvent">
+          <p-dialog
+            header="Add an {{ tagName }}"
+            [(visible)]="display"
+            [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+            [draggable]="false"
+            [modal]="true"
+            (onHide)="crossButton()"
+          >
+            <form [formGroup]="eventsForm" (ngSubmit)="onSubmit()">
+              <div class="p-fluid">
+                <div class="p-field p-col-12 p-sm-12">
+                  <p-calendar
+                    dateFormat="yy-mm-dd"
+                    formControlName="eventDate"
+                    dataType="string"
+                    placeholder="{{tagName}} Date"
+                  >
+                  </p-calendar>
+                  <div
+                    *ngIf="
+                      getControl.eventDate.touched &&
+                      getControl.eventDate.invalid
+                    "
+                  >
+                    <small class="form-error"> Event Date is required. </small>
+                  </div>
+                </div>
+                <div class="p-field p-col-12 p-sm-12">
+                  <p-calendar
+                    formControlName="startTime"
+                    placeholder="Start Time"
+                    [timeOnly]="true"
+                    hourFormat="12"
+                  ></p-calendar>
+                  <div
+                    *ngIf="
+                      getControl.startTime.touched &&
+                      getControl.startTime.invalid
+                    "
+                  >
+                    <small class="form-error"> Start Time is required. </small>
+                  </div>
+                </div>
+                <div class="p-field p-col-12 p-sm-12">
+                  <p-calendar
+                    formControlName="endTime"
+                    placeholder="End Time"
+                    [timeOnly]="true"
+                    hourFormat="12"
+                  ></p-calendar>
+                  <div
+                    *ngIf="
+                      getControl.endTime.touched && getControl.endTime.invalid
+                    "
+                  >
+                    <small class="form-error"> End Time is required. </small>
+                  </div>
+                </div>
+                <div class="p-field p-col-12 p-sm-12">
+                  <input
+                    type="text"
+                    formControlName="eventTitle"
+                    pInputText
+                    placeholder="Title"
+                  />
+                  <div
+                    *ngIf="
+                      getControl.eventTitle.touched &&
+                      getControl.eventTitle.invalid
+                    "
+                  >
+                    <small class="form-error"> Event Title is required. </small>
+                  </div>
+                </div>
+                <div class="p-field p-col-12 p-sm-12">
+                  <textarea
+                  placeholder="Description"
+                  [rows]="5"
+                  formControlName="eventDescription"
+                  [cols]="50"
+               
+                  pInputTextarea
+                ></textarea>
+                <div
+                *ngIf="
+                  getControl.eventDescription.touched &&
+                  getControl.eventDescription.invalid"
+              
+              ><small class="form-error">
+                Event Description is required.
+              </small></div>
+                </div>
+              </div>
+              <div class="button--margin">
+                <button type="submit" pButton>Submit</button>
+                <p-button
+                  label="Cancel"
+                  (click)="onCancel()"
+                  styleClass="p-button-link"
+                ></p-button>
+              </div>
+            </form>
+          </p-dialog>
+        </div>
+      </header>
+
+      <full-calendar
+        [options]="calendarOptions"
+        class="calendar-container"
+      ></full-calendar>
+    </div>
   </div>
   <app-progress-notes class="p-col-12 p-lg-6"></app-progress-notes>
   <app-transportation-request-form

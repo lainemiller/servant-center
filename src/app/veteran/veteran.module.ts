@@ -20,7 +20,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { CheckboxModule } from 'primeng/checkbox';
 import {AccordionModule} from 'primeng/accordion';
-
+import {TabMenuModule} from 'primeng/tabmenu';
 @NgModule({
   declarations: [
     VeteranComponent,
@@ -46,7 +46,8 @@ import {AccordionModule} from 'primeng/accordion';
     RadioButtonModule,
     RxReactiveFormsModule,
     NgxMaskModule.forRoot(),
-    AccordionModule
+    AccordionModule,
+    TabMenuModule
   ],
   exports: [Ng2SearchPipeModule,InputSwitchModule,ToggleButtonModule,ToolbarModule],
 })
