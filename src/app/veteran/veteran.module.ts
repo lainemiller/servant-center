@@ -16,7 +16,6 @@ import { VeteranProfileComponent } from './components/veteran-profile/veteran-pr
 import { VeteranRoutingModule } from './veteran-routing.module';
 import { VeteranComponent } from './veteran.component';
 import { ToggleButtonModule } from 'primeng/togglebutton';
-import { ToolbarModule } from 'primeng/toolbar';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { CheckboxModule } from 'primeng/checkbox';
 import {AccordionModule} from 'primeng/accordion';
@@ -39,7 +38,6 @@ import {TabMenuModule} from 'primeng/tabmenu';
     Ng2SearchPipeModule,
     InputSwitchModule,
     ToggleButtonModule,
-    ToolbarModule,
     CheckboxModule,
     RxReactiveFormsModule,
     HttpClientModule,
@@ -49,6 +47,6 @@ import {TabMenuModule} from 'primeng/tabmenu';
     AccordionModule,
     TabMenuModule
   ],
-  exports: [Ng2SearchPipeModule,InputSwitchModule,ToggleButtonModule,ToolbarModule],
+  exports: [Ng2SearchPipeModule,InputSwitchModule,ToggleButtonModule],
 })
 export class VeteranModule {}
