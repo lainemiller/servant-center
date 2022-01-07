@@ -21,7 +21,8 @@ export class CaseWorkerDashboardComponent implements OnInit {
   public eventDes!:string;
   public eventStartTime!:string;
   public eventEndTime!:string;
-  public displayEvent=false
+  public eventLabel!:string;
+  public displayEvent=false;
   constructor(private service: CalendarEventsService, private formBuilder: FormBuilder) {
     this.service.getEvents().subscribe(data =>{
       this.totalEvents=data;
@@ -68,8 +69,15 @@ endTime:['', Validators.required]
   }
   onSubmit() {
    console.log(this.eventsForm.value);
-  let a = this.eventsForm.value;
-    let newEvent={'title':a.eventTitle,'date':a.eventDate};
+  let event= this.eventsForm.value;
+  let newEvent = {
+    title: event.eventTitle,
+    date: event.eventDate,
+    description: event.eventDescription,
+    type: this.tagName,
+    sTime: event.startTime,
+    enTime: event.endTime,
+  };
     this.eventList.push(newEvent);
     console.log(this.eventList);
     this.calendarOptions.events = this.eventList;
@@ -91,6 +99,9 @@ endTime:['', Validators.required]
   showEventDetail(arg: any) {
     this.displayEvent= true;
     console.log(arg);
+    this.eventLabel = arg.event._def.extendedProps.type;
+    this.eventStartTime = arg.event._def.extendedProps.sTime;
+    this.eventEndTime = arg.event._def.extendedProps.enTime;
     this.eventTitle= arg.event._def.title;
     this.eventDate= arg.event.start;
     this.eventDes =arg.event._def.extendedProps.description;
