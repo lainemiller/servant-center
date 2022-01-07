@@ -14,16 +14,18 @@ export class DashboardComponent implements OnInit {
   public items: any;
   public display = false;
   public tagName = 'Appointment';
-  public displayEvent= false; 
+  public displayEvent = false;
   public eventsForm!: FormGroup;
-  public eventTitle!:string;
-  public eventDate!:string;
-  public eventDes!:string;
-  public eventStartTime!:string;
-  public eventEndTime!:string;
-
+  public eventTitle!: string;
+  public eventDate!: string;
+  public eventDes!: string;
+  public eventStartTime!: string;
+  public eventEndTime!: string;
+  public eventLabel!: string;
+  public minDateValue: any;
   ngOnInit(): void {
     console.log('veteran dashboard component');
+    this.minDateValue = new Date(new Date().getTime());
     this.items = [
       { label: 'Appointment', icon: 'pi pi-fw pi-calendar' },
       { label: 'Event', icon: 'pi pi-fw pi-pencil' },
@@ -50,7 +52,7 @@ export class DashboardComponent implements OnInit {
     },
     nowIndicator: true,
     editable: true,
-    events:'./assets/mock/events.json'
+    events: './assets/mock/events.json',
   };
   addEvent() {
     this.display = true;
@@ -61,7 +63,14 @@ export class DashboardComponent implements OnInit {
   onSubmit() {
     console.log(this.eventsForm.value);
     let event = this.eventsForm.value;
-    let newEvent = { title: event.eventTitle, date: event.eventDate, description:event.eventDescription };
+    let newEvent = {
+      title: event.eventTitle,
+      date: event.eventDate,
+      description: event.eventDescription,
+      type: this.tagName,
+      sTime: event.startTime,
+      enTime: event.endTime,
+    };
     this.eventList.push(newEvent);
     console.log(this.eventList);
     this.calendarOptions.events = this.eventList;
@@ -80,10 +89,13 @@ export class DashboardComponent implements OnInit {
     this.eventsForm.reset();
   }
   showEventDetail(arg: any) {
- this.displayEvent= true;
- console.log(arg);
- this.eventTitle= arg.event._def.title;
- this.eventDate= arg.event.start;
- this.eventDes =arg.event._def.extendedProps.description;
+    this.displayEvent = true;
+    console.log(arg);
+    this.eventLabel = arg.event._def.extendedProps.type;
+    this.eventStartTime = arg.event._def.extendedProps.sTime;
+    this.eventEndTime = arg.event._def.extendedProps.enTime;
+    this.eventTitle = arg.event._def.title;
+    this.eventDate = arg.event.start;
+    this.eventDes = arg.event._def.extendedProps.description;
   }
 }
