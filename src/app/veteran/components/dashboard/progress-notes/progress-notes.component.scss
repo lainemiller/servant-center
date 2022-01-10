@@ -1,3 +1,4 @@
+@import "src/app/shared/styles/breakpoints.scss";
 .progress-notes--container {
   margin: 0 15px;
   padding: 20px 20px;
@@ -89,7 +90,7 @@
   margin-right: 15px;
 }
 
-@media screen and (max-width: 780px){
+@include mobile(){
   .addNotesButton{
     width: 300px;
     margin-left: 9%;
@@ -100,5 +101,4 @@
     width: 300px; 
     margin-left: 9%;
   }
- 
 }

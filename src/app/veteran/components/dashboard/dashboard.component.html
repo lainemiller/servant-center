@@ -20,7 +20,7 @@
         </div>
         <!-- modal for add event / appointment starts -->
         <div class="calendar-header__addEvent">
-           <p-dialog
+          <p-dialog
             header="Add an {{ tagName }}"
             [(visible)]="display"
             [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
@@ -30,7 +30,7 @@
           >
             <form [formGroup]="eventsForm" (ngSubmit)="onSubmit()">
               <div class="p-fluid">
-                <div class="calendarr p-field p-col-12 p-sm-12 ">
+                <div class="calendarr p-field p-col-12 p-sm-12">
                   <p-calendar
                     dateFormat="yy-mm-dd"
                     formControlName="eventDate"
@@ -98,21 +98,23 @@
                 </div>
                 <div class="p-field p-col-12 p-sm-12">
                   <textarea
-                  placeholder="Description"
-                  [rows]="5"
-                  formControlName="eventDescription"
-                  [cols]="50"
-                  class="user_input--color"
-                  pInputTextarea
-                ></textarea>
-                <div
-                *ngIf="
-                  getControl.eventDescription.touched &&
-                  getControl.eventDescription.invalid"
-              
-              ><small class="form-error">
-                Event Description is required.
-              </small></div>
+                    placeholder="Description"
+                    [rows]="5"
+                    formControlName="eventDescription"
+                    [cols]="50"
+                    class="user_input--color"
+                    pInputTextarea
+                  ></textarea>
+                  <div
+                    *ngIf="
+                      getControl.eventDescription.touched &&
+                      getControl.eventDescription.invalid
+                    "
+                  >
+                    <small class="form-error">
+                      Event Description is required.
+                    </small>
+                  </div>
                 </div>
               </div>
               <div class="button--margin">
@@ -130,36 +132,37 @@
       </header>
       <!-- "modal for event details starts" -->
       <p-dialog
-      header="{{eventLabel}} Details"
-      [(visible)]="displayEvent"
-      [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
-      [draggable]="false"
-      [modal]="true"
-      [style]="{ width: '430px' }"
-    >
-      <header>
-        <p-toolbar class="calendar__eventDetails">
-          <div class="p-toolbar-group-left">
-            <div class="calendar-event__title">{{ eventTitle }}</div>
-          </div>
-          <div class="p-toolbar-group-right">
-            <div class="calendar-event__date">
-              On {{ eventDate | date: "shortDate" }}
+        header="{{ eventInfo[0] }} Details"
+        [(visible)]="displayEvent"
+        [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+        [draggable]="false"
+        [modal]="true"
+        [style]="{ width: '430px' }"
+      >
+        <header>
+          <p-toolbar class="calendar__eventDetails">
+            <div class="p-toolbar-group-left">
+              <div class="calendar-event__title">{{ eventInfo[3] }}</div>
             </div>
-          </div>
-        </p-toolbar>
-      </header>
-      <p-divider></p-divider>
-      <div>
-        From {{eventStartTime | date: "shortTime" }} to {{eventEndTime | date : "shortTime"}}
-       </div>
-      <div>
-        <p class="event-description">
-          {{ eventDes }}
-        </p>
-      </div>
-    </p-dialog>
-    <!-- "modal for event details ends" -->
+            <div class="p-toolbar-group-right">
+              <div class="calendar-event__date">
+                On {{ eventInfo[4] | date: "shortDate" }}
+              </div>
+            </div>
+          </p-toolbar>
+        </header>
+        <p-divider></p-divider>
+        <div>
+          From {{ eventInfo[1] | date: "shortTime" }} to
+          {{ eventInfo[2] | date: "shortTime" }}
+        </div>
+        <div>
+          <p class="event-description">
+            {{ eventInfo[5] }}
+          </p>
+        </div>
+      </p-dialog>
+      <!-- "modal for event details ends" -->
       <full-calendar
         [options]="calendarOptions"
         class="calendar-container"

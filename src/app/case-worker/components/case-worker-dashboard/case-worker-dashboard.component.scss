@@ -12,11 +12,6 @@
   border-color: transparent;
   background: #ffffff;
 }
-.calendar-header__top {
-  margin-left: 11px;
-  margin-bottom: 15px;
-  display: flex;
-}
 @include mobile() {
   :host ::ng-deep .fc .fc-toolbar-title {
     font-size: 15px;
@@ -30,10 +25,37 @@
   border-width: 1px;
   border-style: solid;
   border-color: rgba(183, 183, 183, 1);
+
+  .header--margin {
+    margin: 15px 15px 0 0;
+  }
+  .calendar-header__top {
+    margin-left: 11px;
+    margin-bottom: 15px;
+    display: flex;
+  }
+
+  .form-error {
+    color: red;
+  }
+
+  .button--margin {
+    margin: 15px 15px 0 0;
+    margin-left: 8px;
+  }
+
+  .calendar-event__title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .calendar-event__date {
+    font-size: 16px;
+  }
+  .p-field {
+    margin-bottom: 4px;
+  }
 }
-.header--margin {
-  margin: 15px 15px 0 0;
-}
+
 .btn-text {
   font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
   font-weight: 500;
@@ -44,27 +66,6 @@
 .btn-col {
   color: rgba(13, 93, 166, 1);
   margin: 10px;
-}
-.header__tag {
-  color: rgba(13, 93, 166, 1);
-  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
-}
-.p-field {
-  margin-bottom: 4px;
-}
-.button--margin {
-  margin: 15px 15px 0 0;
-  margin-left: 8px;
-}
-.form-error {
-  color: red;
-}
-.calendar-event__title {
-  font-size: 20px;
-  font-weight: bold;
-}
-.calendar-event__date {
-  font-size: 16px;
 }
 .user_input--color.ng-touched.ng-invalid {
   border-color: red;
