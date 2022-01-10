@@ -16,13 +16,8 @@ export class DashboardComponent implements OnInit {
   public tagName = 'Appointment';
   public displayEvent = false;
   public eventsForm!: FormGroup;
-  public eventTitle!: string;
-  public eventDate!: string;
-  public eventDes!: string;
-  public eventStartTime!: string;
-  public eventEndTime!: string;
-  public eventLabel!: string;
   public minDateValue: any;
+  public eventInfo: any=[];
   ngOnInit(): void {
     console.log('veteran dashboard component');
     this.minDateValue = new Date(new Date().getTime());
@@ -91,11 +86,13 @@ export class DashboardComponent implements OnInit {
   showEventDetail(arg: any) {
     this.displayEvent = true;
     console.log(arg);
-    this.eventLabel = arg.event._def.extendedProps.type;
-    this.eventStartTime = arg.event._def.extendedProps.sTime;
-    this.eventEndTime = arg.event._def.extendedProps.enTime;
-    this.eventTitle = arg.event._def.title;
-    this.eventDate = arg.event.start;
-    this.eventDes = arg.event._def.extendedProps.description;
+    this.eventInfo = [
+      arg.event._def.extendedProps.type,
+      arg.event._def.extendedProps.sTime,
+      arg.event._def.extendedProps.enTime,
+      arg.event._def.title,
+      arg.event.start,
+      arg.event._def.extendedProps.description,
+    ];
   }
 }
