@@ -1,0 +1,65 @@
+.grand {
+    display: table;
+    height: 100%;
+    //margin-top: 200px;
+    margin: 100px auto;
+}
+.login-outerContainer {
+    width: 600px;
+    display: table-cell;
+    vertical-align: middle;
+}
+.login-container {
+    text-align: center;
+    margin: 0px 15px;
+    background-color: #fff;
+    // border: 1px solid rgba(183, 183, 183, 1);
+    border-radius: 10px;
+    padding: 20px;
+    height: 330px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;}
+.p-fluid {
+    padding: 20px;
+}
+.p-fluid i {
+    position:absolute;
+}
+
+.icon {
+    // padding: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 23px;
+    // min-width: 100px;
+}
+
+.inputFromUser {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Roboto';
+}
+
+.loginButton {
+    width: 150px;
+    font-family: 'Roboto';
+}
+.error {
+    color: brown;
+    font-family:'Roboto';
+}
+.loginn{
+    margin-top: 100px;
+}
+a{
+    // text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-family: 'Roboto';
+    font-style: italic;
+}
+p{
+    font-size: 20px;
+    font-style: italic;
+    font-family: 'Roboto';
+}

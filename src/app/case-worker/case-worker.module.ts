@@ -1,29 +1,33 @@
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CaseWorkerComponent } from './case-worker.component';
-import { CaseWorkerRoutingModule } from './case-worker-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { SecureMessageCenterComponent } from './components/secure-message-center/secure-message-center.component';
-import { ResidentSearchComponent } from './components/resident-search/resident-search.component';
+import { CaseWorkerRoutingModule } from './case-worker-routing.module';
+import { CaseWorkerComponent } from './case-worker.component';
 import { CaseWorkerDashboardComponent } from './components/case-worker-dashboard/case-worker-dashboard.component';
 import { CaseWorkerProfileComponent } from './components/case-worker-profile/case-worker-profile.component';
-import { MessagesComponent } from './components/messages/messages.component';
 import { CwTransportRequestComponent } from './components/cw-transport-request/cw-transport-request.component';
-import { RsInitialAssessmentComponent } from './components/resident-search/rs-initial-assessment/rs-initial-assessment.component';
-import { RsTreatmentPlanComponent } from './components/resident-search/rs-treatment-plan/rs-treatment-plan.component';
-import { RsWeeklyProgressNotesComponent } from './components/resident-search/rs-weekly-progress-notes/rs-weekly-progress-notes.component';
+import { MessagesComponent } from './components/messages/messages.component';
+import { ResidentSearchComponent } from './components/resident-search/resident-search.component';
 import { RsConsentAgreementsComponent } from './components/resident-search/rs-consent-agreements/rs-consent-agreements.component';
 import { RsFinancialComponent } from './components/resident-search/rs-financial/rs-financial.component';
+import { IaFormPageFiveComponent } from './components/resident-search/rs-initial-assessment/ia-form-page-five/ia-form-page-five.component';
+import { IaFormPageFourComponent } from './components/resident-search/rs-initial-assessment/ia-form-page-four/ia-form-page-four.component';
+import { IaFormPageOneComponent } from './components/resident-search/rs-initial-assessment/ia-form-page-one/ia-form-page-one.component';
+import { IaFormPageThreeComponent } from './components/resident-search/rs-initial-assessment/ia-form-page-three/ia-form-page-three.component';
+import { IaFormPageTwoComponent } from './components/resident-search/rs-initial-assessment/ia-form-page-two/ia-form-page-two.component';
+import { RsInitialAssessmentComponent } from './components/resident-search/rs-initial-assessment/rs-initial-assessment.component';
 import { RsMedicalComponent } from './components/resident-search/rs-medical/rs-medical.component';
 import { RsMiscCorrespondenceComponent } from './components/resident-search/rs-misc-correspondence/rs-misc-correspondence.component';
-import { IaFormPageOneComponent } from './components/resident-search/rs-initial-assessment/ia-form-page-one/ia-form-page-one.component';
-import { IaFormPageTwoComponent } from './components/resident-search/rs-initial-assessment/ia-form-page-two/ia-form-page-two.component';
-import { IaFormPageThreeComponent } from './components/resident-search/rs-initial-assessment/ia-form-page-three/ia-form-page-three.component';
-import { IaFormPageFourComponent } from './components/resident-search/rs-initial-assessment/ia-form-page-four/ia-form-page-four.component';
-import { IaFormPageFiveComponent } from './components/resident-search/rs-initial-assessment/ia-form-page-five/ia-form-page-five.component';
-
-
-
+import { RsTreatmentPlanComponent } from './components/resident-search/rs-treatment-plan/rs-treatment-plan.component';
+import { RsWeeklyProgressNotesComponent } from './components/resident-search/rs-weekly-progress-notes/rs-weekly-progress-notes.component';
+import { SecureMessageCenterComponent } from './components/secure-message-center/secure-message-center.component';
+import { CardModule } from 'primeng/card';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { StepsModule } from 'primeng/steps';
+import { TableModule } from 'primeng/table';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { TabViewModule } from 'primeng/tabview';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
 @NgModule({
   declarations: [
     CaseWorkerComponent,
@@ -44,12 +48,21 @@ import { IaFormPageFiveComponent } from './components/resident-search/rs-initial
     IaFormPageTwoComponent,
     IaFormPageThreeComponent,
     IaFormPageFourComponent,
-    IaFormPageFiveComponent
+    IaFormPageFiveComponent,
   ],
   imports: [
     CommonModule,
     CaseWorkerRoutingModule,
-    SharedModule
-  ]
+    SharedModule,
+    CardModule,
+    RadioButtonModule,
+    StepsModule,
+    TableModule,
+    TabMenuModule,
+    TabViewModule,
+    NgxMaskModule.forRoot()
+  ],
+  exports: [CardModule, RadioButtonModule, StepsModule, TableModule,TabMenuModule,TabViewModule],
+  providers: [DatePipe]
 })
-export class CaseWorkerModule { }
+export class CaseWorkerModule {}

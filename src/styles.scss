@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import url(//fonts.googleapis.com/css?family=Roboto:100,400,300,500,700,500italic,400italic,300italic|Roboto+Condensed:400,300|Roboto+Slab:300);
 body {
   min-width: fit-content;
 }
@@ -8,4 +9,105 @@ body {
   justify-content: space-between;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+.ui-tooltip .ui-tooltip-text {
+  background-color: red !important;
+}
+
+// consent modal - start
+
+#consent-modal .p-dialog .p-dialog-content {
+  overflow: hidden;
+}
+
+#consent-modal .p-dialog .p-dialog-title {
+  font-family: "Roboto", sans-serif;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 300;
+  color: #822433;
+}
+@media (max-width: 768px) {
+  #consent-modal .p-dialog .p-dialog-title {
+    font-size: 25px;
+  }
+}
+
+// consent modal - end
+
+//progress notes starts
+
+#progress-notes--mainToolbar .p-toolbar {
+  padding: 0px;
+  padding-bottom: 0px;
+  background: #fff;
+  border: none;
+}
+.p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
+  background: green;
+}
+.p-inputswitch:not(.p-disabled):hover .p-inputswitch-slider {
+  background: yellow;
+}
+.p-inputswitch.p-inputswitch-checked:not(.p-disabled) .p-inputswitch-slider {
+  background: green;
+}
+.p-inputswitch:not(.p-disabled) .p-inputswitch-slider {
+  background: yellow;
+}
+.p-inputswitch.p-focus .p-inputswitch-slider{
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem white;
+}
+//progress notes end
+
+.label-title {
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
+  font-style: normal;
+  font-size: 16px;
+  color: #6c757d;
+  line-height: 32px;
+}
+
+.disable-field
+{
+  background-color: #efefef;
+}
+
+//Assessment form starts
+
+.p-accordion .p-accordion-header .p-accordion-header-link {
+  color: black;
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto";
+  font-weight: 500;
+}
+
+//Assessment form ends
+
+//veteran treatment plan start
+p-calendar.ng-touched.ng-invalid > .p-calendar > .p-inputtext {
+  border-color: #ed3629;
+}
+//veteran treatment plan ends
+
+
+//calendar for veteran , case-worker
+.calendar__eventDetails .p-toolbar {
+  padding: 0px;
+  padding-bottom: 0px;
+  background: #fff;
+  border: none;
+}
+.fc .fc-toolbar .fc-button.fc-listWeek-button.fc-button-active:hover {
+  background: #0d89ec;
+  border-color: #0d89ec;
+  color: #ffffff;
+}
+.fc .fc-toolbar .fc-button.fc-listWeek-button {
+  background: #ffffff;
+  border: 1px solid #ced4da;
+  color: #495057;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }

@@ -10,6 +10,7 @@ export class RsWeeklyProgressNotesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('rs weekly progress component');
   }
 
 }

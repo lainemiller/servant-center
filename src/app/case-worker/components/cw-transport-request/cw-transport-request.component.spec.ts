@@ -8,9 +8,8 @@ describe('CwTransportRequestComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CwTransportRequestComponent ]
-    })
-    .compileComponents();
+      declarations: [CwTransportRequestComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

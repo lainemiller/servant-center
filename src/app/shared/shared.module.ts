@@ -1,79 +1,76 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { CalendarModule } from 'primeng/calendar';
-import { DropdownModule } from 'primeng/dropdown';
-import { DividerModule } from "primeng/divider";
-import { MenuModule } from 'primeng/menu';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin  from "@fullcalendar/interaction";
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ItemHeaderComponent } from './components/item-header/item-header.component';
-import { TableModule } from 'primeng/table';
-import { TabViewModule } from "primeng/tabview";
-import { StepsModule } from 'primeng/steps'
-import { CardModule } from "primeng/card";
-import { TabMenuModule } from "primeng/tabmenu";
-import {InputTextareaModule} from 'primeng/inputtextarea';
-import { RadioButtonModule } from "primeng/radiobutton";
+import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
-import { InputSwitchModule } from "primeng/inputswitch";
-import { ToolbarModule } from "primeng/toolbar";
-import { ToggleButtonModule } from 'primeng/togglebutton';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { DialogModule } from 'primeng/dialog';
+import { DividerModule } from 'primeng/divider';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MenuModule } from 'primeng/menu';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { TooltipModule } from 'primeng/tooltip';
+import {PasswordModule} from 'primeng/password';
+import { ToolbarModule } from 'primeng/toolbar';
+
 import { KeysPipe } from '../case-worker/components/resident-search/rs-initial-assessment/ia-form-page-three/ia-form-page-three.component';
+import { ConsentDataComponent } from './components/consent-data/consent-data.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { ItemHeaderComponent } from './components/item-header/item-header.component';
+import { WelcomeHeaderComponent } from './components/welcome-header/welcome-header.component';
+import { NoSpecialSymbolsDirective } from './directives/no-special-symbols.directive';
+import { LoginPageComponent } from './components/login-page/login-page.component';
 
-
-FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+FullCalendarModule.registerPlugins([
+  // register FullCalendar plugins
   dayGridPlugin,
   listPlugin,
   timeGridPlugin,
-  interactionPlugin
+  interactionPlugin,
 ]);
 const MODULES = [
-    InputTextModule,
-    ButtonModule,
-    CalendarModule,
-    DividerModule,
-    MenuModule,
-    DropdownModule,
-    FullCalendarModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TableModule,
-    TabViewModule,
-    TabMenuModule,
-    StepsModule,
-    CardModule,
-    InputTextareaModule,
-    RadioButtonModule,
-    CheckboxModule,
-    InputSwitchModule,
-    ToolbarModule,
-    ToggleButtonModule
+  InputTextModule,
+  ButtonModule,
+  CalendarModule,
+  DividerModule,
+  MenuModule,
+  DropdownModule,
+  FullCalendarModule,
+  FormsModule,
+  ReactiveFormsModule,
+  InputTextareaModule,
+  RadioButtonModule,
+  CheckboxModule,
+  TooltipModule,
+  DialogModule,
+  HttpClientModule,
+  PasswordModule,
+  ToolbarModule
 ];
 
 const COMPONENTS = [
   ItemHeaderComponent,
   HeaderComponent,
   FooterComponent,
-  KeysPipe
-]
+  WelcomeHeaderComponent,
+  KeysPipe,
+  ConsentDataComponent,
+  NoSpecialSymbolsDirective
+];
 
 @NgModule({
-  declarations: [
-    ...COMPONENTS
-  ],
-  imports: [
-    CommonModule,
-    ...MODULES
-  ],
-  exports: [...MODULES, ...COMPONENTS]
+  declarations: [...COMPONENTS, LoginPageComponent],
+  imports: [CommonModule, ...MODULES],
+  exports: [...MODULES, ...COMPONENTS],
 })
-export class SharedModule { }
+export class SharedModule {}

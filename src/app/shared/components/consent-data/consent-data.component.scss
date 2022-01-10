@@ -1,0 +1,72 @@
+@import "src/app/shared/styles/breakpoints.scss";
+
+.consent-container__sign {
+    background-color: rgb(227, 250, 250);
+    display: flex;
+    position: relative;
+    bottom: 20px;
+}
+
+.consent-container__sign--input {
+    justify-content: space-between;
+    margin: 15px;
+    width: 500px;
+    pointer-events: none;
+}
+
+.consent-container__button {
+    display: flex;
+}
+
+.consent-container__scroll {
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 220px;
+    text-align: justify;
+    text-justify: inter-word;
+    padding-right: 12px;
+}
+
+.consent-container__scroll2 {
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 400px;
+    text-align: justify;
+    text-justify: inter-word;
+    padding-right: 12px;
+}
+.consent-container__footer--link {
+    color: #2195f3;
+}
+
+@include mobile(){
+    .consent-container__scroll {
+        font-size: 13px;
+    }
+
+    .consent-container__scroll2 {
+        font-size: 13px;
+    }
+
+    .consent-container__footer {
+        font-size: 13px;
+    }
+
+    .consent-container__sign--input {
+        margin: 6px;
+        width: 97%;
+    }
+
+    .consent-container__sign {
+        flex-direction: column;
+    }
+
+    .consent-container__heading {
+        font-size: 11px;
+        padding-bottom: 5px;
+    }
+
+    .consent-container__button {
+        flex-direction: column;
+    }
+}

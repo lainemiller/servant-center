@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { ConsentDataComponent } from '../shared/components/consent-data/consent-data.component';
+import { LoginPageComponent } from '../shared/components/login-page/login-page.component';
 import { AssessmentComponent } from './components/assessment/assessment.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HealthTrackerComponent } from './components/health-tracker/health-tracker.component';
@@ -28,6 +31,10 @@ const routes: Routes = [
       {
         path: 'profile',
         component: VeteranProfileComponent,
+      },
+      {
+        path: 'consent-form',
+        component: ConsentDataComponent,
       },
     ],
   },

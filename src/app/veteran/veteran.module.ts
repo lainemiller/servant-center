@@ -1,18 +1,25 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { VeteranComponent } from './veteran.component';
-import { VeteranRoutingModule } from './veteran-routing.module';
+import { NgModule } from '@angular/core';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { InputSwitchModule } from 'primeng/inputswitch';
 import { SharedModule } from '../shared/shared.module';
 import { AssessmentComponent } from './components/assessment/assessment.component';
-import { TreatmentPlanComponent } from './components/treatment-plan/treatment-plan.component';
-import { HealthTrackerComponent } from './components/health-tracker/health-tracker.component';
-import { VeteranProfileComponent } from './components/veteran-profile/veteran-profile.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProgressNotesComponent } from './components/dashboard/progress-notes/progress-notes.component';
 import { TransportationRequestFormComponent } from './components/dashboard/transportation-request-form/transportation-request-form.component';
-
-
-
+import { HttpClientModule } from '@angular/common/http';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { HealthTrackerComponent } from './components/health-tracker/health-tracker.component';
+import { TreatmentPlanComponent } from './components/treatment-plan/treatment-plan.component';
+import { VeteranProfileComponent } from './components/veteran-profile/veteran-profile.component';
+import { VeteranRoutingModule } from './veteran-routing.module';
+import { VeteranComponent } from './veteran.component';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { CheckboxModule } from 'primeng/checkbox';
+import {AccordionModule} from 'primeng/accordion';
+import {TabMenuModule} from 'primeng/tabmenu';
 @NgModule({
   declarations: [
     VeteranComponent,
@@ -22,12 +29,24 @@ import { TransportationRequestFormComponent } from './components/dashboard/trans
     TreatmentPlanComponent,
     HealthTrackerComponent,
     VeteranProfileComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     CommonModule,
     VeteranRoutingModule,
-    SharedModule
-  ]
+    SharedModule,
+    Ng2SearchPipeModule,
+    InputSwitchModule,
+    ToggleButtonModule,
+    CheckboxModule,
+    RxReactiveFormsModule,
+    HttpClientModule,
+    RadioButtonModule,
+    RxReactiveFormsModule,
+    NgxMaskModule.forRoot(),
+    AccordionModule,
+    TabMenuModule
+  ],
+  exports: [Ng2SearchPipeModule,InputSwitchModule,ToggleButtonModule],
 })
-export class VeteranModule { }
+export class VeteranModule {}

@@ -1,1 +1,15 @@
-<p>assessment works!</p>
+<app-item-header title="ASSESSMENT FORM"></app-item-header>
+<section class="assessment-container">
+    <p-accordion>
+            <p-accordionTab *ngFor="let info of assesssmentData" header="{{info.header}}">  
+                <section  class="p-fluid p-ml-5 p-grid assessment-container__section">
+                    <article *ngFor="let value of info.data" class="p-field p-col-12 p-md-3">
+                        <label>
+                            <h3 class="section__ques">{{value.key}}:</h3>
+                        </label>
+                        <h3 class="section__answer">{{value.value}}</h3>
+                    </article>
+                </section>
+            </p-accordionTab>
+    </p-accordion>
+</section>

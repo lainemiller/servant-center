@@ -1,30 +1,79 @@
+@import "src/app/shared/styles/breakpoints.scss";
+
 :host ::ng-deep .fc .fc-toolbar .fc-button.fc-listWeek-button.fc-button-active {
-  background: #2196f3;
+  background: #f3212c;
   border-color: #2196f3;
   color: #ffffff;
 }
-:host
-  ::ng-deep
-  .fc
-  .fc-toolbar
-  .fc-button.fc-listWeek-button.fc-button-active:hover {
-  background: #0d89ec;
-  border-color: #0d89ec;
-  color: #ffffff;
-}
-
-:host ::ng-deep .calendar-container {
-  padding: 30px;
+.calendar-container {
+  padding: 10px;
   border-width: 1px;
   border-style: solid;
-  border-color: #ced4da;
+  border-color: transparent;
   background: #ffffff;
-  margin: 0 15px;
 }
 
-:host ::ng-deep .fc .fc-toolbar .fc-button.fc-listWeek-button {
-  background: #ffffff;
-    border: 1px solid #ced4da;
-    color: #495057;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+// :host ::ng-deep .fc .fc-toolbar .fc-button.fc-listWeek-button {
+//   background: #ffffff;
+//   border: 1px solid #ced4da;
+//   color: #495057;
+//   transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+// }
+.calendar-header__top {
+  margin-left: 11px;
+  margin-bottom: 15px;
+  display: flex;
+}
+
+@include mobile() {
+  :host ::ng-deep .fc .fc-toolbar-title {
+    font-size: 15px;
+  }
+}
+.border {
+  border: 1px solid red;
+}
+.calendar-header {
+  background: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(183, 183, 183, 1);
+}
+.header--margin {
+  margin: 15px 15px 0 0;
+}
+.btn-text {
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  color: rgba(13, 93, 166, 1);
+  padding-left: 5px;
+}
+.btn-col {
+  color: rgba(13, 93, 166, 1);
+  margin: 10px;
+}
+.header__tag {
+  color: rgba(13, 93, 166, 1);
+  font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
+}
+.p-field {
+  margin-bottom: 4px;
+}
+.button--margin {
+  margin: 15px 15px 0 0;
+  margin-left: 8px;
+}
+.form-error {
+  color: red;
+}
+.calendar-event__title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.calendar-event__date {
+  font-size: 16px;
+}
+.user_input--color.ng-touched.ng-invalid {
+  border-color: red;
 }

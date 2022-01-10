@@ -4,6 +4,7 @@ phases:
   install:
     commands:
       - echo installing nodejs...
+      - apt-get update ; apt-get install ca-certificates && apt-get update && apt-get install -y
       - curl -sL https://deb.nodesource.com/setup_12.x | bash -
       - apt-get install -y nodejs
       - echo installing yarn...
@@ -13,7 +14,7 @@ phases:
   pre_build:
     commands:
       - echo installing dependencies...
-      - npm i -g @angular/cli
+      - npm i -g @angular/cli@12.2.13
       - npm install
   build:
     commands:

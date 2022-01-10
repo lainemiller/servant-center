@@ -1,0 +1,36 @@
+$white-color: #fff;
+$light-black-color: rgba(183, 183, 183, 1);
+
+.form-container {
+    margin: 0 15px;
+    padding: 20px 20px;
+    background: $white-color;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $light-black-color;
+}
+
+.form-container__img {
+    margin-left: 6px;
+}
+
+.form-container__sec {
+    margin-top: 15px;
+    padding: 20px 20px;
+    background: $white-color;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $light-black-color;
+}
+
+.form-container__sec-heading {
+    font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
+    color: #a00000;
+}
+
+.form-container__sec-errmsg {
+    color: rgb(255, 0, 0);
+}

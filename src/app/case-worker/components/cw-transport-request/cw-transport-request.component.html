@@ -1,47 +1,234 @@
-<app-item-header color="blue" title="TRANSPORTATION REQUEST FORM"></app-item-header>
+<app-item-header
+  color="blue"
+  title="Details"
+></app-item-header>
 <div class="form-container">
-  <form [formGroup]="transportRequestForm">
+  <form
+    *ngIf="transportRequestForm"
+    [formGroup]="transportRequestForm"
+    (ngSubmit)="onSubmit()"
+  >
     <div class="p-fluid p-formgrid p-grid">
       <div class="p-field p-col-12 p-md-3">
-      <input type="text" pInputText formControlName=firstName placeholder="Resident's First Name"></div>
+        <label for="firstName" class="label-title">First Name</label>
+        <input
+          type="text"
+          id="firstName"
+          pInputText
+          formControlName="firstName"
+          value="{{ caseWorker?.firstName }}"
+          class="disable"
+        />
+      </div>
       <div class="p-field p-col-12 p-md-3">
-      <input type="text" pInputText formControlName=lastName placeholder="Resident's Last Name"></div>
+        <label for="lastName" class="label-title">Last Name</label>
+        <input
+          type="text"
+          id="lastName"
+          pInputText
+          formControlName="lastName"
+          value="{{ caseWorker?.lastName }}"
+          class="disable"
+        />
+      </div>
       <div class="p-field p-col-12 p-md-4">
-        <p-calendar formControlName=appointmentDate [touchUI]="mobileMode" [readonlyInput]="mobileMode" [inline]=false [showIcon]=true placeholder="Appointment Date (mm/dd/yyyy)"></p-calendar></div>
-        <div class="p-field p-col-12 p-md-2">
-        <p-calendar formControlName=time [timeOnly]=true placeholder="Time" [showIcon]=true icon="pi pi-angle-down"></p-calendar></div>
+        <label for="appointmentDate" class="label-title"
+          >Appointment Date</label
+        >
+        <input
+          type="text"
+          id="appointmentDate"
+          pInputText
+          formControlName="appointmentDate"
+          value="{{ caseWorker?.appointmentDate }}"
+          class="disable"
+        />
+      </div>
+      <div class="p-field p-col-12 p-md-2">
+        <label for="time" class="label-title">Time</label>
+        <input
+          type="text"
+          id="time"
+          pInputText
+          formControlName="time"
+          value="{{ caseWorker?.time }}"
+          class="disable"
+        />
+      </div>
     </div>
+
     <p-divider></p-divider>
+
     <div class="p-fluid p-formgrid p-grid">
       <div class="p-col-12 p-md-6">
         <div class="p-fluid p-formgrid p-grid">
-        <div class="p-field p-col-12">
-          <textarea pInputTextarea formControlName=reason [rows]="6" class="address-text-area" placeholder="Reason for request"></textarea></div>
           <div class="p-field p-col-12">
-            <input type="text" pInputText formControlName=coordinator placeholder="Transport Co-ordinator"></div>
-            <div class="p-field p-col-12">
-              <input type="text" pInputText formControlName=nursingNotified placeholder="Nursing Notified"></div>
-      </div></div>
+            <label for="reason" class="label-title">Reason</label>
+            <textarea
+              id="reason"
+              pInputTextarea
+              formControlName="reason"
+              [rows]="6"
+              class="address-text-area"
+              value="{{ caseWorker.reason }}"
+              class="disable"
+            ></textarea>
+          </div>
+        </div>
+      </div>
       <div class="p-col-12 p-md-6">
         <div class="p-fluid p-formgrid p-grid">
-        <div class="p-field p-col-12">
-          <input type="text" pInputText formControlName=address placeholder="Address"></div>
-        <div class="p-field p-col-8 p-md-5">
-          <input type="text" pInputText formControlName=city placeholder="City"></div>
-        <div class="p-field p-col-4 p-md-3">
-          <p-dropdown formControlName="state" [options]="states" placeholder="State" optionLabel=name></p-dropdown></div>
-        <div class="p-field p-col-5 p-md-4">
-          <input type="text" pInputText formControlName=zip placeholder="Zip"></div>
-          <div class="p-field p-col-7 p-md-8">
-            <p-calendar formControlName=approvedDate [touchUI]="mobileMode" [readonlyInput]="mobileMode" [inline]=false [showIcon]=true placeholder="Date Approved"></p-calendar></div>
-          <div class="p-field p-col-12 p-md-5">
-            <input type="text" pInputText formControlName=by placeholder="By"></div>
-          <div class="p-field p-col-12 p-md-7">
-            <p-calendar formControlName=date [touchUI]="mobileMode" [readonlyInput]="mobileMode" [inline]=false [showIcon]=true placeholder="Date"></p-calendar></div>
+          <div class="p-field p-col-12">
+            <label for="address" class="label-title">Address</label>
+            <input
+              type="text"
+              pInputText
+              formControlName="address"
+              value="{{ caseWorker?.address }}"
+              class="disable"
+            />
+          </div>
+          <div class="p-field p-col-8 p-md-5">
+            <label for="city" class="label-title">City</label>
+            <input
+              type="text"
+              pInputText
+              formControlName="city"
+              value="{{ caseWorker?.city }}"
+              class="disable"
+            />
+          </div>
+          <div class="p-field p-col-4 p-md-3">
+            <label for="state" class="label-title">State</label>
+            <input
+              type="text"
+              pInputText
+              formControlName="state"
+              value="{{ caseWorker?.state }}"
+              class="disable"
+            />
+          </div>
+          <div class="p-field p-col-5 p-md-4">
+            <label for="zip" class="label-title">Zip</label>
+            <input
+              type="text"
+              pInputText
+              formControlName="zip"
+              value="{{ caseWorker?.zip }}"
+              class="disable"
+              mask="00000-0000||00000"
+            />
+          </div>
         </div>
+      </div>
     </div>
+
+    <div class="p-fluid p-formgrid p-grid">
+      <div class="p-col-12 p-md-6">
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12">
+            <input
+              type="text"
+              pInputText
+              formControlName="coordinator"
+              maxlength="30"
+              value="{{ caseWorker.coordinator }}"
+              placeholder="Transport Co-ordinator"
+              appNoSpecialSymbols
+              customAttr="textOnly"
+            />
+            <small
+              class="error"
+              *ngIf="coordinator?.invalid && coordinator?.touched"
+              >coordinator is required.</small
+            >
+          </div>
+        </div>
+      </div>
+      <div class="p-col-12 p-md-6">
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12">
+            <p-calendar
+              formControlName="approvedDate"
+              [touchUI]="mobileMode"
+              [readonlyInput]="mobileMode"
+              [inline]="false"
+              [minDate]="minDateValue"
+              [maxDate]="maxDateValue"
+              placeholder="Date Approved"
+            ></p-calendar>
+            <small
+              class="error"
+              *ngIf="approvedDate?.invalid && approvedDate?.touched"
+              >approved date is required.</small
+            >
+          </div>
+        </div>
+      </div>
     </div>
-    <button type="submit" pButton label="Submit" class="p-button-outlined"></button>
-    <button type="button" pButton label="Cancel" class="p-button-text p-button-secondary"></button>
+
+    <div class="p-fluid p-grid">
+      <div class="p-field p-col-12 p-md-6">
+        <input
+          type="text"
+          pInputText
+          formControlName="nursingNotified"
+          maxlength="30"
+          value="{{ caseWorker.nursingNotified }}"
+          placeholder="Nursing Notified"
+          appNoSpecialSymbols
+          customAttr="textOnly"
+        />
+        <small
+          class="error"
+          *ngIf="nursingNotified?.invalid && nursingNotified?.touched"
+          >nursing notified is required.</small
+        >
+      </div>
+      <div class="p-field p-col-12 p-md-4">
+        <input
+          type="text"
+          pInputText
+          formControlName="by"
+          maxlength="30"
+          value="{{ caseWorker.by }}"
+          placeholder="By"
+          appNoSpecialSymbols
+          customAttr="textOnly"
+        />
+        <small class="error" *ngIf="by?.invalid && by?.touched"
+          >by is required.</small
+        >
+      </div>
+      <div class="p-field p-col-12 p-md-2">
+        <p-calendar
+          formControlName="date"
+          [touchUI]="mobileMode"
+          [readonlyInput]="mobileMode"
+          [inline]="false"
+          [showIcon]="true"
+          [minDate]="minDateValue"
+          placeholder="Date"
+        ></p-calendar>
+        <small class="error" *ngIf="date?.invalid && date?.touched"
+          >date is required.</small
+        >
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      pButton
+      label="Submit"
+      [disabled]="transportRequestForm.invalid"
+      class="p-button-outlined"
+    ></button>
+    <button
+      type="button"
+      pButton
+      label="Cancel"
+      (click)="reset()"
+      class="p-button-text p-button-secondary"
+    ></button>
   </form>
 </div>

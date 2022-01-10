@@ -1,119 +1,154 @@
 <div class="page1-form-container p-mt-4">
-<form [formGroup]="page1Form" (ngSubmit)="onSubmit()" *ngIf="page1Form">
-<div class="p-fluid p-formgrid p-grid" formGroupName="personalDetails">
-  <div class="p-field p-col-12 p-md-6">
-    <input type="text" pInputText formControlName=name placeholder="Name"></div>
-  <div class="p-field p-col-12 p-md-6">
-    <input type="text" pInputText formControlName=nickname placeholder="Nickname"></div>
-  <div class="p-field p-col-12 p-md-6">
-    <p-calendar formControlName=dob [inline]=false [showIcon]=true placeholder="Date of birth (mm/dd/yyyy)"></p-calendar></div>
-  <div class="p-field p-col-12 p-md-6">
-    <input type="text" pInputText formControlName=placeOfBirth placeholder="Place of birth"></div>
-  <div class="p-field p-col-12 p-md-6">
-    <input type="text" pInputText formControlName=ssn placeholder="SSN"></div>
-  <div class="p-field p-col-12 p-md-6">
-    <input type="text" pInputText formControlName=age placeholder="Age"></div>
-  <div class="p-col-12 p-formgroup-inline">
-    <label class="p-mr-2 radiobutton-group-label">Sex</label>
-    <div *ngFor="let gender of genderList; let i = index" class="p-field-radiobutton">
-      <p-radioButton name="sex" formControlName=sex [value]=gender.value inputId="gender{{i}}"></p-radioButton>
-      <label for="gender{{i}}" class="p-ml-2">{{gender.label}}</label>
-    </div>
-  </div>
-  <div class="p-col-12 p-formgroup-inline">
-    <label class="p-mr-2 radiobutton-group-label">Marital Status</label>
-    <div *ngFor="let maritalStatus of maritalStatusList; let i = index" class="p-field-radiobutton">
-      <p-radioButton name="maritalStatus" formControlName=maritalStatus [value]=maritalStatus.value inputId="maritalStatus{{i}}"></p-radioButton>
-      <label for="maritalStatus{{i}}" class="p-ml-2">{{maritalStatus.label}}</label>
-    </div>
-  </div>
-  <div class="p-field p-col-12 p-md-6">
-    <input type="text" pInputText formControlName=race placeholder="Race"></div>
-  <div class="p-field p-col-12 p-md-6">
-    <input type="text" pInputText formControlName=primaryLanguage placeholder="Primary language"></div>
-  <div class="p-field p-col-12 p-md-6">
-    <input type="text" pInputText formControlName=contactPerson placeholder="Contact Person"></div>
-  <div class="p-field p-col-12 p-md-6">
-    <input type="text" pInputText formControlName=relationship placeholder="Relationship"></div>
-  <div class="p-field p-col-12">
-    <input type="text" pInputText formControlName=address placeholder="Address"></div>
-  <div class="p-field p-col-12 p-md-6">
-    <input type="text" pInputText formControlName=phone placeholder="Phone"></div>
-</div>
-<h3>Income and resources</h3>
-<div class="p-fluid p-formgrid p-grid" formGroupName="incomeAndResources">
-  <div class="p-field p-col-12 p-md-6">
-    <input type="text" pInputText formControlName=income placeholder="Income"></div>
-  <div class="p-field p-col-12 p-md-6">
-   <!-- dropdown ? -->
-    <input type="text" pInputText formControlName=type placeholder="Type"></div>
-  <div class="p-field p-col-12">
-    <input type="text" pInputText formControlName=bankAccount placeholder="Bank Accounts"></div>
-  <div class="p-field p-col-12 p-md-6">
-    <input type="text" pInputText formControlName=bankName placeholder="Name of Bank"></div>
-  <div class="p-field p-col-12 p-md-6">
-    <!-- input type? -->
-    <input type="text" pInputText formControlName=directDeposit placeholder="Direct Deposit"></div>
-  <div class="p-field p-col-12">
-    <!-- input type? -->
-    <input type="text" pInputText formControlName=otherAssets placeholder="Other Assets"></div>
-  <div class="p-field p-col-12">
-    <!-- input type? -->
-    <input type="text" pInputText formControlName=medicaid placeholder="Medicaid/VA Coverage"></div>
-    <div class="p-field p-col-12">
-      <!-- input type? -->
-      <input type="text" pInputText formControlName=otherBenefits placeholder="Other Benefits You are receiving"></div>
-</div>
-<h3>Benefits</h3>
-<div class="p-fluid p-formgrid p-grid" formGroupName="benefits">
-  <div class="p-field p-col-12">
-    <!-- input type? multiselect dropdown/checkbox? -->
-    <input type="text" pInputText formControlName=receivingBenefits placeholder="What benefits are you currently receiving?"></div>
-  <div class="p-field p-col-12">
-    <!-- input type? multiselect dropdown/checkbox? -->
-    <input type="text" pInputText formControlName=applyingBenefits placeholder="What benefits would you like to apply for"></div>
-</div>
-<h3>Social & Family history</h3>
-<div class="p-fluid p-formgrid p-grid" formGroupName="socialAndFamilyHistory">
-  <div class="p-field p-col-12 p-md-6">
-    <input type="text" pInputText formControlName=mothersFullName placeholder="Mother's FullName"></div>
-    <div class="p-col-12 p-md-6 p-formgroup-inline" style="align-items: center;">
-      <div *ngFor="let motherStatus of familyStatusList; let i = index" class="p-field-radiobutton">
-        <p-radioButton name="motherStatus" formControlName=motherStatus [value]=motherStatus.value inputId="motherStatus{{i}}"></p-radioButton>
-        <label for="motherStatus{{i}}" class="p-ml-2">{{motherStatus.label}}</label>
+  <form [formGroup]="page1Form" (ngSubmit)="onSubmit()" *ngIf="page1Form">
+    <div class="p-fluid p-formgrid p-grid" formGroupName="personalDetails">
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=name placeholder="Name">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=nickname placeholder="Nickname">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <p-calendar formControlName=dob [inline]=false [showIcon]=true placeholder="Date of birth (mm/dd/yyyy)">
+        </p-calendar>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=placeOfBirth placeholder="Place of birth">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=ssn placeholder="SSN">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=age placeholder="Age">
+      </div>
+      <div class="p-col-12 p-formgroup-inline">
+        <label class="p-mr-2 radiobutton-group-label">Sex</label>
+        <div *ngFor="let gender of genderList; let i = index" class="p-field-radiobutton">
+          <p-radioButton name="sex" formControlName=sex [value]=gender.value inputId="gender{{i}}"></p-radioButton>
+          <label for="gender{{i}}" class="p-ml-2">{{gender.label}}</label>
+        </div>
+      </div>
+      <div class="p-col-12 p-formgroup-inline">
+        <label class="p-mr-2 radiobutton-group-label">Marital Status</label>
+        <div *ngFor="let maritalStatus of maritalStatusList; let i = index" class="p-field-radiobutton">
+          <p-radioButton name="maritalStatus" formControlName=maritalStatus [value]=maritalStatus.value
+            inputId="maritalStatus{{i}}"></p-radioButton>
+          <label for="maritalStatus{{i}}" class="p-ml-2">{{maritalStatus.label}}</label>
+        </div>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=race placeholder="Race">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=primaryLanguage placeholder="Primary language">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=contactPerson placeholder="Contact Person">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=relationship placeholder="Relationship">
+      </div>
+      <div class="p-field p-col-12">
+        <input type="text" pInputText formControlName=address placeholder="Address">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=phone placeholder="Phone">
       </div>
     </div>
-    <div class="p-field p-col-12 p-md-6">
-      <input type="text" pInputText formControlName=fathersFullName placeholder="Father's FullName"></div>
+    <h3>Income and resources</h3>
+    <div class="p-fluid p-formgrid p-grid" formGroupName="incomeAndResources">
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=income placeholder="Income">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <!-- dropdown ? -->
+        <input type="text" pInputText formControlName=type placeholder="Type">
+      </div>
+      <div class="p-field p-col-12">
+        <input type="text" pInputText formControlName=bankAccount placeholder="Bank Accounts">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=bankName placeholder="Name of Bank">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <!-- input type? -->
+        <input type="text" pInputText formControlName=directDeposit placeholder="Direct Deposit">
+      </div>
+      <div class="p-field p-col-12">
+        <!-- input type? -->
+        <input type="text" pInputText formControlName=otherAssets placeholder="Other Assets">
+      </div>
+      <div class="p-field p-col-12">
+        <!-- input type? -->
+        <input type="text" pInputText formControlName=medicaid placeholder="Medicaid/VA Coverage">
+      </div>
+      <div class="p-field p-col-12">
+        <!-- input type? -->
+        <input type="text" pInputText formControlName=otherBenefits placeholder="Other Benefits You are receiving">
+      </div>
+    </div>
+    <h3>Benefits</h3>
+    <div class="p-fluid p-formgrid p-grid" formGroupName="benefits">
+      <div class="p-field p-col-12">
+        <!-- input type? multiselect dropdown/checkbox? -->
+        <input type="text" pInputText formControlName=receivingBenefits
+          placeholder="What benefits are you currently receiving?">
+      </div>
+      <div class="p-field p-col-12">
+        <!-- input type? multiselect dropdown/checkbox? -->
+        <input type="text" pInputText formControlName=applyingBenefits
+          placeholder="What benefits would you like to apply for">
+      </div>
+    </div>
+    <h3>Social & Family history</h3>
+    <div class="p-fluid p-formgrid p-grid" formGroupName="socialAndFamilyHistory">
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=mothersFullName placeholder="Mother's FullName">
+      </div>
+      <div class="p-col-12 p-md-6 p-formgroup-inline" style="align-items: center;">
+        <div *ngFor="let motherStatus of familyStatusList; let i = index" class="p-field-radiobutton">
+          <p-radioButton name="motherStatus" formControlName=motherStatus [value]=motherStatus.value
+            inputId="motherStatus{{i}}"></p-radioButton>
+          <label for="motherStatus{{i}}" class="p-ml-2">{{motherStatus.label}}</label>
+        </div>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=fathersFullName placeholder="Father's FullName">
+      </div>
       <div class="p-col-12 p-md-6 p-formgroup-inline" style="align-items: center;">
         <div *ngFor="let fatherStatus of familyStatusList; let i = index" class="p-field-radiobutton">
-          <p-radioButton name="fatherStatus" formControlName=fatherStatus [value]=fatherStatus.value inputId="fatherStatus{{i}}"></p-radioButton>
+          <p-radioButton name="fatherStatus" formControlName=fatherStatus [value]=fatherStatus.value
+            inputId="fatherStatus{{i}}"></p-radioButton>
           <label for="fatherStatus{{i}}" class="p-ml-2">{{fatherStatus.label}}</label>
         </div>
       </div>
       <h4>Siblings:<span *ngIf="!siblings.controls.length"> None</span></h4>
-    <div formArrayName="siblings" *ngFor="let sibling of siblings.controls; let i = index" class="p-col-12">
-      <div [formGroupName]="i">
-        <h4>Sibling {{ i+1 }}</h4>
-        <div class="p-field p-col-4">
-          <input type="text" pInputText formControlName="name" placeholder="Name"></div>
-        <div class="p-field p-col-4">
-          <input type="text" pInputText formControlName="age" placeholder="Age"></div>
-        <div class="p-field p-col-4">
-            <input type="text" pInputText formControlName="location" placeholder="Location"></div>
-        <button type="button" pButton icon="pi pi-times" class="p-buton-outlined p-button-rounded p-button-danger" (click)="removeSibling(i)"></button>
+      <div formArrayName="siblings" *ngFor="let sibling of siblings.controls; let i = index" class="p-col-12">
+        <div [formGroupName]="i">
+          <h4>Sibling {{ i+1 }}</h4>
+          <div class="p-field p-col-4">
+            <input type="text" pInputText formControlName="name" placeholder="Name">
+          </div>
+          <div class="p-field p-col-4">
+            <input type="text" pInputText formControlName="age" placeholder="Age">
+          </div>
+          <div class="p-field p-col-4">
+            <input type="text" pInputText formControlName="location" placeholder="Location">
+          </div>
+          <button type="button" pButton icon="pi pi-times" class="p-buton-outlined p-button-rounded p-button-danger"
+            (click)="removeSibling(i)"></button>
+        </div>
+      </div>
+      <button type="button" pButton icon="pi pi-plus" class="p-buton-outlined p-button-rounded"
+        (click)="addSibling()"></button>
+    </div>
+    <div class="p-d-flex button-container p-mt-4">
+      <div class="p-jc-start">
+        <button type="button" pButton label="Save"></button>
+        <button type="button" pButton label="Cancel" class="p-button-outlined p-ml-2"></button>
+      </div>
+      <div class="p-jc-end">
+        <button type="submit" pButton label="Next"></button>
       </div>
     </div>
-    <button type="button" pButton icon="pi pi-plus" class="p-buton-outlined p-button-rounded" (click)="addSibling()"></button>
-</div>
-<div class="p-d-flex button-container p-mt-4">
-  <div class="p-jc-start">
-    <button type="button" pButton label="Save"></button>
-    <button type="button" pButton label="Cancel" class="p-button-outlined p-ml-2"></button>
-  </div>
-  <div class="p-jc-end">
-    <button type="submit" pButton label="Next"></button>
-  </div>
-</div>
-</form>
+  </form>
 </div>
