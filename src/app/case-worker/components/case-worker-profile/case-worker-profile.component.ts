@@ -27,10 +27,7 @@ export class CaseWorkerProfileComponent implements OnInit {
   public genderArray: any = [];
   public caseWorkerProfileForm!: FormGroup;
   public veteran: any;
-  // public submitted: boolean = false;
-  //public image: any;
   public states!: DropDown[];
-  //input!: String;
   public relegions!: DropDown[];
   public languages!: DropDown[];
   public maritalStatus!: DropDown[];
@@ -61,6 +58,7 @@ export class CaseWorkerProfileComponent implements OnInit {
     this.races = races;
     this.maxDateValue = new Date(new Date().getTime());
   }
+  
   ngOnInit(): void {
     this.selectedState = this.states[1];
     this.selectedGender = this.genders[1];

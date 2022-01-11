@@ -34,7 +34,6 @@
                 pattern="[a-zA-Z]+"
                 appNoSpecialSymbols
                 customAttr="textOnly"
-                placeholder="First Name"
                 formControlName="firstName"
               />
               <div
@@ -103,7 +102,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.lastName.errors?.required"
                 >
-                  Last Name is required.
+                  Last name is required.
                 </small>
               </div>
             </div>
@@ -131,7 +130,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.nickName.errors?.required"
                 >
-                  Last Name is required.
+                  Nick name is required.
                 </small>
               </div>
             </div>
@@ -663,7 +662,7 @@
           </legend>
           <div class="p-fluid p-grid">
             <div class="p-field p-col-12 p-md-4">
-              <label class="label-title">Contatc Person</label>
+              <label class="label-title">Contact Person</label>
               <input
                 id="cFirstName"
                 maxlength="30"
@@ -686,13 +685,13 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.cfirstName.errors?.required"
                 >
-                  First name is required.
+                  Contact person name is required.
                 </small>
               </div>
             </div>
 
             <div class="p-field p-col-12 p-md-4">
-              <label class="label-title">Contatc Person Address</label>
+              <label class="label-title">Contact Person Address</label>
               <input
                 id="houseNumber"
                 type="text"
@@ -711,13 +710,13 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.cHouseNumber.errors?.required"
                 >
-                  Please enter a valid house number.
+                  Address is required.
                 </small>
               </div>
             </div>
 
             <div class="p-field p-col-12 p-md-4">
-              <label class="label-title">Contatc Person Phone</label>
+              <label class="label-title">Contact Person Phone</label>
               <input
                 id="phoneNumber"
                 type="text"
