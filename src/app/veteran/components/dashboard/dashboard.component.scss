@@ -1,21 +1,11 @@
-::ng-deep .p-tooltip .p-tooltip-text {
-  background-color: white;
-  color: blue;
-  font-size: small;
-}
+@import "src/app/shared/styles/breakpoints.scss";
 
 :host ::ng-deep .fc .fc-toolbar .fc-button.fc-listWeek-button.fc-button-active {
   background: #f3212c;
   border-color: #2196f3;
   color: #ffffff;
 }
-:host ::ng-deep .fc .fc-toolbar .fc-button.fc-listWeek-button.fc-button-active:hover {
-  background: #0d89ec;
-  border-color: #0d89ec;
-  color: #ffffff;
-}
-
-:host ::ng-deep .calendar-container {
+.calendar-container {
   padding: 10px;
   border-width: 1px;
   border-style: solid;
@@ -23,20 +13,21 @@
   background: #ffffff;
 }
 
-:host ::ng-deep .fc .fc-toolbar .fc-button.fc-listWeek-button {
-  background: #ffffff;
-  border: 1px solid #ced4da;
-  color: #495057;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
-}
-.calendar-header__top{
+// :host ::ng-deep .fc .fc-toolbar .fc-button.fc-listWeek-button {
+//   background: #ffffff;
+//   border: 1px solid #ced4da;
+//   color: #495057;
+//   transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+// }
+.calendar-header__top {
   margin-left: 11px;
   margin-bottom: 15px;
   display: flex;
 }
-@media only screen and (max-width: 768px) {
+
+@include mobile() {
   :host ::ng-deep .fc .fc-toolbar-title {
-    font-size: 13px;
+    font-size: 15px;
   }
 }
 .border {
@@ -66,16 +57,23 @@
   color: rgba(13, 93, 166, 1);
   font-family: "Roboto Medium", "Roboto Regular", "Roboto", sans-serif;
 }
-.width-100 {
-  width: 100%;
-}
 .p-field {
-  margin-bottom: 0px;
+  margin-bottom: 4px;
 }
 .button--margin {
   margin: 15px 15px 0 0;
   margin-left: 8px;
 }
-.form-error{
+.form-error {
   color: red;
+}
+.calendar-event__title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.calendar-event__date {
+  font-size: 16px;
+}
+.user_input--color.ng-touched.ng-invalid {
+  border-color: red;
 }

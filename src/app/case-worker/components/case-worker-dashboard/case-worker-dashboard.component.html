@@ -1,22 +1,24 @@
-<div class="p-grid">
+<main class="p-grid">
   <div class="p-col-12 mb-30">
     <app-item-header title="CALENDAR" color="blue"></app-item-header>
     <div class="calendar-header">
       <header class="p-grid header--margin">
         <div class="calendar-header__top">
-          <div>
+          <section>
             <p-tabMenu
               #tab
               [model]="items"
               (click)="changeTag(tab)"
+              [activeItem]="items[0]"
             ></p-tabMenu>
-          </div>
-          <div>
+          </section>
+          <section>
             <i class="fa btn-col" (click)="addEvent()"
               ><span class="btn-text">+ Add new</span></i
             >
-          </div>
+          </section>
         </div>
+        <!-- modal for add event / appointment starts -->
         <div class="calendar-header__addEvent">
            <p-dialog
             header="Add an {{ tagName }}"
@@ -34,6 +36,7 @@
                     formControlName="eventDate"
                     dataType="string"
                     placeholder="Date (yyyy-mm-dd)"
+                    [minDate]="minDateValue"
                   >
                   </p-calendar>
                   <div
@@ -82,6 +85,7 @@
                     formControlName="eventTitle"
                     pInputText
                     placeholder="Title"
+                    class="user_input--color"
                   />
                   <div
                     *ngIf="
@@ -98,7 +102,7 @@
                   [rows]="5"
                   formControlName="eventDescription"
                   [cols]="50"
-               
+                  class="user_input--color"
                   pInputTextarea
                 ></textarea>
                 <div
@@ -122,8 +126,40 @@
             </form>
           </p-dialog>
         </div>
+        <!-- modal for add event / appointment ends -->
       </header>
-
+      <!-- "modal for event details starts" -->
+      <p-dialog
+      header="{{eventInfo[0]}} Details"
+      [(visible)]="displayEvent"
+      [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+      [draggable]="false"
+      [modal]="true"
+      [style]="{ width: '430px' }"
+    >
+      <header>
+        <p-toolbar class="calendar__eventDetails">
+          <div class="p-toolbar-group-left">
+            <div class="calendar-event__title">{{eventInfo[3]}}</div>
+          </div>
+          <div class="p-toolbar-group-right">
+            <div class="calendar-event__date">
+              On {{ eventInfo[4] | date: "shortDate" }}
+            </div>
+          </div>
+        </p-toolbar>
+      </header>
+      <p-divider></p-divider>
+      <div>
+        From {{eventInfo[1] | date: "shortTime" }} to {{eventInfo[2] | date : "shortTime"}}
+       </div>
+      <div>
+        <p class="event-description">
+          {{ eventInfo[5] }}
+        </p>
+      </div>
+    </p-dialog>
+    <!-- "modal for event details ends" -->
       <full-calendar
         [options]="calendarOptions"
         class="calendar-container"
@@ -131,4 +167,4 @@
     </div>
   </div>
   <app-secure-message-center></app-secure-message-center>
-</div>
+</main>

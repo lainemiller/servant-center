@@ -1,78 +1,173 @@
 <div class="p-grid">
-  <div class="p-col-12">
-    <app-item-header title="CASEWORKER PROFILE" color="blue"></app-item-header>
-    <div class="form-container">
-      <form
-        *ngIf="caseWorkerProfileForm"
-        [formGroup]="caseWorkerProfileForm"
-        (ngSubmit)="onSubmit()"
-      >
-        <div class="p-fluid p-formgrid p-grid">
-          <img
-            class="form-container__img"
-            src="assets/images/profile.svg"
-            alt="Image"
-            width="150"
-          />
-        </div>
-
-        <!-- Person Info start -->
-        <fieldset class="form-container__sec">
-          <legend class="p-col form-container__sec-heading">
-            <span class="form-container__sec-heading"
-              >PERSON'S INFORMATION</span
-            >
-          </legend>
-          <div class="p-fluid p-grid">
-            <div class="p-field p-col-12 p-md-4">
-              <label for="First Name" class="label-title">First Name</label>
-              <input
-                id="First Name"
-                type="text"
-                pInputText
-                maxlength="30"
-                pattern="[a-zA-Z]+"
-                appNoSpecialSymbols
-                customAttr="textOnly"
-                formControlName="firstName"
-              />
-              <div
-                *ngIf="
-                  getControl.firstName.touched && getControl.firstName.invalid
-                "
-                class="text-danger"
+    <div class="p-col-12">
+      <app-item-header title="CASEWORKER PROFILE" color="blue"></app-item-header>
+      <div class="form-container">
+        <form
+          *ngIf="caseWorkerProfileForm"
+          [formGroup]="caseWorkerProfileForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <div class="p-fluid p-formgrid p-grid">
+            <img
+              class="form-container__img"
+              src="assets/images/profile.svg"
+              alt="Image"
+              width="150"
+            />
+          </div>
+  
+          <!-- Person Info start -->
+          <fieldset class="form-container__sec">
+            <legend class="p-col form-container__sec-heading">
+              <span class="form-container__sec-heading"
+                >PERSON'S INFORMATION</span
               >
-                <small
-                  class="form-container__sec-errmsg"
-                  *ngIf="getControl.firstName.errors?.required"
+            </legend>
+            <div class="p-fluid p-grid">
+              <div class="p-field p-col-12 p-md-4">
+                <label for="First Name" class="label-title">First Name</label>
+                <input
+                  id="First Name"
+                  type="text"
+                  pInputText
+                  maxlength="30"
+                  pattern="[a-zA-Z]+"
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
+                  formControlName="firstName"
+                />
+                <div
+                  *ngIf="
+                    getControl.firstName.touched && getControl.firstName.invalid
+                  "
+                  class="text-danger"
                 >
-                  First name is required.
-                </small>
+                  <small
+                    class="form-container__sec-errmsg"
+                    *ngIf="getControl.firstName.errors?.required"
+                  >
+                    First name is required.
+                  </small>
+                </div>
+              </div>
+  
+              <div class="p-field p-col-12 p-md-4">
+                <label class="label-title">Middle Name</label>
+                <input
+                  type="text"
+                  id="Last Name"
+                  pInputText
+                  value="{{ veteran?.middleName }}"
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
+                  maxlength="30"
+                  formControlName="middleName"
+                />
+  
+                <div
+                  *ngIf="
+                    getControl.middleName.touched && getControl.middleName.invalid
+                  "
+                  class="text-danger"
+                >
+                  <small
+                    class="form-container__sec-errmsg"
+                    *ngIf="getControl.middleName.errors?.required"
+                  >
+                    Middle name is required.
+                  </small>
+                </div>
+              </div>
+  
+              <div class="p-field p-col-12 p-md-4">
+                <label class="label-title">Last Name</label>
+                <input
+                  required
+                  id="Last Name"
+                  type="text"
+                  pInputText
+                  value="{{ veteran?.lastName }}"
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
+                  maxlength="30"
+                  formControlName="lastName"
+                />
+                <div
+                  *ngIf="
+                    getControl.lastName.touched && getControl.lastName.invalid
+                  "
+                  class="text-danger"
+                >
+                  <small
+                    class="form-container__sec-errmsg"
+                    *ngIf="getControl.lastName.errors?.required"
+                  >
+                    Last name is required.
+                  </small>
+                </div>
               </div>
             </div>
-
-            <div class="p-field p-col-12 p-md-4">
-              <label class="label-title">Middle Name</label>
-              <input
-                type="text"
-                id="Last Name"
-                pInputText
-                value="{{ veteran?.middleName }}"
-                appNoSpecialSymbols
-                customAttr="textOnly"
-                maxlength="30"
-                formControlName="middleName"
-              />
-
-              <div
-                *ngIf="
-                  getControl.middleName.touched && getControl.middleName.invalid
-                "
-                class="text-danger"
-              >
-                <small
-                  class="form-container__sec-errmsg"
-                  *ngIf="getControl.middleName.errors?.required"
+  
+            <div class="p-fluid p-grid">
+              <div class="p-field p-col-12 p-md-4">
+                <label class="label-title">Nick Name</label>
+                <input
+                  id="Nick Name"
+                  maxlength="30"
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
+                  type="text"
+                  pInputText
+                  formControlName="nickName"
+                />
+                <div
+                  *ngIf="
+                    getControl.nickName.touched && getControl.nickName.invalid
+                  "
+                  class="text-danger"
+                >
+                  <small
+                    class="form-container__sec-errmsg"
+                    *ngIf="getControl.nickName.errors?.required"
+                  >
+                    Nick name is required.
+                  </small>
+                </div>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                <label class="label-title">Date of Birth</label>
+                <p-calendar
+                  formControlName="DOB"
+                  [maxDate]="maxDateValue"
+                  [inline]="false"
+                  [showIcon]="true"
+                >
+                </p-calendar>
+                <div
+                  *ngIf="getControl.DOB.touched && getControl.DOB.invalid"
+                  class="text-danger"
+                >
+                  <small
+                    class="form-container__sec-errmsg"
+                    *ngIf="getControl.DOB.errors?.required"
+                  >
+                    Date of birth is required.
+                  </small>
+                </div>
+              </div>
+  
+              <div class="p-field p-col-12 p-md-4">
+                <label class="label-title">Place of Birth</label>
+                <input
+                  id="pob"
+                  type="text"
+                  pInputText
+                  maxlength="30"
+                  formControlName="POB"
+                />
+                <div
+                  *ngIf="getControl.POB.touched && getControl.POB.invalid"
+                  class="text-danger"
                 >
                   Middle name is required.
                 </small>
@@ -130,7 +225,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.nickName.errors?.required"
                 >
-                  Nick name is required.
+                  SSN number is invalid minimum 8 digits required.
                 </small>
               </div>
             </div>
@@ -173,7 +268,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.POB.errors?.required"
                 >
-                  Please enter a valid place of birth.
+                  HMIS ID is invalid.
                 </small>
               </div>
             </div>
@@ -265,16 +360,41 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.selectedGenders.errors?.required"
                 >
-                  Select an option.
-                </small>
+                  <small
+                    class="form-container__sec-errmsg"
+                    *ngIf="getControl.selectedGenders.errors?.required"
+                  >
+                    Select an option.
+                  </small>
+                </div>
               </div>
             </div>
-            <ng-template pTemplate="selectedItem">
-              <div
-                class="country-item country-item-value"
-                *ngIf="selectedGender"
-              >
-                <div>{{ selectedGender.name }}</div>
+  
+            <div class="p-fluid p-grid">
+              <div class="p-field p-col-12 p-md-4">
+                <label class="label-title">Select Marital Status</label>
+                <p-dropdown
+                  inputId="maritalStatus"
+                  [autoDisplayFirst]="false"
+                  [options]="maritalStatus"
+                  formControlName="selectedMaritalStatus"
+                  optionLabel="name"
+                >
+                </p-dropdown>
+                <div
+                  *ngIf="
+                    getControl.selectedMaritalStatus.touched &&
+                    getControl.selectedMaritalStatus.invalid
+                  "
+                  class="text-danger"
+                >
+                  <small
+                    class="form-container__sec-errmsg"
+                    *ngIf="getControl.selectedMaritalStatus.errors?.required"
+                  >
+                    Select an option.
+                  </small>
+                </div>
               </div>
             </ng-template>
           </div>
@@ -418,8 +538,13 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.address1.errors?.required"
                 >
-                  Address 1 is required.
-                </small>
+                  <small
+                    class="form-container__sec-errmsg"
+                    *ngIf="getControl.city.errors?.required"
+                  >
+                    City is required.
+                  </small>
+                </div>
               </div>
             </div>
             <div class="p-field p-col-12 p-md-4">
@@ -441,8 +566,13 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.city.errors?.required"
                 >
-                  City is required.
-                </small>
+                  <small
+                    class="form-container__sec-errmsg"
+                    *ngIf="getControl.selectedState.errors?.required"
+                  >
+                    Select an option.
+                  </small>
+                </div>
               </div>
             </div>
             <div class="p-field p-col-12 p-md-4">
@@ -468,17 +598,37 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.selectedState.errors?.required"
                 >
-                  Select an option.
-                </small>
+                  <small
+                    class="form-container__sec-errmsg"
+                    *ngIf="getControl.country.errors?.required"
+                  >
+                    Country is required.
+                  </small>
+                </div>
               </div>
-            </div>
-
-            <ng-template pTemplate="selectedItem">
-              <div
-                class="country-item country-item-value"
-                *ngIf="selectedState"
-              >
-                <div>{{ selectedState.name }}</div>
+              <div class="p-field p-col-12 p-md-4">
+                <label class="label-title">Address 2</label>
+                <input
+                  type="text"
+                  pInputText
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
+                  formControlName="address2"
+                  maxlength="30"
+                />
+                <div
+                  *ngIf="
+                    getControl.address2.touched && getControl.address2.invalid
+                  "
+                  class="text-danger"
+                >
+                  <small
+                    class="form-container__sec-errmsg"
+                    *ngIf="getControl.address2.errors?.required"
+                  >
+                    Address 2 is required.
+                  </small>
+                </div>
               </div>
             </ng-template>
           </div>
@@ -501,7 +651,7 @@
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.country.errors?.required"
                 >
-                  Country is required.
+                  Zip code is required.
                 </small>
               </div>
             </div>
@@ -529,82 +679,78 @@
                 </small>
               </div>
             </div>
-            <div class="p-field p-col-12 p-md-4">
-              <label class="label-title">Zip</label>
-              <input
-                id="zip"
-                type="text"
-                pInputText
-                formControlName="zipCode"
-                mask="00000-0000||00000"
-              />
-              <small
-                class="form-container__sec-errmsg"
-                *ngIf="
-                  getControl.zipCode.touched &&
-                  getControl.zipCode.errors?.required
-                "
-              >
-                Zip code is required.
-              </small>
-
-              <small
-                class="form-container__sec-errmsg"
-                *ngIf="
-                  getControl.zipCode.touched &&
-                  getControl.zipCode.invalid &&
-                  !getControl.zipCode.errors?.required
-                "
-              >
-                Zip code is invalid.
-              </small>
-            </div>
-          </div>
-        </fieldset>
-        <!-- Address Info End -->
-
-        <!-- Other Info start -->
-        <fieldset class="form-container__sec">
-          <legend class="p-col form-container__sec-heading">
-            OTHER INFORMATION
-          </legend>
-          <div class="p-fluid p-grid">
-            <div class="p-field p-col-12 p-md-4">
-              <label class="label-title">Hobbies</label>
-              <input
-                id="hobbies"
-                type="text"
-                appNoSpecialSymbols
-                customAttr="textOnly"
-                maxlength="30"
-                pInputText
-                formControlName="hobbies"
-              />
-            </div>
-
-            <div class="p-field p-col-12 p-md-4">
-              <label class="label-title">Select Primary Language</label>
-              <p-dropdown
-                inputId="primaryLanguage"
-                [autoDisplayFirst]="false"
-                [options]="languages"
-                formControlName="selectedprimaryLanguage"
-                optionLabel="name"
-              >
-              </p-dropdown>
-              <div
-                *ngIf="
-                  getControl.selectedprimaryLanguage.touched &&
-                  getControl.selectedprimaryLanguage.invalid
-                "
-                class="text-danger"
-              >
-                <small
-                  class="form-container__sec-errmsg"
-                  *ngIf="getControl.selectedprimaryLanguage.errors?.required"
+          </fieldset>
+          <!-- Address Info End -->
+  
+          <!-- Other Info start -->
+          <fieldset class="form-container__sec">
+            <legend class="p-col form-container__sec-heading">
+              OTHER INFORMATION
+            </legend>
+            <div class="p-fluid p-grid">
+              <div class="p-field p-col-12 p-md-4">
+                <label class="label-title">Hobbies</label>
+                <input
+                  id="hobbies"
+                  type="text"
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
+                  maxlength="30"
+                  pInputText
+                  formControlName="hobbies"
+                />
+              </div>
+  
+              <div class="p-field p-col-12 p-md-4">
+                <label class="label-title">Select Primary Language</label>
+                <p-dropdown
+                  inputId="primaryLanguage"
+                  [autoDisplayFirst]="false"
+                  [options]="languages"
+                  formControlName="selectedprimaryLanguage"
+                  optionLabel="name"
                 >
-                  Select an option.
-                </small>
+                </p-dropdown>
+                <div
+                  *ngIf="
+                    getControl.selectedprimaryLanguage.touched &&
+                    getControl.selectedprimaryLanguage.invalid
+                  "
+                  class="text-danger"
+                >
+                  <small
+                    class="form-container__sec-errmsg"
+                    *ngIf="getControl.selectedprimaryLanguage.errors?.required"
+                  >
+                    Select an option.
+                  </small>
+                </div>
+              </div>
+  
+              <div class="p-field p-col-12 p-md-4">
+                <label class="label-title">Select Relegious Preference</label>
+                <p-dropdown
+                  inputId="Select RelegiousPreference"
+                  [autoDisplayFirst]="false"
+                  [options]="relegions"
+                  formControlName="selectedRelegion"
+                  optionLabel="name"
+                >
+                </p-dropdown>
+                <div
+                  *ngIf="
+                    getControl.selectedRelegion.touched &&
+                    getControl.selectedRelegion.invalid
+                  "
+                  class="text-danger"
+                >
+                  <small
+                    class="form-container__sec-errmsg"
+                    *ngIf="getControl.selectedRelegion.errors?.required"
+                  >
+                    Select an option.
+                  </small>
+                </div>
               </div>
             </div>
 
@@ -633,79 +779,79 @@
                 </small>
               </div>
             </div>
-
-            <div class="p-field p-col-12 p-md-4">
-              <label class="label-title">Select Race</label>
-              <p-dropdown
-                inputId="race"
-                [autoDisplayFirst]="false"
-                [options]="races"
-                formControlName="selectedRace"
-                optionLabel="name"
-              >
-              </p-dropdown>
-            </div>
-            <ng-template pTemplate="selectedItem">
-              <div class="country-item country-item-value" *ngIf="selectedRace">
-                <div>{{ selectedRace.name }}</div>
-              </div>
-            </ng-template>
-          </div>
-        </fieldset>
-        <!-- Other Info End -->
-
-        <!-- Contact Person Details -->
-
-        <fieldset class="form-container__sec p-mb-4">
-          <legend class="p-col form-container__sec-heading">
-            CONTACT PERSON'S DETAILS
-          </legend>
-          <div class="p-fluid p-grid">
-            <div class="p-field p-col-12 p-md-4">
-              <label class="label-title">Contact Person</label>
-              <input
-                id="cFirstName"
-                maxlength="30"
-                appNoSpecialSymbols
-                appNoSpecialSymbols
-                customAttr="textOnly"
-                customAttr="textOnly"
-                type="text"
-                pInputText
-                formControlName="cfirstName"
-              />
-
-              <div
-                *ngIf="
-                  getControl.cfirstName.touched && getControl.cfirstName.invalid
-                "
-                class="text-danger"
-              >
-                <small
-                  class="form-container__sec-errmsg"
-                  *ngIf="getControl.cfirstName.errors?.required"
+          </fieldset>
+          <!-- Other Info End -->
+  
+          <!-- Contact Person Details -->
+  
+          <fieldset class="form-container__sec p-mb-4">
+            <legend class="p-col form-container__sec-heading">
+              CONTACT PERSON'S DETAILS
+            </legend>
+            <div class="p-fluid p-grid">
+              <div class="p-field p-col-12 p-md-4">
+                <label class="label-title">Contact Person</label>
+                <input
+                  id="cFirstName"
+                  maxlength="30"
+                  appNoSpecialSymbols
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
+                  customAttr="textOnly"
+                  type="text"
+                  pInputText
+                  formControlName="cfirstName"
+                />
+  
+                <div
+                  *ngIf="
+                    getControl.cfirstName.touched && getControl.cfirstName.invalid
+                  "
+                  class="text-danger"
                 >
-                  Contact person name is required.
-                </small>
+                  <small
+                    class="form-container__sec-errmsg"
+                    *ngIf="getControl.cfirstName.errors?.required"
+                  >
+                    Contact person name is required.
+                  </small>
+                </div>
               </div>
-            </div>
-
-            <div class="p-field p-col-12 p-md-4">
-              <label class="label-title">Contact Person Address</label>
-              <input
-                id="houseNumber"
-                type="text"
-                pInputText
-                formControlName="cHouseNumber"
-              />
-
-              <div
-                *ngIf="
-                  getControl.cHouseNumber.touched &&
-                  getControl.cHouseNumber.invalid
-                "
-                class="text-danger"
-              >
+  
+              <div class="p-field p-col-12 p-md-4">
+                <label class="label-title">Contact Person Address</label>
+                <input
+                  id="houseNumber"
+                  type="text"
+                  pInputText
+                  formControlName="cHouseNumber"
+                />
+  
+                <div
+                  *ngIf="
+                    getControl.cHouseNumber.touched &&
+                    getControl.cHouseNumber.invalid
+                  "
+                  class="text-danger"
+                >
+                  <small
+                    class="form-container__sec-errmsg"
+                    *ngIf="getControl.cHouseNumber.errors?.required"
+                  >
+                    Address is required.
+                  </small>
+                </div>
+              </div>
+  
+              <div class="p-field p-col-12 p-md-4">
+                <label class="label-title">Contact Person Phone</label>
+                <input
+                  id="phoneNumber"
+                  type="text"
+                  pInputText
+                  formControlName="cPhoneNumber"
+                  mask="(000) 000-0000"
+                />
                 <small
                   class="form-container__sec-errmsg"
                   *ngIf="getControl.cHouseNumber.errors?.required"
@@ -778,7 +924,12 @@
                   class="country-item country-item-value"
                   *ngIf="selectedRelationship"
                 >
-                  <div>{{ selectedRelationship.name }}</div>
+                  <small
+                    class="form-container__sec-errmsg"
+                    *ngIf="getControl.selectedRelationship.errors?.required"
+                  >
+                    Select an option.
+                  </small>
                 </div>
               </ng-template>
             </div>
