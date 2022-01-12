@@ -20,6 +20,7 @@ import { MenuModule } from 'primeng/menu';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TooltipModule } from 'primeng/tooltip';
 import {PasswordModule} from 'primeng/password';
+import { ToolbarModule } from 'primeng/toolbar';
 import { NgxMaskModule } from 'ngx-mask';
 
 import { KeysPipe } from '../case-worker/components/resident-search/rs-initial-assessment/ia-form-page-three/ia-form-page-three.component';
@@ -56,6 +57,7 @@ const MODULES = [
   DialogModule,
   HttpClientModule,
   PasswordModule,
+  ToolbarModule,
   NgxMaskModule
 ];
 
