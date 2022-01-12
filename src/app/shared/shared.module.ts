@@ -21,6 +21,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { TooltipModule } from 'primeng/tooltip';
 import {PasswordModule} from 'primeng/password';
 import { ToolbarModule } from 'primeng/toolbar';
+import { NgxMaskModule } from 'ngx-mask';
 
 import { KeysPipe } from '../case-worker/components/resident-search/rs-initial-assessment/ia-form-page-three/ia-form-page-three.component';
 import { ConsentDataComponent } from './components/consent-data/consent-data.component';
@@ -30,6 +31,7 @@ import { ItemHeaderComponent } from './components/item-header/item-header.compon
 import { WelcomeHeaderComponent } from './components/welcome-header/welcome-header.component';
 import { NoSpecialSymbolsDirective } from './directives/no-special-symbols.directive';
 import { LoginPageComponent } from './components/login-page/login-page.component';
+import { ProfileFormComponent } from './components/profile-form/profile-form.component';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -55,7 +57,8 @@ const MODULES = [
   DialogModule,
   HttpClientModule,
   PasswordModule,
-  ToolbarModule
+  ToolbarModule,
+  NgxMaskModule
 ];
 
 const COMPONENTS = [
@@ -65,7 +68,8 @@ const COMPONENTS = [
   WelcomeHeaderComponent,
   KeysPipe,
   ConsentDataComponent,
-  NoSpecialSymbolsDirective
+  NoSpecialSymbolsDirective,
+  ProfileFormComponent
 ];
 
 @NgModule({
