@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VeteranprofileService } from '../../../services/veteranprofile.service';
 import { states } from '../../../app.constants';
+import { VeteranProfileResponse } from 'src/app/shared/models/VeteranProfileResponse';
 
 interface State {
   value: string;
@@ -28,6 +29,7 @@ export class TransportationRequestFormComponent implements OnInit {
   public states: State[];
   // selectedState!: State;
   selectedState!: any;
+  userId:number=7;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,7 +42,7 @@ export class TransportationRequestFormComponent implements OnInit {
   ngOnInit(): void {
     this.selectedState = this.states[1];
 
-    this.service.getProfileData().subscribe((data) => {
+    this.service.getProfileData(this.userId).subscribe((data:VeteranProfileResponse) => {
       this.veteranData = data;
       this.firstName = this.veteranData.firstName;
       this.lastName = this.veteranData.lastName;
