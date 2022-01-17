@@ -11,6 +11,7 @@ import {
   statuses,
   relations,
 } from '../../../veteran/app.constants';
+import { VeteranProfileResponse } from '../../models/VeteranProfileResponse';
 
 interface DropDown {
   name: string;
@@ -43,6 +44,7 @@ export class ProfileFormComponent implements OnInit {
   selectedRace: any;
   maxDateValue!: Date;
   @Input() isShowFields!: boolean;
+  userId:number=7;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -71,7 +73,7 @@ export class ProfileFormComponent implements OnInit {
   }
 
   setForm() {
-    this.service.getProfileData().subscribe((data) => {
+    this.service.getProfileData(this.userId).subscribe((data:VeteranProfileResponse) => {
       this.profileDetails = data;
       this.veteran = this.profileDetails.result[0];
       console.log('Check Profile', this.veteran);

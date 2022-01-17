@@ -1,22 +1,26 @@
-import { HttpClient } from '@angular/common/http';
+import { Injectable, isDevMode } from '@angular/core';
 
-import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { RestClientService } from 'src/app/shared/services/rest-client.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VeteranprofileService {
-  constructor(private http: HttpClient) {}
+  constructor(private restcs: RestClientService) {}
 
-  // public getVeteranProfileDetailsByRecordNumber() {
+  private isDev = isDevMode();
+  private veteranProfileAPI = environment.serviceUrl.veteranProfileGetUser;
 
-  //    return this.http.get("./assets/mock/getdata.json");
-
-  // }
-
-  public getProfileData() {
-    return this.http.get(
-      'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/userProfile/getUserDetails/7'
-    );
+  public getProfileData(
+    endPoint: number,
+    payload = {}
+  ): Observable<any> {
+    if (this.isDev) {
+      return this.restcs.get('./assets/mock/getdata.json');
+    } else {
+      return this.restcs.get(this.veteranProfileAPI + endPoint);
+    }
   }
 }
