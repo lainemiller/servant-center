@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AssessmentResp } from 'src/app/shared/models/assessmentResponse';
 import { AssessmentDataService } from '../../services/assessment-data.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class AssessmentComponent implements OnInit {
   constructor(private service: AssessmentDataService) {}
 
   ngOnInit(): void {
-    this.service.getData().subscribe((data) => {
+    this.service.getData().subscribe((data:AssessmentResp) => {
       this.assessDetails = data;
       console.log(this.assessDetails.assessment_details);
       this.assesssmentData=this.assessDetails.assessment_details
