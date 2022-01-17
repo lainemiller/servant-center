@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { progressNoteResponse } from 'src/app/shared/models/progressNotes_model';
 
 import { ProgressNotesService } from 'src/app/veteran/services/progress-notes.service';
 
@@ -28,7 +29,7 @@ export class ProgressNotesComponent implements OnInit {
   ngOnInit(): void {
     //get data from backend
 
-    this.service.getNotes().subscribe((data) => {
+    this.service.getNotes().subscribe((data:progressNoteResponse) => {
       this.progress = data;
       let k = 0;
       for (let i = this.progress.length; i > 0; i--) {
@@ -90,7 +91,7 @@ export class ProgressNotesComponent implements OnInit {
     //   console.log('Submitted');
     // });
     //get data from backend
-    this.service.getNotes().subscribe((notes) => {
+    this.service.getNotes().subscribe((notes:progressNoteResponse) => {
       console.log(notes);
     });
     // this.progressNotes.push(this.progressNote.value)
