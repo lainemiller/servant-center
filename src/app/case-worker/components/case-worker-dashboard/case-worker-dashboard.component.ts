@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { CalendarOptions } from '@fullcalendar/angular';
+import { CalendarResp } from 'src/app/shared/models/calendarEventsResponse';
 import { CalendarEventsService } from '../../services/calendar-events.service';
 
 @Component({
@@ -19,16 +20,18 @@ export class CaseWorkerDashboardComponent implements OnInit {
   public displayEvent = false;
   public eventInfo: any = [];
   public minDateValue: any;
+  
   constructor(
     private service: CalendarEventsService,
     private formBuilder: FormBuilder
   ) {
-    this.service.getEvents().subscribe((data) => {
+    this.service.getEvents().subscribe((data:CalendarResp) => {
       this.totalEvents = data;
       console.log(this.totalEvents);
       this.eventList = this.totalEvents;
     });
   }
+
 
   ngOnInit(): void {
     console.log('case worker dashboard component');

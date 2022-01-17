@@ -1,21 +1,27 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
+import { RestClientService } from 'src/app/shared/services/rest-client.service';
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  constructor(private http: HttpClient) {}
-  getName() {
-    return this.http.get('./assets/mock/userData.json');
+  constructor( private restcs: RestClientService) {}
+
+  private isDev = isDevMode();
+  private caseWorkerApi = environment.serviceUrl.caseWorkerUser;
+
+  public getUserData(payload = {}): Observable<any> {
+    if (this.isDev) {
+      return this.restcs.get('./assets/mock/userData.json');
+    } else {
+      return this.restcs.get(this.caseWorkerApi);
+    }
   }
-  getMsgCount() {
-    return this.http.get('./assets/mock/msgs.json');
+  public getMsgCount(payload = {}): Observable<any> {
+    return this.restcs.get('./assets/mock/msgs.json');
   }
-  getTreatmentPlanData() {
-    return this.http.get('./assets/mock/treatmentPlan-data.json');
-  }
-  getUserData()
-  {
-    return this.http.get('https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/uiLayout/getCaseWorkerDetails/3');
+  public getTreatmentPlanData(payload = {}): Observable<any> {
+    return this.restcs.get('./assets/mock/treatmentPlan-data.json');
   }
 }
