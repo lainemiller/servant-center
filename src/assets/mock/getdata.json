@@ -1,34 +1,21 @@
 {
-    "recordNo" : 1,
-    "veteranId" : 100,
-    "intakeDOB" : "10/27/2021" ,
-    "caseManager" : "Rama",
-    "firstName" : "Navya",
-    "middleName" : "",
-    "lastName" : "Kottoor",
-    "nickName" : "navi",
-    "dob" : "10/12/2021",
-    "pod" : "03/03/1999",
-    "emailId" : "kottoor@gmail.com",
-    
-    "phoneNumber" : 1234567890,
-    "address1" : "kphb",
-    "city" : "Hyderabd",
-    "state" : "Telangana",
-    "zipcode" : 12344,
-    "contactPersonFirstName" : "Dania",
-    "contactPersonLastName" : "Al esa",
-    "contactPersonMiddleName" : "",
-    "address2" : "Chennai",
-    "country" : "United States Of America",
-    "ssnNumber" : 973526738,
-    "hmisIdNo" : 12345432,
-   "race" : "American Indian",
-    "contactPersonRelationship" : "Father",
-    "contactPersonStreetName" : "Subhas Nagar",
-    "contactPersonCity" : "New York",
-    "contactPersonState" : "America",
-    "contactPersonZip" : "876543651",
-    "contactPersonHouseNumber" : 1234321,
-    "contactPersonPhoneNumber" : 8365284682
+  "vetID": "7",
+  "result": [
+    {
+      "photo": null,
+      "nick_name": "Heavy Duty",
+      "address_main": "578 Oak Hollow Dr. ",
+      "address_line_2": null,
+      "city": "Greensboro",
+      "state": "NC",
+      "county": "Guilford",
+      "zip_code": 27401,
+      "primary_phone": "336-383-9283",
+      "marital_status": "Single",
+      "contact_person": "Adewale Akinnuoye-Agbaje",
+      "contact_person_relationship": "uncle",
+      "contact_person_address": "1235 N. 52nd St., New York, NY",
+      "contact_person_phone": "202-555-2269"
+    }
+  ]
 }
