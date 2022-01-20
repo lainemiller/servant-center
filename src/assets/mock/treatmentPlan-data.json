@@ -1,181 +1,180 @@
 {
-    "fname": "Arpita",
-    "lname": "Maurya",
-    "recNo": "233",
-    "dob1": "07/08/2000",
-    "dob2": "08/09/2000",
-    "intakeDate": "10/23/2021",
+    "FirstName": "Robert",
+    "LastName": "Smith",
+    "RecordNo": "233",
+    "DOB": "07/08/1955",
+    "IntakeDate": "10/23/2021",
     "hmisId": "123456",
-    "diagnoses": "This is the diagnosis",
-    "support": "support text from the backend",
-    "strength": "strength text from the backend",
+    "Diagnosis": "This is the diagnosis",
+    "Support": "Supports text",
+    "Strength": "Strengths text",
     "treatmentIssues": [
       {
         "physicalHealth": [
           {
-            "goals": "goal1",
-            "plans": "plan1",
-            "strategies": "s1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal1",
+            "Plans": "Plan1",
+            "Strategies": "Strategies1",
+            "TargetDate": "09/09/2021"
           },
           {
-            "goals": "goal2",
-            "plans": "plan2",
-            "strategies": "s2",
-            "targetDate": "8/09/2021"
+            "Goals": "Goal2",
+            "Plans": "Plan2",
+            "Strategies": "Strategies2",
+            "TargetDate": "8/09/2021"
           },
           {
-            "goals": "goal3",
-            "plans": "plan3",
-            "strategies": "s3",
-            "targetDate": "7/09/2021"
+            "Goals": "Goal3",
+            "Plans": "Plan3",
+            "Strategies": "Strategies3",
+            "TargetDate": "7/09/2021"
           }
         ],
   
         "mentalHealth": [
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal1",
+            "Plans": "Plan1",
+            "Strategies": "Strategies1",
+            "TargetDate": "09/09/2021"
           },
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal2",
+            "Plans": "Plan2",
+            "Strategies": "Strategies2",
+            "TargetDate": "8/09/2021"
           },
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal3",
+            "Plans": "Plan3",
+            "Strategies": "Strategies3",
+            "TargetDate": "7/09/2021"
           }
         ],
         "substanceUse": [
           {
-            "goals": "goal1",
-            "plans": "plan1",
-            "strategies": "s1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal1",
+            "Plans": "Plan1",
+            "Strategies": "Strategies1",
+            "TargetDate": "09/09/2021"
           },
           {
-            "goals": "goal2",
-            "plans": "plan2",
-            "strategies": "s2",
-            "targetDate": "8/09/2021"
+            "Goals": "Goal2",
+            "Plans": "Plan2",
+            "Strategies": "Strategies2",
+            "TargetDate": "8/09/2021"
           },
           {
-            "goals": "goal3",
-            "plans": "plan3",
-            "strategies": "s3",
-            "targetDate": "7/09/2021"
+            "Goals": "Goal3",
+            "Plans": "Plan3",
+            "Strategies": "Strategies3",
+            "TargetDate": "7/09/2021"
           }
         ],
   
         "housing": [
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal1",
+            "Plans": "Plan1",
+            "Strategies": "Strategies1",
+            "TargetDate": "09/09/2021"
           },
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal2",
+            "Plans": "Plan2",
+            "Strategies": "Strategies2",
+            "TargetDate": "8/09/2021"
           },
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal3",
+            "Plans": "Plan3",
+            "Strategies": "Strategies3",
+            "TargetDate": "7/09/2021"
           }
         ],
         "incomeLegal": [
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal1",
+            "Plans": "Plan1",
+            "Strategies": "Strategies1",
+            "TargetDate": "09/09/2021"
           },
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal2",
+            "Plans": "Plan2",
+            "Strategies": "Strategies2",
+            "TargetDate": "8/09/2021"
           },
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal3",
+            "Plans": "Plan3",
+            "Strategies": "Strategies3",
+            "TargetDate": "7/09/2021"
           }
         ],
         "education": [
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal1",
+            "Plans": "Plan1",
+            "Strategies": "Strategies1",
+            "TargetDate": "09/09/2021"
           },
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal2",
+            "Plans": "Plan2",
+            "Strategies": "Strategies2",
+            "TargetDate": "8/09/2021"
           },
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal3",
+            "Plans": "Plan3",
+            "Strategies": "Strategies3",
+            "TargetDate": "7/09/2021"
           }
         ],
         "relationships": [
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal1",
+            "Plans": "Plan1",
+            "Strategies": "Strategies1",
+            "TargetDate": "09/09/2021"
           },
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal2",
+            "Plans": "Plan2",
+            "Strategies": "Strategies2",
+            "TargetDate": "8/09/2021"
           },
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal3",
+            "Plans": "Plan3",
+            "Strategies": "Strategies3",
+            "TargetDate": "7/09/2021"
           }
         ],
         "benefits": [
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal1",
+            "Plans": "Plan1",
+            "Strategies": "Strategies1",
+            "TargetDate": "09/09/2021"
           },
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal2",
+            "Plans": "Plan2",
+            "Strategies": "Strategies2",
+            "TargetDate": "8/09/2021"
           },
           {
-            "goals": "goalM1",
-            "plans": "planM1",
-            "strategies": "sM1",
-            "targetDate": "09/09/2021"
+            "Goals": "Goal3",
+            "Plans": "Plan3",
+            "Strategies": "Strategies3",
+            "TargetDate": "7/09/2021"
           }
         ]
       }
     ],
   
-    "notes": "Simple note text"
+    "notes": "Add any additional notes here"
   }
   
