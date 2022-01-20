@@ -1,13 +1,12 @@
 [
   
-    { "title": "COVID-19 Awareness event", "date": "2021-12-03","description":"The respondents have adequate awareness for COVID‐19 outbreak and its preventive measures, out of total, 98% (513) answered that the virus spreads from one person to another, 95% (494) answered that the disease is caused by a virus."},
-    { "title": "Pet adopting event", "date": "2021-12-04" },
-    { "title": "Team-building events", "date": "2021-12-05" },
-    { "title": "charity events", "date": "2021-12-05" },
-    { "title": "Appreciation events", "date": "2021-12-08" },
-    { "title": "Celebrating Indian Army Day ", "date": "2021-12-12" },
-    { "title": "Celebrating National Girl Child Day", "date": "2021-12-15" },
-    { "title": "Celebrating The Republic Day", "date": "2022-01-26" },
-    { "title": "COVID-19 Awareness event", "date": "2021-12-18" }
+    { "title": "COVID-19 Awareness Event", "date": "2021-12-03","Description":"The respondents have adequate awareness for COVID‐19 outbreak and its preventive measures."},
+    { "title": "Pet adopting Event", "date": "2021-12-04","Description":"Event details go here."},
+    { "title": "Team-building Event", "date": "2021-12-05","Description":"Event details go here."},
+    { "title": "Charity Event", "date": "2021-12-05","Description":"Event details go here."},
+    { "title": "Resume Building Help", "date": "2021-12-08","Description":"Event details go here."},
+    { "title": "Celebrating Veterans", "date": "2021-12-12","Description":"Event details go here."},
+    { "title": "National Holiday", "date": "2021-12-15","Description":"Event details go here."},
+    { "title": "Career Fair", "date": "2022-01-26","Description":"Event details go here."}
   
 ]
