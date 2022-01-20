@@ -3,30 +3,30 @@
     "goalState": true,
     "goalTitle": "Goal Title 1",
     "addedDate": "12/12/2020",
-    "goalDescription": "Lorem pravin dolor sit amet consectetur, adipisicing elit. Ab, earum.Atque cum odit veniam illo in illum ducimus cupiditate nemo harum perferendis,molestias, totam eligendi consectetur vel quasi perspiciatis ad!"
+    "goalDescription": "Progress notes and details to go here."
   },
   {
     "goalState": true,
-    "goalTitle": "Goal Title 1",
-    "addedDate": "12/12/2020",
-    "goalDescription": "Lorem pravin dolor sit amet consectetur, adipisicing elit. Ab, earum.Atque cum odit veniam illo in illum ducimus cupiditate nemo harum perferendis,molestias, totam eligendi consectetur vel quasi perspiciatis ad!"
+    "goalTitle": "Goal Title 2",
+    "addedDate": "10/22/2021",
+    "goalDescription": "Progress notes and details to go here."
   },
   {
     "goalState": false,
-    "goalTitle": "csk",
-    "addedDate": "12/12/2020",
-    "goalDescription": "Lorem pravin dolor sit amet consectetur, adipisicing elit. Ab, earum.Atque cum odit veniam illo in illum ducimus cupiditate nemo harum perferendis,molestias, totam eligendi consectetur vel quasi perspiciatis ad!"
+    "goalTitle": "Goal Title 3",
+    "addedDate": "01/12/2022",
+    "goalDescription": "Progress notes and details to go here."
   },
   {
     "goalState": true,
-    "goalTitle": "csk",
+    "goalTitle": "Goal Title 4",
     "addedDate": "12/12/2020",
-    "goalDescription": "Lorem pravin dolor sit amet consectetur, adipisicing elit. Ab, earum.Atque cum odit veniam illo in illum ducimus cupiditate nemo harum perferendis,molestias, totam eligendi consectetur vel quasi perspiciatis ad!"
+    "goalDescription": "Progress notes and details to go here."
   },
   {
     "goalState": false,
-    "goalTitle": "rcb",
+    "goalTitle": "Goal Title 5",
     "addedDate": "12/12/2020",
-    "goalDescription": "Lorem pravin dolor sit amet consectetur, adipisicing elit. Ab, earum.Atque cum odit veniam illo in illum ducimus cupiditate nemo harum perferendis,molestias, totam eligendi consectetur vel quasi perspiciatis ad!"
+    "goalDescription": "Progress notes and details to go here."
   }
 ]
