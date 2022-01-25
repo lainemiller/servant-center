@@ -178,7 +178,7 @@
           "value": "Kargil"
         },
         {
-          "key": "Other training and / or location",
+          "key": "Other training and/or location",
           "value": "N/A"
         }
       ]
@@ -191,7 +191,7 @@
           "value": "None"
         },
         {
-          "key": "Hobbies / Interests",
+          "key": "Hobbies/Interests",
           "value": "Family, Sports"
         }
       ]
@@ -204,7 +204,7 @@
           "value": "Nancy Smith"
         },
         {
-          "key": "Mother Living / Deceased",
+          "key": "Mother Living/Deceased",
           "value": "Deceased"
         },
         {
@@ -212,7 +212,7 @@
           "value": "Robert Smith"
         },
         {
-          "key": "Father Living / Deceased",
+          "key": "Father Living/Deceased",
           "value": "Living"
         },
         {
@@ -407,7 +407,10 @@
     {
         "header": "Preliminary Diagnosis",
         "data": [
-         
+         {
+            "key": "Preliminary Diagnosis Details",
+            "value": "Diagnosis to go here"
+          }
         ]
       },
       {
