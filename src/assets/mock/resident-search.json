@@ -1,66 +1,66 @@
 [
     {
       "photo": "null",
-      "firstName": "apeksha",
-      "lastName": "horambe",
-      "birthDate": "12-10-2021",
-      "address": "mumbai",
+      "firstName": "Patrick",
+      "lastName": "Mahomes",
+      "birthDate": "12-10-1990",
+      "address": "123 Main Street, Kansas City, MO",
       "phoneNumber": "123-456-7890",
-      "email": "apeksha@mail.com"
+      "email": "pmahomes@gmail.com"
     },
     {
       "photo": "null",
-      "firstName": "arpita",
-      "lastName": "maurya",
-      "birthDate": "12-13-2021",
-      "address": "noida",
+      "firstName": "Kyler",
+      "lastName": "Murray",
+      "birthDate": "12-13-1990",
+      "address": "50 Elm Street, Sedona, AZ",
       "phoneNumber": "786-456-7890",
-      "email": "arpita@mail.com"
+      "email": "kmurray@gmail.com"
     },
     {
       "photo": "null",
-      "firstName": "pravin",
-      "lastName": "bhilare",
-      "birthDate": "12-15-2021",
-      "address": "thane",
+      "firstName": "Josh",
+      "lastName": "Allen",
+      "birthDate": "12-15-1990",
+      "address": "17 Farmington Avenue, Buffalo, NY",
       "phoneNumber": "987-456-7890",
-      "email": "pravin@mail.com"
+      "email": "jallen@gmail.com"
     },
     {
       "photo": "null",
-      "firstName": "mayuri",
-      "lastName": "horambe",
-      "birthDate": "12-18-2021",
-      "address": "ratnagiri",
+      "firstName": "Lamar",
+      "lastName": "Jackson",
+      "birthDate": "12-18-1990",
+      "address": "291 City Street, Baltimore, MD",
       "phoneNumber": "111-456-7890",
-      "email": "mahi@mail.com"
+      "email": "ljackson@gmail.com"
     },
     {
       "photo": "null",
-      "firstName": "apeksha",
-      "lastName": "potale",
-      "birthDate": "12-19-2021",
-      "address": "kokan",
+      "firstName": "Dak",
+      "lastName": "Prescott",
+      "birthDate": "12-19-1990",
+      "address": "152 Albany Avenue, Dallas, TX",
       "phoneNumber": "999-456-7890",
-      "email": "mishti@mail.com"
+      "email": "dprescott@gmail.com"
     },
     {
       "photo": "null",
-      "firstName": "apeksha",
-      "lastName": "potale",
-      "birthDate": "12-19-2021",
-      "address": "kokan",
+      "firstName": "Russell",
+      "lastName": "Wilson",
+      "birthDate": "12-19-1990",
+      "address": "72 New Street, Seattle, WA",
       "phoneNumber": "999-456-7890",
-      "email": "apu@mail.com"
+      "email": "rwilson@gmail.com"
     },
     {
       "photo": "null",
-      "firstName": "anuja",
-      "lastName": "masekar",
-      "birthDate": "12-11-2021",
-      "address": "devnar",
+      "firstName": "Aaron",
+      "lastName": "Rodgers",
+      "birthDate": "12-11-1990",
+      "address": "2 Superbowl Way, Green Bay, WI",
       "phoneNumber": "987-456-7890",
-      "email": "ajuna@mail.com"
+      "email": "arodgers@gmail.com"
     }
   ]
   
