@@ -2,6 +2,7 @@ import { Injectable, isDevMode } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { RestClientService } from './rest-client.service';
+import { environment as env } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -12,13 +13,14 @@ export class ConsentService {
   private isDev = isDevMode();
   private consentAPI = environment.serviceUrl.consentGetUser;
   private consentConfirmAPI = environment.serviceUrl.consentUpdateUser;
+  private commonUrl=env.localUrl;
 
   public getRegisterUserDetailsById(
     endPoint: number,
     payload = {}
   ): Observable<any> {
     if (this.isDev) {
-      return this.restcs.get('./assets/mock/consent-data.json');
+      return this.restcs.get(this.commonUrl+'consentData');
     } else {
       return this.restcs.get(this.consentAPI + endPoint);
     }

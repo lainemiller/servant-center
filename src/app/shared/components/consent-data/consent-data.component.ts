@@ -51,6 +51,8 @@ export class ConsentDataComponent implements OnInit {
     let resp = this.service.getRegisterUserDetailsById(this.userId);
     resp.subscribe((data:ConsentResponse) => {
       this.consentDetails = data;
+      console.log('data--->',data);
+      
       this.vetran = this.consentDetails.result[0];
       if (this.vetran.consent_status) {
         this.display = false;

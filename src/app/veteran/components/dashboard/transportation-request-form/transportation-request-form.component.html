@@ -11,7 +11,7 @@
         <input
           type="text"
           pInputText
-          value="{{ veteranData?.firstName }}"
+         
           placeholder="First Name"
           formControlName="firstName"
           class="disable"
@@ -22,7 +22,7 @@
         <input
           type="text"
           pInputText
-          value="{{ veteranData?.lastName }}"
+         
           placeholder="Last Name"
           formControlName="lastName"
           class="disable"
@@ -48,6 +48,7 @@
     <!-- <div class="p-fluid p-formgrid p-grid"> -->
     <div class="p-field p-fluid">
       <p-calendar
+        appendTo="body"
         formControlName="appointmentDate"
         [inline]="false"
         [showIcon]="true"
@@ -78,20 +79,35 @@
     </div>
     <!-- </div> -->
     <div class="p-field p-fluid">
-      <!-- <label for="address1" class="label-title">Destination Address</label> -->
-      <input
-        type="text"
-        pInputText
-        placeholder="Destination Address"
-        formControlName="destinationAddress"
-        maxlength="30"
-        appNoSpecialSymbols
-        customAttr="textOnly"
-        class="inputFromUser"
-      />
+      <p-dropdown
+      placeholder="Destination Address"
+      [autoDisplayFirst]="false"
+      [options]="destinationAddresses"
+      formControlName="destinationAddress"
+      optionLabel="name"
+      scrollHeight="120px"
+      (onChange)="onChange($event)"
+    >
+    </p-dropdown>
+
       <small
         class="error"
         *ngIf="destinationAddress?.invalid && destinationAddress?.touched"
+        >destination address is required.</small
+      >
+    </div>
+    <div class="p-field p-fluid" *ngIf="showOtherAddressTextBox">
+      <input
+      type="text"
+      pInputText
+      formControlName="destinationAddress2"
+      placeholder="Other Address"
+      class="inputFromUser"
+    />
+
+      <small
+        class="error"
+        *ngIf="destinationAddress2?.invalid && destinationAddress2?.touched"
         >destination address is required.</small
       >
     </div>
@@ -160,7 +176,7 @@
       pButton
       label="Submit"
       class="p-button-outlined"
-      [disabled]="transportRequestForm.invalid"
+      
     ></button>
     <button
       type="button"

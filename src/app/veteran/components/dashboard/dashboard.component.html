@@ -2,18 +2,6 @@
   <div class="p-col-12 mb-30">
     <app-item-header title="CALENDAR" color="blue"></app-item-header>
     <div class="calendar-header">
-      <header class="p-grid header--margin">
-        <div class="calendar-header__top">
-          <section>
-            <p-tabMenu
-              #tab
-              [model]="items"
-              (click)="changeTag(tab)"
-              [activeItem]="items[0]"
-            ></p-tabMenu>
-          </section>
-        </div>
-      </header>
       <!-- "modal for event details starts" -->
       <p-dialog
         header="{{ eventInfo[0] }} Details"
