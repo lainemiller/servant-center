@@ -1,5 +1,9 @@
 {
-  "name": "Sam",
-  "date": "09/10/2021",
-  "image": "../assets/images/user-profile.jpg"
+  "result":[
+    {
+  "nick_name": "Sam",
+  "last_login_date_time": "09/10/2021",
+  "photo": "../assets/images/user-profile.jpg"
+    }
+  ]
 }
