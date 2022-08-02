@@ -205,7 +205,7 @@
             <span class="p-mr-2">In Progress</span>
             <p-inputSwitch
               [(ngModel)]="progressNote.goalState"
-              (onChange)="changed(i)"
+              (onChange)="changed(i,progressNote.goalState)"
               class="open-close-switch"
             ></p-inputSwitch>
             <span class="p-ml-2">Complete</span>
