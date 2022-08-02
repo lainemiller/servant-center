@@ -160,7 +160,7 @@ export class ResidentSearchComponent implements OnInit {
       type: [''],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      birthDate: ['', Validators.required],
+      birthDate: [''],
     });
   }
 

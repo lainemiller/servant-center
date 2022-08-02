@@ -3,8 +3,8 @@
   "result": [
     {
       "photo": null,
-      "nick_name": "Heavy Duty",
-      "address_main": "578 Oak Hollow Dr. ",
+      "nick_name": "Tom",
+      "address_main": "578 Oak Hollow Drive",
       "address_line_2": null,
       "city": "Greensboro",
       "state": "NC",
@@ -12,8 +12,8 @@
       "zip_code": 27401,
       "primary_phone": "336-383-9283",
       "marital_status": "Single",
-      "contact_person": "Adewale Akinnuoye-Agbaje",
-      "contact_person_relationship": "uncle",
+      "contact_person": "Nancy Brady",
+      "contact_person_relationship": "Mother",
       "contact_person_address": "1235 N. 52nd St., New York, NY",
       "contact_person_phone": "202-555-2269"
     }
