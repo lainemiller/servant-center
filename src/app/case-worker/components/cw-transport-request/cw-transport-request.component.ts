@@ -14,6 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { TransportService } from '../../services/transport.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-cw-transport-request',
@@ -29,7 +30,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
   public caseWorker: any;
   public firstName: any;
   public lastName: any;
-  public appointmentDate: any;
+  public appointmentDate: any
   public time: any;
   public reason: any;
   public address: any;
@@ -45,6 +46,10 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
   tableData: any;
   selectedResident: any;
   public optionState: any;
+
+
+
+
 
   constructor(
     private formbuilder: FormBuilder,
@@ -66,14 +71,13 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
 
     // this.service.getTransportRequestFormData().subscribe((data) => {
     this.caseWorker = this.requestFormObject;
-    console.log(this.requestFormObject);
+    console.log("data",this.requestFormObject);
 
-    // console.log(this.caseWorker);
+    // console.log(this.caseWorker); 
 
     this.firstName = this.caseWorker.firstName;
-
     this.lastName = this.caseWorker.lastName;
-    this.appointmentDate = this.caseWorker.appointmentDate;
+    this.appointmentDate = this.caseWorker.appointmentDate
     this.time = this.caseWorker.time;
     this.reason = this.caseWorker.reason;
     this.coordinatorField = this.caseWorker.coordinatorField;
@@ -103,15 +107,15 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
 
   buildForm() {
     this.transportRequestForm = this.formbuilder.group({
-      firstName: [this.firstName],
-      lastName: [this.lastName, Validators.required],
-      appointmentDate: [this.appointmentDate, Validators.required],
-      time: [this.time, Validators.required],
-      reason: [this.reason, Validators.required],
-      address: [this.address, Validators.required],
-      city: [this.city, Validators.required],
-      state: [this.state, Validators.required],
-      zip: [this.zip, Validators.required],
+      firstName: [this.caseWorker.first_name],
+      lastName: [this.caseWorker.last_name, Validators.required],
+      appointmentDate: [this.caseWorker.appointment_date],
+      time: [this.caseWorker.appointment_time, Validators.required],
+      reason: [this.caseWorker.reason_for_request, Validators.required],
+      address: [this.caseWorker.pick_up_address_main, Validators.required],
+      city: [this.caseWorker.pick_up_city, Validators.required],
+      state: [this.caseWorker.pick_up_state, Validators.required],
+      zip: [this.caseWorker.pick_up_zip_code, Validators.required],
       coordinator: ['', Validators.required],
       approvedDate: [this.maxDateValue, Validators.required],
       nursingNotified: ['', Validators.required],
@@ -139,9 +143,31 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
     return this.transportRequestForm.get('date');
   }
 
-  onSubmit() {
-    this.submitted = true;
+  onSubmit() :void {
+  
+  
+let obj={
+
+  request_id:this.caseWorker.request_id,
+
+  coordinator:this.transportRequestForm.value.coordinator,
+
+  nursing_notified:this.transportRequestForm.value.nursingNotified,
+
+  notified_by:this.transportRequestForm.value.by,
+
+  approved_date:this.transportRequestForm.value.approvedDate,
+
+  date:this.transportRequestForm.value.date
+};
+	//console.log("Clicked submit");
+	this.service.approveTransportationForm(obj).subscribe((data)=>{
+	console.log("Form submitted");
+   });
+	//this.transportRequestForm.push(this.transportRequestForm.value);
+    //this.submitted = true;
     console.log(this.transportRequestForm.value);
+	this.transportRequestForm.reset();
 
     // }
   }
