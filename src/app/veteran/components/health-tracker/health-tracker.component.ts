@@ -240,6 +240,7 @@ export class HealthTrackerComponent implements OnInit {
 
   resetForm() {
     this.buildForm();
+    this.isFormFilled=false;
     this.getHealthTrackerByVeteranId();
   }
 }
