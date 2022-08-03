@@ -243,3 +243,5 @@ export class TreatmentPlanComponent implements OnInit {
     window.print();
   }
 }
+
+//treatmetPlanComponent
