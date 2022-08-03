@@ -118,7 +118,8 @@ export class TreatmentPlanComponent implements OnInit {
       },
     ];
   }
-
+  
+  //onSubmit
   onSubmit() {
     this.formView = false;
     console.log(this.treatmentPlanForm.value);
@@ -245,3 +246,4 @@ export class TreatmentPlanComponent implements OnInit {
 }
 
 //treatmetPlanComponent
+
