@@ -20,7 +20,7 @@ export class ProgressNotesComponent implements OnInit {
   public progressNotes: any = [];
   public progress: any = [];
   public initialStatus = false;
-  public progressNotesState:any;
+  public progressNotesState:any = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -79,7 +79,7 @@ export class ProgressNotesComponent implements OnInit {
       ],
       goalDescription: ['', [Validators.required, Validators.maxLength(300)]],
       goalState: [false, Validators.required],
-      addedDate: [d],
+      addedDate: [d]
     });
   }
 
@@ -94,12 +94,11 @@ export class ProgressNotesComponent implements OnInit {
     new Date().getUTCDate() +
     '/' +
     new Date().getFullYear();
-    
-    //console.log(this.progressNote.value);
+    console.log(this.progressNote.value);
     //send data to backend
-    this.service.postNotes(this.progressNote.value).subscribe((data) => {
-      console.log('Submitted');
-    });
+     this.service.postNotes(this.progressNote.value).subscribe((data) => {
+       console.log('Submitted');
+     });
     //get data from backend
     this.service.getNotes().subscribe((notes:progressNoteResponse) => {
       console.log(notes);
@@ -121,7 +120,7 @@ export class ProgressNotesComponent implements OnInit {
     };
     console.log("status changed for id and status",goal_id, goal_status); 
 
-    this.service.postStatus(this.progressNotesState).subscribe((data:any) => {
+    this.service.postStatus(this.progressNotesState).subscribe((data) => {
     console.log('proressnote value after status change',  this.progressNotesState);
   });
     
