@@ -24,7 +24,7 @@ export class ProgressNotesService {
     return this.http.get<any>(this.commonUrl+'calendarEvents');
   }
   public postNotes(data:any): Observable<any> {
-    return this.http.post(this.commonUrl+'progressNotes/addGoal',data);
+    return this.http.post(this.commonUrl+'progressNotes/addGoal/',data);
 }
 public postStatus(data:any): Observable<any> {
   return this.http.post(this.commonUrl+'progressNotes/updateGoalStatus/',data);
