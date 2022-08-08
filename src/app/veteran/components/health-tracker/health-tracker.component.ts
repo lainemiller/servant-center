@@ -116,6 +116,8 @@ export class HealthTrackerComponent implements OnInit {
     });
   }
 
+  
+
   buildForm() {
     this.healthTrackerForm = this.formBuilder.group({
       weight: this.formBuilder.group({
