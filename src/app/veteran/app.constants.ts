@@ -1,343 +1,352 @@
 export const states = [
   {
-    "value": "AL",
-    "name": "Alabama"
+    value: 'AL',
+    name: 'Alabama',
   },
   {
-    "value": "AK",
-    "name": "Alaska"
+    value: 'AK',
+    name: 'Alaska',
   },
   {
-    "value": "AS",
-    "name": "American Samoa"
+    value: 'AS',
+    name: 'American Samoa',
   },
   {
-    "value": "AZ",
-    "name": "Arizona"
+    value: 'AZ',
+    name: 'Arizona',
   },
   {
-    "value": "AR",
-    "name": "Arkansas"
+    value: 'AR',
+    name: 'Arkansas',
   },
   {
-    "value": "CA",
-    "name": "California"
+    value: 'CA',
+    name: 'California',
   },
   {
-    "value": "CO",
-    "name": "Colorado"
+    value: 'CO',
+    name: 'Colorado',
   },
   {
-    "value": "CT",
-    "name": "Connecticut"
+    value: 'CT',
+    name: 'Connecticut',
   },
   {
-    "value": "DE",
-    "name": "Delaware"
+    value: 'DE',
+    name: 'Delaware',
   },
   {
-    "value": "DC",
-    "name": "District of Columbia"
+    value: 'DC',
+    name: 'District of Columbia',
   },
   {
-    "value": "FS",
-    "name": "Federated States Of Micronesia"
+    value: 'FS',
+    name: 'Federated States Of Micronesia',
   },
   {
-    "value": "FL",
-    "name": "Florida"
+    value: 'FL',
+    name: 'Florida',
   },
   {
-    "value": "GA",
-    "name": "Georgia"
+    value: 'GA',
+    name: 'Georgia',
   },
   {
-    "value": "GU",
-    "name": "Guam"
+    value: 'GU',
+    name: 'Guam',
   },
   {
-    "value": "HI",
-    "name": "Hawaii"
+    value: 'HI',
+    name: 'Hawaii',
   },
   {
-    "value": "ID",
-    "name": "Idaho"
+    value: 'ID',
+    name: 'Idaho',
   },
   {
-    "value": "IL",
-    "name": "Illinois"
+    value: 'IL',
+    name: 'Illinois',
   },
   {
-    "value": "IN",
-    "name": "Indiana"
+    value: 'IN',
+    name: 'Indiana',
   },
   {
-    "value": "IA",
-    "name": "Iowa"
+    value: 'IA',
+    name: 'Iowa',
   },
   {
-    "value": "KS",
-    "name": "Kansas"
+    value: 'KS',
+    name: 'Kansas',
   },
   {
-    "value": "KY",
-    "name": "Kentucky"
+    value: 'KY',
+    name: 'Kentucky',
   },
   {
-    "value": "LA",
-    "name": "Louisiana"
+    value: 'LA',
+    name: 'Louisiana',
   },
   {
-    "value": "ME",
-    "name": "Maine"
+    value: 'ME',
+    name: 'Maine',
   },
   {
-    "value": "MH",
-    "name": "Marshall Islands"
+    value: 'MH',
+    name: 'Marshall Islands',
   },
   {
-    "value": "MD",
-    "name": "Maryland"
+    value: 'MD',
+    name: 'Maryland',
   },
   {
-    "value": "MA",
-    "name": "Massachusetts"
+    value: 'MA',
+    name: 'Massachusetts',
   },
   {
-    "value": "MI",
-    "name": "Michigan"
+    value: 'MI',
+    name: 'Michigan',
   },
   {
-    "value": "MN",
-    "name": "Minnesota"
+    value: 'MN',
+    name: 'Minnesota',
   },
   {
-    "value": "MS",
-    "name": "Mississippi"
+    value: 'MS',
+    name: 'Mississippi',
   },
   {
-    "value": "MO",
-    "name": "Missouri"
+    value: 'MO',
+    name: 'Missouri',
   },
   {
-    "value": "MT",
-    "name": "Montana"
+    value: 'MT',
+    name: 'Montana',
   },
   {
-    "value": "NE",
-    "name": "Nebraska"
+    value: 'NE',
+    name: 'Nebraska',
   },
   {
-    "value": "NV",
-    "name": "Nevada"
+    value: 'NV',
+    name: 'Nevada',
   },
   {
-    "value": "NH",
-    "name": "New Hampshire"
+    value: 'NH',
+    name: 'New Hampshire',
   },
   {
-    "value": "NJ",
-    "name": "New Jersey"
+    value: 'NJ',
+    name: 'New Jersey',
   },
   {
-    "value": "NM",
-    "name": "New Mexico"
+    value: 'NM',
+    name: 'New Mexico',
   },
   {
-    "value": "NY",
-    "name": "New York"
+    value: 'NY',
+    name: 'New York',
   },
   {
-    "value": "NC",
-    "name": "North Carolina"
+    value: 'NC',
+    name: 'North Carolina',
   },
   {
-    "value": "ND",
-    "name": "North Dakota"
+    value: 'ND',
+    name: 'North Dakota',
   },
   {
-    "value": "MP",
-    "name": "Northern Mariana Islands"
+    value: 'MP',
+    name: 'Northern Mariana Islands',
   },
   {
-    "value": "OH",
-    "name": "Ohio"
+    value: 'OH',
+    name: 'Ohio',
   },
   {
-    "value": "OK",
-    "name": "Oklahoma"
+    value: 'OK',
+    name: 'Oklahoma',
   },
   {
-    "value": "OR",
-    "name": "Oregon"
+    value: 'OR',
+    name: 'Oregon',
   },
   {
-    "value": "OT",
-    "name": "OT"
+    value: 'OT',
+    name: 'OT',
   },
   {
-    "value": "PW",
-    "name": "Palau Island"
+    value: 'PW',
+    name: 'Palau Island',
   },
   {
-    "value": "PA",
-    "name": "Pennsylvania"
+    value: 'PA',
+    name: 'Pennsylvania',
   },
   {
-    "value": "PR",
-    "name": "Puerto Rico"
+    value: 'PR',
+    name: 'Puerto Rico',
   },
   {
-    "value": "RI",
-    "name": "Rhode Island"
+    value: 'RI',
+    name: 'Rhode Island',
   },
   {
-    "value": "SC",
-    "name": "South Carolina"
+    value: 'SC',
+    name: 'South Carolina',
   },
   {
-    "value": "SD",
-    "name": "South Dakota"
+    value: 'SD',
+    name: 'South Dakota',
   },
   {
-    "value": "TN",
-    "name": "Tennessee"
+    value: 'TN',
+    name: 'Tennessee',
   },
   {
-    "value": "TX",
-    "name": "Texas"
+    value: 'TX',
+    name: 'Texas',
   },
   {
-    "value": "S_OTHER",
-    "name": "Other"
+    value: 'S_OTHER',
+    name: 'Other',
   },
   {
-    "value": "UT",
-    "name": "Utah"
+    value: 'UT',
+    name: 'Utah',
   },
   {
-    "value": "VT",
-    "name": "Vermont"
+    value: 'VT',
+    name: 'Vermont',
   },
   {
-    "value": "VI",
-    "name": "Virgin Islands"
+    value: 'VI',
+    name: 'Virgin Islands',
   },
   {
-    "value": "VA",
-    "name": "Virginia"
+    value: 'VA',
+    name: 'Virginia',
   },
   {
-    "value": "WA",
-    "name": "Washington"
+    value: 'WA',
+    name: 'Washington',
   },
   {
-    "value": "WV",
-    "name": "West Virginia"
+    value: 'WV',
+    name: 'West Virginia',
   },
   {
-    "value": "WI",
-    "name": "Wisconsin"
+    value: 'WI',
+    name: 'Wisconsin',
   },
   {
-    "value": "WY",
-    "name": "Wyoming"
+    value: 'WY',
+    name: 'Wyoming',
   },
- 
 
+  // {name: 'Alabama'},
+  // {name: 'Alaska'},
+  // {name: 'Arizona'},
+  // {name: 'Arkansas'},
+  // {name: 'California'},
+  // {name: 'Colorado'},
+  // {name: 'Connecticut'},
+  // {name: 'Delaware'},
+  // {name: 'Florida'},
+  // {name: 'Georgia'},
+  // {name: 'Hawaii'},
+  // {name: 'Idaho'},
+  // {name: 'Illinois'},
+  // {name: 'Indiana'},
+  // {name: 'Iowa'},
+  // {name: 'Kansas'},
+  // {name: 'Kentucky'},
+  // {name: 'Louisiana'},
+  // {name: 'Maine'},
+  // {name: 'Maryland'},
+  // {name: 'Massachusetts'},
+  // {name: 'Michigan'},
+  // {name: 'Mississippi'},
+  // {name: 'Missouri'},
+  // {name: 'Montana'},
+  // {name: 'Nebraska'},
+  // {name: 'Nevada'},
+  // {name: 'New Hampshire'},
+  // {name: 'New Jersey'},
+  // {name: 'New Mexico'},
+  // {name: 'New York'},
+  // {name: 'North Carolina'},
+  // {name: 'North Dakota'},
+  // {name: 'Ohio'},
+  // {name: 'Oklahoma'},
+  // {name: 'Oregon'},
+  // {name: 'Pennsylvania'},
+  // {name: 'Rhode Island'},
+  // {name: 'South Carolina'},
+  // {name: 'South Dakota'},
+  // {name: 'Tennessee'},
+  // {name: 'Texas'},
+  // {name: 'Utah'},
+  // {name: 'Vermont'},
+  // {name: 'Virginia'},
+  // {name: 'Washington'},
+  // {name: 'West Virginia'},
+  // {name: 'Wisconsin'},
+  // {name: 'Wyoming'},
+];
 
+export const relegions = [
+  { name: 'Hindu' },
+  { name: 'Muslim' },
+  { name: 'Christain' },
+];
 
+export const relations = [
+  { name: 'Mother' },
+  { name: 'Father' },
+  { name: 'Wife' },
+];
 
+export const languages = [
+  { name: 'English' },
+  { name: 'Telugu' },
+  { name: 'Hindi' },
+];
 
+export const genders = [
+  { name: 'Male' },
+  { name: 'Female' },
+  { name: 'Other' },
+];
 
+export const statuses = [
+  { name: 'Single' },
+  { name: 'Married' },
+  { name: 'Widowed' },
+  { name: 'Divorced' },
+];
 
+export const races = [
+  { name: 'White' },
+  { name: 'Native Hawaiian/Other Pacific Islander' },
+  { name: 'Hispanic/Latino' },
+];
 
-
-
-    // {name: 'Alabama'},
-    // {name: 'Alaska'},
-    // {name: 'Arizona'},
-    // {name: 'Arkansas'},
-    // {name: 'California'},
-    // {name: 'Colorado'},
-    // {name: 'Connecticut'},
-    // {name: 'Delaware'},
-    // {name: 'Florida'},
-    // {name: 'Georgia'},
-    // {name: 'Hawaii'},
-    // {name: 'Idaho'},
-    // {name: 'Illinois'},
-    // {name: 'Indiana'},
-    // {name: 'Iowa'},
-    // {name: 'Kansas'},
-    // {name: 'Kentucky'},
-    // {name: 'Louisiana'},
-    // {name: 'Maine'},
-    // {name: 'Maryland'},
-    // {name: 'Massachusetts'},
-    // {name: 'Michigan'},
-    // {name: 'Mississippi'},
-    // {name: 'Missouri'},
-    // {name: 'Montana'},
-    // {name: 'Nebraska'},
-    // {name: 'Nevada'},
-    // {name: 'New Hampshire'},
-    // {name: 'New Jersey'},
-    // {name: 'New Mexico'},
-    // {name: 'New York'},
-    // {name: 'North Carolina'},
-    // {name: 'North Dakota'},
-    // {name: 'Ohio'},
-    // {name: 'Oklahoma'},
-    // {name: 'Oregon'},
-    // {name: 'Pennsylvania'},
-    // {name: 'Rhode Island'},
-    // {name: 'South Carolina'},
-    // {name: 'South Dakota'},
-    // {name: 'Tennessee'},
-    // {name: 'Texas'},
-    // {name: 'Utah'},
-    // {name: 'Vermont'},
-    // {name: 'Virginia'},
-    // {name: 'Washington'},
-    // {name: 'West Virginia'},
-    // {name: 'Wisconsin'},
-    // {name: 'Wyoming'},
-  ];
-  
-  export const relegions = [
-    {name: 'Hindu'},
-    {name: 'Muslim'},
-    {name: 'Christain'},
-  ];
-
-  export const relations = [
-    {name: 'Mother'},
-    {name: 'Father'},
-    {name: 'Wife'},
-  ];
-  
-  export const languages = [
-    {name: 'English'},
-    {name: 'Telugu'},
-    {name: 'Hindi'},
-  ];
-
-  export const genders = [
-    {name: 'Male'},
-    {name: 'Female'},
-    {name: 'Other'},
-  ];
-
-  export const statuses = [
-    {name: 'Single'},
-    {name: 'Married'},
-    {name: 'Widowed'},
-    {name: 'Divorced'},
-  ];
-
-  export const races = [
-    {name: 'White'},
-    {name: 'Native Hawaiian/Other Pacific Islander'},
-    {name: 'Hispanic/Latino'},
-  ];
+export const destinationAddresses = [
+  {
+    value: 'Kernersville',
+    name: 'Kernersville VA Clinic: 1695 Kernersville Medical Parkway; Kernersville, NC 27284',
+  },
+  {
+    value: 'Salisbury',
+    name: 'Salisbury VA Medical Center: 1601 Brenner Avenue; Salisbury, NC 28144',
+  },
+  {
+    value: 'Durham',
+    name: 'Durham VA Healthcare System: 508 Fulton Street; Durham, NC 27705',
+  },
+  {
+    value: 'other',
+    name: 'Other'
+  },
+];

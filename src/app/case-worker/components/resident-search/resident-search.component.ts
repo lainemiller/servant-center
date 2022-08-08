@@ -48,12 +48,13 @@ export class ResidentSearchComponent implements OnInit {
 
     this.service.getResidentSearchData().subscribe((data) => {
       this.tableValues = data;
-      console.log(this.tableValues);
+      this.tableValues = this.tableValues.resedentData;
     });
   }
 
   columns = [
-    { header: 'Name', field: 'firstName' },
+    { header: 'First Name', field: 'firstName' },
+    { header: 'last Name', field: 'lastName' },
     { header: 'Birthdate', field: 'birthDate' },
     { header: 'Address', field: 'address' },
   ];
@@ -135,11 +136,19 @@ export class ResidentSearchComponent implements OnInit {
     // console.log(typeof str)
 
     this.result = this.tableValues.filter((index: any) => {
-      return (
-        index.firstName == filters.firstName &&
-        index.lastName == filters.lastName &&
-        index.birthDate == filters.birthDate
-      );
+      if(!filters.birthDate){
+        return (
+          index.firstName == filters.firstName &&
+          index.lastName == filters.lastName 
+        );
+      }else{
+        return (
+          index.firstName == filters.firstName &&
+          index.lastName == filters.lastName   &&
+          index.birthDate == filters.birthDate
+        );
+      }
+     
     });
 
     //store filter data

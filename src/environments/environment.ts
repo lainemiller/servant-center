@@ -32,7 +32,8 @@ export const environment = {
   serviceUrl: {
     consentGetUser: '',
     consentUpdateUser: ''
-  }
+  },
+  localUrl:'http://localhost:3000/'
 };
 
 /*
