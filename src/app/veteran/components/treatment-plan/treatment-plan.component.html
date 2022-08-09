@@ -1398,7 +1398,12 @@
                 </div>
                   <div class="p-d-flex p-jc-between margin-30">
                     <div class="print-display">
-                      <button pButton label="Save" class="p-button"></button>
+                      <button 
+                      pButton 
+                      label="Save" 
+                      class="p-button"
+                      (click)="saveForm()"
+                      ></button>
                       <p-button
                         label="Cancel"
                         (click)="resetForm()"
