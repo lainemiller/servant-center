@@ -69,14 +69,21 @@ export class ProfileFormComponent implements OnInit {
     this.selectedRelationship = this.relations[1];
     this.selectedRace = this.races[1];
     this.setForm();
-    console.log('Check Profile', this.veteran);
+    let data={
+      nick_name:"joei"
+    }
+    this.service.getUpdate(data).subscribe(resp=>{
+      console.log('updated---->',resp);
+      
+    })
+    //console.log('Check Profile', this.veteran);
   }
 
   setForm() {
     this.service.getProfileData(this.userId).subscribe((data:VeteranProfileResponse) => {
       this.profileDetails = data;
       this.veteran = this.profileDetails.result[0];
-      console.log('Check Profile', this.veteran);
+      console.log('Check Profile--->', this.veteran);
       this.buildForm();
       this.caseWorkerProfileForm.patchValue({
         firstName: this.veteran.firstName,

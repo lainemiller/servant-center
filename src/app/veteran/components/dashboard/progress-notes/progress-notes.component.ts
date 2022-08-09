@@ -20,6 +20,7 @@ export class ProgressNotesComponent implements OnInit {
   public progressNotes: any = [];
   public progress: any = [];
   public initialStatus = false;
+  public progressNotesState:any = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,6 +53,7 @@ export class ProgressNotesComponent implements OnInit {
 
   showDialog() {
     this.display = true;
+    this.buildForm();
   }
 
   showList() {
@@ -59,7 +61,7 @@ export class ProgressNotesComponent implements OnInit {
   }
 
   buildForm() {
-    this.d =
+    let d =
       new Date().getMonth() +
       1 +
       '/' +
@@ -76,8 +78,8 @@ export class ProgressNotesComponent implements OnInit {
         ],
       ],
       goalDescription: ['', [Validators.required, Validators.maxLength(300)]],
-      goalState: ['true', Validators.required],
-      addedDate: [this.d],
+      goalState: [false, Validators.required],
+      addedDate: [d]
     });
   }
 
@@ -85,26 +87,43 @@ export class ProgressNotesComponent implements OnInit {
     return this.progressNote.controls;
   }
   onSubmit() {
-    //console.log(this.progressNote.value);
+    let d =
+    new Date().getMonth() +
+    1 +
+    '/' +
+    new Date().getUTCDate() +
+    '/' +
+    new Date().getFullYear();
+    console.log(this.progressNote.value);
     //send data to backend
-    // this.service.postNotes(this.progressNote.value).subscribe((data) => {
-    //   console.log('Submitted');
-    // });
+     this.service.postNotes(this.progressNote.value).subscribe((data) => {
+       console.log('Submitted');
+     });
     //get data from backend
     this.service.getNotes().subscribe((notes:progressNoteResponse) => {
       console.log(notes);
     });
-    // this.progressNotes.push(this.progressNote.value)
+     this.progressNotes.push(this.progressNote.value);
+    
     this.display = false;
-    //console.log(this.progressNotes);
     this.progressNote.reset();
   }
   crossButton() {
     this.initialStatus = true;
     this.progressNote.reset();
   }
-  changed(id:any){
-    console.log("status changed for id",id); 
+  changed(goal_id:number, goal_status: boolean){
+    //TO UPDATE STATUS OF PROGRESS NOTE 
+    this.progressNotesState = {
+      goal_id,
+      goal_status
+    };
+    console.log("status changed for id and status",goal_id, goal_status); 
+
+    this.service.postStatus(this.progressNotesState).subscribe((data) => {
+    console.log('proressnote value after status change',  this.progressNotesState);
+  });
+    
   }
   cancleIt() {
     this.display = false;

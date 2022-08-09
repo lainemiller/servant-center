@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { CalendarOptions } from '@fullcalendar/angular';
 
-import { VeteranDashboardService } from '../../services/veteran-dashboard.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProgressNotesService } from '../../services/progress-notes.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -11,33 +11,43 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class DashboardComponent implements OnInit {
   public eventList: any = [];
-  public items: any;
-  public display = false;
-  public tagName = 'Appointment';
   public displayEvent = false;
   public eventsForm!: FormGroup;
-  public minDateValue: any;
-  public eventInfo: any=[];
+  public eventInfo: any = [];
+  public calendarData: any = [];
+
+  constructor(
+    private service: ProgressNotesService
+  ) {}
+
   ngOnInit(): void {
-    console.log('veteran dashboard component');
-    this.minDateValue = new Date(new Date().getTime());
-    this.items = [
-      { label: 'Appointment', icon: 'pi pi-fw pi-calendar' },
-      { label: 'Event', icon: 'pi pi-fw pi-pencil' },
-    ];
-    this.builtForm();
-  }
-  constructor(private formBuilder: FormBuilder) {}
-  public builtForm() {
-    this.eventsForm = this.formBuilder.group({
-      eventTitle: ['', Validators.required],
-      eventDate: ['', Validators.required],
-      eventDescription: ['', Validators.required],
-      startTime: ['', Validators.required],
-      endTime: ['', Validators.required],
+    //to get all the events of logged in veteran
+    this.service.getCalData().subscribe((data) => {
+      this.eventList = data;
+      this.calendarData = this.eventList.data;
     });
+    // this.service.getCalData().subscribe((data) => {
+    //   this.eventList = data;
+    //   console.log('eventdata',data);
+      
+    //   this.calendarData = this.eventList.data;
+    // });
+
+    setTimeout(() => {
+      this.calendarOptions.events = this.calendarData;
+    }, 200);   
   }
+
+
   public calendarOptions: CalendarOptions = {
+    customButtons: {
+      myCustomButton: {
+        text: 'Previous year',
+        click: function() {
+         //api call for getting previous year data 
+        }
+      }
+    },
     initialView: 'dayGridMonth',
     eventClick: this.showEventDetail.bind(this),
     headerToolbar: {
@@ -47,52 +57,26 @@ export class DashboardComponent implements OnInit {
     },
     nowIndicator: true,
     editable: true,
-    events: './assets/mock/events.json',
+  //  events:  []
   };
-  addEvent() {
-    this.display = true;
-  }
+
+ 
   get getControl() {
     return this.eventsForm.controls;
   }
-  onSubmit() {
-    console.log(this.eventsForm.value);
-    let event = this.eventsForm.value;
-    let newEvent = {
-      title: event.eventTitle,
-      date: event.eventDate,
-      description: event.eventDescription,
-      type: this.tagName,
-      sTime: event.startTime,
-      enTime: event.endTime,
-    };
-    this.eventList.push(newEvent);
-    console.log(this.eventList);
-    this.calendarOptions.events = this.eventList;
-    console.log(this.calendarOptions.events);
-    this.display = false;
-  }
-  onCancel() {
-    this.eventsForm.reset();
-    this.display = false;
-  }
-  changeTag(value: any) {
-    console.log(value.activeItem.label);
-    this.tagName = value.activeItem.label;
-  }
-  crossButton() {
-    this.eventsForm.reset();
-  }
+  
   showEventDetail(arg: any) {
-    this.displayEvent = true;
+    this.displayEvent = true;  
     console.log(arg);
+      
     this.eventInfo = [
-      arg.event._def.extendedProps.type,
-      arg.event._def.extendedProps.sTime,
-      arg.event._def.extendedProps.enTime,
+      'Event',
+      arg.event._instance.range.start,
+      arg.event._instance.range.end,
       arg.event._def.title,
-      arg.event.start,
-      arg.event._def.extendedProps.description,
+      arg.event._instance.range.start,
+      arg.event._def.extendedProps.Description,
     ];
+    
   }
 }
