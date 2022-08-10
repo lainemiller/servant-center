@@ -1,5 +1,4 @@
 import { Injectable, isDevMode } from '@angular/core';
-
 import { Observable } from 'rxjs';
 import { RestClientService } from 'src/app/shared/services/rest-client.service';
 import { environment } from 'src/environments/environment.prod';
@@ -29,7 +28,8 @@ export class VeteranprofileService {
   public getUpdate(data:any): Observable<any> {
       return this.http.put(this.commonUrl+'userProfile/updateUserDetails',data);
   }
+  
   saveTransportationForm(data:any):Observable<any>{
-    return this.http.post(this.commonUrl+'transportationForm/saveTransportationRequest/', data);
+	return this.http.post(this.commonUrl+'transportationForm/saveTransportationRequest/', data);
   }
 }
