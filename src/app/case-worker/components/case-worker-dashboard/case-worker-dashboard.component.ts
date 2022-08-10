@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { CalendarOptions } from '@fullcalendar/angular';
 import { CalendarResp } from 'src/app/shared/models/calendarEventsResponse';
@@ -20,18 +20,18 @@ export class CaseWorkerDashboardComponent implements OnInit {
   public displayEvent = false;
   public eventInfo: any = [];
   public minDateValue: any;
-  
+  public count = 0;
+  public participantsExceeded: boolean = false;
   constructor(
     private service: CalendarEventsService,
     private formBuilder: FormBuilder
   ) {
-    this.service.getEvents().subscribe((data:CalendarResp) => {
+    this.service.getEvents().subscribe((data: CalendarResp) => {
       this.totalEvents = data;
       console.log(this.totalEvents);
       this.eventList = this.totalEvents;
     });
   }
-
 
   ngOnInit(): void {
     console.log('case worker dashboard component');
@@ -49,7 +49,33 @@ export class CaseWorkerDashboardComponent implements OnInit {
       eventDescription: ['', Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
+      participants: new FormArray([]),
     });
+  }
+
+  getParticipantsDetailFormGroup() {
+    return this.formBuilder.group({
+      name: ['', Validators.required],
+    });
+  }
+
+  addparticipant() {
+    this.count = this.count + 1;    
+    if(this.count <= 20){
+      const participantsFormArray = this.participants;
+      participantsFormArray.push(this.getParticipantsDetailFormGroup());
+    }else{
+      this.participantsExceeded = true;
+    }  
+  }
+
+  removeparticipant(index: number) {
+    const participantsFormArray = this.participants;
+    participantsFormArray.removeAt(index);
+  }
+
+  get participants() {
+    return this.eventsForm.get(['participants']) as FormArray;
   }
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -78,8 +104,9 @@ export class CaseWorkerDashboardComponent implements OnInit {
       type: this.tagName,
       sTime: event.startTime,
       enTime: event.endTime,
+      participants: event.participants,
     };
-    this.eventList.push(newEvent);
+    // this.eventList.push(newEvent);
     console.log(this.eventList);
     this.calendarOptions.events = this.eventList;
     console.log(this.calendarOptions.events);

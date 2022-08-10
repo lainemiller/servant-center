@@ -40,7 +40,6 @@ export class TransportationRequestFormComponent implements OnInit {
   public destinationAddresses!: DropDown[];
   public showOtherAddressTextBox: boolean = false;
   
-
   constructor(
     private cacheData: ClipBoardService,
     private formBuilder: FormBuilder,
@@ -51,12 +50,10 @@ export class TransportationRequestFormComponent implements OnInit {
     this.destinationAddresses = destinationAddresses;
   }
   
-  
   ngOnInit(): void {
     this.userId = this.cacheData.get("veteranId")
     this.veteran_id = this.cacheData.get("veteranId")
     this.selectedState = this.states[1];
-    
         
     this.service
       .getProfileData(this.userId)

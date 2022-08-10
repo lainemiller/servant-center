@@ -29,3 +29,10 @@
 .inputFromUser.ng-touched.ng-invalid {
   border: 1px solid red;
 }
+
+:host ::ng-deep .p-dropdown-panel{
+  width: 100%;
+}
+:host ::ng-deep .p-dropdown-item{
+  white-space: normal;
+}
