@@ -40,7 +40,7 @@
           id="appointmentDate"
           pInputText
           formControlName="appointmentDate"
-          value="{{ caseWorker?.appointment_date | date: 'dd/MM/yyyy'  }}"
+          value="{{ caseWorker?.appointment_date | date: 'MM/dd/yyyy'  }}"
           class="disable"
         />
       </div>
@@ -135,7 +135,7 @@
               value="{{ caseWorker.transport_coordinator }}"
               placeholder="Transport Co-ordinator"
               appNoSpecialSymbols
-              customAttr="textOnly"
+              customAttr="textWithSpace"
             />
             <small
               class="error"
@@ -177,7 +177,7 @@
           value="{{ caseWorker.nursing_notified }}"
           placeholder="Nursing Notified"
           appNoSpecialSymbols
-          customAttr="textOnly"
+          customAttr="textWithSpace"
         />
         <small
           class="error"
@@ -194,7 +194,7 @@
           value="{{ caseWorker.notified_by }}"
           placeholder="By"
           appNoSpecialSymbols
-          customAttr="textOnly"
+          customAttr="textWithSpace"
         />
         <small class="error" *ngIf="by?.invalid && by?.touched"
           >by is required.</small
@@ -211,7 +211,7 @@
           placeholder="Date"
         ></p-calendar>
         <small class="error" *ngIf="date?.invalid && date?.touched"
-          >date is required.</small
+          >Date is required.</small
         >
       </div>
     </div>
@@ -220,6 +220,7 @@
       type="submit"
        pButton
       label="Submit"
+      [disabled]="transportRequestForm.invalid"
       class="p-button-outlined"
     ></button>
     <button

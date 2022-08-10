@@ -14,7 +14,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { TransportService } from '../../services/transport.service';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-cw-transport-request',
@@ -47,10 +46,6 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
   selectedResident: any;
   public optionState: any;
 
-
-
-
-
   constructor(
     private formbuilder: FormBuilder,
     private service: TransportService
@@ -68,7 +63,6 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.onWindowResize();
-
     // this.service.getTransportRequestFormData().subscribe((data) => {
     this.caseWorker = this.requestFormObject;
     console.log("data",this.requestFormObject);
@@ -144,8 +138,13 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
   }
 
   onSubmit() :void {
-  
-  
+
+    if((this.transportRequestForm.value.nursingNotified).toLowerCase() ==="yes" ){
+      this.transportRequestForm.value.nursingNotified=true;
+      }else{
+      this.transportRequestForm.value.nursingNotified=false;
+      }
+      
 let obj={
 
   request_id:this.caseWorker.request_id,
@@ -160,19 +159,17 @@ let obj={
 
   date:this.transportRequestForm.value.date
 };
-	//console.log("Clicked submit");
 	this.service.approveTransportationForm(obj).subscribe((data)=>{
-	console.log("Form submitted");
+    this.submitted = true;
+	  console.log("Form submitted");
    });
-	//this.transportRequestForm.push(this.transportRequestForm.value);
-    //this.submitted = true;
     console.log(this.transportRequestForm.value);
-	this.transportRequestForm.reset();
-
+	  this.transportRequestForm.reset();
     // }
   }
   reset() {
     this.buildForm();
+    this.submitted = false;
   }
 
   selectResident(index: number) {

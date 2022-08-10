@@ -11,7 +11,7 @@
         <input
           type="text"
           pInputText
-         
+          value="{{ veteranData?.firstName }}"
           placeholder="First Name"
           formControlName="firstName"
           class="disable"
@@ -22,7 +22,7 @@
         <input
           type="text"
           pInputText
-         
+          value="{{ veteranData?.lastName }}"
           placeholder="Last Name"
           formControlName="lastName"
           class="disable"
@@ -36,8 +36,7 @@
         formControlName="reason"
         placeholder="Reason for request"
         maxlength="30"
-        appNoSpecialSymbols
-        customAttr="textOnly"
+        customAttr="textWithSpace"
         class="inputFromUser"
       />
       <small class="error" *ngIf="reason?.invalid && reason?.touched"
@@ -48,7 +47,7 @@
     <!-- <div class="p-fluid p-formgrid p-grid"> -->
     <div class="p-field p-fluid">
       <p-calendar
-        appendTo="body"
+        appendTo="body" 
         formControlName="appointmentDate"
         [inline]="false"
         [showIcon]="true"
@@ -77,6 +76,7 @@
         >time is required.</small
       >
     </div>
+    
     <!-- </div> -->
     <div class="p-field p-fluid">
       <p-dropdown
@@ -138,7 +138,7 @@
           formControlName="state"
          
         /> -->
-        <p-dropdown
+         <p-dropdown
           [autoDisplayFirst]="false"
           [options]="states"
           formControlName="selectedState"
@@ -168,24 +168,6 @@
         <small class="error" *ngIf="zipcode?.invalid && zipcode?.touched"
           >zipcode is required.</small
         >
-      </div>
-	   <div class="p-col-12 p-md-6">
-        <div class="p-fluid p-formgrid p-grid">
-          <div class="p-field p-col-12">
-            <p-calendar
-              formControlName="requestedDate"
-              [inline]="false"
-              [minDate]="minDateValue"
-              [maxDate]="maxDateValue"
-              placeholder="requested Date"
-            ></p-calendar>
-            <small
-              class="error"
-              *ngIf="requestedDate?.invalid && requestedDate?.touched"
-              >Requested date is required.</small
-            >
-          </div>
-        </div>
       </div>
     </div>
 

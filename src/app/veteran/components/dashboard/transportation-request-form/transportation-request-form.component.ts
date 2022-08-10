@@ -3,8 +3,7 @@ import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
 import { VeteranprofileService } from '../../../services/veteranprofile.service';
 import { states, destinationAddresses } from '../../../app.constants';
 import { VeteranProfileResponse } from 'src/app/shared/models/VeteranProfileResponse';
-//import { TransportService } from '../../services/transport.service';
-//
+import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 
 interface State {
   value: string;
@@ -21,6 +20,7 @@ export class TransportationRequestFormComponent implements OnInit {
   formTitle = 'TRANSPORTATION REQUEST FORM';
 
   transportRequestForm!: FormGroup;
+  submitted = false;
   public state: any;
   public minDateValue: any;
   public maxDateValue: any;
@@ -32,36 +32,32 @@ export class TransportationRequestFormComponent implements OnInit {
   // public zipcode: any;
   public data: any;
   public states: State[];
-  public requestedDate:any;
+  public dateRequested:any;
   // selectedState!: State;
   selectedState!: any;
-  userId: number = 7;
+  userId!: number;
+  veteran_id!:number;
   public destinationAddresses!: DropDown[];
   public showOtherAddressTextBox: boolean = false;
   
 
   constructor(
+    private cacheData: ClipBoardService,
     private formBuilder: FormBuilder,
     private service: VeteranprofileService
   ) {
-    this.minDateValue = new Date(new Date().getTime());
+    this.minDateValue = new Date(new Date().getTime()); 
     this.states = states;
     this.destinationAddresses = destinationAddresses;
-	  this.maxDateValue = new Date(new Date().getTime());
   }
-
-//transportRequestForm!: FormGroup;
-
- // @HostListener('window:resize')
- // onWindowResize() {
-  //  this.mobileMode = window.innerWidth < 768;
-  //}
   
- 
   
   ngOnInit(): void {
+    this.userId = this.cacheData.get("veteranId")
+    this.veteran_id = this.cacheData.get("veteranId")
     this.selectedState = this.states[1];
-
+    
+        
     this.service
       .getProfileData(this.userId)
       .subscribe((data: VeteranProfileResponse) => {
@@ -73,26 +69,25 @@ export class TransportationRequestFormComponent implements OnInit {
         this.state = this.veteranData.state;
         // console.log(this.selectedState)
         // this.zipcode = this.veteranData.zipcode;
-		this.requestedDate= this.veteranData.requestedDate;
-
+        
         this.buildForm();
         console.log(this.transportRequestForm.value);
       });
   }
-
+ 
   buildForm() {
     this.transportRequestForm = this.formBuilder.group({
-      firstName: ['Harry', Validators.required],
-      lastName: ['Potter', Validators.required],
+      veteran_id:[this.veteran_id],
+      firstName: ["Harry", Validators.required],
+      lastName: ["Potter", Validators.required],
       reason: ['', Validators.required],
       appointmentDate: ['', Validators.required],
       time: ['', Validators.required],
       destinationAddress: ['', Validators.required],
-      destinationAddress2: [''],
+      destinationAddress2: ['',Validators.required],
       city: ['', Validators.required],
       selectedState: ['', Validators.required],
       zipcode: ['', Validators.required],
-	  dateRequested: [this.maxDateValue, Validators.required],
     });
   }
 
@@ -121,9 +116,6 @@ export class TransportationRequestFormComponent implements OnInit {
     return this.transportRequestForm.get('zipcode');
   }
   
-  get dateRequested() {
-    return this.transportRequestForm.get('requestedDate');
-  }
 
   get control() {
     return this.transportRequestForm.controls;
@@ -163,30 +155,40 @@ export class TransportationRequestFormComponent implements OnInit {
   }
   reset() {
     this.buildForm();
+    this.submitted = false;
   }
 
   onSubmit(): void {
   
-   console.log("clicked");
- 
+  this.transportRequestForm.value.dateRequested= (new Date().getMonth() +1) +'/' + new Date().getUTCDate() +'/' + new Date().getFullYear();
+
    let t=new Date(this.transportRequestForm.value.time)
-   
    this.transportRequestForm.value.time = t.getHours() +':'+ t.getMinutes() +':' +t.getSeconds()
    
   this.transportRequestForm.value.selectedState=this.transportRequestForm.value.selectedState.name,
   
   this.transportRequestForm.value.destinationAddress= this.transportRequestForm.value.destinationAddress.name
     if (this.transportRequestForm.value.destinationAddress.name === 'Other') {
-      this.transportRequestForm.value.destinationAddress.name =
+        this.transportRequestForm.value.destinationAddress.name =
         this.transportRequestForm.value.destinationAddress2;
     }
+
 	this.service.saveTransportationForm(this.transportRequestForm.value).subscribe((data)=>{
-	console.log("Form submitted");
+    this.submitted = true;
+	  console.log("Form Submitted");
    });
    
-  // this.transportRequestForm.reset();
-	
-    console.log("FormData ",this.transportRequestForm.value);
+   //this.transportRequestForm.reset();
+   this.transportRequestForm.controls["reason"].reset()
+   this.transportRequestForm.controls["appointmentDate"].reset()
+   this.transportRequestForm.controls["time"].reset()
+   this.transportRequestForm.controls["city"].reset()
+   this.transportRequestForm.controls["selectedState"].reset()
+   this.transportRequestForm.controls["destinationAddress2"].reset()
+   this.transportRequestForm.controls["destinationAddress"].reset()
+	 this.transportRequestForm.controls["zipcode"].reset()
+
+  // console.log("FormData ",this.transportRequestForm.value);
 	
   }
 }

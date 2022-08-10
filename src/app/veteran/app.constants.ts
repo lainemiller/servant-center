@@ -341,3 +341,39 @@ export const states = [
     {name: 'Native Hawaiian/Other Pacific Islander'},
     {name: 'Hispanic/Latino'},
   ];
+  
+  export const destinationAddresses = [
+
+  {
+
+    value: 'Kernersville',
+
+    name: 'Kernersville VA Clinic: 1695 Kernersville Medical Parkway; Kernersville, NC 27284',
+
+  },
+
+  {
+
+    value: 'Salisbury',
+
+    name: 'Salisbury VA Medical Center: 1601 Brenner Avenue; Salisbury, NC 28144',
+
+  },
+
+  {
+
+    value: 'Durham',
+
+    name: 'Durham VA Healthcare System: 508 Fulton Street; Durham, NC 27705',
+
+  },
+
+  {
+
+    value: 'other',
+
+    name: 'Other'
+
+  },
+
+];
