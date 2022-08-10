@@ -84,7 +84,7 @@ export class TransportationRequestFormComponent implements OnInit {
       appointmentDate: ['', Validators.required],
       time: ['', Validators.required],
       destinationAddress: ['', Validators.required],
-      destinationAddress2: ['',Validators.required],
+      destinationAddress2: [''],
       city: ['', Validators.required],
       selectedState: ['', Validators.required],
       zipcode: ['', Validators.required],
@@ -176,6 +176,7 @@ export class TransportationRequestFormComponent implements OnInit {
 	this.service.saveTransportationForm(this.transportRequestForm.value).subscribe((data)=>{
     this.submitted = true;
 	  console.log("Form Submitted");
+    console.log("FormData ",this.transportRequestForm.value);
    });
    
    //this.transportRequestForm.reset();
@@ -187,8 +188,5 @@ export class TransportationRequestFormComponent implements OnInit {
    this.transportRequestForm.controls["destinationAddress2"].reset()
    this.transportRequestForm.controls["destinationAddress"].reset()
 	 this.transportRequestForm.controls["zipcode"].reset()
-
-  // console.log("FormData ",this.transportRequestForm.value);
-	
   }
 }

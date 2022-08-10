@@ -14,6 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { TransportService } from '../../services/transport.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-cw-transport-request',
@@ -45,10 +46,12 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
   tableData: any;
   selectedResident: any;
   public optionState: any;
+  public newAappointmentDate:any;
 
   constructor(
     private formbuilder: FormBuilder,
-    private service: TransportService
+    private service: TransportService,
+    private datePipe: DatePipe
   ) {
     this.minDateValue = new Date(new Date().getTime());
     this.maxDateValue = new Date(new Date().getTime());
@@ -94,16 +97,18 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
   ngOnChanges(change: SimpleChanges): void {
     console.log('login');
     console.log(change);
+    
     if (change?.requestFormObject) {
       this.caseWorker = change.requestFormObject.currentValue;
     }
+    this.newAappointmentDate=this.datePipe.transform(this.caseWorker.appointment_date,'dd/MM/yyyy')
   }
 
   buildForm() {
     this.transportRequestForm = this.formbuilder.group({
       firstName: [this.caseWorker.first_name],
       lastName: [this.caseWorker.last_name, Validators.required],
-      appointmentDate: [this.caseWorker.appointment_date],
+      appointmentDate: [this.newAappointmentDate],
       time: [this.caseWorker.appointment_time, Validators.required],
       reason: [this.caseWorker.reason_for_request, Validators.required],
       address: [this.caseWorker.pick_up_address_main, Validators.required],
