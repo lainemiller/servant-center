@@ -68,7 +68,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
     this.onWindowResize();
     // this.service.getTransportRequestFormData().subscribe((data) => {
     this.caseWorker = this.requestFormObject;
-    console.log("data",this.requestFormObject);
+    console.log('reeustObj----',this.requestFormObject);
 
     // console.log(this.caseWorker); 
 
@@ -117,7 +117,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
       zip: [this.caseWorker.pick_up_zip_code, Validators.required],
       coordinator: ['', Validators.required],
       approvedDate: [this.maxDateValue, Validators.required],
-      nursingNotified: ['', Validators.required],
+      nursingNotified: [true, Validators.required],
       by: ['', Validators.required],
       date: ['', Validators.required],
     });

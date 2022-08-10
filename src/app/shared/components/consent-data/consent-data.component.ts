@@ -15,7 +15,7 @@ export class ConsentDataComponent implements OnInit {
   displayTwo: boolean = false;
   vetran: any;
   consentDetails: any;
-  userId: number = 0;
+  loginId: number = 0;
   email: any;
 
   constructor(private service: ConsentService) {}
@@ -36,9 +36,11 @@ export class ConsentDataComponent implements OnInit {
   }
 
   onConsentSubmit() {
-    this.userId = 7;
-    let response = this.service.consentConfirm(this.userId);
-    response.subscribe();
+    this.loginId = 7;
+    let response = this.service.consentConfirm(this.loginId);
+    response.subscribe((response)=>{
+      console.log(response)
+    });
     this.display=false;
   }
 
@@ -47,10 +49,11 @@ export class ConsentDataComponent implements OnInit {
   }
 
   getVetranDetailsById() {
-    this.userId = 7;
-    let resp = this.service.getRegisterUserDetailsById(this.userId);
+    this.loginId = 7;
+    let resp = this.service.getRegisterUserDetailsByLoginId(this.loginId);
     resp.subscribe((data:ConsentResponse) => {
       this.consentDetails = data;
+      console.log('Consent API data--->',data);
       this.vetran = this.consentDetails.result[0];
       if (this.vetran.consent_status) {
         this.display = false;
