@@ -114,9 +114,23 @@
                 Event Description is required.
               </small></div>
                 </div>
+                <h4>Participants:<span *ngIf="!participants.controls.length"> None</span></h4>
+                <div formArrayName="participants" *ngFor="let participant of participants.controls; let i = index" class="p-col-12">
+                  <div [formGroupName]="i">
+                    <h4>Participant {{ i+1 }}</h4>
+                    <div class="p-field p-col-4">
+                      <input type="text" pInputText formControlName="name" placeholder="Name">
+                    </div>
+                    <button type="button" pButton icon="pi pi-times" class="p-buton-outlined p-button-rounded p-button-danger"
+                      (click)="removeparticipant(i)"></button>
+                  </div>
+                </div>
+                <button type="button" pButton icon="pi pi-plus" class="p-buton-outlined p-button-rounded"
+                  (click)="addparticipant()"></button>
+                <h5 style="color: red;" *ngIf="participantsExceeded">Can not add more participants</h5>
               </div>
               <div class="button--margin">
-                <button type="submit" pButton>Submit</button>
+                <button type="submit" pButton [disabled]="eventsForm.invalid">Submit</button>
                 <p-button
                   label="Cancel"
                   (click)="onCancel()"

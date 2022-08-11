@@ -16,7 +16,7 @@
           id="firstName"
           pInputText
           formControlName="firstName"
-          value="{{ caseWorker?.firstName }}"
+          value="{{ caseWorker?.first_name }}"
           class="disable"
         />
       </div>
@@ -27,7 +27,7 @@
           id="lastName"
           pInputText
           formControlName="lastName"
-          value="{{ caseWorker?.lastName }}"
+          value="{{ caseWorker?.last_name }}"
           class="disable"
         />
       </div>
@@ -40,7 +40,7 @@
           id="appointmentDate"
           pInputText
           formControlName="appointmentDate"
-          value="{{ caseWorker?.appointmentDate }}"
+          value="{{ caseWorker?.appointment_date | date: 'dd/MM/yyyy'  }}"
           class="disable"
         />
       </div>
@@ -51,7 +51,7 @@
           id="time"
           pInputText
           formControlName="time"
-          value="{{ caseWorker?.time }}"
+          value="{{ caseWorker?.appointment_time }}"
           class="disable"
         />
       </div>
@@ -70,7 +70,7 @@
               formControlName="reason"
               [rows]="6"
               class="address-text-area"
-              value="{{ caseWorker.reason }}"
+              value="{{ caseWorker.reason_for_request }}"
               class="disable"
             ></textarea>
           </div>
@@ -84,7 +84,7 @@
               type="text"
               pInputText
               formControlName="address"
-              value="{{ caseWorker?.address }}"
+              value="{{ caseWorker?.pick_up_address_main }}"
               class="disable"
             />
           </div>
@@ -94,7 +94,7 @@
               type="text"
               pInputText
               formControlName="city"
-              value="{{ caseWorker?.city }}"
+              value="{{ caseWorker?.pick_up_city }}"
               class="disable"
             />
           </div>
@@ -104,7 +104,7 @@
               type="text"
               pInputText
               formControlName="state"
-              value="{{ caseWorker?.state }}"
+              value="{{ caseWorker?.pick_up_state }}"
               class="disable"
             />
           </div>
@@ -114,7 +114,7 @@
               type="text"
               pInputText
               formControlName="zip"
-              value="{{ caseWorker?.zip }}"
+              value="{{ caseWorker?.pick_up_zip_code }}"
               class="disable"
               mask="00000-0000||00000"
             />
@@ -132,10 +132,10 @@
               pInputText
               formControlName="coordinator"
               maxlength="30"
-              value="{{ caseWorker.coordinator }}"
+              value="{{ caseWorker.transport_coordinator }}"
               placeholder="Transport Co-ordinator"
               appNoSpecialSymbols
-              customAttr="textOnly"
+              customAttr="textWithSpace"
             />
             <small
               class="error"
@@ -174,10 +174,10 @@
           pInputText
           formControlName="nursingNotified"
           maxlength="30"
-          value="{{ caseWorker.nursingNotified }}"
+          value="{{ caseWorker.nursing_notified }}"
           placeholder="Nursing Notified"
           appNoSpecialSymbols
-          customAttr="textOnly"
+          customAttr="textWithSpace"
         />
         <small
           class="error"
@@ -191,10 +191,10 @@
           pInputText
           formControlName="by"
           maxlength="30"
-          value="{{ caseWorker.by }}"
+          value="{{ caseWorker.notified_by }}"
           placeholder="By"
           appNoSpecialSymbols
-          customAttr="textOnly"
+          customAttr="textWithSpace"
         />
         <small class="error" *ngIf="by?.invalid && by?.touched"
           >by is required.</small
@@ -211,16 +211,15 @@
           placeholder="Date"
         ></p-calendar>
         <small class="error" *ngIf="date?.invalid && date?.touched"
-          >date is required.</small
+          >Date is required.</small
         >
       </div>
     </div>
 
     <button
       type="submit"
-      pButton
+       pButton
       label="Submit"
-      [disabled]="transportRequestForm.invalid"
       class="p-button-outlined"
     ></button>
     <button
