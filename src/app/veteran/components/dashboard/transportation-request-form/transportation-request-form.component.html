@@ -36,8 +36,7 @@
         formControlName="reason"
         placeholder="Reason for request"
         maxlength="30"
-        appNoSpecialSymbols
-        customAttr="textOnly"
+        customAttr="textWithSpace"
         class="inputFromUser"
       />
       <small class="error" *ngIf="reason?.invalid && reason?.touched"
@@ -48,11 +47,11 @@
     <!-- <div class="p-fluid p-formgrid p-grid"> -->
     <div class="p-field p-fluid">
       <p-calendar
-        appendTo="body"
+        appendTo="body" 
         formControlName="appointmentDate"
         [inline]="false"
         [showIcon]="true"
-        placeholder="Appointment Date (mm/dd/yyyy)"
+        placeholder="Appointment Date (dd/mm/yyyy)"
         class="inputFromUser"
         [minDate]="minDateValue"
       ></p-calendar>
@@ -77,6 +76,7 @@
         >time is required.</small
       >
     </div>
+    
     <!-- </div> -->
     <div class="p-field p-fluid">
       <p-dropdown
@@ -138,7 +138,7 @@
           formControlName="state"
          
         /> -->
-        <p-dropdown
+         <p-dropdown
           [autoDisplayFirst]="false"
           [options]="states"
           formControlName="selectedState"
@@ -176,6 +176,7 @@
       pButton
       label="Submit"
       class="p-button-outlined"
+      [disabled]="transportRequestForm.invalid"
       
     ></button>
     <button

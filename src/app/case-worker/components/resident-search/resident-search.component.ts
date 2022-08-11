@@ -47,8 +47,12 @@ export class ResidentSearchComponent implements OnInit {
     this.maxDateValue = new Date(new Date().getTime());
 
     this.service.getResidentSearchData().subscribe((data) => {
+      console.log("test:", data);
+      
       this.tableValues = data;
-      this.tableValues = this.tableValues.resedentData;
+     // this.tableValues = this.tableValues.resedentData;
+      console.log("resident search ", this.tableValues);
+      
     });
   }
 
