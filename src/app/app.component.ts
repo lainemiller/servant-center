@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ClipBoardService } from './shared/services/clip-board.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'servant-center';
-  
+
+  constructor(
+    private cacheData: ClipBoardService
+    ){}
+
+    ngOnInit():void{
+      this.cacheData.set("veteranId",4);
+    }
 }
+
+
