@@ -114,14 +114,23 @@ export class CaseWorkerDashboardComponent implements OnInit {
   }
   onCancel() {
     this.eventsForm.reset();
+    let a=this.eventsForm.get(['participants']) as FormArray
+    this.clearFormArray(a)
     this.display = false;
   }
   changeTag(value: any) {
     console.log(value.activeItem.label);
     this.tagName = value.activeItem.label;
   }
+  clearFormArray = (formArray: FormArray) => {
+    while (formArray.length !== 0) {
+      formArray.removeAt(0)
+    }
+  }
   crossButton() {
     this.eventsForm.reset();
+    let a=this.eventsForm.get(['participants']) as FormArray
+    this.clearFormArray(a)
   }
   showEventDetail(arg: any) {
     this.displayEvent = true;

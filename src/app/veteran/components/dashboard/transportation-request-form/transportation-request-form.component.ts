@@ -151,12 +151,11 @@ export class TransportationRequestFormComponent implements OnInit {
   this.service.saveTransportationForm(this.transportRequestForm.value).subscribe((data:any)=>{
 	console.log("Form submitted");
    });  
+   
     if (this.transportRequestForm.value.destinationAddress.name === 'Other') {
       this.transportRequestForm.value.destinationAddress.name =
         this.transportRequestForm.value.destinationAddress2;
     }
-	
-	
     console.log(this.transportRequestForm.value);
   }
 }
