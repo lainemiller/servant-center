@@ -1,35 +1,35 @@
 [
-    {
-      "firstName": "Robert",
-      "lastName": "Smith",
-      "appointmentDate": "10/27/2021",
-      "time": "11:30 AM",
-      "reason": "Dentist",
-      "coordinator": "Rebecca Wilson",
-      "nursingNotified": "Yes",
-      "address": "123 Elm Street",
-      "city": "Charlotte",
-      "zip": "28105",
-      "dateApproved": "10/17/2021",
-      "by": "Cathy Reed",
-      "date": "10/17/2021",
-      "state": "NC"
-    },
-    {
-      "firstName": "Tom",
-      "lastName": "Brady",
-      "appointmentDate": "10/31/2021",
-      "time": "11:00 AM",
-      "reason": "Eye Doctor",
-      "coordinator": "Rebecca Wilson",
-      "nursingNotified": "Yes",
-      "address": "50 Main Street",
-      "city": "Greensboro",
-      "zip": "27214",
-      "dateApproved": "10/27/2021",
-      "by": "Cathy Reed",
-      "date": "10/27/2021",
-      "state": "NC"
-    }
-  ]
-  
+  {
+    "first_name": "Robert",
+    "last_name": "Smith",
+    "appointment_date": "10/27/2021",
+    "appointment_time": "11:30 AM",
+    "reason_for_request": "Dentist",
+    "transport_coordinator": "Rebecca Wilson",
+    "nursing_notified": "Yes",
+    "pick_up_address_main": "123 Elm Street",
+    "pick_up_city": "Charlotte",
+    "pick_up_zip_code": "28105",
+    "approved_date": "10/17/2021",
+    "notified_by": "Cathy Reed",
+    "date_filled": "10/17/2021",
+    "pick_up_state": "NC"
+  },
+  {
+    "first_name": "Tom",
+    "last_name": "Brady",
+    "appointment_date": "10/31/2021",
+    "appointment_time": "11:00 AM",
+    "reason_for_request": "Eye Doctor",
+    "transport_coordinator": "Rebecca Wilson",
+    "nursing_notified": "Yes",
+    "pick_up_address_main": "50 Main Street",
+    "pick_up_city": "Greensboro",
+    "pick_up_zip_code": "27214",
+    "approved_date": "10/27/2021",
+    "notified_by": "Cathy Reed",
+    "date_filled": "10/27/2021",
+    "pick_up_state": "NC"
+  }
+]
+

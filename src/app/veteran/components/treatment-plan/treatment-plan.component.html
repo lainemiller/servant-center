@@ -14,12 +14,18 @@
               customAttr="textOnly"
               placeholder="Resident's First Name"
             />
+
             <div
-              *ngIf="getControl.firstName.errors?.required"
-              class="form-error"
+              *ngIf="getControl.firstName.invalid && getControl.firstName.touched"
             >
-              <small>FirstName is required.</small>
-            </div>
+            <div
+            *ngIf="getControl.firstName.errors?.required"
+              class="form-error"
+              >
+                <small>FirstName is required</small>
+          </div>
+        </div>
+
           </div>
           <div class="p-field p-col-12 p-md-3">
             <span class="label-title">Resident's Last Name</span>
@@ -32,11 +38,15 @@
               placeholder="Resident's Last Name"
             />
             <div
-              *ngIf="getControl.lastName.errors?.required"
-              class="form-error"
+            *ngIf="getControl.lastName.invalid && getControl.lastName.touched"
+          >
+          <div
+          *ngIf="getControl.lastName.errors?.required"
+            class="form-error"
             >
-              <small>LastName is required.</small>
-            </div>
+              <small>LastName is required</small>
+        </div>
+      </div>
           </div>
           <div class="p-field p-col-12 p-md-3">
             <span class="label-title">Record #</span>
@@ -50,11 +60,15 @@
             />
 
             <div
-              *ngIf="getControl.recordNo.errors?.required"
-              class="form-error"
+            *ngIf="getControl.recordNo.invalid && getControl.recordNo.touched"
+          >
+          <div
+          *ngIf="getControl.recordNo.errors?.required"
+            class="form-error"
             >
-              <small>Record is required.</small>
-            </div>
+              <small>Record Number is required</small>
+        </div>
+      </div>
           </div>
           <div class="p-field p-col-12 p-md-3">
             <span class="label-title">Date Of Birth</span>
@@ -65,11 +79,15 @@
               placeholder="DOB (mm/dd/yyyy)"
             ></p-calendar>
             <div
-              *ngIf="getControl.dateOfBirth1.errors?.required"
-              class="form-error"
+              *ngIf="getControl.dateOfBirth1.invalid && getControl.dateOfBirth1.touched"
             >
-              <small>DOB is required.</small>
-            </div>
+            <div
+            *ngIf="getControl.dateOfBirth1.errors?.required"
+              class="form-error"
+              >
+                <small>DOB is required</small>
+          </div>
+        </div>
           </div>
         </div>
 
