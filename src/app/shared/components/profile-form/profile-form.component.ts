@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VeteranprofileService } from 'src/app/veteran/services/veteranprofile.service';
+import { Auth } from '@aws-amplify/auth';
 
 import {
   genders,
@@ -12,6 +13,7 @@ import {
   relations,
 } from '../../../veteran/app.constants';
 import { VeteranProfileResponse } from '../../models/VeteranProfileResponse';
+import { ClipBoardService } from '../../services/clip-board.service';
 
 interface DropDown {
   name: string;
@@ -26,7 +28,7 @@ export class ProfileFormComponent implements OnInit {
   public stateValue: any;
   public profileDetails: any;
   public genderArray: any = [];
-  public caseWorkerProfileForm!: FormGroup;
+  public profileForm!: FormGroup;
   public veteran: any;
   public states!: DropDown[];
   public relegions!: DropDown[];
@@ -44,14 +46,16 @@ export class ProfileFormComponent implements OnInit {
   selectedRace: any;
   maxDateValue!: Date;
   @Input() isShowFields!: boolean;
-  userId:number=7;
+  veteranId!: number;
+  email!: string;
 
   constructor(
     private formBuilder: FormBuilder,
-    private service: VeteranprofileService
+    private service: VeteranprofileService,
+    private cacheData: ClipBoardService
   ) {
+    this.veteranId = this.cacheData.get('veteranId');
     this.setForm();
-
     this.states = states;
     this.relegions = relegions;
     this.languages = languages;
@@ -68,55 +72,53 @@ export class ProfileFormComponent implements OnInit {
     this.selectedMaritalStatus = this.maritalStatus[1];
     this.selectedRelationship = this.relations[1];
     this.selectedRace = this.races[1];
-    this.setForm();
-    console.log('Check Profile', this.veteran);
-  }
-
-  setForm() {
-    this.service.getProfileData(this.userId).subscribe((data:VeteranProfileResponse) => {
-      this.profileDetails = data;
-      this.veteran = this.profileDetails.result[0];
-      console.log('Check Profile', this.veteran);
-      this.buildForm();
-      this.caseWorkerProfileForm.patchValue({
-        firstName: this.veteran.firstName,
-        middleName: this.veteran.middleName,
-        lastName: this.veteran.lastName,
-        nickName: this.veteran.nick_name,
-        DOB: this.veteran.dob,
-        POB: this.veteran.pob,
-        SSNNumber: this.veteran.ssnNumber,
-        hmisIdNo: this.veteran.hmisIdNo,
-        gender: this.veteran.gender,
-        selectedState: this.veteran.stateValue,
-        mStatus: this.veteran.marital_status,
-        emailId: this.veteran.emailId,
-        phoneNumber: this.veteran.primary_phone,
-        address1: this.veteran.address_main,
-        city: this.veteran.city,
-        country: this.veteran.county,
-        address2: this.profileDetails.address_line_2,
-        zipCode: this.veteran.zip_code,
-        hobbies: this.veteran.hobbies,
-        primaryLanguage: this.veteran.primaryLanguage,
-        relegiousPreferences: this.veteran.relegiousPreferences,
-        selectedRace: this.veteran.race,
-        cfirstName: this.veteran.contact_person,
-        selectedRelationship: this.veteran.contact_person_relationship,
-        cPhoneNumber: this.veteran.contact_person_phone,
-        cHouseNumber: this.veteran.contact_person_address,
-        relegions: this.veteran.relegions,
-        genders: this.veteran.genders,
-        maritalStatus: this.veteran.statuses,
-        relations: this.veteran.relations,
-        maxDateValue: new Date(new Date().getTime()),
-      });
-      console.log(this.caseWorkerProfileForm.value);
+    this.buildForm();
+    Auth.currentAuthenticatedUser().then((user) => {
+      this.email = user.signInUserSession.idToken.payload.email;
     });
   }
 
+  setForm() {
+    this.service
+      .getProfileData(this.veteranId)
+      .subscribe((data: VeteranProfileResponse) => {
+        this.profileDetails = data;
+        this.veteran = this.profileDetails.data[0];
+        console.log('Profile API Data--->', data);
+        this.profileForm.patchValue({
+          firstName: this.veteran.first_name,
+          middleName: this.veteran.middle_initial,
+          lastName: this.veteran.last_name,
+          nickName: this.veteran.nick_name,
+          DOB: new Date(this.veteran.date_of_birth),
+          POB: this.veteran.place_of_birth,
+          SSNNumber: this.veteran.ssn,
+          hmisIdNo: this.veteran.hmis_id,
+          selectedGenders: this.veteran.gender,
+          selectedState: this.veteran.state,
+          selectedMaritalStatus: this.veteran.marital_status,
+          emailId: this.email,
+          phoneNumber: this.veteran.primary_phone,
+          address1: this.veteran.address_main,
+          city: this.veteran.city,
+          country: this.veteran.county,
+          address2: this.veteran.address_line_2,
+          zipCode: this.veteran.zip_code,
+          hobbies: this.veteran.hobbies,
+          selectedprimaryLanguage: this.veteran.primary_language,
+          selectedRelegion: this.veteran.religious_preference,
+          selectedRace: this.veteran.race,
+          cfirstName: this.veteran.contact_person,
+          selectedRelationship: this.veteran.contact_person_relationship,
+          cPhoneNumber: this.veteran.contact_person_phone,
+          cHouseNumber: this.veteran.contact_person_address,
+          maxDateValue: new Date(new Date().getTime()),
+        });
+      });
+  }
+
   buildForm() {
-    this.caseWorkerProfileForm = this.formBuilder.group({
+    this.profileForm = this.formBuilder.group({
       firstName: ['', [Validators.required]],
       middleName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
@@ -155,11 +157,17 @@ export class ProfileFormComponent implements OnInit {
   }
 
   get getControl() {
-    return this.caseWorkerProfileForm.controls;
+    return this.profileForm.controls;
   }
 
   onSubmit() {
-    console.log(this.caseWorkerProfileForm.value);
+    console.log('Profile Form submitted value', this.profileForm.value);
+    let profileDetails = this.profileForm.value;
+    this.service
+      .updateProfile(this.veteranId, profileDetails)
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 
   resetForm() {

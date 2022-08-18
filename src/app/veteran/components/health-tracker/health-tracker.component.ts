@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { HealthTrackerService } from '../../services/health-tracker.service';
 
 @Component({
@@ -20,14 +21,16 @@ export class HealthTrackerComponent implements OnInit {
   healthTrackerDetails: any;
   healthTrackerFormDetails: any;
   isFormFilled: boolean = false;
-  veteranId = 4;
+  veteranId!:number;
 
   constructor(
     private formBuilder: FormBuilder,
-    private service: HealthTrackerService
+    private service: HealthTrackerService,
+    private cacheData: ClipBoardService
   ) {}
 
   ngOnInit(): void {
+    this.veteranId=this.cacheData.get("veteranId");
     this.buildForm();
     this.getHealthTrackerByVeteranId();
   }

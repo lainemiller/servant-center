@@ -309,12 +309,19 @@ export const states = [
     {name: 'Hindu'},
     {name: 'Muslim'},
     {name: 'Christain'},
+    {name: 'Catholic'},
+    {name: 'Baptist'},
+    {name: 'none'},
   ];
 
   export const relations = [
-    {name: 'Mother'},
-    {name: 'Father'},
-    {name: 'Wife'},
+    {name: 'Mother',value:'mother'},
+    {name: 'Father',value:'father'},
+    {name: 'Wife',value:'wife'},
+    {name:'Cousin',value:'cousin'},
+    {name:'Contact',value:'contact'},
+    {name:'Brother',value:'brother'},
+    {name:'Uncle',value:'uncle'}
   ];
   
   export const languages = [
@@ -324,9 +331,9 @@ export const states = [
   ];
 
   export const genders = [
-    {name: 'Male'},
-    {name: 'Female'},
-    {name: 'Other'},
+    {name: 'Male',value:'M'},
+    {name: 'Female',value:'F'},
+    {name: 'Other',value:'O'},
   ];
 
   export const statuses = [
@@ -340,4 +347,6 @@ export const states = [
     {name: 'White'},
     {name: 'Native Hawaiian/Other Pacific Islander'},
     {name: 'Hispanic/Latino'},
+    {name: 'Latinx'},
+    {name: 'African American'}
   ];
