@@ -52,6 +52,7 @@
             formControlName="dateOfBirth1"
             placeholder="dateOfBirth"
             [readonly]=true
+            value="{{ data?.date_of_birth | date: 'dd/MM/yyyy'  }}"
             class="disable-field"
           />
           </div>
@@ -66,6 +67,7 @@
             formControlName="intakeDOB"
             placeholder="Intake Date"
             [readonly]=true
+            value="{{ data?.intake_date| date: 'dd/MM/yyyy'  }}"
             class="disable-field"
           />
           </div>
@@ -880,7 +882,12 @@
           </div>
         </div>
 
-        <button type="submit" pButton label="Submit" class="p-button"></button>
+        <button 
+        type="submit" 
+        pButton label="Submit" 
+        class="p-button"
+        
+        ></button>
         <p-button
           label="Cancel"
           styleClass="p-button-link"
