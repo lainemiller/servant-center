@@ -22,6 +22,8 @@ export class HealthTrackerComponent implements OnInit {
   healthTrackerFormDetails: any;
   isFormFilled: boolean = false;
   veteranId!:number;
+  cols!: any[];
+  tableValues!:any[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,6 +35,7 @@ export class HealthTrackerComponent implements OnInit {
     this.veteranId=this.cacheData.get("veteranId");
     this.buildForm();
     this.getHealthTrackerByVeteranId();
+    this.showSelectedTable();
   }
 
   showFilledForm() {
@@ -112,6 +115,7 @@ export class HealthTrackerComponent implements OnInit {
     resp.subscribe((data) => {
       console.log('Health Tracker API--->', data);
       this.healthTrackerDetails = data;
+      this.tableValues=this.healthTrackerDetails['result'];
       if (!this.isFormFilled) {
         this.showFilledForm();
         this.isFormFilled = true;
@@ -239,6 +243,14 @@ export class HealthTrackerComponent implements OnInit {
         this.healthTrackerFormDetails[trackingSubject].isUpdate = true;
       }
     }
+  }
+
+  showSelectedTable(){
+    this.cols = [
+      { field: 'note_date', header: 'Date' ,date: true,format: 'dd/MM/yyyy'},
+      { field: 'measurement', header: 'Measurement' },
+      { field: 'tracking_comments', header: 'Comment' },
+  ];
   }
 
   resetForm() {
