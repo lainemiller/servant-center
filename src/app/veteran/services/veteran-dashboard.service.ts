@@ -8,19 +8,19 @@ import { environment } from 'src/environments/environment';
 })
 export class VeteranDashboardService {
 
-  public vetID:number=1;
+  //public vetID:number=1;
   private serviceUrl=environment.localUrl;
   constructor(private http: HttpClient) {}
 
   //getTreatmentPlanData
   getTreatmentData(vetID:number) {
     //return this.http.get<any>(`${this.getTreatmentPlanURL}/${vetID}`);
-    return this.http.get<any>(this.serviceUrl+'getTreatmentPlanDetails/1');
+    return this.http.get<any>(this.serviceUrl+'getTreatmentPlanDetails/'+ vetID);
   }
 
   //saving TreatmentplanData after summary
   saveTreatmentData(data:any): Observable<any>{
-    return this.http.post(this.serviceUrl+'updateTreatmentPlan',data);
+    return this.http.post(this.serviceUrl+'postTreatmentPlanDetails/save',data);
   }
 
 

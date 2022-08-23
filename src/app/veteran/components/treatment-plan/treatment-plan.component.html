@@ -12,20 +12,18 @@
               formControlName="firstName"
               appNoSpecialSymbols
               customAttr="textOnly"
+              [readonly]=true
               placeholder="Resident's First Name"
             />
-
-            <div
-              *ngIf="getControl.firstName.invalid && getControl.firstName.touched"
-            >
-            <div
-            *ngIf="getControl.firstName.errors?.required"
-              class="form-error"
-              >
-                <small>FirstName is required</small>
-          </div>
-        </div>
-
+            <div 
+              *ngIf="getControl.firstName.invalid && getControl.firstName.touched">
+              <div 
+                  *ngIf="getControl.firstName.errors?.required" 
+                   class="form-error"
+                 >
+                  <small>FirstName is required</small>
+              </div>
+            </div>
           </div>
           <div class="p-field p-col-12 p-md-3">
             <span class="label-title">Resident's Last Name</span>
@@ -35,18 +33,18 @@
               formControlName="lastName"
               appNoSpecialSymbols
               customAttr="textOnly"
+              [readonly]=true
               placeholder="Resident's Last Name"
             />
-            <div
-            *ngIf="getControl.lastName.invalid && getControl.lastName.touched"
-          >
-          <div
-          *ngIf="getControl.lastName.errors?.required"
-            class="form-error"
-            >
-              <small>LastName is required</small>
-        </div>
-      </div>
+            <div 
+              *ngIf="getControl.lastName.invalid && getControl.lastName.touched">
+              <div 
+                  *ngIf="getControl.lastName.errors?.required" 
+                   class="form-error"
+                 >
+                  <small>LastName is required</small>
+              </div>
+            </div>
           </div>
           <div class="p-field p-col-12 p-md-3">
             <span class="label-title">Record #</span>
@@ -57,37 +55,35 @@
               appNoSpecialSymbols
               customAttr="numbersOnly"
               placeholder="Record #"
+              [readonly]=true
             />
-
-            <div
-            *ngIf="getControl.recordNo.invalid && getControl.recordNo.touched"
-          >
-          <div
-          *ngIf="getControl.recordNo.errors?.required"
-            class="form-error"
-            >
-              <small>Record Number is required</small>
-        </div>
-      </div>
+            <div 
+              *ngIf="getControl.recordNo.invalid && getControl.recordNo.touched">
+              <div 
+                  *ngIf="getControl.recordNo.errors?.required" 
+                   class="form-error"
+                 >
+                  <small>RecordNo is required</small>
+              </div>
+            </div>
           </div>
           <div class="p-field p-col-12 p-md-3">
             <span class="label-title">Date Of Birth</span>
-            <p-calendar
-              formControlName="dateOfBirth1"
-              [inline]="false"
-              [showIcon]="true"
-              placeholder="DOB (mm/dd/yyyy)"
-            ></p-calendar>
+            <input
+            type="text"
+            pInputText
+            formControlName="dateOfBirth1"
+            placeholder="dateOfBirth"
+            [readonly]=true
+            value="{{ data?.date_of_birth | date: 'dd/MM/yyyy'  }}"
+            
+          />
             <div
-              *ngIf="getControl.dateOfBirth1.invalid && getControl.dateOfBirth1.touched"
-            >
-            <div
-            *ngIf="getControl.dateOfBirth1.errors?.required"
+              *ngIf="getControl.dateOfBirth1.errors?.required"
               class="form-error"
-              >
-                <small>DOB is required</small>
-          </div>
-        </div>
+            >
+              <small>DOB is required</small>
+            </div>
           </div>
         </div>
 
@@ -102,8 +98,7 @@
             ></p-calendar>
             <div
               *ngIf="
-                getControl.intakeDOB.invalid && getControl.intakeDOB.touched
-              "
+                getControl.intakeDOB.invalid && getControl.intakeDOB.touched"
             >
               <div
                 *ngIf="getControl.intakeDOB.errors?.required"
@@ -121,6 +116,7 @@
               formControlName="hmisIdNo"
               appNoSpecialSymbols
               customAttr="numbersOnly"
+              [readonly]=true
               placeholder="HMIS ID#"
             />
             <div
