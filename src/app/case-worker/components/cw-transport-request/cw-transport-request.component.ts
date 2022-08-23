@@ -15,7 +15,6 @@ import {
 } from '@angular/forms';
 import { TransportService } from '../../services/transport.service';
 import { DatePipe } from '@angular/common';
-
 @Component({
   selector: 'app-cw-transport-request',
   templateUrl: './cw-transport-request.component.html',
@@ -30,7 +29,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
   public caseWorker: any;
   public firstName: any;
   public lastName: any;
-  public appointmentDate: any
+  public appointmentDate: any;
   public time: any;
   public reason: any;
   public address: any;
@@ -105,6 +104,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
   }
 
   buildForm() {
+   // let newAappointmentDate=this.datePipe.transform(this.caseWorker.appointment_date,'yyyy-MM-dd')
     this.transportRequestForm = this.formbuilder.group({
       firstName: [this.caseWorker.first_name],
       lastName: [this.caseWorker.last_name, Validators.required],
