@@ -24,9 +24,9 @@ export class MessagesComponent implements OnInit {
   }
 
   columns = [
-    { field: 'firstName', header: 'firstName' },
-    { field: 'lastName', header: 'lastName' },
-    { field: 'address', header: 'address' },
+    { field: 'first_name', header: 'firstName' },
+    { field: 'last_name', header: 'lastName' },
+    { field: 'pick_up_address_main', header: 'address' },
   ];
 
   ngOnInit(): void {
@@ -35,6 +35,6 @@ export class MessagesComponent implements OnInit {
 
   selectResident(index: number) {
     this.selectedResident = this.tableValues[index];
-    console.log(this.selectedResident);
+    console.log("Data",this.selectedResident);
   }
 }
