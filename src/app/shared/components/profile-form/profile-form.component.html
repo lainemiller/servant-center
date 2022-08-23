@@ -1,49 +1,54 @@
 <div class="form-container">
-  <form
-    *ngIf="caseWorkerProfileForm"
-    [formGroup]="caseWorkerProfileForm"
-    (ngSubmit)="onSubmit()"
-  >
-    <div class="p-fluid p-formgrid p-grid">
-      <img
-        class="form-container__img"
-        src="assets/images/profile.svg"
-        alt="Image"
-        width="150"
+  <div class="p-fluid p-formgrid p-grid">
+    <img
+      class="form-container__img"
+      src="assets/images/profile.svg"
+      alt="Image"
+      width="150"
+    />
+  </div>
+  <div *ngIf="isShowFields" class="p-fluid p-grid">
+    <div class="p-field p-col-12 p-md-4">
+      <label class="label-title">Record #</label>
+      <input
+        id="Record #"
+        type="text"
+        class="form-container__disable"
+        pInputText
       />
     </div>
-    <div *ngIf="isShowFields" class="p-fluid p-grid">
-      <div class="p-field p-col-12 p-md-4">
-        <label class="label-title">Record #</label>
-        <input id="Record #" type="text" class="form-container__disable" pInputText />
-      </div>
-      <div class="p-field p-col-12 p-md-4">
-        <label class="label-title">Intake Date</label>
-        <input
-          id="Intake DOB"
-          class="form-container__disable"
-          placeholder="Intake DOB(mm/dd/yyyy)"
-          pInputText
-        />
-      </div>
-      <div class="p-field p-col-12 p-md-4">
-        <label class="label-title">Case Manager</label>
-        <input id="Case Manager" type="text" class="form-container__disable" pInputText />
-      </div>
-      <div class="p-field p-col-12 p-md-4">
-        <label class="label-title">Veteran Id</label>
-        <input
-          id="Veteran Id"
-          type="text"
-          class="form-container__disable"
-          value="{{ profileDetails.vetID }}"
-          appNoSpecialSymbols
-          customAttr="textOnly"
-          pInputText
-        />
-      </div>
+    <div class="p-field p-col-12 p-md-4">
+      <label class="label-title">Intake Date</label>
+      <input
+        id="Intake DOB"
+        class="form-container__disable"
+        placeholder="Intake DOB(mm/dd/yyyy)"
+        pInputText
+      />
     </div>
-
+    <div class="p-field p-col-12 p-md-4">
+      <label class="label-title">Case Manager</label>
+      <input
+        id="Case Manager"
+        type="text"
+        class="form-container__disable"
+        pInputText
+      />
+    </div>
+    <div class="p-field p-col-12 p-md-4">
+      <label class="label-title">Veteran Id</label>
+      <input
+        id="Veteran Id"
+        type="text"
+        class="form-container__disable"
+        value="{{ veteran?.veteran_id }}"
+        appNoSpecialSymbols
+        customAttr="textOnly"
+        pInputText
+      />
+    </div>
+  </div>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <!-- Person Info start -->
     <fieldset class="form-container__sec">
       <legend class="p-col form-container__sec-heading">
@@ -81,7 +86,6 @@
             type="text"
             id="Last Name"
             pInputText
-            value="{{ veteran?.middleName }}"
             appNoSpecialSymbols
             customAttr="textOnly"
             maxlength="30"
@@ -110,7 +114,6 @@
             id="Last Name"
             type="text"
             pInputText
-            value="{{ veteran?.lastName }}"
             appNoSpecialSymbols
             customAttr="textOnly"
             maxlength="30"
@@ -267,6 +270,7 @@
 
           <p-dropdown
             inputId="select gender"
+            optionValue="value"
             [autoDisplayFirst]="false"
             [options]="genders"
             formControlName="selectedGenders"
@@ -301,6 +305,7 @@
           <label class="label-title">Select Marital Status</label>
           <p-dropdown
             inputId="maritalStatus"
+            optionValue="name"
             [autoDisplayFirst]="false"
             [options]="maritalStatus"
             formControlName="selectedMaritalStatus"
@@ -418,7 +423,7 @@
           <input
             id="address1"
             appNoSpecialSymbols
-            customAttr="textOnly"
+            customAttr="textWithSpace"
             type="text"
             pInputText
             maxlength="30"
@@ -522,7 +527,7 @@
             type="text"
             pInputText
             appNoSpecialSymbols
-            customAttr="textOnly"
+            customAttr="textWithSpace"
             formControlName="address2"
             maxlength="30"
           />
@@ -583,8 +588,8 @@
             id="hobbies"
             type="text"
             appNoSpecialSymbols
-            customAttr="textOnly"
-            maxlength="30"
+            customAttr="textWithSpace"
+            maxlength="255"
             pInputText
             formControlName="hobbies"
           />
@@ -594,6 +599,7 @@
           <label class="label-title">Select Primary Language</label>
           <p-dropdown
             inputId="primaryLanguage"
+            optionValue="name"
             [autoDisplayFirst]="false"
             [options]="languages"
             formControlName="selectedprimaryLanguage"
@@ -620,6 +626,7 @@
           <label class="label-title">Select Religious Preference</label>
           <p-dropdown
             inputId="Select ReligiousPreference"
+            optionValue="name"
             [autoDisplayFirst]="false"
             [options]="relegions"
             formControlName="selectedRelegion"
@@ -646,6 +653,7 @@
           <label class="label-title">Select Race</label>
           <p-dropdown
             inputId="race"
+            optionValue="name"
             [autoDisplayFirst]="false"
             [options]="races"
             formControlName="selectedRace"
@@ -675,9 +683,7 @@
             id="cFirstName"
             maxlength="30"
             appNoSpecialSymbols
-            appNoSpecialSymbols
-            customAttr="textOnly"
-            customAttr="textOnly"
+            customAttr="textWithSpace"
             type="text"
             pInputText
             formControlName="cfirstName"
@@ -758,7 +764,7 @@
             inputId="relationship"
             [autoDisplayFirst]="false"
             [options]="relations"
-            optionLable="name"
+            optionValue="value"
             formControlName="selectedRelationship"
             optionLabel="name"
           >
@@ -795,7 +801,7 @@
     <button
       type="submit"
       pButton
-      [disabled]="caseWorkerProfileForm.invalid"
+      [disabled]="profileForm.invalid"
       label="Submit"
       class="p-button-outlined"
     ></button>

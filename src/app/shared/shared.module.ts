@@ -22,6 +22,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import {PasswordModule} from 'primeng/password';
 import { ToolbarModule } from 'primeng/toolbar';
 import { NgxMaskModule } from 'ngx-mask';
+import {TableModule} from 'primeng/table';
 
 import { KeysPipe } from '../case-worker/components/resident-search/rs-initial-assessment/ia-form-page-three/ia-form-page-three.component';
 import { ConsentDataComponent } from './components/consent-data/consent-data.component';
@@ -58,7 +59,8 @@ const MODULES = [
   HttpClientModule,
   PasswordModule,
   ToolbarModule,
-  NgxMaskModule
+  NgxMaskModule,
+  TableModule
 ];
 
 const COMPONENTS = [

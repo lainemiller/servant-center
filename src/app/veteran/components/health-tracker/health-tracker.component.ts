@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { HealthTrackerService } from '../../services/health-tracker.service';
 
 @Component({
@@ -20,16 +21,21 @@ export class HealthTrackerComponent implements OnInit {
   healthTrackerDetails: any;
   healthTrackerFormDetails: any;
   isFormFilled: boolean = false;
-  veteranId = 4;
+  veteranId!:number;
+  cols!: any[];
+  tableValues!:any[];
 
   constructor(
     private formBuilder: FormBuilder,
-    private service: HealthTrackerService
+    private service: HealthTrackerService,
+    private cacheData: ClipBoardService
   ) {}
 
   ngOnInit(): void {
+    this.veteranId=this.cacheData.get("veteranId");
     this.buildForm();
     this.getHealthTrackerByVeteranId();
+    this.showSelectedTable();
   }
 
   showFilledForm() {
@@ -109,6 +115,7 @@ export class HealthTrackerComponent implements OnInit {
     resp.subscribe((data) => {
       console.log('Health Tracker API--->', data);
       this.healthTrackerDetails = data;
+      this.tableValues=this.healthTrackerDetails['result'];
       if (!this.isFormFilled) {
         this.showFilledForm();
         this.isFormFilled = true;
@@ -238,6 +245,14 @@ export class HealthTrackerComponent implements OnInit {
         this.healthTrackerFormDetails[trackingSubject].isUpdate = true;
       }
     }
+  }
+
+  showSelectedTable(){
+    this.cols = [
+      { field: 'note_date', header: 'Date' ,date: true,format: 'dd/MM/yyyy'},
+      { field: 'measurement', header: 'Measurement' },
+      { field: 'tracking_comments', header: 'Comment' },
+  ];
   }
 
   resetForm() {
