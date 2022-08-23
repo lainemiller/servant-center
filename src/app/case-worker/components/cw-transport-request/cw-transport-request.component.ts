@@ -14,7 +14,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { TransportService } from '../../services/transport.service';
-import { DatePipe } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
+import { MenuItem } from 'primeng/api';
+import { Router } from "@angular/router";
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-cw-transport-request',
@@ -47,16 +50,21 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
   selectedResident: any;
   public optionState: any;
   public newAappointmentDate:any;
+  public msgCount: number = 1;
+  public msgData: any;
+  items!: MenuItem[];
 
   constructor(
     private formbuilder: FormBuilder,
     private service: TransportService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private router: Router,
+    private location: Location
   ) {
     this.minDateValue = new Date(new Date().getTime());
     this.maxDateValue = new Date(new Date().getTime());
   }
-
+  
   transportRequestForm!: FormGroup;
 
   @HostListener('window:resize')
@@ -64,30 +72,29 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
     this.mobileMode = window.innerWidth < 768;
   }
 
+
   ngOnInit(): void {
     this.onWindowResize();
     // this.service.getTransportRequestFormData().subscribe((data) => {
     this.caseWorker = this.requestFormObject;
-    console.log('reeustObj----',this.requestFormObject);
+    console.log("data",this.requestFormObject);
+    //console.log("CaseWorker",this.caseWorker); 
+    this.firstName = this.caseWorker.first_name;
+    this.lastName = this.caseWorker.last_name;
+    this.appointmentDate = this.caseWorker.appointment_date
+    this.time = this.caseWorker.appointment_time;
+    this.reason = this.caseWorker.reason_for_request;
+    this.coordinatorField = this.caseWorker.transport_coordinator;
+    this.nursingNotifiedField = this.caseWorker.nursing_notified;
+    this.address = this.caseWorker.pick_up_address_main;
+    this.city = this.caseWorker.pick_up_city;
+    this.state = this.caseWorker.pick_up_state;
+    console.log("State",this.state);
 
-    // console.log(this.caseWorker); 
-
-    this.firstName = this.caseWorker.firstName;
-    this.lastName = this.caseWorker.lastName;
-    this.appointmentDate = this.caseWorker.appointmentDate
-    this.time = this.caseWorker.time;
-    this.reason = this.caseWorker.reason;
-    this.coordinatorField = this.caseWorker.coordinatorField;
-    this.nursingNotifiedField = this.caseWorker.nursingNotifiedField;
-    this.address = this.caseWorker.address;
-    this.city = this.caseWorker.city;
-    this.state = this.caseWorker.state;
-    console.log(this.state);
-
-    this.zip = this.caseWorker.zip;
-    this.dateApproved = this.caseWorker.dateApproved;
-    this.byField = this.caseWorker.byField;
-    this.dateField = this.caseWorker.dateField;
+    this.zip = this.caseWorker.pick_up_zip_code;
+    this.dateApproved = this.caseWorker.approved_date;
+    this.byField = this.caseWorker.notified_by;
+    this.dateField = this.caseWorker.date_filled;
 
     this.buildForm();
     console.log(this.transportRequestForm.value);
@@ -97,6 +104,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
   ngOnChanges(change: SimpleChanges): void {
     console.log('login');
     console.log(change);
+    
     
     if (change?.requestFormObject) {
       this.caseWorker = change.requestFormObject.currentValue;
@@ -117,7 +125,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
       zip: [this.caseWorker.pick_up_zip_code, Validators.required],
       coordinator: ['', Validators.required],
       approvedDate: [this.maxDateValue, Validators.required],
-      nursingNotified: [true, Validators.required],
+      nursingNotified: [''],
       by: ['', Validators.required],
       date: ['', Validators.required],
     });
@@ -142,14 +150,9 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
     return this.transportRequestForm.get('date');
   }
 
+  
   onSubmit() :void {
 
-    if((this.transportRequestForm.value.nursingNotified).toLowerCase() ==="yes" ){
-      this.transportRequestForm.value.nursingNotified=true;
-      }else{
-      this.transportRequestForm.value.nursingNotified=false;
-      }
-      
 let obj={
 
   request_id:this.caseWorker.request_id,
@@ -165,19 +168,28 @@ let obj={
   date:this.transportRequestForm.value.date
 };
 	this.service.approveTransportationForm(obj).subscribe((data)=>{
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      console.log("Path Refresg",decodeURI(this.location.path()));
+      this.router.navigate([decodeURI(this.location.path())]);
+     }); 
     this.submitted = true;
 	  console.log("Form submitted");
    });
+
     console.log(this.transportRequestForm.value);
 	  this.transportRequestForm.reset();
     // }
   }
+
   reset() {
     this.buildForm();
     this.submitted = false;
   }
-
+  tableValues: any;
   selectResident(index: number) {
+    this.service.getTransportRequestFormData().subscribe((data) => {
+      this.tableValues = data;
+    });
     this.selectedResident = this.caseWorker[index];
   }
 }
