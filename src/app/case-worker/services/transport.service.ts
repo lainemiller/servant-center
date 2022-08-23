@@ -10,13 +10,10 @@ export class TransportService {
 
   constructor(private http: HttpClient) {}
   getTransportRequestFormData() {
-    //return this.http.get(this.serviceUrl+'transportationRequestData/');
-	//return this.http.get(this.serviceUrl+'transportationForm/getTransportationRequests/');
-  return this.http.get('./assets/mock/transportdata.json');
-	
+	  return this.http.get(this.serviceUrl+'transportationForm/getTransportationRequests/');
   }
   approveTransportationForm(data:any):Observable<any>{
-	return this.http.post(this.serviceUrl+'transportationForm/approveTransportationRequests', data);
+	  return this.http.post(this.serviceUrl+'transportationForm/approveTransportationRequests', data);
   }
 
 }
