@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { Component,OnInit,ViewEncapsulation } from '@angular/core';
+import {MenuItem} from 'primeng/api';
 
 @Component({
   selector: 'app-rs-initial-assessment',
   templateUrl: './rs-initial-assessment.component.html',
   styleUrls: ['./rs-initial-assessment.component.scss'],
 })
-export class RsInitialAssessmentComponent implements OnInit {
+export class RsInitialAssessmentComponent {
   steps: MenuItem[] = [
     { label: 'Step 1', routerLink: ['./page-1'], skipLocationChange: true },
     { label: 'Step 2', routerLink: ['./page-2'], skipLocationChange: true },
@@ -16,7 +16,5 @@ export class RsInitialAssessmentComponent implements OnInit {
   ];
   constructor() {}
 
-  ngOnInit(): void {
-    console.log('rs initial assessment component');
-  }
+
 }
