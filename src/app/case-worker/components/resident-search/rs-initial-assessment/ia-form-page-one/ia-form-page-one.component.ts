@@ -69,6 +69,17 @@ export class IaFormPageOneComponent implements OnInit {
       fathersFullName: ['', Validators.required],
       fatherStatus: ['', Validators.required],
       siblings: new FormArray([]),
+      maritalStatus: ['', Validators.required],
+      numberOfMarriages:['', Validators.required],
+      spouseOrSignificvantOther: ['', Validators.required],
+      children: new FormArray([]),
+      relationShpWithParentsAndSiblings: ['', Validators.required],
+      physicalAbuse: ['', Validators.required],
+      sexualAbuse: ['', Validators.required],
+      healthProblemsInFamily: ['', Validators.required],
+      religiousPreference: ['', Validators.required],
+      hobbiesOrInterests: ['', Validators.required],
+      strengthsAndTalents: ['', Validators.required],
     });
     this.buildForm();
   }
@@ -86,7 +97,7 @@ export class IaFormPageOneComponent implements OnInit {
     this.router.navigateByUrl(
       'case-worker/resident-search/initial-assessment/page-2'
     );
-    console.log(this.page1Form.value);
+    console.log('page 1 values', this.page1Form.value);
   }
 
   getFamilyDetailFormGroup() {
@@ -112,5 +123,22 @@ export class IaFormPageOneComponent implements OnInit {
       'socialAndFamilyHistory',
       'siblings',
     ]) as FormArray;
+  }
+
+  addChildren() {
+    const childrenFormArray = this.children;
+    childrenFormArray.push(this.getFamilyDetailFormGroup());
+  }
+
+  removeChildren(index: number) {
+    const childrenFormArray = this.children;
+    childrenFormArray.removeAt(index);
+  }
+
+  get children(){
+    return this.page1Form.get([
+      'socialAndFamilyHistory',
+      'children',
+    ]) as FormArray
   }
 }

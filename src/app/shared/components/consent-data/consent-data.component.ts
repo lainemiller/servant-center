@@ -4,6 +4,7 @@ import { ConsentService } from '../../services/consent.service';
 
 import { Auth } from '@aws-amplify/auth';
 import { ConsentResponse } from '../../models/ConsentResponse';
+import { ClipBoardService } from '../../services/clip-board.service';
 
 @Component({
   selector: 'app-consent-data',
@@ -15,12 +16,13 @@ export class ConsentDataComponent implements OnInit {
   displayTwo: boolean = false;
   vetran: any;
   consentDetails: any;
-  loginId: number = 0;
+  loginId!: number;
   email: any;
 
-  constructor(private service: ConsentService) {}
+  constructor(private service: ConsentService,private cacheData: ClipBoardService) {}
 
   ngOnInit() {
+    this.loginId=this.cacheData.get("loginId");
     this.getVetranDetailsById();
     Auth.currentAuthenticatedUser().then((user) => {
       this.email = user.signInUserSession.idToken.payload.email;
@@ -36,10 +38,11 @@ export class ConsentDataComponent implements OnInit {
   }
 
   onConsentSubmit() {
-    this.loginId = 7;
     let response = this.service.consentConfirm(this.loginId);
     response.subscribe((response)=>{
-      console.log(response)
+      if (response.responseStatus == 'SUCCESS') {
+        console.log(response)
+      }
     });
     this.display=false;
   }
@@ -49,16 +52,17 @@ export class ConsentDataComponent implements OnInit {
   }
 
   getVetranDetailsById() {
-    this.loginId = 7;
     let resp = this.service.getRegisterUserDetailsByLoginId(this.loginId);
     resp.subscribe((data:ConsentResponse) => {
-      this.consentDetails = data;
-      console.log('Consent API data--->',data);
-      this.vetran = this.consentDetails.result[0];
-      if (this.vetran.consent_status) {
-        this.display = false;
-      } else {
-        this.display = true;
+      if (data.responseStatus == 'SUCCESS') {
+        this.consentDetails = data;
+        console.log('Consent API data--->',data);
+        this.vetran = this.consentDetails.data[0];
+        if (this.vetran.consent_status) {
+          this.display = false;
+        } else {
+          this.display = true;
+        }
       }
     });
   }
