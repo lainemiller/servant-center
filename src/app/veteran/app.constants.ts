@@ -293,60 +293,69 @@ export const states = [
   // {name: 'West Virginia'},
   // {name: 'Wisconsin'},
   // {name: 'Wyoming'},
-];
+  ];
+  
+  export const relegions = [
+    {name: 'Hindu'},
+    {name: 'Muslim'},
+    {name: 'Christain'},
+    {name: 'Catholic'},
+    {name: 'Baptist'},
+    {name: 'none'},
+  ];
 
-export const relegions = [
-  { name: 'Hindu' },
-  { name: 'Muslim' },
-  { name: 'Christain' },
-];
+  export const relations = [
+    {name: 'Mother',value:'mother'},
+    {name: 'Father',value:'father'},
+    {name: 'Wife',value:'wife'},
+    {name:'Cousin',value:'cousin'},
+    {name:'Contact',value:'contact'},
+    {name:'Brother',value:'brother'},
+    {name:'Uncle',value:'uncle'}
+  ];
+  
+  export const languages = [
+    {name: 'English'},
+    {name: 'Telugu'},
+    {name: 'Hindi'},
+  ];
 
-export const relations = [
-  { name: 'Mother' },
-  { name: 'Father' },
-  { name: 'Wife' },
-];
+  export const genders = [
+    {name: 'Male',value:'M'},
+    {name: 'Female',value:'F'},
+    {name: 'Other',value:'O'},
+  ];
 
-export const languages = [
-  { name: 'English' },
-  { name: 'Telugu' },
-  { name: 'Hindi' },
-];
+  export const statuses = [
+    {name: 'Single'},
+    {name: 'Married'},
+    {name: 'Widowed'},
+    {name: 'Divorced'},
+  ];
 
-export const genders = [
-  { name: 'Male' },
-  { name: 'Female' },
-  { name: 'Other' },
-];
+  export const races = [
+    {name: 'White'},
+    {name: 'Native Hawaiian/Other Pacific Islander'},
+    {name: 'Hispanic/Latino'},
+    {name: 'Latinx'},
+    {name: 'African American'}
+  ];
 
-export const statuses = [
-  { name: 'Single' },
-  { name: 'Married' },
-  { name: 'Widowed' },
-  { name: 'Divorced' },
-];
-
-export const races = [
-  { name: 'White' },
-  { name: 'Native Hawaiian/Other Pacific Islander' },
-  { name: 'Hispanic/Latino' },
-];
-
-export const destinationAddresses = [
-  {
-    value: 'Kernersville',
-    name: 'Kernersville VA Clinic: 1695 Kernersville Medical Parkway; Kernersville, NC 27284',
-  },
-  {
-    value: 'Salisbury',
-    name: 'Salisbury VA Medical Center: 1601 Brenner Avenue; Salisbury, NC 28144',
-  },
-  {
-    value: 'Durham',
-    name: 'Durham VA Healthcare System: 508 Fulton Street; Durham, NC 27705',
-  },
-  {
-    value: 'other',
-    name: 'Other'
-  },
-];
+  export const destinationAddresses = [
+    {
+      value: 'Kernersville',
+      name: 'Kernersville VA Clinic: 1695 Kernersville Medical Parkway; Kernersville, NC 27284',
+    },
+    {
+      value: 'Salisbury',
+      name: 'Salisbury VA Medical Center: 1601 Brenner Avenue; Salisbury, NC 28144',
+    },
+    {
+      value: 'Durham',
+      name: 'Durham VA Healthcare System: 508 Fulton Street; Durham, NC 27705',
+    },
+    {
+      value: 'other',
+      name: 'Other'
+    },
+  ];

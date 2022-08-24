@@ -13,7 +13,7 @@ export class AssessmentDataService {
 
   public getData(payload = {}): Observable<any> {
     if (this.isDev) {
-      return this.restcs.get(this.commonUrl+'assessmentDetailsTest/4');
+      return this.restcs.get(this.commonUrl+'assessmentDetails/4');
         } else {
       //api url to be pasted here instead of mock json url
       return this.restcs.get('./assets/mock/assessment-data.json');
