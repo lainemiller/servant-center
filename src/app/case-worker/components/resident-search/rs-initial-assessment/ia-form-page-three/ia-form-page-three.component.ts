@@ -119,11 +119,20 @@ export class IaFormPageThreeComponent implements OnInit {
       mentalStatusAssessment: this.mentalStatusAssessment,
       medicalInformation: this.medicalInformation,
     });
-    console.log(this.page3Form.get(['mentalStatusAssessment', 'ideation']));
+    console.log('build form', this.page3Form.get(['mentalStatusAssessment', 'ideation']));
   }
 
   onSubmit() {
-    console.log(this.page3Form.value);
+      this.router.navigateByUrl(
+        'case-worker/resident-search/initial-assessment/page-4'
+      );
+    console.log('page 3 values', this.page3Form.value);
+  }
+
+  goBack(){
+    this.router.navigateByUrl(
+      'case-worker/resident-search/initial-assessment/page-2'
+    );  
   }
 
   get ideationControls() {
