@@ -7,7 +7,6 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class WelcomeHeaderComponent implements OnInit {
   @Input() public name: any;
-  @Input() public date: any;
   @Input() public image: any;
 
   constructor() {}

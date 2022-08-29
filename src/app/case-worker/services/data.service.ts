@@ -8,25 +8,27 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class DataService {
-  private countUrl = "http://localhost:3000/"
+  private commonUrl = "http://localhost:3000/"
   //private serviceUrl=environment.localUrl
   constructor(private http: HttpClient, private restcs: RestClientService) {}
 
   private isDev = isDevMode();
   private caseWorkerApi = environment.serviceUrl.caseWorkerUser;
-
+  
   public getUserData(payload = {}): Observable<any> {
     if (this.isDev) {
-     return this.restcs.get('./assets/mock/userData.json');
+     // return this.restcs.get(this.caseWorkerApi);
+     return this.restcs.get('./assets/mock/userData.json'); 
 
     } else {
       return this.restcs.get(this.caseWorkerApi);
     } 
   }
 
+  
   public getMsgCount(payload = {}): Observable<any> {
     //return this.restcs.get('./assets/mock/msgs.json');
-    return this.http.get(this.countUrl+'transportationForm/getTransportationRequests/');
+   return this.http.get(this.commonUrl+'transportationForm/getTransportationRequests/');
   }
 
   public getTreatmentPlanData(payload = {}): Observable<any> {

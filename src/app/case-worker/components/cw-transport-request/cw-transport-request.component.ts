@@ -72,7 +72,6 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
     this.mobileMode = window.innerWidth < 768;
   }
 
-
   ngOnInit(): void {
     this.onWindowResize();
     // this.service.getTransportRequestFormData().subscribe((data) => {
@@ -104,8 +103,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
   ngOnChanges(change: SimpleChanges): void {
     console.log('login');
     console.log(change);
-    
-    
+
     if (change?.requestFormObject) {
       this.caseWorker = change.requestFormObject.currentValue;
     }
@@ -126,7 +124,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
       zip: [this.caseWorker.pick_up_zip_code, Validators.required],
       coordinator: ['', Validators.required],
       approvedDate: [this.maxDateValue, Validators.required],
-      nursingNotified: [''],
+      nursingNotified: [false],
       by: ['', Validators.required],
       date: ['', Validators.required],
     });
@@ -151,8 +149,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
     return this.transportRequestForm.get('date');
   }
 
-  
-  onSubmit() :void {
+onSubmit() :void {
 
 let obj={
 
@@ -170,11 +167,15 @@ let obj={
 };
 	this.service.approveTransportationForm(obj).subscribe((data)=>{
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      console.log("Path Refresg",decodeURI(this.location.path()));
       this.router.navigate([decodeURI(this.location.path())]);
      }); 
     this.submitted = true;
 	  console.log("Form submitted");
+    
+    // this.service.getTransportRequestFormData().subscribe((data) => {
+    //   this.tableValues = data;
+    //   console.log(this.tableValues);
+    // });
    });
 
     console.log(this.transportRequestForm.value);

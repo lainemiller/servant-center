@@ -20,14 +20,12 @@ export class VeteranprofileService {
     endPoint: number,
     payload = {}
   ): Observable<any> {
-    if (this.isDev) {
+    if (this.isDev) {  
       return this.restcs.get(this.commonUrl+'userProfile/getUserDetails/'+endPoint);
     } else {
       return this.restcs.get(this.veteranProfileAPI + endPoint);
     }
   }
-
-  
 
   public updateProfile(endpoint:number,payload={}):Observable<any>{
     if(this.isDev){
