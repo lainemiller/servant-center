@@ -14,7 +14,6 @@ export class CaseWorkerComponent implements OnInit {
   public msgData: any;
   public userInfo: any;
   public name!: string;
-  public login!: string;
   public profilePic!: string;
   items!: MenuItem[];
 
@@ -43,7 +42,6 @@ export class CaseWorkerComponent implements OnInit {
       if (this.profilePic === null) {
         this.profilePic = '../assets/images/user-profile.jpg';
       }
-      this.login = this.userInfo[0].last_login_date_time;
     });
   }
   itemChange(msgs: number) {
