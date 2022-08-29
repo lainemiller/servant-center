@@ -1,5 +1,6 @@
 <div class="page1-form-container p-mt-4">
   <form [formGroup]="page1Form" (ngSubmit)="onSubmit()" *ngIf="page1Form">
+    <h3>Personal Details </h3>
     <div class="p-fluid p-formgrid p-grid" formGroupName="personalDetails">
       <div class="p-field p-col-12 p-md-6">
         <input type="text" pInputText formControlName=name placeholder="Name">
@@ -27,14 +28,14 @@
           <label for="gender{{i}}" class="p-ml-2">{{gender.label}}</label>
         </div>
       </div>
-      <div class="p-col-12 p-formgroup-inline">
+      <!-- <div class="p-col-12 p-formgroup-inline">
         <label class="p-mr-2 radiobutton-group-label">Marital Status</label>
         <div *ngFor="let maritalStatus of maritalStatusList; let i = index" class="p-field-radiobutton">
           <p-radioButton name="maritalStatus" formControlName=maritalStatus [value]=maritalStatus.value
             inputId="maritalStatus{{i}}"></p-radioButton>
           <label for="maritalStatus{{i}}" class="p-ml-2">{{maritalStatus.label}}</label>
         </div>
-      </div>
+      </div> -->
       <div class="p-field p-col-12 p-md-6">
         <input type="text" pInputText formControlName=race placeholder="Race">
       </div>
@@ -140,7 +141,67 @@
       </div>
       <button type="button" pButton icon="pi pi-plus" class="p-buton-outlined p-button-rounded"
         (click)="addSibling()"></button>
+      <div class="p-col-12 p-formgroup-inline">
+        <label class="p-mr-2 radiobutton-group-label">Marital Status</label>
+        <div *ngFor="let maritalStatus of maritalStatusList; let i = index" class="p-field-radiobutton">
+          <p-radioButton name="maritalStatus" formControlName="maritalStatus" [value]=maritalStatus.value
+            inputId="maritalStatus{{i}}"></p-radioButton>
+          <label for="maritalStatus{{i}}" class="p-ml-2">{{maritalStatus.label}}</label>
+        </div>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=numberOfMarriages placeholder="Number of Marriages">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=spouseOrSignificvantOther
+          placeholder="Spouse or Significant Others">
+      </div>
+      <h4>Children: <span *ngIf="!children.controls.length"> None</span></h4>
+      <div formArrayName="children" *ngFor="let child of children.controls; let i = index" class="p-col-12">
+        <div [formGroupName]="i">
+          <h4>Children {{ i+1 }}</h4>
+          <div class="p-field p-col-4">
+            <input type="text" pInputText formControlName="name" placeholder="Name">
+          </div>
+          <div class="p-field p-col-4">
+            <input type="text" pInputText formControlName="age" placeholder="Age">
+          </div>
+          <div class="p-field p-col-4">
+            <input type="text" pInputText formControlName="location" placeholder="Location">
+          </div>
+          <button type="button" pButton icon="pi pi-times" class="p-buton-outlined p-button-rounded p-button-danger"
+            (click)="removeChildren(i)"></button>
+        </div>
+      </div>
+      <button type="button" pButton icon="pi pi-plus" class="p-buton-outlined p-button-rounded"
+        (click)="addChildren()"></button>
     </div>
+    <div class="p-fluid p-formgrid p-grid" formGroupName="socialAndFamilyHistory">
+      <div class="p-field p-col-12">
+        <input type="text" pInputText formControlName=relationShpWithParentsAndSiblings
+          placeholder="How would you describe your childhood and your relationship with your parents and your siblings?">
+      </div>
+      <div class="p-field p-col-12">
+        <input type="text" pInputText formControlName=physicalAbuse placeholder="History of Physical Abuse">
+      </div>
+      <div class="p-field p-col-12">
+        <input type="text" pInputText formControlName=sexualAbuse placeholder="History of Sexual Abuse">
+      </div>
+      <div class="p-field p-col-12">
+        <input type="text" pInputText formControlName=healthProblemsInFamily
+          placeholder="History of Health Problems in your Family">
+      </div>
+      <div class="p-field p-col-12">
+        <input type="text" pInputText formControlName=religiousPreference placeholder="Religious Preference">
+      </div>
+      <div class="p-field p-col-12">
+        <input type="text" pInputText formControlName=hobbiesOrInterests placeholder="Hobbies or Interests">
+      </div>
+      <div class="p-field p-col-12">
+        <input type="text" pInputText formControlName=strengthsAndTalents placeholder="Strengths and Talents">
+      </div>
+    </div>
+
     <div class="p-d-flex button-container p-mt-4">
       <div class="p-jc-start">
         <button type="button" pButton label="Save"></button>

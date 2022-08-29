@@ -27,7 +27,7 @@ export class CaseWorkerComponent implements OnInit {
     this.service.getMsgCount().subscribe(
       (data: any) => {
         this.msgData = data;
-        this.msgCount = this.msgData.msgs.length;
+        this.msgCount = this.msgData.length;
         this.itemChange(this.msgCount);
       },
       (err: any) => {
@@ -55,7 +55,7 @@ export class CaseWorkerComponent implements OnInit {
         routerLink: ['/case-worker/'],
       },
       {
-        label: `MESSAGES (${msgs})+`,
+        label: `REQUESTS (${msgs})+`,
         icon: 'fa fa-bell',
         styleClass: 'menu-items--text menu-item--2',
         routerLink: ['/case-worker/messages'],

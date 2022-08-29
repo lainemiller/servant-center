@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,17 +9,36 @@ import { Router } from '@angular/router';
 })
 export class IaFormPageFiveComponent implements OnInit {
   page5Form!: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router) {}
+  preliminaryTreatmentGoals!: FormGroup;
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.initializeFormGroups();
   }
 
   initializeFormGroups() {
+
+    this.preliminaryTreatmentGoals = this.fb.group({
+      shortTermGoals: ['', Validators.required],
+      longTermGoals: ['', Validators.required],
+      ptDate: ['', Validators.required]
+    });
     this.buildForm();
   }
 
   buildForm() {
-    this.page5Form = this.fb.group({});
+    this.page5Form = this.fb.group({
+      preliminaryTreatmentGoals: this.preliminaryTreatmentGoals
+    });
+  }
+
+  onSubmit() {
+    console.log('Submitted');
+  }
+
+  goBack() {
+    this.router.navigateByUrl(
+      'case-worker/resident-search/initial-assessment/page-4'
+    );
   }
 }

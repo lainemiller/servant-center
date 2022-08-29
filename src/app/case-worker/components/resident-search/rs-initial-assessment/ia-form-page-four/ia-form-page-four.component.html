@@ -1,9 +1,69 @@
 <p>ia-form-page-four works!</p>
-<div class="p-d-flex button-container p-mt-4">
-  <div class="p-jc-start">
-    <button type="button" pButton label="Save"></button>
-    <button type="button" pButton label="Cancel" class="p-button-outlined p-ml-2"></button>
+<form [formGroup]="page4Form" (ngSubmit)="onSubmit()" *ngIf="page4Form">
+  <h3>Substance Abuse History</h3>
+  <div class="p-fluid p-formgrid p-grid" formGroupName="substanceAbuseHistory">
+    <div class="p-field p-md-6">
+      <input type="text" pInputText formControlName=chemicalsUsed placeholder="Chemical(s) Used">
+    </div>
+    <div class="p-field p-md-6">
+      <input type="text" pInputText formControlName=drugsOfChoice placeholder="Drug(s) of Choice">
+    </div>
+    <div class="p-field p-md-6">
+      <input type="text" pInputText formControlName=amountsAndFrequencyOfUse
+        placeholder="Amount(s) and Frequency of use">
+    </div>
+    <div class="p-field p-md-6">
+      <input type="text" pInputText formControlName=routeOfAdministration placeholder="Route(s) of Administration">
+    </div>
+    <div class="p-field p-md-6">
+      <input type="text" pInputText formControlName=negativeConsequences placeholder="Negative Consequences">
+    </div>
+    <div class="p-field p-md-6">
+      <input type="text" pInputText formControlName=historyOfWithdrawal placeholder="History of Withdrawal">
+    </div>
+    <div class="p-field p-md-6">
+      <input type="text" pInputText formControlName=inpatientOrOutpatientRehabPrograms
+        placeholder="Inpatient and/or Outpatient Rehab Programs">
+    </div>
+    <div class="p-field p-md-6">
+      <input type="text" pInputText formControlName=lastUseOfDrugsAndAlchohol
+        placeholder="Last Use of Drugs and/or Alchohol">
+    </div>
+    <div class="p-field p-md-6">
+      <input type="text" pInputText formControlName=currentAndPastTreatment placeholder="Current and Past Treatment">
+    </div>
   </div>
-  <div class="p-jc-end">
-    <button type="submit" pButton label="Next"></button>
+
+  <h3>Legal History/Issues</h3>
+  <div class="p-fluid p-formgrid p-grid" formGroupName="legalHistoryOrIssues">
+    <div class="p-field p-md-6">
+      <input type="text" pInputText formControlName=priorConvictions placeholder="Prior Convictions">
+    </div>
+    <div class="p-field p-md-6">
+      <input type="text" pInputText formControlName=incarcerations placeholder="Incarcerations">
+    </div>
+    <div class="p-field p-md-6">
+      <input type="text" pInputText formControlName=termsAndConditionsOfProbationOrParole placeholder="Terms and Conditions of Probation/Parole">
+    </div>
+    <div class="p-field p-md-6">
+      <input type="text" pInputText formControlName=nameAndAddresOfProbationOrParoleOfficer placeholder="Name and Address of Probation/Parole Officer">
+    </div>
+    <div class="p-field p-md-6">
+      <input type="text" pInputText formControlName=chargesPending placeholder="Charges pending">
+    </div>
+    <div class="p-field p-md-6">
+      <input type="text" pInputText formControlName=outstandingWarrants placeholder="Outstanding Warrants">
+    </div>
   </div>
+  <!-- save -->
+  <div class="p-d-flex button-container p-mt-4">
+    <div class="p-jc-start">
+      <button type="button" pButton label="Save"></button>
+      <button type="button" pButton label="Cancel" class="p-button-outlined p-ml-2"></button>
+    </div>
+    <div class="p-jc-end">
+      <button type="button" pButton label="Back" (click)="goBack()"></button>
+      <button type="submit" pButton label="Next" class="p-button-inlined p-ml-2"></button>
+    </div>
+  </div>
+</form>
