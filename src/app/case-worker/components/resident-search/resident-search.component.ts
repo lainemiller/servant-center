@@ -46,21 +46,16 @@ export class ResidentSearchComponent implements OnInit {
   ) {
     this.maxDateValue = new Date(new Date().getTime());
 
-    this.service.getResidentSearchData().subscribe((data) => {
-      console.log("test:", data);
-      
-      this.tableValues = data;
-     // this.tableValues = this.tableValues.resedentData;
-      console.log("resident search ", this.tableValues);
-      
+    this.service.getResidentSearchData().subscribe((res) => {
+      this.tableValues = res;
+      console.log(this.tableValues);
     });
   }
 
   columns = [
-    { header: 'First Name', field: 'firstName' },
-    { header: 'last Name', field: 'lastName' },
-    { header: 'Birthdate', field: 'birthDate' },
-    { header: 'Address', field: 'address' },
+    { header: 'Name', field: 'first_name' },
+    { header: 'Birthdate', field: 'date_of_birth' },
+    { header: 'Address', field: 'address_main' },
   ];
 
   tabMenuItems: MenuItem[] = [
@@ -140,19 +135,11 @@ export class ResidentSearchComponent implements OnInit {
     // console.log(typeof str)
 
     this.result = this.tableValues.filter((index: any) => {
-      if(!filters.birthDate){
-        return (
-          index.firstName == filters.firstName &&
-          index.lastName == filters.lastName 
-        );
-      }else{
-        return (
-          index.firstName == filters.firstName &&
-          index.lastName == filters.lastName   &&
-          index.birthDate == filters.birthDate
-        );
-      }
-     
+      return (
+        index.firstName == filters.firstName &&
+        index.lastName == filters.lastName &&
+        index.birthDate == filters.birthDate
+      );
     });
 
     //store filter data

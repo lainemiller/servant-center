@@ -81,7 +81,9 @@
       [value]="tableValues"
       selectionMode="single"
       [(selection)]="selectedResident"
-    >
+      [scrollable]="true"
+      scrollHeight="30vh"
+      >
       <ng-template pTemplate="header">
         <tr>
           <th [pSortableColumn]="col.field" *ngFor="let col of columns">
@@ -117,14 +119,15 @@
           <div class="p-col-12 p-md-6">
             <p class="card-resident-details">
               <span class="card-resident-name">{{
-                selectedResident.firstName }} {{  selectedResident.lastName }}</span
-              ><br />
-              <span class="card-resident-name">{{
-                selectedResident.address
+                selectedResident.first_name
               }}</span
               ><br />
               <span class="card-resident-name">{{
-                selectedResident.phoneNumber
+                selectedResident.address_main
+              }}</span
+              ><br />
+              <span class="card-resident-name">{{
+                selectedResident.primary_phone
               }}</span
               ><br />
               <span class="card-resident-name">{{

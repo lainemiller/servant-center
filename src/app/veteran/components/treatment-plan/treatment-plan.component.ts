@@ -46,7 +46,7 @@ export class TreatmentPlanComponent implements OnInit {
         lastName: this.data.last_name,
         recordNo: 1234,
         dateOfBirth1: this.data.date_of_birth,
-        //intakeDOB: this.data.intake_date,
+        intakeDOB: this.data.intake_date,
         hmisIdNo: this.data.hmis_id
       });
      console.log(this.treatmentPlanForm.value);

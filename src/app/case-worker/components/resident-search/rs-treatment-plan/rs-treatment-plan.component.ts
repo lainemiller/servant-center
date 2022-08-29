@@ -128,11 +128,11 @@ export class RsTreatmentPlanComponent implements OnInit {
 
   onSubmit() {
     this.formView = false;
-    console.log(this.treatmentPlanForm.value);
     this.treatmentArr = this.treatmentPlanForm.get('treatmentIssues')?.value;
-    console.log(this.treatmentArr);
-    
+    this.service.updateTreatmentPlanData(this.treatmentPlanForm.value).subscribe();
+    console.log("Updated Successfully");
     this.formData= this.treatmentPlanForm.value;
+    console.log(this.formData)
     
   }
  

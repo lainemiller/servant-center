@@ -90,13 +90,21 @@
         <div class="p-fluid p-formgrid p-grid">
           <div class="p-field p-col-12 p-md-3">
             <span class="label-title">Intake Date</span>
-            <p-calendar
+           <!-- <p-calendar
               formControlName="intakeDOB"
               [inline]="false"
               [showIcon]="true"
               placeholder="Intake date (mm/dd/yyyy)"
-            ></p-calendar>
-            <div
+            ></p-calendar>-->
+            <input
+            type="text"
+            pInputText
+            formControlName="intakeDOB"
+            placeholder="Intake Date (mm/dd/yyyy)"
+            [readonly]=true
+            value="{{ data?.intake_date | date: 'dd/MM/yyyy'  }}"
+            />
+            <!--<div
               *ngIf="
                 getControl.intakeDOB.invalid && getControl.intakeDOB.touched"
             >
@@ -105,8 +113,8 @@
                 class="form-error"
               >
                 <small>Intake date is required.</small>
-              </div>
-            </div>
+              </div>-->
+            
           </div>
           <div class="p-field p-col-12 p-md-3">
             <span class="label-title">HMIS ID </span>

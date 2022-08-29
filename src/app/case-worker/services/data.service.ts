@@ -26,4 +26,7 @@ export class DataService {
   getTreatmentPlanData(vetID:number): Observable<any> {
     return this.http.get(this.serviceUrl+'getTreatmentPlanDetails/'+ vetID);
   }
+  public updateTreatmentPlanData(data:any): Observable<any>{
+    return this.http.put(this.serviceUrl+'updateTreatmentPlanDetails/save/4',data);
+  }
 }
