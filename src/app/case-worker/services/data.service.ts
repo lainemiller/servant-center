@@ -27,12 +27,6 @@ export class DataService {
     } 
   }
 
-  
-  // public getMsgCount(payload = {}): Observable<any> {
-  //   //return this.restcs.get('./assets/mock/msgs.json');
-  //  return this.http.get(this.serviceUrl+'transportationForm/getTransportationRequests/');
-  // }
-
   public getMsgCount(payload = {}): Observable<any> {
     if (this.isDev) {
       return this.http.get(this.serviceUrl+'transportationForm/getTransportationRequests/');
