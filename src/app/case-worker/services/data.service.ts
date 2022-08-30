@@ -8,20 +8,27 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class DataService {
-  constructor( private restcs: RestClientService,private http: HttpClient) {}
+  private commonUrl = "http://localhost:3000/"
+  constructor(private http: HttpClient, private restcs: RestClientService) {}
 
   private isDev = isDevMode();
   private caseWorkerApi = prodenv.serviceUrl.caseWorkerUser;
-  private serviceUrl=environment.localUrl;
+  private serviceUrl= environment.localUrl;
+  
   public getUserData(payload = {}): Observable<any> {
     if (this.isDev) {
-      return this.restcs.get('./assets/mock/userData.json');
+     // return this.restcs.get(this.caseWorkerApi);
+     return this.restcs.get('./assets/mock/userData.json'); 
+
     } else {
       return this.restcs.get(this.caseWorkerApi);
-    }
+    } 
   }
+
+  
   public getMsgCount(payload = {}): Observable<any> {
-    return this.restcs.get('./assets/mock/msgs.json');
+    //return this.restcs.get('./assets/mock/msgs.json');
+   return this.http.get(this.commonUrl+'transportationForm/getTransportationRequests/');
   }
   getTreatmentPlanData(vetID:number): Observable<any> {
     return this.http.get(this.serviceUrl+'getTreatmentPlanDetails/'+ vetID);

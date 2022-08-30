@@ -1,49 +1,54 @@
 <div class="form-container">
-  <form
-    *ngIf="caseWorkerProfileForm"
-    [formGroup]="caseWorkerProfileForm"
-    (ngSubmit)="onSubmit()"
-  >
-    <div class="p-fluid p-formgrid p-grid">
-      <img
-        class="form-container__img"
-        src="assets/images/profile.svg"
-        alt="Image"
-        width="150"
+  <div class="p-fluid p-formgrid p-grid">
+    <img
+      class="form-container__img"
+      src="assets/images/profile.svg"
+      alt="Image"
+      width="150"
+    />
+  </div>
+  <div *ngIf="isShowFields" class="p-fluid p-grid">
+    <div class="p-field p-col-12 p-md-4">
+      <label class="label-title">Record #</label>
+      <input
+        id="Record #"
+        type="text"
+        class="form-container__disable"
+        pInputText
       />
     </div>
-    <div *ngIf="isShowFields" class="p-fluid p-grid">
-      <div class="p-field p-col-12 p-md-4">
-        <label class="label-title">Record #</label>
-        <input id="Record #" type="text" class="form-container__disable" pInputText />
-      </div>
-      <div class="p-field p-col-12 p-md-4">
-        <label class="label-title">Intake Date</label>
-        <input
-          id="Intake DOB"
-          class="form-container__disable"
-          placeholder="Intake DOB(mm/dd/yyyy)"
-          pInputText
-        />
-      </div>
-      <div class="p-field p-col-12 p-md-4">
-        <label class="label-title">Case Manager</label>
-        <input id="Case Manager" type="text" class="form-container__disable" pInputText />
-      </div>
-      <div class="p-field p-col-12 p-md-4">
-        <label class="label-title">Veteran Id</label>
-        <input
-          id="Veteran Id"
-          type="text"
-          class="form-container__disable"
-          value="{{ profileDetails.vetID }}"
-          appNoSpecialSymbols
-          customAttr="textOnly"
-          pInputText
-        />
-      </div>
+    <div class="p-field p-col-12 p-md-4">
+      <label class="label-title">Intake Date</label>
+      <input
+        id="Intake DOB"
+        class="form-container__disable"
+        placeholder="Intake DOB(mm/dd/yyyy)"
+        pInputText
+      />
     </div>
-
+    <div class="p-field p-col-12 p-md-4">
+      <label class="label-title">Case Manager</label>
+      <input
+        id="Case Manager"
+        type="text"
+        class="form-container__disable"
+        pInputText
+      />
+    </div>
+    <div class="p-field p-col-12 p-md-4">
+      <label class="label-title">Veteran Id</label>
+      <input
+        id="Veteran Id"
+        type="text"
+        class="form-container__disable"
+        value="{{ veteran?.veteran_id }}"
+        appNoSpecialSymbols
+        customAttr="textOnly"
+        pInputText
+      />
+    </div>
+  </div>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <!-- Person Info start -->
     <fieldset class="form-container__sec">
       <legend class="p-col form-container__sec-heading">
@@ -81,7 +86,6 @@
             type="text"
             id="Last Name"
             pInputText
-            value="{{ veteran?.middleName }}"
             appNoSpecialSymbols
             customAttr="textOnly"
             maxlength="30"
@@ -110,7 +114,6 @@
             id="Last Name"
             type="text"
             pInputText
-            value="{{ veteran?.lastName }}"
             appNoSpecialSymbols
             customAttr="textOnly"
             maxlength="30"
@@ -267,6 +270,7 @@
 
           <p-dropdown
             inputId="select gender"
+            optionValue="value"
             [autoDisplayFirst]="false"
             [options]="genders"
             formControlName="selectedGenders"
@@ -301,6 +305,7 @@
           <label class="label-title">Select Marital Status</label>
           <p-dropdown
             inputId="maritalStatus"
+            optionValue="name"
             [autoDisplayFirst]="false"
             [options]="maritalStatus"
             formControlName="selectedMaritalStatus"
@@ -418,7 +423,7 @@
           <input
             id="address1"
             appNoSpecialSymbols
-            customAttr="textOnly"
+            customAttr="textWithSpace"
             type="text"
             pInputText
             maxlength="30"
@@ -496,7 +501,7 @@
 
       <div class="p-fluid p-grid">
         <div class="p-field p-col-12 p-md-4">
-          <label class="label-title">Select Country</label>
+          <label class="label-title">Country</label>
           <input
             type="text"
             appNoSpecialSymbols
@@ -522,7 +527,7 @@
             type="text"
             pInputText
             appNoSpecialSymbols
-            customAttr="textOnly"
+            customAttr="textWithSpace"
             formControlName="address2"
             maxlength="30"
           />
@@ -583,81 +588,89 @@
             id="hobbies"
             type="text"
             appNoSpecialSymbols
-            customAttr="textOnly"
-            maxlength="30"
+            customAttr="textWithSpace"
+            maxlength="255"
             pInputText
             formControlName="hobbies"
           />
         </div>
 
         <div class="p-field p-col-12 p-md-4">
-          <label class="label-title">Select Primary Language</label>
-          <p-dropdown
-            inputId="primaryLanguage"
-            [autoDisplayFirst]="false"
-            [options]="languages"
-            formControlName="selectedprimaryLanguage"
-            optionLabel="name"
-          >
-          </p-dropdown>
+          <label class="label-title">Primary Language</label>
+          <input
+            id="primaryLanguage"
+            type="text"
+            appNoSpecialSymbols
+            customAttr="textWithSpace"
+            pInputText
+            formControlName="primaryLanguage"
+          />
           <div
             *ngIf="
-              getControl.selectedprimaryLanguage.touched &&
-              getControl.selectedprimaryLanguage.invalid
+              getControl.primaryLanguage.touched &&
+              getControl.primaryLanguage.invalid
             "
             class="text-danger"
           >
             <small
               class="form-container__sec-errmsg"
-              *ngIf="getControl.selectedprimaryLanguage.errors?.required"
+              *ngIf="getControl.primaryLanguage.errors?.required"
             >
-              Select an option.
+              Primary language is required.
             </small>
           </div>
         </div>
 
         <div class="p-field p-col-12 p-md-4">
-          <label class="label-title">Select Religious Preference</label>
-          <p-dropdown
-            inputId="Select ReligiousPreference"
-            [autoDisplayFirst]="false"
-            [options]="relegions"
-            formControlName="selectedRelegion"
-            optionLabel="name"
-          >
-          </p-dropdown>
+          <label class="label-title">Religious Preference</label>
+          <input
+            id="Select ReligiousPreference"
+            type="text"
+            appNoSpecialSymbols
+            customAttr="textWithSpace"
+            pInputText
+            formControlName="relegion"
+          />
           <div
-            *ngIf="
-              getControl.selectedRelegion.touched &&
-              getControl.selectedRelegion.invalid
-            "
+            *ngIf="getControl.relegion.touched && getControl.relegion.invalid"
             class="text-danger"
           >
             <small
               class="form-container__sec-errmsg"
-              *ngIf="getControl.selectedRelegion.errors?.required"
+              *ngIf="getControl.relegion.errors?.required"
             >
-              Select an option.
+              Relegion preference is required.
             </small>
           </div>
         </div>
 
         <div class="p-field p-col-12 p-md-4">
-          <label class="label-title">Select Race</label>
-          <p-dropdown
-            inputId="race"
-            [autoDisplayFirst]="false"
-            [options]="races"
-            formControlName="selectedRace"
-            optionLabel="name"
+          <label class="label-title">Race</label>
+          <input
+            id="race"
+            type="text"
+            appNoSpecialSymbols
+            customAttr="textWithSpace"
+            pInputText
+            formControlName="race"
+          />
+          <div
+            *ngIf="getControl.race.touched && getControl.race.invalid"
+            class="text-danger"
           >
-          </p-dropdown>
+            <small
+              class="form-container__sec-errmsg"
+              *ngIf="getControl.race.errors?.required"
+            >
+              Race is required.
+            </small>
+          </div>
         </div>
-        <ng-template pTemplate="selectedItem">
+        <!-- <ng-template pTemplate="selectedItem">
           <div class="country-item country-item-value" *ngIf="selectedRace">
             <div>{{ selectedRace.name }}</div>
           </div>
-        </ng-template>
+        </ng-template> -->
       </div>
     </fieldset>
     <!-- Other Info End -->
@@ -675,9 +688,7 @@
             id="cFirstName"
             maxlength="30"
             appNoSpecialSymbols
-            appNoSpecialSymbols
-            customAttr="textOnly"
-            customAttr="textOnly"
+            customAttr="textWithSpace"
             type="text"
             pInputText
             formControlName="cfirstName"
@@ -758,7 +769,7 @@
             inputId="relationship"
             [autoDisplayFirst]="false"
             [options]="relations"
-            optionLable="name"
+            optionValue="value"
             formControlName="selectedRelationship"
             optionLabel="name"
           >
@@ -795,7 +806,7 @@
     <button
       type="submit"
       pButton
-      [disabled]="caseWorkerProfileForm.invalid"
+      [disabled]="profileForm.invalid"
       label="Submit"
       class="p-button-outlined"
     ></button>

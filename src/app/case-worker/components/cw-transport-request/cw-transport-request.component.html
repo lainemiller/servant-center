@@ -166,25 +166,19 @@
         </div>
       </div>
     </div>
-
+  
     <div class="p-fluid p-grid">
-      <div class="p-field p-col-12 p-md-6">
-        <input
-          type="text"
-          pInputText
+      <div class="p-field p-col-12 p-md-3 p-field-checkbox">
+        <label for="Nursing Notified" class="label-title">Nursing Notified</label>
+        <p-checkbox name="Nursing Notified"
+          dir="rtl" 
           formControlName="nursingNotified"
-          maxlength="30"
-          value="{{ caseWorker.nursing_notified }}"
-          placeholder="Nursing Notified"
-          appNoSpecialSymbols
-          customAttr="textWithSpace"
-        />
-        <small
-          class="error"
-          *ngIf="nursingNotified?.invalid && nursingNotified?.touched"
-          >nursing notified is required.</small
-        >
+          class="checkbox"
+          value="{{caseWorker.nursing_notified}}"
+          [binary]="true">
+      </p-checkbox>
       </div>
+
       <div class="p-field p-col-12 p-md-4">
         <input
           type="text"
@@ -200,7 +194,7 @@
           >by is required.</small
         >
       </div>
-      <div class="p-field p-col-12 p-md-2">
+      <div class="p-field p-col-12 p-md-5">
         <p-calendar
           formControlName="date"
           [touchUI]="mobileMode"
@@ -220,6 +214,7 @@
       type="submit"
        pButton
       label="Submit"
+      [disabled]="transportRequestForm.invalid"
       class="p-button-outlined"
     ></button>
     <button

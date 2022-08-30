@@ -11,6 +11,7 @@ import { CalendarEventsService } from '../../services/calendar-events.service';
   styleUrls: ['./case-worker-dashboard.component.scss'],
 })
 export class CaseWorkerDashboardComponent implements OnInit {
+  
   public items: any;
   public display = false;
   public eventList: any = [];
@@ -22,6 +23,8 @@ export class CaseWorkerDashboardComponent implements OnInit {
   public minDateValue: any;
   public count = 0;
   public participantsExceeded: boolean = false;
+  public partic: string = "";
+  
   constructor(
     private service: CalendarEventsService,
     private formBuilder: FormBuilder
@@ -59,7 +62,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
     });
   }
 
-  addparticipant() {
+  addParticipant() {
     this.count = this.count + 1;    
     if(this.count <= 20){
       const participantsFormArray = this.participants;
@@ -69,9 +72,13 @@ export class CaseWorkerDashboardComponent implements OnInit {
     }  
   }
 
-  removeparticipant(index: number) {
+  removeParticipant(index: number) {
+    this.count -= 1;
     const participantsFormArray = this.participants;
     participantsFormArray.removeAt(index);
+    //if(this.count <= 20){
+      this.participantsExceeded = false;
+    //}
   }
 
   get participants() {
@@ -97,6 +104,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
   onSubmit() {
     console.log(this.eventsForm.value);
     let event = this.eventsForm.value;
+    
     let newEvent = {
       title: event.eventTitle,
       date: event.eventDate,
@@ -113,15 +121,27 @@ export class CaseWorkerDashboardComponent implements OnInit {
     this.display = false;
   }
   onCancel() {
+    this.count = 0;
     this.eventsForm.reset();
+    let participantsArray=this.eventsForm.get(['participants']) as FormArray
+    this.clearFormArray(participantsArray)
     this.display = false;
   }
   changeTag(value: any) {
     console.log(value.activeItem.label);
     this.tagName = value.activeItem.label;
   }
+  clearFormArray = (formArray: FormArray) => {
+    while (formArray.length !== 0) {
+      formArray.removeAt(0)
+    }
+  }
+  
   crossButton() {
+    this.count = 0;
     this.eventsForm.reset();
+    let participantsArray=this.eventsForm.get(['participants']) as FormArray
+    this.clearFormArray(participantsArray)
   }
   showEventDetail(arg: any) {
     this.displayEvent = true;

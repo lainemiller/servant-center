@@ -59,8 +59,9 @@ export class TransportationRequestFormComponent implements OnInit {
       .getProfileData(this.userId)
       .subscribe((data: VeteranProfileResponse) => {
         this.veteranData = data;
-        this.firstName = this.veteranData.firstName;
-        this.lastName = this.veteranData.lastName;
+        console.log("Veteran Data is ---> ",this.veteranData);
+        this.firstName = this.veteranData.data[0].first_name;
+        this.lastName = this.veteranData.data[0].last_name;
         // this.address1 = this.veteranData.address1;
         // this.city = this.veteranData.city;
         this.state = this.veteranData.state;
@@ -75,8 +76,8 @@ export class TransportationRequestFormComponent implements OnInit {
   buildForm() {
     this.transportRequestForm = this.formBuilder.group({
       veteran_id:[this.veteran_id],
-      firstName: ["Harry", Validators.required],
-      lastName: ["Potter", Validators.required],
+      firstName: [this.firstName, Validators.required],
+      lastName: [this.lastName, Validators.required],
       reason: ['', Validators.required],
       appointmentDate: ['', Validators.required],
       time: ['', Validators.required],
