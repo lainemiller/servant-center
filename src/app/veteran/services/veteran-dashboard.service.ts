@@ -17,8 +17,12 @@ export class VeteranDashboardService {
 
   //getTreatmentPlanData
   getTreatmentData(vetID:number) {
-    //return this.http.get<any>(`${this.getTreatmentPlanURL}/${vetID}`);
     return this.http.get<any>(this.commonUrl+'getTreatmentPlanDetails/'+ vetID);
+  }
+
+  //saving TreatmentplanData after summary
+  saveTreatmentData(data:any): Observable<any>{
+    return this.http.post(this.commonUrl+'postTreatmentPlanDetails/save',data);
   }
 
   public getName(payload = {}): Observable<any> {
