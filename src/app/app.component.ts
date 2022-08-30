@@ -13,6 +13,7 @@ export class AppComponent {
   username!: string;
   veteranId!: number;
   private isDev = isDevMode();
+  nickName!: string;
 
   constructor(
     private cacheData: ClipBoardService,
@@ -24,23 +25,26 @@ export class AppComponent {
       this.cacheData.set('veteranId', 4);
       this.cacheData.set('loginId', 4);
     } else {
+      this.cacheData.set('veteranId', 4);
+      this.cacheData.set('loginId', 4);
       Auth.currentAuthenticatedUser().then((user) => {
         console.log('Authenticated User Details', user);
-        this.username = user.signInUserSession.idToken.payload.username;
+        this.username = user.signInUserSession.accessToken.payload.username;
         console.log('Authenticated UserName', this.username);
         this.service
           .getVeteranIdByUsername(this.username)
           .subscribe((response) => {
             if (response.responseStatus == 'SUCCESS') {
               this.veteranId = response.data[0].party_id;
-              this.cacheData.set('veteranId', this.veteranId);
-              this.cacheData.set('loginId', this.veteranId);
+              this.nickName = response.data[0].nick_name;
+              // this.cacheData.set('veteranId', this.veteranId);
+              // this.cacheData.set('loginId', this.veteranId);
+              this.cacheData.set('nickName', this.nickName);
               console.log('web_party_id', this.veteranId);
+              console.log('Nick name', this.nickName);
             }
           });
       });
     }
   }
 }
-
-
