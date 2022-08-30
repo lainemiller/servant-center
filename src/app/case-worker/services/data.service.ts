@@ -18,6 +18,7 @@ export class DataService {
   private caseWorkerApi = environment.serviceUrl.caseWorkerUser;
   
   public getUserData(payload = {}): Observable<any> {
+
     if (this.isDev) {
      // return this.restcs.get(this.caseWorkerApi);
      return this.restcs.get('./assets/mock/userData.json'); 
@@ -25,6 +26,7 @@ export class DataService {
     } else {
       return this.restcs.get(this.caseWorkerApi);
     } 
+
   }
 
   public getMsgCount(payload = {}): Observable<any> { 

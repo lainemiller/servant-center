@@ -68,7 +68,7 @@
                     </small></div>
                 </div>
                 <div class="p-field p-col-12 p-sm-12">
-                  <h4>Participants ID:<span *ngIf="!participants.controls.length"> None</span></h4>
+                  <h4>Participants E-mail:<span *ngIf="!participants.controls.length"> None</span></h4>
                   <div formArrayName="participants" *ngFor="let participant of participants.controls; let i = index"
                     class="p-col-12">
                     <div [formGroupName]="i">
@@ -81,7 +81,7 @@
                         (click)="removeParticipant(i)"></button>
                     </div>
                   </div>
-                  <button type="button" pButton icon="pi pi-plus" class="p-buton-outlined p-button-rounded participantAdd"
+                  <button type='button' pButton icon="pi pi-plus" class="p-buton-outlined p-button-rounded participantAdd"
                     (click)="addParticipant()"></button>
                   <h5 style="color: red;" *ngIf="participantsExceeded">Maximum 20 participants should be there.</h5>
                 </div>
