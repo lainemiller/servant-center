@@ -2,6 +2,7 @@ import { Injectable, isDevMode } from '@angular/core';
 import { environment as env } from 'src/environments/environment';
 import { RestClientService } from 'src/app/shared/services/rest-client.service';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,8 @@ export class HealthTrackerService {
 
   private isDev=isDevMode();
   private commonUrl=env.localUrl;
-  private getHealthTrackerAPI="";
-  private addHealthTrackerAPI="";
+  private getHealthTrackerAPI=environment.serviceUrl.getHealthTracker;
+  private addHealthTrackerAPI=environment.serviceUrl.saveHealthTracker;
 
   constructor(private restcs:RestClientService) { }
 
