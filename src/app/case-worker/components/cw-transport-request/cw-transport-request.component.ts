@@ -166,16 +166,19 @@ let obj={
   date:this.transportRequestForm.value.date
 };
 	this.service.approveTransportationForm(obj).subscribe((data)=>{
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([decodeURI(this.location.path())]);
-     }); 
+    // this.router.navigateByUrl('', { skipLocationChange: true }).then(() => {
+    //   this.router.navigate([decodeURI(this.location.path())]);
+    //  }); 
+    window.location.reload();
+
     this.submitted = true;
 	  console.log("Form submitted");
-    
+
     // this.service.getTransportRequestFormData().subscribe((data) => {
     //   this.tableValues = data;
     //   console.log(this.tableValues);
     // });
+    
    });
 
     console.log(this.transportRequestForm.value);
