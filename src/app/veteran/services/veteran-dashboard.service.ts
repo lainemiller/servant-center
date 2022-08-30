@@ -38,7 +38,7 @@ export class VeteranDashboardService {
     if(this.isDev){
     return this.restcs.get(this.commonUrl+'getVeteranId/'+endPoint)
     }else{
-    return this.restcs.get(this.getVeteranIdAPI,endPoint)
+    return this.restcs.get(this.getVeteranIdAPI+endPoint)
     }
   }
 }
