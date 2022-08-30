@@ -13,21 +13,21 @@ export class VeteranprofileService {
 
   private isDev = isDevMode();
   private veteranProfileAPI = environment.serviceUrl.veteranProfileGetUser;
+  private saveTransportationFormAPI = environment.serviceUrl.saveTransportationForm;
+
   private commonUrl=env.localUrl;
-  private veteranProfileUpdateAPI='';
+  private veteranProfileUpdateAPI=environment.serviceUrl.veteranProfileUpdateUser;
 
   public getProfileData(
     endPoint: number,
     payload = {}
   ): Observable<any> {
-    if (this.isDev) {
+    if (this.isDev) {  
       return this.restcs.get(this.commonUrl+'userProfile/getUserDetails/'+endPoint);
     } else {
-      return this.restcs.get(this.veteranProfileAPI + endPoint);
+      return this.restcs.get(this.veteranProfileAPI+endPoint);
     }
   }
-
-  
 
   public updateProfile(endpoint:number,payload={}):Observable<any>{
     if(this.isDev){
@@ -37,8 +37,12 @@ export class VeteranprofileService {
     }
   }
   //Transportation start
-  saveTransportationForm(data:any):Observable<any>{
-	  return this.http.post(this.commonUrl+'transportationForm/saveTransportationRequest/', data);
-  }
+  public saveTransportationForm(data:any): Observable<any> {
+    if (this.isDev) {
+      return this.http.post(this.commonUrl+'transportationForm/saveTransportationRequest/', data);
+    } else {
+      return this.http.post(this.saveTransportationFormAPI, data);
+    }  
+  } 
   //Transportation End
 }
