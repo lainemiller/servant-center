@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/case-worker/services/data.service';
+import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 @Component({
   selector: 'app-rs-treatment-plan',
   templateUrl: './rs-treatment-plan.component.html',
@@ -16,14 +17,17 @@ export class RsTreatmentPlanComponent implements OnInit {
   public maxDateValue: any;
   public eventId: any;
   public data: any;
+  public vetID!:any;
   public formView = true;
   public treatmentArr: any;
   public formData:any;
 
   constructor(
     private formBuilder: FormBuilder,
-    private service: DataService
+    private service: DataService,
+    private cacheData:ClipBoardService
   ) {
+    this.vetID=this.cacheData.get("veteranId");
     this.setForm();
   }
 
@@ -32,23 +36,22 @@ export class RsTreatmentPlanComponent implements OnInit {
   }
 
   setForm() {
-    this.service.getTreatmentPlanData().subscribe((res) => {
+    this.service.getTreatmentPlanData(this.vetID).subscribe((res) => {
       this.data = res;
-      console.log(this.data.treatmentIssues)
       this.buildForm();
       this.treatmentPlanForm.patchValue({
-        firstName: this.data.fname,
-        lastName: this.data.lname,
-        recordNo: this.data.recNo,
-        dateOfBirth1: this.data.dob1,
-        intakeDOB: this.data.intakeDate,
-        hmisIdNo: this.data.hmisId,
-        veteranDiagnosis: this.data.diagnoses,
-        veteranSupports: this.data.support,
-        veteranStrengths: this.data.strength,
+        firstName: this.data.first_name,
+        lastName: this.data.last_name,
+        recordNo: 1234,
+        dateOfBirth1: this.data.date_of_birth,
+        intakeDOB: this.data.intake_date,
+        hmisIdNo: this.data.hmis_id,
+        veteranDiagnosis: this.data.diagnosis,
+        veteranSupports: this.data.supports,
+        veteranStrengths: '(strengths yet to be columnized)',
        
         treatmentIssues:this.data.treatmentIssues,
-        veteranNotes:this.data.notes
+        veteranNotes:'(notes yet to be columnized)'
       });
       console.log(this.treatmentPlanForm.value);
     });
@@ -58,9 +61,8 @@ export class RsTreatmentPlanComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       recordNo: ['', Validators.required],
-      dateOfBirth1: [null, Validators.required],
-      dateOfBirth2: [null, Validators.required],
-      intakeDOB: [null, Validators.required],
+      dateOfBirth1: ['', Validators.required],
+      intakeDOB: ['', Validators.required],
       hmisIdNo: ['', Validators.required],
       veteranDiagnosis: ['', Validators.required],
       veteranSupports: ['', Validators.required],
@@ -126,11 +128,11 @@ export class RsTreatmentPlanComponent implements OnInit {
 
   onSubmit() {
     this.formView = false;
-    console.log(this.treatmentPlanForm.value);
     this.treatmentArr = this.treatmentPlanForm.get('treatmentIssues')?.value;
-    console.log(this.treatmentArr);
-    
+    this.service.updateTreatmentPlanData(this.treatmentPlanForm.value).subscribe();
+    console.log("Updated Successfully");
     this.formData= this.treatmentPlanForm.value;
+    console.log(this.formData)
     
   }
  
