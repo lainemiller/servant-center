@@ -28,7 +28,7 @@ export class HealthTrackerService {
     if(this.isDev){
       return this.restcs.post(this.commonUrl+'healthTracker/saveHealthTrackerRequest/'+endPoint,payload)
     }else{
-      return this.restcs.post(this.addHealthTrackerAPI+endPoint)
+      return this.restcs.post(this.addHealthTrackerAPI+endPoint,payload)
     }
   }
 }

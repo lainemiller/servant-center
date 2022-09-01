@@ -1,19 +1,21 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { environment as prodenv } from 'src/environments/environment.prod';
+import { environment} from 'src/environments/environment.prod';
+import { environment as env } from 'src/environments/environment';;
 import { RestClientService } from 'src/app/shared/services/rest-client.service';
 import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  private commonUrl = "http://localhost:3000/"
+  private serviceUrl=env.localUrl
+  private getMsgCountAPI = environment.serviceUrl.getTransportRequestFormData;
+
   constructor(private http: HttpClient, private restcs: RestClientService) {}
 
   private isDev = isDevMode();
-  private caseWorkerApi = prodenv.serviceUrl.caseWorkerUser;
-  private serviceUrl= environment.localUrl;
+  private caseWorkerApi = environment.serviceUrl.caseWorkerUser;
+  
   
   public getUserData(payload = {}): Observable<any> {
     if (this.isDev) {
@@ -26,9 +28,12 @@ export class DataService {
   }
 
   
-  public getMsgCount(payload = {}): Observable<any> {
-    //return this.restcs.get('./assets/mock/msgs.json');
-   return this.http.get(this.commonUrl+'transportationForm/getTransportationRequests/');
+  public getMsgCount(payload = {}): Observable<any> { 
+    if (this.isDev) {
+      return this.http.get(this.serviceUrl+'transportationForm/getTransportationRequests/');
+    } else {
+      return this.http.get(this.getMsgCountAPI);
+    }  
   }
   getTreatmentPlanData(vetID:number): Observable<any> {
     return this.http.get(this.serviceUrl+'getTreatmentPlanDetails/'+ vetID);
