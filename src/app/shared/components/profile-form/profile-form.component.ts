@@ -34,6 +34,10 @@ export class ProfileFormComponent implements OnInit {
   public customPatterns = { '0': { pattern: new RegExp('[a-zA-Z]') } };
   public genders!: DropDown[];
   public selectedRelationship: any;
+
+  public imageObj!: File;
+  public imageUrl!: string;
+  selectedRace: any;
   maxDateValue!: Date;
   @Input() isShowFields!: boolean;
   veteranId!: number;
@@ -159,4 +163,22 @@ export class ProfileFormComponent implements OnInit {
     this.buildForm();
     this.setForm();
   }
+
+  onImagePicked(imageInput: HTMLInputElement): void {
+    console.log('image upload ******',imageInput.files![0]);
+   
+   const FILE = imageInput.files![0];
+    this.imageObj = FILE;
+   }
+
+   onImageUpload() {
+    let imageForm = new FormData();    
+    imageForm.append('image', this.imageObj);
+    console.log("imageForm----",imageForm);
+    
+    this.service.imageUpload(imageForm).subscribe(res => {
+      //this.imageUrl = res['image'];
+      console.log("uploaded successfully");
+    });
+   }
 }
