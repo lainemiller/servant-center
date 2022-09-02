@@ -14,7 +14,6 @@ import { VeteranDashboardService } from './services/veteran-dashboard.service';
 })
 export class VeteranComponent implements OnInit {
   public name: any;
-  public date: any;
   public data: any;
   public image: any;
   public userInfo: any;
@@ -27,14 +26,13 @@ export class VeteranComponent implements OnInit {
   ) {
     this.service.getName().subscribe((data) => {
       this.userInfo = data;
-      console.log(this.userInfo);
+      console.log("UserInfo: ",this.userInfo);
       this.userInfo = this.userInfo.result;
       this.name = this.userInfo[0].nick_name;
       this.image = this.userInfo[0].photo;
       if (this.image === null) {
         this.image = '../assets/images/user-profile.jpg';
       }
-      this.date = this.userInfo[0].last_login_date_time;
     });
   }
 

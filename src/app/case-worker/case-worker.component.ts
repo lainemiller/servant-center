@@ -14,7 +14,6 @@ export class CaseWorkerComponent implements OnInit {
   public msgData: any;
   public userInfo: any;
   public name!: string;
-  public login!: string;
   public profilePic!: string;
   items!: MenuItem[];
 
@@ -27,7 +26,7 @@ export class CaseWorkerComponent implements OnInit {
     this.service.getMsgCount().subscribe(
       (data: any) => {
         this.msgData = data;
-        this.msgCount = this.msgData.msgs.length;
+        this.msgCount = this.msgData.length;
         this.itemChange(this.msgCount);
       },
       (err: any) => {
@@ -43,7 +42,6 @@ export class CaseWorkerComponent implements OnInit {
       if (this.profilePic === null) {
         this.profilePic = '../assets/images/user-profile.jpg';
       }
-      this.login = this.userInfo[0].last_login_date_time;
     });
   }
   itemChange(msgs: number) {
@@ -55,7 +53,7 @@ export class CaseWorkerComponent implements OnInit {
         routerLink: ['/case-worker/'],
       },
       {
-        label: `MESSAGES (${msgs})+`,
+        label: `REQUESTS (${msgs})+`,
         icon: 'fa fa-bell',
         styleClass: 'menu-items--text menu-item--2',
         routerLink: ['/case-worker/messages'],
