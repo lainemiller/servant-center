@@ -50,7 +50,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
   selectedResident: any;
   public optionState: any;
   public newAappointmentDate:any;
-  public msgCount: number = 1;
+  public msgCount!: number;
   public msgData: any;
   items!: MenuItem[];
 
@@ -59,7 +59,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
     private service: TransportService,
     private datePipe: DatePipe,
     private router: Router,
-    private location: Location
+    private location: Location,
   ) {
     this.minDateValue = new Date(new Date().getTime());
     this.maxDateValue = new Date(new Date().getTime());
@@ -165,26 +165,32 @@ let obj={
 
   date:this.transportRequestForm.value.date
 };
-	this.service.approveTransportationForm(obj).subscribe((data)=>{
-    // this.router.navigateByUrl('', { skipLocationChange: true }).then(() => {
-    //   this.router.navigate([decodeURI(this.location.path())]);
-    //  }); 
-    window.location.reload();
-
+	this.service.approveTransportationForm(obj).subscribe(()=>{
+   // this.newData();
+    this.refreshRequestComponent();
     this.submitted = true;
 	  console.log("Form submitted");
-
-    // this.service.getTransportRequestFormData().subscribe((data) => {
-    //   this.tableValues = data;
-    //   console.log(this.tableValues);
-    // });
-    
    });
-
     console.log(this.transportRequestForm.value);
 	  this.transportRequestForm.reset();
     // }
   }
+  // newData():any{
+  //   this.service.getTransportRequestFormData().subscribe((data) => {
+  //     this.msgData = data;
+  //     this.msgCount= this.msgData.length
+  //     console.log("new Count", this.msgCount);
+      
+  //     this.tableValues = data;
+  //     console.log("New table",this.tableValues);
+  //   });
+  // }
+  refreshRequestComponent() {
+    let currentUrl = this.router.url;
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+         this.router.navigate([currentUrl]);
+    }
 
   reset() {
     this.buildForm();
