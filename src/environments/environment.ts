@@ -2,6 +2,17 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import awsConfig from "src/aws-exports";
+
+const winHostNm = window.location.hostname;
+let envConfig: any;
+
+if (winHostNm === 'localhost' || winHostNm.includes('dev')) {
+  envConfig = awsConfig.oauth.dev;
+} else {
+  envConfig = awsConfig.oauth.prod;
+}
+
 export const environment = {
   production: false,
   cognitoUserPoolId: 'us-east-1_SpellypxJ',
@@ -19,17 +30,12 @@ export const environment = {
   cognitoTokenURL:
     'https://servant-center.auth.us-east-1.amazoncognito.com/oauth2/token',
   oauth: {
-    domain: 'domain.auth.ap-northeast-1.amazoncognito.com',
-    scope: [
-      'phone',
-      'email',
-      'openid',
-      'profile',
-      'aws.cognito.signin.user.admin',
-    ],
-    redirectSignIn: 'http://localhost:4200/veteran',
-    redirectSignOut: 'http://localhost:4200/login',
+    domain: envConfig.domain,
+    scope: ['email', 'openid'],
+    redirectSignIn: envConfig.redirectSignIn,
+    redirectSignOut: envConfig.redirectSignOut,
     responseType: 'code',
+    redirect_uri: envConfig.redirectSignIn
   },
   serviceUrl: {
     consentGetUser: '',

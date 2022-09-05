@@ -1,5 +1,24 @@
+import awsConfig from "src/aws-exports";
+
+const winHostNm = window.location.hostname;
+let envConfig: any;
+
+if (winHostNm === 'localhost' || winHostNm.includes('dev')) {
+  envConfig = awsConfig.oauth.dev;
+} else {
+  envConfig = awsConfig.oauth.prod;
+}
+
 export const environment = {
   production: true,
+  oauth: {
+    domain: envConfig.domain,
+    scope: ['email', 'openid'],
+    redirectSignIn: envConfig.redirectSignIn,
+    redirectSignOut: envConfig.redirectSignOut,
+    responseType: 'code',
+    redirect_uri: envConfig.redirectSignIn
+  },
   serviceUrl: {
     consentGetUser: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/consentForm/getUserDetails/',
     consentUpdateUser: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/consentForm/acceptConsent/',
