@@ -5,10 +5,7 @@ import { Auth } from '@aws-amplify/auth';
 
 import {
   genders,
-  languages,
-  relegions,
   states,
-  races,
   statuses,
   relations,
 } from '../../../veteran/app.constants';
@@ -25,24 +22,21 @@ interface DropDown {
   styleUrls: ['./profile-form.component.scss'],
 })
 export class ProfileFormComponent implements OnInit {
-  public stateValue: any;
   public profileDetails: any;
-  public genderArray: any = [];
   public profileForm!: FormGroup;
   public veteran: any;
   public states!: DropDown[];
-  public relegions!: DropDown[];
-  public languages!: DropDown[];
   public maritalStatus!: DropDown[];
   public relations!: DropDown[];
-  public races!: DropDown[];
   public selectedState!: DropDown;
-  public selectedLanguage!: DropDown;
   public selectedGender: any = null;
   public selectedMaritalStatus!: DropDown;
   public customPatterns = { '0': { pattern: new RegExp('[a-zA-Z]') } };
   public genders!: DropDown[];
   public selectedRelationship: any;
+
+  public imageObj!: File;
+  public imageUrl!: string;
   selectedRace: any;
   maxDateValue!: Date;
   @Input() isShowFields!: boolean;
@@ -57,12 +51,9 @@ export class ProfileFormComponent implements OnInit {
     this.veteranId = this.cacheData.get('veteranId');
     this.setForm();
     this.states = states;
-    this.relegions = relegions;
-    this.languages = languages;
     this.genders = genders;
     this.maritalStatus = statuses;
     this.relations = relations;
-    this.races = races;
     this.maxDateValue = new Date(new Date().getTime());
   }
 
@@ -71,7 +62,6 @@ export class ProfileFormComponent implements OnInit {
     this.selectedGender = this.genders[1];
     this.selectedMaritalStatus = this.maritalStatus[1];
     this.selectedRelationship = this.relations[1];
-    this.selectedRace = this.races[1];
     this.buildForm();
     Auth.currentAuthenticatedUser().then((user) => {
       this.email = user.signInUserSession.idToken.payload.email;
@@ -105,9 +95,9 @@ export class ProfileFormComponent implements OnInit {
           address2: this.veteran.address_line_2,
           zipCode: this.veteran.zip_code,
           hobbies: this.veteran.hobbies,
-          selectedprimaryLanguage: this.veteran.primary_language,
-          selectedRelegion: this.veteran.religious_preference,
-          selectedRace: this.veteran.race,
+          primaryLanguage: this.veteran.primary_language,
+          relegion: this.veteran.religious_preference,
+          race: this.veteran.race,
           cfirstName: this.veteran.contact_person,
           selectedRelationship: this.veteran.contact_person_relationship,
           cPhoneNumber: this.veteran.contact_person_phone,
@@ -148,9 +138,9 @@ export class ProfileFormComponent implements OnInit {
       selectedMaritalStatus: ['', Validators.required],
       SSNNumber: ['', [Validators.required]],
       hmisIdNo: ['', [Validators.required]],
-      selectedRace: ['', Validators.required],
-      selectedprimaryLanguage: ['', Validators.required],
-      selectedRelegion: ['', Validators.required],
+      race: ['', Validators.required],
+      primaryLanguage: ['', Validators.required],
+      relegion: ['', Validators.required],
       cHouseNumber: ['', [Validators.required]],
       cPhoneNumber: ['', [Validators.required, Validators.minLength(10)]],
     });
@@ -161,7 +151,6 @@ export class ProfileFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Profile Form submitted value', this.profileForm.value);
     let profileDetails = this.profileForm.value;
     this.service
       .updateProfile(this.veteranId, profileDetails)
@@ -174,4 +163,22 @@ export class ProfileFormComponent implements OnInit {
     this.buildForm();
     this.setForm();
   }
+
+  onImagePicked(imageInput: HTMLInputElement): void {
+    console.log('image upload ******',imageInput.files![0]);
+   
+   const FILE = imageInput.files![0];
+    this.imageObj = FILE;
+   }
+
+   onImageUpload() {
+    let imageForm = new FormData();    
+    imageForm.append('image', this.imageObj);
+    console.log("imageForm----",imageForm);
+    
+    this.service.imageUpload(imageForm).subscribe(res => {
+      //this.imageUrl = res['image'];
+      console.log("uploaded successfully");
+    });
+   }
 }

@@ -7,6 +7,9 @@
       width="150"
     />
   </div>
+  <input  #imageInput accept="image/*" (change)="onImagePicked(imageInput)" pInputText placeholder="Upload Image" 
+  type="file" />
+  <button pButton (click)="onImageUpload()">Upload Image</button>
   <div *ngIf="isShowFields" class="p-fluid p-grid">
     <div class="p-field p-col-12 p-md-4">
       <label class="label-title">Record #</label>
@@ -501,7 +504,7 @@
 
       <div class="p-fluid p-grid">
         <div class="p-field p-col-12 p-md-4">
-          <label class="label-title">Select Country</label>
+          <label class="label-title">Country</label>
           <input
             type="text"
             appNoSpecialSymbols
@@ -596,76 +599,81 @@
         </div>
 
         <div class="p-field p-col-12 p-md-4">
-          <label class="label-title">Select Primary Language</label>
-          <p-dropdown
-            inputId="primaryLanguage"
-            optionValue="name"
-            [autoDisplayFirst]="false"
-            [options]="languages"
-            formControlName="selectedprimaryLanguage"
-            optionLabel="name"
-          >
-          </p-dropdown>
+          <label class="label-title">Primary Language</label>
+          <input
+            id="primaryLanguage"
+            type="text"
+            appNoSpecialSymbols
+            customAttr="textWithSpace"
+            pInputText
+            formControlName="primaryLanguage"
+          />
           <div
             *ngIf="
-              getControl.selectedprimaryLanguage.touched &&
-              getControl.selectedprimaryLanguage.invalid
+              getControl.primaryLanguage.touched &&
+              getControl.primaryLanguage.invalid
             "
             class="text-danger"
           >
             <small
               class="form-container__sec-errmsg"
-              *ngIf="getControl.selectedprimaryLanguage.errors?.required"
+              *ngIf="getControl.primaryLanguage.errors?.required"
             >
-              Select an option.
+              Primary language is required.
             </small>
           </div>
         </div>
 
         <div class="p-field p-col-12 p-md-4">
-          <label class="label-title">Select Religious Preference</label>
-          <p-dropdown
-            inputId="Select ReligiousPreference"
-            optionValue="name"
-            [autoDisplayFirst]="false"
-            [options]="relegions"
-            formControlName="selectedRelegion"
-            optionLabel="name"
-          >
-          </p-dropdown>
+          <label class="label-title">Religious Preference</label>
+          <input
+            id="Select ReligiousPreference"
+            type="text"
+            appNoSpecialSymbols
+            customAttr="textWithSpace"
+            pInputText
+            formControlName="relegion"
+          />
           <div
-            *ngIf="
-              getControl.selectedRelegion.touched &&
-              getControl.selectedRelegion.invalid
-            "
+            *ngIf="getControl.relegion.touched && getControl.relegion.invalid"
             class="text-danger"
           >
             <small
               class="form-container__sec-errmsg"
-              *ngIf="getControl.selectedRelegion.errors?.required"
+              *ngIf="getControl.relegion.errors?.required"
             >
-              Select an option.
+              Relegion preference is required.
             </small>
           </div>
         </div>
 
         <div class="p-field p-col-12 p-md-4">
-          <label class="label-title">Select Race</label>
-          <p-dropdown
-            inputId="race"
-            optionValue="name"
-            [autoDisplayFirst]="false"
-            [options]="races"
-            formControlName="selectedRace"
-            optionLabel="name"
+          <label class="label-title">Race</label>
+          <input
+            id="race"
+            type="text"
+            appNoSpecialSymbols
+            customAttr="textWithSpace"
+            pInputText
+            formControlName="race"
+          />
+          <div
+            *ngIf="getControl.race.touched && getControl.race.invalid"
+            class="text-danger"
           >
-          </p-dropdown>
+            <small
+              class="form-container__sec-errmsg"
+              *ngIf="getControl.race.errors?.required"
+            >
+              Race is required.
+            </small>
+          </div>
         </div>
-        <ng-template pTemplate="selectedItem">
+        <!-- <ng-template pTemplate="selectedItem">
           <div class="country-item country-item-value" *ngIf="selectedRace">
             <div>{{ selectedRace.name }}</div>
           </div>
-        </ng-template>
+        </ng-template> -->
       </div>
     </fieldset>
     <!-- Other Info End -->

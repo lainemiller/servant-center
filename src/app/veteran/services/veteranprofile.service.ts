@@ -16,7 +16,7 @@ export class VeteranprofileService {
   private saveTransportationFormAPI = environment.serviceUrl.saveTransportationForm;
 
   private commonUrl=env.localUrl;
-  private veteranProfileUpdateAPI='';
+  private veteranProfileUpdateAPI=environment.serviceUrl.veteranProfileUpdateUser;
 
   public getProfileData(
     endPoint: number,
@@ -25,7 +25,7 @@ export class VeteranprofileService {
     if (this.isDev) {  
       return this.restcs.get(this.commonUrl+'userProfile/getUserDetails/'+endPoint);
     } else {
-      return this.restcs.get(this.veteranProfileAPI + endPoint);
+      return this.restcs.get(this.veteranProfileAPI+endPoint);
     }
   }
 
@@ -45,4 +45,10 @@ export class VeteranprofileService {
     }  
   } 
   //Transportation End
+
+
+  imageUpload(imageForm: FormData) {
+    console.log('image uploading',imageForm);
+    return this.http.post('http://localhost:3000/api/v1/upload', imageForm);
+   }
 }
