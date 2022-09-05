@@ -37,7 +37,7 @@ export class RsTreatmentPlanComponent implements OnInit {
 
   setForm() {
     this.service.getTreatmentPlanData(this.vetID).subscribe((res) => {
-      this.data = res;
+      this.data = res.data;
       this.buildForm();
       this.treatmentPlanForm.patchValue({
         firstName: this.data.first_name,

@@ -94,7 +94,7 @@
       <ng-template pTemplate="body" let-tableValue>
         <tr [pSelectableRow]="tableValue">
           <td *ngFor="let col of columns">
-            {{ tableValue[col.field] }}
+            {{col.date? (tableValue[col.field] | date: col.format) : tableValue[col.field]}}
           </td>
         </tr>
       </ng-template>

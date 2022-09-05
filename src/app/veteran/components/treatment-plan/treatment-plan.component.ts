@@ -30,7 +30,9 @@ export class TreatmentPlanComponent implements OnInit {
     private cacheData: ClipBoardService
   ) {
     this.vetID = this.cacheData.get("veteranId")
+    //console.log(this.vetID)
     this.setForm();
+
   }
 
   ngOnInit(): void {
@@ -39,7 +41,7 @@ export class TreatmentPlanComponent implements OnInit {
 
   setForm() {
     this.service.getTreatmentData(this.vetID).subscribe((res) => {
-      this.data = res;
+      this.data = res.data;
       this.buildForm();
       this.treatmentPlanForm.patchValue({
         firstName: this.data.first_name,
