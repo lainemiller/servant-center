@@ -3,7 +3,7 @@ import awsConfig from "src/aws-exports";
 const winHostNm = window.location.hostname;
 let envConfig: any;
 
-if (winHostNm === 'localhost' || winHostNm.includes('dev')) {
+if (winHostNm === 'localhost' || winHostNm.includes('dev') || winHostNm.includes('dd1w1wuqwe28t')) {
   envConfig = awsConfig.oauth.dev;
 } else {
   envConfig = awsConfig.oauth.prod;
