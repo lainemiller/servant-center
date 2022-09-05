@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  cognitoUserPoolId: 'us-east-1_8wIG1UbUU',
-  cognitoAppClientId: '5igt34gtp2ok5mf02d9e4v30lb',
+  cognitoUserPoolId: 'us-east-1_SpellypxJ',
+  cognitoAppClientId: '3ebsuhsnrt5j4n2hsko4n0m88r',
+  oldCognitoUserPoolId: 'us-east-1_8wIG1UbUU',
+  oldCognitoAppClientId: '5igt34gtp2ok5mf02d9e4v30lb',
 
   loginURL:
     'https://servant-center.auth.us-east-1.amazoncognito.com/login?' +
