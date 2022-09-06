@@ -174,7 +174,6 @@ export class ProfileFormComponent implements OnInit {
    onImageUpload() {
     let imageForm = new FormData();    
     imageForm.append('image', this.imageObj);
-    console.log("imageForm----",imageForm);
     
     this.service.imageUpload(imageForm).subscribe(res => {
       //this.imageUrl = res['image'];

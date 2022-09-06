@@ -24,16 +24,14 @@ export class CaseWorkerDashboardComponent implements OnInit {
   public count = 0;
   public participantsExceeded: boolean = false;
   public partic: string = "";
+  public eventParticipants: string = "";
+  public isAppointment: boolean = true;
+  public caseWorkerId: number | undefined;
   
   constructor(
     private service: CalendarEventsService,
     private formBuilder: FormBuilder
   ) {
-    this.service.getEvents().subscribe((data: CalendarResp) => {
-      this.totalEvents = data;
-      console.log(this.totalEvents);
-      this.eventList = this.totalEvents;
-    });
   }
 
   ngOnInit(): void {
@@ -43,12 +41,28 @@ export class CaseWorkerDashboardComponent implements OnInit {
       { label: 'Appointment', icon: 'pi pi-fw pi-calendar' },
       { label: 'Event', icon: 'pi pi-fw pi-pencil' },
     ];
+    this.caseWorkerId = 3;
+    this.service.getCalendarEvents(this.caseWorkerId).subscribe((data: CalendarResp) => {
+      this.totalEvents = data;
+      console.log(this.totalEvents);
+      this.getCaseWorkerEventData(data);
+    });
+    
     this.builtForm();
+  }
+
+  getCaseWorkerEventData(data: any) {
+    this.totalEvents = data;
+    for (let i = 0; i < this.totalEvents.data.length; i++) {
+    let eventDate = this.totalEvents.data[i].eventstart.substring(0, 10);
+    this.totalEvents.data[i]['date'] =  eventDate;
+    }
+   this.calendarOptions.events =  this.totalEvents.data;
   }
   public builtForm() {
     this.eventsForm = this.formBuilder.group({
       eventTitle: ['', Validators.required],
-      eventDate: ['', Validators.required],
+      // eventDate: ['', Validators.required],
       eventDescription: ['', Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
@@ -93,7 +107,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
       end: 'dayGridMonth,timeGridWeek,listWeek',
     },
     nowIndicator: true,
-    events: './assets/mock/calendarEvents.json',
+    //events: './assets/mock/calendarEvents.json',
   };
   addEvent() {
     this.display = true;
@@ -104,16 +118,23 @@ export class CaseWorkerDashboardComponent implements OnInit {
   onSubmit() {
     console.log(this.eventsForm.value);
     let event = this.eventsForm.value;
-    
+    for(let i=0;i<event.participants.length;i++){
+      this.eventParticipants +=event.participants[i].name + ',';            
+    }    
     let newEvent = {
+      case_worker_id:4,
+      isAppointment:this.isAppointment,
       title: event.eventTitle,
-      date: event.eventDate,
       description: event.eventDescription,
-      type: this.tagName,
       sTime: event.startTime,
       enTime: event.endTime,
-      participants: event.participants,
+      participants: this.eventParticipants,
     };
+    
+    //sending calendar events/appointments to backend database
+    this.service.postCalendarEvents(newEvent).subscribe(data =>{
+      console.log('successfully posted event to backend');
+    })
     // this.eventList.push(newEvent);
     console.log(this.eventList);
     this.calendarOptions.events = this.eventList;
@@ -128,8 +149,12 @@ export class CaseWorkerDashboardComponent implements OnInit {
     this.display = false;
   }
   changeTag(value: any) {
-    console.log(value.activeItem.label);
     this.tagName = value.activeItem.label;
+    if(this.tagName === 'Appointment'){
+      this.isAppointment = true;
+    }else if(this.tagName === 'Event'){
+      this.isAppointment = false;
+    }
   }
   clearFormArray = (formArray: FormArray) => {
     while (formArray.length !== 0) {
