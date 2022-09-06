@@ -25,11 +25,10 @@ export class VeteranComponent implements OnInit {
     private clipboardService: ClipBoardService
   ) {
     this.service.getName().subscribe((data) => {
-      this.userInfo = data;
-      console.log("UserInfo: ",this.userInfo);
-      this.userInfo = this.userInfo.result;
-      this.name = this.userInfo[0].nick_name;
-      this.image = this.userInfo[0].photo;
+      console.log("UserInfo: ", data);
+      this.userInfo = this.userInfo?.result;
+      this.name = this.userInfo?.[0]?.nick_name;
+      this.image = this.userInfo?.[0]?.photo;
       if (this.image === null) {
         this.image = '../assets/images/user-profile.jpg';
       }
