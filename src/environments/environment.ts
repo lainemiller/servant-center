@@ -2,6 +2,8 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import awsAmplifyConfig from "src/aws-exports";
+
 export const environment = {
   production: false,
   cognitoUserPoolId: 'us-east-1_SpellypxJ',
@@ -17,20 +19,15 @@ export const environment = {
   redirectURL: 'http://localhost:4200/veteran',
 
   cognitoTokenURL:
-    'https://servant-center-dev.auth.us-east-1.amazoncognito.com/oauth2/token',
-  oauth: {
-    domain: 'domain.auth.ap-northeast-1.amazoncognito.com',
-    scope: [
-      'phone',
-      'email',
-      'openid',
-      'profile',
-      'aws.cognito.signin.user.admin',
-    ],
-    redirectSignIn: 'http://localhost:4200/veteran',
-    redirectSignOut: 'http://localhost:4200/login',
-    responseType: 'code',
-  },
+    'https://servant-center.auth.us-east-1.amazoncognito.com/oauth2/token',
+    oauth: {
+      domain: awsAmplifyConfig.oauth.domain,
+      scope: ['email', 'openid'],
+      redirectSignIn: awsAmplifyConfig.oauth.redirectSignIn,
+      redirectSignOut: awsAmplifyConfig.oauth.redirectSignOut,
+      responseType: awsAmplifyConfig.oauth.responseType,
+      redirect_uri: awsAmplifyConfig.oauth.redirectSignIn
+    },
   serviceUrl: {
     consentGetUser: '',
     consentUpdateUser: ''

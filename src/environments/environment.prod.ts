@@ -1,5 +1,15 @@
+import awsAmplifyConfig from "src/aws-exports";
+
 export const environment = {
   production: true,
+  oauth: {
+    domain: awsAmplifyConfig.oauth.domain,
+    scope: ['email', 'openid'],
+    redirectSignIn: awsAmplifyConfig.oauth.redirectSignIn,
+    redirectSignOut: awsAmplifyConfig.oauth.redirectSignOut,
+    responseType: awsAmplifyConfig.oauth.responseType,
+    redirect_uri: awsAmplifyConfig.oauth.redirectSignIn
+  },
   serviceUrl: {
     consentGetUser: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/consentForm/getUserDetails/',
     consentUpdateUser: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/consentForm/acceptConsent/',
