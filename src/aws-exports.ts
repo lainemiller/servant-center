@@ -21,7 +21,7 @@ const awsAmplifyConfig = {
     scope: ['email', 'openid'],
     redirectSignIn: envConfig.redirectSignIn,
     redirectSignOut: envConfig.redirectSignOut,
-    responseType: 'code',
+    responseType: envConfig.responseType,
     redirect_uri: envConfig.redirectSignIn
   },
 };

@@ -9,14 +9,14 @@ const awsConfig = {
       scope: ['email', 'openid'],
       redirectSignIn: 'https://dd1w1wuqwe28t.cloudfront.net/veteran',
       redirectSignOut: 'https://dd1w1wuqwe28t.cloudfront.net/login',
-      responseType: 'code',
+      responseType: 'token',
     },
     prod: {
       domain: 'servant-center.auth.us-east-1.amazoncognito.com',
       scope: ['email', 'openid'],
       redirectSignIn: 'https://dd1w1wuqwe28t.cloudfront.net/veteran',
       redirectSignOut: 'https://dd1w1wuqwe28t.cloudfront.net/login',
-      responseType: 'code',
+      responseType: 'token',
     },
   },
 };
