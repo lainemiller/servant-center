@@ -2,18 +2,7 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import awsConfig from "src/aws-exports";
-
-const winHostNm = window.location.hostname;
-let envConfig: any;
-
-if (winHostNm === 'localhost' || winHostNm.includes('dev') || winHostNm.includes('dd1w1wuqwe28t')) {
-  envConfig = awsConfig.oauth.dev;
-} else {
-  envConfig = awsConfig.oauth.prod;
-}
-
-console.log('env prod::envConfig', envConfig, winHostNm);
+import awsAmplifyConfig from "src/aws-exports";
 
 export const environment = {
   production: false,
@@ -31,14 +20,14 @@ export const environment = {
 
   cognitoTokenURL:
     'https://servant-center.auth.us-east-1.amazoncognito.com/oauth2/token',
-  oauth: {
-    domain: envConfig.domain,
-    scope: ['email', 'openid'],
-    redirectSignIn: envConfig.redirectSignIn,
-    redirectSignOut: envConfig.redirectSignOut,
-    responseType: 'code',
-    redirect_uri: envConfig.redirectSignIn
-  },
+    oauth: {
+      domain: awsAmplifyConfig.oauth.domain,
+      scope: ['email', 'openid'],
+      redirectSignIn: awsAmplifyConfig.oauth.redirectSignIn,
+      redirectSignOut: awsAmplifyConfig.oauth.redirectSignOut,
+      responseType: 'code',
+      redirect_uri: awsAmplifyConfig.oauth.redirectSignIn
+    },
   serviceUrl: {
     consentGetUser: '',
     consentUpdateUser: ''

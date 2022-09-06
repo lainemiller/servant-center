@@ -1,25 +1,14 @@
-import awsConfig from "src/aws-exports";
-
-const winHostNm = window.location.hostname;
-let envConfig: any;
-
-if (winHostNm === 'localhost' || winHostNm.includes('dev') || winHostNm.includes('dd1w1wuqwe28t')) {
-  envConfig = awsConfig.oauth.dev;
-} else {
-  envConfig = awsConfig.oauth.prod;
-}
-
-console.log('env prod::envConfig', envConfig, winHostNm);
+import awsAmplifyConfig from "src/aws-exports";
 
 export const environment = {
   production: true,
   oauth: {
-    domain: envConfig.domain,
+    domain: awsAmplifyConfig.oauth.domain,
     scope: ['email', 'openid'],
-    redirectSignIn: envConfig.redirectSignIn,
-    redirectSignOut: envConfig.redirectSignOut,
+    redirectSignIn: awsAmplifyConfig.oauth.redirectSignIn,
+    redirectSignOut: awsAmplifyConfig.oauth.redirectSignOut,
     responseType: 'code',
-    redirect_uri: envConfig.redirectSignIn
+    redirect_uri: awsAmplifyConfig.oauth.redirectSignIn
   },
   serviceUrl: {
     consentGetUser: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/consentForm/getUserDetails/',
