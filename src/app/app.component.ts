@@ -1,4 +1,4 @@
-import { Component, isDevMode } from '@angular/core';
+import { Component, isDevMode, OnInit } from '@angular/core';
 import { ClipBoardService } from './shared/services/clip-board.service';
 import { Auth } from '@aws-amplify/auth';
 import { VeteranDashboardService } from './veteran/services/veteran-dashboard.service';
@@ -8,7 +8,7 @@ import { VeteranDashboardService } from './veteran/services/veteran-dashboard.se
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'servant-center';
   username!: string;
   veteranId!: number;
