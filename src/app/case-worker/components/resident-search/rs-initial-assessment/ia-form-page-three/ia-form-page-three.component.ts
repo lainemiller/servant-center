@@ -1,5 +1,5 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -119,7 +119,7 @@ export class IaFormPageThreeComponent implements OnInit {
       mentalStatusAssessment: this.mentalStatusAssessment,
       medicalInformation: this.medicalInformation,
     });
-    console.log('build form', this.page3Form.get(['mentalStatusAssessment', 'ideation']));
+    //console.log('build form', this.page3Form.get(['mentalStatusAssessment', 'ideation']));
   }
 
   onSubmit() {

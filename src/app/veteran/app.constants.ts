@@ -341,6 +341,15 @@ export const states = [
     {name: 'African American'}
   ];
 
+export const goalTypes = [
+  { value: 'career', name: 'Career' },
+  { value: 'social', name: 'Social' },
+  { value: 'family', name: 'Family' },
+  { value: 'mental health', name: 'Mental Health' },
+  { value: 'physical health', name: 'Physical Health' },
+  { value: 'other', name: 'Other' },
+];
+
   export const destinationAddresses = [
     {
       value: 'Kernersville',
