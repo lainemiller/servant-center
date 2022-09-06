@@ -1,4 +1,6 @@
-
+<div *ngIf="isTableEmpty">
+  <p>Health tracker details not submitted by veteran</p>
+</div>
 <div *ngFor="let tableName of tableValues">
     <div class="p-fluid p-formgrid p-grid">
       <div class="p-field p-col-12">
