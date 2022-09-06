@@ -27,7 +27,11 @@ export const environment = {
     getVeteranEvents:'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/getCalendarEventsForVeteran',
     addUser:'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/addUser/',
     addVeteran:'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/addVeteran/',
-    addCaseWorker:'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/addCaseWorker/'
+    addCaseWorker:'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/addCaseWorker/',
+    getAssessmentData: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/assessmentDetails/',
+    getProgressNotes: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/getGoals/',
+    createProgressNotes: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/progressNotes/addGoal/',
+    updateProgressNotes: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/progressNotes/updateGoalStatus/',
   },
   localUrl:''
 };
