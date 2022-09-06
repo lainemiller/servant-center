@@ -22,6 +22,7 @@ export class AppComponent {
   ngOnInit(): void {
     if (this.isDev) {
       this.cacheData.set('veteranId', 4);
+      this.cacheData.set('caseWorkerId', 3);
       this.cacheData.set('loginId', 4);
     } else {
       Auth.currentAuthenticatedUser().then((user) => {

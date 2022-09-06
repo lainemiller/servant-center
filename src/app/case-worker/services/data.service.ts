@@ -17,13 +17,11 @@ export class DataService {
   private isDev = isDevMode();
   private caseWorkerApi = environment.serviceUrl.caseWorkerUser;
   
-  public getUserData(payload = {}): Observable<any> {
+  public getUserData( endPoint: number): Observable<any> {
     if (this.isDev) {
-     // return this.restcs.get(this.caseWorkerApi);
-     return this.restcs.get('./assets/mock/userData.json'); 
-
+     return this.restcs.get(this.serviceUrl+'uiLayout/getCaseWorkerDetails/'+ endPoint); 
     } else {
-      return this.restcs.get(this.caseWorkerApi);
+       return this.restcs.get(this.caseWorkerApi);
     } 
   }
 

@@ -17,16 +17,7 @@ export class VeteranDashboardService {
   getTreatmentData() {
     return this.http.get<any>('./assets/mock/treatmentPlan-data.json');
   }
-
-  public getName(payload = {}): Observable<any> {
-    if (this.isDev) {
-      return this.restcs.get('./assets/mock/userData.json');
-    } else {
-      return this.http.get(
-        'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/uiLayout/getUserDetails/4'
-      );
-    }  
-  } 
+  
   // getName() {
   //   return this.http.get(
   //     'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/uiLayout/getUserDetails/4'
