@@ -12,7 +12,7 @@ export const environment = {
   oldCognitoAppClientId: '5igt34gtp2ok5mf02d9e4v30lb',
 
   loginURL:
-    'https://servant-center.auth.us-east-1.amazoncognito.com/login?' +
+    'https://servant-center-dev.auth.us-east-1.amazoncognito.com/login?' +
     'client_id=5igt34gtp2ok5mf02d9e4v30lb&response_type=code&' +
     'redirect_uri=http://localhost:4200/veteran',
 

@@ -21,9 +21,9 @@ export class HealthTrackerComponent implements OnInit {
   healthTrackerDetails: any;
   healthTrackerFormDetails: any;
   isFormFilled: boolean = false;
-  veteranId!:number;
+  veteranId!: number;
   cols!: any[];
-  tableValues!:any[];
+  tableValues!: any[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,7 +32,7 @@ export class HealthTrackerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.veteranId=this.cacheData.get("veteranId");
+    this.veteranId = this.cacheData.get('veteranId');
     this.buildForm();
     this.getHealthTrackerByVeteranId();
     this.showSelectedTable();
@@ -42,6 +42,8 @@ export class HealthTrackerComponent implements OnInit {
     for (let i = 0; i < this.healthTrackerDetails['result'].length; i++) {
       var trackingSubject =
         this.healthTrackerDetails['result'][i]['tracking_subject'];
+      console.log('check tracking subject', trackingSubject);
+
       var trackingDetails = this.healthTrackerDetails['result'][i];
       if (trackingSubject === 'weight') {
         this.showWeight = true;
@@ -115,15 +117,41 @@ export class HealthTrackerComponent implements OnInit {
     resp.subscribe((data) => {
       console.log('Health Tracker API--->', data);
       this.healthTrackerDetails = data;
-      this.tableValues=this.healthTrackerDetails['result'];
       if (!this.isFormFilled) {
         this.showFilledForm();
         this.isFormFilled = true;
       }
+      this.changeTableNameLabel();
     });
   }
 
-  
+  changeTableNameLabel() {
+    this.tableValues = this.healthTrackerDetails['result'];
+    for (let i = 0; i < this.tableValues.length; i++) {
+      let tracking_subject = this.tableValues[i].tracking_subject;
+      if (tracking_subject === 'weight') {
+        this.tableValues[i].tracking_subject = 'Weight';
+      }
+      if (tracking_subject === 'temperature') {
+        this.tableValues[i].tracking_subject = 'Temperature';
+      }
+      if (tracking_subject === 'blood pressure') {
+        this.tableValues[i].tracking_subject = 'Blood pressure';
+      }
+      if (tracking_subject === 'drug screen') {
+        this.tableValues[i].tracking_subject = 'Drug Screen';
+      }
+      if (tracking_subject === 'breathalyzer') {
+        this.tableValues[i].tracking_subject = 'Breathalyzer';
+      }
+      if (tracking_subject === 'blood sugar') {
+        this.tableValues[i].tracking_subject = 'Blood Sugar';
+      }
+      if (tracking_subject === 'other') {
+        this.tableValues[i].tracking_subject = 'Other';
+      }
+    }
+  }
 
   buildForm() {
     this.healthTrackerForm = this.formBuilder.group({
@@ -247,17 +275,17 @@ export class HealthTrackerComponent implements OnInit {
     }
   }
 
-  showSelectedTable(){
+  showSelectedTable() {
     this.cols = [
-      { field: 'note_date', header: 'Date' ,date: true,format: 'dd/MM/yyyy'},
+      { field: 'note_date', header: 'Date', date: true, format: 'dd/MM/yyyy' },
       { field: 'measurement', header: 'Measurement' },
       { field: 'tracking_comments', header: 'Comment' },
-  ];
+    ];
   }
 
   resetForm() {
     this.buildForm();
-    this.isFormFilled=false;
+    this.isFormFilled = false;
     this.getHealthTrackerByVeteranId();
   }
 }
