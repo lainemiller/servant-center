@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   veteranId!: number;
   private isDev = isDevMode();
   nickName!: string;
-  isShowComponent: boolean = false;
+  isShowComponent: boolean = true;
   userGroup!: string;
   email!: string;
 
