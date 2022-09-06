@@ -2,10 +2,12 @@
   <h3>Preliminary Treatment Goals</h3>
   <div class="p-fluid p-formgrid p-grid" formGroupName="preliminaryTreatmentGoals">
     <div class="p-field p-md-6">
-      <input type="text" pInputText formControlName=shortTermGoals placeholder="Short Term Goals">
+      <h5>Short Term Goals:</h5>
+      <input type="text" pInputText formControlName=shortTermGoals placeholder="Immediate concerns for the First Year">
     </div>
     <div class="p-field p-md-6">
-      <input type="text" pInputText formControlName=longTermGoals placeholder="Long Term Goals">
+      <h5>Long Term Goals:</h5>
+      <input type="text" pInputText formControlName=longTermGoals placeholder="For the next year and Hopes for the Future">
     </div>
     <div class="p-field p-md-6">
       <p-calendar formControlName=ptDate [inline]=false [showIcon]=true placeholder="Date"></p-calendar>
