@@ -22,6 +22,9 @@ export const environment = {
     saveTransportationForm:'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/transportationForm/saveTransportationRequest/',
     getTransportRequestFormData:'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/transportationForm/getTransportationRequests/',
     approveTransportationForm:'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/transportationForm/approveTransportationRequests/',
+    getCaseWorkerEvents:'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/getCalendarEvents',
+    addCaseWorkerEvents:'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/postCalendarEvents',
+    getVeteranEvents:'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/getCalendarEventsForVeteran',
     addUser:'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/addUser/',
     addVeteran:'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/addVeteran/',
     addCaseWorker:'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/addCaseWorker/'

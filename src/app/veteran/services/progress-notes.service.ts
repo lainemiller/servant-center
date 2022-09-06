@@ -20,9 +20,7 @@ export class ProgressNotesService {
     }
   }
 
-  public getCalData(payload = {}): Observable<any> {
-    return this.http.get<any>(this.commonUrl+'calendarEvents');
-  }
+  
   public postNotes(data:any): Observable<any> {
     return this.http.post(this.commonUrl+'progressNotes/addGoal/',data);
 }
