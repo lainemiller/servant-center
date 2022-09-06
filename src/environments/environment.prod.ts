@@ -7,7 +7,7 @@ export const environment = {
     scope: ['email', 'openid'],
     redirectSignIn: awsAmplifyConfig.oauth.redirectSignIn,
     redirectSignOut: awsAmplifyConfig.oauth.redirectSignOut,
-    responseType: 'code',
+    responseType: awsAmplifyConfig.oauth.responseType,
     redirect_uri: awsAmplifyConfig.oauth.redirectSignIn
   },
   serviceUrl: {
