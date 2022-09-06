@@ -9,6 +9,8 @@ if (winHostNm === 'localhost' || winHostNm.includes('dev') || winHostNm.includes
   envConfig = awsConfig.oauth.prod;
 }
 
+console.log('env prod::envConfig', envConfig, winHostNm);
+
 export const environment = {
   production: true,
   oauth: {
