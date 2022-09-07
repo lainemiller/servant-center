@@ -19,19 +19,8 @@
             <form [formGroup]="eventsForm" (ngSubmit)="onSubmit()">
               <div class="p-fluid">
                 <div class="p-field p-col-12 p-sm-12">
-                  <p-calendar dateFormat="yy-mm-dd" formControlName="eventDate" dataType="string"
-                    placeholder="Date (yyyy-mm-dd)" [minDate]="minDateValue">
-                  </p-calendar>
-                  <div *ngIf="
-                      getControl.eventDate.touched &&
-                      getControl.eventDate.invalid
-                    ">
-                    <small class="form-error"> Event Date is required. </small>
-                  </div>
-                </div>
-                <div class="p-field p-col-12 p-sm-12">
-                  <p-calendar formControlName="startTime" placeholder="Start Time" [timeOnly]="true" hourFormat="12">
-                  </p-calendar>
+                  <p-calendar formControlName="startTime" placeholder="Start Time" [showTime]="true"
+                    [showSeconds]="true" inputId="time"></p-calendar>
                   <div *ngIf="
                       getControl.startTime.touched &&
                       getControl.startTime.invalid
@@ -40,8 +29,10 @@
                   </div>
                 </div>
                 <div class="p-field p-col-12 p-sm-12">
-                  <p-calendar formControlName="endTime" placeholder="End Time" [timeOnly]="true" hourFormat="12">
-                  </p-calendar>
+                  <p-calendar formControlName="endTime" placeholder="End Time" [showTime]="true" [showSeconds]="true"
+                    inputId="time"></p-calendar>
+                  <!-- <p-calendar formControlName="endTime" placeholder="End Time" [timeOnly]="true" hourFormat="12">
+                  </p-calendar> -->
                   <div *ngIf="
                       getControl.endTime.touched && getControl.endTime.invalid
                     ">
@@ -81,8 +72,8 @@
                         (click)="removeParticipant(i)"></button>
                     </div>
                   </div>
-                  <button type="button" pButton icon="pi pi-plus" class="p-buton-outlined p-button-rounded participantAdd"
-                    (click)="addParticipant()"></button>
+                  <button type='button' pButton icon="pi pi-plus"
+                    class="p-buton-outlined p-button-rounded participantAdd" (click)="addParticipant()"></button>
                   <h5 style="color: red;" *ngIf="participantsExceeded">Maximum 20 participants should be there.</h5>
                 </div>
               </div>

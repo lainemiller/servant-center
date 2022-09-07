@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AssessmentResp } from 'src/app/shared/models/assessmentResponse';
+import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { AssessmentDataService } from '../../services/assessment-data.service';
 
 @Component({
@@ -10,10 +11,14 @@ import { AssessmentDataService } from '../../services/assessment-data.service';
 export class AssessmentComponent implements OnInit {
   public assessDetails: any;
   public assesssmentData:any
-  constructor(private service: AssessmentDataService) {}
+  public vetID!: number;
+  constructor(private service: AssessmentDataService,
+    private cachedata: ClipBoardService) {
+      this.vetID = this.cachedata.get("veteranId")
+    }
 
   ngOnInit(): void {
-    this.service.getData().subscribe((data:AssessmentResp) => {
+    this.service.getData(this.vetID).subscribe((data:AssessmentResp) => {
       this.assessDetails = data;
       console.log(this.assessDetails.assessment_details);
       this.assesssmentData=this.assessDetails.assessment_details

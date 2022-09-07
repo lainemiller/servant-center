@@ -174,4 +174,24 @@ export class ProfileFormComponent implements OnInit {
     this.buildForm();
     this.setForm();
   }
+<<<<<<< HEAD
+=======
+
+  onImagePicked(imageInput: HTMLInputElement): void {
+   console.log('image upload ******',imageInput.files![0]);
+   const FILE = imageInput.files![0];
+   this.imageObj = FILE;
+   }
+
+
+
+   onImageUpload() {
+    let imageForm = new FormData();    
+    imageForm.append('image', this.imageObj);
+    this.service.imageUpload(imageForm).subscribe(res => {
+      //this.imageUrl = res['image'];
+      console.log("uploaded successfully");
+    });
+   }
+>>>>>>> 9ddc6eda2b628511d303c08847d49167e3f1d715
 }
