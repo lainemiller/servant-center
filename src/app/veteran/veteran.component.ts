@@ -28,6 +28,7 @@ export class VeteranComponent implements OnInit {
     private route: ActivatedRoute,
     private clipboardService: ClipBoardService
   ) {
+<<<<<<< HEAD
     // this.service.getName().subscribe((data) => {
     //   this.userInfo = data;
     //   console.log("UserInfo: ",this.userInfo);
@@ -43,6 +44,13 @@ export class VeteranComponent implements OnInit {
       this.userInfo = data;
       this.name = this.userInfo.data[0].nick_name;
       this.image = this.userInfo.data[0].photo;
+=======
+    this.service.getName().subscribe((data) => {
+      console.log("UserInfo: ", data);
+      this.userInfo = this.userInfo?.result;
+      this.name = this.userInfo?.[0]?.nick_name;
+      this.image = this.userInfo?.[0]?.photo;
+>>>>>>> 9ddc6eda2b628511d303c08847d49167e3f1d715
       if (this.image === null) {
         this.image = '../assets/images/user-profile.jpg';
       }

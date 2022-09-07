@@ -54,7 +54,7 @@ export class IaFormPageFourComponent implements OnInit {
       'case-worker/resident-search/initial-assessment/page-5'
     );
     
-    console.log(this.page4Form.value);
+    console.log('page 4 values', this.page4Form.value);
 }
 
 goBack(){

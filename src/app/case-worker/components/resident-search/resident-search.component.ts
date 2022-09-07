@@ -3,14 +3,13 @@ import {
   Component,
   EventEmitter,
   Inject,
-  OnChanges,
   OnInit,
-  Output,
-  SimpleChanges,
+  Output
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { ResidentSearchService } from '../../services/resident-search.service';
 
 @Component({
@@ -42,9 +41,11 @@ export class ResidentSearchComponent implements OnInit {
     private service: ResidentSearchService,
     @Inject(DOCUMENT) private _document: Document,
     private router: Router,
-    private datepipe: DatePipe
+    private datepipe: DatePipe,
+    private cacheData: ClipBoardService
   ) {
     this.maxDateValue = new Date(new Date().getTime());
+<<<<<<< HEAD
 
     this.service.getResidentSearchData().subscribe((data) => {
       console.log("test:", data);
@@ -61,6 +62,23 @@ export class ResidentSearchComponent implements OnInit {
     { header: 'last Name', field: 'lastName' },
     { header: 'Birthdate', field: 'birthDate' },
     { header: 'Address', field: 'address' },
+=======
+    this.service.getResidentSearchData().subscribe((res) => {
+      this.tableValues = res;
+      console.log(this.tableValues);
+    });
+  }
+
+  selectResident(event: any) {
+    console.log("selected veteran id",event.data.veteran_id)
+    this.cacheData.set('selectedResidentVeteranId',event.data.veteran_id)
+  }
+  
+  columns = [
+    { header: 'Name', field: 'first_name' },
+    { header: 'Birthdate', field: 'date_of_birth',date: true,format: 'dd/MM/yyyy' },
+    { header: 'Address', field: 'address_main' },
+>>>>>>> 9ddc6eda2b628511d303c08847d49167e3f1d715
   ];
 
   tabMenuItems: MenuItem[] = [
