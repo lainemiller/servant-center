@@ -33,7 +33,7 @@ export class IaFormPageFiveComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Submitted');
+    console.log('page 5 values', this.page5Form.value);
   }
 
   goBack() {

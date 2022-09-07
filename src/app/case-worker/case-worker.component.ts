@@ -48,11 +48,9 @@ export class CaseWorkerComponent implements OnInit {
       }
     );
     this.service.getUserData().subscribe((data) => {
-      this.userInfo = data;
-      console.log(this.userInfo);
-      this.userInfo = this.userInfo.result;
-      this.name = this.userInfo[0].nick_name;
-      this.profilePic = this.userInfo[0].photo;
+      this.userInfo = data?.result;
+      this.name = this.userInfo?.[0]?.nick_name;
+      this.profilePic = this.userInfo?.[0]?.photo;
       if (this.profilePic === null) {
         this.profilePic = '../assets/images/user-profile.jpg';
       }
