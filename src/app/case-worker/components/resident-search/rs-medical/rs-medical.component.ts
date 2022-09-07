@@ -14,7 +14,8 @@ export class RsMedicalComponent implements OnInit {
   veteranId!:number;
   isTableEmpty:boolean=false;
 
-  constructor() { }
+  constructor(private service: HealthTrackerService,
+    private cacheData: ClipBoardService) { }
 
   ngOnInit(): void {
     this.veteranId=this.cacheData.get("selectedResidentVeteranId");

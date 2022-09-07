@@ -45,24 +45,6 @@ export class ResidentSearchComponent implements OnInit {
     private cacheData: ClipBoardService
   ) {
     this.maxDateValue = new Date(new Date().getTime());
-<<<<<<< HEAD
-
-    this.service.getResidentSearchData().subscribe((data) => {
-      console.log("test:", data);
-      
-      this.tableValues = data;
-     // this.tableValues = this.tableValues.resedentData;
-      console.log("resident search ", this.tableValues);
-      
-    });
-  }
-
-  columns = [
-    { header: 'First Name', field: 'firstName' },
-    { header: 'last Name', field: 'lastName' },
-    { header: 'Birthdate', field: 'birthDate' },
-    { header: 'Address', field: 'address' },
-=======
     this.service.getResidentSearchData().subscribe((res) => {
       this.tableValues = res;
       console.log(this.tableValues);
@@ -78,7 +60,6 @@ export class ResidentSearchComponent implements OnInit {
     { header: 'Name', field: 'first_name' },
     { header: 'Birthdate', field: 'date_of_birth',date: true,format: 'dd/MM/yyyy' },
     { header: 'Address', field: 'address_main' },
->>>>>>> 9ddc6eda2b628511d303c08847d49167e3f1d715
   ];
 
   tabMenuItems: MenuItem[] = [
@@ -207,9 +188,9 @@ export class ResidentSearchComponent implements OnInit {
     return this.residentSearchForm.get('birthDate');
   }
 
-  selectResident(index: number) {
-    this.selectedResident = this.tableValues[index];
-  }
+  // selectResident(index: number) {
+  //   this.selectedResident = this.tableValues[index];
+  // }
 
   refresh() {
     this.buildForm();

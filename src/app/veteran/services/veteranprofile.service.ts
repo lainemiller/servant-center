@@ -45,12 +45,9 @@ export class VeteranprofileService {
     }  
   } 
   //Transportation End
-<<<<<<< HEAD
-=======
 
   imageUpload(imageForm: FormData) {
     console.log('image uploading',imageForm);
     return this.http.post('http://localhost:3000/api/v1/upload', imageForm);
    }
->>>>>>> 9ddc6eda2b628511d303c08847d49167e3f1d715
 }

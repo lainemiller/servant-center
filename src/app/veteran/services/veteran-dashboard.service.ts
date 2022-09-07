@@ -3,6 +3,7 @@ import { Injectable, isDevMode } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RestClientService } from 'src/app/shared/services/rest-client.service';
 import { environment as env } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
@@ -12,14 +13,10 @@ export class VeteranDashboardService {
 
   private isDev = isDevMode();
   private commonUrl=env.localUrl;
-<<<<<<< HEAD
-  private getVeteranIdAPI='';
-=======
   private getVeteranIdAPI=environment.serviceUrl.getVeteranId;
   private addUserAPI=environment.serviceUrl.addUser;
   private addVeteranAPI=environment.serviceUrl.addVeteran;
   private addCaseWorkerAPI=environment.serviceUrl.addCaseWorker;
->>>>>>> 9ddc6eda2b628511d303c08847d49167e3f1d715
 
   getTreatmentData() {
     return this.http.get<any>('./assets/mock/treatmentPlan-data.json');
