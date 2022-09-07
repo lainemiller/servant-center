@@ -35,6 +35,8 @@ export class ProfileFormComponent implements OnInit {
   public languages!: DropDown[];
   public maritalStatus!: DropDown[];
   public relations!: DropDown[];
+  public imageObj!: File;
+  public imageUrl!: string;
   public races!: DropDown[];
   public selectedState!: DropDown;
   public selectedLanguage!: DropDown;
@@ -174,4 +176,20 @@ export class ProfileFormComponent implements OnInit {
     this.buildForm();
     this.setForm();
   }
+  onImagePicked(imageInput: HTMLInputElement): void {
+    console.log('image upload ******',imageInput.files![0]);
+    const FILE = imageInput.files![0];
+    this.imageObj = FILE;
+    }
+ 
+ 
+ 
+    onImageUpload() {
+     let imageForm = new FormData();    
+     imageForm.append('image', this.imageObj);
+     this.service.imageUpload(imageForm).subscribe(res => {
+       //this.imageUrl = res['image'];
+       console.log("uploaded successfully");
+     });
+    }
 }

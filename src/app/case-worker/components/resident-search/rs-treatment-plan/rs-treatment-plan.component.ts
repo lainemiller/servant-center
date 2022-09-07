@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/case-worker/services/data.service';
+import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 @Component({
   selector: 'app-rs-treatment-plan',
   templateUrl: './rs-treatment-plan.component.html',
@@ -19,11 +20,14 @@ export class RsTreatmentPlanComponent implements OnInit {
   public formView = true;
   public treatmentArr: any;
   public formData:any;
+  public vetID!:any;
 
   constructor(
     private formBuilder: FormBuilder,
-    private service: DataService
+    private service: DataService,
+    private cacheData:ClipBoardService
   ) {
+    this.vetID=this.cacheData.get("veteranId");
     this.setForm();
   }
 
@@ -32,7 +36,7 @@ export class RsTreatmentPlanComponent implements OnInit {
   }
 
   setForm() {
-    this.service.getTreatmentPlanData().subscribe((res) => {
+    this.service.getTreatmentPlanData(this.vetID).subscribe((res) => {
       this.data = res;
       console.log(this.data.treatmentIssues)
       this.buildForm();
