@@ -48,10 +48,11 @@ export class RsTreatmentPlanComponent implements OnInit {
         hmisIdNo: this.data.hmis_id,
         veteranDiagnosis: this.data.diagnosis,
         veteranSupports: this.data.supports,
-        veteranStrengths: '(strengths yet to be columnized)',
+        veteranStrengths: this.data.strengths,
        
         treatmentIssues:this.data.treatmentIssues,
-        veteranNotes:'(notes yet to be columnized)'
+        
+        veteranNotes:this.data.notes
       });
       console.log(this.treatmentPlanForm.value);
     });

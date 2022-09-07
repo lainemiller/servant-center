@@ -30,7 +30,6 @@ export class TreatmentPlanComponent implements OnInit {
     private cacheData: ClipBoardService
   ) {
     this.vetID = this.cacheData.get("veteranId")
-    //console.log(this.vetID)
     this.setForm();
 
   }
@@ -48,13 +47,21 @@ export class TreatmentPlanComponent implements OnInit {
         lastName: this.data.last_name,
         recordNo: 1234,
         dateOfBirth1: this.data.date_of_birth,
-        intakeDOB: this.data.intake_date,
-        hmisIdNo: this.data.hmis_id
+        hmisIdNo: this.data.hmis_id,
+        treatmentIssues: this.data.treatmentIssues
       });
      console.log(this.treatmentPlanForm.value);
     });
   }
   buildForm() {
+    let d = 
+      new Date().getMonth()+
+      1+
+      '/'+
+      new Date().getUTCDate()+
+      '/'+
+      new Date().getFullYear();
+
     this.treatmentPlanForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -67,6 +74,7 @@ export class TreatmentPlanComponent implements OnInit {
       veteranStrengths: ['', Validators.required],
       treatmentIssues: this.initializeIssuesFormArray(),
       veteranNotes: ['', Validators.required],
+      addedDate:[d]
     });
 
     this.treatmentIssuesForm = this.formBuilder.group({
@@ -140,7 +148,7 @@ export class TreatmentPlanComponent implements OnInit {
   }
 
   saveForm(){
-   this.service.saveTreatmentData(this.treatmentPlanForm.value).subscribe();
+   this.service.saveTreatmentData(this.vetID,this.treatmentPlanForm.value).subscribe();
    console.log("form submitted successfully")
   }
  
@@ -178,7 +186,7 @@ export class TreatmentPlanComponent implements OnInit {
       goals: ['', Validators.required],
       plans: ['', Validators.required],
       strategies: ['', Validators.required],
-      targetDate: [null, Validators.required],
+      targetDate: ['', Validators.required],
     });
   }
 

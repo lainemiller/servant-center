@@ -90,21 +90,20 @@
         <div class="p-fluid p-formgrid p-grid">
           <div class="p-field p-col-12 p-md-3">
             <span class="label-title">Intake Date</span>
-           <!-- <p-calendar
+            <p-calendar
               formControlName="intakeDOB"
               [inline]="false"
               [showIcon]="true"
               placeholder="Intake date (mm/dd/yyyy)"
-            ></p-calendar>-->
-            <input
+            ></p-calendar>
+            <!--<input
             type="text"
             pInputText
             formControlName="intakeDOB"
             placeholder="Intake Date (mm/dd/yyyy)"
-            [readonly]=true
             value="{{ data?.intake_date | date: 'dd/MM/yyyy'  }}"
-            />
-            <!--<div
+            />-->
+            <div
               *ngIf="
                 getControl.intakeDOB.invalid && getControl.intakeDOB.touched"
             >
@@ -113,8 +112,8 @@
                 class="form-error"
               >
                 <small>Intake date is required.</small>
-              </div>-->
-            
+              </div>
+            </div>
           </div>
           <div class="p-field p-col-12 p-md-3">
             <span class="label-title">HMIS ID </span>
@@ -994,12 +993,8 @@
             <span class="form-head--data__light">{{ formData.dateOfBirth1  | date: "shortDate" }}</span>
           </section>
           <section class="p-field p-col-12 p-md-2">
-            <span class="form-head--data">Date: </span>
-            <span class="form-head--data__light">{{ formData.dateOfBirth1  | date: "shortDate" }}</span>
-          </section>
-          <section class="p-field p-col-12 p-md-2">
             <span class="form-head--data">IntakeDate: </span>
-            <span class="form-head--data__light">{{ formData.intakeDOB  | date: "shortDate" }}</span>
+            <span class="form-head--data__light">{{ formData.intakeDate  | date: "shortDate" }}</span>
           </section>
           <section class="p-field p-col-12 p-md-2">
             <span class="form-head--data">HMIS ID: </span>
