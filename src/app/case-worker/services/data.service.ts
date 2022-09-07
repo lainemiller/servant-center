@@ -21,7 +21,7 @@ export class DataService {
     if (this.isDev) {
      return this.restcs.get(this.serviceUrl+'uiLayout/getCaseWorkerDetails/'+ endPoint); 
     } else {
-       return this.restcs.get(this.caseWorkerApi);
+       return this.restcs.get(this.caseWorkerApi + endPoint);
     } 
   }
 

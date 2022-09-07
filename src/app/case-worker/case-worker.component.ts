@@ -37,7 +37,7 @@ export class CaseWorkerComponent implements OnInit {
         this.itemChange(0);
       }
     );
-    this.caseWorkerId = this.cacheData.get("caseWorkerId");
+    this.caseWorkerId = this.cacheData.get("caseWorkerId"); 
     this.service.getUserData(this.caseWorkerId).subscribe((data) => {
       this.userInfo = data;
       console.log("CaseInfo:",this.userInfo);

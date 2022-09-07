@@ -39,7 +39,7 @@ export class VeteranComponent implements OnInit {
     //   }
     // });
     this.veteran_id = this.cacheData.get("veteranId");
-    this.getName.getProfileData(this.veteran_id).subscribe((data) => {
+    this.getName.getProfileData(this.veteran_id).subscribe((data) => { 
       this.userInfo = data;
       this.name = this.userInfo.data[0].nick_name;
       this.image = this.userInfo.data[0].photo;

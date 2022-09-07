@@ -19,7 +19,7 @@ export class VeteranprofileService {
   private veteranProfileUpdateAPI='';
 
   public getProfileData(
-    endPoint: number,
+    endPoint: number, 
     payload = {}
   ): Observable<any> {
     if (this.isDev) {  
