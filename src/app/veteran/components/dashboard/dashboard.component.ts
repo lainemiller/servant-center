@@ -30,7 +30,10 @@ export class DashboardComponent implements OnInit {
     //to get all the events of logged in veteran
     this.veteranId = this.cache.get('veteranId');
     console.log('this.veteranId',this.veteranId);
-    this.service.getVeteranEmailId(this.veteranId).subscribe((emailIdData:any)=>{
+    let requestObj={
+      veteranId:this.veteranId
+    }
+    this.service.getVeteranEmailId(requestObj).subscribe((emailIdData:any)=>{
       console.log('veteran email id',emailIdData.data[0].email);
       this.service.getCalendarEvents().subscribe((eventData: any) => {
         this.getVeteranEventData(eventData,emailIdData);
