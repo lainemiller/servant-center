@@ -45,15 +45,15 @@
           <div class="p-field-checkbox" *ngFor="let mood of moodList">
             <label for="{{mood.value}}--answered">{{mood.label}}</label>
             <p-checkbox inputId="{{mood.value}}--answered" [name]=mood.value [value]=mood.value
-              [formControl]="moodAnsweredByClient"></p-checkbox>
+              formControlName="answeredByClient"></p-checkbox>
           </div>
         </div>
         <div class="p-col-12 p-formgroup-inline">
           <label style="width: 160px;">Observed by Interviewer</label>
           <div class="p-field-checkbox" *ngFor="let mood of moodList">
-            <label for="{{mood.value}}--observed">{{mood.label}}</label>
-            <p-checkbox inputId="{{mood.value}}--observed" [name]=mood.value [value]=mood.value
-              [formControl]="moodAnsweredByClient"></p-checkbox>
+            <label for="{{mood.value}}--answered">{{mood.label}}</label>
+            <p-checkbox inputId="{{mood.value}}--answered" [name]=mood.value [value]=mood.value
+              formControlName="observedByInterviewer"></p-checkbox>
           </div>
         </div>
       </div>
@@ -131,15 +131,15 @@
         <input type="text" pInputText formControlName=currentMedication placeholder="Current Medication">
       </div>
     </div>
-<div class="p-d-flex button-container p-mt-4">
-  <div class="p-jc-start">
-    <button type="button" pButton label="Save"></button>
-    <button type="button" pButton label="Cancel" class="p-button-outlined p-ml-2"></button>
-  </div>
-  <div class="p-jc-end">
-    <button type="button" pButton label="Back" (click)="goBack()"></button> 
-    <button type="submit" pButton label="Next" class="p-button-inlined p-ml-2"></button>
-  </div>
-  </div>
-</form>
+    <div class="p-d-flex button-container p-mt-4">
+      <div class="p-jc-start">
+        <button type="button" pButton label="Save"></button>
+        <button type="button" pButton label="Cancel" class="p-button-outlined p-ml-2"></button>
+      </div>
+      <div class="p-jc-end">
+        <button type="button" pButton label="Back" (click)="goBack()"></button>
+        <button type="submit" pButton label="Next" class="p-button-inlined p-ml-2"></button>
+      </div>
+    </div>
+  </form>
 </div>

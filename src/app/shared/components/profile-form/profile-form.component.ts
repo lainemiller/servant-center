@@ -1,11 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VeteranprofileService } from 'src/app/veteran/services/veteranprofile.service';
-import { Auth } from '@aws-amplify/auth';
 
 import {
   genders,
+  languages,
+  relegions,
   states,
+  races,
   statuses,
   relations,
 } from '../../../veteran/app.constants';
@@ -22,26 +24,30 @@ interface DropDown {
   styleUrls: ['./profile-form.component.scss'],
 })
 export class ProfileFormComponent implements OnInit {
+  public stateValue: any;
   public profileDetails: any;
+  public genderArray: any = [];
   public profileForm!: FormGroup;
   public veteran: any;
   public states!: DropDown[];
+  public relegions!: DropDown[];
+  public languages!: DropDown[];
   public maritalStatus!: DropDown[];
   public relations!: DropDown[];
+  public imageObj!: File;
+  public imageUrl!: string;
+  public races!: DropDown[];
   public selectedState!: DropDown;
+  public selectedLanguage!: DropDown;
   public selectedGender: any = null;
   public selectedMaritalStatus!: DropDown;
   public customPatterns = { '0': { pattern: new RegExp('[a-zA-Z]') } };
   public genders!: DropDown[];
   public selectedRelationship: any;
-
-  public imageObj!: File;
-  public imageUrl!: string;
   selectedRace: any;
   maxDateValue!: Date;
   @Input() isShowFields!: boolean;
   veteranId!: number;
-  email!: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,9 +57,12 @@ export class ProfileFormComponent implements OnInit {
     this.veteranId = this.cacheData.get('veteranId');
     this.setForm();
     this.states = states;
+    this.relegions = relegions;
+    this.languages = languages;
     this.genders = genders;
     this.maritalStatus = statuses;
     this.relations = relations;
+    this.races = races;
     this.maxDateValue = new Date(new Date().getTime());
   }
 
@@ -62,10 +71,8 @@ export class ProfileFormComponent implements OnInit {
     this.selectedGender = this.genders[1];
     this.selectedMaritalStatus = this.maritalStatus[1];
     this.selectedRelationship = this.relations[1];
+    this.selectedRace = this.races[1];
     this.buildForm();
-    Auth.currentAuthenticatedUser().then((user) => {
-      this.email = user.signInUserSession.idToken.payload.email;
-    });
   }
 
   setForm() {
@@ -87,7 +94,6 @@ export class ProfileFormComponent implements OnInit {
           selectedGenders: this.veteran.gender,
           selectedState: this.veteran.state,
           selectedMaritalStatus: this.veteran.marital_status,
-          emailId: this.email,
           phoneNumber: this.veteran.primary_phone,
           address1: this.veteran.address_main,
           city: this.veteran.city,
@@ -95,9 +101,9 @@ export class ProfileFormComponent implements OnInit {
           address2: this.veteran.address_line_2,
           zipCode: this.veteran.zip_code,
           hobbies: this.veteran.hobbies,
-          primaryLanguage: this.veteran.primary_language,
-          relegion: this.veteran.religious_preference,
-          race: this.veteran.race,
+          selectedprimaryLanguage: this.veteran.primary_language,
+          selectedRelegion: this.veteran.religious_preference,
+          selectedRace: this.veteran.race,
           cfirstName: this.veteran.contact_person,
           selectedRelationship: this.veteran.contact_person_relationship,
           cPhoneNumber: this.veteran.contact_person_phone,
@@ -115,15 +121,6 @@ export class ProfileFormComponent implements OnInit {
       nickName: ['', [Validators.required]],
       DOB: ['', Validators.required],
       POB: ['', [Validators.required]],
-      emailId: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(
-            '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}$'
-          ),
-        ],
-      ],
       phoneNumber: ['', Validators.required],
       cfirstName: ['', [Validators.required]],
       hobbies: ['', [Validators.required]],
@@ -138,9 +135,9 @@ export class ProfileFormComponent implements OnInit {
       selectedMaritalStatus: ['', Validators.required],
       SSNNumber: ['', [Validators.required]],
       hmisIdNo: ['', [Validators.required]],
-      race: ['', Validators.required],
-      primaryLanguage: ['', Validators.required],
-      relegion: ['', Validators.required],
+      selectedRace: ['', Validators.required],
+      selectedprimaryLanguage: ['', Validators.required],
+      selectedRelegion: ['', Validators.required],
       cHouseNumber: ['', [Validators.required]],
       cPhoneNumber: ['', [Validators.required, Validators.minLength(10)]],
     });
@@ -151,6 +148,7 @@ export class ProfileFormComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log('Profile Form submitted value', this.profileForm.value);
     let profileDetails = this.profileForm.value;
     this.service
       .updateProfile(this.veteranId, profileDetails)
@@ -163,21 +161,20 @@ export class ProfileFormComponent implements OnInit {
     this.buildForm();
     this.setForm();
   }
-
   onImagePicked(imageInput: HTMLInputElement): void {
-   console.log('image upload ******',imageInput.files![0]);
-   const FILE = imageInput.files![0];
-   this.imageObj = FILE;
-   }
-
-
-
-   onImageUpload() {
-    let imageForm = new FormData();    
-    imageForm.append('image', this.imageObj);
-    this.service.imageUpload(imageForm).subscribe(res => {
-      //this.imageUrl = res['image'];
-      console.log("uploaded successfully");
-    });
-   }
+    console.log('image upload ******',imageInput.files![0]);
+    const FILE = imageInput.files![0];
+    this.imageObj = FILE;
+    }
+ 
+ 
+ 
+    onImageUpload() {
+     let imageForm = new FormData();    
+     imageForm.append('image', this.imageObj);
+     this.service.imageUpload(imageForm).subscribe(res => {
+       //this.imageUrl = res['image'];
+       console.log("uploaded successfully");
+     });
+    }
 }

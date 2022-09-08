@@ -1,5 +1,5 @@
-<app-header (toggleMenu)="toggleMenu()"></app-header>
-<div class="p-grid nested-grid">
+<app-header *ngIf="isShowComponent" (toggleMenu)="toggleMenu()"></app-header>
+<div *ngIf="isShowComponent" class="p-grid nested-grid">
 
   <p-menu [model]=items class="p-col-12 p-lg-2" width="250px" [hidden]="!displayMenu" (click) = "activeMenu($event)"></p-menu>
 
@@ -13,6 +13,6 @@
     <router-outlet></router-outlet>
   </div>
 </div>
-<footer>
+<footer *ngIf="isShowComponent">
   <app-footer class="p-jc-end"></app-footer>
 </footer>

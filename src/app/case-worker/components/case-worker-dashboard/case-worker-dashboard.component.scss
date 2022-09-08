@@ -74,3 +74,6 @@
 // .participantAdd{
 //   margin-left: 10px;
 // }
+:host ::ng-deep .p-datepicker{
+ overflow-x: visible;
+}
