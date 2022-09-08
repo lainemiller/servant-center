@@ -62,6 +62,12 @@
       <div class="p-field p-md-4">
         <input type="text" pInputText formControlName=otherTrainingEducation placeholder="Other Training or Education">
       </div>
+      <div class="p-field p-md-6">
+        <input type="text" pInputText formControlName=currentEmployer placeholder="Current Employer">
+      </div>
+      <div class="p-field p-md-6">
+        <input type="text" pInputText formControlName=currentEmployerLocation placeholder="Current Employer Location">
+      </div>
     </div>
     <h4>Social History</h4>
     <div class="p-fluid p-formgrid p-grid" formGroupName="socialHistory">
@@ -78,23 +84,52 @@
         <input type="text" pInputText formControlName=diagnoses placeholder="Diagnoses">
       </div>
       <div class="p-field p-md-6">
-        <input type="text" pInputText formControlName=currentMedications placeholder="Current Medications">
+        <input type="text" pInputText formControlName=currentPsychiatricTreatment placeholder="Current Psychiatric Treatment">
       </div>
       <div class="p-field p-md-6">
-        <input type="text" pInputText formControlName=psychiatristOrTherapist placeholder="Psychiatrist/Therapist">
+        <input type="text" pInputText formControlName=psychiatristName placeholder="Name of Psychiatrist/Therapist">
       </div>
       <div class="p-field p-md-6">
-        <input type="text" pInputText formControlName=clinic placeholder="Clinic">
+        <input type="text" pInputText formControlName=psychiatristAddress placeholder="Address of Psychiatrist/Therapist">
       </div>
       <div class="p-field p-md-6">
-        <input type="tel" pInputText formControlName=telephone placeholder="Telephone">
+        <input type="text" pInputText formControlName=pastTreatments placeholder="Past Inpatient, Outpatient and/or Psychiatric Hospitalizations">
       </div>
-      <div class="p-field p-md-6">
-        <input type="text" pInputText formControlName=inpatientOrOutpatientPsychiatricHospitalization
-          placeholder="Impatient or Outpatient Psychiatric Hospitalizations">
+      <!-- Need psychiatrist cunsultant -->
+      <div *ngFor="let psychiatricCunsultant of needPsychiatricCunsultant; let i = index;">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Does Client need a Psychiatrist Cunsultant? </label>
+          <div class="p-field-radiobutton">
+            <p-radioButton [name]=psychiatricCunsultant.key [formControlName]=psychiatricCunsultant.key value=true
+              inputId="psychiatricCunsultant-{{i}}-yes">
+            </p-radioButton>
+            <label for="psychiatricCunsultant{{i}}-yes" class="p-ml-3">Yes</label>
+          </div>
+          <div class="p-field-radiobutton">
+            <p-radioButton [name]=psychiatricCunsultant.key [formControlName]=psychiatricCunsultant.key value=false
+              inputId="psychiatricCunsultant-{{i}}-no">
+            </p-radioButton>
+            <label for="psychiatricCunsultant{{i}}-no" class="p-ml-3">No</label>
+          </div>
+        </div>
       </div>
+      <!-- Date scheduled -->
+      <div class="p-field p-col-12 p-md-5">
+        <p-calendar formControlName=dateScheduled [inline]=false [showIcon]=true placeholder="Date Scheduled"></p-calendar>
+      </div>
+      <!-- name and address of eveluator -->
       <div class="p-field p-md-6">
-        <input type="text" pInputText formControlName=historyOfSucideAttempts placeholder="History of Sucide Attempts ">
+        <input type="text" pInputText formControlName=psychEvaluatorName placeholder="Name of Physician Completing Psych Evaluation">
+      </div><div class="p-field p-md-6">
+        <input type="text" pInputText formControlName=psychEvaluatorAddress placeholder="Address of Physician Completing Psych Evaluation">
+      </div><div class="p-field p-md-4">
+        <input type="text" pInputText formControlName=psychEvaluatorCity placeholder="City">
+      </div><div class="p-field p-md-4">
+        <input type="text" pInputText formControlName=psychEvaluatorState placeholder="State">
+      </div><div class="p-field p-md-4">
+        <input type="text" pInputText formControlName=psychEvaluatorZipcode placeholder="Zipcode">
+      </div><div class="p-field p-md-12">
+        <input type="text" pInputText formControlName=psychEvaluatorLicense placeholder="License of Physician Completing Psych Evaluation">
       </div>
     </div>
     <div class="p-d-flex button-container p-mt-4">
