@@ -505,7 +505,7 @@
 
       <div class="p-fluid p-grid">
         <div class="p-field p-col-12 p-md-4">
-          <label class="label-title">Country</label>
+          <label class="label-title">Select Country</label>
           <input
             type="text"
             appNoSpecialSymbols
@@ -600,81 +600,76 @@
         </div>
 
         <div class="p-field p-col-12 p-md-4">
-          <label class="label-title">Primary Language</label>
-          <input
-            id="primaryLanguage"
-            type="text"
-            appNoSpecialSymbols
-            customAttr="textWithSpace"
-            pInputText
-            formControlName="primaryLanguage"
-          />
+          <label class="label-title">Select Primary Language</label>
+          <p-dropdown
+            inputId="primaryLanguage"
+            optionValue="name"
+            [autoDisplayFirst]="false"
+            [options]="languages"
+            formControlName="selectedprimaryLanguage"
+            optionLabel="name"
+          >
+          </p-dropdown>
           <div
             *ngIf="
-              getControl.primaryLanguage.touched &&
-              getControl.primaryLanguage.invalid
+              getControl.selectedprimaryLanguage.touched &&
+              getControl.selectedprimaryLanguage.invalid
             "
             class="text-danger"
           >
             <small
               class="form-container__sec-errmsg"
-              *ngIf="getControl.primaryLanguage.errors?.required"
+              *ngIf="getControl.selectedprimaryLanguage.errors?.required"
             >
-              Primary language is required.
+              Select an option.
             </small>
           </div>
         </div>
 
         <div class="p-field p-col-12 p-md-4">
-          <label class="label-title">Religious Preference</label>
-          <input
-            id="Select ReligiousPreference"
-            type="text"
-            appNoSpecialSymbols
-            customAttr="textWithSpace"
-            pInputText
-            formControlName="relegion"
-          />
+          <label class="label-title">Select Religious Preference</label>
+          <p-dropdown
+            inputId="Select ReligiousPreference"
+            optionValue="name"
+            [autoDisplayFirst]="false"
+            [options]="relegions"
+            formControlName="selectedRelegion"
+            optionLabel="name"
+          >
+          </p-dropdown>
           <div
-            *ngIf="getControl.relegion.touched && getControl.relegion.invalid"
+            *ngIf="
+              getControl.selectedRelegion.touched &&
+              getControl.selectedRelegion.invalid
+            "
             class="text-danger"
           >
             <small
               class="form-container__sec-errmsg"
-              *ngIf="getControl.relegion.errors?.required"
+              *ngIf="getControl.selectedRelegion.errors?.required"
             >
-              Relegion preference is required.
+              Select an option.
             </small>
           </div>
         </div>
 
         <div class="p-field p-col-12 p-md-4">
-          <label class="label-title">Race</label>
-          <input
-            id="race"
-            type="text"
-            appNoSpecialSymbols
-            customAttr="textWithSpace"
-            pInputText
-            formControlName="race"
-          />
-          <div
-            *ngIf="getControl.race.touched && getControl.race.invalid"
-            class="text-danger"
+          <label class="label-title">Select Race</label>
+          <p-dropdown
+            inputId="race"
+            optionValue="name"
+            [autoDisplayFirst]="false"
+            [options]="races"
+            formControlName="selectedRace"
+            optionLabel="name"
           >
-            <small
-              class="form-container__sec-errmsg"
-              *ngIf="getControl.race.errors?.required"
-            >
-              Race is required.
-            </small>
-          </div>
+          </p-dropdown>
         </div>
-        <!-- <ng-template pTemplate="selectedItem">
+        <ng-template pTemplate="selectedItem">
           <div class="country-item country-item-value" *ngIf="selectedRace">
             <div>{{ selectedRace.name }}</div>
           </div>
-        </ng-template> -->
+        </ng-template>
       </div>
     </fieldset>
     <!-- Other Info End -->

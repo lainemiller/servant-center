@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 
 import { VeteranDashboardService } from '../../services/veteran-dashboard.service';
 
@@ -19,37 +18,34 @@ export class TreatmentPlanComponent implements OnInit {
   public maxDateValue: any;
   public eventId: any;
   public data: any;
-  public vetID!: number;
   public formView = true;
   public treatmentArr: any;
   public formData:any;
  public persons=['Client','Case Manager','RN']
   constructor(
     private formBuilder: FormBuilder,
-    private service: VeteranDashboardService,
-    private cacheData: ClipBoardService
+    private service: VeteranDashboardService
   ) {
-    this.vetID = this.cacheData.get("veteranId")
     this.setForm();
   }
 
   ngOnInit(): void {
-    this.buildForm();    
+    this.buildForm();
   }
 
   setForm() {
-    this.service.getTreatmentData(this.vetID).subscribe((res) => {
+    this.service.getTreatmentData().subscribe((res) => {
       this.data = res;
       this.buildForm();
       this.treatmentPlanForm.patchValue({
-        firstName: this.data.first_name,
-        lastName: this.data.last_name,
-        recordNo: 1234,
-        dateOfBirth1: this.data.date_of_birth,
-        intakeDOB: this.data.intake_date,
-        hmisIdNo: this.data.hmis_id
+        firstName: this.data.fname,
+        lastName: this.data.lname,
+        recordNo: this.data.recNo,
+        dateOfBirth1: this.data.dob1,
+        intakeDOB: this.data.intakeDate,
+        hmisIdNo: this.data.hmisId,
       });
-     console.log(this.treatmentPlanForm.value);
+      console.log(this.treatmentPlanForm.value);
     });
   }
   buildForm() {
@@ -57,8 +53,9 @@ export class TreatmentPlanComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       recordNo: ['', Validators.required],
-      dateOfBirth1: ['', Validators.required],
-      intakeDOB: ['', Validators.required],
+      dateOfBirth1: [null, Validators.required],
+      dateOfBirth2: [null, Validators.required],
+      intakeDOB: [null, Validators.required],
       hmisIdNo: ['', Validators.required],
       veteranDiagnosis: ['', Validators.required],
       veteranSupports: ['', Validators.required],
@@ -121,25 +118,20 @@ export class TreatmentPlanComponent implements OnInit {
       },
     ];
   }
-  
-  //onSubmit
+
   onSubmit() {
     this.formView = false;
-    //this.treatmentArr = this.treatmentPlanForm.get('treatmentIssues')?.value;
-    //console.log(this.treatmentArr);
+    console.log(this.treatmentPlanForm.value);
+    this.treatmentArr = this.treatmentPlanForm.get('treatmentIssues')?.value;
+    console.log(this.treatmentArr);
     this.showTopView();
     this.formData= this.treatmentPlanForm.value;
-    console.log("form data",this.treatmentPlanForm.value);
+    
   }
   showTopView() {
     const p = document.querySelector('#prnt');
     console.log(p)
     p?.scrollIntoView();
-  }
-
-  saveForm(){
-   this.service.saveTreatmentData(this.treatmentPlanForm.value).subscribe();
-   console.log("form submitted successfully")
   }
  
   initializeIssuesFormArray() {
@@ -251,6 +243,3 @@ export class TreatmentPlanComponent implements OnInit {
     window.print();
   }
 }
-
-//treatmetPlanComponent
-

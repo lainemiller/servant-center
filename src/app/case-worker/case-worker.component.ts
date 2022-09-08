@@ -1,7 +1,9 @@
 import { Component, HostListener, isDevMode, OnInit } from '@angular/core';
+
 import { MenuItem } from 'primeng/api';
-import { DataService } from './services/data.service';
 import { Auth } from '@aws-amplify/auth';
+
+import { DataService } from './services/data.service';
 import { ClipBoardService } from '../shared/services/clip-board.service';
 import { VeteranDashboardService } from '../veteran/services/veteran-dashboard.service';
 
@@ -12,12 +14,13 @@ import { VeteranDashboardService } from '../veteran/services/veteran-dashboard.s
 })
 export class CaseWorkerComponent implements OnInit {
   displayMenu: boolean = true;
-  public msgCount: number = 1;
+  public msgCount!: number;
   public msgData: any;
   public userInfo: any;
   public name!: string;
   public profilePic!: string;
   items!: MenuItem[];
+
   username!: string;
   caseWorkerId!: number;
   private isDev = isDevMode();
@@ -47,10 +50,12 @@ export class CaseWorkerComponent implements OnInit {
         this.itemChange(0);
       }
     );
-    this.service.getUserData().subscribe((data) => {
-      this.userInfo = data?.result;
-      this.name = this.userInfo?.[0]?.nick_name;
-      this.profilePic = this.userInfo?.[0]?.photo;
+    this.caseWorkerId = this.cacheData.get("caseWorkerId"); 
+    this.service.getUserData(this.caseWorkerId).subscribe((data) => {
+      this.userInfo = data;
+      console.log("CaseInfo:",this.userInfo);
+      this.name = this.userInfo[0].nick_name;
+      this.profilePic = this.userInfo[0].photo;
       if (this.profilePic === null) {
         this.profilePic = '../assets/images/user-profile.jpg';
       }

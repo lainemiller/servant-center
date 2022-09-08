@@ -59,7 +59,7 @@
                     </small></div>
                 </div>
                 <div class="p-field p-col-12 p-sm-12">
-                  <h4>Participants E-mail:<span *ngIf="!participants.controls.length"> None</span></h4>
+                  <h4>Participants ID:<span *ngIf="!participants.controls.length"> None</span></h4>
                   <div formArrayName="participants" *ngFor="let participant of participants.controls; let i = index"
                     class="p-col-12">
                     <div [formGroupName]="i">
