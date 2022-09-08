@@ -38,25 +38,25 @@ export class VeteranDashboardService {
 
   addUser(payload={}):Observable<any>{
     if(this.isDev){
-      return this.restcs.post(this.commonUrl+'addUser/'+payload)
+      return this.restcs.post(this.commonUrl+'addUser/',payload)
     }else{
-      return this.restcs.post(this.addUserAPI+payload)
+      return this.restcs.post(this.addUserAPI,payload)
       }
   }
 
   addVeteran(payload={}):Observable<any>{
     if(this.isDev){
-      return this.restcs.post(this.commonUrl+'addVeteran/'+payload)
+      return this.restcs.post(this.commonUrl+'addVeteran/',payload)
     }else{
-      return this.restcs.post(this.addVeteranAPI)
+      return this.restcs.post(this.addVeteranAPI,payload)
     }
   }
 
   addCaseWorker(payload={}):Observable<any>{
     if(this.isDev){
-      return this.restcs.post(this.commonUrl+'addVeteran/'+payload)
+      return this.restcs.post(this.commonUrl+'addCaseWorker/',payload)
     }else{
-      return this.restcs.post(this.addCaseWorkerAPI)
+      return this.restcs.post(this.addCaseWorkerAPI,payload)
     }
   }
 }

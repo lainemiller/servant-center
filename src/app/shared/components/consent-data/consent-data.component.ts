@@ -17,16 +17,12 @@ export class ConsentDataComponent implements OnInit {
   vetran: any;
   consentDetails: any;
   loginId!: number;
-  email: any;
 
   constructor(private service: ConsentService,private cacheData: ClipBoardService) {}
 
   ngOnInit() {
     this.loginId=this.cacheData.get("loginId");
     this.getVetranDetailsById();
-    Auth.currentAuthenticatedUser().then((user) => {
-      this.email = user.signInUserSession.idToken.payload.email;
-    });
   }
 
   showConsentForm() {
