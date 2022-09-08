@@ -1,6 +1,10 @@
 <form [formGroup]="page5Form" (ngSubmit)="onSubmit()" *ngIf="page5Form">
   <h3>Preliminary Treatment Goals</h3>
   <div class="p-fluid p-formgrid p-grid" formGroupName="preliminaryTreatmentGoals">
+    <div class="p-field p-md-12">
+      <h5>What has happened in my ife this past year?</h5>
+      <input type="text" pInputText formControlName=hppenedInMyLifeLastYear placeholder="Include exciting, fun things as well as challenges and concerns">
+    </div>
     <div class="p-field p-md-6">
       <h5>Short Term Goals:</h5>
       <input type="text" pInputText formControlName=shortTermGoals placeholder="Immediate concerns for the First Year">
@@ -9,8 +13,25 @@
       <h5>Long Term Goals:</h5>
       <input type="text" pInputText formControlName=longTermGoals placeholder="For the next year and Hopes for the Future">
     </div>
+    <div class="p-field p-md-12">
+      <h5>Strengths and Resources:</h5>
+      <input type="text" pInputText formControlName=strengthAndResources placeholder="What am I good at doing? What do people admire about me?">
+    </div>
+    <div class="p-field p-md-12">
+      <h5>Preferences:</h5>
+      <input type="text" pInputText formControlName=preferences placeholder="What is important to me? What are the people/activities/things/places that matter to me in everyday life? What I don't want in my life?">
+    </div>
+    <div class="p-field p-md-12">
+      <h5>Needs:</h5>
+      <input type="text" pInputText formControlName=needs placeholder="What would I change about my life? What is not working in my lefe? What do I need in order to be an active part of my community? What do I need to be healthy and safe?">
+    </div>
+    <div class="p-field p-md-12">
+      <h5>Supports:</h5>
+      <input type="text" pInputText formControlName=supports placeholder="What do others need to know or do to support me best in relationships, in things I like to do, in work or school and ways to stay healthy and safe?">
+    </div>
     <div class="p-field p-md-6">
-      <p-calendar formControlName=ptDate [inline]=false [showIcon]=true placeholder="Date"></p-calendar>
+      <h5>Additional Comments:</h5>
+      <textarea type="text" pInputText formControlName=additionalComments placeholder="Comments"></textarea>
     </div>
   </div>
     <!-- save -->

@@ -6,7 +6,7 @@
     [style]="{ width: '70vw' }"
     [draggable]="false"
     [modal]="true"
-    (onHide)="onConsentCancel()"
+    [closable]="false"
     id="consent-modal"
   >
     <div class="consent-container__scroll">
@@ -300,13 +300,13 @@
     <div class="consent-container__sign">
       <input
         class="consent-container__sign--input"
-        value="{{ vetran?.first_name }}, {{ vetran?.last_name }}"
+        value="{{ vetran?.first_name }} {{ vetran?.last_name }}"
         type="text"
         pInputText
       />
       <input
         class="consent-container__sign--input"
-        value="{{ email }}"
+        value="{{ vetran?.email }}"
         type="text"
         pInputText
       />

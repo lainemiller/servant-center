@@ -19,9 +19,14 @@ export class IaFormPageFiveComponent implements OnInit {
   initializeFormGroups() {
 
     this.preliminaryTreatmentGoals = this.fb.group({
+      hppenedInMyLifeLastYear: ['', Validators.required],
       shortTermGoals: ['', Validators.required],
       longTermGoals: ['', Validators.required],
-      ptDate: ['', Validators.required]
+      strengthAndResources: ['', Validators.required],
+      preferences: ['', Validators.required],
+      needs: ['', Validators.required],
+      supports: ['', Validators.required],
+      additionalComments: ['', Validators.required]
     });
     this.buildForm();
   }

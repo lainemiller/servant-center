@@ -29,16 +29,16 @@ export class ProgressNotesService {
   }
   public postNotes(vetID:number,data:any): Observable<any> {
     if (this.isDev){
-    return this.http.post(this.commonUrl+'progressNotes/addGoal/'+vetID,data);
+    return this.restcs.post(this.commonUrl+'progressNotes/addGoal/'+vetID,data);
     } else{
-      return this.http.post(this.createProgressNotes+vetID,data);
+      return this.restcs.post(this.createProgressNotes+vetID,data);
     }
 }
 public postStatus(vetID:number,data:any): Observable<any> {
   if (this.isDev){
-  return this.http.post(this.commonUrl+'progressNotes/updateGoalStatus/'+vetID,data);
+  return this.restcs.post(this.commonUrl+'progressNotes/updateGoalStatus/'+vetID,data);
   } else{
-    return this.http.post(this.updateProgressNotes+vetID,data);
+    return this.restcs.post(this.updateProgressNotes+vetID,data);
   }
 }
 }

@@ -16,6 +16,7 @@
         id="Record #"
         type="text"
         class="form-container__disable"
+        value="{{veteran?.record_number}}"
         pInputText
       />
     </div>
@@ -25,6 +26,7 @@
         id="Intake DOB"
         class="form-container__disable"
         placeholder="Intake DOB(mm/dd/yyyy)"
+        value="{{veteran?.intake_date | date:'dd/MM/yyyy'}}"
         pInputText
       />
     </div>

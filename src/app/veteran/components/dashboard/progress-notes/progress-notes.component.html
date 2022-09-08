@@ -125,7 +125,7 @@
         <p-toolbar id="progress-notes--mainToolbar">
           <div class="p-toolbar-group-left">
             <span class="p-mr-2">In Progress</span>
-            <p-inputSwitch [(ngModel)]="progressNote.goalState" (onChange)="changed(i,progressNote.goalState)"
+            <p-inputSwitch [(ngModel)]="progressNote.goalState" (onChange)="changed(progressNote.goalTitle, progressNote.goalState)"
               class="open-close-switch"></p-inputSwitch>
             <span class="p-ml-2">Complete</span>
           </div>
