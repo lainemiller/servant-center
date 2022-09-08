@@ -36,17 +36,6 @@ export class VeteranComponent implements OnInit {
     private service: VeteranDashboardService,
     private cacheData: ClipBoardService
   ) {
-    // this.service.getName().subscribe((data) => {
-    //   this.userInfo = data;
-    //   console.log("UserInfo: ",this.userInfo);
-    //   this.userInfo = this.userInfo.result;
-    //   this.name = this.userInfo[0].nick_name;
-    //   this.image = this.userInfo[0].photo;
-    //   if (this.image === null) {
-    //     this.image = '../assets/images/user-profile.jpg';
-    //   }
-    // });
-    this.displayWelcomeData();
   }
 
   public displayMenu = true;
@@ -132,11 +121,11 @@ export class VeteranComponent implements OnInit {
             if (response.responseStatus == 'SUCCESS') {
               if (response.data.length === 1) {
                 this.veteranId = response.data[0].party_id;
-                this.nickName = response.data[0].nick_name;
                 this.cacheData.set('veteranId', this.veteranId);
                 this.cacheData.set('loginId', this.veteranId);
                 if (this.veteranId) {
                   this.isShowComponent = true;
+                  this.displayWelcomeData();
                 }
               } else if (response.data.length === 0) {
                  console.log('username is not present')
@@ -186,6 +175,7 @@ export class VeteranComponent implements OnInit {
           console.log('web_party_id', this.veteranId);
           if (this.veteranId) {
             this.isShowComponent = true;
+            this.displayWelcomeData();
           }
         }
       });
