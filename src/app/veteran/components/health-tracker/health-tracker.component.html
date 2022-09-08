@@ -497,8 +497,8 @@
                     {{col.header}}
                 </th>
             </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          </ng-template>
+          <ng-template  pTemplate="body" let-rowData let-columns="columns">
             <tr>
                 <td *ngFor="let col of columns">
                     {{col.date ? (rowData[col.field]| date : col.format) : rowData[col.field]}}
