@@ -24,6 +24,9 @@ export class RsMedicalComponent implements OnInit {
     this.getHealthTrackerByVeteranId();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes)
+  }
   showSelectedTable(){
     this.cols = [
       { field: 'note_date', header: 'Date' ,date: true,format: 'dd/MM/yyyy'},

@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { CalendarOptions } from '@fullcalendar/angular';
 import { CalendarResp } from 'src/app/shared/models/calendarEventsResponse';
+import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { CalendarEventsService } from '../../services/calendar-events.service';
 
 @Component({
@@ -24,13 +25,13 @@ export class CaseWorkerDashboardComponent implements OnInit {
   public count = 0;
   public participantsExceeded: boolean = false;
   public partic: string = "";
-  public eventParticipants: string = "";
   public isAppointment: boolean = true;
-  public caseWorkerId: number | undefined;
+  public caseWorkerId:any;
   
   constructor(
     private service: CalendarEventsService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private cache: ClipBoardService
   ) {
   }
 
@@ -41,7 +42,9 @@ export class CaseWorkerDashboardComponent implements OnInit {
       { label: 'Appointment', icon: 'pi pi-fw pi-calendar' },
       { label: 'Event', icon: 'pi pi-fw pi-pencil' },
     ];
-    this.caseWorkerId = 3;
+    this.caseWorkerId = this.cache.get('caseworkerId');
+    console.log('this.caseWorkerId',this.caseWorkerId);
+    
     this.service.getCalendarEvents(this.caseWorkerId).subscribe((data: CalendarResp) => {
       this.totalEvents = data;
       console.log(this.totalEvents);
@@ -62,7 +65,6 @@ export class CaseWorkerDashboardComponent implements OnInit {
   public builtForm() {
     this.eventsForm = this.formBuilder.group({
       eventTitle: ['', Validators.required],
-      // eventDate: ['', Validators.required],
       eventDescription: ['', Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
@@ -116,29 +118,29 @@ export class CaseWorkerDashboardComponent implements OnInit {
     return this.eventsForm.controls;
   }
   onSubmit() {
+    let eventParticipants=''
     console.log(this.eventsForm.value);
     let event = this.eventsForm.value;
     for(let i=0;i<event.participants.length;i++){
-      this.eventParticipants +=event.participants[i].name + ',';            
+      eventParticipants +=event.participants[i].name + ',';            
     }    
     let newEvent = {
-      case_worker_id:4,
+      case_worker_id:this.caseWorkerId,
       isAppointment:this.isAppointment,
       title: event.eventTitle,
       description: event.eventDescription,
       sTime: event.startTime,
       enTime: event.endTime,
-      participants: this.eventParticipants,
+      participants: eventParticipants,
     };
     
     //sending calendar events/appointments to backend database
     this.service.postCalendarEvents(newEvent).subscribe(data =>{
       console.log('successfully posted event to backend');
     })
-    // this.eventList.push(newEvent);
-    console.log(this.eventList);
-    this.calendarOptions.events = this.eventList;
-    console.log(this.calendarOptions.events);
+    this.eventsForm.reset();
+    let participantsArray=this.eventsForm.get(['participants']) as FormArray
+    this.clearFormArray(participantsArray)
     this.display = false;
   }
   onCancel() {
@@ -170,15 +172,15 @@ export class CaseWorkerDashboardComponent implements OnInit {
   }
   showEventDetail(arg: any) {
     this.displayEvent = true;
-    console.log(arg);
+    console.log('arg',arg);
 
     this.eventInfo = [
       arg.event._def.extendedProps.type,
-      arg.event._def.extendedProps.sTime,
-      arg.event._def.extendedProps.enTime,
+      arg.event._def.extendedProps.eventstart,
+      arg.event._def.extendedProps.eventend,
       arg.event._def.title,
       arg.event.start,
       arg.event._def.extendedProps.description,
-    ];
+    ];    
   }
 }
