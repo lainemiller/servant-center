@@ -120,14 +120,17 @@ export class ResidentSearchComponent implements OnInit {
 
     //for filtering the data
     this.groupFilters.emit(filters);
-   
+    console.log(filters);
     //will get date into object form
     this.newDate = filters.birthDate;
+
+    // this.datepipe.transform(this.newDate, 'MM/dd/yyyy');
+    // console.log(this.newDate);
+    // this.newDate=new Date();
 
     //string format
     this.resultDate = this.datepipe.transform(this.newDate, 'MM-dd-yyyy');
     filters.birthDate = this.resultDate;
-    console.log(filters);
 
     // console.log(typeof filters.birthDate);
     // var date = new Date(filters.birthDate);
@@ -136,15 +139,23 @@ export class ResidentSearchComponent implements OnInit {
     // console.log(typeof str)
 
     this.result = this.tableValues.filter((index: any) => {
-      return (
-        index.firstName == filters.firstName &&
-        index.lastName == filters.lastName &&
-        index.birthDate == filters.birthDate
-      );
+      if(!filters.birthDate){
+        return (
+          index.firstName == filters.firstName &&
+          index.lastName == filters.lastName 
+        );
+      }else{
+        return (
+          index.firstName == filters.firstName &&
+          index.lastName == filters.lastName   &&
+          index.birthDate == filters.birthDate
+        );
+      }
+     
     });
 
     //store filter data
-    //console.log(this.result);
+    console.log(this.result);
     //this is for sending data console to browser
     this.tableValues = this.result;
 
@@ -177,10 +188,15 @@ export class ResidentSearchComponent implements OnInit {
     return this.residentSearchForm.get('birthDate');
   }
 
-
+  // selectResident(index: number) {
+  //   this.selectedResident = this.tableValues[index];
+  // }
 
   refresh() {
     this.buildForm();
+    // location.reload();
+    // window.location.reload()
+    //  this._document.defaultView?.location.reload()
     let currentUrl = this.router.url;
     this.router
       .navigateByUrl('resident-search', { skipLocationChange: true })

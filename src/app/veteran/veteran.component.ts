@@ -3,9 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Auth } from '@aws-amplify/auth';
 import { MenuItem } from 'primeng/api';
+import { VeteranProfileResponse } from '../shared/models/VeteranProfileResponse';
 
 import { ClipBoardService } from '../shared/services/clip-board.service';
 import { VeteranDashboardService } from './services/veteran-dashboard.service';
+import { VeteranprofileService } from './services/veteranprofile.service';
 
 @Component({
   selector: 'app-veteran',
@@ -17,18 +19,30 @@ export class VeteranComponent implements OnInit {
   public data: any;
   public image: any;
   public userInfo: any;
- 
+  veteran_id!: number;
 
   constructor(
+    private cacheData: ClipBoardService,
     private service: VeteranDashboardService,
+    private getName: VeteranprofileService,
     private route: ActivatedRoute,
     private clipboardService: ClipBoardService
   ) {
-    this.service.getName().subscribe((data) => {
-      console.log("UserInfo: ", data);
-      this.userInfo = this.userInfo?.result;
-      this.name = this.userInfo?.[0]?.nick_name;
-      this.image = this.userInfo?.[0]?.photo;
+    // this.service.getName().subscribe((data) => {
+    //   this.userInfo = data;
+    //   console.log("UserInfo: ",this.userInfo);
+    //   this.userInfo = this.userInfo.result;
+    //   this.name = this.userInfo[0].nick_name;
+    //   this.image = this.userInfo[0].photo;
+    //   if (this.image === null) {
+    //     this.image = '../assets/images/user-profile.jpg';
+    //   }
+    // });
+    this.veteran_id = this.cacheData.get("veteranId");
+    this.getName.getProfileData(this.veteran_id).subscribe((data) => { 
+      this.userInfo = data;
+      this.name = this.userInfo.data[0].nick_name;
+      this.image = this.userInfo.data[0].photo;
       if (this.image === null) {
         this.image = '../assets/images/user-profile.jpg';
       }

@@ -29,12 +29,10 @@ export class AppComponent implements OnInit {
     // console.log('Encoded String', encStr);
     // console.log('Decoded String', atob(encStr));
     if (this.isDev) {
-      this.username = 'mt_veteran';
-      this.getUserId();
+      this.cacheData.set('veteranId', 4);
+      this.cacheData.set('caseWorkerId', 3); 
+      this.cacheData.set('loginId', 4);
     } else {
-      Auth.currentUserInfo().then((user) => {
-        console.log('Auth.currentUserInfo() response', user);
-      });
       Auth.currentAuthenticatedUser().then((user) => {
         Auth.userAttributes(user).then((currentAttribute) => {
           console.log(' Auth.userAttributes() response', currentAttribute);
@@ -106,3 +104,5 @@ export class AppComponent implements OnInit {
     });
   }
 }
+
+

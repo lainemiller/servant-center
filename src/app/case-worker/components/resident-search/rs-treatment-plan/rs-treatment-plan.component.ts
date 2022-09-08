@@ -17,10 +17,10 @@ export class RsTreatmentPlanComponent implements OnInit {
   public maxDateValue: any;
   public eventId: any;
   public data: any;
-  public vetID!:any;
   public formView = true;
   public treatmentArr: any;
   public formData:any;
+  public vetID!:any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,20 +38,21 @@ export class RsTreatmentPlanComponent implements OnInit {
   setForm() {
     this.service.getTreatmentPlanData(this.vetID).subscribe((res) => {
       this.data = res;
+      console.log(this.data.treatmentIssues)
       this.buildForm();
       this.treatmentPlanForm.patchValue({
-        firstName: this.data.first_name,
-        lastName: this.data.last_name,
-        recordNo: 1234,
-        dateOfBirth1: this.data.date_of_birth,
-        intakeDOB: this.data.intake_date,
-        hmisIdNo: this.data.hmis_id,
-        veteranDiagnosis: this.data.diagnosis,
-        veteranSupports: this.data.supports,
-        veteranStrengths: '(strengths yet to be columnized)',
+        firstName: this.data.fname,
+        lastName: this.data.lname,
+        recordNo: this.data.recNo,
+        dateOfBirth1: this.data.dob1,
+        intakeDOB: this.data.intakeDate,
+        hmisIdNo: this.data.hmisId,
+        veteranDiagnosis: this.data.diagnoses,
+        veteranSupports: this.data.support,
+        veteranStrengths: this.data.strength,
        
         treatmentIssues:this.data.treatmentIssues,
-        veteranNotes:'(notes yet to be columnized)'
+        veteranNotes:this.data.notes
       });
       console.log(this.treatmentPlanForm.value);
     });
@@ -61,8 +62,9 @@ export class RsTreatmentPlanComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       recordNo: ['', Validators.required],
-      dateOfBirth1: ['', Validators.required],
-      intakeDOB: ['', Validators.required],
+      dateOfBirth1: [null, Validators.required],
+      dateOfBirth2: [null, Validators.required],
+      intakeDOB: [null, Validators.required],
       hmisIdNo: ['', Validators.required],
       veteranDiagnosis: ['', Validators.required],
       veteranSupports: ['', Validators.required],
@@ -128,11 +130,11 @@ export class RsTreatmentPlanComponent implements OnInit {
 
   onSubmit() {
     this.formView = false;
+    console.log(this.treatmentPlanForm.value);
     this.treatmentArr = this.treatmentPlanForm.get('treatmentIssues')?.value;
-    this.service.updateTreatmentPlanData(this.treatmentPlanForm.value).subscribe();
-    console.log("Updated Successfully");
+    console.log(this.treatmentArr);
+    
     this.formData= this.treatmentPlanForm.value;
-    console.log(this.formData)
     
   }
  

@@ -16,16 +16,16 @@ export class VeteranprofileService {
   private saveTransportationFormAPI = environment.serviceUrl.saveTransportationForm;
 
   private commonUrl=env.localUrl;
-  private veteranProfileUpdateAPI=environment.serviceUrl.veteranProfileUpdateUser;
+  private veteranProfileUpdateAPI='';
 
   public getProfileData(
-    endPoint: number,
+    endPoint: number, 
     payload = {}
   ): Observable<any> {
     if (this.isDev) {  
       return this.restcs.get(this.commonUrl+'userProfile/getUserDetails/'+endPoint);
     } else {
-      return this.restcs.get(this.veteranProfileAPI+endPoint);
+      return this.restcs.get(this.veteranProfileAPI + endPoint);
     }
   }
 

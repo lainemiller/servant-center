@@ -11,6 +11,7 @@ export const environment = {
   oldCognitoUserPoolId: 'us-east-1_8wIG1UbUU',
   oldCognitoAppClientId: '5igt34gtp2ok5mf02d9e4v30lb',
 
+
   loginURL:
     'https://servant-center-dev.auth.us-east-1.amazoncognito.com/login?' +
     'client_id=5igt34gtp2ok5mf02d9e4v30lb&response_type=code&' +

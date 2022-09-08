@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { DataService } from './services/data.service';
 import Auth from '@aws-amplify/auth';
+import { ClipBoardService } from '../shared/services/clip-board.service';
 
 @Component({
   selector: 'app-case-worker',
@@ -10,19 +11,22 @@ import Auth from '@aws-amplify/auth';
 })
 export class CaseWorkerComponent implements OnInit {
   displayMenu: boolean = true;
-  public msgCount: number = 1;
+  public msgCount!: number;
   public msgData: any;
   public userInfo: any;
   public name!: string;
   public profilePic!: string;
   items!: MenuItem[];
+  caseWorkerId!: number;
 
   @HostListener('window:resize')
   onWindowResize() {
     this.displayMenu = window.innerWidth > 768;
   }
 
-  constructor(private service: DataService) {
+  constructor(
+    private cacheData: ClipBoardService,
+    private service: DataService) {
     this.service.getMsgCount().subscribe(
       (data: any) => {
         this.msgData = data;
@@ -33,10 +37,12 @@ export class CaseWorkerComponent implements OnInit {
         this.itemChange(0);
       }
     );
-    this.service.getUserData().subscribe((data) => {
-      this.userInfo = data?.result;
-      this.name = this.userInfo?.[0]?.nick_name;
-      this.profilePic = this.userInfo?.[0]?.photo;
+    this.caseWorkerId = this.cacheData.get("caseWorkerId"); 
+    this.service.getUserData(this.caseWorkerId).subscribe((data) => {
+      this.userInfo = data;
+      console.log("CaseInfo:",this.userInfo);
+      this.name = this.userInfo[0].nick_name;
+      this.profilePic = this.userInfo[0].photo;
       if (this.profilePic === null) {
         this.profilePic = '../assets/images/user-profile.jpg';
       }
