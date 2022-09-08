@@ -42,7 +42,7 @@ export class RsTreatmentPlanComponent implements OnInit {
       this.treatmentPlanForm.patchValue({
         firstName: this.data.first_name,
         lastName: this.data.last_name,
-        recordNo: 1234,
+        recordNo: this.data.record_number,
         dateOfBirth1: this.data.date_of_birth,
         intakeDOB: this.data.intake_date,
         hmisIdNo: this.data.hmis_id,

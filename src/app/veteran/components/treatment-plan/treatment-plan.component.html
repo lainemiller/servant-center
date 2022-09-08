@@ -90,19 +90,13 @@
         <div class="p-fluid p-formgrid p-grid">
           <div class="p-field p-col-12 p-md-3">
             <span class="label-title">Intake Date</span>
-            <p-calendar
-              formControlName="intakeDOB"
-              [inline]="false"
-              [showIcon]="true"
-              placeholder="Intake date (mm/dd/yyyy)"
-            ></p-calendar>
-            <!--<input
+            <input
             type="text"
             pInputText
             formControlName="intakeDOB"
             placeholder="Intake Date (mm/dd/yyyy)"
             value="{{ data?.intake_date | date: 'dd/MM/yyyy'  }}"
-            />-->
+            />
             <div
               *ngIf="
                 getControl.intakeDOB.invalid && getControl.intakeDOB.touched"
