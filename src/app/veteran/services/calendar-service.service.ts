@@ -22,11 +22,11 @@ export class CalendarServiceService {
     }
   }
 
-  public getVeteranEmailId(requestObj:any): Observable<any> {
+  public getVeteranEmailId(veteranId:any): Observable<any> {
     if(this.isDev){
-      return this.restcs.get(this.commonUrl+'getCurrentVeteranEmailId/',requestObj);
+      return this.restcs.get(this.commonUrl+'getCurrentVeteranEmailId/'+veteranId);
     }else{
-      return this.restcs.get(this.getCurrentVeteranEmailId,requestObj);
+      return this.restcs.get(this.getCurrentVeteranEmailId+veteranId);
     }
   }
 }
