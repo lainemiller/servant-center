@@ -354,32 +354,11 @@
           <input
             id="Email Id"
             type="text"
-            formControlName="emailId"
-            maxlength="30"
-            class="form-control"
+            class="form-container__disable"
             pInputText
             appNoSpecialSymbols
-            customAttr="email"
+            value="{{ veteran?.email }}"
           />
-          <div
-            *ngIf="getControl.emailId.touched && getControl.emailId.invalid"
-            class="text-danger"
-          >
-            <small
-              class="form-container__sec-errmsg"
-              *ngIf="getControl.emailId.errors?.required"
-            >
-              Email is required.
-            </small>
-            <small
-              class="form-container__sec-errmsg"
-              *ngIf="
-                getControl.emailId.errors?.pattern && getControl.emailId.invalid
-              "
-            >
-              Email seems invalid.
-            </small>
-          </div>
         </div>
 
         <div class="p-field p-col-12 p-md-4">

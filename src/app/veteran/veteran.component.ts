@@ -32,7 +32,7 @@ export class VeteranComponent implements OnInit {
 
 
   constructor(
-    private cacheData: ClipBoardService,
+    private profileService: VeteranprofileService,
     private service: VeteranDashboardService,
     private cacheData: ClipBoardService
   ) {
@@ -46,15 +46,7 @@ export class VeteranComponent implements OnInit {
     //     this.image = '../assets/images/user-profile.jpg';
     //   }
     // });
-    this.veteran_id = this.cacheData.get("veteranId");
-    this.getName.getProfileData(this.veteran_id).subscribe((data) => { 
-      this.userInfo = data;
-      this.name = this.userInfo.data[0].nick_name;
-      this.image = this.userInfo.data[0].photo;
-      if (this.image === null) {
-        this.image = '../assets/images/user-profile.jpg';
-      }
-    });
+    this.displayWelcomeData();
   }
 
   public displayMenu = true;
@@ -208,5 +200,17 @@ export class VeteranComponent implements OnInit {
   }
   onLogoutClick() {
     Auth.signOut();
+  }
+
+  displayWelcomeData(){
+    this.veteranId = this.cacheData.get("veteranId");
+    this.profileService.getProfileData(this.veteranId).subscribe((data) => { 
+      this.userInfo = data;
+      this.name = this.userInfo.data[0].nick_name;
+      this.image = this.userInfo.data[0].photo;
+      if (this.image === null) {
+        this.image = '../assets/images/user-profile.jpg';
+      }
+    });
   }
 }

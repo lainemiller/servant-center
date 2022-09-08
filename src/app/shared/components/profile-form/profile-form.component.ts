@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VeteranprofileService } from 'src/app/veteran/services/veteranprofile.service';
-import { Auth } from '@aws-amplify/auth';
 
 import {
   genders,
@@ -49,7 +48,6 @@ export class ProfileFormComponent implements OnInit {
   maxDateValue!: Date;
   @Input() isShowFields!: boolean;
   veteranId!: number;
-  email!: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -75,9 +73,6 @@ export class ProfileFormComponent implements OnInit {
     this.selectedRelationship = this.relations[1];
     this.selectedRace = this.races[1];
     this.buildForm();
-    Auth.currentAuthenticatedUser().then((user) => {
-      this.email = user.signInUserSession.idToken.payload.email;
-    });
   }
 
   setForm() {
@@ -99,7 +94,6 @@ export class ProfileFormComponent implements OnInit {
           selectedGenders: this.veteran.gender,
           selectedState: this.veteran.state,
           selectedMaritalStatus: this.veteran.marital_status,
-          emailId: this.email,
           phoneNumber: this.veteran.primary_phone,
           address1: this.veteran.address_main,
           city: this.veteran.city,
@@ -127,15 +121,6 @@ export class ProfileFormComponent implements OnInit {
       nickName: ['', [Validators.required]],
       DOB: ['', Validators.required],
       POB: ['', [Validators.required]],
-      emailId: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(
-            '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}$'
-          ),
-        ],
-      ],
       phoneNumber: ['', Validators.required],
       cfirstName: ['', [Validators.required]],
       hobbies: ['', [Validators.required]],
