@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProgressNotesService } from '../../services/progress-notes.service';
 import { CalendarResp } from 'src/app/shared/models/calendarEventsResponse';
 import { CalendarServiceService } from '../../services/calendar-service.service';
+import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -20,28 +21,35 @@ export class DashboardComponent implements OnInit {
   public veteranId: any;
   public totalEvents: any;
   public allEvents: any = [];
-  constructor(private service: CalendarServiceService) {}
+  constructor(
+    private service: CalendarServiceService,
+    private cache: ClipBoardService
+  ) {}
 
   ngOnInit(): void {
     //to get all the events of logged in veteran
-    this.veteranId = 5;
-    this.service.getCalendarEvents().subscribe((data: any) => {
-      this.getVeteranEventData(data);
-    });
+    this.veteranId = this.cache.get('veteranId');
+    console.log('this.veteranId',this.veteranId);
+    this.service.getVeteranEmailId(this.veteranId).subscribe((emailIdData:any)=>{
+      console.log('veteran email id',emailIdData.data[0].email);
+      this.service.getCalendarEvents().subscribe((eventData: any) => {
+        this.getVeteranEventData(eventData,emailIdData);
+      });
+    })
   }
 
-  getVeteranEventData(data: any) {
-    this.totalEvents = data;
+  getVeteranEventData(eventData: any,emailIdData:any) {
+    this.totalEvents = eventData;
     let parti = this.totalEvents.data;
     for (let i = 0; i < this.totalEvents.data.length; i++) {
       let participantMails = parti[i].participants;
-      if (participantMails.includes('pravin.bhilare@mindtree.com')) {
+      if (participantMails.includes(emailIdData.data[0].email)) {
         let eventDate = this.totalEvents.data[i].eventstart.substring(0, 10);
         this.totalEvents.data[i]['date'] = eventDate;
         this.allEvents.push(this.totalEvents.data[i]);
       }
     }
-      this.calendarOptions.events = this.allEvents;
+    this.calendarOptions.events = this.allEvents;
   }
   public calendarOptions: CalendarOptions = {
     customButtons: {
@@ -77,7 +85,7 @@ export class DashboardComponent implements OnInit {
       arg.event._instance.range.end,
       arg.event._def.title,
       arg.event._instance.range.start,
-      arg.event._def.extendedProps.Description,
+      arg.event._def.extendedProps.description,
     ];
   }
 }
