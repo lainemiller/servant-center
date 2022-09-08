@@ -1,7 +1,11 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, isDevMode, OnInit } from '@angular/core';
+
 import { MenuItem } from 'primeng/api';
+import { Auth } from '@aws-amplify/auth';
+
 import { DataService } from './services/data.service';
-import Auth from '@aws-amplify/auth';
+import { ClipBoardService } from '../shared/services/clip-board.service';
+import { VeteranDashboardService } from '../veteran/services/veteran-dashboard.service';
 
 @Component({
   selector: 'app-case-worker',
@@ -10,19 +14,32 @@ import Auth from '@aws-amplify/auth';
 })
 export class CaseWorkerComponent implements OnInit {
   displayMenu: boolean = true;
-  public msgCount: number = 1;
+  public msgCount!: number;
   public msgData: any;
   public userInfo: any;
   public name!: string;
   public profilePic!: string;
   items!: MenuItem[];
 
+  username!: string;
+  caseWorkerId!: number;
+  private isDev = isDevMode();
+  nickName!: string;
+  isShowComponent: boolean = false;
+  userGroup!: string;
+  email!: string;
+  firstName!:string;
+  lastName!:string;
+  party_id!:number;
+
   @HostListener('window:resize')
   onWindowResize() {
     this.displayMenu = window.innerWidth > 768;
   }
 
-  constructor(private service: DataService) {
+  constructor(private service: DataService,
+    private dashboarDservice: VeteranDashboardService,
+    private cacheData: ClipBoardService) {
     this.service.getMsgCount().subscribe(
       (data: any) => {
         this.msgData = data;
@@ -33,10 +50,12 @@ export class CaseWorkerComponent implements OnInit {
         this.itemChange(0);
       }
     );
-    this.service.getUserData().subscribe((data) => {
-      this.userInfo = data?.result;
-      this.name = this.userInfo?.[0]?.nick_name;
-      this.profilePic = this.userInfo?.[0]?.photo;
+    this.caseWorkerId = this.cacheData.get("caseWorkerId"); 
+    this.service.getUserData(this.caseWorkerId).subscribe((data) => {
+      this.userInfo = data;
+      console.log("CaseInfo:",this.userInfo);
+      this.name = this.userInfo[0].nick_name;
+      this.profilePic = this.userInfo[0].photo;
       if (this.profilePic === null) {
         this.profilePic = '../assets/images/user-profile.jpg';
       }
@@ -79,8 +98,91 @@ export class CaseWorkerComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('case worker component');
+    this.getLoginId();
     if (window.innerWidth < 768) this.displayMenu = false;
   }
+
+  getLoginId(){
+    if (this.isDev) {
+      this.username = 'mt_veteran';
+      this.getUserId();
+    } else {
+      Auth.currentAuthenticatedUser().then((user) => {
+        console.log('Authenticated User Details', user);
+        const userPayloadObject = user?.signInUserSession;
+        this.userGroup =
+          userPayloadObject.accessToken?.payload['cognito:groups']?.[0];
+        this.username = userPayloadObject?.accessToken?.payload?.username;
+        this.email = userPayloadObject?.idToken?.payload?.email;
+        this.firstName = userPayloadObject?.idToken?.payload?.given_name;
+        this.lastName = userPayloadObject?.idToken?.payload?.family_name;
+        this.nickName = userPayloadObject?.idToken?.payload?.nickname;
+        console.log('Authenticated UserName', this.username);
+        console.log('Authenticated email', this.email);
+        console.log('Authenticated firstName', this.firstName);
+        console.log('Authenticated lastName', this.lastName);
+        console.log('Authenticated nickName', this.nickName);
+        this.dashboarDservice
+          .getVeteranIdByUsername(this.username)
+          .subscribe((response) => {
+            console.log(response)
+            if (response.responseStatus == 'SUCCESS') {
+              if (response.data.length === 1) {
+                this.caseWorkerId = response.data[0].party_id;
+                this.nickName = response.data[0].nick_name;
+                this.cacheData.set('caseworkerId', this.caseWorkerId);
+                if (this.caseWorkerId) {
+                  this.isShowComponent = true;
+                }
+              } else if (response.data.length === 0) {
+                 console.log('username is not present')
+                 this.party_id=Math.floor(100000 + Math.random() * 900000);
+                 console.log("generated party Id",this.party_id);
+                 if(this.userGroup.toUpperCase()==='CASEWORKER'){
+                  this.userGroup="case worker"
+                 }
+                const userDetails={
+                  "userName": this.username,
+                  "userGroup": this.userGroup,
+                  "partyId": this.party_id
+                };
+                this.dashboarDservice.addUser(userDetails).subscribe((response)=>{
+                  if (response.responseStatus == 'SUCCESS') {
+                      console.log(response);
+                       if(this.userGroup.toUpperCase()==='CASE WORKER'){
+                        const caseWorkerDetails={
+                          "caseWorkerId": this.party_id,
+                          "nickName":this.nickName,
+                          "email":this.email
+                        };
+                        this.dashboarDservice.addCaseWorker(caseWorkerDetails).subscribe((response)=>{
+                          if (response.responseStatus == 'SUCCESS') {
+                            console.log(response);
+                          }
+                        })
+                      }
+                      this.getUserId();
+                  }
+                })
+              }
+            }
+          });
+      });
+    }
+    }
+
+    getUserId() {
+      this.dashboarDservice.getVeteranIdByUsername(this.username).subscribe((response) => {
+        if (response.responseStatus == 'SUCCESS') {
+          this.caseWorkerId = response.data[0].party_id;
+          this.cacheData.set('caseworkerId', this.caseWorkerId);
+          console.log('web_party_id', this.caseWorkerId);
+          if (this.caseWorkerId) {
+            this.isShowComponent = true;
+          }
+        }
+      });
+    }
 
   toggleMenu(): void {
     this.displayMenu = !this.displayMenu;

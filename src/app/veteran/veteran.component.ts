@@ -1,11 +1,12 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, HostListener, isDevMode, OnInit } from '@angular/core';
 
 import { Auth } from '@aws-amplify/auth';
 import { MenuItem } from 'primeng/api';
+import { VeteranProfileResponse } from '../shared/models/VeteranProfileResponse';
 
 import { ClipBoardService } from '../shared/services/clip-board.service';
 import { VeteranDashboardService } from './services/veteran-dashboard.service';
+import { VeteranprofileService } from './services/veteranprofile.service';
 
 @Component({
   selector: 'app-veteran',
@@ -17,18 +18,39 @@ export class VeteranComponent implements OnInit {
   public data: any;
   public image: any;
   public userInfo: any;
- 
+
+  username!: string;
+  veteranId!: number;
+  private isDev = isDevMode();
+  nickName!: string;
+  isShowComponent: boolean = false;
+  userGroup!: string;
+  email!: string;
+  firstName!:string;
+  lastName!:string;
+  party_id!:number;
+
 
   constructor(
+    private cacheData: ClipBoardService,
     private service: VeteranDashboardService,
-    private route: ActivatedRoute,
-    private clipboardService: ClipBoardService
+    private cacheData: ClipBoardService
   ) {
-    this.service.getName().subscribe((data) => {
-      console.log("UserInfo: ", data);
-      this.userInfo = this.userInfo?.result;
-      this.name = this.userInfo?.[0]?.nick_name;
-      this.image = this.userInfo?.[0]?.photo;
+    // this.service.getName().subscribe((data) => {
+    //   this.userInfo = data;
+    //   console.log("UserInfo: ",this.userInfo);
+    //   this.userInfo = this.userInfo.result;
+    //   this.name = this.userInfo[0].nick_name;
+    //   this.image = this.userInfo[0].photo;
+    //   if (this.image === null) {
+    //     this.image = '../assets/images/user-profile.jpg';
+    //   }
+    // });
+    this.veteran_id = this.cacheData.get("veteranId");
+    this.getName.getProfileData(this.veteran_id).subscribe((data) => { 
+      this.userInfo = data;
+      this.name = this.userInfo.data[0].nick_name;
+      this.image = this.userInfo.data[0].photo;
       if (this.image === null) {
         this.image = '../assets/images/user-profile.jpg';
       }
@@ -83,12 +105,100 @@ export class VeteranComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('veteran component');
+    this.getLoginId()
     if (window.innerWidth < 768) this.displayMenu = false;
 
-    const userData = this.clipboardService.get('userData');
+    const userData = this.cacheData.get('userData');
 
     console.log('veteran component::userData:', userData);
   }
+
+  getLoginId(){
+    if (this.isDev) {
+      this.username = 'mt_veteran';
+      this.getUserId();
+    } else {
+      Auth.currentAuthenticatedUser().then((user) => {
+        console.log('Authenticated User Details', user);
+        const userPayloadObject = user?.signInUserSession;
+        this.userGroup =
+          userPayloadObject.accessToken?.payload['cognito:groups']?.[0];
+        this.username = userPayloadObject?.accessToken?.payload?.username;
+        this.email = userPayloadObject?.idToken?.payload?.email;
+        this.firstName = userPayloadObject?.idToken?.payload?.given_name;
+        this.lastName = userPayloadObject?.idToken?.payload?.family_name;
+        this.nickName = userPayloadObject?.idToken?.payload?.nickname;
+        console.log('Authenticated UserName', this.username);
+        console.log('Authenticated email', this.email);
+        console.log('Authenticated firstName', this.firstName);
+        console.log('Authenticated lastName', this.lastName);
+        console.log('Authenticated nickName', this.nickName);
+        this.service
+          .getVeteranIdByUsername(this.username)
+          .subscribe((response) => {
+            console.log(response)
+            if (response.responseStatus == 'SUCCESS') {
+              if (response.data.length === 1) {
+                this.veteranId = response.data[0].party_id;
+                this.nickName = response.data[0].nick_name;
+                this.cacheData.set('veteranId', this.veteranId);
+                this.cacheData.set('loginId', this.veteranId);
+                if (this.veteranId) {
+                  this.isShowComponent = true;
+                }
+              } else if (response.data.length === 0) {
+                 console.log('username is not present')
+                 this.party_id=Math.floor(100000 + Math.random() * 900000);
+                 console.log("generated party Id",this.party_id);
+                 if(this.userGroup.toUpperCase()==='VETERAN'){
+                  this.userGroup="veteran"
+                 }
+                const userDetails={
+                  "userName": this.username,
+                  "userGroup": this.userGroup,
+                  "partyId": this.party_id
+                };
+                this.service.addUser(userDetails).subscribe((response)=>{
+                  if (response.responseStatus == 'SUCCESS') {
+                      console.log(response);
+                      if(this.userGroup.toUpperCase()==='VETERAN'){
+                        const veteranDetails={
+                          "veteranId": this.party_id,
+                          "firstName": this.firstName,
+                          "lastName": this.lastName,
+                          "nickName":this.nickName,
+                          "email":this.email
+                        };
+                        this.service.addVeteran(veteranDetails).subscribe((response)=>{
+                          if (response.responseStatus == 'SUCCESS') {
+                            console.log(response);
+                          }
+                        })
+                      }
+                      this.getUserId();
+                  }
+                })
+              }
+            }
+          });
+      });
+    }
+    }
+
+    getUserId() {
+      this.service.getVeteranIdByUsername(this.username).subscribe((response) => {
+        if (response.responseStatus == 'SUCCESS') {
+          this.veteranId = response.data[0].party_id;
+          this.cacheData.set('veteranId', this.veteranId);
+          this.cacheData.set('loginId', this.veteranId);
+          console.log('web_party_id', this.veteranId);
+          if (this.veteranId) {
+            this.isShowComponent = true;
+          }
+        }
+      });
+    }
+  
 
   toggleMenu(): void {
     this.displayMenu = !this.displayMenu;
