@@ -22,7 +22,7 @@ export class VeteranDashboardService {
 
   //saving TreatmentplanData after summary
   saveTreatmentData(vetID:number,data:any): Observable<any>{
-    return this.http.post(this.commonUrl+'postTreatmentPlanDetails/save/'+ vetID,data);
+    return this.http.post(this.commonUrl+'postTreatmentPlanDetails/save/'+ vetID,data); 
   }
 
   public getName(payload = {}): Observable<any> {
