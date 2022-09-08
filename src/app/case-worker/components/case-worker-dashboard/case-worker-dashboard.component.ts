@@ -42,7 +42,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
       { label: 'Appointment', icon: 'pi pi-fw pi-calendar' },
       { label: 'Event', icon: 'pi pi-fw pi-pencil' },
     ];
-    this.caseWorkerId = this.cache.get('veteranId');
+    this.caseWorkerId = this.cache.get('caseworkerId');
     console.log('this.caseWorkerId',this.caseWorkerId);
     
     this.service.getCalendarEvents(this.caseWorkerId).subscribe((data: CalendarResp) => {
