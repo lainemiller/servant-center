@@ -24,6 +24,14 @@ export class HealthTrackerComponent implements OnInit {
   veteranId!: number;
   cols!: any[];
   tableValues!: any[];
+  tableWeightValues!: any[];
+  tableTemperatureValues!: any[];
+  tableBloodPressureValues!: any[];
+  tableBmiValues!: any[];
+  tableDrugScreenValues!: any[];
+  tableBreathalyzerValues!: any[];
+  tableBloodSugarValues!: any[];
+  tableOtherValues!: any[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -127,6 +135,41 @@ export class HealthTrackerComponent implements OnInit {
 
   changeTableNameLabel() {
     this.tableValues = this.healthTrackerDetails['result'];
+    console.log("Table name values",this.tableValues);
+    var newArray = this.healthTrackerDetails['result'].filter((data:any)=>{
+     return data.tracking_subject.toUpperCase() ==='WEIGHT';
+    }
+    );
+    var newArray = this.healthTrackerDetails['result'].filter((data:any)=>{
+      return data.tracking_subject.toUpperCase() ==='TEMPERATUR';
+     }
+     );
+     var newArray = this.healthTrackerDetails['result'].filter((data:any)=>{
+      return data.tracking_subject.toUpperCase() ==='BLOOD PRESSURE';
+     }
+     );
+     var newArray = this.healthTrackerDetails['result'].filter((data:any)=>{
+      return data.tracking_subject.toUpperCase() ==='DRUG SCREEN';
+     }
+     );
+     var newArray = this.healthTrackerDetails['result'].filter((data:any)=>{
+      return data.tracking_subject.toUpperCase() ==='BREATHALYZER';
+     }
+     );
+     var newArray = this.healthTrackerDetails['result'].filter((data:any)=>{
+      return data.tracking_subject.toUpperCase() ==='BLOOD SUGAR';
+     }
+     );
+     var newArray = this.healthTrackerDetails['result'].filter((data:any)=>{
+      return data.tracking_subject.toUpperCase() ==='BMI';
+     }
+     );
+     var newArray = this.healthTrackerDetails['result'].filter((data:any)=>{
+      return data.tracking_subject.toUpperCase() ==='OTHER';
+     }
+     );
+console.log("BMI filter",newArray);
+    
     for (let i = 0; i < this.tableValues.length; i++) {
       let tracking_subject = this.tableValues[i].tracking_subject;
       if (tracking_subject === 'weight') {
