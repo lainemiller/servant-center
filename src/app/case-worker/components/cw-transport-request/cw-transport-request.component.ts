@@ -151,6 +151,9 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
 
 onSubmit() :void {
 
+  let dateF= this.transportRequestForm.value.date
+  this.transportRequestForm.value.date=dateF.toLocaleDateString();
+
 let obj={
 
   request_id:this.caseWorker.request_id,
@@ -170,6 +173,12 @@ let obj={
     this.refreshRequestComponent();
     this.submitted = true;
 	  console.log("Form submitted");
+    if (this.submitted = true) {
+      console.log('successfully posted event to backend');
+      alert('Form successfully saved !!');
+    } else {
+      alert('FAILUER, Something went wrong.');
+    }
    });
     console.log(this.transportRequestForm.value);
 	  this.transportRequestForm.reset();
