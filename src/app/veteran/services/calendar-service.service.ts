@@ -13,11 +13,20 @@ export class CalendarServiceService {
   private commonUrl=env.localUrl;
   private isDev = isDevMode();
   private getVeteranEventsApi = environment.serviceUrl.getVeteranEvents
+  private getCurrentVeteranEmailId = environment.serviceUrl.getCurrentVeteranEmailId
   public getCalendarEvents(): Observable<any> {
     if(this.isDev){
       return this.restcs.get(this.commonUrl+'getCalendarEventsForVeteran/');
     }else{
       return this.restcs.get(this.getVeteranEventsApi);
+    }
+  }
+
+  public getVeteranEmailId(veteranId:any): Observable<any> {
+    if(this.isDev){
+      return this.restcs.get(this.commonUrl+'getCurrentVeteranEmailId/'+veteranId);
+    }else{
+      return this.restcs.get(this.getCurrentVeteranEmailId+veteranId);
     }
   }
 }
