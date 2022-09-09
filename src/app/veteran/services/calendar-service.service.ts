@@ -12,21 +12,14 @@ export class CalendarServiceService {
   constructor(private restcs: RestClientService) { }
   private commonUrl=env.localUrl;
   private isDev = isDevMode();
-  private getVeteranEventsApi = environment.serviceUrl.getVeteranEvents
-  private getCurrentVeteranEmailId = environment.serviceUrl.getCurrentVeteranEmailId
-  public getCalendarEvents(requestObj:any): Observable<any> {
-    if(this.isDev){
-      return this.restcs.get(this.commonUrl+'getCalendarEventsForVeteran/'+requestObj);
-    }else{
-      return this.restcs.get(this.getVeteranEventsApi+requestObj);
-    }
-  }
+  private getCurrentVeteranEvents = environment.serviceUrl.getCurrentVeteranEvents
 
-  public getVeteranEmailId(veteranId:any): Observable<any> {
+
+  public getVeteranEvents(veteranId:any): Observable<any> {
     if(this.isDev){
-      return this.restcs.get(this.commonUrl+'getCurrentVeteranEmailId/'+veteranId);
+      return this.restcs.get(this.commonUrl+'getCurrentVeteranEvents/'+veteranId);
     }else{
-      return this.restcs.get(this.getCurrentVeteranEmailId+veteranId);
+      return this.restcs.get(this.getCurrentVeteranEvents+veteranId);
     }
   }
 }

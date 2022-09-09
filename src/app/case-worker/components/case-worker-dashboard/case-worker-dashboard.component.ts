@@ -199,9 +199,13 @@ export class CaseWorkerDashboardComponent implements OnInit {
   showEventDetail(arg: any) {
     this.displayEvent = true;
     console.log('arg', arg);
-
+    if(arg.event._def.extendedProps.isappointment){
+      this.tagName='Appointment';
+    }else{
+      this.tagName='Appointment';
+    }
     this.eventInfo = [
-      arg.event._def.extendedProps.type,
+      this.tagName,
       arg.event._def.extendedProps.eventstart,
       arg.event._def.extendedProps.eventend,
       arg.event._def.title,

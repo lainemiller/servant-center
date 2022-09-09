@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
   public veteranId: any;
   public totalEvents: any;
   public allEvents: any = [];
+  public tagName: string = 'Appointment';
   constructor(
     private service: CalendarServiceService,
     private cache: ClipBoardService
@@ -30,19 +31,13 @@ export class DashboardComponent implements OnInit {
     //to get all the events of logged in veteran
     this.veteranId = this.cache.get('veteranId');
     console.log('this.veteranId',this.veteranId);
-    this.service.getVeteranEmailId(this.veteranId).subscribe((emailIdData:any)=>{
-      console.log('veteran email id',emailIdData.data[0].email);
-      let requestObj=emailIdData.data[0].email
-      let obj = {
-        id:emailIdData.data[0].email
-      }
-      this.service.getCalendarEvents(requestObj).subscribe((eventData: any) => {        
-        this.getVeteranEventData(eventData,emailIdData);
-      });
+    this.service.getVeteranEvents(this.veteranId).subscribe((eventData:any)=>{
+      console.log('veteran event data id',eventData);
+      this.getVeteranEventData(eventData)
     })
   }
 
-  getVeteranEventData(eventData: any,emailIdData:any) {
+  getVeteranEventData(eventData: any) {
     this.totalEvents = eventData;
     let parti = this.totalEvents.data;
     for (let i = 0; i < this.totalEvents.data.length; i++) {
@@ -83,9 +78,13 @@ export class DashboardComponent implements OnInit {
   showEventDetail(arg: any) {
     this.displayEvent = true;
     console.log(arg);
-
+    if(arg.event._def.extendedProps.isappointment){
+      this.tagName='Appointment';
+    }else{
+      this.tagName='Appointment';
+    }
     this.eventInfo = [
-      'Event',
+      this.tagName,
       arg.event._def.extendedProps.eventstart,
       arg.event._def.extendedProps.eventend,
       arg.event._def.title,
