@@ -129,16 +129,16 @@ export class ProgressNotesComponent implements OnInit {
     this.initialStatus = true;
     this.progressNote.reset();    
   }
-  changed(goalTitle: string, goalState: boolean){
+  changed( goalState: boolean, goalTitle:string){
     //TO UPDATE STATUS OF PROGRESS NOTE 
     this.progressNotesState = {
       goalTitle,
       goalState
     };
-    console.log("status changed for id and status",goalTitle, goalState); 
+    console.log("status changed for title",goalTitle," to", goalState); 
 
     this.service.postStatus(this.vetID,this.progressNotesState).subscribe((data) => {
-    console.log('progressnote value after status change',  this.progressNotesState);
+    console.log('goal status after change',  this.progressNotesState);
   });
     
   }
