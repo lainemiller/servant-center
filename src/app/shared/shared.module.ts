@@ -23,6 +23,8 @@ import {PasswordModule} from 'primeng/password';
 import { ToolbarModule } from 'primeng/toolbar';
 import { NgxMaskModule } from 'ngx-mask';
 import {TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 import { KeysPipe } from '../case-worker/components/resident-search/rs-initial-assessment/ia-form-page-three/ia-form-page-three.component';
 import { ConsentDataComponent } from './components/consent-data/consent-data.component';
@@ -60,7 +62,9 @@ const MODULES = [
   PasswordModule,
   ToolbarModule,
   NgxMaskModule,
-  TableModule
+  TableModule,
+  ToastModule,
+  ProgressSpinnerModule
 ];
 
 const COMPONENTS = [

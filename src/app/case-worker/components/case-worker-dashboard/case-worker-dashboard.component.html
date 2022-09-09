@@ -27,7 +27,7 @@
             [draggable]="false"
             [modal]="true"
             (onHide)="crossButton()"
-            #myDiv
+            [style]="{ width: '500px',height:'600px' }"
           >
             <form [formGroup]="eventsForm" (ngSubmit)="onSubmit()" >
               <div class="p-fluid">
