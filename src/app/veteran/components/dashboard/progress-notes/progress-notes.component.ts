@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { progressNoteResponse } from 'src/app/shared/models/progressNotes_model';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
-import { goalTypes} from '../../../app.constants';
+import { goalTypes } from '../../../app.constants';
 import { ProgressNotesService } from 'src/app/veteran/services/progress-notes.service';
 
 interface DropDown {
-  name: string,
-  value: string
+  name: string;
+  value: string;
 }
 
 @Component({
@@ -15,10 +15,9 @@ interface DropDown {
   templateUrl: './progress-notes.component.html',
   styleUrls: ['./progress-notes.component.scss'],
 })
-
-
 export class ProgressNotesComponent implements OnInit {
   public title = 'PROGRESS NOTES';
+  public submitted = false;
   public display = false;
   public displayList = false;
   public status: any;
@@ -28,35 +27,36 @@ export class ProgressNotesComponent implements OnInit {
   public progressNotes: any = [];
   public progress: any = [];
   public initialStatus = false;
-  public progressNotesState:any = [];
+  public progressNotesState: any = [];
   public vetID: number;
   public goalTypes!: DropDown[];
   selectedType!: any;
   constructor(
     private formBuilder: FormBuilder,
     private service: ProgressNotesService,
-    private cacheData: ClipBoardService,
+    private cacheData: ClipBoardService
   ) {
-    this.vetID = this.cacheData.get("veteranId");
-    this.goalTypes = goalTypes;    
+    this.vetID = this.cacheData.get('veteranId');
+    this.goalTypes = goalTypes;
   }
 
   ngOnInit(): void {
     //get data from backend
 
-    this.service.getNotes(this.vetID).subscribe((data:progressNoteResponse) => {
-      this.progress = data;
-      let k = 0;
-      for (let i = this.progress.length; i > 0; i--) {
-        this.progressNotes[k++] = this.progress[i - 1];
-      }
-    });
+    this.service
+      .getNotes(this.vetID)
+      .subscribe((data: progressNoteResponse) => {
+        this.progress = data;
+        let k = 0;
+        for (let i = this.progress.length; i > 0; i--) {
+          this.progressNotes[k++] = this.progress[i - 1];
+        }
+      });
 
     this.initialStatus = false;
     this.buildForm();
   }
-  
-  
+
   expandOrCollapse(index: any) {
     const elementSelector = '#goal-desc--' + index;
     const descElement = document.querySelector(elementSelector) as HTMLElement;
@@ -94,7 +94,7 @@ export class ProgressNotesComponent implements OnInit {
       goalType: ['', Validators.required],
       goalDescription: ['', [Validators.required, Validators.maxLength(300)]],
       goalState: [false, Validators.required],
-      addedDate: [d]
+      addedDate: [d],
     });
   }
 
@@ -103,44 +103,65 @@ export class ProgressNotesComponent implements OnInit {
   }
   onSubmit() {
     let d =
-    new Date().getMonth() +
-    1 +
-    '/' +
-    new Date().getUTCDate() +
-    '/' +
-    new Date().getFullYear();
+      new Date().getMonth() +
+      1 +
+      '/' +
+      new Date().getUTCDate() +
+      '/' +
+      new Date().getFullYear();
     console.log(this.progressNote.value);
     //send data to backend
-     this.service.postNotes(this.vetID,this.progressNote.value).subscribe((data) => {
-       console.log('Submitted');
-       console.log(this.progressNote.value);
-       
-     });
+    this.service
+      .postNotes(this.vetID, this.progressNote.value)
+      .subscribe((data) => {
+        this.submitted = true;
+        console.log('Submitted');
+        console.log(this.progressNote.value);
+        console.log('data data', data);
+        if (data.responseStatus === 'SUCCESS') {
+          console.log('successfully added new progress note');
+
+          alert('Event added new progress note !!');
+        } else if (data.responseStatus === 'FAILUER') {
+          alert('FAILUER, Something went wrong.');
+        }
+      });
     //get data from backend
-    this.service.getNotes(this.vetID).subscribe((notes:progressNoteResponse) => {
-      console.log(notes);
-    });
-     this.progressNotes.push(this.progressNote.value);
-    
+    this.service
+      .getNotes(this.vetID)
+      .subscribe((notes: progressNoteResponse) => {
+        console.log(notes);
+      });
+    this.progressNotes.push(this.progressNote.value);
+
     this.display = false;
     this.progressNote.reset();
   }
   crossButton() {
     this.initialStatus = true;
-    this.progressNote.reset();    
+    this.progressNote.reset();
   }
-  changed( goalState: boolean, goalTitle:string){
-    //TO UPDATE STATUS OF PROGRESS NOTE 
+  changed(goalState: boolean, goalTitle: string) {
+    //TO UPDATE STATUS OF PROGRESS NOTE
     this.progressNotesState = {
       goalTitle,
-      goalState
+      goalState,
     };
-    console.log("status changed for title",goalTitle," to", goalState); 
+    console.log('status changed for title', goalTitle, ' to', goalState);
 
-    this.service.postStatus(this.vetID,this.progressNotesState).subscribe((data) => {
-    console.log('goal status after change',  this.progressNotesState);
-  });
-    
+    this.service
+      .postStatus(this.vetID, this.progressNotesState)
+      .subscribe((data) => {
+        console.log('goal status after change', this.progressNotesState);
+        console.log('data data', data);
+        if (data.responseStatus === 'SUCCESS') {
+          console.log('successfully saved the goal status');
+
+          alert('successfully saved the goal status !!');
+        } else if (data.responseStatus === 'FAILUER') {
+          alert('FAILUER, Something went wrong.');
+        }
+      });
   }
   cancleIt() {
     this.display = false;
