@@ -1,13 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VeteranprofileService } from 'src/app/veteran/services/veteranprofile.service';
+import { MessageService } from 'primeng/api';
 
 import {
   genders,
-  languages,
-  relegions,
   states,
-  races,
   statuses,
   relations,
 } from '../../../veteran/app.constants';
@@ -22,47 +20,40 @@ interface DropDown {
   selector: 'app-profile-form',
   templateUrl: './profile-form.component.html',
   styleUrls: ['./profile-form.component.scss'],
+  providers: [MessageService],
 })
 export class ProfileFormComponent implements OnInit {
-  public stateValue: any;
   public profileDetails: any;
-  public genderArray: any = [];
   public profileForm!: FormGroup;
   public veteran: any;
   public states!: DropDown[];
-  public relegions!: DropDown[];
-  public languages!: DropDown[];
   public maritalStatus!: DropDown[];
   public relations!: DropDown[];
   public imageObj!: File;
   public imageUrl!: string;
-  public races!: DropDown[];
   public selectedState!: DropDown;
-  public selectedLanguage!: DropDown;
   public selectedGender: any = null;
   public selectedMaritalStatus!: DropDown;
   public customPatterns = { '0': { pattern: new RegExp('[a-zA-Z]') } };
   public genders!: DropDown[];
   public selectedRelationship: any;
-  selectedRace: any;
   maxDateValue!: Date;
   @Input() isShowFields!: boolean;
   veteranId!: number;
+  showSpinner:boolean=true;
 
   constructor(
     private formBuilder: FormBuilder,
     private service: VeteranprofileService,
-    private cacheData: ClipBoardService
+    private cacheData: ClipBoardService,
+    private messageService: MessageService
   ) {
     this.veteranId = this.cacheData.get('veteranId');
     this.setForm();
     this.states = states;
-    this.relegions = relegions;
-    this.languages = languages;
     this.genders = genders;
     this.maritalStatus = statuses;
     this.relations = relations;
-    this.races = races;
     this.maxDateValue = new Date(new Date().getTime());
   }
 
@@ -71,7 +62,6 @@ export class ProfileFormComponent implements OnInit {
     this.selectedGender = this.genders[1];
     this.selectedMaritalStatus = this.maritalStatus[1];
     this.selectedRelationship = this.relations[1];
-    this.selectedRace = this.races[1];
     this.buildForm();
   }
 
@@ -81,7 +71,40 @@ export class ProfileFormComponent implements OnInit {
       .subscribe((data: VeteranProfileResponse) => {
         this.profileDetails = data;
         this.veteran = this.profileDetails.data[0];
+        if(this.veteran){
+          this.showSpinner=false;
+        }
         console.log('Profile API Data--->', data);
+        if (this.veteran.place_of_birth === 'x') {
+          this.veteran.place_of_birth = '';
+        }
+        if (this.veteran.ssn === 1234) {
+          this.veteran.ssn = '';
+        }
+        if (this.veteran.address_main === 'x') {
+          this.veteran.address_main = '';
+        }
+        if (this.veteran.city === 'x') {
+          this.veteran.city = '';
+        }
+        if (this.veteran.zip_code === 1234) {
+          this.veteran.zip_code = '';
+        }
+        if (this.veteran.contact_person === 'x') {
+          this.veteran.contact_person = '';
+        }
+        if (this.veteran.contact_person_phone === '1234') {
+          this.veteran.contact_person_phone = '';
+        }
+        if (this.veteran.primary_language === 'x') {
+          this.veteran.primary_language = '';
+        }
+        if (this.veteran.religious_preference === 'x') {
+          this.veteran.religious_preference = '';
+        }
+        if (this.veteran.race === 'x') {
+          this.veteran.race = '';
+        }
         this.profileForm.patchValue({
           firstName: this.veteran.first_name,
           middleName: this.veteran.middle_initial,
@@ -101,9 +124,9 @@ export class ProfileFormComponent implements OnInit {
           address2: this.veteran.address_line_2,
           zipCode: this.veteran.zip_code,
           hobbies: this.veteran.hobbies,
-          selectedprimaryLanguage: this.veteran.primary_language,
-          selectedRelegion: this.veteran.religious_preference,
-          selectedRace: this.veteran.race,
+          primaryLanguage: this.veteran.primary_language,
+          relegion: this.veteran.religious_preference,
+          race: this.veteran.race,
           cfirstName: this.veteran.contact_person,
           selectedRelationship: this.veteran.contact_person_relationship,
           cPhoneNumber: this.veteran.contact_person_phone,
@@ -135,9 +158,9 @@ export class ProfileFormComponent implements OnInit {
       selectedMaritalStatus: ['', Validators.required],
       SSNNumber: ['', [Validators.required]],
       hmisIdNo: ['', [Validators.required]],
-      selectedRace: ['', Validators.required],
-      selectedprimaryLanguage: ['', Validators.required],
-      selectedRelegion: ['', Validators.required],
+      race: ['', Validators.required],
+      primaryLanguage: ['', Validators.required],
+      relegion: ['', Validators.required],
       cHouseNumber: ['', [Validators.required]],
       cPhoneNumber: ['', [Validators.required, Validators.minLength(10)]],
     });
@@ -153,28 +176,56 @@ export class ProfileFormComponent implements OnInit {
     this.service
       .updateProfile(this.veteranId, profileDetails)
       .subscribe((response) => {
-        console.log(response);
+        if (response.responseStatus == 'SUCCESS') {
+          this.sucessMessage();
+        } else if (response.responseStatus == 'FAILURE') {
+          this.errorMessage();
+        }
       });
+  }
+
+  sucessMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Profile updated sucessfully',
+    });
+  }
+
+  errorMessage() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Profile not updated',
+    });
+  }
+
+  resetMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Profile reset completed',
+    });
   }
 
   resetForm() {
     this.buildForm();
+    this.showSpinner=true;
     this.setForm();
+    this.resetMessage();
   }
   onImagePicked(imageInput: HTMLInputElement): void {
-    console.log('image upload ******',imageInput.files![0]);
+    console.log('image upload ******', imageInput.files![0]);
     const FILE = imageInput.files![0];
     this.imageObj = FILE;
-    }
- 
- 
- 
-    onImageUpload() {
-     let imageForm = new FormData();    
-     imageForm.append('image', this.imageObj);
-     this.service.imageUpload(imageForm).subscribe(res => {
-       //this.imageUrl = res['image'];
-       console.log("uploaded successfully");
-     });
-    }
+  }
+
+  onImageUpload() {
+    let imageForm = new FormData();
+    imageForm.append('image', this.imageObj);
+    this.service.imageUpload(imageForm).subscribe((res) => {
+      //this.imageUrl = res['image'];
+      console.log('uploaded successfully');
+    });
+  }
 }

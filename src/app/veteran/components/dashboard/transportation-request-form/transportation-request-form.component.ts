@@ -157,24 +157,37 @@ export class TransportationRequestFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+
+  let appointDate= this.transportRequestForm.value.appointmentDate
+  this.transportRequestForm.value.appointmentDate=appointDate.toLocaleDateString();
   
   this.transportRequestForm.value.dateRequested= (new Date().getMonth() +1) +'/' + new Date().getUTCDate() +'/' + new Date().getFullYear();
 
    let t=new Date(this.transportRequestForm.value.time)
    this.transportRequestForm.value.time = t.getHours() +':'+ t.getMinutes() +':' +t.getSeconds()
    
-  this.transportRequestForm.value.selectedState=this.transportRequestForm.value.selectedState.name,
+  this.transportRequestForm.value.selectedState=this.transportRequestForm.value.selectedState.name;
   
-  this.transportRequestForm.value.destinationAddress= this.transportRequestForm.value.destinationAddress.name
     if (this.transportRequestForm.value.destinationAddress.name === 'Other') {
-        this.transportRequestForm.value.destinationAddress.name =
-        this.transportRequestForm.value.destinationAddress2;
+        // this.transportRequestForm.value.destinationAddress.name =
+        // this.transportRequestForm.value.destinationAddress2;
+        this.transportRequestForm.value.destinationAddress= this.transportRequestForm.value.selectedState
+        +" "+this.transportRequestForm.value.city+" "+this.transportRequestForm.value.zipcode
+    }else{
+      this.transportRequestForm.value.destinationAddress= this.transportRequestForm.value.destinationAddress.name;
     }
 
 	this.service.saveTransportationForm(this.transportRequestForm.value).subscribe((data)=>{
     this.submitted = true;
 	  console.log("Form Submitted");
     console.log("FormData ",this.transportRequestForm.value);
+    
+    if (this.submitted = true) {
+      console.log('successfully posted event to backend');
+      alert('Form successfully saved !!');
+    } else {
+      alert('FAILUER, Something went wrong.');
+    }
    });
    
    //this.transportRequestForm.reset();
