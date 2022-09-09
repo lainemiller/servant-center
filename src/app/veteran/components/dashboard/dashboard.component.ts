@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
   public veteranId: any;
   public totalEvents: any;
   public allEvents: any = [];
+  public tagName: string = 'Appointment';
   constructor(
     private service: CalendarServiceService,
     private cache: ClipBoardService
@@ -30,24 +31,19 @@ export class DashboardComponent implements OnInit {
     //to get all the events of logged in veteran
     this.veteranId = this.cache.get('veteranId');
     console.log('this.veteranId',this.veteranId);
-    this.service.getVeteranEmailId(this.veteranId).subscribe((emailIdData:any)=>{
-      console.log('veteran email id',emailIdData.data[0].email);
-      this.service.getCalendarEvents().subscribe((eventData: any) => {
-        this.getVeteranEventData(eventData,emailIdData);
-      });
+    this.service.getVeteranEvents(this.veteranId).subscribe((eventData:any)=>{
+      console.log('veteran event data id',eventData);
+      this.getVeteranEventData(eventData)
     })
   }
 
-  getVeteranEventData(eventData: any,emailIdData:any) {
+  getVeteranEventData(eventData: any) {
     this.totalEvents = eventData;
     let parti = this.totalEvents.data;
     for (let i = 0; i < this.totalEvents.data.length; i++) {
-      let participantMails = parti[i].participants;
-      if (participantMails.includes(emailIdData.data[0].email)) {
         let eventDate = this.totalEvents.data[i].eventstart.substring(0, 10);
         this.totalEvents.data[i]['date'] = eventDate;
-        this.allEvents.push(this.totalEvents.data[i]);
-      }
+        this.allEvents.push(this.totalEvents.data[i]);   
     }
     this.calendarOptions.events = this.allEvents;
   }
@@ -61,6 +57,10 @@ export class DashboardComponent implements OnInit {
       },
     },
     initialView: 'dayGridMonth',
+    validRange: {
+      start: new Date().getFullYear()+'-01-01',
+      end: new Date().getFullYear()+'-12-31'
+    },
     eventClick: this.showEventDetail.bind(this),
     headerToolbar: {
       start: 'prev,next',
@@ -78,11 +78,15 @@ export class DashboardComponent implements OnInit {
   showEventDetail(arg: any) {
     this.displayEvent = true;
     console.log(arg);
-
+    if(arg.event._def.extendedProps.isappointment){
+      this.tagName='Appointment';
+    }else{
+      this.tagName='Appointment';
+    }
     this.eventInfo = [
-      'Event',
-      arg.event._instance.range.start,
-      arg.event._instance.range.end,
+      this.tagName,
+      arg.event._def.extendedProps.eventstart,
+      arg.event._def.extendedProps.eventend,
       arg.event._def.title,
       arg.event._instance.range.start,
       arg.event._def.extendedProps.description,
