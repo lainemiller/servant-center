@@ -31,7 +31,7 @@ export class ConsentService {
     if (this.isDev) {
       return this.http.put(this.commonUrl+'consentForm/acceptConsent/'+endPoint,payload);
     } else {
-      return this.restcs.post(this.consentConfirmAPI + endPoint, payload);
+      return this.http.put(this.consentConfirmAPI+endPoint,payload);
     }
   }
 }
