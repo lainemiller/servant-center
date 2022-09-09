@@ -1,5 +1,5 @@
 $hd-cutoff: 1240px;
-$desktop-cutoff: 999px;
+$desktop-cutoff: 800px;
 $mobile-cutoff: 749px;
 $tablet-landscape: 1024px;
 
@@ -22,7 +22,7 @@ $tablet-landscape: 1024px;
 }
 
 @mixin desktop() {
-  @media only screen and (max-width: $hd-cutoff) and (min-width: $desktop-cutoff) {
+  @media only screen and (min-width: $desktop-cutoff) {
     @content;
   }
 }
