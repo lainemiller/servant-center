@@ -24,21 +24,21 @@ export class ProgressNotesService {
     }
   }
 
-  public getCalData(vetID:number): Observable<any> {
+  public getCalData(): Observable<any> {
     return this.http.get<any>(this.commonUrl+'calendarEvents');
   }
   public postNotes(vetID:number,data:any): Observable<any> {
     if (this.isDev){
-    return this.restcs.post(this.commonUrl+'progressNotes/addGoal/'+vetID,data);
+    return this.restcs.post<any>(this.commonUrl+'progressNotes/addGoal/'+vetID,data);
     } else{
-      return this.restcs.post(this.createProgressNotes+vetID,data);
+      return this.restcs.post<any>(this.createProgressNotes+vetID,data);
     }
 }
 public postStatus(vetID:number,data:any): Observable<any> {
   if (this.isDev){
-  return this.restcs.post(this.commonUrl+'progressNotes/updateGoalStatus/'+vetID,data);
+  return this.http.put<any>(this.commonUrl+'progressNotes/updateGoalStatus/'+vetID,data);
   } else{
-    return this.restcs.post(this.updateProgressNotes+vetID,data);
+    return this.http.put<any>(this.updateProgressNotes+vetID,data);
   }
 }
 }
