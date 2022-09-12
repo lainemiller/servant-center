@@ -27,8 +27,9 @@ export class RsTreatmentPlanComponent implements OnInit {
     private service: DataService,
     private cacheData:ClipBoardService
   ) {
-    this.vetID=this.cacheData.get("veteranId");
+    this.vetID=this.cacheData.get("selectedResidentVeteranId");
     this.setForm();
+    
   }
 
   ngOnInit(): void {

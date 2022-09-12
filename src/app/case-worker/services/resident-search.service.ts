@@ -10,7 +10,6 @@ export class ResidentSearchService {
   private commonUrl=environment.localUrl;
 
   getResidentSearchData() {
-    return this.http.get(this.commonUrl+'resedentSearch');
-    //return this.http.get('./assets/mock/resident-search.json');
+    return this.http.get(this.commonUrl+'residentSearch/getAll');
   }
 }
