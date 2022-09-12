@@ -1,4 +1,8 @@
-<div class="form-container">
+<p-toast position="top-center"></p-toast>
+<div class="center-spinner">
+<p-progressSpinner *ngIf="showSpinner" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+</div>
+<div *ngIf="!showSpinner" class="form-container">
   <div class="p-fluid p-formgrid p-grid">
     <img
       class="form-container__img"
@@ -7,6 +11,8 @@
       width="150"
     />
   </div>
+  <!-- <input  #imageInput accept="image/*" (change)="onImagePicked(imageInput)" pInputText placeholder="Upload Image" type="file" />
+  <button pButton (click)="onImageUpload()">Upload Image</button> -->
   <div *ngIf="isShowFields" class="p-fluid p-grid">
     <div class="p-field p-col-12 p-md-4">
       <label class="label-title">Record #</label>
@@ -14,6 +20,7 @@
         id="Record #"
         type="text"
         class="form-container__disable"
+        value="{{veteran?.record_number}}"
         pInputText
       />
     </div>
@@ -23,6 +30,7 @@
         id="Intake DOB"
         class="form-container__disable"
         placeholder="Intake DOB(mm/dd/yyyy)"
+        value="{{veteran?.intake_date | date:'dd/MM/yyyy'}}"
         pInputText
       />
     </div>
@@ -350,32 +358,11 @@
           <input
             id="Email Id"
             type="text"
-            formControlName="emailId"
-            maxlength="30"
-            class="form-control"
+            class="form-container__disable"
             pInputText
             appNoSpecialSymbols
-            customAttr="email"
+            value="{{ veteran?.email }}"
           />
-          <div
-            *ngIf="getControl.emailId.touched && getControl.emailId.invalid"
-            class="text-danger"
-          >
-            <small
-              class="form-container__sec-errmsg"
-              *ngIf="getControl.emailId.errors?.required"
-            >
-              Email is required.
-            </small>
-            <small
-              class="form-container__sec-errmsg"
-              *ngIf="
-                getControl.emailId.errors?.pattern && getControl.emailId.invalid
-              "
-            >
-              Email seems invalid.
-            </small>
-          </div>
         </div>
 
         <div class="p-field p-col-12 p-md-4">
@@ -501,7 +488,7 @@
 
       <div class="p-fluid p-grid">
         <div class="p-field p-col-12 p-md-4">
-          <label class="label-title">Country</label>
+          <label class="label-title">Select Country</label>
           <input
             type="text"
             appNoSpecialSymbols

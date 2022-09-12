@@ -1,6 +1,9 @@
-<app-header (toggleMenu)="toggleMenu()" id="prnt"></app-header>
+<div class="center-spinner">
+  <p-progressSpinner *ngIf="!isShowComponent" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+</div>
+<app-header *ngIf="isShowComponent" (toggleMenu)="toggleMenu()" id="prnt"></app-header>
 
-<div class="p-grid nested-grid">
+<div *ngIf="isShowComponent" class="p-grid nested-grid">
   <p-menu [model]="items" class="p-col-12 p-lg-2" width="250px" [hidden]="!displayMenu" (click)='activeMenu($event)'></p-menu>
   <p-divider
     layout="vertical"
@@ -15,5 +18,5 @@
     <router-outlet></router-outlet>
   </div>
 </div>
-<app-footer class="p-jc-end"></app-footer>
-<app-consent-data></app-consent-data>
+<app-footer *ngIf="isShowComponent" class="p-jc-end"></app-footer>
+<app-consent-data *ngIf="isShowComponent"></app-consent-data>

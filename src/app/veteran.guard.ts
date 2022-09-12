@@ -6,8 +6,8 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
 import Auth from '@aws-amplify/auth';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -26,8 +26,8 @@ export class VeteranGuard implements CanActivate {
     Auth.currentAuthenticatedUser()
       .then((user) => {
         this.group =
-          user.signInUserSession.accessToken.payload['cognito:groups'][0];
-        if (this.group == 'Veteran') {
+          user?.signInUserSession?.accessToken?.payload?.['cognito:groups']?.[0];
+        if (this.group.toUpperCase() === 'VETERAN') {
           return true;
         } else {
           this._router.navigate(['/case-worker']);

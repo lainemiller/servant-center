@@ -2,13 +2,18 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import awsAmplifyConfig from "src/aws-exports";
+
 export const environment = {
   production: false,
-  cognitoUserPoolId: 'us-east-1_8wIG1UbUU',
-  cognitoAppClientId: '5igt34gtp2ok5mf02d9e4v30lb',
+  cognitoUserPoolId: 'us-east-1_SpellypxJ',
+  cognitoAppClientId: '3ebsuhsnrt5j4n2hsko4n0m88r',
+  oldCognitoUserPoolId: 'us-east-1_8wIG1UbUU',
+  oldCognitoAppClientId: '5igt34gtp2ok5mf02d9e4v30lb',
+
 
   loginURL:
-    'https://servant-center.auth.us-east-1.amazoncognito.com/login?' +
+    'https://servant-center-dev.auth.us-east-1.amazoncognito.com/login?' +
     'client_id=5igt34gtp2ok5mf02d9e4v30lb&response_type=code&' +
     'redirect_uri=http://localhost:4200/veteran',
 
@@ -16,19 +21,14 @@ export const environment = {
 
   cognitoTokenURL:
     'https://servant-center.auth.us-east-1.amazoncognito.com/oauth2/token',
-  oauth: {
-    domain: 'domain.auth.ap-northeast-1.amazoncognito.com',
-    scope: [
-      'phone',
-      'email',
-      'openid',
-      'profile',
-      'aws.cognito.signin.user.admin',
-    ],
-    redirectSignIn: 'http://localhost:4200/veteran',
-    redirectSignOut: 'http://localhost:4200/login',
-    responseType: 'code',
-  },
+    oauth: {
+      domain: awsAmplifyConfig.oauth.domain,
+      scope: ['email', 'openid'],
+      redirectSignIn: awsAmplifyConfig.oauth.redirectSignIn,
+      redirectSignOut: awsAmplifyConfig.oauth.redirectSignOut,
+      responseType: awsAmplifyConfig.oauth.responseType,
+      redirect_uri: awsAmplifyConfig.oauth.redirectSignIn
+    },
   serviceUrl: {
     consentGetUser: '',
     consentUpdateUser: ''

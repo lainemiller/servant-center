@@ -1,82 +1,146 @@
 <div class="page1-form-container p-mt-4">
-<form [formGroup]="page2Form" (ngSubmit)="onSubmit()" *ngIf="page2Form">
-  <h3>Employment and Education History</h3>
-  <div class="p-fluid p-formgrid p-grid" formGroupName="educationAndEmploymentHistory">
-    <div class="p-field p-col-12 p-md-6">
-      <input type="text" pInputText formControlName=highestGradeCompleted placeholder="Highest Grade Completed">
+  <form [formGroup]="page2Form" (ngSubmit)="onSubmit()" *ngIf="page2Form">
+    <h3>Employment and Education History</h3>
+    <div class="p-fluid p-formgrid p-grid" formGroupName="educationAndEmploymentHistory">
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=occupationOrWorkSkill
+          placeholder="Previous/Current Occupation/Work Skills">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=mostRecentJob placeholder="Most Recent Job">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <p-calendar formControlName=jobDate [inline]=false [showIcon]=true placeholder="Date"></p-calendar>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=reasonForLeaving placeholder="Reason for Leaving">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="number" min="1" max="18" pInputText formControlName=highestGradeCompleted
+          placeholder="Highest Grade Completed">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=nameAndLocation placeholder="Name and Location of School">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=otherTrainingOrEducation
+          placeholder="Others Training and/or Skills">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <input type="text" pInputText formControlName=jobEmployedInLongest placeholder="Job Employed in the Longest">
+      </div>
+      <!-- military service -->
+      <div *ngFor="let militaryService of military; let i = index;">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Military: </label>
+          <div class="p-field-radiobutton">
+            <p-radioButton [name]=militaryService.key [formControlName]=militaryService.key value=true
+              inputId="militaryService-{{i}}-yes">
+            </p-radioButton>
+            <label for="militaryService{{i}}-yes" class="p-ml-3">Yes</label>
+          </div>
+          <div class="p-field-radiobutton">
+            <p-radioButton [name]=militaryService.key [formControlName]=militaryService.key value=false
+              inputId="militaryService-{{i}}-no">
+            </p-radioButton>
+            <label for="militaryService{{i}}-no" class="p-ml-3">No</label>
+          </div>
+        </div>
+      </div>
+      <div class="p-field p-md-4">
+        <input type="text" pInputText formControlName=branch placeholder="Branch">
+      </div>
+      <div class="p-field p-md-4">
+        <input type="text" pInputText formControlName=typeOfDischarge placeholder="Type of Discharge">
+      </div>
+      <div class="p-field p-md-4">
+        <p-calendar formControlName=serviceDate [inline]=false [showIcon]=true placeholder="Dates of Service"></p-calendar>
+      </div>
+      <div class="p-field p-md-4">
+        <input type="text" pInputText formControlName=serviceLocation placeholder="Service Location">
+      </div>
+      <div class="p-field p-md-4">
+        <input type="text" pInputText formControlName=otherTrainingEducation placeholder="Other Training or Education">
+      </div>
+      <div class="p-field p-md-6">
+        <input type="text" pInputText formControlName=currentEmployer placeholder="Current Employer">
+      </div>
+      <div class="p-field p-md-6">
+        <input type="text" pInputText formControlName=currentEmployerLocation placeholder="Current Employer Location">
+      </div>
     </div>
-    <div class="p-field p-col-12 p-md-6">
-      <input type="text" pInputText formControlName=nameAndLocation placeholder="Name and Location of School">
+    <h4>Social History</h4>
+    <div class="p-fluid p-formgrid p-grid" formGroupName="socialHistory">
+      <div class="p-field p-md-6">
+        <input type="text" pInputText formControlName=religiousPreferences placeholder="Religious preference">
+      </div>
+      <div class="p-field p-md-6">
+        <input type="text" pInputText formControlName=hobbiesInterests placeholder="Hobbies and Interests">
+      </div>
     </div>
-    <div class="p-field p-col-12 p-md-6">
-      <input type="text" pInputText formControlName=otherTrainingOrEducation placeholder="Others Training and/or Skills">
+    <h3>Mental Health Information</h3>
+    <div class="p-fluid p-formgrid p-grid" formGroupName="mentalHealthInformation">
+      <div class="p-field p-md-6">
+        <input type="text" pInputText formControlName=diagnoses placeholder="Diagnoses">
+      </div>
+      <div class="p-field p-md-6">
+        <input type="text" pInputText formControlName=currentPsychiatricTreatment placeholder="Current Psychiatric Treatment">
+      </div>
+      <div class="p-field p-md-6">
+        <input type="text" pInputText formControlName=psychiatristName placeholder="Name of Psychiatrist/Therapist">
+      </div>
+      <div class="p-field p-md-6">
+        <input type="text" pInputText formControlName=psychiatristAddress placeholder="Address of Psychiatrist/Therapist">
+      </div>
+      <div class="p-field p-md-6">
+        <input type="text" pInputText formControlName=pastTreatments placeholder="Past Inpatient, Outpatient and/or Psychiatric Hospitalizations">
+      </div>
+      <!-- Need psychiatrist cunsultant -->
+      <div *ngFor="let psychiatricCunsultant of needPsychiatricCunsultant; let i = index;">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Does Client need a Psychiatrist Cunsultant? </label>
+          <div class="p-field-radiobutton">
+            <p-radioButton [name]=psychiatricCunsultant.key [formControlName]=psychiatricCunsultant.key value=true
+              inputId="psychiatricCunsultant-{{i}}-yes">
+            </p-radioButton>
+            <label for="psychiatricCunsultant{{i}}-yes" class="p-ml-3">Yes</label>
+          </div>
+          <div class="p-field-radiobutton">
+            <p-radioButton [name]=psychiatricCunsultant.key [formControlName]=psychiatricCunsultant.key value=false
+              inputId="psychiatricCunsultant-{{i}}-no">
+            </p-radioButton>
+            <label for="psychiatricCunsultant{{i}}-no" class="p-ml-3">No</label>
+          </div>
+        </div>
+      </div>
+      <!-- Date scheduled -->
+      <div class="p-field p-col-12 p-md-5">
+        <p-calendar formControlName=dateScheduled [inline]=false [showIcon]=true placeholder="Date Scheduled"></p-calendar>
+      </div>
+      <!-- name and address of eveluator -->
+      <div class="p-field p-md-6">
+        <input type="text" pInputText formControlName=psychEvaluatorName placeholder="Name of Physician Completing Psych Evaluation">
+      </div><div class="p-field p-md-6">
+        <input type="text" pInputText formControlName=psychEvaluatorAddress placeholder="Address of Physician Completing Psych Evaluation">
+      </div><div class="p-field p-md-4">
+        <input type="text" pInputText formControlName=psychEvaluatorCity placeholder="City">
+      </div><div class="p-field p-md-4">
+        <input type="text" pInputText formControlName=psychEvaluatorState placeholder="State">
+      </div><div class="p-field p-md-4">
+        <input type="text" pInputText formControlName=psychEvaluatorZipcode placeholder="Zipcode">
+      </div><div class="p-field p-md-12">
+        <input type="text" pInputText formControlName=psychEvaluatorLicense placeholder="License of Physician Completing Psych Evaluation">
+      </div>
     </div>
-    <div class="p-field p-col-12 p-md-6">
-      <input type="text" pInputText formControlName=occupationOrWorkSkill placeholder="Occupation/Work Skills">
+    <div class="p-d-flex button-container p-mt-4">
+      <div class="p-jc-start">
+        <button type="button" pButton label="Save"></button>
+        <button type="button" pButton label="Cancel" class="p-button-outlined p-ml-2"></button>
+      </div>
+      <div class="p-jc-end">
+        <button type="button" pButton label="Back" (click)="goBack()"></button>
+        <button type="submit" pButton label="Next" class="p-button-inlined p-ml-2"></button>
+      </div>
     </div>
-    <div class="p-field p-col-12 p-md-6">
-      <input type="text" pInputText formControlName=jobEmployedInLongest placeholder="Job Employed in the Longest">
-    </div>
-    <div class="p-field p-col-12 p-md-6">
-      <input type="text" pInputText formControlName=mostRecentJob placeholder="Most Recent Job">
-    </div>
-    <div class="p-field p-col-12 p-md-6">
-      <p-calendar formControlName=jobDate [inline]=false [showIcon]=true placeholder="Date"></p-calendar>
-      <!-- <input type="date" pInputText formControlName=reasonForLeaving placeholder="date"> -->
-    </div>
-    <div class="p-field p-md-6">
-      <input type="text" pInputText formControlName=reasonForLeaving placeholder="Reason for Leaving">
-    </div>
-    <div class="p-field p-md-6">
-      <input type="text" pInputText formControlName=militaryService placeholder="Military Service">
-    </div>
-    <div class="p-field p-md-6">
-      <input type="text" pInputText formControlName=typeOfDischarge placeholder="Type of Discharge">
-    </div>
-    <div class="p-field p-md-6">
-      <input type="text" pInputText formControlName=yearOfServiceAndLocations placeholder="Years of Service and Locations">
-    </div>
-    <div class="p-field p-md-6">
-      <input type="text" pInputText formControlName=rankAndDuties placeholder="Rank and Duties">
-    </div>
-    <div class="p-field p-md-6">
-      <input type="text" pInputText formControlName=combatExperience placeholder="Combat Experience">
-    </div>
-  </div>
-  <h3>Mental Health Information</h3>
-  <div class="p-fluid p-formgrid p-grid" formGroupName="mentalHealthInformation">
-    <div class="p-field p-md-6">
-      <input type="text" pInputText formControlName=diagnoses placeholder="Diagnoses">
-    </div>
-    <div class="p-field p-md-6">
-      <input type="text" pInputText formControlName=currentMedications placeholder="Current Medications">
-    </div>
-    <div class="p-field p-md-6">
-      <input type="text" pInputText formControlName=psychiatristOrTherapist placeholder="Psychiatrist/Therapist">
-    </div>
-    <div class="p-field p-md-6">
-      <input type="text" pInputText formControlName=clinic placeholder="Clinic">
-    </div>
-    <div class="p-field p-md-6">
-      <input type="tel" pInputText formControlName=telephone placeholder="Telephone">
-    </div>
-    <div class="p-field p-md-6">
-      <input type="text" pInputText formControlName=inpatientOrOutpatientPsychiatricHospitalization
-        placeholder="Impatient or Outpatient Psychiatric Hospitalizations">
-    </div>
-    <div class="p-field p-md-6">
-      <input type="text" pInputText formControlName=historyOfSucideAttempts placeholder="History of Sucide Attempts ">
-    </div>
-  </div>
-<div class="p-d-flex button-container p-mt-4">
-  <div class="p-jc-start">
-    <button type="button" pButton label="Save"></button>
-    <button type="button" pButton label="Cancel" class="p-button-outlined p-ml-2"></button>
-  </div>
-  <div class="p-jc-end">
-    <button type="button" pButton label="Back" (click)="goBack()"></button> 
-    <button type="submit" pButton label="Next" class="p-button-inlined p-ml-2"></button>
-  </div>
-</div>
-</form>
+  </form>
 </div>

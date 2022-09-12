@@ -4,6 +4,7 @@ import { environment} from 'src/environments/environment.prod';
 import { environment as env } from 'src/environments/environment';;
 import { RestClientService } from 'src/app/shared/services/rest-client.service';
 import { HttpClient } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -16,25 +17,22 @@ export class DataService {
   private isDev = isDevMode();
   private caseWorkerApi = environment.serviceUrl.caseWorkerUser;
   
-  
-  public getUserData(payload = {}): Observable<any> {
+  public getUserData( endPoint: number): Observable<any> {
     if (this.isDev) {
-     // return this.restcs.get(this.caseWorkerApi);
-     return this.restcs.get('./assets/mock/userData.json'); 
-
+     return this.restcs.get(this.serviceUrl+'uiLayout/getCaseWorkerDetails/'+ endPoint); 
     } else {
-      return this.restcs.get(this.caseWorkerApi);
+       return this.restcs.get(this.caseWorkerApi + endPoint);
     } 
   }
 
-  
   public getMsgCount(payload = {}): Observable<any> { 
     if (this.isDev) {
       return this.http.get(this.serviceUrl+'transportationForm/getTransportationRequests/');
     } else {
       return this.http.get(this.getMsgCountAPI);
     }  
-  }
+  } 
+
   getTreatmentPlanData(vetID:number): Observable<any> {
     if (this.isDev){
     return this.restcs.get(this.serviceUrl+'getTreatmentPlanDetails/'+ vetID);
@@ -44,5 +42,5 @@ export class DataService {
   }
   public updateTreatmentPlanData(data:any): Observable<any>{
     return this.http.put(this.serviceUrl+'updateTreatmentPlanDetails/save/4',data);
-  }
+  } 
 }

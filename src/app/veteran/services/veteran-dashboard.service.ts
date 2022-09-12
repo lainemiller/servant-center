@@ -14,6 +14,9 @@ export class VeteranDashboardService {
   private isDev = isDevMode();
   private commonUrl=env.localUrl;
   private getVeteranIdAPI=environment.serviceUrl.getVeteranId;
+  private addUserAPI=environment.serviceUrl.addUser;
+  private addVeteranAPI=environment.serviceUrl.addVeteran;
+  private addCaseWorkerAPI=environment.serviceUrl.addCaseWorker;
 
   //getTreatmentPlanData
   getTreatmentData(vetID:number) {
@@ -45,6 +48,30 @@ export class VeteranDashboardService {
     return this.restcs.get(this.commonUrl+'getVeteranId/'+endPoint)
     }else{
     return this.restcs.get(this.getVeteranIdAPI+endPoint)
+    }
+  }
+
+  addUser(payload={}):Observable<any>{
+    if(this.isDev){
+      return this.restcs.post(this.commonUrl+'addUser/',payload)
+    }else{
+      return this.restcs.post(this.addUserAPI,payload)
+      }
+  }
+
+  addVeteran(payload={}):Observable<any>{
+    if(this.isDev){
+      return this.restcs.post(this.commonUrl+'addVeteran/',payload)
+    }else{
+      return this.restcs.post(this.addVeteranAPI,payload)
+    }
+  }
+
+  addCaseWorker(payload={}):Observable<any>{
+    if(this.isDev){
+      return this.restcs.post(this.commonUrl+'addCaseWorker/',payload)
+    }else{
+      return this.restcs.post(this.addCaseWorkerAPI,payload)
     }
   }
 }

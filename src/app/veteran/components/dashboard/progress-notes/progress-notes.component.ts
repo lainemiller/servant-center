@@ -1,14 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { progressNoteResponse } from 'src/app/shared/models/progressNotes_model';
-
+import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
+import { goalTypes} from '../../../app.constants';
 import { ProgressNotesService } from 'src/app/veteran/services/progress-notes.service';
+
+interface DropDown {
+  name: string,
+  value: string
+}
 
 @Component({
   selector: 'app-progress-notes',
   templateUrl: './progress-notes.component.html',
   styleUrls: ['./progress-notes.component.scss'],
 })
+
+
 export class ProgressNotesComponent implements OnInit {
   public title = 'PROGRESS NOTES';
   public display = false;
@@ -21,16 +29,22 @@ export class ProgressNotesComponent implements OnInit {
   public progress: any = [];
   public initialStatus = false;
   public progressNotesState:any = [];
-
+  public vetID: number;
+  public goalTypes!: DropDown[];
+  selectedType!: any;
   constructor(
     private formBuilder: FormBuilder,
-    private service: ProgressNotesService
-  ) {}
+    private service: ProgressNotesService,
+    private cacheData: ClipBoardService,
+  ) {
+    this.vetID = this.cacheData.get("veteranId");
+    this.goalTypes = goalTypes;    
+  }
 
   ngOnInit(): void {
     //get data from backend
 
-    this.service.getNotes().subscribe((data:progressNoteResponse) => {
+    this.service.getNotes(this.vetID).subscribe((data:progressNoteResponse) => {
       this.progress = data;
       let k = 0;
       for (let i = this.progress.length; i > 0; i--) {
@@ -77,6 +91,7 @@ export class ProgressNotesComponent implements OnInit {
           Validators.maxLength(50),
         ],
       ],
+      goalType: ['', Validators.required],
       goalDescription: ['', [Validators.required, Validators.maxLength(300)]],
       goalState: [false, Validators.required],
       addedDate: [d]
@@ -96,11 +111,13 @@ export class ProgressNotesComponent implements OnInit {
     new Date().getFullYear();
     console.log(this.progressNote.value);
     //send data to backend
-     this.service.postNotes(this.progressNote.value).subscribe((data) => {
+     this.service.postNotes(this.vetID,this.progressNote.value).subscribe((data) => {
        console.log('Submitted');
+       console.log(this.progressNote.value);
+       
      });
     //get data from backend
-    this.service.getNotes().subscribe((notes:progressNoteResponse) => {
+    this.service.getNotes(this.vetID).subscribe((notes:progressNoteResponse) => {
       console.log(notes);
     });
      this.progressNotes.push(this.progressNote.value);
@@ -110,18 +127,18 @@ export class ProgressNotesComponent implements OnInit {
   }
   crossButton() {
     this.initialStatus = true;
-    this.progressNote.reset();
+    this.progressNote.reset();    
   }
-  changed(goal_id:number, goal_status: boolean){
+  changed( goalState: boolean, goalTitle:string){
     //TO UPDATE STATUS OF PROGRESS NOTE 
     this.progressNotesState = {
-      goal_id,
-      goal_status
+      goalTitle,
+      goalState
     };
-    console.log("status changed for id and status",goal_id, goal_status); 
+    console.log("status changed for title",goalTitle," to", goalState); 
 
-    this.service.postStatus(this.progressNotesState).subscribe((data) => {
-    console.log('proressnote value after status change',  this.progressNotesState);
+    this.service.postStatus(this.vetID,this.progressNotesState).subscribe((data) => {
+    console.log('goal status after change',  this.progressNotesState);
   });
     
   }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 
 import { VeteranDashboardService } from '../../services/veteran-dashboard.service';
 
@@ -19,23 +18,22 @@ export class TreatmentPlanComponent implements OnInit {
   public maxDateValue: any;
   public eventId: any;
   public data: any;
-  public vetID!: number;
   public formView = true;
   public treatmentArr: any;
   public formData:any;
+  public vetID: number
  public persons=['Client','Case Manager','RN']
   constructor(
     private formBuilder: FormBuilder,
     private service: VeteranDashboardService,
-    private cacheData: ClipBoardService
+    private vetID:
   ) {
-    this.vetID = this.cacheData.get("veteranId")
     this.setForm();
 
   }
 
   ngOnInit(): void {
-    this.buildForm();    
+    this.buildForm();
   }
 
   setForm() {
@@ -51,7 +49,7 @@ export class TreatmentPlanComponent implements OnInit {
         hmisIdNo: this.data.hmis_id,
         treatmentIssues: this.data.treatmentIssues
       });
-     console.log(this.treatmentPlanForm.value);
+      console.log(this.treatmentPlanForm.value);
     });
   }
   buildForm() {
@@ -67,8 +65,9 @@ export class TreatmentPlanComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       recordNo: ['', Validators.required],
-      dateOfBirth1: ['', Validators.required],
-      intakeDOB: ['', Validators.required],
+      dateOfBirth1: [null, Validators.required],
+      dateOfBirth2: [null, Validators.required],
+      intakeDOB: [null, Validators.required],
       hmisIdNo: ['', Validators.required],
       veteranDiagnosis: ['', Validators.required],
       veteranSupports: ['', Validators.required],
@@ -132,13 +131,12 @@ export class TreatmentPlanComponent implements OnInit {
       },
     ];
   }
-  
-  //onSubmit
+
   onSubmit() {
     this.formView = false;
     this.showTopView();
     this.formData= this.treatmentPlanForm.value;
-    console.log("form data",this.treatmentPlanForm.value);
+    
   }
   showTopView() {
     const p = document.querySelector('#prnt');

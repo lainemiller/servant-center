@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VeteranprofileService } from 'src/app/veteran/services/veteranprofile.service';
-import { Auth } from '@aws-amplify/auth';
+import { MessageService } from 'primeng/api';
 
 import {
   genders,
@@ -20,6 +20,7 @@ interface DropDown {
   selector: 'app-profile-form',
   templateUrl: './profile-form.component.html',
   styleUrls: ['./profile-form.component.scss'],
+  providers: [MessageService],
 })
 export class ProfileFormComponent implements OnInit {
   public profileDetails: any;
@@ -28,6 +29,8 @@ export class ProfileFormComponent implements OnInit {
   public states!: DropDown[];
   public maritalStatus!: DropDown[];
   public relations!: DropDown[];
+  public imageObj!: File;
+  public imageUrl!: string;
   public selectedState!: DropDown;
   public selectedGender: any = null;
   public selectedMaritalStatus!: DropDown;
@@ -37,12 +40,13 @@ export class ProfileFormComponent implements OnInit {
   maxDateValue!: Date;
   @Input() isShowFields!: boolean;
   veteranId!: number;
-  email!: string;
+  showSpinner:boolean=true;
 
   constructor(
     private formBuilder: FormBuilder,
     private service: VeteranprofileService,
-    private cacheData: ClipBoardService
+    private cacheData: ClipBoardService,
+    private messageService: MessageService
   ) {
     this.veteranId = this.cacheData.get('veteranId');
     this.setForm();
@@ -59,9 +63,6 @@ export class ProfileFormComponent implements OnInit {
     this.selectedMaritalStatus = this.maritalStatus[1];
     this.selectedRelationship = this.relations[1];
     this.buildForm();
-    Auth.currentAuthenticatedUser().then((user) => {
-      this.email = user.signInUserSession.idToken.payload.email;
-    });
   }
 
   setForm() {
@@ -70,7 +71,40 @@ export class ProfileFormComponent implements OnInit {
       .subscribe((data: VeteranProfileResponse) => {
         this.profileDetails = data;
         this.veteran = this.profileDetails.data[0];
+        if(this.veteran){
+          this.showSpinner=false;
+        }
         console.log('Profile API Data--->', data);
+        if (this.veteran.place_of_birth === 'x') {
+          this.veteran.place_of_birth = '';
+        }
+        if (this.veteran.ssn === 1234) {
+          this.veteran.ssn = '';
+        }
+        if (this.veteran.address_main === 'x') {
+          this.veteran.address_main = '';
+        }
+        if (this.veteran.city === 'x') {
+          this.veteran.city = '';
+        }
+        if (this.veteran.zip_code === 1234) {
+          this.veteran.zip_code = '';
+        }
+        if (this.veteran.contact_person === 'x') {
+          this.veteran.contact_person = '';
+        }
+        if (this.veteran.contact_person_phone === '1234') {
+          this.veteran.contact_person_phone = '';
+        }
+        if (this.veteran.primary_language === 'x') {
+          this.veteran.primary_language = '';
+        }
+        if (this.veteran.religious_preference === 'x') {
+          this.veteran.religious_preference = '';
+        }
+        if (this.veteran.race === 'x') {
+          this.veteran.race = '';
+        }
         this.profileForm.patchValue({
           firstName: this.veteran.first_name,
           middleName: this.veteran.middle_initial,
@@ -83,7 +117,6 @@ export class ProfileFormComponent implements OnInit {
           selectedGenders: this.veteran.gender,
           selectedState: this.veteran.state,
           selectedMaritalStatus: this.veteran.marital_status,
-          emailId: this.email,
           phoneNumber: this.veteran.primary_phone,
           address1: this.veteran.address_main,
           city: this.veteran.city,
@@ -111,15 +144,6 @@ export class ProfileFormComponent implements OnInit {
       nickName: ['', [Validators.required]],
       DOB: ['', Validators.required],
       POB: ['', [Validators.required]],
-      emailId: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(
-            '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}$'
-          ),
-        ],
-      ],
       phoneNumber: ['', Validators.required],
       cfirstName: ['', [Validators.required]],
       hobbies: ['', [Validators.required]],
@@ -147,16 +171,61 @@ export class ProfileFormComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log('Profile Form submitted value', this.profileForm.value);
     let profileDetails = this.profileForm.value;
     this.service
       .updateProfile(this.veteranId, profileDetails)
       .subscribe((response) => {
-        console.log(response);
+        if (response.responseStatus == 'SUCCESS') {
+          this.sucessMessage();
+        } else if (response.responseStatus == 'FAILURE') {
+          this.errorMessage();
+        }
       });
+  }
+
+  sucessMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Profile updated sucessfully',
+    });
+  }
+
+  errorMessage() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Profile not updated',
+    });
+  }
+
+  resetMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Profile reset completed',
+    });
   }
 
   resetForm() {
     this.buildForm();
+    this.showSpinner=true;
     this.setForm();
+    this.resetMessage();
+  }
+  onImagePicked(imageInput: HTMLInputElement): void {
+    console.log('image upload ******', imageInput.files![0]);
+    const FILE = imageInput.files![0];
+    this.imageObj = FILE;
+  }
+
+  onImageUpload() {
+    let imageForm = new FormData();
+    imageForm.append('image', this.imageObj);
+    this.service.imageUpload(imageForm).subscribe((res) => {
+      //this.imageUrl = res['image'];
+      console.log('uploaded successfully');
+    });
   }
 }

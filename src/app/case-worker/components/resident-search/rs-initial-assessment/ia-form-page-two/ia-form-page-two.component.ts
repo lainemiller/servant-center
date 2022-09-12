@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,8 +11,12 @@ import { Router } from '@angular/router';
 export class IaFormPageTwoComponent implements OnInit {
   page2Form!: FormGroup;
   educationAndEmploymentHistory!: FormGroup;
+  socialHistory!: FormGroup;
   mentalHealthInformation!: FormGroup;
-
+  military = [{ label: 'Military', key: 'military' }];
+  needPsychiatricCunsultant = [
+    { label: 'Need Psychiatrist Cunsultant', key: 'needPsychiatricCunsultant' },
+  ];
 
   constructor(private fb: FormBuilder, private router: Router) {}
 
@@ -29,20 +34,34 @@ export class IaFormPageTwoComponent implements OnInit {
       mostRecentJob: ['', Validators.required],
       jobDate: ['', Validators.required],
       reasonForLeaving: ['', Validators.required],
-      militaryService: ['', Validators.required],
+      military: ['', Validators.required],
+      branch: ['', Validators.required],
       typeOfDischarge: ['', Validators.required],
-      yearOfServiceAndLocations: ['', Validators.required],
-      rankAndDuties: ['', Validators.required],
-      combatExperience: ['', Validators.required]
+      serviceDate: ['', Validators.required],
+      serviceLocation: ['', Validators.required],
+      otherTrainingEducation: ['', Validators.required],
+      currentEmployer: ['', Validators.required],
+      currentEmployerLocation: ['', Validators.required],
+    });
+
+    this.socialHistory = this.fb.group({
+      religiousPreferences: ['', Validators.required],
+      hobbiesInterests: ['', Validators.required],
     });
     this.mentalHealthInformation = this.fb.group({
       diagnoses: ['', Validators.required],
-      currentMedications: ['', Validators.required],
-      psychiatristOrTherapist: ['', Validators.required],
-      clinic: ['', Validators.required],
-      telephone: ['', Validators.required],
-      inpatientOrOutpatientPsychiatricHospitalization: ['', Validators.required],
-      historyOfSucideAttempts: ['', Validators.required]
+      currentPsychiatricTreatment: ['', Validators.required],
+      psychiatristName: ['', Validators.required],
+      psychiatristAddress: ['', Validators.required],
+      pastTreatments: ['', Validators.required],
+      needPsychiatricCunsultant: ['', Validators.required],
+      dateScheduled: ['', Validators.required],
+      psychEvaluatorName: ['', Validators.required],
+      psychEvaluatorAddress: ['', Validators.required],
+      psychEvaluatorCity: ['', Validators.required],
+      psychEvaluatorState: ['', Validators.required],
+      psychEvaluatorZipcode: ['', Validators.required],
+      psychEvaluatorLicense: ['', Validators.required],
     });
     this.buildForm();
   }
@@ -50,7 +69,8 @@ export class IaFormPageTwoComponent implements OnInit {
   buildForm() {
     this.page2Form = this.fb.group({
       educationAndEmploymentHistory: this.educationAndEmploymentHistory,
-      mentalHealthInformation: this.mentalHealthInformation
+      mentalHealthInformation: this.mentalHealthInformation,
+      socialHistory: this.socialHistory,
     });
   }
 
@@ -58,12 +78,14 @@ export class IaFormPageTwoComponent implements OnInit {
     this.router.navigateByUrl(
       'case-worker/resident-search/initial-assessment/page-3'
     );
-    console.log(this.page2Form.value);
+    console.log('page 2 values', this.page2Form.value);
   }
 
-  goBack(){
+  goBack() {
     this.router.navigateByUrl(
       'case-worker/resident-search/initial-assessment/page-1'
-    );    
+    );
   }
+
+  index: number = 0;
 }

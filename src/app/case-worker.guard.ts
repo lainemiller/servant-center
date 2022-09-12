@@ -26,8 +26,8 @@ export class CaseWorkerGuard implements CanActivate {
     Auth.currentAuthenticatedUser()
       .then((user) => {
         this.group =
-          user.signInUserSession.accessToken.payload['cognito:groups'][0];
-        if (this.group == 'CaseWorker') {
+          user?.signInUserSession?.accessToken?.payload?.['cognito:groups']?.[0];
+        if (this.group.toUpperCase() == 'CASEWORKER') {
           return true;
         } else {
           this._router.navigate(['/login']);
