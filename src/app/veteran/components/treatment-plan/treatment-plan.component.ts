@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 
 import { VeteranDashboardService } from '../../services/veteran-dashboard.service';
 
@@ -26,8 +25,7 @@ export class TreatmentPlanComponent implements OnInit {
  public persons=['Client','Case Manager','RN']
   constructor(
     private formBuilder: FormBuilder,
-    private service: VeteranDashboardService,
-    private cacheData: ClipBoardService
+    private service: VeteranDashboardService
   ) {
     this.vetID=this.cacheData.get("veteranId")
     this.setForm();

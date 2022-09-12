@@ -58,7 +58,7 @@ export class ResidentSearchComponent implements OnInit {
   
   columns = [
     { header: 'Name', field: 'first_name' },
-    { header: 'Birthdate', field: 'date_of_birth',date:true, format:'dd/MM/yyyy' },
+    { header: 'Birthdate', field: 'date_of_birth',date: true,format: 'dd/MM/yyyy' },
     { header: 'Address', field: 'address_main' },
   ];
 
