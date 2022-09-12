@@ -17,12 +17,12 @@ export class VeteranDashboardService {
 
   //getTreatmentPlanData
   getTreatmentData(vetID:number) {
-    return this.http.get<any>(this.commonUrl+'getTreatmentPlanDetails/'+ vetID);
+    return this.restcs.get<any>(this.commonUrl+'getTreatmentPlanDetails/'+ vetID);
   }
 
   //saving TreatmentplanData after summary
   saveTreatmentData(vetID:number,data:any): Observable<any>{
-    return this.http.post(this.commonUrl+'postTreatmentPlanDetails/save/'+ vetID,data); 
+    return this.restcs.post(this.commonUrl+'postTreatmentPlanDetails/save/'+ vetID,data); 
   }
 
   public getName(payload = {}): Observable<any> {

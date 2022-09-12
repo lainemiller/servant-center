@@ -136,8 +136,6 @@ export class TreatmentPlanComponent implements OnInit {
   //onSubmit
   onSubmit() {
     this.formView = false;
-    //this.treatmentArr = this.treatmentPlanForm.get('treatmentIssues')?.value;
-    //console.log(this.treatmentArr);
     this.showTopView();
     this.formData= this.treatmentPlanForm.value;
     console.log("form data",this.treatmentPlanForm.value);
@@ -149,9 +147,17 @@ export class TreatmentPlanComponent implements OnInit {
   }
 
   saveForm(){
-   this.service.saveTreatmentData(this.vetID,this.treatmentPlanForm.value).subscribe();
+   this.service.saveTreatmentData(this.vetID,this.treatmentPlanForm.value).subscribe((response) =>{
+    if (response.responseStatus === 'SUCCESS') {
+      console.log('Successfully saved TreatmentPlan details');
+      alert('Treatment Plan is saved successfully !!');
+    } else if (response.responseStatus === 'FAILURE') {
+      alert('OOPS!, Something went wrong.');
+    }
+    window.location.reload();
+  })
    console.log("form submitted successfully")
-  }
+}
  
   initializeIssuesFormArray() {
     this.issuesArray = this.formBuilder.array([]);
@@ -263,5 +269,5 @@ export class TreatmentPlanComponent implements OnInit {
   }
 }
 
-//treatmetPlanComponent
+
 
