@@ -53,6 +53,7 @@
             placeholder="dateOfBirth"
             [readonly]=true
             class="disable-field"
+            value="{{ data?.date_of_birth | date: 'dd/MM/yyyy'  }}"
           />
           </div>
         </div>
@@ -67,6 +68,7 @@
             placeholder="Intake Date"
             [readonly]=true
             class="disable-field"
+            value="{{ data?.intake_date | date: 'dd/MM/yyyy'  }}"
           />
           </div>
           <div class="p-field p-col-12 p-md-3">
