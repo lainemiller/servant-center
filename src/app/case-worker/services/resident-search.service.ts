@@ -11,6 +11,6 @@ export class ResidentSearchService {
 
   getResidentSearchData() {
     return this.http.get(this.commonUrl+'residentSearch/getAll');
-    //return this.http.get('./assets/mock/resident-search.json');
+
   }
 }

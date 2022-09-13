@@ -34,7 +34,11 @@ export class DataService {
   } 
 
   getTreatmentPlanData(vetID:number): Observable<any> {
-    return this.http.get(this.serviceUrl+'getTreatmentPlanDetails/'+ vetID);
+    if (this.isDev){
+    return this.restcs.get(this.serviceUrl+'getTreatmentPlanDetails/'+ vetID);
+    } else{
+      return this.http.get('./assets/mock/treatmentPlan-data/json')
+    }
   }
   public updateTreatmentPlanData(data:any): Observable<any>{
     return this.http.put(this.serviceUrl+'updateTreatmentPlanDetails/save/4',data);
