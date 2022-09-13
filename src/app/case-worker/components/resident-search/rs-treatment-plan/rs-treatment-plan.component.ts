@@ -27,8 +27,9 @@ export class RsTreatmentPlanComponent implements OnInit {
     private service: DataService,
     private cacheData:ClipBoardService
   ) {
-    this.vetID=this.cacheData.get("veteranId");
+    this.vetID=this.cacheData.get("selectedResidentVeteranId");
     this.setForm();
+    
   }
 
   ngOnInit(): void {
@@ -37,21 +38,21 @@ export class RsTreatmentPlanComponent implements OnInit {
 
   setForm() {
     this.service.getTreatmentPlanData(this.vetID).subscribe((res) => {
-      this.data = res;
-      console.log(this.data.treatmentIssues)
+      this.data = res.data;
       this.buildForm();
       this.treatmentPlanForm.patchValue({
-        firstName: this.data.fname,
-        lastName: this.data.lname,
-        recordNo: this.data.recNo,
-        dateOfBirth1: this.data.dob1,
-        intakeDOB: this.data.intakeDate,
-        hmisIdNo: this.data.hmisId,
-        veteranDiagnosis: this.data.diagnoses,
-        veteranSupports: this.data.support,
-        veteranStrengths: this.data.strength,
+        firstName: this.data.first_name,
+        lastName: this.data.last_name,
+        recordNo: this.data.record_number,
+        dateOfBirth1: this.data.date_of_birth,
+        intakeDOB: this.data.intake_date,
+        hmisIdNo: this.data.hmis_id,
+        veteranDiagnosis: this.data.diagnosis,
+        veteranSupports: this.data.supports,
+        veteranStrengths: this.data.strengths,
        
         treatmentIssues:this.data.treatmentIssues,
+        
         veteranNotes:this.data.notes
       });
       console.log(this.treatmentPlanForm.value);
