@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { CaseWorkerModule } from './case-worker/case-worker.module';
 import { SharedModule } from './shared/shared.module';
 import { VeteranModule } from './veteran/veteran.module';
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
