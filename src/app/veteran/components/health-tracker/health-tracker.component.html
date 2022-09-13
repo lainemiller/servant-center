@@ -1,3 +1,4 @@
+<p-toast position="top-center"></p-toast>
 <div class="p-grid">
   <div class="p-col-12">
     <app-item-header title="HEALTH TRACKER"></app-item-header>
@@ -97,6 +98,7 @@
                   [inline]="false"
                   [showIcon]="true"
                   placeholder="Date (mm/dd/yyyy)"
+                  dataType="string"
                 ></p-calendar>
               </div>
             </div>
@@ -146,6 +148,7 @@
                   [inline]="false"
                   [showIcon]="true"
                   placeholder="Date (mm/dd/yyyy)"
+                  dataType="string"
                 ></p-calendar>
               </div>
             </div>
@@ -195,6 +198,7 @@
                   [inline]="false"
                   [showIcon]="true"
                   placeholder="Date (mm/dd/yyyy)"
+                  dataType="string"
                 ></p-calendar>
               </div>
             </div>
@@ -240,6 +244,7 @@
                   [inline]="false"
                   [showIcon]="true"
                   placeholder="Date (mm/dd/yyyy)"
+                  dataType="string"
                 ></p-calendar>
               </div>
             </div>
@@ -289,6 +294,7 @@
                   [inline]="false"
                   [showIcon]="true"
                   placeholder="Date (mm/dd/yyyy)"
+                  dataType="string"
                 ></p-calendar>
               </div>
             </div>
@@ -338,6 +344,7 @@
                   [inline]="false"
                   [showIcon]="true"
                   placeholder="Date (mm/dd/yyyy)"
+                  dataType="string"
                 ></p-calendar>
               </div>
             </div>
@@ -387,6 +394,7 @@
                   [inline]="false"
                   [showIcon]="true"
                   placeholder="Date (mm/dd/yyyy)"
+                  dataType="string"
                 ></p-calendar>
               </div>
             </div>
@@ -432,6 +440,7 @@
                   [inline]="false"
                   [showIcon]="true"
                   placeholder="Date (mm/dd/yyyy)"
+                  dataType="string"
                 ></p-calendar>
               </div>
             </div>
@@ -480,17 +489,18 @@
       <br>
       <br>
       <!-- table start -->
-      <div *ngFor="let tableName of tableValues">
+      <!-- Weight Table -->
+      <div *ngIf="showWeight" class="weight-table">
       <div class="p-fluid p-formgrid p-grid">
         <div class="p-field p-col-12 ">
           <div class="title-container" style="background: #971f1f">
             <p>
-              <span>{{tableName.tracking_subject}}</span>
+              <span>Weight</span>
             </p>
           </div>
         </div>
       </div>
-      <p-table [columns]="cols" [value]="tableValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+      <p-table [columns]="cols" [value]="tableWeightValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th *ngFor="let col of columns">
@@ -508,6 +518,209 @@
     </p-table>
     <br>
   </div>
+  <!-- Temperature Table -->
+  <div *ngIf="showTemperature" class="temperature-table">
+    <div class="p-fluid p-formgrid p-grid">
+      <div class="p-field p-col-12 ">
+        <div class="title-container" style="background: #971f1f">
+          <p>
+            <span>Temperature</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <p-table [columns]="cols" [value]="tableTemperatureValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+      <ng-template pTemplate="header" let-columns>
+          <tr>
+              <th *ngFor="let col of columns">
+                  {{col.header}}
+              </th>
+          </tr>
+        </ng-template>
+        <ng-template  pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+              <td *ngFor="let col of columns">
+                  {{col.date ? (rowData[col.field]| date : col.format) : rowData[col.field]}}
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
+  <br>
+</div>
+<!-- Blood Pressure Table -->
+<div *ngIf="showBloodPressure" class="blood-pressure-table">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 ">
+      <div class="title-container" style="background: #971f1f">
+        <p>
+          <span>Blood Pressure</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <p-table [columns]="cols" [value]="tableBloodPressureValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+      </ng-template>
+      <ng-template  pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                {{col.date ? (rowData[col.field]| date : col.format) : rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>
+</div>
+<!-- Drug Screen Table -->
+<div *ngIf="showDrugScreen" class="drug-screen-table">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 ">
+      <div class="title-container" style="background: #971f1f">
+        <p>
+          <span>Drug Screen</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <p-table [columns]="cols" [value]="tableDrugScreenValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+      </ng-template>
+      <ng-template  pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                {{col.date ? (rowData[col.field]| date : col.format) : rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>
+</div>
+<!-- Breathalyzer Table -->
+<div *ngIf="showBreathalyzer" class="breathalyzer-table">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 ">
+      <div class="title-container" style="background: #971f1f">
+        <p>
+          <span>Breathalyzer</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <p-table [columns]="cols" [value]="tableBreathalyzerValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+      </ng-template>
+      <ng-template  pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                {{col.date ? (rowData[col.field]| date : col.format) : rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>
+</div>
+<!-- Blood Sugar Table -->
+<div *ngIf="showBloodSugar" class="blood-sugar-table">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 ">
+      <div class="title-container" style="background: #971f1f">
+        <p>
+          <span>Blood Sugar</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <p-table [columns]="cols" [value]="tableBloodSugarValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+      </ng-template>
+      <ng-template  pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                {{col.date ? (rowData[col.field]| date : col.format) : rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>
+</div>
+<!-- BMI Table -->
+<div *ngIf="showBmi" class="bmi-table">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 ">
+      <div class="title-container" style="background: #971f1f">
+        <p>
+          <span>BMI</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <p-table [columns]="cols" [value]="tableBmiValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+      </ng-template>
+      <ng-template  pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                {{col.date ? (rowData[col.field]| date : col.format) : rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>
+</div>
+<!-- Other Table -->
+<div *ngIf="showOther" class="other-table">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 ">
+      <div class="title-container" style="background: #971f1f">
+        <p>
+          <span>Other</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <p-table [columns]="cols" [value]="tableOtherValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+      </ng-template>
+      <ng-template  pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                {{col.date ? (rowData[col.field]| date : col.format) : rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>
+</div>
       <!-- table end -->
     </div>
   </div>
