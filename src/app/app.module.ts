@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { CaseWorkerModule } from './case-worker/case-worker.module';
 import { SharedModule } from './shared/shared.module';
 import { VeteranModule } from './veteran/veteran.module';
-import { StepsModule } from "primeng/steps";
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -22,7 +21,6 @@ import { StepsModule } from "primeng/steps";
     HttpClientModule,
     VeteranModule,
     CaseWorkerModule,
-    StepsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
