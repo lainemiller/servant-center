@@ -16,7 +16,7 @@ export class VeteranprofileService {
   private saveTransportationFormAPI = environment.serviceUrl.saveTransportationForm;
 
   private commonUrl=env.localUrl;
-  private veteranProfileUpdateAPI='';
+  private veteranProfileUpdateAPI=environment.serviceUrl.veteranProfileUpdateUser;
 
   public getProfileData(
     endPoint: number, 
