@@ -171,7 +171,7 @@ export class TransportationRequestFormComponent implements OnInit {
     if (this.transportRequestForm.value.destinationAddress.name === 'Other') {
         // this.transportRequestForm.value.destinationAddress.name =
         // this.transportRequestForm.value.destinationAddress2;
-        this.transportRequestForm.value.destinationAddress= this.transportRequestForm.value.selectedState
+        this.transportRequestForm.value.destinationAddress= this.transportRequestForm.value.destinationAddress2+" " +this.transportRequestForm.value.selectedState
         +" "+this.transportRequestForm.value.city+" "+this.transportRequestForm.value.zipcode
     }else{
       this.transportRequestForm.value.destinationAddress= this.transportRequestForm.value.destinationAddress.name;
