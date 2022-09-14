@@ -81,7 +81,7 @@ export class DashboardComponent implements OnInit {
     if(arg.event._def.extendedProps.isappointment){
       this.tagName='Appointment';
     }else{
-      this.tagName='Appointment';
+      this.tagName='Event';
     }
     this.eventInfo = [
       this.tagName,
