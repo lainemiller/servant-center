@@ -27,7 +27,8 @@
             [draggable]="false"
             [modal]="true"
             (onHide)="crossButton()"
-            [style]="{ width: '500px',height:'600px' }"
+            [contentStyle]="{'overflow': 'visible'}"
+            [style]="{ width: '500px',height:'600px','overflow-y':'scroll' }"
           >
             <form [formGroup]="eventsForm" (ngSubmit)="onSubmit()" >
               <div class="p-fluid">
