@@ -381,6 +381,26 @@ export class HealthTrackerComponent implements OnInit {
             healthTrackerValue.push(formValue[i]);
             console.log('date new', formValue[i]);
           }
+          if (formValue[i].comments != currentValue[j].tracking_comments) {
+            console.log('comments changed form', formValue[i]);
+            let oldTrackerValue = currentValue.filter((data: any) => {
+              let trackerDate = new Date(
+                new Date(data.note_date).toUTCString()
+              );
+              data.note_date =
+                trackerDate.getMonth() +
+                1 +
+                '/' +
+                trackerDate.getDate() +
+                '/' +
+                trackerDate.getFullYear();
+              return data.tracking_subject === formValue[i].trackingSubject;
+            });
+            updateHealthTrackerValue.push(oldTrackerValue);
+            console.log('comments old', oldTrackerValue);
+            healthTrackerValue.push(formValue[i]);
+            console.log('comments new', formValue[i]);
+          }
         }
       }
     }
