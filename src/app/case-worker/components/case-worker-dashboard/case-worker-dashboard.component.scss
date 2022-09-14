@@ -72,8 +72,3 @@
   border-color: red;
 }
 
-@include desktop() {
-  :host ::ng-deep .p-datepicker{
-    padding-top: 100px;
-  }
-}

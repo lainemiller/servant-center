@@ -27,6 +27,7 @@
             [draggable]="false"
             [modal]="true"
             (onHide)="crossButton()"
+            [contentStyle]="{'overflow': 'visible'}"
             [style]="{ width: '500px',height:'600px' }"
           >
             <form [formGroup]="eventsForm" (ngSubmit)="onSubmit()" >
