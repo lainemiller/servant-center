@@ -16,6 +16,8 @@ export class DataService {
 
   private isDev = isDevMode();
   private caseWorkerApi = environment.serviceUrl.caseWorkerUser;
+  private getTreatmentPlanAPI = environment.serviceUrl.getTreatmentPlan;
+  private updateTreatmentPlanAPI = environment.serviceUrl.updateTreatmentPlan;
   
   public getUserData( endPoint: number): Observable<any> {
     if (this.isDev) {
@@ -37,10 +39,14 @@ export class DataService {
     if (this.isDev){
     return this.restcs.get(this.serviceUrl+'getTreatmentPlanDetails/'+ vetID);
     } else{
-      return this.http.get('./assets/mock/treatmentPlan-data/json')
+      return this.restcs.get(this.getTreatmentPlanAPI+vetID);
     }
   }
-  public updateTreatmentPlanData(data:any): Observable<any>{
-    return this.http.put(this.serviceUrl+'updateTreatmentPlanDetails/save/4',data);
+  public updateTreatmentPlanData(vetID:number,data:any): Observable<any>{
+    if (this.isDev){
+    return this.http.put(this.serviceUrl+'updateTreatmentPlanDetails/save/'+vetID,data);
+    } else {
+      return this.restcs.get(this.updateTreatmentPlanAPI+vetID,data);
+    }
   } 
 }

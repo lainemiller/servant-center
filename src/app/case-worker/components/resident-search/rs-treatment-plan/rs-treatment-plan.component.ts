@@ -63,9 +63,8 @@ export class RsTreatmentPlanComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       recordNo: ['', Validators.required],
-      dateOfBirth1: [null, Validators.required],
-      dateOfBirth2: [null, Validators.required],
-      intakeDOB: [null, Validators.required],
+      dateOfBirth1: ['', Validators.required],
+      intakeDOB: ['', Validators.required],
       hmisIdNo: ['', Validators.required],
       veteranDiagnosis: ['', Validators.required],
       veteranSupports: ['', Validators.required],
@@ -131,11 +130,14 @@ export class RsTreatmentPlanComponent implements OnInit {
 
   onSubmit() {
     this.formView = false;
-    console.log(this.treatmentPlanForm.value);
-    this.treatmentArr = this.treatmentPlanForm.get('treatmentIssues')?.value;
-    console.log(this.treatmentArr);
-    
-    this.formData= this.treatmentPlanForm.value;
+    //this.treatmentArr = this.treatmentPlanForm.get('treatmentIssues')?.value;
+    this.service.updateTreatmentPlanData(this.vetID,this.treatmentPlanForm.value).subscribe((response)=>{
+      if (response.responseStatus === 'SUCCESS'){
+        alert("Updated TreatmentPlan successfully");
+      }else if (response.responseStatus === 'FAILURE'){
+        alert('Error updating');
+      }
+    })
     
   }
  
