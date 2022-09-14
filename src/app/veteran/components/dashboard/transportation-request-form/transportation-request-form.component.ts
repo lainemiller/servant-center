@@ -182,11 +182,11 @@ export class TransportationRequestFormComponent implements OnInit {
 	  console.log("Form Submitted");
     console.log("FormData ",this.transportRequestForm.value);
     
-    if (this.submitted = true) {
+    if (data.responseStatus === 'SUCCESS') {
       console.log('successfully posted event to backend');
       alert('Form successfully saved !!');
-    } else {
-      alert('FAILUER, Something went wrong.');
+    } else if (data.responseStatus === 'FAILURE') {
+      alert('FAILURE, Something went wrong.');
     }
    });
    
