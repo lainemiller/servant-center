@@ -1,6 +1,59 @@
 <div class="p-grid">
   <div class="p-col-12">
     <app-item-header title="CASEWORKER PROFILE" color="blue"></app-item-header>
-    <app-profile-form [isShowFields]="isShowFields"></app-profile-form>
+    <div class="caseProfile">
+      <div class="p-fluid p-formgrid p-grid">
+        <div>
+          <img
+            src="assets/images/profile.svg"
+            alt="CaseWorker Image"
+            width="150"
+          />
+        </div>
+      </div>
+      <div class="CaseWorkerInfo">
+        <div class="p-fluid p-grid">
+          <div class="p-field p-col-12 p-md-4">
+            <label for="First Name" class="label-title">First Name</label>
+            <input
+              value="{{firstName}}"
+              type="text"
+              pInputText
+              maxlength="30"
+              appNoSpecialSymbols
+              customAttr="textOnly"
+              class="disable"
+            />
+           
+          </div>
+    
+          <div class="p-field p-col-12 p-md-4">
+            <label class="label-title">Last Name</label>
+            <input
+              type="text"
+              value="{{lastName}}"
+              pInputText
+              appNoSpecialSymbols
+              customAttr="textOnly"
+              maxlength="30"
+              class="disable"
+            />
+          </div>
+    
+          <div class="p-field p-col-12 p-md-4">
+            <label class="label-title">Nick Name</label>
+            <input
+              value="{{nickName}}"
+              type="text"
+              pInputText
+              appNoSpecialSymbols
+              customAttr="textOnly"
+              maxlength="30"
+              class="disable"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
