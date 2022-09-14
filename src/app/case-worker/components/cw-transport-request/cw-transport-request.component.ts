@@ -168,16 +168,16 @@ let obj={
 
   date:this.transportRequestForm.value.date
 };
-	this.service.approveTransportationForm(obj).subscribe(()=>{
+	this.service.approveTransportationForm(obj).subscribe((data)=>{
    // this.newData();
     this.refreshRequestComponent();
     this.submitted = true;
 	  console.log("Form submitted");
-    if (this.submitted = true) {
+    if (data.responseStatus === 'SUCCESS') {
       console.log('successfully posted event to backend');
       alert('Form successfully saved !!');
-    } else {
-      alert('FAILUER, Something went wrong.');
+    }else if (data.responseStatus === 'FAILURE') {
+      alert('FAILURE, Something went wrong.');
     }
    });
     console.log(this.transportRequestForm.value);

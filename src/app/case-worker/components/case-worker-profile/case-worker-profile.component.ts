@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
+import { DataService } from '../../services/data.service';
+import { Auth } from '@aws-amplify/auth';
 
 @Component({
   selector: 'app-case-worker-profile',
@@ -6,10 +9,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./case-worker-profile.component.scss'],
 })
 export class CaseWorkerProfileComponent {
-  // to hide few fields in caseworker profile
-  isShowFields: boolean = false;
+  public caseWorker: any;
+  public userInfo: any;
+  @Input() public profilePic!: string;
+  caseWorkerId!: number;
+  @Input() public nickName!: string;
+  @Input() public firstName!:string;
+  @Input() public lastName!:string;
+  userGroup!: string;
 
-  constructor() {}
+  constructor(
+    private service: DataService,
+    private cacheData: ClipBoardService
+  ) {
+   this.caseWorkerId = this.cacheData.get("caseWorkerId");
+  // this.caseWorkerId=3;
+    this.service.getUserData(this.caseWorkerId).subscribe((data) => {
+      this.userInfo = data;
+      this.profilePic = this.userInfo[0]?.photo;
 
- 
+      Auth.currentAuthenticatedUser().then((user) => {
+        console.log('Authenticated User Details', user);
+        const userPayloadObject = user?.signInUserSession;
+        this.userGroup =
+          userPayloadObject.accessToken?.payload['cognito:groups']?.[0];
+        this.firstName = userPayloadObject?.idToken?.payload?.given_name;
+        this.lastName = userPayloadObject?.idToken?.payload?.family_name;
+        this.nickName = userPayloadObject?.idToken?.payload?.nickname;
+        console.log('CaseWorker firstName', this.firstName);
+        console.log('case lastName', this.lastName);
+        console.log('case nickName', this.nickName);
+      });
+    });   
+  }
 }
