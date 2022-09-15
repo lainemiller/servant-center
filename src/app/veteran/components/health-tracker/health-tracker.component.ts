@@ -151,7 +151,7 @@ export class HealthTrackerComponent implements OnInit {
       }
     }
   }
-
+ 
   getHealthTrackerByVeteranId() {
     let resp = this.service.getHealthTrackerByVeteranId(this.veteranId);
     resp.subscribe((data) => {
