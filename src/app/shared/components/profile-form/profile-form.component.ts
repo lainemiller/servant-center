@@ -104,13 +104,18 @@ export class ProfileFormComponent implements OnInit {
         }
         if (this.veteran.race === 'x') {
           this.veteran.race = '';
+        }    
+        let dateOfBirth = new Date(new Date(this.veteran.date_of_birth).toUTCString());
+        let veteranDateOfBirth =dateOfBirth.getMonth() +1 +'/' +dateOfBirth.getDate() +'/' +dateOfBirth.getFullYear();
+        if (veteranDateOfBirth === '9/15/1777') {
+          veteranDateOfBirth = '';
         }
         this.profileForm.patchValue({
           firstName: this.veteran.first_name,
           middleName: this.veteran.middle_initial,
           lastName: this.veteran.last_name,
           nickName: this.veteran.nick_name,
-          DOB: new Date(this.veteran.date_of_birth),
+          DOB: veteranDateOfBirth,
           POB: this.veteran.place_of_birth,
           SSNNumber: this.veteran.ssn,
           hmisIdNo: this.veteran.hmis_id,
