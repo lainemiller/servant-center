@@ -42,6 +42,7 @@ export class TreatmentPlanComponent implements OnInit {
 
   setForm() {
     this.service.getTreatmentData(this.vetID).subscribe((res) => {
+      console.log('TP API data->',res);
       this.data = res.data;
       this.buildForm();
       this.treatmentPlanForm.patchValue({
@@ -53,7 +54,7 @@ export class TreatmentPlanComponent implements OnInit {
         hmisIdNo: this.data.hmis_id,
         treatmentIssues: this.data.treatmentIssues
       });
-      console.log(this.treatmentPlanForm.value);
+      
     });
   }
   buildForm() {
@@ -148,7 +149,8 @@ export class TreatmentPlanComponent implements OnInit {
   }
 
   saveForm(){
-    console.log(this.treatmentPlanForm.value);
+    const treatmentData= this.treatmentPlanForm.value;
+    console.log(treatmentData);
    this.service.saveTreatmentData(this.vetID,this.treatmentPlanForm.value).subscribe((response) =>{
     if (response.responseStatus === 'SUCCESS') {
       console.log('Successfully saved TreatmentPlan details');
