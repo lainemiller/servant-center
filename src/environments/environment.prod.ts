@@ -36,6 +36,7 @@ export const environment = {
     getTreatmentPlan: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/getTreatmentPlanDetails/',
     saveTreatmentPlan: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/postTreatmentPlanDetails/save/',
     updateTreatmentPlan: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/updateTreatmentPlanDetails/save/',
+    getResidentSearchData: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/residentSearch/getAll',
   },
   localUrl:''
 };
