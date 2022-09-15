@@ -19,7 +19,7 @@ export class CalendarEventsService {
     if(this.isDev){
       return this.restcs.post(this.commonUrl+'postCalendarEvents',requestObj);
     }else{
-      return this.http.get(this.addCaseWorkerEventsAPI,requestObj);
+      return this.http.post(this.addCaseWorkerEventsAPI,requestObj);
     }
   }
   public getCalendarEvents(endPoint:number): Observable<any> {
