@@ -96,7 +96,7 @@ export class VeteranComponent implements OnInit {
 
   getLoginId(){
     if (this.isDev) {
-      this.username = 'mt_veteran';
+      this.username = 'lfg_veteran';
       this.getUserId();
     } else {
       Auth.currentAuthenticatedUser().then((user) => {
