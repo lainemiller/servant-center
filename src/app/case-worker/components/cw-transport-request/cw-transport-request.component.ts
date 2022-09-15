@@ -15,7 +15,7 @@ import {
 } from '@angular/forms';
 import { TransportService } from '../../services/transport.service';
 import { DatePipe, Location } from '@angular/common';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { Router } from "@angular/router";
 import { DataService } from '../../services/data.service';
 
@@ -23,6 +23,7 @@ import { DataService } from '../../services/data.service';
   selector: 'app-cw-transport-request',
   templateUrl: './cw-transport-request.component.html',
   styleUrls: ['./cw-transport-request.component.scss'],
+  providers: [MessageService],
 })
 export class CwTransportRequestComponent implements OnInit, OnChanges {
   @Input() requestFormObject: any;
@@ -60,6 +61,8 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
     private datePipe: DatePipe,
     private router: Router,
     private location: Location,
+    private messageService: MessageService
+
   ) {
     this.minDateValue = new Date(new Date().getTime());
     this.maxDateValue = new Date(new Date().getTime());
@@ -170,16 +173,20 @@ let obj={
 };
 	this.service.approveTransportationForm(obj).subscribe((data)=>{
    // this.newData();
-    this.refreshRequestComponent();
+    
     this.submitted = true;
 	  console.log("Form submitted");
     if (data.responseStatus === 'SUCCESS') {
-      console.log('successfully posted event to backend');
-      alert('Form successfully saved !!');
+        this.sucessMessage();
+        this.refreshRequestComponent();
+
     }else if (data.responseStatus === 'FAILURE') {
-      alert('FAILURE, Something went wrong.');
+      this.errorMessage();
+      this.refreshRequestComponent();
     }
+    
    });
+   
     console.log(this.transportRequestForm.value);
 	  this.transportRequestForm.reset();
     // }
@@ -194,12 +201,32 @@ let obj={
   //     console.log("New table",this.tableValues);
   //   });
   // }
-  refreshRequestComponent() {
-    let currentUrl = this.router.url;
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.router.onSameUrlNavigation = 'reload';
-         this.router.navigate([currentUrl]);
+  
+    sucessMessage() {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Approved sucessfully',
+      });
     }
+  
+    errorMessage() {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Something went wrong',
+      });
+    }
+
+    refreshRequestComponent() {
+      setTimeout(() => {
+        let currentUrl = this.router.url;
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+           this.router.navigate([currentUrl]);
+       }, 500);
+      
+      }
 
   reset() {
     this.buildForm();
