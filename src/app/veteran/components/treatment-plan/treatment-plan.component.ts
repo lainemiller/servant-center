@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
-
 import { VeteranDashboardService } from '../../services/veteran-dashboard.service';
 
 @Component({
   selector: 'app-treatment-plan',
   templateUrl: './treatment-plan.component.html',
   styleUrls: ['./treatment-plan.component.scss'],
+  providers: [MessageService],
 })
 export class TreatmentPlanComponent implements OnInit {
   public treatmentPlanForm!: FormGroup;
@@ -27,7 +28,8 @@ export class TreatmentPlanComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private service: VeteranDashboardService,
-    private cacheData:ClipBoardService
+    private cacheData:ClipBoardService,
+    private messageService: MessageService
   ) {
     this.vetID=this.cacheData.get("veteranId")
     this.setForm();
@@ -67,9 +69,8 @@ export class TreatmentPlanComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       recordNo: ['', Validators.required],
-      dateOfBirth1: [null, Validators.required],
-      dateOfBirth2: [null, Validators.required],
-      intakeDOB: [null, Validators.required],
+      dateOfBirth1: ['', Validators.required],
+      intakeDOB: ['', Validators.required],
       hmisIdNo: ['', Validators.required],
       veteranDiagnosis: ['', Validators.required],
       veteranSupports: ['', Validators.required],
@@ -147,16 +148,19 @@ export class TreatmentPlanComponent implements OnInit {
   }
 
   saveForm(){
+    console.log(this.treatmentPlanForm.value);
    this.service.saveTreatmentData(this.vetID,this.treatmentPlanForm.value).subscribe((response) =>{
     if (response.responseStatus === 'SUCCESS') {
       console.log('Successfully saved TreatmentPlan details');
       alert('Treatment Plan is saved successfully !!');
+      this.successMessage();
     } else if (response.responseStatus === 'FAILURE') {
-      alert('OOPS!, Something went wrong.');
+      this.errorMessage();
+      alert('oops! error');
     }
     window.location.reload();
   })
-   console.log("form submitted successfully")
+   console.log("form submitted successfully");
 }
  
   initializeIssuesFormArray() {
@@ -229,6 +233,22 @@ export class TreatmentPlanComponent implements OnInit {
 
   get getControl() {
     return this.treatmentPlanForm.controls;
+  }
+
+  successMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Treatment-Plan saved successfully!!',
+    });
+  }
+
+  errorMessage() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Treatment-Plan not saved!!',
+    });
   }
 
   resetForm() {
