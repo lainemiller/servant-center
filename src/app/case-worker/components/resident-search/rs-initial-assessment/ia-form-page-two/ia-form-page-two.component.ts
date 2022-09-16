@@ -2,6 +2,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IaPage2Service } from 'src/app/case-worker/services/ia-page2.service';
 
 @Component({
   selector: 'app-ia-form-page-two',
@@ -18,7 +19,11 @@ export class IaFormPageTwoComponent implements OnInit {
     { label: 'Need Psychiatrist Cunsultant', key: 'needPsychiatricCunsultant' },
   ];
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private service: IaPage2Service
+  ) {}
 
   ngOnInit(): void {
     this.initializeFormGroups();
@@ -75,6 +80,11 @@ export class IaFormPageTwoComponent implements OnInit {
   }
 
   onSubmit() {
+    this.service
+      .initialTreatmentGoalsPage2(this.page2Form.value)
+      .subscribe((data) => {
+        console.log('Submitted');
+      });
     this.router.navigateByUrl(
       'case-worker/resident-search/initial-assessment/page-3'
     );

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IaPage4Service } from 'src/app/case-worker/services/ia-page4.service';
+
 
 @Component({
   selector: 'app-ia-form-page-four',
@@ -36,7 +38,7 @@ export class IaFormPageFourComponent implements OnInit {
     { label: 'On Probation or Parole', key: 'onProbationOrParole' },
   ];
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router, private service: IaPage4Service) {}
 
   ngOnInit(): void {
     this.initializeFormGroups();
@@ -87,6 +89,10 @@ export class IaFormPageFourComponent implements OnInit {
   }
 
   onSubmit() {
+
+    this.service.initialTreatmentGoalsPage4(this.page4Form.value).subscribe((data) => {
+      console.log('Submitted');
+    });
     this.router.navigateByUrl(
       'case-worker/resident-search/initial-assessment/page-5'
     );
