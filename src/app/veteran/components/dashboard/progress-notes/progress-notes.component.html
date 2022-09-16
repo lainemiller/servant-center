@@ -1,3 +1,4 @@
+<p-toast position="top-center"></p-toast>
 <app-item-header [title]="title"></app-item-header>
 <div class="progress-notes--container">
   <p-toolbar id="progress-notes--mainToolbar">
@@ -13,7 +14,7 @@
                   appNoSpecialSymbols customAttr="startWithAlpha" />
                 <small class="error"
                   *ngIf="progressNoteForm.goalTitle.errors?.required && progressNoteForm.goalTitle.touched">Goal Title
-                  is required.</small>
+                  is Required.</small>
                 <small class="error" *ngIf="progressNoteForm.goalTitle.errors?.maxlength">Goal Title should be at max of
                   50 characters.</small>
               </div>
@@ -21,14 +22,14 @@
                   <p-dropdown [options]="goalTypes" formControlName="goalType" placeholder="Select a Goal Type" optionLabel="name" optionValue = "value" [showClear]="true"></p-dropdown>
                   <small class="error"
                   *ngIf="progressNoteForm.goalType.errors?.required && progressNoteForm.goalType.touched">Goal
-                  type is required.</small>
+                  type is Required.</small>
                 </div>
               <div class="p-field p-col-12 p-sm-12">
                 <textarea [rows]="6" formControlName="goalDescription" pInputTextarea placeholder="Goal Description"
                   class="inputFromUser"></textarea>
                 <small class="error"
                   *ngIf="progressNoteForm.goalDescription.errors?.required && progressNoteForm.goalDescription.touched">Goal
-                  Description is required.</small>
+                  Description is Required.</small>
                 <small class="error" *ngIf="progressNoteForm.goalDescription.errors?.maxlength">Goal Description should
                   be at max of 300 characters</small>
               </div>
@@ -47,7 +48,7 @@
             </div>
             <div class="progress-note-buttons">
               <button type="submit" pButton [disabled]="progressNote.invalid" label="Submit"
-                class="p-button-outlined"></button>
+                class="p-button-inlined"></button>
               <button type="button" (click)="cancleIt()" pButton label="Cancel"
                 class="p-button-text p-button-secondary"></button>
             </div>
