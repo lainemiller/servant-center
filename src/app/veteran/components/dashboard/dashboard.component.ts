@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
   public totalEvents: any;
   public allEvents: any = [];
   public tagName: string = 'Appointment';
+  public isShowSpinner:boolean=true;
   constructor(
     private service: CalendarServiceService,
     private cache: ClipBoardService
@@ -32,6 +33,9 @@ export class DashboardComponent implements OnInit {
     this.veteranId = this.cache.get('veteranId');
     console.log('this.veteranId',this.veteranId);
     this.service.getVeteranEvents(this.veteranId).subscribe((eventData:any)=>{
+      if(eventData){
+        this.isShowSpinner=false;
+      }
       console.log('veteran event data id',eventData);
       this.getVeteranEventData(eventData)
     })
