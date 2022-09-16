@@ -34,6 +34,7 @@ export class HealthTrackerComponent implements OnInit {
   tableBreathalyzerValues!: any[];
   tableBloodSugarValues!: any[];
   tableOtherValues!: any[];
+  isShowSpinner:boolean=true
 
   constructor(
     private formBuilder: FormBuilder,
@@ -157,6 +158,9 @@ export class HealthTrackerComponent implements OnInit {
     resp.subscribe((data) => {
       console.log('Health Tracker API--->', data);
       this.healthTrackerDetails = data;
+    //  if(this.healthTrackerDetails){
+        this.isShowSpinner=false;
+      //}
       this.showFilledForm();
       this.showHealthTrackerTable();
     });
