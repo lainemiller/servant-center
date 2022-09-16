@@ -12,6 +12,7 @@ export class AssessmentComponent implements OnInit {
   public assessDetails: any;
   public assesssmentData:any
   public vetID!: number;
+  public showAssessment: boolean = false;
   constructor(private service: AssessmentDataService,
     private cachedata: ClipBoardService) {
       this.vetID = this.cachedata.get("veteranId")
@@ -22,6 +23,7 @@ export class AssessmentComponent implements OnInit {
       this.assessDetails = data;
       console.log(this.assessDetails.assessment_details);
       this.assesssmentData=this.assessDetails.assessment_details
+      this.showAssessment = true;
     });
    
   }

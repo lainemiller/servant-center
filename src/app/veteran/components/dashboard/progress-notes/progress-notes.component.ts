@@ -4,7 +4,7 @@ import { progressNoteResponse } from 'src/app/shared/models/progressNotes_model'
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { goalTypes } from '../../../app.constants';
 import { ProgressNotesService } from 'src/app/veteran/services/progress-notes.service';
-
+import { MessageService } from 'primeng/api';
 interface DropDown {
   name: string;
   value: string;
@@ -14,6 +14,7 @@ interface DropDown {
   selector: 'app-progress-notes',
   templateUrl: './progress-notes.component.html',
   styleUrls: ['./progress-notes.component.scss'],
+  providers: [MessageService],
 })
 export class ProgressNotesComponent implements OnInit {
   public title = 'PROGRESS NOTES';
@@ -34,10 +35,12 @@ export class ProgressNotesComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private service: ProgressNotesService,
-    private cacheData: ClipBoardService
+    private cacheData: ClipBoardService,
+    private messageService: MessageService
   ) {
     this.vetID = this.cacheData.get('veteranId');
     this.goalTypes = goalTypes;
+    this.sucessMessage();
   }
 
   ngOnInit(): void {
@@ -120,10 +123,9 @@ export class ProgressNotesComponent implements OnInit {
         console.log('data data', data);
         if (data.responseStatus === 'SUCCESS') {
           console.log('successfully added new progress note');
-
-          alert('Event added new progress note !!');
+          this.sucessMessage();
         } else if (data.responseStatus === 'FAILUER') {
-          alert('FAILUER, Something went wrong.');
+          this.someError();
         }
       });
     //get data from backend
@@ -156,10 +158,9 @@ export class ProgressNotesComponent implements OnInit {
         console.log('data data', data);
         if (data.responseStatus === 'SUCCESS') {
           console.log('successfully saved the goal status');
-
-          alert('successfully saved the goal status !!');
+          this.statusMessage();
         } else if (data.responseStatus === 'FAILUER') {
-          alert('FAILUER, Something went wrong.');
+          this.someError();
         }
       });
   }
@@ -167,5 +168,30 @@ export class ProgressNotesComponent implements OnInit {
     this.display = false;
     this.initialStatus = true;
     this.progressNote.reset();
+  }
+
+  sucessMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'New Goal Added sucessfully',
+    });
+  }
+
+  statusMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Goal Status Updated Successfully',
+    });
+    
+  }
+
+  someError(){
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Failed',
+      detail: 'Something Went Wrong!',
+    });
   }
 }
