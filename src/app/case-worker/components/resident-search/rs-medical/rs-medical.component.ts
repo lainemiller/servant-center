@@ -10,9 +10,24 @@ import { HealthTrackerService } from 'src/app/veteran/services/health-tracker.se
 export class RsMedicalComponent implements OnInit {
   healthTrackerDetails: any;
   cols!: any[];
-  tableValues!:any[];
   veteranId!:number;
   isTableEmpty:boolean=false;
+  tableWeightValues!: any[];
+  tableTemperatureValues!: any[];
+  tableBloodPressureValues!: any[];
+  tableBmiValues!: any[];
+  tableDrugScreenValues!: any[];
+  tableBreathalyzerValues!: any[];
+  tableBloodSugarValues!: any[];
+  tableOtherValues!: any[];
+  showWeight: boolean = false;
+  showTemperature: boolean = false;
+  showBloodPressure: boolean = false;
+  showBmi: boolean = false;
+  showDrugScreen: boolean = false;
+  showBreathalyzer: boolean = false;
+  showBloodSugar: boolean = false;
+  showOther: boolean = false;
 
   constructor(private service: HealthTrackerService,
     private cacheData: ClipBoardService) { }
@@ -24,9 +39,9 @@ export class RsMedicalComponent implements OnInit {
     this.getHealthTrackerByVeteranId();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes)
-  }
+  // ngOnChanges(changes: SimpleChanges) {
+  //   console.log(changes)
+  // }
   showSelectedTable(){
     this.cols = [
       { field: 'note_date', header: 'Date' ,date: true,format: 'dd/MM/yyyy'},
@@ -40,40 +55,79 @@ export class RsMedicalComponent implements OnInit {
     resp.subscribe((data) => {
       console.log('Health Tracker API--->', data);
       this.healthTrackerDetails = data;
-      this.tableValues=this.healthTrackerDetails['result'];
-      if(data.result.length===0){
+      if(data.data.length===0){
         this.isTableEmpty=true;
+      }else{
+      this.showHealthTrackerTable();
       }
-      this.changeTableNameLabel();
     });
   }
 
-  changeTableNameLabel() {
-    this.tableValues = this.healthTrackerDetails['result'];
-    for (let i = 0; i < this.tableValues.length; i++) {
-      let tracking_subject = this.tableValues[i].tracking_subject;
-      if (tracking_subject === 'weight') {
-        this.tableValues[i].tracking_subject = 'Weight';
+  showHealthTrackerTable() {
+    this.tableWeightValues = this.healthTrackerDetails['data'].filter(
+      (data: any) => {
+        return data.tracking_subject.toUpperCase() === 'WEIGHT';
       }
-      if (tracking_subject === 'temperature') {
-        this.tableValues[i].tracking_subject = 'Temperature';
-      }
-      if (tracking_subject === 'blood pressure') {
-        this.tableValues[i].tracking_subject = 'Blood pressure';
-      }
-      if (tracking_subject === 'drug screen') {
-        this.tableValues[i].tracking_subject = 'Drug Screen';
-      }
-      if (tracking_subject === 'breathalyzer') {
-        this.tableValues[i].tracking_subject = 'Breathalyzer';
-      }
-      if (tracking_subject === 'blood sugar') {
-        this.tableValues[i].tracking_subject = 'Blood Sugar';
-      }
-      if (tracking_subject === 'other') {
-        this.tableValues[i].tracking_subject = 'Other';
-      }
+    );
+    if(this.tableWeightValues.length!=0){
+       this.showWeight=true;
     }
+    this.tableTemperatureValues = this.healthTrackerDetails['data'].filter(
+      (data: any) => {
+        return data.tracking_subject.toUpperCase() === 'TEMPERATURE';
+      }
+    );
+    if(this.tableTemperatureValues.length!=0){
+      this.showTemperature=true;
+   }
+    this.tableBloodPressureValues = this.healthTrackerDetails['data'].filter(
+      (data: any) => {
+        return data.tracking_subject.toUpperCase() === 'BLOOD PRESSURE';
+      }
+    );
+    if(this.tableBloodPressureValues.length!=0){
+      this.showBloodPressure=true;
+   }
+    this.tableDrugScreenValues = this.healthTrackerDetails['data'].filter(
+      (data: any) => {
+        return data.tracking_subject.toUpperCase() === 'DRUG SCREEN';
+      }
+    );
+    if(this.tableDrugScreenValues.length!=0){
+      this.showDrugScreen=true;
+   }
+    this.tableBreathalyzerValues = this.healthTrackerDetails['data'].filter(
+      (data: any) => {
+        return data.tracking_subject.toUpperCase() === 'BREATHALYZER';
+      }
+    );
+    if(this.tableBreathalyzerValues.length!=0){
+      this.showBreathalyzer=true;
+   }
+    this.tableBloodSugarValues = this.healthTrackerDetails['data'].filter(
+      (data: any) => {
+        return data.tracking_subject.toUpperCase() === 'BLOOD SUGAR';
+      }
+    );
+    if(this.tableBloodSugarValues.length!=0){
+      this.showBloodSugar=true;
+   }
+    this.tableBmiValues = this.healthTrackerDetails['data'].filter(
+      (data: any) => {
+        return data.tracking_subject.toUpperCase() === 'BMI';
+      }
+    );
+    if(this.tableBmiValues.length!=0){
+      this.showBmi=true;
+   }
+    this.tableOtherValues = this.healthTrackerDetails['data'].filter(
+      (data: any) => {
+        return data.tracking_subject.toUpperCase() === 'OTHER';
+      }
+    );
+    if(this.tableOtherValues.length!=0){
+      this.showOther=true;
+   }
   }
 
 }

@@ -17,11 +17,35 @@ export class VeteranDashboardService {
   private addUserAPI=environment.serviceUrl.addUser;
   private addVeteranAPI=environment.serviceUrl.addVeteran;
   private addCaseWorkerAPI=environment.serviceUrl.addCaseWorker;
-
-  getTreatmentData() {
-    return this.http.get<any>('./assets/mock/treatmentPlan-data.json');
+  private getTreatmentPlanAPI=environment.serviceUrl.getTreatmentPlan;
+  private saveTreatmentPlanAPI=environment.serviceUrl.saveTreatmentPlan;
+  //getTreatmentPlanData
+  getTreatmentData(vetID:number) {
+    if(this.isDev){
+    return this.restcs.get<any>(this.commonUrl+'getTreatmentPlanDetails/'+ vetID);
+    } else {
+      return this.restcs.get(this.getTreatmentPlanAPI+vetID);
+    }
   }
-  
+
+  //saving TreatmentplanData after summary
+  saveTreatmentData(vetID:number,data:any): Observable<any>{
+    if(this.isDev){
+    return this.restcs.post(this.commonUrl+'postTreatmentPlanDetails/save/'+ vetID,data); 
+  } else{
+    return this.restcs.post(this.saveTreatmentPlanAPI+vetID,data);
+  }
+  }
+
+  public getName(payload = {}): Observable<any> {
+    if (this.isDev) {
+      return this.restcs.get('./assets/mock/userData.json');
+    } else {
+      return this.http.get(
+        'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/uiLayout/getUserDetails/4'
+      );
+    }  
+  } 
   // getName() {
   //   return this.http.get(
   //     'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/uiLayout/getUserDetails/4'

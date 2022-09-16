@@ -1,3 +1,7 @@
+<p-toast position="top-center"></p-toast>
+<div class="center-spinner">
+  <p-progressSpinner *ngIf="isShowSpinner" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+</div>
 <div class="p-grid">
   <div class="p-col-12">
     <app-item-header title="HEALTH TRACKER"></app-item-header>
@@ -97,7 +101,11 @@
                   [inline]="false"
                   [showIcon]="true"
                   placeholder="Date (mm/dd/yyyy)"
+                  dataType="string"
                 ></p-calendar>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('weight.date')?.errors?.required && healthTrackerForm.get('weight.date')?.touched">Date
+                is required.</small>
               </div>
             </div>
 
@@ -109,6 +117,9 @@
                   formControlName="measurement"
                   placeholder="Measurement"
                 />
+                <small class="error"
+                *ngIf="healthTrackerForm.get('weight.measurement')?.errors?.required && healthTrackerForm.get('weight.measurement')?.touched">Measurement
+is required.</small>
               </div>
             </div>
 
@@ -120,6 +131,9 @@
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('weight.comments')?.errors?.required && healthTrackerForm.get('weight.comments')?.touched">Comments
+                is required.</small>
               </div>
             </div>
           </div>
@@ -146,7 +160,11 @@
                   [inline]="false"
                   [showIcon]="true"
                   placeholder="Date (mm/dd/yyyy)"
+                  dataType="string"
                 ></p-calendar>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('temperature.date')?.errors?.required && healthTrackerForm.get('temperature.date')?.touched">Date
+                is required.</small>
               </div>
             </div>
 
@@ -158,6 +176,9 @@
                   formControlName="measurement"
                   placeholder="Measurement"
                 />
+                <small class="error"
+                *ngIf="healthTrackerForm.get('temperature.measurement')?.errors?.required && healthTrackerForm.get('temperature.measurement')?.touched">Measurement
+                is required.</small>
               </div>
             </div>
 
@@ -169,6 +190,9 @@
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('temperature.comments')?.errors?.required && healthTrackerForm.get('temperature.comments')?.touched">Comments
+                is required.</small>
               </div>
             </div>
           </div>
@@ -195,7 +219,11 @@
                   [inline]="false"
                   [showIcon]="true"
                   placeholder="Date (mm/dd/yyyy)"
+                  dataType="string"
                 ></p-calendar>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('bloodPressure.date')?.errors?.required && healthTrackerForm.get('bloodPressure.date')?.touched">Date
+                is required.</small>
               </div>
             </div>
 
@@ -207,6 +235,9 @@
                   formControlName="measurement"
                   placeholder="Measurement"
                 />
+                <small class="error"
+                *ngIf="healthTrackerForm.get('bloodPressure.measurement')?.errors?.required && healthTrackerForm.get('bloodPressure.measurement')?.touched">Measurement
+                is required.</small>
               </div>
             </div>
 
@@ -218,6 +249,9 @@
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('bloodPressure.comments')?.errors?.required && healthTrackerForm.get('bloodPressure.comments')?.touched">Comments
+                is required.</small>
               </div>
             </div>
           </div>
@@ -240,7 +274,11 @@
                   [inline]="false"
                   [showIcon]="true"
                   placeholder="Date (mm/dd/yyyy)"
+                  dataType="string"
                 ></p-calendar>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('BMI.date')?.errors?.required && healthTrackerForm.get('BMI.date')?.touched">Date
+                is required.</small>
               </div>
             </div>
 
@@ -252,6 +290,9 @@
                   formControlName="measurement"
                   placeholder="Measurement"
                 />
+                <small class="error"
+                *ngIf="healthTrackerForm.get('BMI.measurement')?.errors?.required && healthTrackerForm.get('BMI.measurement')?.touched">Measurement
+                is required.</small>
               </div>
             </div>
 
@@ -263,6 +304,9 @@
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('BMI.comments')?.errors?.required && healthTrackerForm.get('BMI.comments')?.touched">Comments
+                is required.</small>
               </div>
             </div>
           </div>
@@ -289,7 +333,11 @@
                   [inline]="false"
                   [showIcon]="true"
                   placeholder="Date (mm/dd/yyyy)"
-                ></p-calendar>
+                  dataType="string"
+                ></p-calendar>y
+                <small class="error"
+                *ngIf="healthTrackerForm.get('drugScreen.date')?.errors?.required && healthTrackerForm.get('drugScreen.date')?.touched">Date
+                is required.</small>
               </div>
             </div>
 
@@ -301,6 +349,9 @@
                   formControlName="measurement"
                   placeholder="Measurement"
                 />
+                <small class="error"
+                *ngIf="healthTrackerForm.get('drugScreen.measurement')?.errors?.required && healthTrackerForm.get('drugScreen.measurement')?.touched">Measurement
+                is required.</small>
               </div>
             </div>
 
@@ -312,6 +363,9 @@
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('drugScreen.comments')?.errors?.required && healthTrackerForm.get('drugScreen.comments')?.touched">Comments
+                is required.</small>
               </div>
             </div>
           </div>
@@ -338,7 +392,11 @@
                   [inline]="false"
                   [showIcon]="true"
                   placeholder="Date (mm/dd/yyyy)"
+                  dataType="string"
                 ></p-calendar>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('breathalyzer.date')?.errors?.required && healthTrackerForm.get('breathalyzer.date')?.touched">Date
+                is required.</small>
               </div>
             </div>
 
@@ -350,6 +408,9 @@
                   formControlName="measurement"
                   placeholder="Measurement"
                 />
+                <small class="error"
+                *ngIf="healthTrackerForm.get('breathalyzer.measurement')?.errors?.required && healthTrackerForm.get('breathalyzer.measurement')?.touched">Measurement
+                is required.</small>
               </div>
             </div>
 
@@ -361,6 +422,9 @@
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('breathalyzer.comments')?.errors?.required && healthTrackerForm.get('breathalyzer.comments')?.touched">Comments
+                is required.</small>
               </div>
             </div>
           </div>
@@ -387,7 +451,11 @@
                   [inline]="false"
                   [showIcon]="true"
                   placeholder="Date (mm/dd/yyyy)"
+                  dataType="string"
                 ></p-calendar>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('bloodSugar.date')?.errors?.required && healthTrackerForm.get('bloodSugar.date')?.touched">Date
+                is required.</small>
               </div>
             </div>
 
@@ -399,6 +467,9 @@
                   formControlName="measurement"
                   placeholder="Measurement"
                 />
+                <small class="error"
+                *ngIf="healthTrackerForm.get('bloodSugar.measurement')?.errors?.required && healthTrackerForm.get('bloodSugar.measurement')?.touched">Measurement
+                is required.</small>
               </div>
             </div>
 
@@ -410,6 +481,9 @@
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('bloodSugar.comments')?.errors?.required && healthTrackerForm.get('bloodSugar.comments')?.touched">Comments
+                is required.</small>
               </div>
             </div>
           </div>
@@ -432,7 +506,11 @@
                   [inline]="false"
                   [showIcon]="true"
                   placeholder="Date (mm/dd/yyyy)"
+                  dataType="string"
                 ></p-calendar>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('other.date')?.errors?.required && healthTrackerForm.get('other.date')?.touched">Date
+                is required.</small>
               </div>
             </div>
 
@@ -444,6 +522,9 @@
                   formControlName="measurement"
                   placeholder="Measurement"
                 />
+                <small class="error"
+                *ngIf="healthTrackerForm.get('other.measurement')?.errors?.required && healthTrackerForm.get('other.measurement')?.touched">Measurement
+                is required.</small>
               </div>
             </div>
 
@@ -455,6 +536,9 @@
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('other.comments')?.errors?.required && healthTrackerForm.get('other.comments')?.touched">Comments
+                is required.</small>
               </div>
             </div>
           </div>
@@ -480,17 +564,18 @@
       <br>
       <br>
       <!-- table start -->
-      <div *ngFor="let tableName of tableValues">
+      <!-- Weight Table -->
+      <div *ngIf="showWeight" class="weight-table">
       <div class="p-fluid p-formgrid p-grid">
         <div class="p-field p-col-12 ">
           <div class="title-container" style="background: #971f1f">
             <p>
-              <span>{{tableName.tracking_subject}}</span>
+              <span>Weight</span>
             </p>
           </div>
         </div>
       </div>
-      <p-table [columns]="cols" [value]="tableValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+      <p-table [columns]="cols" [value]="tableWeightValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th *ngFor="let col of columns">
@@ -508,6 +593,209 @@
     </p-table>
     <br>
   </div>
+  <!-- Temperature Table -->
+  <div *ngIf="showTemperature" class="temperature-table">
+    <div class="p-fluid p-formgrid p-grid">
+      <div class="p-field p-col-12 ">
+        <div class="title-container" style="background: #971f1f">
+          <p>
+            <span>Temperature</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <p-table [columns]="cols" [value]="tableTemperatureValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+      <ng-template pTemplate="header" let-columns>
+          <tr>
+              <th *ngFor="let col of columns">
+                  {{col.header}}
+              </th>
+          </tr>
+        </ng-template>
+        <ng-template  pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+              <td *ngFor="let col of columns">
+                  {{col.date ? (rowData[col.field]| date : col.format) : rowData[col.field]}}
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
+  <br>
+</div>
+<!-- Blood Pressure Table -->
+<div *ngIf="showBloodPressure" class="blood-pressure-table">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 ">
+      <div class="title-container" style="background: #971f1f">
+        <p>
+          <span>Blood Pressure</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <p-table [columns]="cols" [value]="tableBloodPressureValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+      </ng-template>
+      <ng-template  pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                {{col.date ? (rowData[col.field]| date : col.format) : rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>
+</div>
+<!-- Drug Screen Table -->
+<div *ngIf="showDrugScreen" class="drug-screen-table">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 ">
+      <div class="title-container" style="background: #971f1f">
+        <p>
+          <span>Drug Screen</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <p-table [columns]="cols" [value]="tableDrugScreenValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+      </ng-template>
+      <ng-template  pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                {{col.date ? (rowData[col.field]| date : col.format) : rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>
+</div>
+<!-- Breathalyzer Table -->
+<div *ngIf="showBreathalyzer" class="breathalyzer-table">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 ">
+      <div class="title-container" style="background: #971f1f">
+        <p>
+          <span>Breathalyzer</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <p-table [columns]="cols" [value]="tableBreathalyzerValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+      </ng-template>
+      <ng-template  pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                {{col.date ? (rowData[col.field]| date : col.format) : rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>
+</div>
+<!-- Blood Sugar Table -->
+<div *ngIf="showBloodSugar" class="blood-sugar-table">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 ">
+      <div class="title-container" style="background: #971f1f">
+        <p>
+          <span>Blood Sugar</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <p-table [columns]="cols" [value]="tableBloodSugarValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+      </ng-template>
+      <ng-template  pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                {{col.date ? (rowData[col.field]| date : col.format) : rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>
+</div>
+<!-- BMI Table -->
+<div *ngIf="showBmi" class="bmi-table">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 ">
+      <div class="title-container" style="background: #971f1f">
+        <p>
+          <span>BMI</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <p-table [columns]="cols" [value]="tableBmiValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+      </ng-template>
+      <ng-template  pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                {{col.date ? (rowData[col.field]| date : col.format) : rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>
+</div>
+<!-- Other Table -->
+<div *ngIf="showOther" class="other-table">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 ">
+      <div class="title-container" style="background: #971f1f">
+        <p>
+          <span>Other</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <p-table [columns]="cols" [value]="tableOtherValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+      </ng-template>
+      <ng-template  pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                {{col.date ? (rowData[col.field]| date : col.format) : rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>
+</div>
       <!-- table end -->
     </div>
   </div>

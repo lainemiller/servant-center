@@ -74,18 +74,8 @@
             appNoSpecialSymbols
             customAttr="textOnly"
             formControlName="firstName"
+            class="form-container__disable"
           />
-          <div
-            *ngIf="getControl.firstName.touched && getControl.firstName.invalid"
-            class="text-danger"
-          >
-            <small
-              class="form-container__sec-errmsg"
-              *ngIf="getControl.firstName.errors?.required"
-            >
-              First name is required.
-            </small>
-          </div>
         </div>
 
         <div class="p-field p-col-12 p-md-4">
@@ -126,18 +116,8 @@
             customAttr="textOnly"
             maxlength="30"
             formControlName="lastName"
+            class="form-container__disable"
           />
-          <div
-            *ngIf="getControl.lastName.touched && getControl.lastName.invalid"
-            class="text-danger"
-          >
-            <small
-              class="form-container__sec-errmsg"
-              *ngIf="getControl.lastName.errors?.required"
-            >
-              Last name is required.
-            </small>
-          </div>
         </div>
       </div>
 
@@ -152,18 +132,8 @@
             type="text"
             pInputText
             formControlName="nickName"
+            class="form-container__disable"
           />
-          <div
-            *ngIf="getControl.nickName.touched && getControl.nickName.invalid"
-            class="text-danger"
-          >
-            <small
-              class="form-container__sec-errmsg"
-              *ngIf="getControl.nickName.errors?.required"
-            >
-              Nick name is required.
-            </small>
-          </div>
         </div>
         <div class="p-field p-col-12 p-md-4">
           <label class="label-title">Date of Birth</label>
@@ -172,6 +142,7 @@
             [maxDate]="maxDateValue"
             [inline]="false"
             [showIcon]="true"
+            dataType="string"
           >
           </p-calendar>
           <div

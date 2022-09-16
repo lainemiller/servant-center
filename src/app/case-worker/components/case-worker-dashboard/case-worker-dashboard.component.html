@@ -1,3 +1,7 @@
+<p-toast position="top-center"></p-toast>
+<div class="center-spinner">
+  <p-progressSpinner *ngIf="isShowSpinner" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+</div>
 <main class="p-grid">
   <div class="p-col-12 mb-30">
     <app-item-header title="CALENDAR" color="blue"></app-item-header>
@@ -27,7 +31,8 @@
             [draggable]="false"
             [modal]="true"
             (onHide)="crossButton()"
-            [style]="{ width: '500px',height:'600px' }"
+            [contentStyle]="{'overflow': 'visible'}"
+            [style]="{ width: '500px',height:'600px','overflow-y':'scroll' }"
           >
             <form [formGroup]="eventsForm" (ngSubmit)="onSubmit()" >
               <div class="p-fluid">

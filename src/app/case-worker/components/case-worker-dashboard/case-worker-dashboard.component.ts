@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { CalendarOptions } from '@fullcalendar/angular';
+import { MessageService } from 'primeng/api';
 import { CalendarResp } from 'src/app/shared/models/calendarEventsResponse';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { CalendarEventsService } from '../../services/calendar-events.service';
@@ -10,6 +11,7 @@ import { CalendarEventsService } from '../../services/calendar-events.service';
   selector: 'app-case-worker-dashboard',
   templateUrl: './case-worker-dashboard.component.html',
   styleUrls: ['./case-worker-dashboard.component.scss'],
+  providers: [MessageService],
 })
 export class CaseWorkerDashboardComponent implements OnInit {
   public items: any;
@@ -27,10 +29,12 @@ export class CaseWorkerDashboardComponent implements OnInit {
   public isAppointment: boolean = true;
   public caseWorkerId: any;
   public CurrentYear: any;
+  public isShowSpinner: boolean = true;
   constructor(
     private service: CalendarEventsService,
     private formBuilder: FormBuilder,
-    private cache: ClipBoardService
+    private cache: ClipBoardService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +51,9 @@ export class CaseWorkerDashboardComponent implements OnInit {
       .getCalendarEvents(this.caseWorkerId)
       .subscribe((data: CalendarResp) => {
         this.totalEvents = data;
+        if(this.totalEvents){
+          this.isShowSpinner=false;
+        }
         console.log(this.totalEvents);
         this.getCaseWorkerEventData(data);
       });
@@ -159,9 +166,9 @@ export class CaseWorkerDashboardComponent implements OnInit {
         });
       if (response.responseStatus === 'SUCCESS') {
         console.log('successfully posted event to backend');
-        alert('Event successfully saved !!');
+        this.sucessMessage();
       } else if (response.responseStatus === 'FAILUER') {
-        alert('FAILUER, Something went wrong.');
+        this.failuerMessage();
       }
     });
     this.eventsForm.reset();
@@ -199,10 +206,10 @@ export class CaseWorkerDashboardComponent implements OnInit {
   showEventDetail(arg: any) {
     this.displayEvent = true;
     console.log('arg', arg);
-    if(arg.event._def.extendedProps.isappointment){
-      this.tagName='Appointment';
-    }else{
-      this.tagName='Appointment';
+    if (arg.event._def.extendedProps.isappointment) {
+      this.tagName = 'Appointment';
+    } else {
+      this.tagName = 'Event';
     }
     this.eventInfo = [
       this.tagName,
@@ -212,5 +219,21 @@ export class CaseWorkerDashboardComponent implements OnInit {
       arg.event.start,
       arg.event._def.extendedProps.description,
     ];
+  }
+
+  sucessMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: this.tagName + ' saved successfully !!',
+    });
+  }
+
+  failuerMessage() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Something went wrong !!',
+    });
   }
 }

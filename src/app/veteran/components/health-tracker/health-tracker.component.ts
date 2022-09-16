@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { HealthTrackerService } from '../../services/health-tracker.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-health-tracker',
   templateUrl: './health-tracker.component.html',
   styleUrls: ['./health-tracker.component.scss'],
+  providers: [MessageService],
 })
 export class HealthTrackerComponent implements OnInit {
   showWeight: boolean = false;
@@ -32,11 +34,13 @@ export class HealthTrackerComponent implements OnInit {
   tableBreathalyzerValues!: any[];
   tableBloodSugarValues!: any[];
   tableOtherValues!: any[];
+  isShowSpinner:boolean=true
 
   constructor(
     private formBuilder: FormBuilder,
     private service: HealthTrackerService,
-    private cacheData: ClipBoardService
+    private cacheData: ClipBoardService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -47,153 +51,161 @@ export class HealthTrackerComponent implements OnInit {
   }
 
   showFilledForm() {
-    for (let i = 0; i < this.healthTrackerDetails['result'].length; i++) {
-      var trackingSubject =
-        this.healthTrackerDetails['result'][i]['tracking_subject'];
-      console.log('check tracking subject', trackingSubject);
-
-      var trackingDetails = this.healthTrackerDetails['result'][i];
+    let currentHealthTrackerDetails = this.healthTrackerDetails['data'].filter(
+      (data: any) => {
+        return data.current_tracker === true;
+      }
+    );
+    for (let i = 0; i < currentHealthTrackerDetails.length; i++) {
+      var trackingSubject = currentHealthTrackerDetails[i]['tracking_subject'];
+      var trackingDetails = currentHealthTrackerDetails[i];
+      let trackerDate = new Date(
+        new Date(trackingDetails.note_date).toUTCString()
+      );
+      let healthTrackerDate =
+        trackerDate.getMonth() +
+        1 +
+        '/' +
+        trackerDate.getDate() +
+        '/' +
+        trackerDate.getFullYear();
+      console.log('tracker date', healthTrackerDate);
       if (trackingSubject === 'weight') {
         this.showWeight = true;
         this.healthTrackerForm.controls['weight'].patchValue({
-          date: new Date(trackingDetails.note_date),
+          date: healthTrackerDate,
           measurement: trackingDetails.measurement,
           comments: trackingDetails.tracking_comments,
+          currentTracker: trackingDetails.current_tracker,
+          isUpdate: trackingDetails.current_tracker,
         });
       }
       if (trackingSubject === 'temperature') {
         this.showTemperature = true;
         this.healthTrackerForm.controls['temperature'].patchValue({
-          date: new Date(trackingDetails.note_date),
+          date: healthTrackerDate,
           measurement: trackingDetails.measurement,
           comments: trackingDetails.tracking_comments,
+          currentTracker: trackingDetails.current_tracker,
+          isUpdate: trackingDetails.current_tracker,
         });
       }
       if (trackingSubject === 'blood pressure') {
         this.showBloodPressure = true;
         this.healthTrackerForm.controls['bloodPressure'].patchValue({
-          date: new Date(trackingDetails.note_date),
+          date: healthTrackerDate,
           measurement: trackingDetails.measurement,
           comments: trackingDetails.tracking_comments,
+          currentTracker: trackingDetails.current_tracker,
+          isUpdate: trackingDetails.current_tracker,
         });
       }
       if (trackingSubject === 'BMI') {
         this.showBmi = true;
         this.healthTrackerForm.controls['BMI'].patchValue({
-          date: new Date(trackingDetails.note_date),
+          date: healthTrackerDate,
           measurement: trackingDetails.measurement,
           comments: trackingDetails.tracking_comments,
+          currentTracker: trackingDetails.current_tracker,
+          isUpdate: trackingDetails.current_tracker,
         });
       }
       if (trackingSubject === 'drug screen') {
         this.showDrugScreen = true;
         this.healthTrackerForm.controls['drugScreen'].patchValue({
-          date: new Date(trackingDetails.note_date),
+          date: healthTrackerDate,
           measurement: trackingDetails.measurement,
           comments: trackingDetails.tracking_comments,
+          currentTracker: trackingDetails.current_tracker,
+          isUpdate: trackingDetails.current_tracker,
         });
       }
       if (trackingSubject === 'breathalyzer') {
         this.showBreathalyzer = true;
         this.healthTrackerForm.controls['breathalyzer'].patchValue({
-          date: new Date(trackingDetails.note_date),
+          date: healthTrackerDate,
           measurement: trackingDetails.measurement,
           comments: trackingDetails.tracking_comments,
+          currentTracker: trackingDetails.current_tracker,
+          isUpdate: trackingDetails.current_tracker,
         });
       }
       if (trackingSubject === 'blood sugar') {
         this.showBloodSugar = true;
         this.healthTrackerForm.controls['bloodSugar'].patchValue({
-          date: new Date(trackingDetails.note_date),
+          date: healthTrackerDate,
           measurement: trackingDetails.measurement,
           comments: trackingDetails.tracking_comments,
+          currentTracker: trackingDetails.current_tracker,
+          isUpdate: trackingDetails.current_tracker,
         });
       }
       if (trackingSubject === 'other') {
         this.showOther = true;
         this.healthTrackerForm.controls['other'].patchValue({
-          date: new Date(trackingDetails.note_date),
+          date: healthTrackerDate,
           measurement: trackingDetails.measurement,
           comments: trackingDetails.tracking_comments,
+          currentTracker: trackingDetails.current_tracker,
+          isUpdate: trackingDetails.current_tracker,
         });
       }
     }
   }
-
+ 
   getHealthTrackerByVeteranId() {
     let resp = this.service.getHealthTrackerByVeteranId(this.veteranId);
     resp.subscribe((data) => {
       console.log('Health Tracker API--->', data);
       this.healthTrackerDetails = data;
-      if (!this.isFormFilled) {
-        this.showFilledForm();
-        this.isFormFilled = true;
-      }
-      this.changeTableNameLabel();
+        this.isShowSpinner=false;
+      this.showFilledForm();
+      this.showHealthTrackerTable();
     });
   }
 
-  changeTableNameLabel() {
-    this.tableValues = this.healthTrackerDetails['result'];
-    console.log("Table name values",this.tableValues);
-    var newArray = this.healthTrackerDetails['result'].filter((data:any)=>{
-     return data.tracking_subject.toUpperCase() ==='WEIGHT';
-    }
+  showHealthTrackerTable() {
+    this.tableValues = this.healthTrackerDetails;
+    this.tableWeightValues = this.healthTrackerDetails['data'].filter(
+      (data: any) => {
+        return data.tracking_subject.toUpperCase() === 'WEIGHT';
+      }
     );
-    var newArray = this.healthTrackerDetails['result'].filter((data:any)=>{
-      return data.tracking_subject.toUpperCase() ==='TEMPERATUR';
-     }
-     );
-     var newArray = this.healthTrackerDetails['result'].filter((data:any)=>{
-      return data.tracking_subject.toUpperCase() ==='BLOOD PRESSURE';
-     }
-     );
-     var newArray = this.healthTrackerDetails['result'].filter((data:any)=>{
-      return data.tracking_subject.toUpperCase() ==='DRUG SCREEN';
-     }
-     );
-     var newArray = this.healthTrackerDetails['result'].filter((data:any)=>{
-      return data.tracking_subject.toUpperCase() ==='BREATHALYZER';
-     }
-     );
-     var newArray = this.healthTrackerDetails['result'].filter((data:any)=>{
-      return data.tracking_subject.toUpperCase() ==='BLOOD SUGAR';
-     }
-     );
-     var newArray = this.healthTrackerDetails['result'].filter((data:any)=>{
-      return data.tracking_subject.toUpperCase() ==='BMI';
-     }
-     );
-     var newArray = this.healthTrackerDetails['result'].filter((data:any)=>{
-      return data.tracking_subject.toUpperCase() ==='OTHER';
-     }
-     );
-console.log("BMI filter",newArray);
-    
-    for (let i = 0; i < this.tableValues.length; i++) {
-      let tracking_subject = this.tableValues[i].tracking_subject;
-      if (tracking_subject === 'weight') {
-        this.tableValues[i].tracking_subject = 'Weight';
+    this.tableTemperatureValues = this.healthTrackerDetails['data'].filter(
+      (data: any) => {
+        return data.tracking_subject.toUpperCase() === 'TEMPERATURE';
       }
-      if (tracking_subject === 'temperature') {
-        this.tableValues[i].tracking_subject = 'Temperature';
+    );
+    this.tableBloodPressureValues = this.healthTrackerDetails['data'].filter(
+      (data: any) => {
+        return data.tracking_subject.toUpperCase() === 'BLOOD PRESSURE';
       }
-      if (tracking_subject === 'blood pressure') {
-        this.tableValues[i].tracking_subject = 'Blood pressure';
+    );
+    this.tableDrugScreenValues = this.healthTrackerDetails['data'].filter(
+      (data: any) => {
+        return data.tracking_subject.toUpperCase() === 'DRUG SCREEN';
       }
-      if (tracking_subject === 'drug screen') {
-        this.tableValues[i].tracking_subject = 'Drug Screen';
+    );
+    this.tableBreathalyzerValues = this.healthTrackerDetails['data'].filter(
+      (data: any) => {
+        return data.tracking_subject.toUpperCase() === 'BREATHALYZER';
       }
-      if (tracking_subject === 'breathalyzer') {
-        this.tableValues[i].tracking_subject = 'Breathalyzer';
+    );
+    this.tableBloodSugarValues = this.healthTrackerDetails['data'].filter(
+      (data: any) => {
+        return data.tracking_subject.toUpperCase() === 'BLOOD SUGAR';
       }
-      if (tracking_subject === 'blood sugar') {
-        this.tableValues[i].tracking_subject = 'Blood Sugar';
+    );
+    this.tableBmiValues = this.healthTrackerDetails['data'].filter(
+      (data: any) => {
+        return data.tracking_subject.toUpperCase() === 'BMI';
       }
-      if (tracking_subject === 'other') {
-        this.tableValues[i].tracking_subject = 'Other';
+    );
+    this.tableOtherValues = this.healthTrackerDetails['data'].filter(
+      (data: any) => {
+        return data.tracking_subject.toUpperCase() === 'OTHER';
       }
-    }
+    );
   }
 
   buildForm() {
@@ -204,6 +216,7 @@ console.log("BMI filter",newArray);
         measurement: ['', Validators.required],
         comments: ['', Validators.required],
         isUpdate: [false],
+        currentTracker: [true],
       }),
       temperature: this.formBuilder.group({
         trackingSubject: ['temperature'],
@@ -211,6 +224,7 @@ console.log("BMI filter",newArray);
         measurement: ['', Validators.required],
         comments: ['', Validators.required],
         isUpdate: [false],
+        currentTracker: [true],
       }),
       bloodPressure: this.formBuilder.group({
         trackingSubject: ['blood pressure'],
@@ -218,6 +232,7 @@ console.log("BMI filter",newArray);
         measurement: ['', Validators.required],
         comments: ['', Validators.required],
         isUpdate: [false],
+        currentTracker: [true],
       }),
       BMI: this.formBuilder.group({
         trackingSubject: ['BMI'],
@@ -225,6 +240,7 @@ console.log("BMI filter",newArray);
         measurement: ['', Validators.required],
         comments: ['', Validators.required],
         isUpdate: [false],
+        currentTracker: [true],
       }),
       drugScreen: this.formBuilder.group({
         trackingSubject: ['drug screen'],
@@ -232,6 +248,7 @@ console.log("BMI filter",newArray);
         measurement: ['', Validators.required],
         comments: ['', Validators.required],
         isUpdate: [false],
+        currentTracker: [true],
       }),
       breathalyzer: this.formBuilder.group({
         trackingSubject: ['breathalyzer'],
@@ -239,6 +256,7 @@ console.log("BMI filter",newArray);
         measurement: ['', Validators.required],
         comments: ['', Validators.required],
         isUpdate: [false],
+        currentTracker: [true],
       }),
       bloodSugar: this.formBuilder.group({
         trackingSubject: ['blood sugar'],
@@ -246,6 +264,7 @@ console.log("BMI filter",newArray);
         measurement: ['', Validators.required],
         comments: ['', Validators.required],
         isUpdate: [false],
+        currentTracker: [true],
       }),
       other: this.formBuilder.group({
         trackingSubject: ['other'],
@@ -253,6 +272,7 @@ console.log("BMI filter",newArray);
         measurement: ['', Validators.required],
         comments: ['', Validators.required],
         isUpdate: [false],
+        currentTracker: [true],
       }),
     });
   }
@@ -283,38 +303,142 @@ console.log("BMI filter",newArray);
     if (!this.showOther) {
       delete this.healthTrackerFormDetails['other'];
     }
-    this.checkUpdateDetails();
-    this.service
-      .addHealthTrackerByVeteranID(
-        this.veteranId,
-        this.healthTrackerFormDetails
-      )
-      .subscribe((response: any) => {
-        console.log(response);
-        if (response.status) {
-          setTimeout(() => {
-            this.getHealthTrackerByVeteranId();
-          }, 800);
-        }
-      });
+    this.checkNewTracker();
   }
 
-  checkUpdateDetails() {
-    for (let i = 0; i < this.healthTrackerDetails['result'].length; i++) {
-      var trackingSubject =
-        this.healthTrackerDetails['result'][i]['tracking_subject'];
-      if (trackingSubject == 'blood pressure') {
-        trackingSubject = 'bloodPressure';
+  async checkNewTracker() {
+    let healthTrackerValue: any[] = [];
+    let updateHealthTrackerValue: any[] = [];
+    console.log('initial value form', healthTrackerValue);
+    let formValue: any[] = Object.values(this.healthTrackerFormDetails);
+    var currentValue = this.healthTrackerDetails['data'].filter((data: any) => {
+      return data.current_tracker === true;
+    });
+    var newHealthTracker = formValue.filter((data: any) => {
+      return data.isUpdate === false;
+    });
+    for (let i = 0; i < newHealthTracker.length; i++) {
+      healthTrackerValue.push(newHealthTracker[i]);
+    }
+    console.log('new Tracker Form', newHealthTracker);
+    console.log('Form value', formValue);
+    console.log('current value', currentValue);
+    for (let i = 0; i < formValue.length; i++) {
+      for (let j = 0; j < currentValue.length; j++) {
+        if (formValue[i].trackingSubject === currentValue[j].tracking_subject) {
+          var formValueDate = new Date(formValue[i].date);
+          var formDate =
+            formValueDate.getUTCDate() +
+            '/' +
+            formValueDate.getUTCMonth() +
+            '/' +
+            formValueDate.getUTCFullYear();
+          var currentValueDate = new Date(currentValue[j].note_date);
+          var currentDate =
+            currentValueDate.getUTCDate() +
+            '/' +
+            currentValueDate.getUTCMonth() +
+            '/' +
+            currentValueDate.getUTCFullYear();
+          if (
+            formDate === currentDate &&
+            formValue[i].measurement !== currentValue[j].measurement
+          ) {
+            console.log('changed form', formValue[i]);
+            let oldTrackerValue = currentValue.filter((data: any) => {
+              let trackerDate = new Date(
+                new Date(data.note_date).toUTCString()
+              );
+              data.note_date =
+                trackerDate.getMonth() +
+                1 +
+                '/' +
+                trackerDate.getDate() +
+                '/' +
+                trackerDate.getFullYear();
+              return data.tracking_subject === formValue[i].trackingSubject;
+            });
+            updateHealthTrackerValue.push(oldTrackerValue);
+            console.log('old', oldTrackerValue);
+            healthTrackerValue.push(formValue[i]);
+            console.log('new', formValue[i]);
+          }
+          if (formDate != currentDate) {
+            console.log('date changed form', formValue[i]);
+            let oldTrackerValue = currentValue.filter((data: any) => {
+              let trackerDate = new Date(
+                new Date(data.note_date).toUTCString()
+              );
+              data.note_date =
+                trackerDate.getMonth() +
+                1 +
+                '/' +
+                trackerDate.getDate() +
+                '/' +
+                trackerDate.getFullYear();
+              return data.tracking_subject === formValue[i].trackingSubject;
+            });
+            updateHealthTrackerValue.push(oldTrackerValue);
+            console.log('date old', oldTrackerValue);
+            healthTrackerValue.push(formValue[i]);
+            console.log('date new', formValue[i]);
+          }
+          if (formValue[i].comments != currentValue[j].tracking_comments) {
+            console.log('comments changed form', formValue[i]);
+            let oldTrackerValue = currentValue.filter((data: any) => {
+              let trackerDate = new Date(
+                new Date(data.note_date).toUTCString()
+              );
+              data.note_date =
+                trackerDate.getMonth() +
+                1 +
+                '/' +
+                trackerDate.getDate() +
+                '/' +
+                trackerDate.getFullYear();
+              return data.tracking_subject === formValue[i].trackingSubject;
+            });
+            updateHealthTrackerValue.push(oldTrackerValue);
+            console.log('comments old', oldTrackerValue);
+            healthTrackerValue.push(formValue[i]);
+            console.log('comments new', formValue[i]);
+          }
+        }
       }
-      if (trackingSubject == 'drug screen') {
-        trackingSubject = 'drugScreen';
-      }
-      if (trackingSubject == 'blood sugar') {
-        trackingSubject = 'bloodSugar';
-      }
-      if (this.healthTrackerFormDetails[trackingSubject]) {
-        this.healthTrackerFormDetails[trackingSubject].isUpdate = true;
-      }
+    }
+    if (updateHealthTrackerValue.length != 0) {
+      let resp = await this.service
+        .updateHealthTrackerByVeteranID(
+          this.veteranId,
+          updateHealthTrackerValue
+        )
+        .subscribe((response: any) => {
+          console.log(response);
+        });
+    }
+    if (healthTrackerValue.length != 0) {
+      let resp = await this.service
+        .addHealthTrackerByVeteranID(this.veteranId, healthTrackerValue)
+        .subscribe((response: any) => {
+          console.log(response);
+        });
+      setTimeout(() => {
+        this.getHealthTrackerByVeteranId();
+      }, 1000);
+      this.sucessMessage();
+    }
+
+    for (let i = 0; i < healthTrackerValue.length; i++) {
+      console.log('insert submitted form value', healthTrackerValue[i]);
+    }
+    for (let i = 0; i < updateHealthTrackerValue.length; i++) {
+      console.log('update submitted form value', updateHealthTrackerValue[i]);
+    }
+    while (healthTrackerValue.length > 0) {
+      healthTrackerValue.pop();
+    }
+    while (updateHealthTrackerValue.length > 0) {
+      updateHealthTrackerValue.pop();
     }
   }
 
@@ -330,5 +454,22 @@ console.log("BMI filter",newArray);
     this.buildForm();
     this.isFormFilled = false;
     this.getHealthTrackerByVeteranId();
+    this.resetMessage();
+  }
+
+  sucessMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Health Tracker updated sucessfully',
+    });
+  }
+
+  resetMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Health Tracker Form reset completed',
+    });
   }
 }

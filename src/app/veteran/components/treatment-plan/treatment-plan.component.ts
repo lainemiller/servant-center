@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { MessageService } from 'primeng/api';
+import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { VeteranDashboardService } from '../../services/veteran-dashboard.service';
 
 @Component({
   selector: 'app-treatment-plan',
   templateUrl: './treatment-plan.component.html',
   styleUrls: ['./treatment-plan.component.scss'],
+  providers: [MessageService],
 })
 export class TreatmentPlanComponent implements OnInit {
   public treatmentPlanForm!: FormGroup;
@@ -21,12 +23,17 @@ export class TreatmentPlanComponent implements OnInit {
   public formView = true;
   public treatmentArr: any;
   public formData:any;
+  public vetID: number
  public persons=['Client','Case Manager','RN']
   constructor(
     private formBuilder: FormBuilder,
-    private service: VeteranDashboardService
+    private service: VeteranDashboardService,
+    private cacheData:ClipBoardService,
+    private messageService: MessageService
   ) {
+    this.vetID=this.cacheData.get("veteranId")
     this.setForm();
+
   }
 
   ngOnInit(): void {
@@ -34,34 +41,44 @@ export class TreatmentPlanComponent implements OnInit {
   }
 
   setForm() {
-    this.service.getTreatmentData().subscribe((res) => {
-      this.data = res;
+    this.service.getTreatmentData(this.vetID).subscribe((res) => {
+      console.log('TP API data->',res);
+      this.data = res.data;
       this.buildForm();
       this.treatmentPlanForm.patchValue({
-        firstName: this.data.fname,
-        lastName: this.data.lname,
-        recordNo: this.data.recNo,
-        dateOfBirth1: this.data.dob1,
-        intakeDOB: this.data.intakeDate,
-        hmisIdNo: this.data.hmisId,
+        firstName: this.data.first_name,
+        lastName: this.data.last_name,
+        recordNo: this.data.record_number,
+        dateOfBirth1: this.data.date_of_birth,
+        intakeDOB: this.data.intake_date,
+        hmisIdNo: this.data.hmis_id,
+        treatmentIssues: this.data.treatmentIssues
       });
-      console.log(this.treatmentPlanForm.value);
+      
     });
   }
   buildForm() {
+    let d = 
+      new Date().getMonth()+
+      1+
+      '/'+
+      new Date().getUTCDate()+
+      '/'+
+      new Date().getFullYear();
+
     this.treatmentPlanForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       recordNo: ['', Validators.required],
-      dateOfBirth1: [null, Validators.required],
-      dateOfBirth2: [null, Validators.required],
-      intakeDOB: [null, Validators.required],
+      dateOfBirth1: ['', Validators.required],
+      intakeDOB: ['', Validators.required],
       hmisIdNo: ['', Validators.required],
       veteranDiagnosis: ['', Validators.required],
       veteranSupports: ['', Validators.required],
       veteranStrengths: ['', Validators.required],
       treatmentIssues: this.initializeIssuesFormArray(),
       veteranNotes: ['', Validators.required],
+      addedDate:[d]
     });
 
     this.treatmentIssuesForm = this.formBuilder.group({
@@ -121,9 +138,6 @@ export class TreatmentPlanComponent implements OnInit {
 
   onSubmit() {
     this.formView = false;
-    console.log(this.treatmentPlanForm.value);
-    this.treatmentArr = this.treatmentPlanForm.get('treatmentIssues')?.value;
-    console.log(this.treatmentArr);
     this.showTopView();
     this.formData= this.treatmentPlanForm.value;
     
@@ -133,6 +147,23 @@ export class TreatmentPlanComponent implements OnInit {
     console.log(p)
     p?.scrollIntoView();
   }
+
+  saveForm(){
+    const treatmentData= this.treatmentPlanForm.value;
+    console.log(treatmentData);
+   this.service.saveTreatmentData(this.vetID,this.treatmentPlanForm.value).subscribe((response) =>{
+    if (response.responseStatus === 'SUCCESS') {
+      console.log('Successfully saved TreatmentPlan details');
+      alert('Treatment Plan is saved successfully !!');
+      this.successMessage();
+    } else if (response.responseStatus === 'FAILURE') {
+      this.errorMessage();
+      alert('oops! error');
+    }
+    window.location.reload();
+  })
+   console.log("form submitted successfully");
+}
  
   initializeIssuesFormArray() {
     this.issuesArray = this.formBuilder.array([]);
@@ -168,7 +199,7 @@ export class TreatmentPlanComponent implements OnInit {
       goals: ['', Validators.required],
       plans: ['', Validators.required],
       strategies: ['', Validators.required],
-      targetDate: [null, Validators.required],
+      targetDate: ['', Validators.required],
     });
   }
 
@@ -204,6 +235,22 @@ export class TreatmentPlanComponent implements OnInit {
 
   get getControl() {
     return this.treatmentPlanForm.controls;
+  }
+
+  successMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Treatment-Plan saved successfully!!',
+    });
+  }
+
+  errorMessage() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Treatment-Plan not saved!!',
+    });
   }
 
   resetForm() {
@@ -243,3 +290,6 @@ export class TreatmentPlanComponent implements OnInit {
     window.print();
   }
 }
+
+
+

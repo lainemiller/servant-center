@@ -72,8 +72,16 @@
   border-color: red;
 }
 
-@include desktop() {
+//@include desktop() {
   :host ::ng-deep .p-datepicker{
-    padding-top: 100px;
+    padding-top: 30px;
   }
+//}
+
+.participantAdd{
+  margin-left: 7px;
+}
+
+::ng-deep .fc-event{
+  cursor: pointer;
 }

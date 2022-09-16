@@ -4,6 +4,7 @@ import { VeteranprofileService } from '../../../services/veteranprofile.service'
 import { states, destinationAddresses } from '../../../app.constants';
 import { VeteranProfileResponse } from 'src/app/shared/models/VeteranProfileResponse';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
+import { MessageService } from 'primeng/api';
 
 interface State {
   value: string;
@@ -15,6 +16,7 @@ interface DropDown {
   selector: 'app-transportation-request-form',
   templateUrl: './transportation-request-form.component.html',
   styleUrls: ['./transportation-request-form.component.scss'],
+  providers: [MessageService],
 })
 export class TransportationRequestFormComponent implements OnInit {
   formTitle = 'TRANSPORTATION REQUEST FORM';
@@ -43,7 +45,9 @@ export class TransportationRequestFormComponent implements OnInit {
   constructor(
     private cacheData: ClipBoardService,
     private formBuilder: FormBuilder,
-    private service: VeteranprofileService
+    private service: VeteranprofileService,
+    private messageService: MessageService
+
   ) {
     this.minDateValue = new Date(new Date().getTime()); 
     this.states = states;
@@ -171,7 +175,7 @@ export class TransportationRequestFormComponent implements OnInit {
     if (this.transportRequestForm.value.destinationAddress.name === 'Other') {
         // this.transportRequestForm.value.destinationAddress.name =
         // this.transportRequestForm.value.destinationAddress2;
-        this.transportRequestForm.value.destinationAddress= this.transportRequestForm.value.selectedState
+        this.transportRequestForm.value.destinationAddress= this.transportRequestForm.value.destinationAddress2+" " +this.transportRequestForm.value.selectedState
         +" "+this.transportRequestForm.value.city+" "+this.transportRequestForm.value.zipcode
     }else{
       this.transportRequestForm.value.destinationAddress= this.transportRequestForm.value.destinationAddress.name;
@@ -182,11 +186,10 @@ export class TransportationRequestFormComponent implements OnInit {
 	  console.log("Form Submitted");
     console.log("FormData ",this.transportRequestForm.value);
     
-    if (this.submitted = true) {
-      console.log('successfully posted event to backend');
-      alert('Form successfully saved !!');
-    } else {
-      alert('FAILUER, Something went wrong.');
+    if (data.responseStatus === 'SUCCESS') {
+     this.sucessMessage();
+    }else if (data.responseStatus === 'FAILURE') {
+     this.errorMessage();
     }
    });
    
@@ -199,5 +202,21 @@ export class TransportationRequestFormComponent implements OnInit {
    this.transportRequestForm.controls["destinationAddress2"].reset()
    this.transportRequestForm.controls["destinationAddress"].reset()
 	 this.transportRequestForm.controls["zipcode"].reset()
+  }
+
+  sucessMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Form Saved Sucessfully',
+    });
+  }
+
+  errorMessage() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Something Went Wrong',
+    });
   }
 }
