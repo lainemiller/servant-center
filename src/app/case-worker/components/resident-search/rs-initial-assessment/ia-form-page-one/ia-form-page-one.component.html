@@ -4,6 +4,8 @@
     <div class="p-fluid p-formgrid p-grid" formGroupName="personalDetails">
       <div class="p-field p-col-12 p-md-3">
         <input type="text" pInputText formControlName=firstName placeholder="First Name">
+        <small class="error"
+                  *ngIf="iaPage1PD.firstName.errors?.required && iaPage1PD.firstName.touched">first name is required.</small>
       </div>
       <div class="p-field p-col-12 p-md-3">
         <input type="text" pInputText formControlName=middleInitial placeholder="Middle Initial">

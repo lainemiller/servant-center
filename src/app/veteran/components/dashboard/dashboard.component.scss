@@ -77,3 +77,6 @@
 .user_input--color.ng-touched.ng-invalid {
   border-color: red;
 }
+::ng-deep .fc-event{
+  cursor: pointer;
+}

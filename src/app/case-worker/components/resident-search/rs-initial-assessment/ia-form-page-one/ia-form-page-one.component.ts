@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IaPage1Service } from "src/app/case-worker/services/ia-page1.service";
 
 @Component({
   selector: 'app-ia-form-page-one',
@@ -54,9 +55,10 @@ export class IaFormPageOneComponent implements OnInit {
     {label: 'Transgender', value: 'transgender'},
     {label: 'Other', value: 'other'},
   ];
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router, private service: IaPage1Service) {}
   ngOnInit(): void {
     this.initializeFormGroups();
+
   }
   initializeFormGroups() {
     this.personalDetails = this.fb.group({
@@ -144,7 +146,15 @@ export class IaFormPageOneComponent implements OnInit {
     });
   }
 
+  get iaPage1PD() {
+    return this.personalDetails.controls;
+  }
+
   onSubmit() {
+
+    this.service.initialTreatmentGoalsPage1(this.page1Form.value).subscribe((data) => {
+      console.log('Submitted');
+    });
     this.router.navigateByUrl(
       'case-worker/resident-search/initial-assessment/page-2'
     );

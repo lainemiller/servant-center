@@ -1,4 +1,7 @@
 <p-toast position="top-center"></p-toast>
+<div class="center-spinner">
+  <p-progressSpinner *ngIf="isShowSpinner" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+</div>
 <div class="p-grid">
   <div class="p-col-12">
     <app-item-header title="HEALTH TRACKER"></app-item-header>
@@ -100,6 +103,9 @@
                   placeholder="Date (mm/dd/yyyy)"
                   dataType="string"
                 ></p-calendar>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('weight.date')?.errors?.required && healthTrackerForm.get('weight.date')?.touched">Date
+                is required.</small>
               </div>
             </div>
 
@@ -111,6 +117,9 @@
                   formControlName="measurement"
                   placeholder="Measurement"
                 />
+                <small class="error"
+                *ngIf="healthTrackerForm.get('weight.measurement')?.errors?.required && healthTrackerForm.get('weight.measurement')?.touched">Measurement
+is required.</small>
               </div>
             </div>
 
@@ -122,6 +131,9 @@
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('weight.comments')?.errors?.required && healthTrackerForm.get('weight.comments')?.touched">Comments
+                is required.</small>
               </div>
             </div>
           </div>
@@ -150,6 +162,9 @@
                   placeholder="Date (mm/dd/yyyy)"
                   dataType="string"
                 ></p-calendar>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('temperature.date')?.errors?.required && healthTrackerForm.get('temperature.date')?.touched">Date
+                is required.</small>
               </div>
             </div>
 
@@ -161,6 +176,9 @@
                   formControlName="measurement"
                   placeholder="Measurement"
                 />
+                <small class="error"
+                *ngIf="healthTrackerForm.get('temperature.measurement')?.errors?.required && healthTrackerForm.get('temperature.measurement')?.touched">Measurement
+                is required.</small>
               </div>
             </div>
 
@@ -172,6 +190,9 @@
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('temperature.comments')?.errors?.required && healthTrackerForm.get('temperature.comments')?.touched">Comments
+                is required.</small>
               </div>
             </div>
           </div>
@@ -200,6 +221,9 @@
                   placeholder="Date (mm/dd/yyyy)"
                   dataType="string"
                 ></p-calendar>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('bloodPressure.date')?.errors?.required && healthTrackerForm.get('bloodPressure.date')?.touched">Date
+                is required.</small>
               </div>
             </div>
 
@@ -211,6 +235,9 @@
                   formControlName="measurement"
                   placeholder="Measurement"
                 />
+                <small class="error"
+                *ngIf="healthTrackerForm.get('bloodPressure.measurement')?.errors?.required && healthTrackerForm.get('bloodPressure.measurement')?.touched">Measurement
+                is required.</small>
               </div>
             </div>
 
@@ -222,6 +249,9 @@
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('bloodPressure.comments')?.errors?.required && healthTrackerForm.get('bloodPressure.comments')?.touched">Comments
+                is required.</small>
               </div>
             </div>
           </div>
@@ -246,6 +276,9 @@
                   placeholder="Date (mm/dd/yyyy)"
                   dataType="string"
                 ></p-calendar>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('BMI.date')?.errors?.required && healthTrackerForm.get('BMI.date')?.touched">Date
+                is required.</small>
               </div>
             </div>
 
@@ -257,6 +290,9 @@
                   formControlName="measurement"
                   placeholder="Measurement"
                 />
+                <small class="error"
+                *ngIf="healthTrackerForm.get('BMI.measurement')?.errors?.required && healthTrackerForm.get('BMI.measurement')?.touched">Measurement
+                is required.</small>
               </div>
             </div>
 
@@ -268,6 +304,9 @@
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('BMI.comments')?.errors?.required && healthTrackerForm.get('BMI.comments')?.touched">Comments
+                is required.</small>
               </div>
             </div>
           </div>
@@ -295,7 +334,10 @@
                   [showIcon]="true"
                   placeholder="Date (mm/dd/yyyy)"
                   dataType="string"
-                ></p-calendar>
+                ></p-calendar>y
+                <small class="error"
+                *ngIf="healthTrackerForm.get('drugScreen.date')?.errors?.required && healthTrackerForm.get('drugScreen.date')?.touched">Date
+                is required.</small>
               </div>
             </div>
 
@@ -307,6 +349,9 @@
                   formControlName="measurement"
                   placeholder="Measurement"
                 />
+                <small class="error"
+                *ngIf="healthTrackerForm.get('drugScreen.measurement')?.errors?.required && healthTrackerForm.get('drugScreen.measurement')?.touched">Measurement
+                is required.</small>
               </div>
             </div>
 
@@ -318,6 +363,9 @@
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('drugScreen.comments')?.errors?.required && healthTrackerForm.get('drugScreen.comments')?.touched">Comments
+                is required.</small>
               </div>
             </div>
           </div>
@@ -346,6 +394,9 @@
                   placeholder="Date (mm/dd/yyyy)"
                   dataType="string"
                 ></p-calendar>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('breathalyzer.date')?.errors?.required && healthTrackerForm.get('breathalyzer.date')?.touched">Date
+                is required.</small>
               </div>
             </div>
 
@@ -357,6 +408,9 @@
                   formControlName="measurement"
                   placeholder="Measurement"
                 />
+                <small class="error"
+                *ngIf="healthTrackerForm.get('breathalyzer.measurement')?.errors?.required && healthTrackerForm.get('breathalyzer.measurement')?.touched">Measurement
+                is required.</small>
               </div>
             </div>
 
@@ -368,6 +422,9 @@
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('breathalyzer.comments')?.errors?.required && healthTrackerForm.get('breathalyzer.comments')?.touched">Comments
+                is required.</small>
               </div>
             </div>
           </div>
@@ -396,6 +453,9 @@
                   placeholder="Date (mm/dd/yyyy)"
                   dataType="string"
                 ></p-calendar>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('bloodSugar.date')?.errors?.required && healthTrackerForm.get('bloodSugar.date')?.touched">Date
+                is required.</small>
               </div>
             </div>
 
@@ -407,6 +467,9 @@
                   formControlName="measurement"
                   placeholder="Measurement"
                 />
+                <small class="error"
+                *ngIf="healthTrackerForm.get('bloodSugar.measurement')?.errors?.required && healthTrackerForm.get('bloodSugar.measurement')?.touched">Measurement
+                is required.</small>
               </div>
             </div>
 
@@ -418,6 +481,9 @@
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('bloodSugar.comments')?.errors?.required && healthTrackerForm.get('bloodSugar.comments')?.touched">Comments
+                is required.</small>
               </div>
             </div>
           </div>
@@ -442,6 +508,9 @@
                   placeholder="Date (mm/dd/yyyy)"
                   dataType="string"
                 ></p-calendar>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('other.date')?.errors?.required && healthTrackerForm.get('other.date')?.touched">Date
+                is required.</small>
               </div>
             </div>
 
@@ -453,6 +522,9 @@
                   formControlName="measurement"
                   placeholder="Measurement"
                 />
+                <small class="error"
+                *ngIf="healthTrackerForm.get('other.measurement')?.errors?.required && healthTrackerForm.get('other.measurement')?.touched">Measurement
+                is required.</small>
               </div>
             </div>
 
@@ -464,6 +536,9 @@
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
+                <small class="error"
+                *ngIf="healthTrackerForm.get('other.comments')?.errors?.required && healthTrackerForm.get('other.comments')?.touched">Comments
+                is required.</small>
               </div>
             </div>
           </div>
