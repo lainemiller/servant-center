@@ -1,13 +1,17 @@
 <app-item-header title="ASSESSMENT FORM"></app-item-header>
 <section class="assessment-container">
+    <div class="Spinner">
+        <p-progressSpinner *ngIf="!showAssessment"></p-progressSpinner>
+      </div>
     <p-accordion>
             <p-accordionTab *ngFor="let info of assesssmentData" header="{{info.header}}">  
                 <section  class="p-fluid p-ml-5 p-grid assessment-container__section">
-                    <article *ngFor="let value of info.data" class="p-field p-col-12 p-md-3">
+                    <article *ngFor="let value of info.data " class="p-field p-col-12 p-md-3">
                         <label>
-                            <h3 class="section__ques">{{value.key}}:</h3>
+                            <h3 class="section__ques">{{value.key }}:</h3>
                         </label>
-                        <h3 class="section__answer">{{value.value}}</h3>
+                        <!-- <h3 class="section__answer">{{value.value | titlecase}}</h3> -->
+                        <h3 class="section__answer">{{value.value | letterCaseForAssessment}}</h3>
                     </article>
                 </section>
             </p-accordionTab>

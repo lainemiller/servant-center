@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { LetterCase } from '../veteran/components/assessment/letterCaseForAssessment.pipe';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -73,6 +73,7 @@ const COMPONENTS = [
   FooterComponent,
   WelcomeHeaderComponent,
   KeysPipe,
+  LetterCase,
   ConsentDataComponent,
   NoSpecialSymbolsDirective,
   ProfileFormComponent

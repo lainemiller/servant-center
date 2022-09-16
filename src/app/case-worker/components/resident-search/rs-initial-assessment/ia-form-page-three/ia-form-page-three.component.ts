@@ -1,6 +1,7 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IaPage3Service } from 'src/app/case-worker/services/ia-page3.service';
 
 @Component({
   selector: 'app-ia-form-page-three',
@@ -65,7 +66,7 @@ export class IaFormPageThreeComponent implements OnInit {
     { label: 'Recent Memory', key: 'recentMemory' },
     { label: 'Remote Memory', key: 'remoteMemory' },
   ];
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router, private service: IaPage3Service) {}
 
   ngOnInit(): void {
     this.initializeFormGroups();
@@ -95,7 +96,7 @@ export class IaFormPageThreeComponent implements OnInit {
         answeredByClient: [''],
         observedByInterviewer: [''],
       }),
-      affect: [''],
+      affect:new FormArray([]),
       ideation: this.ideation,
       memory: this.fb.group({
         recentMemory: [],
@@ -119,10 +120,15 @@ export class IaFormPageThreeComponent implements OnInit {
       mentalStatusAssessment: this.mentalStatusAssessment,
       medicalInformation: this.medicalInformation,
     });
-    //console.log('build form', this.page3Form.get(['mentalStatusAssessment', 'ideation']));
+    console.log('build form', this.page3Form.get(['mentalStatusAssessment', 'ideation']));
   }
 
   onSubmit() {
+    this.service
+      .initialTreatmentGoalsPage3(this.page3Form.value)
+      .subscribe((data) => {
+        console.log('Submitted');
+      });
       this.router.navigateByUrl(
         'case-worker/resident-search/initial-assessment/page-4'
       );
@@ -156,6 +162,7 @@ export class IaFormPageThreeComponent implements OnInit {
       'observedByInterviewer',
     ]) as FormControl;
   }
+
 }
 
 @Pipe({ name: 'keys' })
