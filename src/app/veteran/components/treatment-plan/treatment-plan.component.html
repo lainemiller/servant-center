@@ -18,6 +18,7 @@
               customAttr="textOnly"
               placeholder="Resident's First Name"
               class="disable-field"
+              [readonly]="true"
             />
 
             <div
@@ -41,7 +42,8 @@
               appNoSpecialSymbols
               customAttr="textOnly"
               placeholder="Resident's Last Name"
-              class="disable-field"  
+              class="disable-field"
+              [readonly]="true" 
             />
             <div
             *ngIf="getControl.lastName.invalid && getControl.lastName.touched"
@@ -64,6 +66,7 @@
               customAttr="numbersOnly"
               placeholder="Record #"
               class="disable-field"
+              [readonly]="true"
             />
 
             <div
@@ -85,6 +88,7 @@
             formControlName="dateOfBirth1"
             placeholder="DateOfBirth"
             class="disable-field"
+            [readonly]="true"
             value="{{ data?.date_of_birth | date: 'dd/MM/yyyy'  }}"
             
           />
@@ -110,6 +114,7 @@
             formControlName="intakeDOB"
             placeholder="Intake Date (mm/dd/yyyy)"
             class="disable-field"
+            [readonly]="true"
             value="{{ data?.intake_date | date: 'dd/MM/yyyy' }}"
             />
             <div
@@ -135,6 +140,7 @@
               customAttr="numbersOnly"
               placeholder="HMIS ID#"
               class="disable-field"
+              [readonly]="true"
             />
             <div
               *ngIf="getControl.hmisIdNo.invalid && getControl.hmisIdNo.touched"
