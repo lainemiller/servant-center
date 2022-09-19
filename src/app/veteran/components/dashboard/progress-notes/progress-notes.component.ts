@@ -5,6 +5,7 @@ import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { goalTypes } from '../../../app.constants';
 import { ProgressNotesService } from 'src/app/veteran/services/progress-notes.service';
 import { MessageService } from 'primeng/api';
+import { Router } from "@angular/router";
 interface DropDown {
   name: string;
   value: string;
@@ -17,6 +18,7 @@ interface DropDown {
   providers: [MessageService],
 })
 export class ProgressNotesComponent implements OnInit {
+  [x: string]: any;
   public title = 'PROGRESS NOTES';
   public submitted = false;
   public display = false;
@@ -31,12 +33,14 @@ export class ProgressNotesComponent implements OnInit {
   public progressNotesState: any = [];
   public vetID: number;
   public goalTypes!: DropDown[];
+  public goalId!: number;
   selectedType!: any;
   constructor(
     private formBuilder: FormBuilder,
     private service: ProgressNotesService,
     private cacheData: ClipBoardService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router,
   ) {
     this.vetID = this.cacheData.get('veteranId');
     this.goalTypes = goalTypes;
@@ -54,6 +58,7 @@ export class ProgressNotesComponent implements OnInit {
         for (let i = this.progress.length; i > 0; i--) {
           this.progressNotes[k++] = this.progress[i - 1];
         }
+        this.goalId = this.progressNote.goalId;
       });
 
     this.initialStatus = false;
@@ -98,6 +103,7 @@ export class ProgressNotesComponent implements OnInit {
       goalDescription: ['', [Validators.required, Validators.maxLength(300)]],
       goalState: [false, Validators.required],
       addedDate: [d],
+     // goalID: ['', Validators.required],
     });
   }
 
@@ -124,32 +130,40 @@ export class ProgressNotesComponent implements OnInit {
         if (data.responseStatus === 'SUCCESS') {
           console.log('successfully added new progress note');
           this.sucessMessage();
+          let currentUrl = this.router.url;
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+           this.router.navigate([currentUrl]);
         } else if (data.responseStatus === 'FAILUER') {
           this.someError();
         }
       });
-    //get data from backend
+    // get data from backend
     this.service
       .getNotes(this.vetID)
       .subscribe((notes: progressNoteResponse) => {
         console.log(notes);
       });
     this.progressNotes.push(this.progressNote.value);
-
+  
     this.display = false;
     this.progressNote.reset();
+    // window.location.reload();
   }
   crossButton() {
     this.initialStatus = true;
     this.progressNote.reset();
   }
-  changed(goalState: boolean, goalTitle: string) {
+  changed(goalId: number, goalState: boolean) {
     //TO UPDATE STATUS OF PROGRESS NOTE
+
+    console.log('goal before passing status', goalState);
+    
     this.progressNotesState = {
-      goalTitle,
+      goalId,
       goalState,
     };
-    console.log('status changed for title', goalTitle, ' to', goalState);
+    console.log('status changed for id', goalId, ' to', goalState);
 
     this.service
       .postStatus(this.vetID, this.progressNotesState)

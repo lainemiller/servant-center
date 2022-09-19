@@ -87,7 +87,7 @@
                 <p-toolbar id="progress-notes--mainToolbar">
                   <div class="p-toolbar-group-left  p-col-9">
                     <span class="p-mr-2">InProgress</span>
-                    <p-inputSwitch [(ngModel)]="progressNote.goalState" (onChange)="changed(progressNote.goalState, progressNote.goalTitle)"
+                    <p-inputSwitch [(ngModel)]="progressNote.goalState" (onChange)="changed(progressNote.goalId, progressNote.goalState)"
                     class="open-close-switch"></p-inputSwitch>                  <span class="p-ml-2">Complete</span>
                   <div class="p-col-12 goal-header p-d-flex p-jc-end">
                     <div class="goal-header--date">
@@ -99,12 +99,12 @@
               </div>
               <div class="p-col-12 goal-header p-d-flex p-jc-between">
                 <div class="goal-header--title">
-                  {{ progressNote.goalTitle }}
+                  {{ progressNote.goalTitle | titlecase}}
                 </div>
                 </div>
                 <div class="p-col-12 goal-header p-d-flex p-jc-between">
                 <div class="goal-header--date">
-                  Goal Type: {{ progressNote.goalType }}
+                  Goal Type: {{ progressNote.goalType | titlecase}}
                 </div>
               </div>
               <div class="p-col-12 goal-content">
@@ -131,7 +131,7 @@
         <p-toolbar id="progress-notes--mainToolbar">
           <div class="p-toolbar-group-left  p-col-7">
             <span class="p-mr-2">InProgress</span>
-            <p-inputSwitch [(ngModel)]="progressNote.goalState" (onChange)="changed(progressNote.goalState, progressNote.goalTitle)"
+            <p-inputSwitch [(ngModel)]="progressNote.goalState" (onChange)="changed(progressNote.goalId, progressNote.goalState)"
             class="open-close-switch"></p-inputSwitch>                  <span class="p-ml-2">Complete</span>
           <div class="p-col-12 goal-header p-d-flex p-jc-end">
             <div class="goal-header--date">
@@ -142,10 +142,10 @@
         </p-toolbar>
       </div>
       <div class="p-col-12 goal-header p-d-flex p-jc-between">
-        <div class="goal-header--title">{{ progressNote.goalTitle }}</div>
+        <div class="goal-header--title">{{ progressNote.goalTitle | titlecase}}</div>
       </div>
         <div class="p-col-12 goal-header p-d-flex p-jc-between">
-        <div class="goal-header--date">Goal Type: {{ progressNote.goalType }}</div>
+        <div class="goal-header--date">Goal Type: {{ progressNote.goalType | titlecase}}</div>
          <!-- <div class="goal-header--date">Added on: {{ progressNote.addedDate | date: 'dd/MM/yyyy'  }}</div> -->
       </div>
       <div class="p-col-12 goal-content">

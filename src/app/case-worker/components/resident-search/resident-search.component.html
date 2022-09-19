@@ -1,3 +1,6 @@
+<div class="center-spinner">
+  <p-progressSpinner *ngIf="showSpinner" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+  </div>
 <div class="container">
   <div class="search-header"><span>RESIDENT SEARCH </span></div>
   <div class="search-form">
@@ -27,7 +30,7 @@
             class="inputFromUser"
           />
           <small class="error" *ngIf="firstName?.invalid && firstName?.touched"
-            >firstname is required.</small
+            >Firstname is required.</small
           >
         </div>
         <div class="p-field p-col-12 p-md-3">
@@ -42,7 +45,7 @@
             class="inputFromUser"
           />
           <small class="error" *ngIf="lastName?.invalid && lastName?.touched"
-            >lastname is required.</small
+            >Lastname is required.</small
           >
         </div>
         <div class="p-field p-col-12 p-md-3">
@@ -55,6 +58,7 @@
             [maxDate]="maxDateValue"
           >
           </p-calendar>
+          
         </div>
       </div>
       <div class="p-d-flex p-jc-end p-mr-2">
@@ -66,13 +70,12 @@
           (click)="onSubmit(residentSearchForm.value)"
           [disabled]="residentSearchForm.invalid"
         ></button>
-        <button
+        <!--<button
           pButton
           icon="fa fa-sync-alt"
           class="p-button-rounded p-button-text sync-button p-ml-1"
-          (click)="refresh()"
           [routerLink]="['/resident-search']"
-        ></button>
+        ></button>-->
       </div>
     </form>
   </div>
