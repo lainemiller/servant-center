@@ -19,11 +19,15 @@ export class AssessmentComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    document.getElementById("overlay")!.style.display="block"
     this.service.getData(this.vetID).subscribe((data:AssessmentResp) => {
       this.assessDetails = data;
       console.log(this.assessDetails.assessment_details);
       this.assesssmentData=this.assessDetails.assessment_details
+      if(data){
       this.showAssessment = true;
+      document.getElementById("overlay")!.style.display="none"
+      }
     });
    
   }

@@ -40,11 +40,9 @@ export class ProgressNotesComponent implements OnInit {
     private service: ProgressNotesService,
     private cacheData: ClipBoardService,
     private messageService: MessageService,
-    private router: Router,
   ) {
     this.vetID = this.cacheData.get('veteranId');
     this.goalTypes = goalTypes;
-    this.sucessMessage();
   }
 
   ngOnInit(): void {
@@ -130,13 +128,10 @@ export class ProgressNotesComponent implements OnInit {
         if (data.responseStatus === 'SUCCESS') {
           console.log('successfully added new progress note');
           this.sucessMessage();
-          let currentUrl = this.router.url;
-          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          this.router.onSameUrlNavigation = 'reload';
-           this.router.navigate([currentUrl]);
         } else if (data.responseStatus === 'FAILUER') {
           this.someError();
         }
+        this.ngOnInit();
       });
     // get data from backend
     this.service
@@ -203,7 +198,7 @@ export class ProgressNotesComponent implements OnInit {
 
   someError(){
     this.messageService.add({
-      severity: 'info',
+      severity: 'error',
       summary: 'Failed',
       detail: 'Something Went Wrong!',
     });

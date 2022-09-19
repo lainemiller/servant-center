@@ -89,10 +89,15 @@ export class IaFormPageFourComponent implements OnInit {
   }
 
   onSubmit() {
-
+    let chargesLegal = this.legalHistoryOrIssues.value.charges;
+    this.legalHistoryOrIssues.value.charges = "{"+chargesLegal + "}";
+    
+    
     this.service.initialTreatmentGoalsPage4(this.page4Form.value).subscribe((data) => {
       console.log('Submitted');
     });
+
+
     this.router.navigateByUrl(
       'case-worker/resident-search/initial-assessment/page-5'
     );
