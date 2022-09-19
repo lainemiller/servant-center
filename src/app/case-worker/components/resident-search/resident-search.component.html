@@ -23,7 +23,7 @@
             type="text"
             pInputText
             formControlName="firstName"
-            placeholder="Veteran's First Name"
+            placeholder="Veteran's First Name *"
             maxlength="30"
             appNoSpecialSymbols
             customAttr="textOnly"
@@ -41,7 +41,7 @@
             placeholder="Veteran's Last Name"
             maxlength="30"
             appNoSpecialSymbols
-            customAttr="textOnly"
+            customAttr="textWithSpace"
             class="inputFromUser"
           />
           <small class="error" *ngIf="lastName?.invalid && lastName?.touched"
@@ -70,12 +70,12 @@
           (click)="onSubmit(residentSearchForm.value)"
           [disabled]="residentSearchForm.invalid"
         ></button>
-        <!--<button
+        <button
           pButton
           icon="fa fa-sync-alt"
           class="p-button-rounded p-button-text sync-button p-ml-1"
-          [routerLink]="['/resident-search']"
-        ></button>-->
+          (click)="resetData()"
+        ></button>
       </div>
     </form>
   </div>

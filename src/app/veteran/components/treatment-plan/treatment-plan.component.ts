@@ -24,7 +24,7 @@ export class TreatmentPlanComponent implements OnInit {
   public formView = true;
   public treatmentArr: any;
   public formData:any;
-  public vetID: number
+  public vetID: number;
  public persons=['Client','Case Manager','RN']
  showSpinner:boolean=true;
   constructor(
@@ -44,7 +44,7 @@ export class TreatmentPlanComponent implements OnInit {
   }
 
   setForm() {
-    this.service.getTreatmentData(this.vetID).subscribe((res) => {
+    this.service.getTreatmentData(this.vetID).subscribe((res:any) => {
       this.data = res.data;      
       if(this.data){
         this.showSpinner=false;
