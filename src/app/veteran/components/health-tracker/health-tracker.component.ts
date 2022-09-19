@@ -333,7 +333,7 @@ export class HealthTrackerComponent implements OnInit {
             formValueDate.getUTCMonth() +
             '/' +
             formValueDate.getUTCFullYear();
-          var currentValueDate = new Date(currentValue[j].note_date);
+          var currentValueDate = new Date(new Date(currentValue[j].note_date).toUTCString());
           var currentDate =
             currentValueDate.getUTCDate() +
             '/' +
@@ -342,7 +342,7 @@ export class HealthTrackerComponent implements OnInit {
             currentValueDate.getUTCFullYear();
             console.log('formDate',formDate);
             console.log('currentDate',currentDate);
-            console.log('comparision',formDate<currentDate);
+            console.log('comparision',formDate === currentDate);
           if (
             formDate === currentDate &&
             formValue[i].measurement !== currentValue[j].measurement
@@ -365,6 +365,26 @@ export class HealthTrackerComponent implements OnInit {
             console.log('old', oldTrackerValue);
             healthTrackerValue.push(formValue[i]);
             console.log('new', formValue[i]);
+          }
+          if (formDate != currentDate) {
+            console.log('date changed form', formValue[i]);
+            let oldTrackerValue = currentValue.filter((data: any) => {
+              let trackerDate = new Date(
+                new Date(data.note_date).toUTCString()
+              );
+              data.note_date =
+                trackerDate.getMonth() +
+                1 +
+                '/' +
+                trackerDate.getDate() +
+                '/' +
+                trackerDate.getFullYear();
+              return data.tracking_subject === formValue[i].trackingSubject;
+            });
+            updateHealthTrackerValue.push(oldTrackerValue);
+            console.log('date old', oldTrackerValue);
+            healthTrackerValue.push(formValue[i]);
+            console.log('date new', formValue[i]);
           }
           if (formValue[i].comments != currentValue[j].tracking_comments) {
             console.log('comments changed form', formValue[i]);
