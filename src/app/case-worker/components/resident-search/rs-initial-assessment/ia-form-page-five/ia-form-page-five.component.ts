@@ -20,7 +20,6 @@ export class IaFormPageFiveComponent implements OnInit {
   }
 
   initializeFormGroups() {
-
     this.preliminaryTreatmentGoals = this.fb.group({
       hppenedInMyLifeLastYear: ['', Validators.required],
       shortTermGoals: ['', Validators.required],
@@ -41,15 +40,10 @@ export class IaFormPageFiveComponent implements OnInit {
   }
 
   onSubmit() {
-    this.service.initialTreatmentGoals(this.preliminaryTreatmentGoals.value).subscribe(() => {
+    this.service.initialTreatmentGoalsPage5(this.page5Form.value).subscribe((data) => {
       console.log('Submitted');
-      console.log(this.preliminaryTreatmentGoals.value);
-      
     });
     console.log('page 5 values', this.page5Form.value);
-  }
-  vetID(vetID: any, value: any) {
-    throw new Error('Method not implemented.');
   }
 
   goBack() {

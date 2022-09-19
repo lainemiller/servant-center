@@ -1,3 +1,4 @@
+<p-toast position="top-center"></p-toast>
 <app-item-header
   color="blue"
   title="Details"
@@ -131,6 +132,7 @@
               type="text"
               pInputText
               formControlName="coordinator"
+              class="inputFromUser"
               maxlength="30"
               value="{{ caseWorker.transport_coordinator }}"
               placeholder="Transport Co-ordinator"
@@ -140,7 +142,7 @@
             <small
               class="error"
               *ngIf="coordinator?.invalid && coordinator?.touched"
-              >coordinator is required.</small
+              >Coordinator is required.</small
             >
           </div>
         </div>
@@ -160,7 +162,7 @@
             <small
               class="error"
               *ngIf="approvedDate?.invalid && approvedDate?.touched"
-              >approved date is required.</small
+              >Approved date is required.</small
             >
           </div>
         </div>
@@ -188,10 +190,11 @@
           value="{{ caseWorker.notified_by }}"
           placeholder="By"
           appNoSpecialSymbols
-          customAttr="textWithSpace"
+          customAttr="textWithSpace"  
+          class="inputFromUser"        
         />
         <small class="error" *ngIf="by?.invalid && by?.touched"
-          >by is required.</small
+          >By is required.</small
         >
       </div>
       <div class="p-field p-col-12 p-md-5">
@@ -215,7 +218,8 @@
        pButton
       label="Submit"
       [disabled]="transportRequestForm.invalid"
-      class="p-button-outlined"
+      [ngClass]="transportRequestForm.invalid ? ' p-button-outlined p-button-disabled' : 'p-button-outlined'"
+      
     ></button>
     <button
       type="button"
