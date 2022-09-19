@@ -127,6 +127,7 @@ export class TransportationRequestFormComponent implements OnInit {
     console.log('changed option', evt);
     if (evt.value.value === 'other') {
       this.showOtherAddressTextBox = true;
+      this.transportRequestForm.controls["destinationAddress2"].setValidators([Validators.required]);
       this.transportRequestForm.patchValue({
         city: '',
         selectedState: '',
