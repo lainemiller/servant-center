@@ -1,3 +1,4 @@
+<div id="overlay"></div>
 <p-toast position="top-center"></p-toast>
 <div class="center-spinner">
   <p-progressSpinner *ngIf="isShowSpinner" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
@@ -42,7 +43,9 @@
                     placeholder="Start Time"
                     [showTime]="true"
                     [showSeconds]="true"
+                    [minDate]="minimumDate"
                     inputId="time"
+                    #startDate
                   ></p-calendar>
                   <div
                     *ngIf="
@@ -59,7 +62,10 @@
                     placeholder="End Time"
                     [showTime]="true"
                     [showSeconds]="true"
+                    [minDate]="minimumDate"
                     inputId="time"
+                    #endTime
+                    (onFocus)="focusFunction()"
                   ></p-calendar>
                   <div
                     *ngIf="
@@ -67,6 +73,9 @@
                     "
                   >
                     <small class="form-error"> End Time is required. </small>
+                  </div>
+                  <div>
+                    <small class="form-error" *ngIf="wrongDate">End date must be greater that start date</small>
                   </div>
                 </div>
                 <div class="p-field p-col-12 p-sm-12">
@@ -76,6 +85,7 @@
                     pInputText
                     placeholder="Title"
                     class="user_input--color"
+                    (click)="checkDate(startDate,endTime)"
                   />
                   <div
                     *ngIf="
@@ -106,7 +116,7 @@
                     </small>
                   </div>
                 </div>
-                <div class="p-field p-col-12 p-sm-12">
+                <div> <div class="p-field p-col-12 p-sm-12" >
                   <h4>
                     Participants E-mail:<span
                       *ngIf="!participants.controls.length"
@@ -151,7 +161,8 @@
                   <h5 style="color: red" *ngIf="participantsExceeded">
                     Maximum 20 participants should be there.
                   </h5>
-                </div>
+                </div></div>
+               
               </div>
               <div class="button--margin">
                 <button type="submit" pButton [disabled]="eventsForm.invalid">
