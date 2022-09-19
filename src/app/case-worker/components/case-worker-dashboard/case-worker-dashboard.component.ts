@@ -30,6 +30,8 @@ export class CaseWorkerDashboardComponent implements OnInit {
   public caseWorkerId: any;
   public CurrentYear: any;
   public isShowSpinner: boolean = true;
+  public wrongDate: boolean = false;
+  minimumDate: any;
   constructor(
     private service: CalendarEventsService,
     private formBuilder: FormBuilder,
@@ -39,6 +41,8 @@ export class CaseWorkerDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('case worker dashboard component');
+    this.minimumDate = new Date();
+    document.getElementById("overlay")!.style.display="block"
     this.minDateValue = new Date(new Date().getTime());
     this.items = [
       { label: 'Appointment', icon: 'pi pi-fw pi-calendar' },
@@ -53,6 +57,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
         this.totalEvents = data;
         if(this.totalEvents){
           this.isShowSpinner=false;
+          document.getElementById("overlay")!.style.display="none"
         }
         console.log(this.totalEvents);
         this.getCaseWorkerEventData(data);
@@ -67,6 +72,8 @@ export class CaseWorkerDashboardComponent implements OnInit {
       let eventDate = this.totalEvents.data[i].eventstart.substring(0, 10);
       this.totalEvents.data[i]['date'] = eventDate;
     }
+    console.log('this.totalEvents.data',this.totalEvents.data);
+    
     this.calendarOptions.events = this.totalEvents.data;
   }
 
@@ -92,6 +99,16 @@ export class CaseWorkerDashboardComponent implements OnInit {
     return this.formBuilder.group({
       name: ['', Validators.required],
     });
+  }
+  focusFunction(){
+    this.wrongDate=false;
+  }
+  checkDate(Startdate:any,endTime:any){    
+    if(new Date(endTime.inputFieldValue) < new Date(Startdate.inputFieldValue)){
+      this.wrongDate=true;
+    }else{
+      this.wrongDate=false;
+    }
   }
 
   addParticipant() {
@@ -157,9 +174,17 @@ export class CaseWorkerDashboardComponent implements OnInit {
 
     //sending calendar events/appointments to backend database
     this.service.postCalendarEvents(newEvent).subscribe((response) => {
+      if(response){
+        this.isShowSpinner=true;
+        document.getElementById("overlay")!.style.display="block"
+      }
       this.service
         .getCalendarEvents(this.caseWorkerId)
         .subscribe((data: CalendarResp) => {
+          if(data){
+            this.isShowSpinner=false;
+            document.getElementById("overlay")!.style.display="none"
+          }
           this.totalEvents = data;
           console.log(this.totalEvents);
           this.getCaseWorkerEventData(data);
@@ -187,8 +212,11 @@ export class CaseWorkerDashboardComponent implements OnInit {
     this.tagName = value.activeItem.label;
     if (this.tagName === 'Appointment') {
       this.isAppointment = true;
+      document.getElementById('p-dialog')!.style.overflowY='scroll'
     } else if (this.tagName === 'Event') {
       this.isAppointment = false;
+      console.log('*** changed');
+      
     }
   }
   clearFormArray = (formArray: FormArray) => {

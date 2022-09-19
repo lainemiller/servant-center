@@ -340,6 +340,9 @@ export class HealthTrackerComponent implements OnInit {
             currentValueDate.getUTCMonth() +
             '/' +
             currentValueDate.getUTCFullYear();
+            console.log('formDate',formDate);
+            console.log('currentDate',currentDate);
+            console.log('comparision',formDate<currentDate);
           if (
             formDate === currentDate &&
             formValue[i].measurement !== currentValue[j].measurement
