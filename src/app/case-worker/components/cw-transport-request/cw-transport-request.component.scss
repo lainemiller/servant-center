@@ -29,3 +29,11 @@
 .error {
   color: red;
 }
+
+.inputFromUser.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+
+.p-button-disabled{
+  color: grey !important;
+}

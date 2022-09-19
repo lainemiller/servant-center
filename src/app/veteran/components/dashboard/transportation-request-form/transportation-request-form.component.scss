@@ -30,6 +30,19 @@
   border: 1px solid red;
 }
 
+.p-button-disabled{
+  color: grey !important;
+}
+
+.input-cal{
+  display: block !important;
+  border-radius: 4px;
+}
+
+// .other.p-inputtext.ng-touched.ng-invalid {
+//   border: 1px solid red;
+// }
+
 :host ::ng-deep .p-dropdown-panel{
   width: 100%;
 }

@@ -1,3 +1,4 @@
+<p-toast position="top-center"></p-toast>
 <app-item-header [title]="formTitle"></app-item-header>
 <div class="form-container">
   <form
@@ -40,7 +41,7 @@
         class="inputFromUser"
       />
       <small class="error" *ngIf="reason?.invalid && reason?.touched"
-        >reason is required.</small
+        >Reason is required.</small
       >
     </div>
     <p-divider></p-divider>
@@ -52,13 +53,13 @@
         [inline]="false"
         [showIcon]="true"
         placeholder="Appointment Date (dd/mm/yyyy)"
-        class="inputFromUser"
+        class="input-cal"
         [minDate]="minDateValue"
       ></p-calendar>
       <small
         class="error"
         *ngIf="appointmentDate?.invalid && appointmentDate?.touched"
-        >appointment date is required.</small
+        >Appointment date is required.</small
       >
     </div>
     <div class="p-field p-fluid">
@@ -69,11 +70,10 @@
         placeholder="Time"
         [showIcon]="true"
         icon="pi pi-angle-down"
-        class="inputFromUser"
-        formControlName="time"
+        class="input-cal"
       ></p-calendar>
       <small class="error" *ngIf="time?.invalid && time?.touched"
-        >time is required.</small
+        >Time is required.</small
       >
     </div>
     
@@ -87,15 +87,17 @@
       optionLabel="name"
       scrollHeight="120px"
       (onChange)="onChange($event)"
+      class="inputFromUser input-cal"
     >
     </p-dropdown>
 
       <small
         class="error"
         *ngIf="destinationAddress?.invalid && destinationAddress?.touched"
-        >destination address is required.</small
+        >Destination address is required.</small
       >
     </div>
+    
     <div class="p-field p-fluid" *ngIf="showOtherAddressTextBox">
       <input
       type="text"
@@ -108,7 +110,7 @@
       <small
         class="error"
         *ngIf="destinationAddress2?.invalid && destinationAddress2?.touched"
-        >destination address is required.</small
+        >Destination address is required.</small
       >
     </div>
     <div class="p-fluid p-formgrid p-grid">
@@ -125,7 +127,7 @@
           formControlName="city"
         />
         <small class="error" *ngIf="city?.invalid && city?.touched"
-          >city is required.</small
+          >City is required.</small
         >
       </div>
       <div class="p-field p-col-4 p-md-3">
@@ -141,17 +143,18 @@
          <p-dropdown
           [autoDisplayFirst]="false"
           [options]="states"
+        appendTo="body" 
           formControlName="selectedState"
           placeholder="State"
           optionLabel="name"
-          class="inputFromUser"
+          class="inputFromUser input-cal"
         >
         </p-dropdown>
         <small
           class="error"
           *ngIf="control.selectedState?.invalid && control.selectedState?.touched"
          
-          >state is required.</small
+          >State is required.</small
         >
       </div>
       <div class="p-field p-col-6 p-md-4">
@@ -166,7 +169,7 @@
           class="inputFromUser"
         />
         <small class="error" *ngIf="zipcode?.invalid && zipcode?.touched"
-          >zipcode is required.</small
+          >Zipcode is required.</small
         >
       </div>
     </div>
@@ -175,7 +178,7 @@
       type="submit"
       pButton
       label="Submit"
-      class="p-button-outlined"
+      [ngClass]="transportRequestForm.invalid ? ' p-button-outlined p-button-disabled' : 'p-button-outlined'"
       [disabled]="transportRequestForm.invalid"
       
     ></button>
