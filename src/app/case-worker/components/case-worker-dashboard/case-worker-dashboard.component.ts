@@ -32,6 +32,10 @@ export class CaseWorkerDashboardComponent implements OnInit {
   public isShowSpinner: boolean = true;
   public wrongDate: boolean = false;
   minimumDate: any;
+  public displayAppointment:boolean = false;
+  public displayEventDialog:boolean = false;
+  public showAppointmentDialog:boolean=true;
+  public showEventDialog:boolean=false;
   constructor(
     private service: CalendarEventsService,
     private formBuilder: FormBuilder,
@@ -78,12 +82,12 @@ export class CaseWorkerDashboardComponent implements OnInit {
   }
 
   changeTimeZone(dateTime: any): string {
-    var d = new Date(dateTime);
-    var timeZoneDifference = (d.getTimezoneOffset() / 60) * -1; //convert to positive value.
-    d.setTime(d.getTime() + timeZoneDifference * 60 * 60 * 1000);
-    console.log('d.toISOString()', d.toISOString());
-    var eventTime = d.toISOString().substring(11, 16);
-    return d.toISOString();
+    var eventDate = new Date(dateTime);
+    var timeZoneDifference = (eventDate.getTimezoneOffset() / 60) * -1; //convert to positive value.
+    eventDate.setTime(eventDate.getTime() + timeZoneDifference * 60 * 60 * 1000);
+    console.log('eventDate.toISOString()', eventDate.toISOString());
+    var eventTime = eventDate.toISOString().substring(11, 16);
+    return eventDate.toISOString();
   }
   public builtForm() {
     this.eventsForm = this.formBuilder.group({
@@ -149,7 +153,13 @@ export class CaseWorkerDashboardComponent implements OnInit {
     //events: './assets/mock/calendarEvents.json',
   };
   addEvent() {
-    this.display = true;
+    if(this.showAppointmentDialog){
+      this.displayAppointment = true;
+      this.displayEventDialog =false
+    }else if(this.showEventDialog){
+      this.displayEventDialog =true;
+      this.displayAppointment =false;
+    }
   }
   get getControl() {
     return this.eventsForm.controls;
@@ -199,7 +209,11 @@ export class CaseWorkerDashboardComponent implements OnInit {
     this.eventsForm.reset();
     let participantsArray = this.eventsForm.get(['participants']) as FormArray;
     this.clearFormArray(participantsArray);
-    this.display = false;
+    if(this.showAppointmentDialog){
+      this.displayAppointment = false;
+    }else if(this.showEventDialog){
+      this.displayEventDialog =false
+    }
   }
   onCancel() {
     this.count = 0;
@@ -212,11 +226,12 @@ export class CaseWorkerDashboardComponent implements OnInit {
     this.tagName = value.activeItem.label;
     if (this.tagName === 'Appointment') {
       this.isAppointment = true;
-      document.getElementById('p-dialog')!.style.overflowY='scroll'
+      this.showEventDialog = false;
+      this.showAppointmentDialog = true;
     } else if (this.tagName === 'Event') {
       this.isAppointment = false;
-      console.log('*** changed');
-      
+      this.showEventDialog = true;
+      this.showAppointmentDialog = false;
     }
   }
   clearFormArray = (formArray: FormArray) => {

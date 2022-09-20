@@ -44,6 +44,7 @@ export class HealthTrackerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    document.getElementById("overlay")!.style.display="block"
     this.veteranId = this.cacheData.get('veteranId');
     this.buildForm();
     this.getHealthTrackerByVeteranId();
@@ -158,7 +159,13 @@ export class HealthTrackerComponent implements OnInit {
     resp.subscribe((data) => {
       console.log('Health Tracker API--->', data);
       this.healthTrackerDetails = data;
+      if(this.healthTrackerDetails){
+        console.log('inside grayyy');
+        
+        
+        document.getElementById("overlay")!.style.display="none"
         this.isShowSpinner=false;
+      }
       this.showFilledForm();
       this.showHealthTrackerTable();
     });
