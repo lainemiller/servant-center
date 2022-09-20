@@ -41,6 +41,7 @@ export class ProfileFormComponent implements OnInit {
   @Input() isShowFields!: boolean;
   veteranId!: number;
   showSpinner:boolean=true;
+  showOverlay:boolean=true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -63,7 +64,6 @@ export class ProfileFormComponent implements OnInit {
     this.selectedMaritalStatus = this.maritalStatus[1];
     this.selectedRelationship = this.relations[1];
     this.buildForm();
-    document.getElementById("overlay")!.style.display="block";
   }
 
   setForm() {
@@ -74,7 +74,7 @@ export class ProfileFormComponent implements OnInit {
         this.veteran = this.profileDetails.data[0];
         if(this.veteran){
           this.showSpinner=false;
-          document.getElementById("overlay")!.style.display="none";
+          this.showOverlay=false;
         }
         console.log('Profile API Data--->', data);
         if (this.veteran.place_of_birth === 'x') {
@@ -216,7 +216,7 @@ export class ProfileFormComponent implements OnInit {
   }
 
   resetForm() {
-    document.getElementById("overlay")!.style.display="block"
+    this.showOverlay=true;
     this.buildForm();
     this.showSpinner=true;
     this.setForm();
