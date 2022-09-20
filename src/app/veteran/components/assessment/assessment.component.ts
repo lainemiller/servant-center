@@ -12,7 +12,7 @@ export class AssessmentComponent implements OnInit {
   public assessDetails: any;
   public assesssmentData:any
   public vetID!: number;
-  public showAssessment: boolean = false;
+  public showAssessment!: boolean;
   constructor(private service: AssessmentDataService,
     private cachedata: ClipBoardService) {
       this.vetID = this.cachedata.get("veteranId")

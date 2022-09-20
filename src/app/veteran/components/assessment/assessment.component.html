@@ -1,8 +1,5 @@
 <app-item-header title="ASSESSMENT FORM"></app-item-header>
 <section class="assessment-container">
-    <div class="Spinner">
-        <p-progressSpinner *ngIf="!showAssessment"></p-progressSpinner>
-      </div>
     <p-accordion>
             <p-accordionTab *ngFor="let info of assesssmentData" header="{{info.header}}">  
                 <section  class="p-fluid p-ml-5 p-grid assessment-container__section">
@@ -17,4 +14,8 @@
             </p-accordionTab>
     </p-accordion>
 </section>
-<div id="overlay"></div>
+<div id="overlay">
+    <div class="center-spinner">
+        <p-progressSpinner *ngIf="!showAssessment" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+      </div>
+</div>

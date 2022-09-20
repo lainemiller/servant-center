@@ -20,7 +20,7 @@ interface DropDown {
 export class ProgressNotesComponent implements OnInit {
   [x: string]: any;
   public title = 'PROGRESS NOTES';
-  public submitted = false;
+  public submitted!: boolean;
   public display = false;
   public displayList = false;
   public status: any;
@@ -122,11 +122,11 @@ export class ProgressNotesComponent implements OnInit {
     this.service
       .postNotes(this.vetID, this.progressNote.value)
       .subscribe((data) => {
+        this.submitted = false;
         console.log('Submitted');
         console.log(this.progressNote.value);
         console.log('data data', data);
         if (data.responseStatus === 'SUCCESS') {
-          this.submitted = true;
           document.getElementById("overlay")!.style.display="none"
           console.log('successfully added new progress note');
           this.sucessMessage();
