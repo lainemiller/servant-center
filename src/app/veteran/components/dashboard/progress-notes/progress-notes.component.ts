@@ -109,6 +109,7 @@ export class ProgressNotesComponent implements OnInit {
     return this.progressNote.controls;
   }
   onSubmit() {
+    document.getElementById("overlay")!.style.display="block"
     let d =
       new Date().getMonth() +
       1 +
@@ -121,11 +122,12 @@ export class ProgressNotesComponent implements OnInit {
     this.service
       .postNotes(this.vetID, this.progressNote.value)
       .subscribe((data) => {
-        this.submitted = true;
         console.log('Submitted');
         console.log(this.progressNote.value);
         console.log('data data', data);
         if (data.responseStatus === 'SUCCESS') {
+          this.submitted = true;
+          document.getElementById("overlay")!.style.display="none"
           console.log('successfully added new progress note');
           this.sucessMessage();
         } else if (data.responseStatus === 'FAILUER') {
@@ -143,7 +145,6 @@ export class ProgressNotesComponent implements OnInit {
   
     this.display = false;
     this.progressNote.reset();
-    // window.location.reload();
   }
   crossButton() {
     this.initialStatus = true;

@@ -1,5 +1,10 @@
 <p-toast position="top-center"></p-toast>
 <app-item-header [title]="title"></app-item-header>
+<div id="overlay">
+  <div class="center-spinner">
+    <p-progressSpinner *ngIf="!submitted"></p-progressSpinner>
+  </div>
+  </div>
 <div class="progress-notes--container">
   <p-toolbar id="progress-notes--mainToolbar">
     <div class="p-toolbar-group-left">
