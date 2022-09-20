@@ -1,7 +1,9 @@
 <p-toast position="top-center"></p-toast>
+<div id="overlay">
 <div class="center-spinner">
   <p-progressSpinner *ngIf="showSpinner" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
   </div>
+</div>
 <div class="p-grid">
   <div class="p-col-12">
     <app-item-header title="TREATMENT PLAN"></app-item-header>
@@ -786,7 +788,7 @@
                             placeholder="Target date"
                             (onSelect)="validateDate($event)"
                             (focusout)="getDate($event)"
-                            [maxDate]="maxDateValue"
+                            [minDate]="minDateValue"
                           ></p-calendar>
                         </div>
                         <div
@@ -806,7 +808,7 @@
                             placeholder="Target date"
                             (onSelect)="validateDate($event)"
                             (focusout)="getDate($event)"
-                            [maxDate]="maxDateValue"
+                            [minDate]="minDateValue"
                           ></p-calendar>
                         </div>
                         <div
@@ -826,7 +828,7 @@
                             placeholder="Target date"
                             (onSelect)="validateDate($event)"
                             (focusout)="getDate($event)"
-                            [maxDate]="maxDateValue"
+                            [minDate]="minDateValue"
                           ></p-calendar>
                         </div>
                         <div
@@ -847,7 +849,7 @@
                             placeholder="Target date"
                             (onSelect)="validateDate($event)"
                             (focusout)="getDate($event)"
-                            [maxDate]="maxDateValue"
+                            [minDate]="minDateValue"
                           ></p-calendar>
                         </div>
                         <div
@@ -870,7 +872,7 @@
                             placeholder="Target date"
                             (onSelect)="validateDate($event)"
                             (focusout)="getDate($event)"
-                            [maxDate]="maxDateValue"
+                            [minDate]="minDateValue"
                           ></p-calendar>
                         </div>
                         <div
@@ -890,7 +892,7 @@
                             placeholder="Target date"
                             (onSelect)="validateDate($event)"
                             (focusout)="getDate($event)"
-                            [maxDate]="maxDateValue"
+                            [minDate]="minDateValue"
                           ></p-calendar>
                         </div>
                         <div
@@ -910,7 +912,7 @@
                             placeholder="Target date"
                             (onSelect)="validateDate($event)"
                             (focusout)="getDate($event)"
-                            [maxDate]="maxDateValue"
+                            [minDate]="minDateValue"
                           ></p-calendar>
                         </div>
                         <div
@@ -933,7 +935,7 @@
                             placeholder="Target date"
                             (onSelect)="validateDate($event)"
                             (focusout)="getDate($event)"
-                            [maxDate]="maxDateValue"
+                            [minDate]="minDateValue"
                           ></p-calendar>
                         </div>
                         <div
