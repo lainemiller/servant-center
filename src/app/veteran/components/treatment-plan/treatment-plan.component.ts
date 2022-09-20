@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -25,6 +26,8 @@ export class TreatmentPlanComponent implements OnInit {
   public treatmentArr: any;
   public formData:any;
   public vetID: number;
+  public intake_date:any;
+  public date_of_birth:any;
  public persons=['Client','Case Manager','RN']
  showSpinner:boolean=true;
  
@@ -34,6 +37,7 @@ export class TreatmentPlanComponent implements OnInit {
     private cacheData:ClipBoardService,
     private messageService: MessageService,
     private router: Router,
+    private datepipe: DatePipe,
   ) {
     this.minDateValue = new Date();
     this.vetID=this.cacheData.get("veteranId")
@@ -53,14 +57,16 @@ export class TreatmentPlanComponent implements OnInit {
         this.showSpinner=false;
         document.getElementById("overlay")!.style.display="none";
       }
+      this.intake_date = this.datepipe.transform(this.data.intake_date, 'dd/MM/yyyy');
+      this.date_of_birth = this.datepipe.transform(this.data.date_of_birth, 'dd/MM/yyyy');
       console.log('TP API data->',res);
       this.buildForm();
       this.treatmentPlanForm.patchValue({
         firstName: this.data.first_name,
         lastName: this.data.last_name,
         recordNo: this.data.record_number,
-        dateOfBirth1: this.data.date_of_birth,
-        intakeDOB: this.data.intake_date,
+        dateOfBirth1: this.date_of_birth,
+        intakeDOB: this.intake_date,
         hmisIdNo: this.data.hmis_id,
         treatmentIssues: this.data.treatmentIssues
       });
@@ -149,7 +155,7 @@ export class TreatmentPlanComponent implements OnInit {
     this.formView = false;
     this.showTopView();
     this.formData= this.treatmentPlanForm.value;
-    
+    this.treatmentArr = this.treatmentPlanForm.get('treatmentIssues')?.value;    
   }
   showTopView() {
     const p = document.querySelector('#prnt');

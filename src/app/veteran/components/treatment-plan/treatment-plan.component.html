@@ -91,7 +91,6 @@
             placeholder="DateOfBirth"
             class="disable-field"
             [readonly]="true"
-            value="{{ data?.date_of_birth | date: 'dd/MM/yyyy'  }}"
             
           />
             <div
@@ -117,7 +116,7 @@
             placeholder="Intake Date (mm/dd/yyyy)"
             class="disable-field"
             [readonly]="true"
-            value="{{ data?.intake_date | date: 'dd/MM/yyyy' }}"
+            
             />
             <div
               *ngIf="
@@ -1011,11 +1010,11 @@
           </section>
           <section class="p-field p-col-12 p-md-2">
             <span class="form-head--data">DOB: </span>
-            <span class="form-head--data__light">{{ formData.dateOfBirth1 | date: 'dd/MM/yyyy'}}</span>
+            <span class="form-head--data__light">{{ formData.dateOfBirth1 }}</span>
           </section>
           <section class="p-field p-col-12 p-md-2">
             <span class="form-head--data">IntakeDate: </span>
-            <span class="form-head--data__light">{{ formData.intakeDOB  | date: 'dd/MM/yyyy' }}</span>
+            <span class="form-head--data__light">{{ formData.intakeDOB }}</span>
           </section>
           <section class="p-field p-col-12 p-md-2">
             <span class="form-head--data">HMIS ID: </span>

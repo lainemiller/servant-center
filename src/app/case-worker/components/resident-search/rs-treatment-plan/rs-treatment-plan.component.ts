@@ -1,11 +1,14 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { DataService } from 'src/app/case-worker/services/data.service';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 @Component({
   selector: 'app-rs-treatment-plan',
   templateUrl: './rs-treatment-plan.component.html',
   styleUrls: ['./rs-treatment-plan.component.scss'],
+  providers: [MessageService],
 })
 export class RsTreatmentPlanComponent implements OnInit {
   public treatmentPlanForm!: FormGroup;
@@ -21,11 +24,14 @@ export class RsTreatmentPlanComponent implements OnInit {
   public treatmentArr: any;
   public formData:any;
   public vetID!:any;
+  showSpinner:boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
     private service: DataService,
-    private cacheData:ClipBoardService
+    private cacheData:ClipBoardService,
+    private messageService: MessageService,
+    private scroller: ViewportScroller
   ) {
     this.vetID=this.cacheData.get("selectedResidentVeteranId");
     this.setForm();
@@ -33,12 +39,17 @@ export class RsTreatmentPlanComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    document.getElementById("overlay")!.style.display="block";
     this.buildForm();
   }
 
   setForm() {
     this.service.getTreatmentPlanData(this.vetID).subscribe((res) => {
       this.data = res.data;
+        if(this.data){
+          this.showSpinner=false;
+          document.getElementById("overlay")!.style.display="none";
+        }      
       this.buildForm();
       this.treatmentPlanForm.patchValue({
         firstName: this.data.first_name,
@@ -130,15 +141,19 @@ export class RsTreatmentPlanComponent implements OnInit {
 
   onSubmit() {
     this.formView = false;
+    this.showSpinner=true;
     //this.treatmentArr = this.treatmentPlanForm.get('treatmentIssues')?.value;
     this.service.updateTreatmentPlanData(this.vetID,this.treatmentPlanForm.value).subscribe((response)=>{
       if (response.responseStatus === 'SUCCESS'){
-        alert("Updated TreatmentPlan successfully");
+        setTimeout(() => {
+          this.showSpinner=false;
+          this.successMessage();
+          this.scroller.scrollToAnchor("topOfPage");
+        }, 500); 
       }else if (response.responseStatus === 'FAILURE'){
-        alert('Error updating');
+        this.errorMessage();
       }
-    })
-    
+    })  
   }
  
   initializeIssuesFormArray() {
@@ -225,9 +240,25 @@ export class RsTreatmentPlanComponent implements OnInit {
       this.delete = true;
     }
   }
+
+  successMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Updated',
+      detail: 'Treatment-Plan updated successfully!!',
+    });
+  }
+
+  errorMessage() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Treatment-Plan not updated!!',
+    });
+  }
+
   resetForm() {
     this.formView=true;
- 
     this.buildForm();
     this.setForm();
   }
