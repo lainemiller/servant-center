@@ -34,7 +34,8 @@ export class HealthTrackerComponent implements OnInit {
   tableBreathalyzerValues!: any[];
   tableBloodSugarValues!: any[];
   tableOtherValues!: any[];
-  isShowSpinner:boolean=true
+  isShowSpinner: boolean = true;
+  showOverlay: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -152,13 +153,16 @@ export class HealthTrackerComponent implements OnInit {
       }
     }
   }
- 
+
   getHealthTrackerByVeteranId() {
     let resp = this.service.getHealthTrackerByVeteranId(this.veteranId);
     resp.subscribe((data) => {
       console.log('Health Tracker API--->', data);
       this.healthTrackerDetails = data;
-        this.isShowSpinner=false;
+      if (this.healthTrackerDetails) {
+        this.showOverlay = false;
+        this.isShowSpinner = false;
+      }
       this.showFilledForm();
       this.showHealthTrackerTable();
     });
@@ -328,18 +332,23 @@ export class HealthTrackerComponent implements OnInit {
         if (formValue[i].trackingSubject === currentValue[j].tracking_subject) {
           var formValueDate = new Date(formValue[i].date);
           var formDate =
-            formValueDate.getUTCDate() +
+            formValueDate.getDate() +
             '/' +
-            formValueDate.getUTCMonth() +
+            (formValueDate.getMonth() + 1) +
             '/' +
-            formValueDate.getUTCFullYear();
-          var currentValueDate = new Date(currentValue[j].note_date);
+            formValueDate.getFullYear();
+          var currentValueDate = new Date(
+            new Date(currentValue[j].note_date).toUTCString()
+          );
           var currentDate =
-            currentValueDate.getUTCDate() +
+            currentValueDate.getDate() +
             '/' +
-            currentValueDate.getUTCMonth() +
+            (currentValueDate.getMonth() + 1) +
             '/' +
-            currentValueDate.getUTCFullYear();
+            currentValueDate.getFullYear();
+          console.log('formDate', formDate);
+          console.log('currentDate', currentDate);
+          console.log('comparision', formDate === currentDate);
           if (
             formDate === currentDate &&
             formValue[i].measurement !== currentValue[j].measurement
@@ -362,6 +371,26 @@ export class HealthTrackerComponent implements OnInit {
             console.log('old', oldTrackerValue);
             healthTrackerValue.push(formValue[i]);
             console.log('new', formValue[i]);
+          }
+          if (formDate != currentDate) {
+            console.log('date changed form', formValue[i]);
+            let oldTrackerValue = currentValue.filter((data: any) => {
+              let trackerDate = new Date(
+                new Date(data.note_date).toUTCString()
+              );
+              data.note_date =
+                trackerDate.getMonth() +
+                1 +
+                '/' +
+                trackerDate.getDate() +
+                '/' +
+                trackerDate.getFullYear();
+              return data.tracking_subject === formValue[i].trackingSubject;
+            });
+            updateHealthTrackerValue.push(oldTrackerValue);
+            console.log('date old', oldTrackerValue);
+            healthTrackerValue.push(formValue[i]);
+            console.log('date new', formValue[i]);
           }
           if (formValue[i].comments != currentValue[j].tracking_comments) {
             console.log('comments changed form', formValue[i]);
@@ -431,6 +460,8 @@ export class HealthTrackerComponent implements OnInit {
   }
 
   resetForm() {
+    this.isShowSpinner = true;
+    this.showOverlay = true;
     this.buildForm();
     this.isFormFilled = false;
     this.getHealthTrackerByVeteranId();

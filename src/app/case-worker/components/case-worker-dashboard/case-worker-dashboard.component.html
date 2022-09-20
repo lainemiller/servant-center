@@ -1,3 +1,4 @@
+<div id="overlay"></div>
 <p-toast position="top-center"></p-toast>
 <div class="center-spinner">
   <p-progressSpinner *ngIf="isShowSpinner" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
@@ -23,26 +24,30 @@
           </section>
         </div>
         <!-- modal for add event / appointment starts -->
-        <div class="calendar-header__addEvent" >
+        <div class="calendar-header__addEvent" *ngIf="showAppointmentDialog" >
           <p-dialog
             header="Add an {{ tagName }}"
-            [(visible)]="display"
+            [(visible)]="displayAppointment"
             [breakpoints]="{ '960px': '70vw', '640px': '100vw' }"
             [draggable]="false"
             [modal]="true"
             (onHide)="crossButton()"
+            styleClass="my-style-class"
             [contentStyle]="{'overflow': 'visible'}"
-            [style]="{ width: '500px',height:'600px','overflow-y':'scroll' }"
+            [style]="{'overflow-y':'scroll' }"
           >
             <form [formGroup]="eventsForm" (ngSubmit)="onSubmit()" >
               <div class="p-fluid">
-                <div class="p-field p-col-12 p-sm-12">
+                <div class="p-field p-col-12 p-sm-12" >
                   <p-calendar
+                  [showIcon]="true"
                     formControlName="startTime"
                     placeholder="Start Time"
                     [showTime]="true"
                     [showSeconds]="true"
+                    [minDate]="minimumDate"
                     inputId="time"
+                    #startDate
                   ></p-calendar>
                   <div
                     *ngIf="
@@ -53,13 +58,17 @@
                     <small class="form-error"> Start Time is required. </small>
                   </div>
                 </div>
-                <div class="p-field p-col-12 p-sm-12">
+                <div class="p-field p-col-12 p-sm-12" >
                   <p-calendar
+                  [showIcon]="true"
                     formControlName="endTime"
                     placeholder="End Time"
                     [showTime]="true"
                     [showSeconds]="true"
+                    [minDate]="minimumDate"
                     inputId="time"
+                    #endTime
+                    (onFocus)="focusFunction()"
                   ></p-calendar>
                   <div
                     *ngIf="
@@ -68,14 +77,18 @@
                   >
                     <small class="form-error"> End Time is required. </small>
                   </div>
+                  <div>
+                    <small class="form-error" *ngIf="wrongDate">End date must be greater that start date</small>
+                  </div>
                 </div>
-                <div class="p-field p-col-12 p-sm-12">
+                <div class="p-field p-col-12 p-sm-12" >
                   <input
                     type="text"
                     formControlName="eventTitle"
                     pInputText
                     placeholder="Title"
                     class="user_input--color"
+                    (click)="checkDate(startDate,endTime)"
                   />
                   <div
                     *ngIf="
@@ -86,7 +99,7 @@
                     <small class="form-error"> Event Title is required. </small>
                   </div>
                 </div>
-                <div class="p-field p-col-12 p-sm-12">
+                <div class="p-field p-col-12 p-sm-12" >
                   <textarea
                     placeholder="Description"
                     [rows]="5"
@@ -106,7 +119,7 @@
                     </small>
                   </div>
                 </div>
-                <div class="p-field p-col-12 p-sm-12">
+                <div> <div class="p-field p-col-12 p-sm-12" >
                   <h4>
                     Participants E-mail:<span
                       *ngIf="!participants.controls.length"
@@ -151,6 +164,116 @@
                   <h5 style="color: red" *ngIf="participantsExceeded">
                     Maximum 20 participants should be there.
                   </h5>
+                </div></div>
+               
+              </div>
+              <div class="button--margin">
+                <button type="submit" pButton [disabled]="eventsForm.invalid">
+                  Submit
+                </button>
+                <p-button
+                  label="Cancel"
+                  (click)="onCancel()"
+                  styleClass="p-button-link"
+                ></p-button>
+              </div>
+            </form>
+          </p-dialog>
+        </div>
+        <div class="calendar-header__addEvent" *ngIf="showEventDialog">
+          <p-dialog
+            header="Add an {{ tagName }}"
+            [(visible)]="displayEventDialog"
+            [breakpoints]="{ '960px': '70vw', '640px': '100vw' }"
+            [draggable]="false"
+            [modal]="true"
+            (onHide)="crossButton()"
+            styleClass="my-style-class"
+            [contentStyle]="{'overflow': 'visible'}"
+            [style]="{'overflow-y':'scroll' }"
+          >
+            <form [formGroup]="eventsForm" (ngSubmit)="onSubmit()" >
+              <div class="p-fluid">
+                <div id="commonPadding" class="p-field p-col-12 p-sm-12" >
+                  <p-calendar
+                  [showIcon]="true"
+                    formControlName="startTime"
+                    placeholder="Start Time"
+                    [showTime]="true"
+                    [showSeconds]="true"
+                    [minDate]="minimumDate"
+                    inputId="time"
+                    #startDate
+                  ></p-calendar>
+                  <div
+                    *ngIf="
+                      getControl.startTime.touched &&
+                      getControl.startTime.invalid
+                    "
+                  >
+                    <small class="form-error"> Start Time is required. </small>
+                  </div>
+                </div>
+                <div id="commonPadding" class="p-field p-col-12 p-sm-12" >
+                  <p-calendar
+                  [showIcon]="true"
+                    formControlName="endTime"
+                    placeholder="End Time"
+                    [showTime]="true"
+                    [showSeconds]="true"
+                    [minDate]="minimumDate"
+                    inputId="time"
+                    #endTime
+                    (onFocus)="focusFunction()"
+                  ></p-calendar>
+                  <div
+                    *ngIf="
+                      getControl.endTime.touched && getControl.endTime.invalid
+                    "
+                  >
+                    <small class="form-error"> End Time is required. </small>
+                  </div>
+                  <div>
+                    <small class="form-error" *ngIf="wrongDate">End date must be greater that start date</small>
+                  </div>
+                </div>
+                <div class="p-field p-col-12 p-sm-12" >
+                  <input
+                    type="text"
+                    formControlName="eventTitle"
+                    pInputText
+                    placeholder="Title"
+                    class="user_input--color"
+                    (click)="checkDate(startDate,endTime)"
+                  />
+                  <div
+                    *ngIf="
+                      getControl.eventTitle.touched &&
+                      getControl.eventTitle.invalid
+                    "
+                  >
+                    <small class="form-error"> Event Title is required. </small>
+                  </div>
+                </div>
+                <div class="p-field p-col-12 p-sm-12" >
+                  <textarea
+                    placeholder="Description"
+                    [rows]="7"
+                    formControlName="eventDescription"
+                    [cols]="50"
+                    class="user_input--color"
+                    pInputTextarea
+                  ></textarea>
+                  <div
+                    *ngIf="
+                      getControl.eventDescription.touched &&
+                      getControl.eventDescription.invalid
+                    "
+                  >
+                    <small class="form-error">
+                      Event Description is required.
+                    </small>
+                  </div>
                 </div>
               </div>
               <div class="button--margin">
