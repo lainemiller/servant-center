@@ -12,7 +12,6 @@ export class HealthTrackerService {
   private isDev=isDevMode();
   private commonUrl=env.localUrl;
   private getHealthTrackerAPI=environment.serviceUrl.getHealthTracker;
-  private addHealthTrackerAPI=environment.serviceUrl.saveHealthTracker;
   private updateHealthTrackerAPI=environment.serviceUrl.updateHealthTracker;
 
   constructor(private restcs:RestClientService) { }
@@ -25,17 +24,9 @@ export class HealthTrackerService {
     }
   }
 
-  public addHealthTrackerByVeteranID(endPoint:number,payload={}): Observable<any>{
-    if(this.isDev){
-      return this.restcs.post(this.commonUrl+'healthTracker/saveHealthTrackerRequest/'+endPoint,payload)
-    }else{
-      return this.restcs.post(this.addHealthTrackerAPI+endPoint,payload)
-    }
-  }
-
   public updateHealthTrackerByVeteranID(endPoint:number,payload={}): Observable<any>{
     if(this.isDev){
-      return this.restcs.post(this.commonUrl+'healthTracker/updateHealthTrackerRequest/'+endPoint,payload)
+      return this.restcs.post(this.commonUrl+'healthTracker/updateHealthTracker/'+endPoint,payload)
     }else{
       return this.restcs.post(this.updateHealthTrackerAPI+endPoint,payload)
     }
