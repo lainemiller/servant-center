@@ -30,11 +30,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     //to get all the events of logged in veteran
+    document.getElementById("overlay")!.style.display="block"
     this.veteranId = this.cache.get('veteranId');
     console.log('this.veteranId',this.veteranId);
     this.service.getVeteranEvents(this.veteranId).subscribe((eventData:any)=>{
       if(eventData){
         this.isShowSpinner=false;
+        document.getElementById("overlay")!.style.display="none"
       }
       console.log('veteran event data id',eventData);
       this.getVeteranEventData(eventData)
