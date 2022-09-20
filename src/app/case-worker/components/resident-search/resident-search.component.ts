@@ -12,6 +12,7 @@ import { MenuItem } from 'primeng/api';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { ResidentSearchService } from '../../services/resident-search.service';
 
+
 @Component({
   selector: 'app-resident-search',
   templateUrl: './resident-search.component.html',
@@ -32,8 +33,7 @@ export class ResidentSearchComponent implements OnInit {
   public data:any;
   public submit:boolean=true;
   newDate: any;
-  resultDate: any;
-  latest_date: any;
+  
 
   @Output() groupFilters: EventEmitter<any> = new EventEmitter<any>();
 
@@ -48,14 +48,18 @@ export class ResidentSearchComponent implements OnInit {
     private cacheData: ClipBoardService
   ) {
     this.maxDateValue = new Date(new Date().getTime());
+    this.setForm();
+  }
+  setForm(){
     this.service.getResidentSearchData().subscribe((res) => {
       setTimeout(()=>{
       this.data=res;
       if(this.data){
         this.showSpinner=false;
+        document.getElementById("overlay")!.style.display="none";
       }
       this.tableValues = this.data;
-    },500)
+    },100)
     });
   }
 
@@ -106,30 +110,34 @@ export class ResidentSearchComponent implements OnInit {
   ];
   ngOnInit(): void {
     this.buildForm();
+    document.getElementById("overlay")!.style.display="block";
   }
 
-  onSubmit(data: any){
-    console.log(data);
+  onSubmit(data: any){    
     if(data.birthDate){
-      this.newDate=this.datepipe.transform(data.birthDate, 'MM/dd/yyyy');
+      this.newDate=this.datepipe.transform(data.birthDate, 'yyyy/MM/dd');
       data.birthDate = this.newDate;
-      console.log(data);
     }
       this.result = this.tableValues.filter((index: any) => {
+        let indexDate = this.datepipe.transform(index.date_of_birth, 'yyyy/MM/dd');        
       if(!data.birthDate){
+        if(data.firstName && data.lastName){
+          return (
+            index.first_name.toLowerCase() === data.firstName.toLowerCase() &&
+            index.last_name.toLowerCase() === data.lastName.toLowerCase() 
+          );
+        }else{
+          return (
+            index.first_name.toLowerCase() === data.firstName.toLowerCase()  
+          );
+        } 
+      } else {
         return (
-          index.first_name == data.firstName &&
-          index.last_name == data.lastName 
-        );
-      }else{
-        return (
-          index.firstName == data.firstName &&
-          index.lastName == data.lastName   &&
-          index.birthDate == data.birthDate
+          index.first_name.toLowerCase() == data.firstName.toLowerCase() &&
+          indexDate == data.birthDate
         );
       }
     });
-     console.log(this.result);
     this.tableValues = this.result;
   }
 
@@ -139,7 +147,7 @@ export class ResidentSearchComponent implements OnInit {
     this.residentSearchForm = this.formBuilder.group({
       type: [''],
       firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      lastName: [''],
       birthDate: [''],
     });
   }
@@ -156,14 +164,8 @@ export class ResidentSearchComponent implements OnInit {
     return this.residentSearchForm.get('birthDate');
   }
 
-
-  reset() {
+   resetData() {
     this.buildForm();
-    let currentUrl = this.router.url;
-    this.router
-      .navigateByUrl('resident-search', { skipLocationChange: true })
-      .then(() => {
-        this.router.navigate([currentUrl]);
-      });
+    this.setForm();
   }
 }
