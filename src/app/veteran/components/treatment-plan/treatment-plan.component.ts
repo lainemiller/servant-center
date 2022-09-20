@@ -18,7 +18,7 @@ export class TreatmentPlanComponent implements OnInit {
   public issuesArray: any = [];
   public delete: boolean = true;
   public error: boolean = false;
-  public maxDateValue: any;
+  public minDateValue: any;
   public eventId: any;
   public data: any;
   public formView = true;
@@ -27,6 +27,7 @@ export class TreatmentPlanComponent implements OnInit {
   public vetID: number;
  public persons=['Client','Case Manager','RN']
  showSpinner:boolean=true;
+ 
   constructor(
     private formBuilder: FormBuilder,
     private service: VeteranDashboardService,
@@ -34,12 +35,14 @@ export class TreatmentPlanComponent implements OnInit {
     private messageService: MessageService,
     private router: Router,
   ) {
+    this.minDateValue = new Date();
     this.vetID=this.cacheData.get("veteranId")
     this.setForm();
 
   }
 
   ngOnInit(): void {
+    document.getElementById("overlay")!.style.display="block";
     this.buildForm();
   }
 
@@ -48,6 +51,7 @@ export class TreatmentPlanComponent implements OnInit {
       this.data = res.data;      
       if(this.data){
         this.showSpinner=false;
+        document.getElementById("overlay")!.style.display="none";
       }
       console.log('TP API data->',res);
       this.buildForm();

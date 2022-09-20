@@ -33,8 +33,7 @@ export class ResidentSearchComponent implements OnInit {
   public data:any;
   public submit:boolean=true;
   newDate: any;
-  resultDate: any;
-  latest_date: any;
+  
 
   @Output() groupFilters: EventEmitter<any> = new EventEmitter<any>();
 
@@ -57,6 +56,7 @@ export class ResidentSearchComponent implements OnInit {
       this.data=res;
       if(this.data){
         this.showSpinner=false;
+        document.getElementById("overlay")!.style.display="none";
       }
       this.tableValues = this.data;
     },100)
@@ -110,6 +110,7 @@ export class ResidentSearchComponent implements OnInit {
   ];
   ngOnInit(): void {
     this.buildForm();
+    document.getElementById("overlay")!.style.display="block";
   }
 
   onSubmit(data: any){    
