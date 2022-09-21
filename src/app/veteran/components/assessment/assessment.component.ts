@@ -11,6 +11,7 @@ import { AssessmentDataService } from '../../services/assessment-data.service';
 export class AssessmentComponent implements OnInit {
   public assessDetails: any;
   public assesssmentData:any
+  public grayingOut: boolean = true;
   public vetID!: number;
   public showAssessment: boolean = true;
   constructor(private service: AssessmentDataService,
@@ -19,14 +20,13 @@ export class AssessmentComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    document.getElementById("overlay")!.style.display="block"
     this.service.getData(this.vetID).subscribe((data:AssessmentResp) => {
       this.assessDetails = data;
       console.log(this.assessDetails.assessment_details);
       this.assesssmentData=this.assessDetails.assessment_details
       if(data){
       this.showAssessment = false;
-      document.getElementById("overlay")!.style.display="none"
+      this.grayingOut = false;
       }
     });
    

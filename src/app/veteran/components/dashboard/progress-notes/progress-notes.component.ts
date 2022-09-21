@@ -20,7 +20,8 @@ interface DropDown {
 export class ProgressNotesComponent implements OnInit {
   [x: string]: any;
   public title = 'PROGRESS NOTES';
-  public submitted!: boolean;
+  public submitted: boolean = true;
+  public greyingOut: boolean= true;
   public display = false;
   public displayList = false;
   public status: any;
@@ -56,6 +57,8 @@ export class ProgressNotesComponent implements OnInit {
     this.service
     .getNotes(this.vetID)
     .subscribe((data: progressNoteResponse) => {
+      this.submitted = false;
+      this.greyingOut = false;
       this.progress = data;
       let k = 0;
       for (let i = this.progress.length; i > 0; i--) {
@@ -111,7 +114,8 @@ export class ProgressNotesComponent implements OnInit {
     return this.progressNote.controls;
   }
   onSubmit() {
-    document.getElementById("overlay")!.style.display="block"
+    this.submitted = true;
+    this.greyingOut = true;
     let d =
       new Date().getMonth() +
       1 +
@@ -124,12 +128,13 @@ export class ProgressNotesComponent implements OnInit {
     this.service
       .postNotes(this.vetID, this.progressNote.value)
       .subscribe((data) => {
-        this.submitted = false;
+        
         console.log('Submitted');
         console.log(this.progressNote.value);
         console.log('data data', data);
         if (data.responseStatus === 'SUCCESS') {
-          document.getElementById("overlay")!.style.display="none"
+          this.submitted = false;
+          this.greyingOut = false;
           console.log('successfully added new progress note');
           this.sucessMessage();
         } else if (data.responseStatus === 'FAILUER') {
@@ -153,7 +158,8 @@ export class ProgressNotesComponent implements OnInit {
     this.progressNote.reset();
   }
   changed(goalId: number, goalState: boolean) {
-    document.getElementById("overlay")!.style.display="block"
+    this.submitted = true;
+    this.greyingOut = true;
     //TO UPDATE STATUS OF PROGRESS NOTE
 
     console.log('goal before passing status', goalState);
@@ -167,11 +173,12 @@ export class ProgressNotesComponent implements OnInit {
     this.service
       .postStatus(this.vetID, this.progressNotesState)
       .subscribe((data) => {
-        this.submitted = false;
+        // this.submitted = false;
         console.log('goal status after change', this.progressNotesState);
         console.log('data data', data);
         if (data.responseStatus === 'SUCCESS') {
-          document.getElementById("overlay")!.style.display="none"
+          this.submitted = false;
+          this.greyingOut = false;
           console.log('successfully saved the goal status');
           this.statusMessage();
         } else if (data.responseStatus === 'FAILUER') {

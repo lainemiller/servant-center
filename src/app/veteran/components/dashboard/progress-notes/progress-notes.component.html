@@ -1,10 +1,10 @@
+
 <p-toast position="top-center"></p-toast>
-<app-item-header [title]="title"></app-item-header>
-<div id="overlay">
+<div *ngIf="greyingOut" id="overlay">  </div>
   <div class="center-spinner">
-    <p-progressSpinner *ngIf="!submitted"></p-progressSpinner>
+    <p-progressSpinner *ngIf="submitted" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
   </div>
-  </div>
+<app-item-header [title]="title"></app-item-header>
 <div class="progress-notes--container">
   <p-toolbar id="progress-notes--mainToolbar">
     <div class="p-toolbar-group-left">
