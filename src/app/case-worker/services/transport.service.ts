@@ -18,19 +18,21 @@ export class TransportService {
 
   public getTransportRequestFormData(payload = {}): Observable<any> {
     const dataFromCache = this.responseCache.get(URL);
-  //   if (this.isDev) {
-  //     return this.http.get(this.serviceUrl+'transportationForm/getTransportationRequests/');
-  //   } else {
-  //     return this.http.get(this.getTransportRequestFormDataAPI);
-  //   }  
-  // }
-    if (dataFromCache) {
-      return of (dataFromCache)
-    } 
-    const response = this.http.get(this.getTransportRequestFormDataAPI);
-    response.subscribe(data => this.responseCache.set(URL, data));
-    return response;
-  } 
+    if (this.isDev) {
+      return this.http.get(this.serviceUrl+'transportationForm/getTransportationRequests/');
+    } else {
+      return this.http.get(this.getTransportRequestFormDataAPI);
+    }  
+  }
+  //   if (dataFromCache) {
+  //     return of (dataFromCache)
+  //   } 
+  //   const response = this.http.get(this.getTransportRequestFormDataAPI);
+  //   response.subscribe(data => this.responseCache.set(URL, data));
+  //   console.log("URL-----",URL);
+    
+  //   return response;
+  // } 
 
   public approveTransportationForm(data:any): Observable<any> {
     if (this.isDev) {
