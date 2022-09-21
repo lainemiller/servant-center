@@ -54,7 +54,7 @@ export class ResidentSearchComponent implements OnInit {
   selectResident(event: any) {
     console.log("selected veteran id",event.data.veteran_id)
     this.cacheData.set('selectedResidentVeteranId',event.data.veteran_id)
-    this.router.navigateByUrl('case-worker/resident-search/initial-assessment/page-1', { skipLocationChange: true })
+    this.router.navigateByUrl('case-worker/resident-search/initial-assessment/page-1', { skipLocationChange: false })
   }
   
   columns = [

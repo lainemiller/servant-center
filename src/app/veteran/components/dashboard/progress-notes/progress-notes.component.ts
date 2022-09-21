@@ -47,20 +47,22 @@ export class ProgressNotesComponent implements OnInit {
 
   ngOnInit(): void {
     //get data from backend
-
-    this.service
-      .getNotes(this.vetID)
-      .subscribe((data: progressNoteResponse) => {
-        this.progress = data;
-        let k = 0;
-        for (let i = this.progress.length; i > 0; i--) {
-          this.progressNotes[k++] = this.progress[i - 1];
-        }
-        this.goalId = this.progressNote.goalId;
-      });
-
+    this.someFun();
     this.initialStatus = false;
     this.buildForm();
+  }
+
+  someFun(){
+    this.service
+    .getNotes(this.vetID)
+    .subscribe((data: progressNoteResponse) => {
+      this.progress = data;
+      let k = 0;
+      for (let i = this.progress.length; i > 0; i--) {
+        this.progressNotes[k++] = this.progress[i - 1];
+      }
+      this.goalId = this.progressNote.goalId;
+    });
   }
 
   expandOrCollapse(index: any) {
@@ -133,7 +135,7 @@ export class ProgressNotesComponent implements OnInit {
         } else if (data.responseStatus === 'FAILUER') {
           this.someError();
         }
-        this.ngOnInit();
+        this.someFun();
       });
     // get data from backend
     this.service
@@ -151,6 +153,7 @@ export class ProgressNotesComponent implements OnInit {
     this.progressNote.reset();
   }
   changed(goalId: number, goalState: boolean) {
+    document.getElementById("overlay")!.style.display="block"
     //TO UPDATE STATUS OF PROGRESS NOTE
 
     console.log('goal before passing status', goalState);
@@ -164,9 +167,11 @@ export class ProgressNotesComponent implements OnInit {
     this.service
       .postStatus(this.vetID, this.progressNotesState)
       .subscribe((data) => {
+        this.submitted = false;
         console.log('goal status after change', this.progressNotesState);
         console.log('data data', data);
         if (data.responseStatus === 'SUCCESS') {
+          document.getElementById("overlay")!.style.display="none"
           console.log('successfully saved the goal status');
           this.statusMessage();
         } else if (data.responseStatus === 'FAILUER') {

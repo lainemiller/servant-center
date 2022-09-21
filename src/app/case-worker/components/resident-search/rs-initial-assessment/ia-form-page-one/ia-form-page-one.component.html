@@ -3,33 +3,41 @@
     <h3>Personal Details </h3>
     <div class="p-fluid p-formgrid p-grid" formGroupName="personalDetails">
       <div class="p-field p-col-12 p-md-3">
+        <span class="label-title">First Name</span>
         <input type="text" pInputText formControlName=firstName placeholder="First Name">
         <small class="error"
-                  *ngIf="iaPage1PD.firstName.errors?.required && iaPage1PD.firstName.touched">first name is required.</small>
+                  *ngIf="iaPage1PD.firstName.errors?.required && iaPage1PD.firstName.touched">First Name is Required.</small>
       </div>
       <div class="p-field p-col-12 p-md-3">
+        <span class="label-title">Middle Name</span>
         <input type="text" pInputText formControlName=middleInitial placeholder="Middle Initial">
       </div>
       <div class="p-field p-col-12 p-md-3">
+        <span class="label-title">Last Name</span>
         <input type="text" pInputText formControlName=lastName placeholder="Last Name">
       </div>
       <div class="p-field p-col-12 p-md-3">
+        <span class="label-title">Nick Name</span>
         <input type="text" pInputText formControlName=nickName placeholder="Nick Name">
       </div>
       <div class="p-field p-col-12 p-md-6">
-        <p-calendar formControlName=dob [inline]=false [showIcon]=true placeholder="Date of birth (mm/dd/yyyy)">
-        </p-calendar>
+        <span class="label-title">Date of Birth</span>
+        <input type="text" pInputText formControlName=dob placeholder="DateOfBirth" [readonly]="true">
       </div>
       <div class="p-field p-col-12 p-md-6">
+        <span class="label-title">Place of Birth</span>
         <input type="text" pInputText formControlName=placeOfBirth placeholder="Place of birth">
       </div>
       <div class="p-field p-col-12 p-md-4">
+        <span class="label-title">#SSN</span>
         <input type="text" pInputText formControlName=ssn placeholder="SSN">
       </div>
       <div class="p-field p-col-12 p-md-4">
+        <span class="label-title">Primary phone</span>
         <input type="text" pInputText formControlName=primaryPhone placeholder="Primary Phone">
       </div>
       <div class="p-field p-col-12 p-md-4">
+        <span class="label-title">Age</span>
         <input type="text" pInputText formControlName=age placeholder="Age">
       </div>
       <div class="p-col-12 p-formgroup-inline">
@@ -48,74 +56,100 @@
         </div>
       </div>
       <div class="p-field p-col-12 p-md-6">
+        <span class="label-title">Race</span>
         <input type="text" pInputText formControlName=race placeholder="Race">
       </div>
       <div class="p-field p-col-12 p-md-6">
+        <span class="label-title">Primary Language</span>
         <input type="text" pInputText formControlName=primaryLanguage placeholder="Primary language">
       </div>
       <div class="p-field p-col-12 p-md-6">
+        <span class="label-title">Address Main</span>
         <input type="text" pInputText formControlName=addressMain placeholder="Address Main">
       </div>
       <div class="p-field p-col-12 p-md-6">
+        <span class="label-title">Address Line</span>
         <input type="text" pInputText formControlName=addressLine2 placeholder="Address Line">
       </div>
       <div class="p-field p-col-12 p-md-4">
+        <span class="label-title">City</span>
         <input type="text" pInputText formControlName=city placeholder="City">
       </div>
       <div class="p-field p-col-12 p-md-4">
+        <span class="label-title">Country</span>
         <input type="text" pInputText formControlName=country placeholder="Country">
       </div>
       <div class="p-field p-col-12 p-md-4">
+        <span class="label-title">Zip Code</span>
         <input type="text" pInputText formControlName=zipcode placeholder="Zip Code">
       </div>
       <div class="p-field p-col-12 p-md-6">
+        <span class="label-title">Contact Person</span>
         <input type="text" pInputText formControlName=contactPerson placeholder="Contact Person">
       </div>
       <div class="p-field p-col-12 p-md-6">
+        <span class="label-title">Relationship</span>
         <input type="text" pInputText formControlName=relationship placeholder="Relationship">
       </div>
       <div class="p-field p-col-12">
+        <span class="label-title">Contact Person's Address</span>
         <input type="text" pInputText formControlName=contactPersonAddress placeholder="Contact Person's Address">
       </div>
       <div class="p-field p-col-12 p-md-6">
-        <input type="text" pInputText formControlName=phone placeholder="Contact Person'sPhone">
+        <span class="label-title">Contact Person's Phone</span>
+        <input type="text" pInputText formControlName=phone placeholder="Contact Person's Phone">
       </div>
     </div>
     <h3>Income and resources</h3>
     <div class="p-fluid p-formgrid p-grid" formGroupName="incomeAndResources">
       <div class="p-field p-col-12 p-md-6">
+        <span class="label-title">Income</span>
         <input type="text" pInputText formControlName=income placeholder="Income">
       </div>
       <div class="p-field p-col-12 p-md-6">
         <!-- dropdown ? -->
+        <span class="label-title">Income Type</span>
         <input type="text" pInputText formControlName=type placeholder="Income Type">
       </div>
-      <div class="p-field p-col-12">
+      <div class="p-field p-col-12 p-md-6">
+        <span class="label-title">Bank Accounts</span>
         <input type="text" pInputText formControlName=bankAccount placeholder="Bank Accounts">
       </div>
       <div class="p-field p-col-12 p-md-6">
+        <span class="label-title">Name of The Bank</span>
         <input type="text" pInputText formControlName=bankName placeholder="Name of Bank">
       </div>
       <div class="p-field p-col-12 p-md-6">
         <!-- input type? -->
+        <span class="label-title">Direct Deposit</span>
         <input type="text" pInputText formControlName=directDeposit placeholder="Direct Deposit">
       </div>
-      <div class="p-field p-col-12">
+      <div class="p-field p-col-12 p-md-6">
         <!-- input type? -->
+        <span class="label-title">Other Assets</span>
         <input type="text" pInputText formControlName=otherAssets placeholder="Other Assets">
       </div>
-      <div class="p-field p-col-12">
+      <div class="p-field p-col-12 p-md-3">
         <!-- input type? -->
-        <input type="text" pInputText formControlName=medicaid placeholder="Medicaid/VA Coverage">
+        <span class="label-title">Medicaid Coverage</span>
+        <input type="text" pInputText formControlName=medicaid placeholder="Medicaid Coverage">
       </div>
-      <div class="p-field p-col-12">
+      <div class="p-field p-col-12 p-md-3">
         <!-- input type? -->
-        <input type="text" pInputText formControlName=otherBenefits placeholder="Other Benefits You are receiving">
+        <span class="label-title">VA Coverage</span>
+        <input type="text" pInputText formControlName=vaCoverage placeholder="VA Coverage">
       </div>
-      <div class="p-field p-col-6">
+      <div class="p-field p-col-12 p-md-6">
+        <!-- input type? -->
+        <span class="label-title">Other Benefits You are receiving</span>
+        <input type="text" pInputText formControlName=otherBenefits placeholder="Receiving Benefits">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <span class="label-title">Cash Benefits</span>
         <input type="text" pInputText formControlName=cashBenefits placeholder="Cash Benefits">
       </div>
-      <div class="p-field p-col-6">
+      <div class="p-field p-col-12 p-md-6">
+        <span class="label-title">Non-Cash Benefits</span>
         <input type="text" pInputText formControlName=nonCashBenefits placeholder="Non-Cash Benefits">
       </div>
     </div>
@@ -123,13 +157,15 @@
     <div class="p-fluid p-formgrid p-grid" formGroupName="benefits">
       <div class="p-field p-col-12">
         <!-- input type? multiselect dropdown/checkbox? -->
+        <span class="label-title">what Benefits are You Currently Receiving?</span>
         <input type="text" pInputText formControlName=receivingBenefits
-          placeholder="What benefits are you currently receiving?">
+          placeholder="Currently Receiving Benefits">
       </div>
       <div class="p-field p-col-12">
         <!-- input type? multiselect dropdown/checkbox? -->
+        <span class="label-title">What Benefits Would You Like to Apply for?</span>
         <input type="text" pInputText formControlName=applyingBenefits
-          placeholder="What benefits would you like to apply for">
+          placeholder="Like to Apply for Benefits">
       </div>
     </div>
     <h3>Social & Family history</h3>
@@ -199,7 +235,8 @@
           placeholder="Spouse or Significant Others">
       </div>
       <div class="p-field p-col-12 p-md-5">
-        <input type="text" pInputText formControlName=childhood placeholder="How would you describe your childhood ?">
+        <span class="label-title">How Would You Describe Your Childhood ?</span>
+        <input type="text" pInputText formControlName=childhood placeholder="Describe Your Childhood">
       </div>
       <div class="p-field p-col-12 p-md-7">
         <input type="text" pInputText formControlName=relationShipWithParents
@@ -376,11 +413,11 @@
 
     <div class="p-d-flex button-container p-mt-4">
       <div class="p-jc-start">
-        <button type="button" pButton label="Save"></button>
+        <button type="submit" pButton label="Save"></button>
         <button type="button" pButton label="Cancel" class="p-button-outlined p-ml-3"></button>
       </div>
       <div class="p-jc-end">
-        <button type="submit" pButton label="Next"></button>
+        <button (click)="next()" type="button" pButton label="Next"></button>
       </div>
     </div>
   </form>
