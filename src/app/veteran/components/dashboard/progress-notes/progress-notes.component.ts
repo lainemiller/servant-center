@@ -20,7 +20,8 @@ interface DropDown {
 export class ProgressNotesComponent implements OnInit {
   [x: string]: any;
   public title = 'PROGRESS NOTES';
-  public submitted = false;
+  public submitted: boolean = true;
+  public greyingOut: boolean= true;
   public display = false;
   public displayList = false;
   public status: any;
@@ -40,29 +41,31 @@ export class ProgressNotesComponent implements OnInit {
     private service: ProgressNotesService,
     private cacheData: ClipBoardService,
     private messageService: MessageService,
-    private router: Router,
   ) {
     this.vetID = this.cacheData.get('veteranId');
     this.goalTypes = goalTypes;
-    this.sucessMessage();
   }
 
   ngOnInit(): void {
     //get data from backend
-
-    this.service
-      .getNotes(this.vetID)
-      .subscribe((data: progressNoteResponse) => {
-        this.progress = data;
-        let k = 0;
-        for (let i = this.progress.length; i > 0; i--) {
-          this.progressNotes[k++] = this.progress[i - 1];
-        }
-        this.goalId = this.progressNote.goalId;
-      });
-
+    this.getAllProgressNotes();
     this.initialStatus = false;
     this.buildForm();
+  }
+
+  getAllProgressNotes(){
+    this.service
+    .getNotes(this.vetID)
+    .subscribe((data: progressNoteResponse) => {
+      this.submitted = false;
+      this.greyingOut = false;
+      this.progress = data;
+      let k = 0;
+      for (let i = this.progress.length; i > 0; i--) {
+        this.progressNotes[k++] = this.progress[i - 1];
+      }
+      this.goalId = this.progressNote.goalId;
+    });
   }
 
   expandOrCollapse(index: any) {
@@ -111,6 +114,8 @@ export class ProgressNotesComponent implements OnInit {
     return this.progressNote.controls;
   }
   onSubmit() {
+    this.submitted = true;
+    this.greyingOut = true;
     let d =
       new Date().getMonth() +
       1 +
@@ -123,20 +128,19 @@ export class ProgressNotesComponent implements OnInit {
     this.service
       .postNotes(this.vetID, this.progressNote.value)
       .subscribe((data) => {
-        this.submitted = true;
+        
         console.log('Submitted');
         console.log(this.progressNote.value);
         console.log('data data', data);
         if (data.responseStatus === 'SUCCESS') {
+          this.submitted = false;
+          this.greyingOut = false;
           console.log('successfully added new progress note');
           this.sucessMessage();
-          let currentUrl = this.router.url;
-          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          this.router.onSameUrlNavigation = 'reload';
-           this.router.navigate([currentUrl]);
         } else if (data.responseStatus === 'FAILUER') {
           this.someError();
         }
+        this.getAllProgressNotes();
       });
     // get data from backend
     this.service
@@ -148,13 +152,14 @@ export class ProgressNotesComponent implements OnInit {
   
     this.display = false;
     this.progressNote.reset();
-    // window.location.reload();
   }
   crossButton() {
     this.initialStatus = true;
     this.progressNote.reset();
   }
   changed(goalId: number, goalState: boolean) {
+    this.submitted = true;
+    this.greyingOut = true;
     //TO UPDATE STATUS OF PROGRESS NOTE
 
     console.log('goal before passing status', goalState);
@@ -168,9 +173,12 @@ export class ProgressNotesComponent implements OnInit {
     this.service
       .postStatus(this.vetID, this.progressNotesState)
       .subscribe((data) => {
+        // this.submitted = false;
         console.log('goal status after change', this.progressNotesState);
         console.log('data data', data);
         if (data.responseStatus === 'SUCCESS') {
+          this.submitted = false;
+          this.greyingOut = false;
           console.log('successfully saved the goal status');
           this.statusMessage();
         } else if (data.responseStatus === 'FAILUER') {
@@ -203,7 +211,7 @@ export class ProgressNotesComponent implements OnInit {
 
   someError(){
     this.messageService.add({
-      severity: 'info',
+      severity: 'error',
       summary: 'Failed',
       detail: 'Something Went Wrong!',
     });

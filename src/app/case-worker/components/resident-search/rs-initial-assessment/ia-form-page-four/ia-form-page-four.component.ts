@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IaPage4Service } from 'src/app/case-worker/services/ia-page4.service';
-
+import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 
 @Component({
   selector: 'app-ia-form-page-four',
@@ -10,6 +10,8 @@ import { IaPage4Service } from 'src/app/case-worker/services/ia-page4.service';
   styleUrls: ['./ia-form-page-four.component.scss'],
 })
 export class IaFormPageFourComponent implements OnInit {
+  submitted!: boolean;
+  selecteVetId!: number;
   page4Form!: FormGroup;
   substanceAbuseHistory!: FormGroup;
   legalHistoryOrIssues!: FormGroup;
@@ -38,7 +40,10 @@ export class IaFormPageFourComponent implements OnInit {
     { label: 'On Probation or Parole', key: 'onProbationOrParole' },
   ];
 
-  constructor(private fb: FormBuilder, private router: Router, private service: IaPage4Service) {}
+  constructor(private fb: FormBuilder, private router: Router, private service: IaPage4Service, private cacheData: ClipBoardService) {
+    this.selecteVetId = this.cacheData.get("selectedResidentVeteranId")
+    console.log('sel', this.selecteVetId);
+  }
 
   ngOnInit(): void {
     this.initializeFormGroups();
@@ -46,6 +51,7 @@ export class IaFormPageFourComponent implements OnInit {
 
   initializeFormGroups() {
     this.substanceAbuseHistory = this.fb.group({
+      veteranId: [this.selecteVetId, Validators.required],
       histOfAlcohol: ['', Validators.required],
       currentlyConsumesAlcohol: ['', Validators.required],
       currentAlcoholIntakeFreq: ['', Validators.required],
@@ -65,6 +71,7 @@ export class IaFormPageFourComponent implements OnInit {
     });
 
     this.legalHistoryOrIssues = this.fb.group({
+      veteranId: [this.selecteVetId, Validators.required],
       everArrested: ['', Validators.required],
       arrestedReason: ['', Validators.required],
       everConvicted: ['', Validators.required],
@@ -89,15 +96,31 @@ export class IaFormPageFourComponent implements OnInit {
   }
 
   onSubmit() {
-
+    // let chargesLegal = this.legalHistoryOrIssues.value.charges;
+    // this.legalHistoryOrIssues.value.charges = "{"+chargesLegal + "}";
+    this.submitted = true;
+    
     this.service.initialTreatmentGoalsPage4(this.page4Form.value).subscribe((data) => {
       console.log('Submitted');
     });
-    this.router.navigateByUrl(
-      'case-worker/resident-search/initial-assessment/page-5'
-    );
+
+
+    // this.router.navigateByUrl(
+    //   'case-worker/resident-search/initial-assessment/page-5'
+    // );
 
     console.log('page 4 values', this.page4Form.value);
+  }
+  next(){
+    console.log('clicked next');
+    if(this.submitted){
+    this.router.navigateByUrl(
+      'case-worker/resident-search/initial-assessment/page-4'
+    );
+    }
+    else{
+      alert("Please save first")
+    }
   }
 
   goBack() {
