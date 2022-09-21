@@ -39,15 +39,7 @@ export class IaFormPageOneComponent implements OnInit {
     { label: 'Same Sex Relationship', value: 'Same Sex Relationship' },
     { label: 'Living Together', value: 'Living Together' },
   ];
-  currentMaritalStatusList = [
-    { label: 'Married', value: 'Married' },
-    { label: 'Seperated', value: 'Seperated' },
-    { label: 'Divorced', value: 'Divorced' },
-    { label: 'Widowed', value: 'Widowed' },
-    { label: 'Single', value: 'Single' },
-    { label: 'Same Sex Relationship', value: 'Same Sex Relationship' },
-    { label: 'Living Together', value: 'Living Together' },
-  ];
+
   familyStatusList = [
     { label: 'Living', value: 'living' },
     { label: 'Deceased', value: 'deceased' },
@@ -174,7 +166,6 @@ export class IaFormPageOneComponent implements OnInit {
       fatherStatus: ['', Validators.required],
       siblings: new FormArray([]),
       married: ['', Validators.required],
-      //currentMaritalStatus: ['', Validators.required],
       numberOfMarriages: ['', Validators.required],
       spouseOrSignificvantOther: ['', Validators.required],
       children: new FormArray([]),

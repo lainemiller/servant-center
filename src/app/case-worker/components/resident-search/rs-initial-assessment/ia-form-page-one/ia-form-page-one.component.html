@@ -283,7 +283,7 @@
       <!-- Current marital status goes here -->
       <div class="p-col-12 p-formgroup-inline">
         <label class="p-mr-3 radiobutton-group-label">Current Marital Status: </label>
-        <div *ngFor="let maritalStatus of currentMaritalStatusList; let i = index" class="p-field-radiobutton">
+        <div *ngFor="let maritalStatus of maritalStatusList; let i = index" class="p-field-radiobutton">
           <p-radioButton name="currentMaritalStatus" formControlName=currentMaritalStatus [value]=maritalStatus.value
             inputId="maritalStatus{{i}}"></p-radioButton>
           <label for="maritalStatus{{i}}" class="p-ml-3">{{maritalStatus.label}}</label>
