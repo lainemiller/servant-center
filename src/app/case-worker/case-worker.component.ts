@@ -87,6 +87,7 @@ export class CaseWorkerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   // document.getElementById("overlay")!.style.display="block";
     console.log('case worker component');
     this.getLoginId();
     if (window.innerWidth < 768) this.displayMenu = false;
@@ -196,6 +197,7 @@ export class CaseWorkerComponent implements OnInit {
       if (this.profilePic === null) {
         this.profilePic = '../assets/images/user-profile.jpg';
       }
+    //  document.getElementById("overlay")!.style.display="none"
     });
   }
 }
