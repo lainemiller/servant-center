@@ -1,8 +1,9 @@
+<div *ngIf="showOverlay" id="overlay"></div>
 <p-toast position="top-center"></p-toast>
 <div class="center-spinner">
 <p-progressSpinner *ngIf="showSpinner" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
 </div>
-<div *ngIf="!showSpinner" class="form-container">
+<div class="form-container">
   <div class="p-fluid p-formgrid p-grid">
     <img
       class="form-container__img"
@@ -123,7 +124,7 @@
 
       <div class="p-fluid p-grid">
         <div class="p-field p-col-12 p-md-4">
-          <label class="label-title">Nickname</label>
+          <label class="label-title">Nick Name</label>
           <input
             id="Nick Name"
             maxlength="30"
@@ -353,7 +354,7 @@
               getControl.phoneNumber.errors?.required
             "
           >
-            Phone Number is required.
+            Phone number is required.
           </small>
           <small
             class="form-container__sec-errmsg"
@@ -363,7 +364,7 @@
               !getControl.phoneNumber.errors?.required
             "
           >
-            Phone Number is invalid.
+            Phone number is invalid.
           </small>
         </div>
       </div>
@@ -395,7 +396,7 @@
               class="form-container__sec-errmsg"
               *ngIf="getControl.address1.errors?.required"
             >
-              Address 1 is required.
+              Address is required.
             </small>
           </div>
         </div>
@@ -707,7 +708,7 @@
               getControl.cPhoneNumber.errors?.required
             "
           >
-            Phone Number is required.
+            Phone number is required.
           </small>
           <small
             class="form-container__sec-errmsg"
@@ -717,7 +718,7 @@
               !getControl.cPhoneNumber.errors?.required
             "
           >
-            Phone Number is invalid.
+            Phone number is invalid.
           </small>
         </div>
 

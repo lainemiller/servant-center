@@ -55,7 +55,7 @@ export class RsTreatmentPlanComponent implements OnInit {
         
         veteranNotes:this.data.notes
       });
-      console.log(this.treatmentPlanForm.value);
+      console.log(this.data);
     });
   }
   buildForm() {

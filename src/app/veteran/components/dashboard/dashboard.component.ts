@@ -22,7 +22,8 @@ export class DashboardComponent implements OnInit {
   public totalEvents: any;
   public allEvents: any = [];
   public tagName: string = 'Appointment';
-  public isShowSpinner:boolean=true;
+  public isShowSpinner: boolean = true;
+  public showGrayOut: boolean = true;
   constructor(
     private service: CalendarServiceService,
     private cache: ClipBoardService
@@ -31,23 +32,26 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     //to get all the events of logged in veteran
     this.veteranId = this.cache.get('veteranId');
-    console.log('this.veteranId',this.veteranId);
-    this.service.getVeteranEvents(this.veteranId).subscribe((eventData:any)=>{
-      if(eventData){
-        this.isShowSpinner=false;
-      }
-      console.log('veteran event data id',eventData);
-      this.getVeteranEventData(eventData)
-    })
+    console.log('this.veteranId', this.veteranId);
+    this.service
+      .getVeteranEvents(this.veteranId)
+      .subscribe((eventData: any) => {
+        if (eventData) {
+          this.isShowSpinner = false;
+          this.showGrayOut = false;
+        }
+        console.log('veteran event data id', eventData);
+        this.getVeteranEventData(eventData);
+      });
   }
 
   getVeteranEventData(eventData: any) {
     this.totalEvents = eventData;
     let parti = this.totalEvents.data;
     for (let i = 0; i < this.totalEvents.data.length; i++) {
-        let eventDate = this.totalEvents.data[i].eventstart.substring(0, 10);
-        this.totalEvents.data[i]['date'] = eventDate;
-        this.allEvents.push(this.totalEvents.data[i]);   
+      let eventDate = this.totalEvents.data[i].eventstart.substring(0, 10);
+      this.totalEvents.data[i]['date'] = eventDate;
+      this.allEvents.push(this.totalEvents.data[i]);
     }
     this.calendarOptions.events = this.allEvents;
   }
@@ -62,8 +66,8 @@ export class DashboardComponent implements OnInit {
     },
     initialView: 'dayGridMonth',
     validRange: {
-      start: new Date().getFullYear()+'-01-01',
-      end: new Date().getFullYear()+'-12-31'
+      start: new Date().getFullYear() + '-01-01',
+      end: new Date().getFullYear() + '-12-31',
     },
     eventClick: this.showEventDetail.bind(this),
     headerToolbar: {
@@ -82,10 +86,10 @@ export class DashboardComponent implements OnInit {
   showEventDetail(arg: any) {
     this.displayEvent = true;
     console.log(arg);
-    if(arg.event._def.extendedProps.isappointment){
-      this.tagName='Appointment';
-    }else{
-      this.tagName='Event';
+    if (arg.event._def.extendedProps.isappointment) {
+      this.tagName = 'Appointment';
+    } else {
+      this.tagName = 'Event';
     }
     this.eventInfo = [
       this.tagName,
