@@ -87,6 +87,8 @@ export class CaseWorkerDashboardComponent implements OnInit {
   }
 
   changeTimeZone(dateTime: any): string {
+    console.log('dateTime',dateTime);
+    
     var eventDate = new Date(dateTime);
     var timeZoneDifference = (eventDate.getTimezoneOffset() / 60) * -1; //convert to positive value.
     eventDate.setTime(
@@ -179,18 +181,38 @@ export class CaseWorkerDashboardComponent implements OnInit {
     for (let i = 0; i < event.participants.length; i++) {
       eventParticipants += event.participants[i].name + ',';
     }
-    console.log('event.startTime', new Date(event.startTime).toUTCString());
+    //console.log('event.startTime', new Date(event.startTime).toUTCString());
+    console.log('event.startTime',event.startTime);
+    console.log('event.endTime',event.endTime);
 
+
+    var eventstartDate = new Date(event.startTime);
+    var timeZoneDifferencestart = (eventstartDate.getTimezoneOffset() / 60) * -1; //convert to positive value.
+    eventstartDate.setTime(
+      eventstartDate.getTime() + timeZoneDifferencestart * 60 * 60 * 1000
+    );
+    let strTime =eventstartDate.toISOString()
+    console.log('eventDate.toISOString()', eventstartDate.toISOString());
+
+    var eventendDate = new Date(event.endTime);
+    var timeZoneDifference = (eventendDate.getTimezoneOffset() / 60) * -1; //convert to positive value.
+    eventendDate.setTime(
+      eventendDate.getTime() + timeZoneDifference * 60 * 60 * 1000
+    );
+    let endTime =eventendDate.toISOString()
+    console.log('eventDate.toISOString()', eventendDate.toISOString());
     let newEvent = {
       case_worker_id: this.caseWorkerId,
       isAppointment: this.isAppointment,
       title: event.eventTitle,
       description: event.eventDescription,
-      sTime: this.changeTimeZone(event.startTime),
-      enTime: this.changeTimeZone(event.endTime),
+      sTime: strTime,
+      enTime: endTime,
       participants: eventParticipants,
     };
 
+    console.log('new event',newEvent);
+    
     //sending calendar events/appointments to backend database
     this.service.postCalendarEvents(newEvent).subscribe((response) => {
       if (response) {
