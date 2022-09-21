@@ -154,8 +154,8 @@ export class HealthTrackerComponent implements OnInit {
     }
   }
 
-  getHealthTrackerByVeteranId() {
-    let resp = this.service.getHealthTrackerByVeteranId(this.veteranId);
+ async getHealthTrackerByVeteranId() {
+    let resp =await this.service.getHealthTrackerByVeteranId(this.veteranId);
     resp.subscribe((data) => {
       console.log('Health Tracker API--->', data);
       this.healthTrackerDetails = data;
@@ -367,10 +367,13 @@ export class HealthTrackerComponent implements OnInit {
                 trackerDate.getFullYear();
               return data.tracking_subject === formValue[i].trackingSubject;
             });
-            updateHealthTrackerValue.push(oldTrackerValue);
+            for(let i=0;i<oldTrackerValue.length;i++){
+              updateHealthTrackerValue.push(oldTrackerValue[i]);
+            }
             console.log('old', oldTrackerValue);
             healthTrackerValue.push(formValue[i]);
             console.log('new', formValue[i]);
+            break;
           }
           if (formDate != currentDate) {
             console.log('date changed form', formValue[i]);
@@ -387,10 +390,13 @@ export class HealthTrackerComponent implements OnInit {
                 trackerDate.getFullYear();
               return data.tracking_subject === formValue[i].trackingSubject;
             });
-            updateHealthTrackerValue.push(oldTrackerValue);
+            for(let i=0;i<oldTrackerValue.length;i++){
+              updateHealthTrackerValue.push(oldTrackerValue[i]);
+            }
             console.log('date old', oldTrackerValue);
             healthTrackerValue.push(formValue[i]);
             console.log('date new', formValue[i]);
+            break;
           }
           if (formValue[i].comments != currentValue[j].tracking_comments) {
             console.log('comments changed form', formValue[i]);
@@ -407,35 +413,36 @@ export class HealthTrackerComponent implements OnInit {
                 trackerDate.getFullYear();
               return data.tracking_subject === formValue[i].trackingSubject;
             });
-            updateHealthTrackerValue.push(oldTrackerValue);
+            for(let i=0;i<oldTrackerValue.length;i++){
+              updateHealthTrackerValue.push(oldTrackerValue[i]);
+            }
             console.log('comments old', oldTrackerValue);
             healthTrackerValue.push(formValue[i]);
             console.log('comments new', formValue[i]);
+            break;
           }
         }
       }
     }
-    if (updateHealthTrackerValue.length != 0) {
-      let resp = await this.service
+      var healthTrackerAllDetails:any[]=[];
+      healthTrackerAllDetails.push(healthTrackerValue);
+      healthTrackerAllDetails.push(updateHealthTrackerValue);
+      console.log("test now",healthTrackerAllDetails)
+      console.log("test now array 1",healthTrackerAllDetails[0])
+      console.log("test now array 2",healthTrackerAllDetails[1])
+      this.service
         .updateHealthTrackerByVeteranID(
           this.veteranId,
-          updateHealthTrackerValue
+          healthTrackerAllDetails
         )
         .subscribe((response: any) => {
           console.log(response);
+          this.healthTrackerDetails = response;
+          this.showFilledForm();
+          this.showHealthTrackerTable();
+          this.sucessMessage();
         });
-    }
-    if (healthTrackerValue.length != 0) {
-      let resp = await this.service
-        .addHealthTrackerByVeteranID(this.veteranId, healthTrackerValue)
-        .subscribe((response: any) => {
-          console.log(response);
-        });
-      setTimeout(() => {
-        this.getHealthTrackerByVeteranId();
-      }, 1000);
-      this.sucessMessage();
-    }
+    
 
     for (let i = 0; i < healthTrackerValue.length; i++) {
       console.log('insert submitted form value', healthTrackerValue[i]);
@@ -450,6 +457,8 @@ export class HealthTrackerComponent implements OnInit {
       updateHealthTrackerValue.pop();
     }
   }
+
+
 
   showSelectedTable() {
     this.cols = [
