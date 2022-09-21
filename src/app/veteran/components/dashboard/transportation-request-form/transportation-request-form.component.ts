@@ -38,6 +38,7 @@ export class TransportationRequestFormComponent implements OnInit {
   veteran_id!:number;
   public destinationAddresses!: DropDown[];
   public showOtherAddressTextBox: boolean = false;
+  public phone: any;
   
   constructor(
     private cacheData: ClipBoardService,
@@ -63,6 +64,9 @@ export class TransportationRequestFormComponent implements OnInit {
         console.log("Veteran Data is : ",this.veteranData);
         this.firstName = this.veteranData.data[0].first_name;
         this.lastName = this.veteranData.data[0].last_name;
+        this.phone = this.veteranData.data[0].contact_person_phone  
+        console.log("Phone",this.phone);
+              
 
         this.buildForm();
         console.log(this.transportRequestForm.value);
@@ -72,6 +76,7 @@ export class TransportationRequestFormComponent implements OnInit {
   buildForm() {
     this.transportRequestForm = this.formBuilder.group({
       veteran_id:[this.veteran_id],
+      contactNumber:[this.phone],
       firstName: [this.firstName, Validators.required],
       lastName: [this.lastName, Validators.required],
       reason: ['', Validators.required],
@@ -179,6 +184,7 @@ export class TransportationRequestFormComponent implements OnInit {
     
     if (data.responseStatus === 'SUCCESS') {
      this.sucessMessage();
+
     }else if (data.responseStatus === 'FAILURE') {
      this.errorMessage();
     }

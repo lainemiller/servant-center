@@ -53,6 +53,8 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
   public msgCount!: number;
   public msgData: any;
   items!: MenuItem[];
+  public isShowSpinner:boolean=false;
+
 
   constructor(
     private formbuilder: FormBuilder,
@@ -151,7 +153,8 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
   }
 
 onSubmit() :void {
-
+  this.isShowSpinner=true;
+  
   let dateF= this.transportRequestForm.value.date
   this.transportRequestForm.value.date=dateF.toLocaleDateString();
 
@@ -178,6 +181,7 @@ let obj={
     this.submitted = true;
 	  console.log("Form submitted");
     if (data.responseStatus === 'SUCCESS') {
+      this.isShowSpinner=false;
         this.sucessMessage();
         setTimeout(() => {
           this.refreshRequestComponent('/case-worker/messages');
