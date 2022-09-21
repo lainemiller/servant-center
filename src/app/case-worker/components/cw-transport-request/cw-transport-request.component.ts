@@ -14,10 +14,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { TransportService } from '../../services/transport.service';
-import { DatePipe, Location } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Router } from "@angular/router";
-import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-cw-transport-request',
@@ -60,7 +59,6 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
     private service: TransportService,
     private datePipe: DatePipe,
     private router: Router,
-    private location: Location,
     private messageService: MessageService
 
   ) {
@@ -79,7 +77,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
     this.onWindowResize();
     // this.service.getTransportRequestFormData().subscribe((data) => {
     this.caseWorker = this.requestFormObject;
-    console.log("data",this.requestFormObject);
+    console.log("data::",this.requestFormObject);
     //console.log("CaseWorker",this.caseWorker); 
     this.firstName = this.caseWorker.first_name;
     this.lastName = this.caseWorker.last_name;
@@ -110,21 +108,21 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
     if (change?.requestFormObject) {
       this.caseWorker = change.requestFormObject.currentValue;
     }
-    this.newAappointmentDate=this.datePipe.transform(this.caseWorker.appointment_date,'dd/MM/yyyy')
+    this.newAappointmentDate=this.datePipe.transform(this.caseWorker.appointment_date,'MM/dd/yyyy')
   }
 
   buildForm() {
    // let newAappointmentDate=this.datePipe.transform(this.caseWorker.appointment_date,'yyyy-MM-dd')
     this.transportRequestForm = this.formbuilder.group({
-      firstName: [this.caseWorker.first_name],
-      lastName: [this.caseWorker.last_name, Validators.required],
-      appointmentDate: [this.newAappointmentDate],
-      time: [this.caseWorker.appointment_time, Validators.required],
-      reason: [this.caseWorker.reason_for_request, Validators.required],
-      address: [this.caseWorker.pick_up_address_main, Validators.required],
-      city: [this.caseWorker.pick_up_city, Validators.required],
-      state: [this.caseWorker.pick_up_state, Validators.required],
-      zip: [this.caseWorker.pick_up_zip_code, Validators.required],
+      firstName: [this.firstName, Validators.required],
+      lastName: [this.lastName, Validators.required],
+      appointmentDate: [this.newAappointmentDate, Validators.required],
+      time: [this.time, Validators.required],
+      reason: [this.reason, Validators.required],
+      address: [this.address, Validators.required],
+      city: [this.city, Validators.required],
+      state: [this.state, Validators.required],
+      zip: [this.zip, Validators.required],
       coordinator: ['', Validators.required],
       approvedDate: [this.maxDateValue, Validators.required],
       nursingNotified: [false],
@@ -232,11 +230,11 @@ let obj={
     this.buildForm();
     this.submitted = false;
   }
-  tableValues: any;
-  selectResident(index: number) {
-    this.service.getTransportRequestFormData().subscribe((data) => {
-      this.tableValues = data;
-    });
-    this.selectedResident = this.caseWorker[index];
-  }
+  // tableValues: any;
+  // selectResident(index: number) {
+  //   this.service.getTransportRequestFormData().subscribe((data) => {
+  //     this.tableValues = data;
+  //   });
+  //   this.selectedResident = this.caseWorker[index];
+  // }
 }
