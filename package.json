@@ -27,7 +27,6 @@
     "@fullcalendar/list": "^5.8.0",
     "@fullcalendar/timegrid": "^5.8.0",
     "@rxweb/reactive-form-validators": "^2.1.4",
-    "ajv-errors": "^1.0.1",
     "amazon-cognito-identity-js": "^5.2.1",
     "aws-amplify": "^3.4.3",
     "aws-amplify-angular": "^6.0.22",
