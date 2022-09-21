@@ -155,6 +155,9 @@ onSubmit() :void {
   let dateF= this.transportRequestForm.value.date
   this.transportRequestForm.value.date=dateF.toLocaleDateString();
 
+  let dateApprove = this.transportRequestForm.value.approvedDate
+  this.transportRequestForm.value.approvedDate = dateApprove.toLocaleDateString();
+
 let obj={
 
   request_id:this.caseWorker.request_id,
@@ -176,11 +179,13 @@ let obj={
 	  console.log("Form submitted");
     if (data.responseStatus === 'SUCCESS') {
         this.sucessMessage();
-        this.refreshRequestComponent();
+        setTimeout(() => {
+          this.refreshRequestComponent('/case-worker/messages');
+        }, 500);
 
     }else if (data.responseStatus === 'FAILURE') {
       this.errorMessage();
-      this.refreshRequestComponent();
+      this.refreshRequestComponent('/case-worker/messages');
     }
     
    });
@@ -216,14 +221,9 @@ let obj={
       });
     }
 
-    refreshRequestComponent() {
-      setTimeout(() => {
-        let currentUrl = this.router.url;
-          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          this.router.onSameUrlNavigation = 'reload';
-           this.router.navigate([currentUrl]);
-       }, 500);
-      
+      async refreshRequestComponent(url: string): Promise<boolean> {
+        await this.router.navigateByUrl('.', { skipLocationChange: true });
+        return this.router.navigateByUrl(url);
       }
 
   reset() {
