@@ -34,7 +34,8 @@ export class HealthTrackerComponent implements OnInit {
   tableBreathalyzerValues!: any[];
   tableBloodSugarValues!: any[];
   tableOtherValues!: any[];
-  isShowSpinner:boolean=true
+  isShowSpinner: boolean = true;
+  showOverlay: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -152,13 +153,16 @@ export class HealthTrackerComponent implements OnInit {
       }
     }
   }
- 
-  getHealthTrackerByVeteranId() {
-    let resp = this.service.getHealthTrackerByVeteranId(this.veteranId);
+
+ async getHealthTrackerByVeteranId() {
+    let resp =await this.service.getHealthTrackerByVeteranId(this.veteranId);
     resp.subscribe((data) => {
       console.log('Health Tracker API--->', data);
       this.healthTrackerDetails = data;
-        this.isShowSpinner=false;
+      if (this.healthTrackerDetails) {
+        this.showOverlay = false;
+        this.isShowSpinner = false;
+      }
       this.showFilledForm();
       this.showHealthTrackerTable();
     });
@@ -328,18 +332,23 @@ export class HealthTrackerComponent implements OnInit {
         if (formValue[i].trackingSubject === currentValue[j].tracking_subject) {
           var formValueDate = new Date(formValue[i].date);
           var formDate =
-            formValueDate.getUTCDate() +
+            formValueDate.getDate() +
             '/' +
-            formValueDate.getUTCMonth() +
+            (formValueDate.getMonth() + 1) +
             '/' +
-            formValueDate.getUTCFullYear();
-          var currentValueDate = new Date(currentValue[j].note_date);
+            formValueDate.getFullYear();
+          var currentValueDate = new Date(
+            new Date(currentValue[j].note_date).toUTCString()
+          );
           var currentDate =
-            currentValueDate.getUTCDate() +
+            currentValueDate.getDate() +
             '/' +
-            currentValueDate.getUTCMonth() +
+            (currentValueDate.getMonth() + 1) +
             '/' +
-            currentValueDate.getUTCFullYear();
+            currentValueDate.getFullYear();
+          console.log('formDate', formDate);
+          console.log('currentDate', currentDate);
+          console.log('comparision', formDate === currentDate);
           if (
             formDate === currentDate &&
             formValue[i].measurement !== currentValue[j].measurement
@@ -358,10 +367,36 @@ export class HealthTrackerComponent implements OnInit {
                 trackerDate.getFullYear();
               return data.tracking_subject === formValue[i].trackingSubject;
             });
-            updateHealthTrackerValue.push(oldTrackerValue);
+            for(let i=0;i<oldTrackerValue.length;i++){
+              updateHealthTrackerValue.push(oldTrackerValue[i]);
+            }
             console.log('old', oldTrackerValue);
             healthTrackerValue.push(formValue[i]);
             console.log('new', formValue[i]);
+            break;
+          }
+          if (formDate != currentDate) {
+            console.log('date changed form', formValue[i]);
+            let oldTrackerValue = currentValue.filter((data: any) => {
+              let trackerDate = new Date(
+                new Date(data.note_date).toUTCString()
+              );
+              data.note_date =
+                trackerDate.getMonth() +
+                1 +
+                '/' +
+                trackerDate.getDate() +
+                '/' +
+                trackerDate.getFullYear();
+              return data.tracking_subject === formValue[i].trackingSubject;
+            });
+            for(let i=0;i<oldTrackerValue.length;i++){
+              updateHealthTrackerValue.push(oldTrackerValue[i]);
+            }
+            console.log('date old', oldTrackerValue);
+            healthTrackerValue.push(formValue[i]);
+            console.log('date new', formValue[i]);
+            break;
           }
           if (formValue[i].comments != currentValue[j].tracking_comments) {
             console.log('comments changed form', formValue[i]);
@@ -378,35 +413,36 @@ export class HealthTrackerComponent implements OnInit {
                 trackerDate.getFullYear();
               return data.tracking_subject === formValue[i].trackingSubject;
             });
-            updateHealthTrackerValue.push(oldTrackerValue);
+            for(let i=0;i<oldTrackerValue.length;i++){
+              updateHealthTrackerValue.push(oldTrackerValue[i]);
+            }
             console.log('comments old', oldTrackerValue);
             healthTrackerValue.push(formValue[i]);
             console.log('comments new', formValue[i]);
+            break;
           }
         }
       }
     }
-    if (updateHealthTrackerValue.length != 0) {
-      let resp = await this.service
+      var healthTrackerAllDetails:any[]=[];
+      healthTrackerAllDetails.push(healthTrackerValue);
+      healthTrackerAllDetails.push(updateHealthTrackerValue);
+      console.log("test now",healthTrackerAllDetails)
+      console.log("test now array 1",healthTrackerAllDetails[0])
+      console.log("test now array 2",healthTrackerAllDetails[1])
+      this.service
         .updateHealthTrackerByVeteranID(
           this.veteranId,
-          updateHealthTrackerValue
+          healthTrackerAllDetails
         )
         .subscribe((response: any) => {
           console.log(response);
+          this.healthTrackerDetails = response;
+          this.showFilledForm();
+          this.showHealthTrackerTable();
+          this.sucessMessage();
         });
-    }
-    if (healthTrackerValue.length != 0) {
-      let resp = await this.service
-        .addHealthTrackerByVeteranID(this.veteranId, healthTrackerValue)
-        .subscribe((response: any) => {
-          console.log(response);
-        });
-      setTimeout(() => {
-        this.getHealthTrackerByVeteranId();
-      }, 1000);
-      this.sucessMessage();
-    }
+    
 
     for (let i = 0; i < healthTrackerValue.length; i++) {
       console.log('insert submitted form value', healthTrackerValue[i]);
@@ -422,6 +458,8 @@ export class HealthTrackerComponent implements OnInit {
     }
   }
 
+
+
   showSelectedTable() {
     this.cols = [
       { field: 'note_date', header: 'Date', date: true, format: 'dd/MM/yyyy' },
@@ -431,6 +469,8 @@ export class HealthTrackerComponent implements OnInit {
   }
 
   resetForm() {
+    this.isShowSpinner = true;
+    this.showOverlay = true;
     this.buildForm();
     this.isFormFilled = false;
     this.getHealthTrackerByVeteranId();
