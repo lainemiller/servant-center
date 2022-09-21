@@ -29,7 +29,8 @@ export class TreatmentPlanComponent implements OnInit {
   public intake_date:any;
   public date_of_birth:any;
  public persons=['Client','Case Manager','RN']
- showSpinner:boolean=true;
+ public showSpinner:boolean=true;
+ public grayOut: boolean=true;
  
   constructor(
     private formBuilder: FormBuilder,
@@ -46,7 +47,6 @@ export class TreatmentPlanComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    document.getElementById("overlay")!.style.display="block";
     this.buildForm();
   }
 
@@ -55,7 +55,7 @@ export class TreatmentPlanComponent implements OnInit {
       this.data = res.data;      
       if(this.data){
         this.showSpinner=false;
-        document.getElementById("overlay")!.style.display="none";
+        this.grayOut=false;
       }
       this.intake_date = this.datepipe.transform(this.data.intake_date, 'dd/MM/yyyy');
       this.date_of_birth = this.datepipe.transform(this.data.date_of_birth, 'dd/MM/yyyy');
@@ -164,10 +164,14 @@ export class TreatmentPlanComponent implements OnInit {
   }
 
   saveForm(){
+    this.showSpinner=true;
+    this.grayOut=true;
     const treatmentData= this.treatmentPlanForm.value;
     console.log(treatmentData);
    this.service.saveTreatmentData(this.vetID,this.treatmentPlanForm.value).subscribe((response) =>{
     if (response.responseStatus === 'SUCCESS') {
+      this.showSpinner=false;
+      this.grayOut=false;
       this.successMessage();
       this.refreshpage();
     } else if (response.responseStatus === 'FAILURE') {

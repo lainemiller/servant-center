@@ -39,6 +39,7 @@ export class ResidentSearchComponent implements OnInit {
 
   submitted = false;
   public showSpinner: boolean = true;
+  public grayOut: boolean=true;
   constructor(
     private formBuilder: FormBuilder,
     private service: ResidentSearchService,
@@ -56,7 +57,7 @@ export class ResidentSearchComponent implements OnInit {
       this.data=res;
       if(this.data){
         this.showSpinner=false;
-        document.getElementById("overlay")!.style.display="none";
+        this.grayOut=false;
       }
       this.tableValues = this.data;
     },100)
@@ -110,7 +111,6 @@ export class ResidentSearchComponent implements OnInit {
   ];
   ngOnInit(): void {
     this.buildForm();
-    document.getElementById("overlay")!.style.display="block";
   }
 
   onSubmit(data: any){    

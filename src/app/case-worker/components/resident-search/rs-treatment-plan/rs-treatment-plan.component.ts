@@ -25,6 +25,7 @@ export class RsTreatmentPlanComponent implements OnInit {
   public formData:any;
   public vetID!:any;
   showSpinner:boolean = true;
+  grayOut:boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,7 +40,6 @@ export class RsTreatmentPlanComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    document.getElementById("overlay")!.style.display="block";
     this.buildForm();
   }
 
@@ -48,7 +48,7 @@ export class RsTreatmentPlanComponent implements OnInit {
       this.data = res.data;
         if(this.data){
           this.showSpinner=false;
-          document.getElementById("overlay")!.style.display="none";
+          this.grayOut=false;
         }      
       this.buildForm();
       this.treatmentPlanForm.patchValue({
@@ -142,11 +142,13 @@ export class RsTreatmentPlanComponent implements OnInit {
   onSubmit() {
     this.formView = false;
     this.showSpinner=true;
+    this.grayOut=true;
     //this.treatmentArr = this.treatmentPlanForm.get('treatmentIssues')?.value;
     this.service.updateTreatmentPlanData(this.vetID,this.treatmentPlanForm.value).subscribe((response)=>{
       if (response.responseStatus === 'SUCCESS'){
         setTimeout(() => {
           this.showSpinner=false;
+          this.grayOut=false;
           this.successMessage();
           this.scroller.scrollToAnchor("topOfPage");
         }, 500); 
