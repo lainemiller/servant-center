@@ -87,6 +87,8 @@ export class CaseWorkerDashboardComponent implements OnInit {
   }
 
   changeTimeZone(dateTime: any): string {
+    console.log('dateTime',dateTime);
+    
     var eventDate = new Date(dateTime);
     var timeZoneDifference = (eventDate.getTimezoneOffset() / 60) * -1; //convert to positive value.
     eventDate.setTime(
@@ -179,7 +181,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
     for (let i = 0; i < event.participants.length; i++) {
       eventParticipants += event.participants[i].name + ',';
     }
-    console.log('event.startTime', new Date(event.startTime).toUTCString());
+    //console.log('event.startTime', new Date(event.startTime).toUTCString());
 
     let newEvent = {
       case_worker_id: this.caseWorkerId,
@@ -191,6 +193,8 @@ export class CaseWorkerDashboardComponent implements OnInit {
       participants: eventParticipants,
     };
 
+    console.log('new event',newEvent);
+    
     //sending calendar events/appointments to backend database
     this.service.postCalendarEvents(newEvent).subscribe((response) => {
       if (response) {
