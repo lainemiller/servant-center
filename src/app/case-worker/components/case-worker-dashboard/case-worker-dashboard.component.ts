@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, isDevMode, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { CalendarOptions } from '@fullcalendar/angular';
@@ -31,12 +31,16 @@ export class CaseWorkerDashboardComponent implements OnInit {
   public CurrentYear: any;
   public isShowSpinner: boolean = true;
   public wrongDate: boolean = false;
-  minimumDate: any;
+  public minimumDate: any;
   public displayAppointment: boolean = false;
   public displayEventDialog: boolean = false;
   public showAppointmentDialog: boolean = true;
   public showEventDialog: boolean = false;
   public showGrayOut = true;
+  private isDev = isDevMode();
+  public startDateToDisplay: any;
+  public endDateToDisplay: any;
+
   constructor(
     private service: CalendarEventsService,
     private formBuilder: FormBuilder,
@@ -182,7 +186,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
       isAppointment: this.isAppointment,
       title: event.eventTitle,
       description: event.eventDescription,
-      sTime: this.changeTimeZone(event.endTime),
+      sTime: this.changeTimeZone(event.startTime),
       enTime: this.changeTimeZone(event.endTime),
       participants: eventParticipants,
     };
@@ -263,22 +267,29 @@ export class CaseWorkerDashboardComponent implements OnInit {
     } else {
       this.tagName = 'Event';
     }
-    let startDate = new Date(arg.event._def.extendedProps.eventstart);
-    console.log('old date', startDate);
-    startDate.setTime(
-      startDate.getTime() - 5 * 60 * 60 * 1000 - 30 * 60 * 1000
-    );
-    console.log('new date', startDate);
 
-    let endDate = new Date(arg.event._def.extendedProps.eventend);
-    console.log('old date', endDate);
-    endDate.setTime(endDate.getTime() - 5 * 60 * 60 * 1000 - 30 * 60 * 1000);
-    console.log('new date', endDate);
+    if(this.isDev){
+      this.startDateToDisplay=arg.event._def.extendedProps.eventstart;
+      this.endDateToDisplay= arg.event._def.extendedProps.eventend;
+    }else{
+      this.startDateToDisplay = new Date(arg.event._def.extendedProps.eventstart);
+      console.log('old date', this.startDateToDisplay);
+      this.startDateToDisplay.setTime(
+        this.startDateToDisplay.getTime() - 5 * 60 * 60 * 1000 - 30 * 60 * 1000
+      );
+      console.log('new date', this.startDateToDisplay);
+  
+      this.endDateToDisplay = new Date(arg.event._def.extendedProps.eventend);
+      console.log('old date', this.endDateToDisplay);
+      this.endDateToDisplay.setTime(this.endDateToDisplay.getTime() - 5 * 60 * 60 * 1000 - 30 * 60 * 1000);
+      console.log('new date', this.endDateToDisplay);
 
+    }
+ 
     this.eventInfo = [
       this.tagName,
-      startDate,
-      endDate,
+      this.startDateToDisplay,
+      this.endDateToDisplay,
       arg.event._def.title,
       arg.event.start,
       arg.event._def.extendedProps.description,
