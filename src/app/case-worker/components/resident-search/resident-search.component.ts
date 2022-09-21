@@ -12,6 +12,7 @@ import { MenuItem } from 'primeng/api';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { ResidentSearchService } from '../../services/resident-search.service';
 
+
 @Component({
   selector: 'app-resident-search',
   templateUrl: './resident-search.component.html',
@@ -21,7 +22,7 @@ import { ResidentSearchService } from '../../services/resident-search.service';
 export class ResidentSearchComponent implements OnInit {
   options = [
     { name: 'Veteran', code: 'VT' },
-    { name: 'Option 2', code: 'OPT2' },
+   // { name: 'Option 2', code: 'OPT2' },
   ];
 
   public selectedResident: any;
@@ -29,13 +30,15 @@ export class ResidentSearchComponent implements OnInit {
   public residentSearchForm!: FormGroup;
   public result: any;
   public maxDateValue: any;
+  public data:any;
+  public submit:boolean=true;
   newDate: any;
-  resultDate: any;
-  latest_date: any;
-  // public requestFormObject: any;
+  
 
   @Output() groupFilters: EventEmitter<any> = new EventEmitter<any>();
 
+  submitted = false;
+  public showSpinner: boolean = true;
   constructor(
     private formBuilder: FormBuilder,
     private service: ResidentSearchService,
@@ -45,9 +48,18 @@ export class ResidentSearchComponent implements OnInit {
     private cacheData: ClipBoardService
   ) {
     this.maxDateValue = new Date(new Date().getTime());
+    this.setForm();
+  }
+  setForm(){
     this.service.getResidentSearchData().subscribe((res) => {
-      this.tableValues = res;
-      console.log(this.tableValues);
+      setTimeout(()=>{
+      this.data=res;
+      if(this.data){
+        this.showSpinner=false;
+        document.getElementById("overlay")!.style.display="none";
+      }
+      this.tableValues = this.data;
+    },100)
     });
   }
 
@@ -98,72 +110,35 @@ export class ResidentSearchComponent implements OnInit {
   ];
   ngOnInit(): void {
     this.buildForm();
+    document.getElementById("overlay")!.style.display="block";
   }
 
-  // onSubmit=(event: any) =>{
-
-  //   // if( this.submit == ""){
-  //   //   this.ngOnInit();
-  //   //   console.log('hi')
-  //   // }else{
-  //   //   console.log('hello')
-  //   //   this.tableValues=this.tableValues.filter((data: any)=>{
-  //   //     return data.submit.toLocaleLowerCase().match(this.submit.toLocaleLowerCase())
-  //   //   })
-  //   // }
-  //   // console.log(this.residentSearchForm.value); ///submit the data to console
-
-  //   // console.log(event)
-  // }
-
-  onSubmit(filters: any): void {
-    // Object.keys(filters).forEach(key => filters[key] === '' ? delete filters[key] : key);
-
-    //for filtering the data
-    this.groupFilters.emit(filters);
-    console.log(filters);
-    //will get date into object form
-    this.newDate = filters.birthDate;
-
-    // this.datepipe.transform(this.newDate, 'MM/dd/yyyy');
-    // console.log(this.newDate);
-    // this.newDate=new Date();
-
-    //string format
-    this.resultDate = this.datepipe.transform(this.newDate, 'MM-dd-yyyy');
-    filters.birthDate = this.resultDate;
-
-    // console.log(typeof filters.birthDate);
-    // var date = new Date(filters.birthDate);
-    // let str = date.toDateString();
-    // console.log(str)
-    // console.log(typeof str)
-
-    this.result = this.tableValues.filter((index: any) => {
-      if(!filters.birthDate){
+  onSubmit(data: any){    
+    if(data.birthDate){
+      this.newDate=this.datepipe.transform(data.birthDate, 'yyyy/MM/dd');
+      data.birthDate = this.newDate;
+    }
+      this.result = this.tableValues.filter((index: any) => {
+        let indexDate = this.datepipe.transform(index.date_of_birth, 'yyyy/MM/dd');        
+      if(!data.birthDate){
+        if(data.firstName && data.lastName){
+          return (
+            index.first_name.toLowerCase() === data.firstName.toLowerCase() &&
+            index.last_name.toLowerCase() === data.lastName.toLowerCase() 
+          );
+        }else{
+          return (
+            index.first_name.toLowerCase() === data.firstName.toLowerCase()  
+          );
+        } 
+      } else {
         return (
-          index.firstName == filters.firstName &&
-          index.lastName == filters.lastName 
-        );
-      }else{
-        return (
-          index.firstName == filters.firstName &&
-          index.lastName == filters.lastName   &&
-          index.birthDate == filters.birthDate
+          index.first_name.toLowerCase() == data.firstName.toLowerCase() &&
+          indexDate == data.birthDate
         );
       }
-     
     });
-
-    //store filter data
-    console.log(this.result);
-    //this is for sending data console to browser
     this.tableValues = this.result;
-
-
-    // console.log(this.tableValues);
-    // this.requestFormObject = this.tableValues;
-    // console.log(this.requestFormObject);
   }
 
  
@@ -172,7 +147,7 @@ export class ResidentSearchComponent implements OnInit {
     this.residentSearchForm = this.formBuilder.group({
       type: [''],
       firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      lastName: [''],
       birthDate: [''],
     });
   }
@@ -189,20 +164,8 @@ export class ResidentSearchComponent implements OnInit {
     return this.residentSearchForm.get('birthDate');
   }
 
-  // selectResident(index: number) {
-  //   this.selectedResident = this.tableValues[index];
-  // }
-
-  refresh() {
+   resetData() {
     this.buildForm();
-    // location.reload();
-    // window.location.reload()
-    //  this._document.defaultView?.location.reload()
-    let currentUrl = this.router.url;
-    this.router
-      .navigateByUrl('resident-search', { skipLocationChange: true })
-      .then(() => {
-        this.router.navigate([currentUrl]);
-      });
+    this.setForm();
   }
 }

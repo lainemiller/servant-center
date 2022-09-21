@@ -30,6 +30,13 @@ export class CaseWorkerDashboardComponent implements OnInit {
   public caseWorkerId: any;
   public CurrentYear: any;
   public isShowSpinner: boolean = true;
+  public wrongDate: boolean = false;
+  minimumDate: any;
+  public displayAppointment: boolean = false;
+  public displayEventDialog: boolean = false;
+  public showAppointmentDialog: boolean = true;
+  public showEventDialog: boolean = false;
+  public showGrayOut = true;
   constructor(
     private service: CalendarEventsService,
     private formBuilder: FormBuilder,
@@ -39,6 +46,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('case worker dashboard component');
+    this.minimumDate = new Date();
     this.minDateValue = new Date(new Date().getTime());
     this.items = [
       { label: 'Appointment', icon: 'pi pi-fw pi-calendar' },
@@ -51,8 +59,9 @@ export class CaseWorkerDashboardComponent implements OnInit {
       .getCalendarEvents(this.caseWorkerId)
       .subscribe((data: CalendarResp) => {
         this.totalEvents = data;
-        if(this.totalEvents){
-          this.isShowSpinner=false;
+        if (data) {
+          this.isShowSpinner = false;
+          this.showGrayOut = false;
         }
         console.log(this.totalEvents);
         this.getCaseWorkerEventData(data);
@@ -63,20 +72,24 @@ export class CaseWorkerDashboardComponent implements OnInit {
 
   getCaseWorkerEventData(data: any) {
     this.totalEvents = data;
+    console.log('this.totalEvents.data', this.totalEvents.data);
     for (let i = 0; i < this.totalEvents.data.length; i++) {
       let eventDate = this.totalEvents.data[i].eventstart.substring(0, 10);
       this.totalEvents.data[i]['date'] = eventDate;
     }
+    console.log('this.totalEvents.data', this.totalEvents.data);
+
     this.calendarOptions.events = this.totalEvents.data;
   }
 
   changeTimeZone(dateTime: any): string {
-    var d = new Date(dateTime);
-    var timeZoneDifference = (d.getTimezoneOffset() / 60) * -1; //convert to positive value.
-    d.setTime(d.getTime() + timeZoneDifference * 60 * 60 * 1000);
-    console.log('d.toISOString()', d.toISOString());
-    var eventTime = d.toISOString().substring(11, 16);
-    return d.toISOString();
+    var eventDate = new Date(dateTime);
+    var timeZoneDifference = (eventDate.getTimezoneOffset() / 60) * -1; //convert to positive value.
+    eventDate.setTime(
+      eventDate.getTime() + timeZoneDifference * 60 * 60 * 1000
+    );
+    console.log('eventDate.toISOString()', eventDate.toISOString());
+    return eventDate.toISOString();
   }
   public builtForm() {
     this.eventsForm = this.formBuilder.group({
@@ -92,6 +105,18 @@ export class CaseWorkerDashboardComponent implements OnInit {
     return this.formBuilder.group({
       name: ['', Validators.required],
     });
+  }
+  focusFunction() {
+    this.wrongDate = false;
+  }
+  checkDate(Startdate: any, endTime: any) {
+    if (
+      new Date(endTime.inputFieldValue) < new Date(Startdate.inputFieldValue)
+    ) {
+      this.wrongDate = true;
+    } else {
+      this.wrongDate = false;
+    }
   }
 
   addParticipant() {
@@ -132,7 +157,13 @@ export class CaseWorkerDashboardComponent implements OnInit {
     //events: './assets/mock/calendarEvents.json',
   };
   addEvent() {
-    this.display = true;
+    if (this.showAppointmentDialog) {
+      this.displayAppointment = true;
+      this.displayEventDialog = false;
+    } else if (this.showEventDialog) {
+      this.displayEventDialog = true;
+      this.displayAppointment = false;
+    }
   }
   get getControl() {
     return this.eventsForm.controls;
@@ -144,22 +175,31 @@ export class CaseWorkerDashboardComponent implements OnInit {
     for (let i = 0; i < event.participants.length; i++) {
       eventParticipants += event.participants[i].name + ',';
     }
+    console.log('event.startTime', new Date(event.startTime).toUTCString());
 
     let newEvent = {
       case_worker_id: this.caseWorkerId,
       isAppointment: this.isAppointment,
       title: event.eventTitle,
       description: event.eventDescription,
-      sTime: this.changeTimeZone(event.startTime),
+      sTime: this.changeTimeZone(event.endTime),
       enTime: this.changeTimeZone(event.endTime),
       participants: eventParticipants,
     };
 
     //sending calendar events/appointments to backend database
     this.service.postCalendarEvents(newEvent).subscribe((response) => {
+      if (response) {
+        this.isShowSpinner = true;
+        this.showGrayOut = true;
+      }
       this.service
         .getCalendarEvents(this.caseWorkerId)
         .subscribe((data: CalendarResp) => {
+         // if (data) {
+            this.isShowSpinner = false;
+            this.showGrayOut = false;
+          //}
           this.totalEvents = data;
           console.log(this.totalEvents);
           this.getCaseWorkerEventData(data);
@@ -174,21 +214,33 @@ export class CaseWorkerDashboardComponent implements OnInit {
     this.eventsForm.reset();
     let participantsArray = this.eventsForm.get(['participants']) as FormArray;
     this.clearFormArray(participantsArray);
-    this.display = false;
+    if (this.showAppointmentDialog) {
+      this.displayAppointment = false;
+    } else if (this.showEventDialog) {
+      this.displayEventDialog = false;
+    }
   }
   onCancel() {
     this.count = 0;
     this.eventsForm.reset();
     let participantsArray = this.eventsForm.get(['participants']) as FormArray;
     this.clearFormArray(participantsArray);
-    this.display = false;
+    if (this.showAppointmentDialog) {
+      this.displayAppointment = false;
+    } else if (this.showEventDialog) {
+      this.displayEventDialog = false;
+    }
   }
   changeTag(value: any) {
     this.tagName = value.activeItem.label;
     if (this.tagName === 'Appointment') {
       this.isAppointment = true;
+      this.showEventDialog = false;
+      this.showAppointmentDialog = true;
     } else if (this.tagName === 'Event') {
       this.isAppointment = false;
+      this.showEventDialog = true;
+      this.showAppointmentDialog = false;
     }
   }
   clearFormArray = (formArray: FormArray) => {
@@ -211,10 +263,22 @@ export class CaseWorkerDashboardComponent implements OnInit {
     } else {
       this.tagName = 'Event';
     }
+    let startDate = new Date(arg.event._def.extendedProps.eventstart);
+    console.log('old date', startDate);
+    startDate.setTime(
+      startDate.getTime() - 5 * 60 * 60 * 1000 - 30 * 60 * 1000
+    );
+    console.log('new date', startDate);
+
+    let endDate = new Date(arg.event._def.extendedProps.eventend);
+    console.log('old date', endDate);
+    endDate.setTime(endDate.getTime() - 5 * 60 * 60 * 1000 - 30 * 60 * 1000);
+    console.log('new date', endDate);
+
     this.eventInfo = [
       this.tagName,
-      arg.event._def.extendedProps.eventstart,
-      arg.event._def.extendedProps.eventend,
+      startDate,
+      endDate,
       arg.event._def.title,
       arg.event.start,
       arg.event._def.extendedProps.description,

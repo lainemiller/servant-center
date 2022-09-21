@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { VeteranDashboardService } from '../../services/veteran-dashboard.service';
@@ -17,33 +18,42 @@ export class TreatmentPlanComponent implements OnInit {
   public issuesArray: any = [];
   public delete: boolean = true;
   public error: boolean = false;
-  public maxDateValue: any;
+  public minDateValue: any;
   public eventId: any;
   public data: any;
   public formView = true;
   public treatmentArr: any;
   public formData:any;
-  public vetID: number
+  public vetID: number;
  public persons=['Client','Case Manager','RN']
+ showSpinner:boolean=true;
+ 
   constructor(
     private formBuilder: FormBuilder,
     private service: VeteranDashboardService,
     private cacheData:ClipBoardService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router,
   ) {
+    this.minDateValue = new Date();
     this.vetID=this.cacheData.get("veteranId")
     this.setForm();
 
   }
 
   ngOnInit(): void {
+    document.getElementById("overlay")!.style.display="block";
     this.buildForm();
   }
 
   setForm() {
-    this.service.getTreatmentData(this.vetID).subscribe((res) => {
+    this.service.getTreatmentData(this.vetID).subscribe((res:any) => {
+      this.data = res.data;      
+      if(this.data){
+        this.showSpinner=false;
+        document.getElementById("overlay")!.style.display="none";
+      }
       console.log('TP API data->',res);
-      this.data = res.data;
       this.buildForm();
       this.treatmentPlanForm.patchValue({
         firstName: this.data.first_name,
@@ -54,7 +64,6 @@ export class TreatmentPlanComponent implements OnInit {
         hmisIdNo: this.data.hmis_id,
         treatmentIssues: this.data.treatmentIssues
       });
-      
     });
   }
   buildForm() {
@@ -153,15 +162,12 @@ export class TreatmentPlanComponent implements OnInit {
     console.log(treatmentData);
    this.service.saveTreatmentData(this.vetID,this.treatmentPlanForm.value).subscribe((response) =>{
     if (response.responseStatus === 'SUCCESS') {
-      console.log('Successfully saved TreatmentPlan details');
-      alert('Treatment Plan is saved successfully !!');
       this.successMessage();
+      this.refreshpage();
     } else if (response.responseStatus === 'FAILURE') {
       this.errorMessage();
-      alert('oops! error');
     }
-    window.location.reload();
-  })
+  });
    console.log("form submitted successfully");
 }
  
@@ -252,6 +258,16 @@ export class TreatmentPlanComponent implements OnInit {
       detail: 'Treatment-Plan not saved!!',
     });
   }
+
+  refreshpage() {
+    setTimeout(() => {
+      let currentUrl = this.router.url;
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+         this.router.navigate([currentUrl]);
+     }, 1500);
+    
+    }
 
   resetForm() {
     this.formView=true;

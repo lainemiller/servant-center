@@ -73,15 +73,20 @@
 }
 
 //@include desktop() {
-  :host ::ng-deep .p-datepicker{
-    padding-top: 30px;
-  }
+:host ::ng-deep .p-datepicker {
+  padding-top: 30px;
+}
 //}
 
-.participantAdd{
+.participantAdd {
   margin-left: 7px;
 }
 
-::ng-deep .fc-event{
+::ng-deep .fc-event {
   cursor: pointer;
 }
+
+#commonPadding{
+  padding-top: 17px;
+}
+
