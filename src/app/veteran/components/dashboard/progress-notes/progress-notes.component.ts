@@ -47,12 +47,12 @@ export class ProgressNotesComponent implements OnInit {
 
   ngOnInit(): void {
     //get data from backend
-    this.someFun();
+    this.getAllProgressNotes();
     this.initialStatus = false;
     this.buildForm();
   }
 
-  someFun(){
+  getAllProgressNotes(){
     this.service
     .getNotes(this.vetID)
     .subscribe((data: progressNoteResponse) => {
@@ -135,7 +135,7 @@ export class ProgressNotesComponent implements OnInit {
         } else if (data.responseStatus === 'FAILUER') {
           this.someError();
         }
-        this.someFun();
+        this.getAllProgressNotes();
       });
     // get data from backend
     this.service
