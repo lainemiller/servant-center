@@ -227,7 +227,7 @@ export class ProfileFormComponent implements OnInit {
   }
   onImagePicked(imageInput: HTMLInputElement): void {
     console.log('image upload ******', imageInput.files![0]);
-    const FILE = imageInput.files![0];
+    const FILE:File = imageInput.files![0];
     this.imageObj = FILE;
   }
 
