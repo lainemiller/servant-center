@@ -39,6 +39,10 @@ export class TransportationRequestFormComponent implements OnInit {
   public destinationAddresses!: DropDown[];
   public showOtherAddressTextBox: boolean = false;
   public phone: any;
+  public greyingOut: boolean= false;
+  public isShowSpinner:boolean=false;
+
+
   
   constructor(
     private cacheData: ClipBoardService,
@@ -66,6 +70,7 @@ export class TransportationRequestFormComponent implements OnInit {
         this.lastName = this.veteranData.data[0].last_name;
         this.phone = this.veteranData.data[0].contact_person_phone  
         console.log("Phone",this.phone);
+       
               
 
         this.buildForm();
@@ -159,6 +164,9 @@ export class TransportationRequestFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.greyingOut = true;
+    this.isShowSpinner=true;
+
 
   let appointDate= this.transportRequestForm.value.appointmentDate
   this.transportRequestForm.value.appointmentDate=appointDate.toLocaleDateString();
@@ -184,6 +192,8 @@ export class TransportationRequestFormComponent implements OnInit {
     
     if (data.responseStatus === 'SUCCESS') {
      this.sucessMessage();
+     this.greyingOut = false;
+     this.isShowSpinner=false;
 
     }else if (data.responseStatus === 'FAILURE') {
      this.errorMessage();

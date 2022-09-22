@@ -54,7 +54,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
   public msgData: any;
   items!: MenuItem[];
   public isShowSpinner:boolean=false;
-
+  public greyingOut: boolean= false;
 
   constructor(
     private formbuilder: FormBuilder,
@@ -154,7 +154,8 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
 
 onSubmit() :void {
   this.isShowSpinner=true;
-  
+  this.greyingOut = true;
+
   let dateF= this.transportRequestForm.value.date
   this.transportRequestForm.value.date=dateF.toLocaleDateString();
 
@@ -182,6 +183,7 @@ let obj={
 	  console.log("Form submitted");
     if (data.responseStatus === 'SUCCESS') {
       this.isShowSpinner=false;
+      this.greyingOut = false;
         this.sucessMessage();
         setTimeout(() => {
           this.refreshRequestComponent('/case-worker/messages');
