@@ -10,6 +10,7 @@ import { IaPage3Service } from 'src/app/case-worker/services/ia-page3.service';
 })
 export class IaFormPageThreeComponent implements OnInit {
   page3Form!: FormGroup;
+  submitted!: boolean;
   mentalStatusAssessment!: FormGroup;
   medicalInformation!: FormGroup;
   ideation!: FormGroup;
@@ -124,15 +125,28 @@ export class IaFormPageThreeComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
     this.service
       .initialTreatmentGoalsPage3(this.page3Form.value)
       .subscribe((data) => {
         console.log('Submitted');
       });
-      this.router.navigateByUrl(
-        'case-worker/resident-search/initial-assessment/page-4'
-      );
+      // this.router.navigateByUrl(
+      //   'case-worker/resident-search/initial-assessment/page-4'
+      // );
     console.log('page 3 values', this.page3Form.value);
+  }
+
+  next(){
+    console.log('clicked next');
+    if(this.submitted){
+    this.router.navigateByUrl(
+      'case-worker/resident-search/initial-assessment/page-4'
+    );
+    }
+    else{
+      alert("Please save first")
+    }
   }
 
   goBack(){

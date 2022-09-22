@@ -20,7 +20,7 @@ export class MessagesComponent implements OnInit {
     this.service.getTransportRequestFormData().subscribe((data) => {
       this.tableValues = data;
       this.isShowSpinner=false;
-      document.getElementById("overlay")!.style.display="none"
+      //document.getElementById("overlay")!.style.display="none"
       console.log(this.tableValues);
       console.log(' i am table values');
     });
@@ -33,7 +33,7 @@ export class MessagesComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    document.getElementById("overlay")!.style.display="block";
+    //document.getElementById("overlay")!.style.display="block";
     console.log('messages component');
   }
 
