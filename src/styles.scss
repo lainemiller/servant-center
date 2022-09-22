@@ -179,4 +179,9 @@ p-calendar.ng-touched.ng-invalid > .p-calendar > .p-inputtext {
   background-color: rgba(0,0,0,0.5);
   z-index: 2;
   cursor: pointer;
-}  
+}
+
+//disable button
+.p-button-disabled{
+  color: grey !important;
+}
