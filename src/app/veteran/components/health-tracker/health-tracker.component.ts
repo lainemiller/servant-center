@@ -25,7 +25,6 @@ export class HealthTrackerComponent implements OnInit {
   isFormFilled: boolean = false;
   veteranId!: number;
   cols!: any[];
-  tableValues!: any[];
   tableWeightValues!: any[];
   tableTemperatureValues!: any[];
   tableBloodPressureValues!: any[];
@@ -36,6 +35,7 @@ export class HealthTrackerComponent implements OnInit {
   tableOtherValues!: any[];
   isShowSpinner: boolean = true;
   showOverlay: boolean = true;
+  isShowTable: boolean =false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -162,14 +162,14 @@ export class HealthTrackerComponent implements OnInit {
       if (this.healthTrackerDetails) {
         this.showOverlay = false;
         this.isShowSpinner = false;
+        this.showFilledForm();
+        this.showHealthTrackerTable();
+        this.updateFormValidator();
       }
-      this.showFilledForm();
-      this.showHealthTrackerTable();
     });
   }
 
   showHealthTrackerTable() {
-    this.tableValues = this.healthTrackerDetails;
     this.tableWeightValues = this.healthTrackerDetails['data'].filter(
       (data: any) => {
         return data.tracking_subject.toUpperCase() === 'WEIGHT';
@@ -216,65 +216,65 @@ export class HealthTrackerComponent implements OnInit {
     this.healthTrackerForm = this.formBuilder.group({
       weight: this.formBuilder.group({
         trackingSubject: ['weight'],
-        date: [null, Validators.required],
-        measurement: ['', Validators.required],
-        comments: ['', Validators.required],
+        date: [null],
+        measurement: [''],
+        comments: [''],
         isUpdate: [false],
         currentTracker: [true],
       }),
       temperature: this.formBuilder.group({
         trackingSubject: ['temperature'],
-        date: [null, Validators.required],
-        measurement: ['', Validators.required],
-        comments: ['', Validators.required],
+        date: [null],
+        measurement: [''],
+        comments: [''],
         isUpdate: [false],
         currentTracker: [true],
       }),
       bloodPressure: this.formBuilder.group({
         trackingSubject: ['blood pressure'],
-        date: [null, Validators.required],
-        measurement: ['', Validators.required],
-        comments: ['', Validators.required],
+        date: [null],
+        measurement: [''],
+        comments: [''],
         isUpdate: [false],
         currentTracker: [true],
       }),
       BMI: this.formBuilder.group({
         trackingSubject: ['BMI'],
-        date: [null, Validators.required],
-        measurement: ['', Validators.required],
-        comments: ['', Validators.required],
+        date: [null],
+        measurement: [''],
+        comments: [''],
         isUpdate: [false],
         currentTracker: [true],
       }),
       drugScreen: this.formBuilder.group({
         trackingSubject: ['drug screen'],
-        date: [null, Validators.required],
-        measurement: ['', Validators.required],
-        comments: ['', Validators.required],
+        date: [null],
+        measurement: [''],
+        comments: [''],
         isUpdate: [false],
         currentTracker: [true],
       }),
       breathalyzer: this.formBuilder.group({
         trackingSubject: ['breathalyzer'],
-        date: [null, Validators.required],
-        measurement: ['', Validators.required],
-        comments: ['', Validators.required],
+        date: [null],
+        measurement: [''],
+        comments: [''],
         isUpdate: [false],
         currentTracker: [true],
       }),
       bloodSugar: this.formBuilder.group({
         trackingSubject: ['blood sugar'],
-        date: [null, Validators.required],
-        measurement: ['', Validators.required],
-        comments: ['', Validators.required],
+        date: [null],
+        measurement: [''],
+        comments: [''],
         isUpdate: [false],
         currentTracker: [true],
       }),
       other: this.formBuilder.group({
         trackingSubject: ['other'],
-        date: [null, Validators.required],
-        measurement: ['', Validators.required],
-        comments: ['', Validators.required],
+        date: [null],
+        measurement: [''],
+        comments: [''],
         isUpdate: [false],
         currentTracker: [true],
       }),
@@ -282,6 +282,8 @@ export class HealthTrackerComponent implements OnInit {
   }
 
   onSubmit() {
+    this.showOverlay = true;
+    this.isShowSpinner = true;
     this.healthTrackerFormDetails = this.healthTrackerForm.value;
     if (!this.showWeight) {
       delete this.healthTrackerFormDetails['weight'];
@@ -438,12 +440,18 @@ export class HealthTrackerComponent implements OnInit {
         .subscribe((response: any) => {
           console.log(response);
           this.healthTrackerDetails = response;
-          this.showFilledForm();
-          this.showHealthTrackerTable();
-          this.sucessMessage();
+          if (response.responseStatus == 'SUCCESS') {
+            this.showFilledForm();
+            this.showHealthTrackerTable();
+            this.showOverlay = false;
+            this.isShowSpinner = false;
+            this.sucessMessage();
+            this.updateFormValidator();
+          } else if (response.responseStatus == 'FAILURE') {
+            this.errorMessage();
+          }
         });
     
-
     for (let i = 0; i < healthTrackerValue.length; i++) {
       console.log('insert submitted form value', healthTrackerValue[i]);
     }
@@ -458,7 +466,122 @@ export class HealthTrackerComponent implements OnInit {
     }
   }
 
-
+  updateFormValidator(){
+    console.log("update valid form")
+    let weightDate=this.healthTrackerForm.get('weight')?.get('date');
+    let weightMeasurement=this.healthTrackerForm.get('weight')?.get('measurement');
+    let temperatureDate=this.healthTrackerForm.get('temperature')?.get('date');
+    let temperatureMeasurement=this.healthTrackerForm.get('temperature')?.get('measurement');
+    let bloodPressureDate=this.healthTrackerForm.get('bloodPressure')?.get('date');
+    let bloodPressureMeasurement=this.healthTrackerForm.get('bloodPressure')?.get('measurement');
+    let bmiDate=this.healthTrackerForm.get('BMI')?.get('date');
+    let bmiMeasurement=this.healthTrackerForm.get('BMI')?.get('measurement');
+    let drugScreenDate=this.healthTrackerForm.get('drugScreen')?.get('date');
+    let drugScreenMeasurement=this.healthTrackerForm.get('drugScreen')?.get('measurement');
+    let breathalyzerDate=this.healthTrackerForm.get('breathalyzer')?.get('date');
+    let breathalyzerMeasurement=this.healthTrackerForm.get('breathalyzer')?.get('measurement');
+    let bloodSugarDate=this.healthTrackerForm.get('bloodSugar')?.get('date');
+    let bloodSugarMeasurement=this.healthTrackerForm.get('bloodSugar')?.get('measurement');
+    let otherDate=this.healthTrackerForm.get('other')?.get('date');
+    let otherMeasurement=this.healthTrackerForm.get('other')?.get('measurement');
+    this.isShowTable=false;
+    if (!this.showWeight) {
+      weightDate?.clearValidators(); 
+      weightDate?.updateValueAndValidity();
+      weightMeasurement?.clearValidators(); 
+      weightMeasurement?.updateValueAndValidity();
+    }else{
+      weightDate?.setValidators([Validators.required]); 
+      weightDate?.updateValueAndValidity();
+      weightMeasurement?.setValidators([Validators.required]);
+      weightMeasurement?.updateValueAndValidity();
+      this.isShowTable=true;
+    }
+    if (!this.showTemperature) {
+      temperatureDate?.clearValidators(); 
+      temperatureDate?.updateValueAndValidity();
+      temperatureMeasurement?.clearValidators(); 
+      temperatureMeasurement?.updateValueAndValidity();
+    }else{
+      temperatureDate?.setValidators([Validators.required]); 
+      temperatureDate?.updateValueAndValidity();
+      temperatureMeasurement?.setValidators([Validators.required]);
+      temperatureMeasurement?.updateValueAndValidity();
+      this.isShowTable=true;
+    }
+    if (!this.showBloodPressure) {
+      bloodPressureDate?.clearValidators(); 
+      bloodPressureDate?.updateValueAndValidity();
+      bloodPressureMeasurement?.clearValidators(); 
+      bloodPressureMeasurement?.updateValueAndValidity(); 
+    }else{
+      bloodPressureDate?.setValidators([Validators.required]); 
+      bloodPressureDate?.updateValueAndValidity();
+      bloodPressureMeasurement?.setValidators([Validators.required]);
+      bloodPressureMeasurement?.updateValueAndValidity();
+      this.isShowTable=true;
+    }
+    if (!this.showBmi) {
+      bmiDate?.clearValidators(); 
+      bmiDate?.updateValueAndValidity();
+      bmiMeasurement?.clearValidators(); 
+      bmiMeasurement?.updateValueAndValidity();
+    }else{
+      bmiDate?.setValidators([Validators.required]); 
+      bmiDate?.updateValueAndValidity();
+      bmiMeasurement?.setValidators([Validators.required]);
+      bmiMeasurement?.updateValueAndValidity();
+      this.isShowTable=true;
+    }
+    if (!this.showDrugScreen) {
+      drugScreenDate?.clearValidators(); 
+      drugScreenDate?.updateValueAndValidity();
+      drugScreenMeasurement?.clearValidators(); 
+      drugScreenMeasurement?.updateValueAndValidity();
+    }else{
+      drugScreenDate?.setValidators([Validators.required]); 
+      drugScreenDate?.updateValueAndValidity();
+      drugScreenMeasurement?.setValidators([Validators.required]);
+      drugScreenMeasurement?.updateValueAndValidity();
+      this.isShowTable=true;
+    }
+    if (!this.showBreathalyzer) {
+      breathalyzerDate?.clearValidators(); 
+      breathalyzerDate?.updateValueAndValidity();
+      breathalyzerMeasurement?.clearValidators(); 
+      breathalyzerMeasurement?.updateValueAndValidity();
+    }else{
+      breathalyzerDate?.setValidators([Validators.required]); 
+      breathalyzerDate?.updateValueAndValidity();
+      breathalyzerMeasurement?.setValidators([Validators.required]);
+      breathalyzerMeasurement?.updateValueAndValidity();
+      this.isShowTable=true;
+    }
+    if (!this.showBloodSugar) {
+      bloodSugarDate?.clearValidators(); 
+      bloodSugarDate?.updateValueAndValidity();
+      bloodSugarMeasurement?.clearValidators(); 
+      bloodSugarMeasurement?.updateValueAndValidity();
+    }else{
+      bloodSugarDate?.setValidators([Validators.required]); 
+      bloodSugarDate?.updateValueAndValidity();
+      bloodSugarMeasurement?.setValidators([Validators.required]);
+      bloodSugarMeasurement?.updateValueAndValidity();
+      this.isShowTable=true;
+    }
+    if (!this.showOther) {
+      otherDate?.clearValidators(); 
+      otherDate?.updateValueAndValidity();
+      otherMeasurement?.clearValidators(); 
+      otherMeasurement?.updateValueAndValidity();
+    }else{
+      otherDate?.setValidators([Validators.required]); 
+      otherDate?.updateValueAndValidity();
+      otherMeasurement?.setValidators([Validators.required]);
+      otherMeasurement?.updateValueAndValidity();
+      this.isShowTable=true;
+    }
+  }
 
   showSelectedTable() {
     this.cols = [
@@ -475,6 +598,11 @@ export class HealthTrackerComponent implements OnInit {
     this.isFormFilled = false;
     this.getHealthTrackerByVeteranId();
     this.resetMessage();
+    this.updateFormValidator();
+  }
+
+  changeCheckBox(){
+    this.updateFormValidator();
   }
 
   sucessMessage() {
@@ -482,6 +610,14 @@ export class HealthTrackerComponent implements OnInit {
       severity: 'success',
       summary: 'Success',
       detail: 'Health Tracker updated sucessfully',
+    });
+  }
+
+  errorMessage() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Health Tracker not updated',
     });
   }
 

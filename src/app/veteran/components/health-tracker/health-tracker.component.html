@@ -18,6 +18,7 @@
               label="Weight"
               [binary]="true"
               [(ngModel)]="showWeight"
+              (onChange)="changeCheckBox()"
             ></p-checkbox>
           </div>
           <div class="p-col-12 p-md-3 p-field-checkbox">
@@ -26,6 +27,7 @@
               label="Temperature"
               [binary]="true"
               [(ngModel)]="showTemperature"
+              (onChange)="changeCheckBox()"
             ></p-checkbox>
           </div>
           <div class="p-col-12 p-md-3 p-field-checkbox">
@@ -34,6 +36,7 @@
               label="Blood Pressure"
               [binary]="true"
               [(ngModel)]="showBloodPressure"
+              (onChange)="changeCheckBox()"
             ></p-checkbox>
           </div>
           <div class="p-col-12 p-md-3 p-field-checkbox">
@@ -42,6 +45,7 @@
               label="BMI"
               [binary]="true"
               [(ngModel)]="showBmi"
+              (onChange)="changeCheckBox()"
             ></p-checkbox>
           </div>
         </div>
@@ -53,6 +57,7 @@
               label="Drug Screen"
               [binary]="true"
               [(ngModel)]="showDrugScreen"
+              (onChange)="changeCheckBox()"
             ></p-checkbox>
           </div>
           <div class="p-col-12 p-md-3 p-field-checkbox">
@@ -61,6 +66,7 @@
               label="Breathalyzer"
               [binary]="true"
               [(ngModel)]="showBreathalyzer"
+              (onChange)="changeCheckBox()"
             ></p-checkbox>
           </div>
           <div class="p-col-12 p-md-3 p-field-checkbox">
@@ -69,6 +75,7 @@
               label="Blood Sugar"
               [binary]="true"
               [(ngModel)]="showBloodSugar"
+              (onChange)="changeCheckBox()"
             ></p-checkbox>
           </div>
           <div class="p-col-12 p-md-3 p-field-checkbox">
@@ -77,6 +84,7 @@
               label="Other"
               [binary]="true"
               [(ngModel)]="showOther"
+              (onChange)="changeCheckBox()"
             ></p-checkbox>
           </div>
         </div>
@@ -132,9 +140,6 @@ is required.</small>
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
-                <small class="error"
-                *ngIf="healthTrackerForm.get('weight.comments')?.errors?.required && healthTrackerForm.get('weight.comments')?.touched">Comments
-                is required.</small>
               </div>
             </div>
           </div>
@@ -191,9 +196,6 @@ is required.</small>
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
-                <small class="error"
-                *ngIf="healthTrackerForm.get('temperature.comments')?.errors?.required && healthTrackerForm.get('temperature.comments')?.touched">Comments
-                is required.</small>
               </div>
             </div>
           </div>
@@ -250,9 +252,6 @@ is required.</small>
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
-                <small class="error"
-                *ngIf="healthTrackerForm.get('bloodPressure.comments')?.errors?.required && healthTrackerForm.get('bloodPressure.comments')?.touched">Comments
-                is required.</small>
               </div>
             </div>
           </div>
@@ -305,9 +304,6 @@ is required.</small>
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
-                <small class="error"
-                *ngIf="healthTrackerForm.get('BMI.comments')?.errors?.required && healthTrackerForm.get('BMI.comments')?.touched">Comments
-                is required.</small>
               </div>
             </div>
           </div>
@@ -364,9 +360,6 @@ is required.</small>
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
-                <small class="error"
-                *ngIf="healthTrackerForm.get('drugScreen.comments')?.errors?.required && healthTrackerForm.get('drugScreen.comments')?.touched">Comments
-                is required.</small>
               </div>
             </div>
           </div>
@@ -423,9 +416,6 @@ is required.</small>
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
-                <small class="error"
-                *ngIf="healthTrackerForm.get('breathalyzer.comments')?.errors?.required && healthTrackerForm.get('breathalyzer.comments')?.touched">Comments
-                is required.</small>
               </div>
             </div>
           </div>
@@ -482,9 +472,6 @@ is required.</small>
                   pInputTextarea
                   placeholder="Comment"
                 ></textarea>
-                <small class="error"
-                *ngIf="healthTrackerForm.get('bloodSugar.comments')?.errors?.required && healthTrackerForm.get('bloodSugar.comments')?.touched">Comments
-                is required.</small>
               </div>
             </div>
           </div>
@@ -549,8 +536,11 @@ is required.</small>
           type="submit"
           pButton
           label="Submit"
+          [disabled]="healthTrackerForm.invalid"
           class="p-button-outlined"
           style="margin-top: 10px"
+          [ngClass]="healthTrackerForm.invalid ? ' p-button-outlined p-button-disabled' : 'p-button-primary'"
+          *ngIf="isShowTable"
         ></button>
         &nbsp; &nbsp;
         <button
@@ -559,12 +549,21 @@ is required.</small>
           pButton 
           label="Cancel"
           class="p-button-outlined"
+          *ngIf="isShowTable"
         ></button>
-        <!-- <p-button label="Cancel" styleClass="p-button-link" style="margin-top: 10px;"></p-button> -->
       </form>
       <br>
       <br>
       <!-- table start -->
+      <div *ngIf="isShowTable" class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12">
+          <div class="title-container" style="background: #971f1f">
+            <p>
+              <span>Health Tracker History</span>
+            </p>
+          </div>
+        </div>
+      </div>
       <!-- Weight Table -->
       <div *ngIf="showWeight" class="weight-table">
       <div class="p-fluid p-formgrid p-grid">
