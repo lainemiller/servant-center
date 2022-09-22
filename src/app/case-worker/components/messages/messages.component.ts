@@ -11,8 +11,8 @@ export class MessagesComponent implements OnInit {
   public requestObject: any;
   selectedResident: any;
   tableValues: any;
-  public isShowSpinner:boolean=true;
-
+  public isShowSpinner:boolean=false;
+  public greyingOut: boolean= false;
   constructor(
     private formBuilder: FormBuilder,
     private service: TransportService
@@ -20,6 +20,8 @@ export class MessagesComponent implements OnInit {
     this.service.getTransportRequestFormData().subscribe((data) => {
       this.tableValues = data;
       this.isShowSpinner=false;
+      this.greyingOut = false;
+
       //document.getElementById("overlay")!.style.display="none"
       console.log(this.tableValues);
       console.log(' i am table values');
@@ -33,6 +35,9 @@ export class MessagesComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.isShowSpinner=true;
+    this.greyingOut = true;
+
     //document.getElementById("overlay")!.style.display="block";
     console.log('messages component');
   }
