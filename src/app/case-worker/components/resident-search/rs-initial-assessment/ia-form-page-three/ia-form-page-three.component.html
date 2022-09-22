@@ -133,12 +133,12 @@
     </div>
     <div class="p-d-flex button-container p-mt-4">
       <div class="p-jc-start">
-        <button type="button" pButton label="Save"></button>
+        <button type="submit" pButton label="Save"></button>
         <button type="button" pButton label="Cancel" class="p-button-outlined p-ml-2"></button>
       </div>
       <div class="p-jc-end">
         <button type="button" pButton label="Back" (click)="goBack()"></button>
-        <button type="submit" pButton label="Next" class="p-button-inlined p-ml-2"></button>
+        <button type="button" (click)="next()" pButton label="Next" class="p-button-inlined p-ml-2"></button>
       </div>
     </div>
   </form>

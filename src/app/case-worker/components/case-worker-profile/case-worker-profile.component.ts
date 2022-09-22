@@ -18,6 +18,7 @@ export class CaseWorkerProfileComponent {
   @Input() public nickName!: string;
   @Input() public firstName!: string;
   @Input() public lastName!: string;
+  public isShowSpinner:boolean=true;
   userGroup!: string;
 
   constructor(
@@ -61,7 +62,12 @@ export class CaseWorkerProfileComponent {
               });
             }
           }
+          this.isShowSpinner=false;
+          document.getElementById("overlay")!.style.display="none"
         });
     });
+  }
+  ngOnInit():void{
+    document.getElementById("overlay")!.style.display="block";
   }
 }
