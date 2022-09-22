@@ -201,6 +201,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
     );
     let endTime =eventendDate.toISOString()
     console.log('eventDate.toISOString()', eventendDate.toISOString());
+    
     let newEvent = {
       case_worker_id: this.caseWorkerId,
       isAppointment: this.isAppointment,
