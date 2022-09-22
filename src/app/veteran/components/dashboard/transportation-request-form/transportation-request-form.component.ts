@@ -38,6 +38,11 @@ export class TransportationRequestFormComponent implements OnInit {
   veteran_id!:number;
   public destinationAddresses!: DropDown[];
   public showOtherAddressTextBox: boolean = false;
+  public phone: any;
+  public greyingOut: boolean= false;
+  public isShowSpinner:boolean=false;
+
+
   
   constructor(
     private cacheData: ClipBoardService,
@@ -63,6 +68,10 @@ export class TransportationRequestFormComponent implements OnInit {
         console.log("Veteran Data is : ",this.veteranData);
         this.firstName = this.veteranData.data[0].first_name;
         this.lastName = this.veteranData.data[0].last_name;
+        this.phone = this.veteranData.data[0].contact_person_phone  
+        console.log("Phone",this.phone);
+       
+              
 
         this.buildForm();
         console.log(this.transportRequestForm.value);
@@ -72,6 +81,7 @@ export class TransportationRequestFormComponent implements OnInit {
   buildForm() {
     this.transportRequestForm = this.formBuilder.group({
       veteran_id:[this.veteran_id],
+      contactNumber:[this.phone],
       firstName: [this.firstName, Validators.required],
       lastName: [this.lastName, Validators.required],
       reason: ['', Validators.required],
@@ -154,6 +164,9 @@ export class TransportationRequestFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.greyingOut = true;
+    this.isShowSpinner=true;
+
 
   let appointDate= this.transportRequestForm.value.appointmentDate
   this.transportRequestForm.value.appointmentDate=appointDate.toLocaleDateString();
@@ -179,6 +192,9 @@ export class TransportationRequestFormComponent implements OnInit {
     
     if (data.responseStatus === 'SUCCESS') {
      this.sucessMessage();
+     this.greyingOut = false;
+     this.isShowSpinner=false;
+
     }else if (data.responseStatus === 'FAILURE') {
      this.errorMessage();
     }
