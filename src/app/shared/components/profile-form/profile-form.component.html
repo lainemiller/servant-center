@@ -460,7 +460,7 @@
 
       <div class="p-fluid p-grid">
         <div class="p-field p-col-12 p-md-4">
-          <label class="label-title">Select Country</label>
+          <label class="label-title">Country</label>
           <input
             type="text"
             appNoSpecialSymbols
@@ -768,6 +768,7 @@
       [disabled]="profileForm.invalid"
       label="Submit"
       class="p-button-outlined"
+      [ngClass]="profileForm.invalid ? ' p-button-outlined p-button-disabled' : 'p-button-primary'"
     ></button>
     &nbsp; &nbsp;
     <button

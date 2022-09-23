@@ -178,12 +178,15 @@ export class ProfileFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.showOverlay=true;
+    this.showSpinner=true;
     console.log('Profile Form submitted value', this.profileForm.value);
     let profileDetails = this.profileForm.value;
     this.service
       .updateProfile(this.veteranId, profileDetails)
       .subscribe((response) => {
         if (response.responseStatus == 'SUCCESS') {
+          this.setForm();
           this.sucessMessage();
         } else if (response.responseStatus == 'FAILURE') {
           this.errorMessage();
