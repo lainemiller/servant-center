@@ -168,7 +168,7 @@
                
               </div>
               <div class="button--margin">
-                <button type="submit" pButton [disabled]="eventsForm.invalid">
+                <button  [ngClass]="eventsForm.invalid ? ' p-button-outlined p-button-disabled' : 'p-button-primary'" type="submit" pButton [disabled]="eventsForm.invalid || wrongDate">
                   Submit
                 </button>
                 <p-button
@@ -277,7 +277,7 @@
                 </div>
               </div>
               <div class="button--margin">
-                <button type="submit" pButton [disabled]="eventsForm.invalid">
+                <button  [ngClass]="eventsForm.invalid || wrongDate ? ' p-button-outlined p-button-disabled' : 'p-button-primary'" type="submit" pButton [disabled]="eventsForm.invalid || wrongDate">
                   Submit
                 </button>
                 <p-button
