@@ -21,7 +21,8 @@ const routes: Routes = [
     path: 'veteran',
     loadChildren: () =>
       import('./veteran/veteran.module').then((m) => m.VeteranModule),
-   canActivate: [VeteranGuard],
+
+    canActivate: [VeteranGuard],
   },
   { path: '**', redirectTo: 'veteran' },
 ];

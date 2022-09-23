@@ -103,7 +103,7 @@
     <!-- Currently consumes tobacco -->
     <div *ngFor="let consume of currentlyConsumesCaffeine; let i = index;">
       <div class="p-col-12 p-formgroup-inline">
-        <label class="p-mr-3 radiobutton-group-label">Currently Consumes Tobacco? </label>
+        <label class="p-mr-3 radiobutton-group-label">Currently Consumes Caffeine? </label>
         <div class="p-field-radiobutton">
           <p-radioButton [name]=consume.key [formControlName]=consume.key value=true inputId="consume-{{i}}-yes">
           </p-radioButton>
@@ -244,7 +244,7 @@
     </div>
     <div class="p-jc-end">
       <button type="button" pButton label="Back" (click)="goBack()"></button>
-      <button type="submit" pButton label="Next" class="p-button-inlined p-ml-2"></button>
+      <button type="button" (click)="next()" pButton label="Next" class="p-button-inlined p-ml-2"></button>
     </div>
   </div>
 </form>

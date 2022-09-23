@@ -10,6 +10,7 @@ import { IaPage2Service } from 'src/app/case-worker/services/ia-page2.service';
   styleUrls: ['./ia-form-page-two.component.scss'],
 })
 export class IaFormPageTwoComponent implements OnInit {
+  submitted!: boolean;
   page2Form!: FormGroup;
   educationAndEmploymentHistory!: FormGroup;
   socialHistory!: FormGroup;
@@ -80,15 +81,27 @@ export class IaFormPageTwoComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
     this.service
       .initialTreatmentGoalsPage2(this.page2Form.value)
       .subscribe((data) => {
         console.log('Submitted');
       });
+    // this.router.navigateByUrl(
+    //   'case-worker/resident-search/initial-assessment/page-3'
+    // );
+    console.log('page 2 values', this.page2Form.value);
+  }
+  next(){
+    console.log('clicked next');
+    if(this.submitted){
     this.router.navigateByUrl(
       'case-worker/resident-search/initial-assessment/page-3'
     );
-    console.log('page 2 values', this.page2Form.value);
+    }
+    else{
+      alert("Please save first")
+    }
   }
 
   goBack() {

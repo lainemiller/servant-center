@@ -1,4 +1,8 @@
 <p-toast position="top-center"></p-toast>
+<div *ngIf="greyingOut" id="overlay">  </div>
+<div class="center-spinner">
+  <p-progressSpinner *ngIf="isShowSpinner" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+</div>
 <app-item-header
   color="blue"
   title="Details"
@@ -218,7 +222,7 @@
        pButton
       label="Submit"
       [disabled]="transportRequestForm.invalid"
-      [ngClass]="transportRequestForm.invalid ? ' p-button-outlined p-button-disabled' : 'p-button-outlined'"
+      [ngClass]="transportRequestForm.invalid ? ' p-button-outlined p-button-disabled' : 'p-button-primary'"
       
     ></button>
     <button
