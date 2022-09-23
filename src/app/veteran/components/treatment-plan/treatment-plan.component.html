@@ -976,7 +976,8 @@
 
         <button type="submit"
          pButton label="Summary"
-         class="p-button-outlined"
+         [disabled]="treatmentPlanForm.invalid"
+         [ngClass]="treatmentPlanForm.invalid?'p-button-outlined p-button-disabled':'p-button-primary'"
         ></button>
         <p-button
           label="Cancel"
@@ -1042,6 +1043,7 @@
                 {{ formData.veteranStrengths }}
               </div>
             </section>
+            
           </div>
           <div>
             <div class="title-container">
@@ -1399,6 +1401,12 @@
                 </div>
               </div>
             </div>
+            <section class="p-field p-col-12 p-md-3">
+              <span class="form-subbox">NOTES</span>
+              <div class="subbox__content">
+                {{ formData.veteranNotes }}
+              </div>
+            </section>
             <div class="blue-box print-display">
               <span>Please download PDF print, sign and scan and send to Client and
                 RN for signatures and to send back to you.
