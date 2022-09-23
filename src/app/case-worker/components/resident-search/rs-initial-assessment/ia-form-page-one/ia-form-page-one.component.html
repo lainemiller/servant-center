@@ -233,6 +233,7 @@
       <button type="button" pButton icon="pi pi-plus" class="p-buton-outlined p-button-rounded"
         (click)="addChildren()"></button>
       <div class="p-field p-col-12 p-md-12">
+        <span class="label-title">Spouse or Significant Others</span>
         <input type="text" pInputText formControlName=spouseOrSignificvantOther
           placeholder="Spouse or Significant Others">
       </div>
@@ -241,28 +242,34 @@
         <input type="text" pInputText formControlName=childhood placeholder="Describe Your Childhood">
       </div>
       <div class="p-field p-col-12 p-md-7">
+        <span class="label-title">How would You Describe Your Childhood and Your Relationship with Your Parents?</span>
         <input type="text" pInputText formControlName=relationShipWithParents
-          placeholder="How would you describe your childhood and your relationship with your parents?">
+          placeholder="Describr Your Relationship with Parents">
       </div>
       <div class="p-field p-col-12 p-md-6">
+        <span class="label-title">How would you describe your childhood and your relationship with your siblings?</span>
         <input type="text" pInputText formControlName=relationShipWithSiblings
-          placeholder="How would you describe your childhood and your relationship with your siblings?">
+          placeholder="Describr Your Relationship with Siblings">
       </div>
       <div class="p-field p-col-12 p-md-6">
+        <span class="label-title">What type of Discipline did you have growing up?</span>
         <input type="text" pInputText formControlName=discipline
-          placeholder="What type of Discipline did you have growing up?">
+          placeholder="GrownUp Discipline">
       </div>
       <div class="p-field p-col-12">
-        <input type="text" pInputText formControlName=physicalAbuse placeholder="History of Physical Abuse">
+        <span class="label-title">History of Physical Abuse</span>
+        <input type="text" pInputText formControlName=physicalAbuse placeholder="Physical Abuse">
       </div>
       <div class="p-field p-col-12">
-        <input type="text" pInputText formControlName=sexualAbuse placeholder="History of Sexual Abuse">
+        <span class="label-title">History of Sexual Abuse</span>
+        <input type="text" pInputText formControlName=sexualAbuse placeholder="Sexual Abuse">
       </div>
       <div class="p-field p-col-12">
+        <span class="label-title">History of Health Problems in your Family</span>
         <input type="text" pInputText formControlName=healthProblemsInFamily
-          placeholder="History of Health Problems in your Family">
+          placeholder="Health Problems in your Family">
       </div>
-      <div *ngFor="let married of everMarried; let i = index;">
+      <!-- <div *ngFor="let married of everMarried; let i = index;">
         <div class="p-col-12 p-formgroup-inline">
           <label class="p-mr-3 radiobutton-group-label">Have you been ever Married: </label>
           <div class="p-field-radiobutton">
@@ -276,8 +283,18 @@
             <label for="married{{i}}-no" class="p-ml-3">No</label>
           </div>
         </div>
-      </div>
+      </div> -->
+      <div class="p-field p-md-6">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Have you been ever Married?</label>
+          <div *ngFor="let married of everMarried; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="everMarried" formControlName=everMarried [value]=married.value inputId="married{{i}}"></p-radioButton>
+            <label for="married{{i}}" class="p-ml-3">{{married.label}}</label>
+          </div>
+        </div>
+        </div>
       <div class="p-field p-col-12 p-md-3">
+        <span class="label-title">Number of Marriages</span>
         <input type="number" min="0" pInputText formControlName=numberOfMarriages placeholder="Number of Marriages">
       </div>
       <!-- Current marital status goes here -->
@@ -299,9 +316,9 @@
         </div>
       </div>
       <!-- are you sexually active? -->
-      <div *ngFor="let active of sexuallyActive; let i = index;">
+      <!-- <div *ngFor="let active of sexuallyActive; let i = index;">
         <div class="p-col-12 p-formgroup-inline">
-          <label class="p-mr-3 radiobutton-group-label">Are you currently sexually active?: </label>
+          <label class="p-mr-3 radiobutton-group-label">Are you currently sexually active? </label>
           <div class="p-field-radiobutton">
             <p-radioButton [name]=active.key [formControlName]=active.key value=true inputId="active-{{i}}-yes">
             </p-radioButton>
@@ -313,9 +330,18 @@
             <label for="active{{i}}-no" class="p-ml-3">No</label>
           </div>
         </div>
-      </div>
+      </div> -->
+      <div class="p-field p-md-6">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Are you currently sexually active?</label>
+          <div *ngFor="let active of sexuallyActive; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="sexuallyActive" formControlName=sexuallyActive [value]=active.value inputId="active{{i}}"></p-radioButton>
+            <label for="active{{i}}" class="p-ml-3">{{active.label}}</label>
+          </div>
+        </div>
+        </div>
       <!-- sexual problems or concerns -->
-      <div *ngFor="let sexProblems of sexualProblemsOrConcerns; let i = index;">
+      <!-- <div *ngFor="let sexProblems of sexualProblemsOrConcerns; let i = index;">
         <div class="p-col-12 p-formgroup-inline">
           <label class="p-mr-3 radiobutton-group-label">Do you have any sexual problems or concerns?: </label>
           <div class="p-field-radiobutton">
@@ -331,12 +357,22 @@
             <label for="sexProblems{{i}}-no" class="p-ml-3">No</label>
           </div>
         </div>
-      </div>
+      </div> -->
+      <div class="p-field p-md-6">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Do you have any sexual problems or concerns?</label>
+          <div *ngFor="let sexProblems of sexualProblemsOrConcerns; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="sexualProblemsOrConcerns" formControlName=sexualProblemsOrConcerns [value]=sexProblems.value inputId="sexProblems{{i}}"></p-radioButton>
+            <label for="sexProblems{{i}}" class="p-ml-3">{{sexProblems.label}}</label>
+          </div>
+        </div>
+        </div>
       <div class="p-field p-col-12 p-md-12">
-        <input type="text" pInputText formControlName=specifySexualProblems placeholder="Do you wnat to specify?">
+        <span class="label-title">Do you wnat to specify?</span>
+        <input type="text" pInputText formControlName=specifySexualProblems placeholder="Any Specific">
       </div>
       <!-- tested for HIV/AIDS -->
-      <div *ngFor="let hivTested of testedForHivOrAids; let i = index;">
+      <!-- <div *ngFor="let hivTested of testedForHivOrAids; let i = index;">
         <div class="p-col-12 p-formgroup-inline">
           <label class="p-mr-3 radiobutton-group-label">Have you ever been tested for HIV/ AIDS ?: </label>
           <div class="p-field-radiobutton">
@@ -352,21 +388,34 @@
             <label for="hivTested{{i}}-no" class="p-ml-3">No</label>
           </div>
         </div>
-      </div>
+      </div> -->
+      <div class="p-field p-md-6">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Have you ever been tested for HIV/ AIDS ?</label>
+          <div *ngFor="let hivTested of testedForHivOrAids; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="testedForHivOrAids" formControlName=testedForHivOrAids [value]=hivTested.value inputId="hivTested{{i}}"></p-radioButton>
+            <label for="hivTested{{i}}" class="p-ml-3">{{hivTested.label}}</label>
+          </div>
+        </div>
+        </div>
       <!-- where when and results of HIV/AIDS -->
       <div class="p-field p-col-12 p-md-6">
-        <p-calendar formControlName=hivTestedDate [inline]=false [showIcon]=true placeholder="HIV/AIDS tested Date">
-        </p-calendar>
+        <span class="label-title">HIV/AIDS tested Date</span>
+        <!-- <p-calendar formControlName=hivTestedDate [inline]=false [showIcon]=true placeholder="Date">
+        </p-calendar> -->
+        <input type="text" pInputText formControlName=hivTestedDate placeholder="Date" [readonly]="true">
       </div>
       <div class="p-field p-col-12 p-md-6">
-        <input type="text" pInputText formControlName=hivTestedLocation placeholder="HIV/AIDS tested Location">
+        <span class="label-title">HIV/AIDS tested Location</span>
+        <input type="text" pInputText formControlName=hivTestedLocation placeholder="Tested Location">
       </div>
       <div class="p-field p-col-12 p-md-6">
-        <input type="text" pInputText formControlName=hivTestResult placeholder="HIV/AIDS test Results">
+        <span class="label-title">HIV/AIDS test Results</span>
+        <input type="text" pInputText formControlName=hivTestResult placeholder="Test Results">
       </div>
 
       <!-- tested for STD's -->
-      <div *ngFor="let stdTested of testedSTDs; let i = index;">
+      <!-- <div *ngFor="let stdTested of testedSTDs; let i = index;">
         <div class="p-col-12 p-formgroup-inline">
           <label class="p-mr-3 radiobutton-group-label">Have you ever been tested for STD's ?: </label>
           <div class="p-field-radiobutton">
@@ -382,20 +431,33 @@
             <label for="stdTested{{i}}-no" class="p-ml-3">No</label>
           </div>
         </div>
-      </div>
+      </div> -->
+      <div class="p-field p-md-6">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Have you ever been tested for STD's?</label>
+          <div *ngFor="let stdTested of testedSTDs; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="testedSTDs" formControlName=testedSTDs [value]=stdTested.value inputId="stdTested{{i}}"></p-radioButton>
+            <label for="stdTested{{i}}" class="p-ml-3">{{stdTested.label}}</label>
+          </div>
+        </div>
+        </div>
       <!-- where when and results of STD's -->
       <div class="p-field p-col-12 p-md-6">
-        <p-calendar formControlName=stdTestedDate [inline]=false [showIcon]=true placeholder="STD's tested Date">
-        </p-calendar>
+        <span class="label-title">STD's tested Date</span>
+        <!-- <p-calendar formControlName=stdTestedDate [inline]=false [showIcon]=true placeholder="Date">
+        </p-calendar> -->
+        <input type="text" pInputText formControlName=stdTestedDate placeholder="Date" [readonly]="true">
       </div>
       <div class="p-field p-col-12 p-md-6">
-        <input type="text" pInputText formControlName=stdTestedLocation placeholder="STD's tested Location">
+        <span class="label-title">STD's tested Location</span>
+        <input type="text" pInputText formControlName=stdTestedLocation placeholder="Tested Location">
       </div>
       <div class="p-field p-col-12 p-md-6">
-        <input type="text" pInputText formControlName=stdTestResult placeholder="STD's test Results">
+        <span class="label-title">STD's test Results</span>
+        <input type="text" pInputText formControlName=stdTestResult placeholder="Test Results">
       </div>
       <!-- HIV/AIDS or STD's test desired -->
-      <div *ngFor="let desired of hivTestDesired; let i = index;">
+      <!-- <div *ngFor="let desired of hivTestDesired; let i = index;">
         <div class="p-col-12 p-formgroup-inline">
           <label class="p-mr-3 radiobutton-group-label">If you answered no, would you like to be tested for HIV/AIDS or
             STD's? </label>
@@ -410,7 +472,17 @@
             <label for="desired{{i}}-no" class="p-ml-3">No</label>
           </div>
         </div>
-      </div>
+      </div> -->
+      <div class="p-field p-md-12">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">If you answered no, would you like to be tested for HIV/AIDS or
+            STD's?</label>
+          <div *ngFor="let desired of hivTestDesired; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="hivTestDesired" formControlName=hivTestDesired [value]=desired.value inputId="desired{{i}}"></p-radioButton>
+            <label for="desired{{i}}" class="p-ml-3">{{desired.label}}</label>
+          </div>
+        </div>
+        </div>
     </div>
 
     <div class="p-d-flex button-container p-mt-4">

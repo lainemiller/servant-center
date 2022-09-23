@@ -1,126 +1,111 @@
+<!-- <div *ngIf="greyingOut" id="overlay">  </div>
+  <div class="center-spinner">
+    <p-progressSpinner *ngIf="ia4" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+  </div> -->
 <form [formGroup]="page4Form" (ngSubmit)="onSubmit()" *ngIf="page4Form">
   <h3>Substance Abuse History</h3>
   <div class="p-fluid p-formgrid p-grid" formGroupName="substanceAbuseHistory">
     <!-- alcohol -->
     <div class="p-field p-md-6">
+      <span class="label-title">History of Alcohol</span>
       <input type="text" pInputText formControlName=histOfAlcohol placeholder="History of Alcohol">
     </div>
     <!-- Currently consumes alcohol -->
-    <div *ngFor="let consume of currentlyConsumesAlcohol; let i = index;">
-      <div class="p-col-12 p-formgroup-inline">
-        <label class="p-mr-3 radiobutton-group-label">Currently Consumes Alcohol? </label>
-        <div class="p-field-radiobutton">
-          <p-radioButton [name]=consume.key [formControlName]=consume.key value=true inputId="consume-{{i}}-yes">
-          </p-radioButton>
-          <label for="consume{{i}}-yes" class="p-ml-3">Yes</label>
-        </div>
-        <div class="p-field-radiobutton">
-          <p-radioButton [name]=consume.key [formControlName]=consume.key value=false inputId="consume-{{i}}-no">
-          </p-radioButton>
-          <label for="consume{{i}}-no" class="p-ml-3">No</label>
-        </div>
+    <div class="p-field p-md-6">
+    <div class="p-col-12 p-formgroup-inline">
+      <label class="p-mr-3 radiobutton-group-label">Currently Consumes Alcohol?</label>
+      <div *ngFor="let consume of currentlyConsumesAlcohol; let i = index" class="p-field-radiobutton">
+        <p-radioButton name="currentlyConsumesAlcohol" formControlName=currentlyConsumesAlcohol [value]=consume.value inputId="consume{{i}}"></p-radioButton>
+        <label for="consume{{i}}" class="p-ml-3">{{consume.label}}</label>
       </div>
+    </div>
     </div>
     <!-- alcohol intake ferq -->
     <div class="p-field p-md-12">
-      <input type="text" pInputText formControlName=currentAlcoholIntakeFreq placeholder="Current Alcohol Intake Frequency">
+      <span class="label-title">Current Alcohol Intake Frequency</span>
+      <input type="text" pInputText formControlName=currentAlcoholIntakeFreq placeholder="Intake Frequency">
     </div>
     <!-- drugs -->
     <div class="p-field p-md-6">
+      <span class="label-title">History of Drugs </span>
       <input type="text" pInputText formControlName=histOfDrugs placeholder="History of Drugs">
     </div>
     <!-- Currently consumes drugs -->
-    <div *ngFor="let consume of currentlyConsumesDrugs; let i = index;">
+    <div class="p-field p-md-6">
       <div class="p-col-12 p-formgroup-inline">
-        <label class="p-mr-3 radiobutton-group-label">Currently Consumes Drugs? </label>
-        <div class="p-field-radiobutton">
-          <p-radioButton [name]=consume.key [formControlName]=consume.key value=true inputId="consume-{{i}}-yes">
-          </p-radioButton>
-          <label for="consume{{i}}-yes" class="p-ml-3">Yes</label>
-        </div>
-        <div class="p-field-radiobutton">
-          <p-radioButton [name]=consume.key [formControlName]=consume.key value=false inputId="consume-{{i}}-no">
-          </p-radioButton>
-          <label for="consume{{i}}-no" class="p-ml-3">No</label>
+        <label class="p-mr-3 radiobutton-group-label">Currently Consumes Drugs?</label>
+        <div *ngFor="let consume of currentlyConsumesDrugs; let i = index" class="p-field-radiobutton">
+          <p-radioButton name="currentlyConsumesDrugs" formControlName=currentlyConsumesDrugs [value]=consume.value inputId="consume{{i}}"></p-radioButton>
+          <label for="consume{{i}}" class="p-ml-3">{{consume.label}}</label>
         </div>
       </div>
-    </div>
+      </div>
     <!-- drugs intake ferq -->
     <div class="p-field p-md-6">
-      <input type="text" pInputText formControlName=currentDrugIntakeFreq placeholder="Current Drug Intake Frequency">
+      <span class="label-title">Current Drug Intake Frequency</span>
+      <input type="text" pInputText formControlName=currentDrugIntakeFreq placeholder="Intake Frequency">
     </div>
     <div class="p-field p-md-6">
-      <input type="text" pInputText formControlName=lastUseOfDrugAlcohol placeholder="Last use of Alcohol and Drugs">
+      <span class="label-title">Last use of Alcohol and Drugs</span>
+      <input type="text" pInputText formControlName=lastUseOfDrugAlcohol placeholder="Last use">
     </div>
     <!-- current drug alcohol treatment -->
     <div class="p-field p-md-12">
-      <input type="text" pInputText formControlName=currentDrugAlcoholTreatment placeholder="Current Drug Alcohol Treatment">
+      <span class="label-title">Current Drug Alcohol Treatment</span>
+      <input type="text" pInputText formControlName=currentDrugAlcoholTreatment placeholder="Current Treatment">
     </div>
     <!-- withdrawal history -->
-    <div *ngFor="let consume of withdrawalHistory; let i = index;"  class="p-field p-md-12">
+    <div class="p-field p-md-12">
       <div class="p-col-12 p-formgroup-inline">
-        <label class="p-mr-3 radiobutton-group-label">History of Withdrawal? </label>
-        <div class="p-field-radiobutton">
-          <p-radioButton [name]=consume.key [formControlName]=consume.key value=true inputId="consume-{{i}}-yes">
-          </p-radioButton>
-          <label for="consume{{i}}-yes" class="p-ml-3">Yes</label>
-        </div>
-        <div class="p-field-radiobutton">
-          <p-radioButton [name]=consume.key [formControlName]=consume.key value=false inputId="consume-{{i}}-no">
-          </p-radioButton>
-          <label for="consume{{i}}-no" class="p-ml-3">No</label>
+        <label class="p-mr-3 radiobutton-group-label">Any Withdrawal History?</label>
+        <div *ngFor="let withdraw of withdrawalHistory; let i = index" class="p-field-radiobutton">
+          <p-radioButton name="withdrawalHistory" formControlName=withdrawalHistory [value]=withdraw.value inputId="withdraw{{i}}"></p-radioButton>
+          <label for="withdraw{{i}}" class="p-ml-3">{{withdraw.label}}</label>
         </div>
       </div>
-    </div>
+      </div>
     <!-- tobacco -->
     <div class="p-field p-md-6">
+      <span class="label-title">History of Tobacco</span>
       <input type="text" pInputText formControlName=histOfTobacco placeholder="History of Tobacco">
     </div>
     <!-- Currently consumes tobacco -->
-    <div *ngFor="let consume of currentlyConsumesTobacco; let i = index;">
+    <div class="p-field p-md-6">
       <div class="p-col-12 p-formgroup-inline">
-        <label class="p-mr-3 radiobutton-group-label">Currently Consumes Tobacco? </label>
-        <div class="p-field-radiobutton">
-          <p-radioButton [name]=consume.key [formControlName]=consume.key value=true inputId="consume-{{i}}-yes">
-          </p-radioButton>
-          <label for="consume{{i}}-yes" class="p-ml-3">Yes</label>
-        </div>
-        <div class="p-field-radiobutton">
-          <p-radioButton [name]=consume.key [formControlName]=consume.key value=false inputId="consume-{{i}}-no">
-          </p-radioButton>
-          <label for="consume{{i}}-no" class="p-ml-3">No</label>
+        <label class="p-mr-3 radiobutton-group-label">Currently Consumes Tobacco?</label>
+        <div *ngFor="let consume of currentlyConsumesTobacco; let i = index" class="p-field-radiobutton">
+          <p-radioButton name="currentlyConsumesTobacco" formControlName=currentlyConsumesTobacco [value]=consume.value inputId="consume{{i}}"></p-radioButton>
+          <label for="consume{{i}}" class="p-ml-3">{{consume.label}}</label>
         </div>
       </div>
-    </div>
+      </div>
     <!-- tobacco intake ferq -->
     <div class="p-field p-md-12">
-      <input type="text" pInputText formControlName=currentTobaccoIntakeFreq placeholder="Current Tobacco Intake Frequency">
+      <span class="label-title">Current Tobacco Intake Frequency</span>
+      <input type="text" pInputText formControlName=currentTobaccoIntakeFreq placeholder="Intake Frequency">
     </div>
     <!-- Caffeine -->
     <div class="p-field p-md-6">
+      <span class="label-title">History of Caffeine</span>
       <input type="text" pInputText formControlName=histOfCaffeine placeholder="History of Caffeine">
     </div>
-    <!-- Currently consumes tobacco -->
-    <div *ngFor="let consume of currentlyConsumesCaffeine; let i = index;">
-      <div class="p-col-12 p-formgroup-inline">
-        <label class="p-mr-3 radiobutton-group-label">Currently Consumes Caffeine? </label>
-        <div class="p-field-radiobutton">
-          <p-radioButton [name]=consume.key [formControlName]=consume.key value=true inputId="consume-{{i}}-yes">
-          </p-radioButton>
-          <label for="consume{{i}}-yes" class="p-ml-3">Yes</label>
+    <!-- Currently consumes caffeine -->
+      <div class="p-field p-md-6">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Currently Consumes Caffeine?</label>
+          <div *ngFor="let consume of currentlyConsumesCaffeine; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="currentlyConsumesCaffeine" formControlName=currentlyConsumesCaffeine [value]=consume.value inputId="consume{{i}}"></p-radioButton>
+            <label for="consume{{i}}" class="p-ml-3">{{consume.label}}</label>
+          </div>
         </div>
-        <div class="p-field-radiobutton">
-          <p-radioButton [name]=consume.key [formControlName]=consume.key value=false inputId="consume-{{i}}-no">
-          </p-radioButton>
-          <label for="consume{{i}}-no" class="p-ml-3">No</label>
         </div>
-      </div>
-    </div>
-    <!-- tobacco intake ferq -->
+    <!-- caffeine intake ferq -->
     <div class="p-field p-md-6">
-      <input type="text" pInputText formControlName=currentCaffeineIntakeFreq placeholder="Current Caffeine Intake Frequency">
+      <span class="label-title">Current Caffeine Intake Frequency</span>
+      <input type="text" pInputText formControlName=currentCaffeineIntakeFreq placeholder="Intake Frequency">
     </div>
     <div class="p-field p-md-6">
+      <span class="label-title">Treatment Programs</span>
       <input type="text" pInputText formControlName=treatmentPrograms placeholder="Treatment Programs">
     </div>
   </div>
@@ -128,7 +113,7 @@
   <h3>Legal History/Issues</h3>
   <div class="p-fluid p-formgrid p-grid" formGroupName="legalHistoryOrIssues"  >
     <!-- ever arrested -->
-    <div *ngFor="let arrested of everArrested; let i = index;">
+    <!-- <div *ngFor="let arrested of everArrested; let i = index;">
       <div class="p-col-12 p-formgroup-inline">
         <label class="p-mr-3 radiobutton-group-label">Ever Arrested? </label>
         <div class="p-field-radiobutton">
@@ -142,13 +127,23 @@
           <label for="arrested{{i}}-no" class="p-ml-3">No</label>
         </div>
       </div>
-    </div>
+    </div> -->
+    <div class="p-field p-md-6">
+      <div class="p-col-12 p-formgroup-inline">
+        <label class="p-mr-3 radiobutton-group-label">Ever Arrested?</label>
+        <div *ngFor="let arrestes of everArrested; let i = index" class="p-field-radiobutton">
+          <p-radioButton name="everArrested" formControlName=everArrested [value]=arrestes.value inputId="arrestes{{i}}"></p-radioButton>
+          <label for="arrestes{{i}}" class="p-ml-3">{{arrestes.label}}</label>
+        </div>
+      </div>
+      </div>
     <!-- arrested reason -->
     <div class="p-field p-md-8">
+      <span class="label-title">Arrested Reason</span>
       <input type="text" pInputText formControlName=arrestedReason placeholder="Arrested Reason">
     </div>
      <!-- ever convicted -->
-     <div *ngFor="let convicted of everConvicted; let i = index;">
+     <!-- <div *ngFor="let convicted of everConvicted; let i = index;">
       <div class="p-col-12 p-formgroup-inline">
         <label class="p-mr-3 radiobutton-group-label">Ever Convicted? </label>
         <div class="p-field-radiobutton">
@@ -162,13 +157,23 @@
           <label for="convicted{{i}}-no" class="p-ml-3">No</label>
         </div>
       </div>
-    </div>
+    </div> -->
+    <div class="p-field p-md-6">
+      <div class="p-col-12 p-formgroup-inline">
+        <label class="p-mr-3 radiobutton-group-label">Ever Convicted?</label>
+        <div *ngFor="let convicted of everConvicted; let i = index" class="p-field-radiobutton">
+          <p-radioButton name="everConvicted" formControlName=everConvicted [value]=convicted.value inputId="convicted{{i}}"></p-radioButton>
+          <label for="convicted{{i}}" class="p-ml-3">{{convicted.label}}</label>
+        </div>
+      </div>
+      </div>
     <!-- convicted reason -->
     <div class="p-field p-md-8">
+      <span class="label-title">Convicted Reason</span>
       <input type="text" pInputText formControlName=convictedReason placeholder="Convicted Reason">
     </div>
       <!-- current pending charges -->
-      <div *ngFor="let pendingCharges of currentPendingCharges; let i = index;">
+      <!-- <div *ngFor="let pendingCharges of currentPendingCharges; let i = index;">
         <div class="p-col-12 p-formgroup-inline">
           <label class="p-mr-3 radiobutton-group-label">Current Pending Charges </label>
           <div class="p-field-radiobutton">
@@ -182,13 +187,23 @@
             <label for="pendingCharges{{i}}-no" class="p-ml-3">No</label>
           </div>
         </div>
-      </div>
+      </div> -->
+      <div class="p-field p-md-6">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Any Current Pending Charges?</label>
+          <div *ngFor="let pendingCharges of currentPendingCharges; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="currentPendingCharges" formControlName=currentPendingCharges [value]=pendingCharges.value inputId="pendingCharges{{i}}"></p-radioButton>
+            <label for="pendingCharges{{i}}" class="p-ml-3">{{pendingCharges.label}}</label>
+          </div>
+        </div>
+        </div>
       <!--  Charges -->
       <div class="p-field p-md-8">
+        <span class="label-title">Charges</span>
         <input type="text" pInputText formControlName=charges placeholder="Charges ">
       </div>
       <!-- outstanding warrant -->
-      <div *ngFor="let warrants of outstandingWarrants; let i = index;">
+      <!-- <div *ngFor="let warrants of outstandingWarrants; let i = index;">
         <div class="p-col-12 p-formgroup-inline">
           <label class="p-mr-3 radiobutton-group-label">Outstanding Warrants</label>
           <div class="p-field-radiobutton">
@@ -202,15 +217,25 @@
             <label for="warrants{{i}}-no" class="p-ml-3">No</label>
           </div>
         </div>
-      </div>
+      </div> -->
+      <div class="p-field p-md-6">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Outstanding Warrants</label>
+          <div *ngFor="let warrants of outstandingWarrants; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="outstandingWarrants" formControlName=outstandingWarrants [value]=warrants.value inputId="warrants{{i}}"></p-radioButton>
+            <label for="warrants{{i}}" class="p-ml-3">{{warrants.label}}</label>
+          </div>
+        </div>
+        </div>
       <!--  warrant reason -->
       <div class="p-field p-md-8">
+        <span class="label-title">Warrant Reasony</span>
         <input type="text" pInputText formControlName=warrantReason placeholder="Warrant Reason ">
       </div>
       <!-- on probation or parole -->
-      <div *ngFor="let onParole of onProbationOrParole; let i = index;">
+      <!-- <div *ngFor="let onParole of onProbationOrParole; let i = index;">
         <div class="p-col-12 p-formgroup-inline">
-          <label class="p-mr-3 radiobutton-group-label">Do you on Probation or parole</label>
+          <span class="p-mr-3 radiobutton-group-label">Do you on Probation or parole</span>
           <div class="p-field-radiobutton">
             <p-radioButton [name]=onParole.key [formControlName]=onParole.key value=true inputId="onParole-{{i}}-yes">
             </p-radioButton>
@@ -222,18 +247,30 @@
             <label for="onParole{{i}}-no" class="p-ml-3">No</label>
           </div>
         </div>
-      </div>
+      </div> -->
+      <div class="p-field p-md-6">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Do you on Probation or parole?</label>
+          <div *ngFor="let onParole of onProbationOrParole; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="onProbationOrParole" formControlName=onProbationOrParole [value]=onParole.value inputId="onParole{{i}}"></p-radioButton>
+            <label for="onParole{{i}}" class="p-ml-3">{{onParole.label}}</label>
+          </div>
+        </div>
+        </div>
       <!-- Officer name  -->
       <div class="p-field p-md-6">
-        <input type="text" pInputText formControlName=officerName placeholder="Parole Officer Name ">
+        <span class="label-title">Parole Officer Name</span>
+        <input type="text" pInputText formControlName=officerName placeholder="Name">
       </div>
       <!-- Officer address -->
       <div class="p-field p-md-6">
-        <input type="text" pInputText formControlName=officerAddress placeholder="Parole Officer Address ">
+        <span class="label-title">Parole Officer Address</span>
+        <input type="text" pInputText formControlName=officerAddress placeholder="Address ">
       </div>
       <!-- probation or parole terms -->
       <div class="p-field p-md-6">
-        <input type="text" pInputText formControlName=probationOrParoleTerms placeholder="Probation or Parole Terms if any ">
+        <span class="label-title">Probation or Parole Terms</span>
+        <input type="text" pInputText formControlName=probationOrParoleTerms placeholder="if any ">
       </div>
   </div>
   <!-- save -->
