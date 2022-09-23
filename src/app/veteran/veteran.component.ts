@@ -85,6 +85,7 @@ export class VeteranComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+   // document.getElementById("overlay")!.style.display="block";
     console.log('veteran component');
     this.getLoginId()
     if (window.innerWidth < 768) this.displayMenu = false;
@@ -201,6 +202,7 @@ export class VeteranComponent implements OnInit {
       if (this.image === null) {
         this.image = '../assets/images/user-profile.jpg';
       }
+      //document.getElementById("overlay")!.style.display="none"
     });
   }
 }
