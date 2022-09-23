@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, isDevMode, OnInit } from '@angular/core';
 
 import { CalendarOptions } from '@fullcalendar/angular';
 
@@ -24,6 +24,10 @@ export class DashboardComponent implements OnInit {
   public tagName: string = 'Appointment';
   public isShowSpinner: boolean = true;
   public showGrayOut: boolean = true;
+  private isDev = isDevMode();
+  public startDateToDisplay: any;
+  public endDateToDisplay: any;
+
   constructor(
     private service: CalendarServiceService,
     private cache: ClipBoardService
@@ -91,10 +95,29 @@ export class DashboardComponent implements OnInit {
     } else {
       this.tagName = 'Event';
     }
+
+    
+    if(this.isDev){
+      this.startDateToDisplay=arg.event._def.extendedProps.eventstart;
+      this.endDateToDisplay= arg.event._def.extendedProps.eventend;
+    }else{
+      this.startDateToDisplay = new Date(arg.event._def.extendedProps.eventstart);
+      console.log('old date', this.startDateToDisplay);
+      this.startDateToDisplay.setTime(
+        this.startDateToDisplay.getTime() - 5 * 60 * 60 * 1000 - 30 * 60 * 1000
+      );
+      console.log('new date', this.startDateToDisplay);
+  
+      this.endDateToDisplay = new Date(arg.event._def.extendedProps.eventend);
+      console.log('old date', this.endDateToDisplay);
+      this.endDateToDisplay.setTime(this.endDateToDisplay.getTime() - 5 * 60 * 60 * 1000 - 30 * 60 * 1000);
+      console.log('new date', this.endDateToDisplay);
+
+    }
     this.eventInfo = [
       this.tagName,
-      arg.event._def.extendedProps.eventstart,
-      arg.event._def.extendedProps.eventend,
+      this.startDateToDisplay,
+       this.endDateToDisplay,
       arg.event._def.title,
       arg.event._instance.range.start,
       arg.event._def.extendedProps.description,
