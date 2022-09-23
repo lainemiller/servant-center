@@ -121,6 +121,7 @@ export class IaFormPageOneComponent implements OnInit {
         addressLine2: this.data.address_line_2,
         city: this.data.city,
         country: this.data.county,
+        state: this.data.state,
         zipcode: this.data.zip_code,
         contactPerson: this.data.contact_person,
         relationship: this.data.contact_person_relationship,
@@ -139,8 +140,6 @@ export class IaFormPageOneComponent implements OnInit {
         otherBenefits: this.data.otherBenefits,
         cashBenefits: this.data.cash_benefits,
         nonCashBenefits: this.data.non_cash_benefits,
-      });
-      this.benefits.patchValue({
         receivingBenefits: this.data.current_benefits,
         applyingBenefits: this.data.needed_benefits,
       });
@@ -175,6 +174,7 @@ export class IaFormPageOneComponent implements OnInit {
 
   initializeFormGroups() {
     this.personalDetails = this.fb.group({
+      veteranID: [this.selecteVetId, Validators.required],
       firstName: ['', Validators.required],
       middleInitial: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -190,6 +190,7 @@ export class IaFormPageOneComponent implements OnInit {
       primaryLanguage: ['', Validators.required],
       addressMain: ['', Validators.required],
       addressLine2: ['', Validators.required],
+      state: ['', Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
       zipcode: ['', Validators.required],
@@ -199,6 +200,7 @@ export class IaFormPageOneComponent implements OnInit {
       phone: ['', Validators.required],
     });
     this.incomeAndResources = this.fb.group({
+      veteranID: [this.selecteVetId, Validators.required],
       income: ['', Validators.required],
       type: ['', Validators.required],
       bankAccount: ['', Validators.required],
@@ -210,12 +212,11 @@ export class IaFormPageOneComponent implements OnInit {
       otherBenefits: ['', Validators.required],
       cashBenefits: ['', Validators.required],
       nonCashBenefits: ['', Validators.required],
-    });
-    this.benefits = this.fb.group({
       receivingBenefits: ['', Validators.required],
       applyingBenefits: ['', Validators.required],
     });
     this.socialAndFamilyHistory = this.fb.group({
+      veteranID: [this.selecteVetId, Validators.required],
       mothersFullName: ['', Validators.required],
       motherStatus: ['', Validators.required],
       fathersFullName: ['', Validators.required],
@@ -254,7 +255,6 @@ export class IaFormPageOneComponent implements OnInit {
     this.page1Form = this.fb.group({
       personalDetails: this.personalDetails,
       incomeAndResources: this.incomeAndResources,
-      benefits: this.benefits,
       socialAndFamilyHistory: this.socialAndFamilyHistory,
     });
   }
@@ -264,6 +264,10 @@ export class IaFormPageOneComponent implements OnInit {
   }
 
   onSubmit() {
+    let jobType = this.incomeAndResources.value.type;
+    this.incomeAndResources.value.type = "{"+jobType+"}";
+    let neededBeni = this.incomeAndResources.value.applyingBenefits;
+    this.incomeAndResources.value.applyingBenefits = "{"+neededBeni+"}";
     this.submitted = true;
     this.service
       .initialTreatmentGoalsPage1(this.page1Form.value)

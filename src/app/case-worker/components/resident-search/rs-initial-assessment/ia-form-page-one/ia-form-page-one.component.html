@@ -71,17 +71,21 @@
         <span class="label-title">Address Line</span>
         <input type="text" pInputText formControlName=addressLine2 placeholder="Address Line">
       </div>
-      <div class="p-field p-col-12 p-md-4">
+      <div class="p-field p-col-12 p-md-3">
         <span class="label-title">City</span>
         <input type="text" pInputText formControlName=city placeholder="City">
       </div>
-      <div class="p-field p-col-12 p-md-4">
+      <div class="p-field p-col-12 p-md-3">
         <span class="label-title">Country</span>
         <input type="text" pInputText formControlName=country placeholder="Country">
       </div>
-      <div class="p-field p-col-12 p-md-4">
+      <div class="p-field p-col-12 p-md-3">
         <span class="label-title">Zip Code</span>
         <input type="text" pInputText formControlName=zipcode placeholder="Zip Code">
+      </div>
+      <div class="p-field p-col-12 p-md-3">
+        <span class="label-title">State</span>
+        <input type="text" pInputText formControlName=state placeholder="City">
       </div>
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">Contact Person</span>
@@ -119,12 +123,12 @@
         <span class="label-title">Name of The Bank</span>
         <input type="text" pInputText formControlName=bankName placeholder="Name of Bank">
       </div>
-      <div class="p-field p-col-12 p-md-6">
+      <div class="p-field p-col-12 p-md-3">
         <!-- input type? -->
         <span class="label-title">Direct Deposit</span>
         <input type="text" pInputText formControlName=directDeposit placeholder="Direct Deposit">
       </div>
-      <div class="p-field p-col-12 p-md-6">
+      <div class="p-field p-col-12 p-md-3">
         <!-- input type? -->
         <span class="label-title">Other Assets</span>
         <input type="text" pInputText formControlName=otherAssets placeholder="Other Assets">
@@ -139,11 +143,11 @@
         <span class="label-title">VA Coverage</span>
         <input type="text" pInputText formControlName=vaCoverage placeholder="VA Coverage">
       </div>
-      <div class="p-field p-col-12 p-md-6">
+      <!-- <div class="p-field p-col-12 p-md-6"> -->
         <!-- input type? -->
-        <span class="label-title">Other Benefits You are receiving</span>
+        <!-- <span class="label-title">Other Benefits You are receiving</span>
         <input type="text" pInputText formControlName=otherBenefits placeholder="Receiving Benefits">
-      </div>
+      </div> -->
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">Cash Benefits</span>
         <input type="text" pInputText formControlName=cashBenefits placeholder="Cash Benefits">
@@ -154,7 +158,7 @@
       </div>
     </div>
     <h3>Benefits</h3>
-    <div class="p-fluid p-formgrid p-grid" formGroupName="benefits">
+    <div class="p-fluid p-formgrid p-grid" formGroupName="incomeAndResources">
       <div class="p-field p-col-12">
         <!-- input type? multiselect dropdown/checkbox? -->
         <span class="label-title">what Benefits are You Currently Receiving?</span>
@@ -172,7 +176,7 @@
     <div class="p-fluid p-formgrid p-grid" formGroupName="socialAndFamilyHistory">
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">Mother's Full Name</span>
-        <input type="text" pInputText formControlName=mothersFullName placeholder="Mother's FullName">
+        <input type="text" pInputText formControlName=mothersFullName placeholder="Name">
       </div>
       <div class="p-col-12 p-md-6 p-formgroup-inline" style="align-items: center;">
         <div *ngFor="let motherStatus of familyStatusList; let i = index" class="p-field-radiobutton">
@@ -183,7 +187,7 @@
       </div>
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">Father's Full Name</span>
-        <input type="text" pInputText formControlName=fathersFullName placeholder="Father's FullName">
+        <input type="text" pInputText formControlName=fathersFullName placeholder="Name">
       </div>
       <div class="p-col-12 p-md-6 p-formgroup-inline" style="align-items: center;">
         <div *ngFor="let fatherStatus of familyStatusList; let i = index" class="p-field-radiobutton">
