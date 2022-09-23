@@ -29,18 +29,20 @@ export class TransportationRequestFormComponent implements OnInit {
   public veteranData: any;
   public firstName: any;
   public lastName: any;
- // public address1: any;
-  // public city: any;
-  // public zipcode: any;
   public data: any;
   public states: State[];
   public dateRequested:any;
   // selectedState!: State;
   selectedState!: any;
-  userId!: number;
+  //userId!: number;
   veteran_id!:number;
   public destinationAddresses!: DropDown[];
   public showOtherAddressTextBox: boolean = false;
+  public phone: any;
+  public greyingOut: boolean= false;
+  public isShowSpinner:boolean=false;
+
+
   
   constructor(
     private cacheData: ClipBoardService,
@@ -55,23 +57,22 @@ export class TransportationRequestFormComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.userId = this.cacheData.get("veteranId")
+    // this.userId = this.cacheData.get("veteranId")
     this.veteran_id = this.cacheData.get("veteranId")
     this.selectedState = this.states[1];
         
     this.service
-      .getProfileData(this.userId)
+      .getProfileData(this.veteran_id)
       .subscribe((data: VeteranProfileResponse) => {
         this.veteranData = data;
-        console.log("Veteran Data is ---> ",this.veteranData);
+        console.log("Veteran Data is : ",this.veteranData);
         this.firstName = this.veteranData.data[0].first_name;
         this.lastName = this.veteranData.data[0].last_name;
-        // this.address1 = this.veteranData.address1;
-        // this.city = this.veteranData.city;
-        this.state = this.veteranData.state;
-        // console.log(this.selectedState)
-        // this.zipcode = this.veteranData.zipcode;
-        
+        this.phone = this.veteranData.data[0].contact_person_phone  
+        console.log("Phone",this.phone);
+       
+              
+
         this.buildForm();
         console.log(this.transportRequestForm.value);
       });
@@ -80,6 +81,7 @@ export class TransportationRequestFormComponent implements OnInit {
   buildForm() {
     this.transportRequestForm = this.formBuilder.group({
       veteran_id:[this.veteran_id],
+      contactNumber:[this.phone],
       firstName: [this.firstName, Validators.required],
       lastName: [this.lastName, Validators.required],
       reason: ['', Validators.required],
@@ -162,6 +164,9 @@ export class TransportationRequestFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.greyingOut = true;
+    this.isShowSpinner=true;
+
 
   let appointDate= this.transportRequestForm.value.appointmentDate
   this.transportRequestForm.value.appointmentDate=appointDate.toLocaleDateString();
@@ -174,8 +179,6 @@ export class TransportationRequestFormComponent implements OnInit {
   this.transportRequestForm.value.selectedState=this.transportRequestForm.value.selectedState.name;
   
     if (this.transportRequestForm.value.destinationAddress.name === 'Other') {
-        // this.transportRequestForm.value.destinationAddress.name =
-        // this.transportRequestForm.value.destinationAddress2;
         this.transportRequestForm.value.destinationAddress= this.transportRequestForm.value.destinationAddress2+" " +this.transportRequestForm.value.selectedState
         +" "+this.transportRequestForm.value.city+" "+this.transportRequestForm.value.zipcode
     }else{
@@ -189,6 +192,9 @@ export class TransportationRequestFormComponent implements OnInit {
     
     if (data.responseStatus === 'SUCCESS') {
      this.sucessMessage();
+     this.greyingOut = false;
+     this.isShowSpinner=false;
+
     }else if (data.responseStatus === 'FAILURE') {
      this.errorMessage();
     }
