@@ -18,24 +18,24 @@
                 <input type="text" formControlName="goalTitle" pInputText placeholder="Goal Title" class="inputFromUser"
                   appNoSpecialSymbols customAttr="startWithAlpha" />
                 <small class="error"
-                  *ngIf="progressNoteForm.goalTitle.errors?.required && progressNoteForm.goalTitle.touched">Goal Title
-                  is Required.</small>
-                <small class="error" *ngIf="progressNoteForm.goalTitle.errors?.maxlength">Goal Title should be at max of
+                  *ngIf="progressNoteForm.goalTitle.errors?.required && progressNoteForm.goalTitle.touched">Goal title
+                  is required.</small>
+                <small class="error" *ngIf="progressNoteForm.goalTitle.errors?.maxlength">Goal title should be at max of
                   50 characters.</small>
               </div>
                 <div class="p-field p-col-12 p-sm-12">
                   <p-dropdown [options]="goalTypes" formControlName="goalType" placeholder="Select a Goal Type" optionLabel="name" optionValue = "value" [showClear]="true"></p-dropdown>
                   <small class="error"
                   *ngIf="progressNoteForm.goalType.errors?.required && progressNoteForm.goalType.touched">Goal
-                  type is Required.</small>
+                  type is required.</small>
                 </div>
               <div class="p-field p-col-12 p-sm-12">
                 <textarea [rows]="6" formControlName="goalDescription" pInputTextarea placeholder="Goal Description"
                   class="inputFromUser"></textarea>
                 <small class="error"
                   *ngIf="progressNoteForm.goalDescription.errors?.required && progressNoteForm.goalDescription.touched">Goal
-                  Description is Required.</small>
-                <small class="error" *ngIf="progressNoteForm.goalDescription.errors?.maxlength">Goal Description should
+                  description is required.</small>
+                <small class="error" *ngIf="progressNoteForm.goalDescription.errors?.maxlength">Goal description should
                   be at max of 300 characters</small>
               </div>
               <div class="p-field p-col-12 p-sm-12">

@@ -3,11 +3,13 @@ import { Injectable, isDevMode } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RestClientService } from 'src/app/shared/services/rest-client.service';
 import { environment } from 'src/environments/environment';
+import { environment as env} from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IaPage1Service {
+  private getIAPage1Details = env.serviceUrl.getIAPage1Details;
   constructor(private restcs: RestClientService,private http:HttpClient) {}
   private commonUrl=environment.localUrl;
   private isDev = isDevMode();
@@ -16,7 +18,7 @@ export class IaPage1Service {
     if (this.isDev){
     return this.restcs.get(this.commonUrl+'initialAssessment/page-1/'+ vetID);
     } else{
-      return this.restcs.get('dev url goes here');
+      return this.restcs.get(this.getIAPage1Details+vetID);
     }
   }
     
@@ -28,15 +30,6 @@ export class IaPage1Service {
       //env api goes here
       return this.http.post('api goes here',data);
     }
-}
-
-public PIData( vetId: number): Observable<any> {
-  if (this.isDev){
-  return this.http.get(this.commonUrl+'getInitialAssessment/page-1/'+vetId);
-  } else{
-    //env api goes here
-    return this.http.post('api goes here', vetId);
-  }
 }
 
 }
