@@ -14,4 +14,8 @@ export class WelcomeHeaderComponent implements OnInit {
   ngOnInit(): void {
     console.log('welcome header component');
   }
+
+  changePhoto(imageInput: HTMLInputElement){
+    console.log('imageInput.files![0]',imageInput.files![0]); 
+  }
 }
