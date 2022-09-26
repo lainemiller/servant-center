@@ -5,19 +5,22 @@ import { Router } from '@angular/router';
 import { IaPage2Service } from 'src/app/case-worker/services/ia-page2.service';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { DatePipe } from '@angular/common';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-ia-form-page-two',
   templateUrl: './ia-form-page-two.component.html',
   styleUrls: ['./ia-form-page-two.component.scss'],
+  providers: [MessageService]
 })
 export class IaFormPageTwoComponent implements OnInit {
   submitted!: boolean;
+  ia2: boolean = true;
+  greyingOut: boolean = true;
   data: any;
   serviceDate: any;
   selectedVetId!: number;
   page2Form!: FormGroup;
   educationAndEmploymentHistory!: FormGroup;
-  socialHistory!: FormGroup;
   mentalHealthInformation!: FormGroup;
   military = [
     { label: 'Yes', value: true },
@@ -32,6 +35,7 @@ export class IaFormPageTwoComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private service: IaPage2Service,
+    private messageService: MessageService,
     private datepipe: DatePipe,
     private cacheData: ClipBoardService
   ) {
@@ -45,6 +49,8 @@ export class IaFormPageTwoComponent implements OnInit {
 
   setForm() {
     this.service.getIAPage2(this.selectedVetId).subscribe((res) => {
+      this.ia2 = false;
+      this.greyingOut = false;
       this.data = res[0];
       this.serviceDate = this.datepipe.transform(
         this.data.service_dates,
@@ -68,10 +74,6 @@ export class IaFormPageTwoComponent implements OnInit {
         currentEmployer: this.data.current_employer,
         currentEmployerLocation: this.data.current_employer_location,
         otherTrainingOrSkills: this.data.work_skills,
-      });
-      this.socialHistory.patchValue({
-        religiousPreferences: this.data.religious_preference,
-        hobbiesInterests: this.data.hobbies
       });
       this.mentalHealthInformation.patchValue({
       diagnosis: this.data.diagnosis,
@@ -111,12 +113,6 @@ export class IaFormPageTwoComponent implements OnInit {
       currentEmployerLocation: ['', Validators.required],
       veteranId: [this.selectedVetId, Validators.required]
     });
-
-    this.socialHistory = this.fb.group({
-      religiousPreferences: ['', Validators.required],
-      hobbiesInterests: ['', Validators.required],
-      veteranId: [this.selectedVetId, Validators.required]
-    });
     this.mentalHealthInformation = this.fb.group({
       diagnosis: ['', Validators.required],
       currentPsychiatricTreatment: ['', Validators.required],
@@ -138,17 +134,26 @@ export class IaFormPageTwoComponent implements OnInit {
   buildForm() {
     this.page2Form = this.fb.group({
       educationAndEmploymentHistory: this.educationAndEmploymentHistory,
-      mentalHealthInformation: this.mentalHealthInformation,
-      socialHistory: this.socialHistory,
+      mentalHealthInformation: this.mentalHealthInformation
     });
   }
 
   onSubmit() {
     this.submitted = true;
+    this.ia2 = true;
+    this.greyingOut = true
     this.service
       .initialTreatmentGoalsPage2(this.page2Form.value)
       .subscribe((data) => {
+        if(data.responseStatus === 'SUCCESS'){
+        this.ia2 = false;
+        this.greyingOut = false;
+        this.successMessage();
         console.log('Submitted');
+        }
+        else if(data.responseStatus === 'FAILURE'){
+          this.errorMessage();
+        }
       });
     // this.router.navigateByUrl(
     //   'case-worker/resident-search/initial-assessment/page-3'
@@ -173,4 +178,20 @@ export class IaFormPageTwoComponent implements OnInit {
   }
 
   index: number = 0;
+  successMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Successfully Updated Details',
+    });
+    
+  }
+
+  errorMessage(){
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Failed',
+      detail: 'Something Went Wrong!',
+    });
+  }
 }

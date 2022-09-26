@@ -4,13 +4,17 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IaPage1Service } from 'src/app/case-worker/services/ia-page1.service';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-ia-form-page-one',
   templateUrl: './ia-form-page-one.component.html',
   styleUrls: ['./ia-form-page-one.component.scss'],
+  providers: [MessageService]
 })
 export class IaFormPageOneComponent implements OnInit {
   selecteVetId!: number;
+  ia1: boolean = true;
+  greyingOut: boolean = true;
   data: any;
   date_of_birth: any;
   hivTestDate: any;
@@ -45,6 +49,18 @@ export class IaFormPageOneComponent implements OnInit {
     { label: 'Yes', value: true },
     { label: 'No', value: false },
   ];
+  consent = [
+    { label: 'Yes', value: true },
+    { label: 'No', value: false },
+  ];
+  insuCoverages = [
+    { label: 'Yes', value: true },
+    { label: 'No', value: false },
+  ];
+  substanceAbuse = [
+    { label: 'Yes', value: true },
+    { label: 'No', value: false },
+  ];
   genderList = [
     { label: 'Male', value: 'M' },
     { label: 'Female', value: 'F' },
@@ -76,6 +92,7 @@ export class IaFormPageOneComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private service: IaPage1Service,
+    private messageService: MessageService,
     private datepipe: DatePipe,
     private cacheData: ClipBoardService
   ) {
@@ -88,11 +105,13 @@ export class IaFormPageOneComponent implements OnInit {
   }
   setForm() {
     this.service.getIAPage1(this.selecteVetId).subscribe((res) => {
+      this.ia1 = false;
+      this.greyingOut = false;
       this.data = res[0];
       console.log('dob', this.data.date_of_birth);
       this.date_of_birth = this.datepipe.transform(
         this.data.date_of_birth,
-        'dd/MM/yyyy'
+        'M/d/yy'
       );
       this.hivTestDate = this.datepipe.transform(
         this.data.approx_hiv_test_date,
@@ -109,6 +128,7 @@ export class IaFormPageOneComponent implements OnInit {
         middleInitial: this.data.middle_initial,
         nickName: this.data.nick_name,
         dob: this.date_of_birth,
+        // dob: this.data.date_of_birth,
         placeOfBirth: this.data.place_of_birth,
         ssn: this.data.ssn,
         //  age:                   this.data.,
@@ -127,6 +147,9 @@ export class IaFormPageOneComponent implements OnInit {
         relationship: this.data.contact_person_relationship,
         contactPersonAddress: this.data.contact_person_address,
         phone: this.data.contact_person_phone,
+        religiousPreferences: this.data.religious_preference,
+        hobbiesInterests: this.data.hobbies,
+        consent: this.data.consent_status,
       });
       this.incomeAndResources.patchValue({
         income: this.data.income,
@@ -137,6 +160,8 @@ export class IaFormPageOneComponent implements OnInit {
         otherAssets: this.data.other_assets,
         medicaid: this.data.medicaid_coverage,
         vaCoverage: this.data.va_coverage,
+        medicareCoverage: this.data.medicare_coverage,
+        othMedCoverage: this.data.other_med_coverage,
         otherBenefits: this.data.otherBenefits,
         cashBenefits: this.data.cash_benefits,
         nonCashBenefits: this.data.non_cash_benefits,
@@ -153,6 +178,7 @@ export class IaFormPageOneComponent implements OnInit {
         physicalAbuse: this.data.physical_abuse_hist,
         sexualAbuse: this.data.sexual_abuse_hist,
         healthProblemsInFamily:this.data.family_hist_mental_health_and_substance_abuse,
+        substanceAbuse: this.data.substance_abuse,
         currentMaritalStatus: this.data.current_marital_status,
         sexualOrientation: this.data.sexual_orientation,
         sexuallyActive: this.data.sexually_active,
@@ -198,6 +224,9 @@ export class IaFormPageOneComponent implements OnInit {
       relationship: ['', Validators.required],
       contactPersonAddress: ['', Validators.required],
       phone: ['', Validators.required],
+      religiousPreferences: ['', Validators.required],
+      hobbiesInterests: ['', Validators.required],
+      consent: ['', Validators.required]
     });
     this.incomeAndResources = this.fb.group({
       veteranID: [this.selecteVetId, Validators.required],
@@ -209,6 +238,8 @@ export class IaFormPageOneComponent implements OnInit {
       otherAssets: ['', Validators.required],
       medicaid: ['', Validators.required],
       vaCoverage: ['', Validators.required],
+      medicareCoverage: ['', Validators.required],
+      othMedCoverage: ['', Validators.required],
       otherBenefits: ['', Validators.required],
       cashBenefits: ['', Validators.required],
       nonCashBenefits: ['', Validators.required],
@@ -224,7 +255,7 @@ export class IaFormPageOneComponent implements OnInit {
       siblings: new FormArray([]),
       everMarried: ['', Validators.required],
       numberOfMarriages: ['', Validators.required],
-      spouseOrSignificvantOther: ['', Validators.required],
+      spouseOrSignificantOther: ['', Validators.required],
       children: new FormArray([]),
       childhood: ['', Validators.required],
       relationShipWithParents: ['', Validators.required],
@@ -247,6 +278,7 @@ export class IaFormPageOneComponent implements OnInit {
       stdTestedLocation: ['', Validators.required],
       stdTestResult: ['', Validators.required],
       hivTestDesired: ['', Validators.required],
+      substanceAbuse: ['', Validators.required]
     });
     // this.buildForm();
   }
@@ -264,14 +296,38 @@ export class IaFormPageOneComponent implements OnInit {
   }
 
   onSubmit() {
+    this.ia1 = true;
+    this.greyingOut = true;
     let jobType = this.incomeAndResources.value.type;
     this.incomeAndResources.value.type = "{"+jobType+"}";
     let neededBeni = this.incomeAndResources.value.applyingBenefits;
+    let othMedBenifits = this.incomeAndResources.value.othMedCoverage;
     this.incomeAndResources.value.applyingBenefits = "{"+neededBeni+"}";
+    this.incomeAndResources.value.othMedCoverage = "{"+othMedBenifits+"}";
+    let incType = this.incomeAndResources.value.type;
+    let accType = this.incomeAndResources.value.bankAccount;
+    let othAssets = this.incomeAndResources.value.otherAssets;
+    let currBenefits = this.incomeAndResources.value.currBenefits;
+    let cashBeni = this.incomeAndResources.value.cashBenefits;
+    let nonCashBeni = this.incomeAndResources.value.nonCashBenefits;
+    this.incomeAndResources.value.type = "{"+incType+"}"
+    this.incomeAndResources.value.bankAccount = "{"+accType+"}"
+    this.incomeAndResources.value.otherAssets = "{"+othAssets+"}"
+    this.incomeAndResources.value.receivingBenefits = "{"+currBenefits+"}"
+    this.incomeAndResources.value.cashBenefits = "{"+cashBeni+"}"
+    this.incomeAndResources.value.nonCashBenefits = "{"+nonCashBeni+"}"
     this.submitted = true;
     this.service
       .initialTreatmentGoalsPage1(this.page1Form.value)
       .subscribe((data) => {
+        if(data.responseStatus === 'SUCCESS'){
+          this.ia1 = false;
+    this.greyingOut = false;
+    this.successMessage();
+        }
+        else if(data.responseStatus === 'FAILURE'){
+          this.errorMessage();
+        }
         console.log('Submitted');
       });
     // this.router.navigateByUrl(
@@ -330,5 +386,21 @@ export class IaFormPageOneComponent implements OnInit {
       'socialAndFamilyHistory',
       'children',
     ]) as FormArray;
+  }
+  successMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Successfully Updated Details',
+    });
+    
+  }
+
+  errorMessage(){
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Failed',
+      detail: 'Something Went Wrong!',
+    });
   }
 }

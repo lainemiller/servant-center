@@ -3,11 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IaPage4Service } from 'src/app/case-worker/services/ia-page4.service';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
-
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-ia-form-page-four',
   templateUrl: './ia-form-page-four.component.html',
   styleUrls: ['./ia-form-page-four.component.scss'],
+  providers: [MessageService]
 })
 export class IaFormPageFourComponent implements OnInit {
   public ia4: boolean = true;
@@ -62,8 +63,10 @@ export class IaFormPageFourComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private messageService: MessageService,
     private service: IaPage4Service,
-    private cacheData: ClipBoardService
+    private cacheData: ClipBoardService,
+
   ) {
     this.selecteVetId = this.cacheData.get('selectedResidentVeteranId');
     console.log('sel', this.selecteVetId);
@@ -76,6 +79,8 @@ export class IaFormPageFourComponent implements OnInit {
 
   setForm() {
     this.service.getIAPage4(this.selecteVetId).subscribe((res) => {
+      this.ia4 = false;
+      this.greyingOut = false;
       this.data = res[0];
       this.buildForm();
       this.substanceAbuseHistory.patchValue({
@@ -159,8 +164,8 @@ export class IaFormPageFourComponent implements OnInit {
   }
 
   onSubmit() {
-    this.ia4 = false;
-    this.greyingOut = false;
+    this.ia4 = true;
+    this.greyingOut = true;
     let chargesLegal = this.legalHistoryOrIssues.value.charges;
     this.legalHistoryOrIssues.value.charges = '{' + chargesLegal + '}';
     this.submitted = true;
@@ -168,6 +173,14 @@ export class IaFormPageFourComponent implements OnInit {
     this.service
       .initialTreatmentGoalsPage4(this.page4Form.value)
       .subscribe((data) => {
+        if (data.responseStatus === 'SUCCESS') {
+          this.ia4 = false;
+          this.greyingOut = false;
+         this.successMessage();
+        // alert("success");
+        } else if (data.responseStatus === 'FAILURE') {
+          this.errorMessage();
+        }
         console.log('Submitted');
       });
 
@@ -192,5 +205,22 @@ export class IaFormPageFourComponent implements OnInit {
     this.router.navigateByUrl(
       'case-worker/resident-search/initial-assessment/page-3'
     );
+  }
+
+  successMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Successfully Updated Details',
+    });
+    
+  }
+
+  errorMessage(){
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Failed',
+      detail: 'Something Went Wrong!',
+    });
   }
 }

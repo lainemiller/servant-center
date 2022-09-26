@@ -10,6 +10,8 @@ import { IaPage3Service } from 'src/app/case-worker/services/ia-page3.service';
 })
 export class IaFormPageThreeComponent implements OnInit {
   page3Form!: FormGroup;
+  // ia3: boolean = true;
+  // greyingOut: boolean = true;
   submitted!: boolean;
   mentalStatusAssessment!: FormGroup;
   medicalInformation!: FormGroup;
@@ -91,7 +93,7 @@ export class IaFormPageThreeComponent implements OnInit {
         place: [''],
         person: [''],
       }),
-      generalAppearance: [''],
+      generalAppearance: [],
       thoughtForum: [''],
       mood: this.fb.group({
         answeredByClient: [''],
