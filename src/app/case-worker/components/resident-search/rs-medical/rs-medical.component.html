@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <p-table [columns]="cols" [value]="tableWeightValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+    <p-table [columns]="cols" [value]="tableWeightValues" styleClass="p-datatable-sm" [scrollable]="true" scrollHeight="120px" responsiveLayout="scroll">
       <ng-template pTemplate="header" let-columns>
           <tr>
               <th *ngFor="let col of columns">
@@ -41,7 +41,7 @@
       </div>
     </div>
   </div>
-  <p-table [columns]="cols" [value]="tableTemperatureValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+  <p-table [columns]="cols" [value]="tableTemperatureValues" styleClass="p-datatable-sm" [scrollable]="true" scrollHeight="120px" responsiveLayout="scroll">
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of columns">
@@ -70,7 +70,7 @@
     </div>
   </div>
 </div>
-<p-table [columns]="cols" [value]="tableBloodPressureValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+<p-table [columns]="cols" [value]="tableBloodPressureValues" styleClass="p-datatable-sm" [scrollable]="true" scrollHeight="120px" responsiveLayout="scroll">
   <ng-template pTemplate="header" let-columns>
       <tr>
           <th *ngFor="let col of columns">
@@ -99,7 +99,7 @@
     </div>
   </div>
 </div>
-<p-table [columns]="cols" [value]="tableDrugScreenValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+<p-table [columns]="cols" [value]="tableDrugScreenValues" styleClass="p-datatable-sm" [scrollable]="true" scrollHeight="120px" responsiveLayout="scroll">
   <ng-template pTemplate="header" let-columns>
       <tr>
           <th *ngFor="let col of columns">
@@ -128,7 +128,7 @@
     </div>
   </div>
 </div>
-<p-table [columns]="cols" [value]="tableBreathalyzerValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+<p-table [columns]="cols" [value]="tableBreathalyzerValues" styleClass="p-datatable-sm" [scrollable]="true" scrollHeight="120px" responsiveLayout="scroll">
   <ng-template pTemplate="header" let-columns>
       <tr>
           <th *ngFor="let col of columns">
@@ -157,7 +157,7 @@
     </div>
   </div>
 </div>
-<p-table [columns]="cols" [value]="tableBloodSugarValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+<p-table [columns]="cols" [value]="tableBloodSugarValues" styleClass="p-datatable-sm" [scrollable]="true" scrollHeight="120px" responsiveLayout="scroll">
   <ng-template pTemplate="header" let-columns>
       <tr>
           <th *ngFor="let col of columns">
@@ -186,7 +186,7 @@
     </div>
   </div>
 </div>
-<p-table [columns]="cols" [value]="tableBmiValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+<p-table [columns]="cols" [value]="tableBmiValues" styleClass="p-datatable-sm" [scrollable]="true" scrollHeight="120px" responsiveLayout="scroll">
   <ng-template pTemplate="header" let-columns>
       <tr>
           <th *ngFor="let col of columns">
@@ -215,7 +215,7 @@
     </div>
   </div>
 </div>
-<p-table [columns]="cols" [value]="tableOtherValues" styleClass="p-datatable-sm" responsiveLayout="scroll">
+<p-table [columns]="cols" [value]="tableOtherValues" styleClass="p-datatable-sm" [scrollable]="true" scrollHeight="120px" responsiveLayout="scroll">
   <ng-template pTemplate="header" let-columns>
       <tr>
           <th *ngFor="let col of columns">

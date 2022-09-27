@@ -27,10 +27,12 @@ export class ResidentSearchComponent implements OnInit {
 
   public selectedResident: any;
   public tableValues: any;
+  public allValues: any;
   public residentSearchForm!: FormGroup;
   public result: any;
   public maxDateValue: any;
   public data:any;
+  public resdata:any;
   public submit:boolean=true;
   newDate: any;
   
@@ -40,6 +42,7 @@ export class ResidentSearchComponent implements OnInit {
   submitted = false;
   public showSpinner: boolean = true;
   public grayOut: boolean=true;
+  public isVeteranFound: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private service: ResidentSearchService,
@@ -53,14 +56,16 @@ export class ResidentSearchComponent implements OnInit {
   }
   setForm(){
     this.service.getResidentSearchData().subscribe((res) => {
+      this.isVeteranFound=false;
       setTimeout(()=>{
-      this.data=res;
-      if(this.data){
+      this.resdata=res;
+      if(this.resdata){
         this.showSpinner=false;
         this.grayOut=false;
       }
-      this.tableValues = this.data;
-    },100)
+      this.allValues = this.resdata;
+      this.tableValues=this.allValues;
+    },100);
     });
   }
 
@@ -113,35 +118,42 @@ export class ResidentSearchComponent implements OnInit {
     this.buildForm();
   }
 
-  onSubmit(data: any){    
-    if(data.birthDate){
-      this.newDate=this.datepipe.transform(data.birthDate, 'yyyy/MM/dd');
-      data.birthDate = this.newDate;
+  onSubmit(formdata: any){  
+    console.log(formdata)
+    this.tableValues=this.allValues;
+    if(formdata.birthDate){
+      this.newDate = this.datepipe.transform(formdata.birthDate, 'yyyy/MM/dd');
+      formdata.birthDate = this.newDate;
     }
       this.result = this.tableValues.filter((index: any) => {
         let indexDate = this.datepipe.transform(index.date_of_birth, 'yyyy/MM/dd');        
-      if(!data.birthDate){
-        if(data.firstName && data.lastName){
+      if(!formdata.birthDate){
+        if(formdata.firstName && formdata.lastName){
           return (
-            index.first_name.toLowerCase() === data.firstName.toLowerCase() &&
-            index.last_name.toLowerCase() === data.lastName.toLowerCase() 
+            index.first_name?.toLowerCase() === formdata.firstName?.toLowerCase() &&
+            index.last_name?.toLowerCase() === formdata.lastName?.toLowerCase() 
           );
         }else{
           return (
-            index.first_name.toLowerCase() === data.firstName.toLowerCase()  
+            index.first_name?.toLowerCase() === formdata.firstName?.toLowerCase()  
           );
         } 
       } else {
-        return (
-          index.first_name.toLowerCase() == data.firstName.toLowerCase() &&
-          indexDate == data.birthDate
-        );
-      }
+          return (
+            index.first_name?.toLowerCase() === formdata.firstName?.toLowerCase() &&
+            indexDate == formdata.birthDate
+          );
+      } 
     });
-    this.tableValues = this.result;
+    console.log('this is result',this.result)
+    if(this.result.length > 0){
+      this.isVeteranFound=false;
+    }
+    this.tableValues = this.result; 
+    if(this.tableValues.length === 0){
+      this.isVeteranFound = true;
+    } 
   }
-
- 
 
   buildForm(): void {
     this.residentSearchForm = this.formBuilder.group({
