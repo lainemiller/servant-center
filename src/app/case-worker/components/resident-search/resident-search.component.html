@@ -9,7 +9,6 @@
     <form
       *ngIf="residentSearchForm"
       [formGroup]="residentSearchForm"
-      (ngSubmit)="onSubmit(residentSearchForm.value)"
     >
       <div class="p-fluid p-formgrid p-grid">
         <div class="p-field p-col-12 p-md-2">
@@ -68,9 +67,10 @@
           pButton
           type="submit"
           label="Submit"
-          class="p-button-outlined submit-button"
+          class="submit-button"
           (click)="onSubmit(residentSearchForm.value)"
           [disabled]="residentSearchForm.invalid"
+          [ngClass]="residentSearchForm.invalid?'p-button-outlined p-button-disabled':'p-button-outlined'"
         ></button>
         <button
           pButton
@@ -80,6 +80,9 @@
         ></button>
       </div>
     </form>
+  </div>
+  <div *ngIf="isVeteranFound" class="m-2" >
+    <p style="color:white ;text-align: right; margin-right: 20px;" > No veteran found! Please try again with another name! </p>
   </div>
   <div class="result-table">
     <p-table

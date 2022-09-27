@@ -155,6 +155,7 @@ export class TreatmentPlanComponent implements OnInit {
     this.formView = false;
     this.showTopView();
     this.formData= this.treatmentPlanForm.value;
+    console.log(this.formData)
     this.treatmentArr = this.treatmentPlanForm.get('treatmentIssues')?.value;    
   }
   showTopView() {
@@ -212,10 +213,10 @@ export class TreatmentPlanComponent implements OnInit {
 
   getIssues(): FormGroup {
     return this.formBuilder.group({
-      goals: ['', Validators.required],
-      plans: ['', Validators.required],
-      strategies: ['', Validators.required],
-      targetDate: ['', Validators.required],
+      goals: [''],
+      plans: [''],
+      strategies: [''],
+      targetDate: [''],
     });
   }
 
