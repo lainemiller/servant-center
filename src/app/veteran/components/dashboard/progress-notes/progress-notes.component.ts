@@ -55,8 +55,8 @@ export class ProgressNotesComponent implements OnInit {
 
   getAllProgressNotes(){
     this.service
-    .getNotes(this.vetID)
-    .subscribe((data: progressNoteResponse) => {
+      .getNotes(this.vetID)
+      .subscribe((data: progressNoteResponse) => {
       this.submitted = false;
       this.greyingOut = false;
       this.progress = data;
@@ -137,7 +137,7 @@ export class ProgressNotesComponent implements OnInit {
           this.greyingOut = false;
           console.log('successfully added new progress note');
           this.sucessMessage();
-        } else if (data.responseStatus === 'FAILUER') {
+        } else if (data.responseStatus === 'FAILURE') {
           this.someError();
         }
         this.getAllProgressNotes();
