@@ -16,7 +16,8 @@ export class IaFormPageOneComponent implements OnInit {
   ia1: boolean = true;
   greyingOut: boolean = true;
   data: any;
-  date_of_birth: any;
+  age: any;
+  dateofbirth: any;
   hivTestDate: any;
   stdTestDate: any;
   submitted: boolean = false;
@@ -109,7 +110,7 @@ export class IaFormPageOneComponent implements OnInit {
       this.greyingOut = false;
       this.data = res[0];
       console.log('dob', this.data.date_of_birth);
-      this.date_of_birth = this.datepipe.transform(
+      this.dateofbirth = this.datepipe.transform(
         this.data.date_of_birth,
         'M/d/yy'
       );
@@ -121,6 +122,27 @@ export class IaFormPageOneComponent implements OnInit {
         this.data.approx_std_test_date,
         'M/d/yy'
       );
+      this.age = this.datepipe.transform(
+        this.data.date_of_birth,
+        'yyyy-MM-dd'
+      );
+
+      const getAge = (birthDateString: any) => {
+        const today = new Date();
+        const birthDate = new Date(birthDateString);
+      
+        const yearsDifference = today.getFullYear() - birthDate.getFullYear();
+      
+        if (
+          today.getMonth() < birthDate.getMonth() ||
+          (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())
+        ) {
+          return yearsDifference - 1;
+        }
+      
+        return yearsDifference;
+      };
+      const currAge = getAge(this.age);
       this.buildForm();
       if (this.data){
       this.personalDetails.patchValue({
@@ -128,11 +150,11 @@ export class IaFormPageOneComponent implements OnInit {
         lastName: this.data.last_name,
         middleInitial: this.data.middle_initial,
         nickName: this.data.nick_name,
-        dob: this.date_of_birth,
+        dob: this.dateofbirth,
         // dob: this.data.date_of_birth,
         placeOfBirth: this.data.place_of_birth,
         ssn: this.data.ssn,
-        //  age:                   this.data.,
+         age: currAge,
         sex: this.data.gender,
         maritalStatus: this.data.marital_status,
         race: this.data.race,
