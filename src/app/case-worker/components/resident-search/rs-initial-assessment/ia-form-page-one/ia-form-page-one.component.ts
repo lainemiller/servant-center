@@ -115,11 +115,11 @@ export class IaFormPageOneComponent implements OnInit {
       );
       this.hivTestDate = this.datepipe.transform(
         this.data.approx_hiv_test_date,
-        'dd/MM/yyyy'
+        'M/d/yy'
       );
       this.stdTestDate = this.datepipe.transform(
         this.data.approx_std_test_date,
-        'dd/MM/yyyy'
+        'M/d/yy'
       );
       this.buildForm();
       this.personalDetails.patchValue({
@@ -162,7 +162,6 @@ export class IaFormPageOneComponent implements OnInit {
         vaCoverage: this.data.va_coverage,
         medicareCoverage: this.data.medicare_coverage,
         othMedCoverage: this.data.other_med_coverage,
-        otherBenefits: this.data.otherBenefits,
         cashBenefits: this.data.cash_benefits,
         nonCashBenefits: this.data.non_cash_benefits,
         receivingBenefits: this.data.current_benefits,
@@ -307,7 +306,7 @@ export class IaFormPageOneComponent implements OnInit {
     let incType = this.incomeAndResources.value.type;
     let accType = this.incomeAndResources.value.bankAccount;
     let othAssets = this.incomeAndResources.value.otherAssets;
-    let currBenefits = this.incomeAndResources.value.currBenefits;
+    let currBenefits = this.incomeAndResources.value.receivingBenefits;
     let cashBeni = this.incomeAndResources.value.cashBenefits;
     let nonCashBeni = this.incomeAndResources.value.nonCashBenefits;
     this.incomeAndResources.value.type = "{"+incType+"}"
@@ -337,12 +336,12 @@ export class IaFormPageOneComponent implements OnInit {
   }
   next() {
     console.log('clicked next');
-    if (this.submitted) {
+    if (!this.page1Form.touched) {
       this.router.navigateByUrl(
         'case-worker/resident-search/initial-assessment/page-2'
       );
     } else {
-      alert('Please save first');
+      this.infoMessage();
     }
   }
 
@@ -401,6 +400,13 @@ export class IaFormPageOneComponent implements OnInit {
       severity: 'error',
       summary: 'Failed',
       detail: 'Something Went Wrong!',
+    });
+  }
+  infoMessage(){
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Save!',
+      detail: 'Please Save the Details Before Going to next Step',
     });
   }
 }
