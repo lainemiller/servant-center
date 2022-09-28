@@ -26,7 +26,7 @@ export class IaPage5Service {
 
   public initialTreatmentGoalsPage5(data:any): Observable<any> {
     if (this.isDev){
-    return this.restcs.post(this.commonUrl+'initialAssessment/page-5',data);
+      return this.restcs.post(this.commonUrl+'saveInitialAssessment/page-5/',data);
     } else{
       //env api goes here
       return this.restcs.post('api goes here',data);

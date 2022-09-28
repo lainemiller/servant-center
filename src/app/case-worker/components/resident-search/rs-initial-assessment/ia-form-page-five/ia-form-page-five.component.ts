@@ -47,8 +47,6 @@ export class IaFormPageFiveComponent implements OnInit {
   }
   setForm(){
     this.service.getInitialTreatmentGoalsPage5(this.selectedVetId).subscribe((res)=>{
-      console.log('id PG 5',this.selectedVetId);
-      
       this.data= res[0];
       console.log("PG 5 -",this.data);
       
@@ -56,7 +54,7 @@ export class IaFormPageFiveComponent implements OnInit {
       this.preliminaryTreatmentGoals.patchValue(
         {
           shortTermGoals:this.data.goal_plan_short_term,
-          longTermGoals:this.data.goal_plan_short_term,
+          longTermGoals:this.data.goal_plan_long_term,
           strengthAndResources:this.data.strengths,
           supports: this.data.supports,
           additionalComments: this.data.notes,
