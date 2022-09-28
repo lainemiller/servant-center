@@ -11,7 +11,7 @@
         <span class="label-title">First Name</span>
         <input type="text" pInputText formControlName=firstName placeholder="First Name">
         <small class="error"
-                  *ngIf="iaPage1PD.firstName.errors?.required && iaPage1PD.firstName.touched">First Name is Required.</small>
+                  *ngIf="iaPage1PD.firstName.errors?.required && iaPage1PD.firstName.touched">First name is required.</small>
       </div>
       <div class="p-field p-col-12 p-md-3">
         <span class="label-title">Middle Name</span>
@@ -547,7 +547,7 @@
     <div class="p-d-flex button-container p-mt-4">
       <div class="p-jc-start">
         <button type="submit" pButton label="Save"></button>
-        <button type="button" pButton label="Cancel" class="p-button-outlined p-ml-3"></button>
+        <button type="button" pButton label="Cancel" (click)="reset()" class="p-button-outlined p-ml-3"></button>
       </div>
       <div class="p-jc-end">
         <button (click)="next()" type="button" pButton label="Next"></button>

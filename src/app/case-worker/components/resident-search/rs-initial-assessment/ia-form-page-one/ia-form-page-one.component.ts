@@ -122,6 +122,7 @@ export class IaFormPageOneComponent implements OnInit {
         'M/d/yy'
       );
       this.buildForm();
+      if (this.data){
       this.personalDetails.patchValue({
         firstName: this.data.first_name,
         lastName: this.data.last_name,
@@ -193,6 +194,80 @@ export class IaFormPageOneComponent implements OnInit {
         stdTestResult: this.data.std_test_results,
         hivTestDesired: this.data.hiv_test_desired
       });
+    }
+    else{
+      this.personalDetails.patchValue({
+        firstName: null,
+        lastName:null,
+        middleInitial: null,
+        nickName: null,
+        dob: null,
+        // dob: this.data.date_of_birth,
+        placeOfBirth: null,
+        ssn:null,
+        //  age:                   this.data.,
+        sex: null,
+        maritalStatus: null,
+        race: null,
+        primaryPhone: null,
+        primaryLanguage: null,
+        addressMain: null,
+        addressLine2: null,
+        city: null,
+        country: null,
+        state: null,
+        zipcode: null,
+        contactPerson: null,
+        relationship: null,
+        contactPersonAddress: null,
+        phone: null,
+        religiousPreferences:null,
+        hobbiesInterests: null,
+        consent: null,
+      });
+      this.incomeAndResources.patchValue({
+        income: null,
+        type: null,
+        bankAccount: null,
+        bankName: null,
+        directDeposit: null,
+        otherAssets: null,
+        medicaid: null,
+        vaCoverage: null,
+        medicareCoverage: null,
+        othMedCoverage: null,
+        cashBenefits: null,
+        nonCashBenefits: null,
+        receivingBenefits: null,
+        applyingBenefits: null,
+      });
+      this.socialAndFamilyHistory.patchValue({
+        childhood:null,
+        discipline: null,
+        everMarried: null,
+        numberOfMarriages: null,
+        relationShipWithParents: null,
+        relationShipWithSiblings: null,
+        physicalAbuse: null,
+        sexualAbuse: null,
+        healthProblemsInFamily: null,
+        substanceAbuse: null,
+        currentMaritalStatus: null,
+        sexualOrientation: null,
+        sexuallyActive: null,
+        sexualProblemsOrConcerns: null,
+        specifySexualProblems: null,
+        testedForHivOrAids: null,
+        hivTestedDate: null,
+        hivTestedLocation: null,
+        hivTestResult: null,
+        testedSTDs: null,
+        stdTestedDate: null,
+        stdTestedLocation: null,
+        stdTestResult: null,
+        hivTestDesired: null
+      });
+    }
       console.log('daaaata', this.data.first_name);
     });
   }
@@ -343,6 +418,10 @@ export class IaFormPageOneComponent implements OnInit {
     } else {
       this.infoMessage();
     }
+  }
+
+  reset(){
+    this.setForm();
   }
 
   getFamilyDetailFormGroup() {

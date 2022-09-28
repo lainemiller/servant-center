@@ -59,6 +59,7 @@ export class IaFormPageTwoComponent implements OnInit {
         'MM/dd/yyyy'
       );
       this.buildForm();
+      if(this.data){
       this.educationAndEmploymentHistory.patchValue({
         highestGradeCompleted: this.data.highest_education_grade,
         nameAndLocation: this.data.school_name,
@@ -93,7 +94,45 @@ export class IaFormPageTwoComponent implements OnInit {
       psychEvaluatorLicense: this.data.psych_evaluation_physician_license,
       psychiatristCityState: this.data.psychiatrist_city_state
       });
+    }
+    else{
+      this.educationAndEmploymentHistory.patchValue({
+        highestGradeCompleted: null,
+        nameAndLocation: null,
+        currentJob: null,
+        // jobEmployedInLongest:this.data.,
+        mostRecentJob: null,
+        // jobDate: this.data.,
+        // reasonForLeaving: this.data.,
+        military:null,
+        branch: null,
+        typeOfDischarge: null,
+        serviceDate: null,
+        serviceLocation: null ,
+        otherTrainingEducation: null,
+        currentEmployer: null,
+        currentEmployerLocation: null,
+        otherTrainingOrSkills: null,
+      });
+      
+      this.mentalHealthInformation.patchValue({
+      diagnosis: null,
+      currentPsychiatricTreatment: null,
+      psychiatristName: null,
+      psychiatristAddress: null,
+      pastTreatments: null,
+      needPsychiatricCunsultant: null,
+      psychEvaluatorName: null,
+      psychEvaluatorAddress:null,
+      psychEvaluatorCity: null,
+      psychEvaluatorState:null,
+      psychEvaluatorZipcode: null,
+      psychEvaluatorLicense: null,
+      psychiatristCityState: null
+      });
+    }
     });
+    
   }
 
   initializeFormGroups() {
