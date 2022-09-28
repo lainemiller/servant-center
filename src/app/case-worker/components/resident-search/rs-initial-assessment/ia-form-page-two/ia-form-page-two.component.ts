@@ -220,9 +220,17 @@ export class IaFormPageTwoComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl(
-      'case-worker/resident-search/initial-assessment/page-1'
-    );
+    if (!this.page2Form.touched) {
+      this.router.navigateByUrl(
+        'case-worker/resident-search/initial-assessment/page-1'
+      );
+    } else {
+      this.infoMessage();
+    }
+  }
+
+  reset(){
+    this.setForm();
   }
 
   index: number = 0;

@@ -238,9 +238,17 @@ export class IaFormPageFourComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl(
-      'case-worker/resident-search/initial-assessment/page-3'
-    );
+    if (!this.page4Form.touched) {
+      this.router.navigateByUrl(
+        'case-worker/resident-search/initial-assessment/page-3'
+      );
+    } else {
+      this.infoMessage();
+    }
+  }
+
+  reset(){
+    this.setForm();
   }
 
   successMessage() {
