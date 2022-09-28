@@ -227,12 +227,10 @@ let obj={
         detail: 'Something went wrong',
       });
     }
-       refreshRequestComponent(){
-        console.log("PATH_",this.router.url);
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.router.onSameUrlNavigation = 'reload';
-         this.router.navigateByUrl('/', { skipLocationChange: true });
-        return this.router.navigateByUrl(this.router.url);
+
+      async refreshRequestComponent() {
+        await this.router.navigateByUrl('/', { skipLocationChange: true });
+        return this.router.navigateByUrl('/case-worker/messages');
       }
 
   reset() {
