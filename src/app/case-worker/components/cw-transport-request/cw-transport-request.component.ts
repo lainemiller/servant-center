@@ -16,7 +16,7 @@ import {
 import { TransportService } from '../../services/transport.service';
 import { DatePipe } from '@angular/common';
 import { MenuItem, MessageService } from 'primeng/api';
-import {Router, NavigationEnd,ActivatedRoute} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-cw-transport-request',
@@ -62,7 +62,6 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
     private datePipe: DatePipe,
     private router: Router,
     private messageService: MessageService,
-    private route: ActivatedRoute
 
   ) {
     this.minDateValue = new Date(new Date().getTime());
@@ -218,11 +217,11 @@ let obj={
     }
 
     refreshRequestComponent() {
-        let currentUrl = this.router.url;
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate([currentUrl],{relativeTo: this.route, skipLocationChange: true});
-      }
+      let currentUrl = this.router.url;
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+      });
+    }
 
   reset() {
     this.buildForm();
