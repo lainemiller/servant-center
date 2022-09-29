@@ -112,15 +112,15 @@ export class IaFormPageOneComponent implements OnInit {
       console.log('dob', this.data.date_of_birth);
       this.dateofbirth = this.datepipe.transform(
         this.data.date_of_birth,
-        'M/d/yy'
+        'MM/dd/yyyy'
       );
       this.hivTestDate = this.datepipe.transform(
         this.data.approx_hiv_test_date,
-        'M/d/yy'
+        'MM/dd/yyyy'
       );
       this.stdTestDate = this.datepipe.transform(
         this.data.approx_std_test_date,
-        'M/d/yy'
+        'MM/dd/yyyy'
       );
       this.age = this.datepipe.transform(
         this.data.date_of_birth,
