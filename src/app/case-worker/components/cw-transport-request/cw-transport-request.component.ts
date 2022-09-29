@@ -16,7 +16,7 @@ import {
 import { TransportService } from '../../services/transport.service';
 import { DatePipe } from '@angular/common';
 import { MenuItem, MessageService } from 'primeng/api';
-import { Router } from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-cw-transport-request',
@@ -61,7 +61,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
     private service: TransportService,
     private datePipe: DatePipe,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
 
   ) {
     this.minDateValue = new Date(new Date().getTime());
@@ -177,9 +177,7 @@ let obj={
 
   date:this.transportRequestForm.value.date
 };
-	this.service.approveTransportationForm(obj).subscribe((data)=>{
-   // this.newData();
-    
+	this.service.approveTransportationForm(obj).subscribe((data)=>{    
     this.submitted = true;
 	  console.log("Form submitted");
     if (data.responseStatus === 'SUCCESS') {
@@ -201,16 +199,6 @@ let obj={
 	  this.transportRequestForm.reset();
     // }
   }
-  // newData():any{
-  //   this.service.getTransportRequestFormData().subscribe((data) => {
-  //     this.msgData = data;
-  //     this.msgCount= this.msgData.length
-  //     console.log("new Count", this.msgCount);
-      
-  //     this.tableValues = data;
-  //     console.log("New table",this.tableValues);
-  //   });
-  // }
   
     sucessMessage() {
       this.messageService.add({
@@ -228,10 +216,12 @@ let obj={
       });
     }
 
-      async refreshRequestComponent() {
-        await this.router.navigateByUrl('/', { skipLocationChange: true });
-        return this.router.navigateByUrl('/case-worker/messages');
-      }
+    refreshRequestComponent() {
+      let currentUrl = this.router.url;
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+      });
+    }
 
   reset() {
     this.buildForm();
