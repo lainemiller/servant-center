@@ -1,3 +1,8 @@
+<p-toast position="top-center"></p-toast>
+<div *ngIf="greyingOut" id="overlay">  </div>
+  <div class="center-spinner">
+    <p-progressSpinner *ngIf="ia1" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+  </div>
 <div class="page1-form-container p-mt-4">
   <form [formGroup]="page1Form" (ngSubmit)="onSubmit()" *ngIf="page1Form">
     <h3>Personal Details </h3>
@@ -5,16 +10,17 @@
       <div class="p-field p-col-12 p-md-3">
         <span class="label-title">First Name</span>
         <input type="text" pInputText formControlName=firstName placeholder="First Name">
-        <small class="error"
-                  *ngIf="iaPage1PD.firstName.errors?.required && iaPage1PD.firstName.touched">First Name is Required.</small>
+        <small class="error" *ngIf="iaPage1PD.firstName.errors?.required && iaPage1PD.firstName.touched">First name is required.</small>
       </div>
       <div class="p-field p-col-12 p-md-3">
-        <span class="label-title">Middle Name</span>
+        <span class="label-title">Middle Initial</span>
         <input type="text" pInputText formControlName=middleInitial placeholder="Middle Initial">
+        <small class="error" *ngIf="iaPage1PD.middleInitial.errors?.required && iaPage1PD.middleInitial.touched">Middle initial is required.</small>
       </div>
       <div class="p-field p-col-12 p-md-3">
         <span class="label-title">Last Name</span>
         <input type="text" pInputText formControlName=lastName placeholder="Last Name">
+        <small class="error" *ngIf="iaPage1PD.lastName.errors?.required && iaPage1PD.lastName.touched">Last name is required.</small>
       </div>
       <div class="p-field p-col-12 p-md-3">
         <span class="label-title">Nick Name</span>
@@ -23,22 +29,26 @@
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">Date of Birth</span>
         <input type="text" pInputText formControlName=dob placeholder="DateOfBirth" [readonly]="true">
+        <small class="error" *ngIf="iaPage1PD.dob.errors?.required && iaPage1PD.dob.touched">Date of birth is required.</small>
       </div>
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">Place of Birth</span>
         <input type="text" pInputText formControlName=placeOfBirth placeholder="Place of birth">
+        <small class="error" *ngIf="iaPage1PD.placeOfBirth.errors?.required && iaPage1PD.placeOfBirth.touched">Place of birth is required.</small>
       </div>
       <div class="p-field p-col-12 p-md-4">
         <span class="label-title">#SSN</span>
         <input type="text" pInputText formControlName=ssn placeholder="SSN">
+        <small class="error" *ngIf="iaPage1PD.ssn.errors?.required && iaPage1PD.ssn.touched">SSN is required.</small>
       </div>
       <div class="p-field p-col-12 p-md-4">
         <span class="label-title">Primary phone</span>
         <input type="text" pInputText formControlName=primaryPhone placeholder="Primary Phone">
+        <small class="error" *ngIf="iaPage1PD.primaryPhone.errors?.required && iaPage1PD.primaryPhone.touched">Phone number is required.</small>
       </div>
       <div class="p-field p-col-12 p-md-4">
         <span class="label-title">Age</span>
-        <input type="text" pInputText formControlName=age placeholder="Age">
+        <input type="text" pInputText formControlName=age placeholder="Age" [readOnly] = true>
       </div>
       <div class="p-col-12 p-formgroup-inline">
         <label class="p-mr-3 radiobutton-group-label">Sex</label>
@@ -71,17 +81,21 @@
         <span class="label-title">Address Line</span>
         <input type="text" pInputText formControlName=addressLine2 placeholder="Address Line">
       </div>
-      <div class="p-field p-col-12 p-md-4">
+      <div class="p-field p-col-12 p-md-3">
         <span class="label-title">City</span>
         <input type="text" pInputText formControlName=city placeholder="City">
       </div>
-      <div class="p-field p-col-12 p-md-4">
+      <div class="p-field p-col-12 p-md-3">
         <span class="label-title">Country</span>
         <input type="text" pInputText formControlName=country placeholder="Country">
       </div>
-      <div class="p-field p-col-12 p-md-4">
+      <div class="p-field p-col-12 p-md-3">
         <span class="label-title">Zip Code</span>
         <input type="text" pInputText formControlName=zipcode placeholder="Zip Code">
+      </div>
+      <div class="p-field p-col-12 p-md-3">
+        <span class="label-title">State</span>
+        <input type="text" pInputText formControlName=state placeholder="City">
       </div>
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">Contact Person</span>
@@ -99,62 +113,103 @@
         <span class="label-title">Contact Person's Phone</span>
         <input type="text" pInputText formControlName=phone placeholder="Contact Person's Phone">
       </div>
+      <!-- consent -->
+      <div class="p-field p-md-6">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Consent: </label>
+          <div *ngFor="let consent of consent; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="consent" formControlName=consent [value]=consent.value inputId="consent{{i}}" [disabled]=true></p-radioButton>
+            <label for="consent{{i}}" class="p-ml-3">{{consent.label}}</label>
+          </div>
+        </div>
+        </div>
     </div>
     <h3>Income and resources</h3>
     <div class="p-fluid p-formgrid p-grid" formGroupName="incomeAndResources">
-      <div class="p-field p-col-12 p-md-6">
+      <div class="p-field p-col-12 p-md-3">
         <span class="label-title">Income</span>
         <input type="text" pInputText formControlName=income placeholder="Income">
       </div>
-      <div class="p-field p-col-12 p-md-6">
+      <div class="p-field p-col-12 p-md-3">
         <!-- dropdown ? -->
         <span class="label-title">Income Type</span>
         <input type="text" pInputText formControlName=type placeholder="Income Type">
       </div>
-      <div class="p-field p-col-12 p-md-6">
+      <div class="p-field p-col-12 p-md-3">
         <span class="label-title">Bank Accounts</span>
         <input type="text" pInputText formControlName=bankAccount placeholder="Bank Accounts">
       </div>
-      <div class="p-field p-col-12 p-md-6">
+      <div class="p-field p-col-12 p-md-3">
         <span class="label-title">Name of The Bank</span>
         <input type="text" pInputText formControlName=bankName placeholder="Name of Bank">
       </div>
-      <div class="p-field p-col-12 p-md-6">
+      <div class="p-field p-col-12 p-md-3">
         <!-- input type? -->
         <span class="label-title">Direct Deposit</span>
         <input type="text" pInputText formControlName=directDeposit placeholder="Direct Deposit">
       </div>
-      <div class="p-field p-col-12 p-md-6">
+      <div class="p-field p-col-12 p-md-3">
         <!-- input type? -->
         <span class="label-title">Other Assets</span>
         <input type="text" pInputText formControlName=otherAssets placeholder="Other Assets">
       </div>
-      <div class="p-field p-col-12 p-md-3">
+      <!-- <div class="p-field p-col-12 p-md-6"> -->
         <!-- input type? -->
-        <span class="label-title">Medicaid Coverage</span>
-        <input type="text" pInputText formControlName=medicaid placeholder="Medicaid Coverage">
-      </div>
-      <div class="p-field p-col-12 p-md-3">
-        <!-- input type? -->
-        <span class="label-title">VA Coverage</span>
-        <input type="text" pInputText formControlName=vaCoverage placeholder="VA Coverage">
-      </div>
-      <div class="p-field p-col-12 p-md-6">
-        <!-- input type? -->
-        <span class="label-title">Other Benefits You are receiving</span>
+        <!-- <span class="label-title">Other Benefits You are receiving</span>
         <input type="text" pInputText formControlName=otherBenefits placeholder="Receiving Benefits">
-      </div>
-      <div class="p-field p-col-12 p-md-6">
+      </div> -->
+      <div class="p-field p-col-12 p-md-3">
         <span class="label-title">Cash Benefits</span>
         <input type="text" pInputText formControlName=cashBenefits placeholder="Cash Benefits">
       </div>
-      <div class="p-field p-col-12 p-md-6">
+      <div class="p-field p-col-12 p-md-3">
         <span class="label-title">Non-Cash Benefits</span>
         <input type="text" pInputText formControlName=nonCashBenefits placeholder="Non-Cash Benefits">
       </div>
+            <!-- medicaid coverage -->
+            <div class="p-field p-col-12 p-md-6">
+              <span class="label-title">Any Medicaid Coverage's? </span>
+              <div *ngFor="let cover of insuCoverages; let i = index" class="p-field-radiobutton">
+                <p-radioButton name="medicaid" formControlName=medicaid [value]=cover.value inputId="cover{{i}}"></p-radioButton>
+                <label for="cover{{i}}" class="p-ml-3">{{cover.label}}</label>
+              </div>
+            </div>
+            <!-- va coverage -->
+            <div class="p-field p-col-12 p-md-6">
+              <span class="label-title">Any VA Coverage's? </span>
+              <div *ngFor="let cover of insuCoverages; let i = index" class="p-field-radiobutton">
+                <p-radioButton name="vaCoverage" formControlName=vaCoverage [value]=cover.value inputId="cover{{i}}"></p-radioButton>
+                <label for="cover{{i}}" class="p-ml-3">{{cover.label}}</label>
+              </div>
+            </div>
+            <!-- medicare coverages -->
+            <div class="p-field p-col-12 p-md-6">
+              <span class="label-title">Any VA Medicare Coverage's? </span>
+              <div *ngFor="let cover of insuCoverages; let i = index" class="p-field-radiobutton">
+                <p-radioButton name="medicareCoverage" formControlName=medicareCoverage [value]=cover.value inputId="cover{{i}}"></p-radioButton>
+                <label for="cover{{i}}" class="p-ml-3">{{cover.label}}</label>
+              </div>
+            </div>
+            <!-- other med coverages -->
+            <div class="p-field p-col-12 p-md-6">
+              <span class="label-title">Other Med Coverages</span>
+              <input type="text" pInputText formControlName=othMedCoverage placeholder="Med Coverages">
+            </div>
+    </div>
+    <!-- religious preference -->
+    <h3>Social History</h3>
+    <div class="p-fluid p-formgrid p-grid" formGroupName="personalDetails">
+      <div class="p-field p-md-6">
+        <span class="label-title">Religious preference</span>
+        <input type="text" pInputText formControlName=religiousPreferences placeholder="Religious preference">
+      </div>
+      <div class="p-field p-md-6">
+        <span class="label-title">Hobbies and Interests</span>
+        <input type="text" pInputText formControlName=hobbiesInterests placeholder="Hobbies and Interests">
+      </div>
     </div>
     <h3>Benefits</h3>
-    <div class="p-fluid p-formgrid p-grid" formGroupName="benefits">
+    <div class="p-fluid p-formgrid p-grid" formGroupName="incomeAndResources">
       <div class="p-field p-col-12">
         <!-- input type? multiselect dropdown/checkbox? -->
         <span class="label-title">what Benefits are You Currently Receiving?</span>
@@ -172,7 +227,7 @@
     <div class="p-fluid p-formgrid p-grid" formGroupName="socialAndFamilyHistory">
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">Mother's Full Name</span>
-        <input type="text" pInputText formControlName=mothersFullName placeholder="Mother's FullName">
+        <input type="text" pInputText formControlName=mothersFullName placeholder="Name">
       </div>
       <div class="p-col-12 p-md-6 p-formgroup-inline" style="align-items: center;">
         <div *ngFor="let motherStatus of familyStatusList; let i = index" class="p-field-radiobutton">
@@ -183,7 +238,7 @@
       </div>
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">Father's Full Name</span>
-        <input type="text" pInputText formControlName=fathersFullName placeholder="Father's FullName">
+        <input type="text" pInputText formControlName=fathersFullName placeholder="Name">
       </div>
       <div class="p-col-12 p-md-6 p-formgroup-inline" style="align-items: center;">
         <div *ngFor="let fatherStatus of familyStatusList; let i = index" class="p-field-radiobutton">
@@ -233,7 +288,8 @@
       <button type="button" pButton icon="pi pi-plus" class="p-buton-outlined p-button-rounded"
         (click)="addChildren()"></button>
       <div class="p-field p-col-12 p-md-12">
-        <input type="text" pInputText formControlName=spouseOrSignificvantOther
+        <span class="label-title">Spouse or Significant Others</span>
+        <input type="text" pInputText formControlName=spouseOrSignificantOther
           placeholder="Spouse or Significant Others">
       </div>
       <div class="p-field p-col-12 p-md-5">
@@ -241,28 +297,43 @@
         <input type="text" pInputText formControlName=childhood placeholder="Describe Your Childhood">
       </div>
       <div class="p-field p-col-12 p-md-7">
+        <span class="label-title">How would You Describe Your Childhood and Your Relationship with Your Parents?</span>
         <input type="text" pInputText formControlName=relationShipWithParents
-          placeholder="How would you describe your childhood and your relationship with your parents?">
+          placeholder="Describr Your Relationship with Parents">
       </div>
       <div class="p-field p-col-12 p-md-6">
+        <span class="label-title">How would you describe your childhood and your relationship with your siblings?</span>
         <input type="text" pInputText formControlName=relationShipWithSiblings
-          placeholder="How would you describe your childhood and your relationship with your siblings?">
+          placeholder="Describr Your Relationship with Siblings">
       </div>
       <div class="p-field p-col-12 p-md-6">
+        <span class="label-title">What type of Discipline did you have growing up?</span>
         <input type="text" pInputText formControlName=discipline
-          placeholder="What type of Discipline did you have growing up?">
+          placeholder="GrownUp Discipline">
       </div>
       <div class="p-field p-col-12">
-        <input type="text" pInputText formControlName=physicalAbuse placeholder="History of Physical Abuse">
+        <span class="label-title">History of Physical Abuse</span>
+        <input type="text" pInputText formControlName=physicalAbuse placeholder="Physical Abuse">
       </div>
       <div class="p-field p-col-12">
-        <input type="text" pInputText formControlName=sexualAbuse placeholder="History of Sexual Abuse">
+        <span class="label-title">History of Sexual Abuse</span>
+        <input type="text" pInputText formControlName=sexualAbuse placeholder="Sexual Abuse">
       </div>
-      <div class="p-field p-col-12">
+      <div class="p-field p-md-4">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Substance Abuse?</label>
+          <div *ngFor="let abuse of substanceAbuse; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="substanceAbuse" formControlName=substanceAbuse [value]=abuse.value inputId="abuse{{i}}"></p-radioButton>
+            <label for="abuse{{i}}" class="p-ml-3">{{abuse.label}}</label>
+          </div>
+        </div>
+        </div>
+      <div class="p-field p-col-4">
+        <span class="label-title">History of Health Problems in your Family</span>
         <input type="text" pInputText formControlName=healthProblemsInFamily
-          placeholder="History of Health Problems in your Family">
+          placeholder="Health Problems in your Family">
       </div>
-      <div *ngFor="let married of everMarried; let i = index;">
+      <!-- <div *ngFor="let married of everMarried; let i = index;">
         <div class="p-col-12 p-formgroup-inline">
           <label class="p-mr-3 radiobutton-group-label">Have you been ever Married: </label>
           <div class="p-field-radiobutton">
@@ -276,8 +347,18 @@
             <label for="married{{i}}-no" class="p-ml-3">No</label>
           </div>
         </div>
-      </div>
+      </div> -->
+      <div class="p-field p-md-4">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Have you been ever Married?</label>
+          <div *ngFor="let married of everMarried; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="everMarried" formControlName=everMarried [value]=married.value inputId="married{{i}}"></p-radioButton>
+            <label for="married{{i}}" class="p-ml-3">{{married.label}}</label>
+          </div>
+        </div>
+        </div>
       <div class="p-field p-col-12 p-md-3">
+        <span class="label-title">Number of Marriages</span>
         <input type="number" min="0" pInputText formControlName=numberOfMarriages placeholder="Number of Marriages">
       </div>
       <!-- Current marital status goes here -->
@@ -299,9 +380,9 @@
         </div>
       </div>
       <!-- are you sexually active? -->
-      <div *ngFor="let active of sexuallyActive; let i = index;">
+      <!-- <div *ngFor="let active of sexuallyActive; let i = index;">
         <div class="p-col-12 p-formgroup-inline">
-          <label class="p-mr-3 radiobutton-group-label">Are you currently sexually active?: </label>
+          <label class="p-mr-3 radiobutton-group-label">Are you currently sexually active? </label>
           <div class="p-field-radiobutton">
             <p-radioButton [name]=active.key [formControlName]=active.key value=true inputId="active-{{i}}-yes">
             </p-radioButton>
@@ -313,9 +394,18 @@
             <label for="active{{i}}-no" class="p-ml-3">No</label>
           </div>
         </div>
-      </div>
+      </div> -->
+      <div class="p-field p-md-6">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Are you currently sexually active?</label>
+          <div *ngFor="let active of sexuallyActive; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="sexuallyActive" formControlName=sexuallyActive [value]=active.value inputId="active{{i}}"></p-radioButton>
+            <label for="active{{i}}" class="p-ml-3">{{active.label}}</label>
+          </div>
+        </div>
+        </div>
       <!-- sexual problems or concerns -->
-      <div *ngFor="let sexProblems of sexualProblemsOrConcerns; let i = index;">
+      <!-- <div *ngFor="let sexProblems of sexualProblemsOrConcerns; let i = index;">
         <div class="p-col-12 p-formgroup-inline">
           <label class="p-mr-3 radiobutton-group-label">Do you have any sexual problems or concerns?: </label>
           <div class="p-field-radiobutton">
@@ -331,12 +421,22 @@
             <label for="sexProblems{{i}}-no" class="p-ml-3">No</label>
           </div>
         </div>
-      </div>
+      </div> -->
+      <div class="p-field p-md-6">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Do you have any sexual problems or concerns?</label>
+          <div *ngFor="let sexProblems of sexualProblemsOrConcerns; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="sexualProblemsOrConcerns" formControlName=sexualProblemsOrConcerns [value]=sexProblems.value inputId="sexProblems{{i}}"></p-radioButton>
+            <label for="sexProblems{{i}}" class="p-ml-3">{{sexProblems.label}}</label>
+          </div>
+        </div>
+        </div>
       <div class="p-field p-col-12 p-md-12">
-        <input type="text" pInputText formControlName=specifySexualProblems placeholder="Do you wnat to specify?">
+        <span class="label-title">Do you wnat to specify?</span>
+        <input type="text" pInputText formControlName=specifySexualProblems placeholder="Any Specific">
       </div>
       <!-- tested for HIV/AIDS -->
-      <div *ngFor="let hivTested of testedForHivOrAids; let i = index;">
+      <!-- <div *ngFor="let hivTested of testedForHivOrAids; let i = index;">
         <div class="p-col-12 p-formgroup-inline">
           <label class="p-mr-3 radiobutton-group-label">Have you ever been tested for HIV/ AIDS ?: </label>
           <div class="p-field-radiobutton">
@@ -352,21 +452,34 @@
             <label for="hivTested{{i}}-no" class="p-ml-3">No</label>
           </div>
         </div>
-      </div>
+      </div> -->
+      <div class="p-field p-md-6">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Have you ever been tested for HIV/ AIDS ?</label>
+          <div *ngFor="let hivTested of testedForHivOrAids; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="testedForHivOrAids" formControlName=testedForHivOrAids [value]=hivTested.value inputId="hivTested{{i}}"></p-radioButton>
+            <label for="hivTested{{i}}" class="p-ml-3">{{hivTested.label}}</label>
+          </div>
+        </div>
+        </div>
       <!-- where when and results of HIV/AIDS -->
       <div class="p-field p-col-12 p-md-6">
-        <p-calendar formControlName=hivTestedDate [inline]=false [showIcon]=true placeholder="HIV/AIDS tested Date">
-        </p-calendar>
+        <span class="label-title">HIV/AIDS tested Date</span>
+        <!-- <p-calendar formControlName=hivTestedDate [inline]=false [showIcon]=true placeholder="Date">
+        </p-calendar> -->
+        <input type="text" pInputText formControlName=hivTestedDate placeholder="Date" [readonly]="true">
       </div>
       <div class="p-field p-col-12 p-md-6">
-        <input type="text" pInputText formControlName=hivTestedLocation placeholder="HIV/AIDS tested Location">
+        <span class="label-title">HIV/AIDS tested Location</span>
+        <input type="text" pInputText formControlName=hivTestedLocation placeholder="Tested Location">
       </div>
       <div class="p-field p-col-12 p-md-6">
-        <input type="text" pInputText formControlName=hivTestResult placeholder="HIV/AIDS test Results">
+        <span class="label-title">HIV/AIDS test Results</span>
+        <input type="text" pInputText formControlName=hivTestResult placeholder="Test Results">
       </div>
 
       <!-- tested for STD's -->
-      <div *ngFor="let stdTested of testedSTDs; let i = index;">
+      <!-- <div *ngFor="let stdTested of testedSTDs; let i = index;">
         <div class="p-col-12 p-formgroup-inline">
           <label class="p-mr-3 radiobutton-group-label">Have you ever been tested for STD's ?: </label>
           <div class="p-field-radiobutton">
@@ -382,20 +495,33 @@
             <label for="stdTested{{i}}-no" class="p-ml-3">No</label>
           </div>
         </div>
-      </div>
+      </div> -->
+      <div class="p-field p-md-6">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">Have you ever been tested for STD's?</label>
+          <div *ngFor="let stdTested of testedSTDs; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="testedSTDs" formControlName=testedSTDs [value]=stdTested.value inputId="stdTested{{i}}"></p-radioButton>
+            <label for="stdTested{{i}}" class="p-ml-3">{{stdTested.label}}</label>
+          </div>
+        </div>
+        </div>
       <!-- where when and results of STD's -->
       <div class="p-field p-col-12 p-md-6">
-        <p-calendar formControlName=stdTestedDate [inline]=false [showIcon]=true placeholder="STD's tested Date">
-        </p-calendar>
+        <span class="label-title">STD's tested Date</span>
+        <!-- <p-calendar formControlName=stdTestedDate [inline]=false [showIcon]=true placeholder="Date">
+        </p-calendar> -->
+        <input type="text" pInputText formControlName=stdTestedDate placeholder="Date" [readonly]="true">
       </div>
       <div class="p-field p-col-12 p-md-6">
-        <input type="text" pInputText formControlName=stdTestedLocation placeholder="STD's tested Location">
+        <span class="label-title">STD's tested Location</span>
+        <input type="text" pInputText formControlName=stdTestedLocation placeholder="Tested Location">
       </div>
       <div class="p-field p-col-12 p-md-6">
-        <input type="text" pInputText formControlName=stdTestResult placeholder="STD's test Results">
+        <span class="label-title">STD's test Results</span>
+        <input type="text" pInputText formControlName=stdTestResult placeholder="Test Results">
       </div>
       <!-- HIV/AIDS or STD's test desired -->
-      <div *ngFor="let desired of hivTestDesired; let i = index;">
+      <!-- <div *ngFor="let desired of hivTestDesired; let i = index;">
         <div class="p-col-12 p-formgroup-inline">
           <label class="p-mr-3 radiobutton-group-label">If you answered no, would you like to be tested for HIV/AIDS or
             STD's? </label>
@@ -410,13 +536,23 @@
             <label for="desired{{i}}-no" class="p-ml-3">No</label>
           </div>
         </div>
-      </div>
+      </div> -->
+      <div class="p-field p-md-12">
+        <div class="p-col-12 p-formgroup-inline">
+          <label class="p-mr-3 radiobutton-group-label">If you answered no, would you like to be tested for HIV/AIDS or
+            STD's?</label>
+          <div *ngFor="let desired of hivTestDesired; let i = index" class="p-field-radiobutton">
+            <p-radioButton name="hivTestDesired" formControlName=hivTestDesired [value]=desired.value inputId="desired{{i}}"></p-radioButton>
+            <label for="desired{{i}}" class="p-ml-3">{{desired.label}}</label>
+          </div>
+        </div>
+        </div>
     </div>
 
     <div class="p-d-flex button-container p-mt-4">
       <div class="p-jc-start">
         <button type="submit" pButton label="Save"></button>
-        <button type="button" pButton label="Cancel" class="p-button-outlined p-ml-3"></button>
+        <button type="button" pButton label="Cancel" (click)="reset()" class="p-button-outlined p-ml-3"></button>
       </div>
       <div class="p-jc-end">
         <button (click)="next()" type="button" pButton label="Next"></button>

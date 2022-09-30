@@ -16,7 +16,7 @@ import {
 import { TransportService } from '../../services/transport.service';
 import { DatePipe } from '@angular/common';
 import { MenuItem, MessageService } from 'primeng/api';
-import { Router } from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-cw-transport-request',
@@ -61,7 +61,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
     private service: TransportService,
     private datePipe: DatePipe,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
 
   ) {
     this.minDateValue = new Date(new Date().getTime());
@@ -77,6 +77,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.onWindowResize();
+    console.log("PATH--",this.router.url);
     // this.service.getTransportRequestFormData().subscribe((data) => {
     this.caseWorker = this.requestFormObject;
     console.log("data::",this.requestFormObject);
@@ -176,9 +177,7 @@ let obj={
 
   date:this.transportRequestForm.value.date
 };
-	this.service.approveTransportationForm(obj).subscribe((data)=>{
-   // this.newData();
-    
+	this.service.approveTransportationForm(obj).subscribe((data)=>{    
     this.submitted = true;
 	  console.log("Form submitted");
     if (data.responseStatus === 'SUCCESS') {
@@ -186,12 +185,12 @@ let obj={
       this.greyingOut = false;
         this.sucessMessage();
         setTimeout(() => {
-          this.refreshRequestComponent('/case-worker/messages');
+          this.refreshRequestComponent();
         }, 500);
 
     }else if (data.responseStatus === 'FAILURE') {
       this.errorMessage();
-      this.refreshRequestComponent('/case-worker/messages');
+      this.refreshRequestComponent();
     }
     
    });
@@ -200,16 +199,6 @@ let obj={
 	  this.transportRequestForm.reset();
     // }
   }
-  // newData():any{
-  //   this.service.getTransportRequestFormData().subscribe((data) => {
-  //     this.msgData = data;
-  //     this.msgCount= this.msgData.length
-  //     console.log("new Count", this.msgCount);
-      
-  //     this.tableValues = data;
-  //     console.log("New table",this.tableValues);
-  //   });
-  // }
   
     sucessMessage() {
       this.messageService.add({
@@ -227,10 +216,12 @@ let obj={
       });
     }
 
-      async refreshRequestComponent(url: string): Promise<boolean> {
-        await this.router.navigateByUrl('.', { skipLocationChange: true });
-        return this.router.navigateByUrl(url);
-      }
+    refreshRequestComponent() {
+      let currentUrl = this.router.url;
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+      });
+    }
 
   reset() {
     this.buildForm();
