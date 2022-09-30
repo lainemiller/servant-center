@@ -13,6 +13,7 @@ export class IaPage3Service {
   constructor(private restcs: RestClientService, private http: HttpClient) { }
   private commonUrl = environment.localUrl;
   private getIAPage3Details = env.serviceUrl.getIAPage3Details;
+  private postIAPag34Details = env.serviceUrl.postIAPag34Details;
   private isDev = isDevMode();
 
 
@@ -33,7 +34,7 @@ export class IaPage3Service {
       );
     } else {
       //env api goes here
-      return this.restcs.post('api goes here', data);
+      return this.restcs.post(this.postIAPag34Details, data);
     }
   }
 }
