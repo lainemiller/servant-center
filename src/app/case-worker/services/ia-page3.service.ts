@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, isDevMode } from '@angular/core';
+// import { env } from 'process';
 import { Observable } from 'rxjs';
 import { RestClientService } from 'src/app/shared/services/rest-client.service';
 import { environment } from 'src/environments/environment';
+import { environment as env } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +12,7 @@ import { environment } from 'src/environments/environment';
 export class IaPage3Service {
   constructor(private restcs: RestClientService, private http: HttpClient) { }
   private commonUrl = environment.localUrl;
+  private getIAPage3Details = env.serviceUrl.getIAPage3Details;
   private isDev = isDevMode();
 
 
@@ -18,7 +21,7 @@ export class IaPage3Service {
     return this.restcs.get(this.commonUrl+'initialAssessment/page-3/'+vetId);
     } else{
       //env api goes here
-      return this.restcs.post('api goes here');
+      return this.restcs.get(this.getIAPage3Details+vetId);
     }
 }
 
