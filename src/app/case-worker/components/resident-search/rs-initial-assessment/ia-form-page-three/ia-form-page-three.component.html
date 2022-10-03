@@ -1,8 +1,8 @@
-<!-- <p-toast position="top-center"></p-toast>
+<p-toast position="top-center"></p-toast>
 <div *ngIf="greyingOut" id="overlay">  </div>
   <div class="center-spinner">
     <p-progressSpinner *ngIf="ia3" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
-  </div> -->
+  </div>
 <div class="page1-form-container p-mt-4">
   <form [formGroup]="page3Form" (ngSubmit)="onSubmit()" *ngIf="page3Form">
     <h3>Mental Status Assessment</h3>
@@ -46,7 +46,7 @@
           <div class="p-field-checkbox" *ngFor="let thoughtForum of thoughtForumList">
             <label for="{{thoughtForum.value}}--answered">{{thoughtForum.label}}</label>
             <p-checkbox inputId="{{thoughtForum.value}}--answered" [name]=thoughtForum.value [value]=thoughtForum.value
-              formControlName="thoughtForum" [(ngModel)]="selectdeThoughtForum"></p-checkbox>
+              formControlName="thoughtForum" [(ngModel)]="selectedThoughtForum"></p-checkbox>
           </div>
         </div>
       </div>
@@ -124,7 +124,7 @@
       </div>
       <div class="p-field p-col-3">
         <span class="label-title">Give Examples(Remote Memory)</span>
-        <textarea [rows]="7" [cols]="40" formControlName=recentMemoComments class="userInput" pInputTextarea
+        <textarea [rows]="7" [cols]="40" formControlName=remoteMemoComments class="userInput" pInputTextarea
           placeholder="Comment"></textarea>
       </div>
     </div>

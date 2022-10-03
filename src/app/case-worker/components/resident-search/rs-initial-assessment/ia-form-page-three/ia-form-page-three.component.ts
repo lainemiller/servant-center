@@ -1,5 +1,11 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { IaPage3Service } from 'src/app/case-worker/services/ia-page3.service';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
@@ -40,7 +46,7 @@ export class IaFormPageThreeComponent implements OnInit {
     { label: 'Flight of Ideas', value: 'flight of ideas' },
     { label: 'Thought blocking', value: 'Thought blocking' },
   ];
-  selectdeThoughtForum: any[] = [];
+  selectedThoughtForum: any[] = [];
   moodList = [
     { label: 'Depressed', value: 'depressed' },
     { label: 'Elated', value: 'elated' },
@@ -87,12 +93,15 @@ export class IaFormPageThreeComponent implements OnInit {
 
   priPhyscianPartOfGP = [
     { label: 'Yes', value: true },
-    { label: 'No', value: false }
+    { label: 'No', value: false },
   ];
-  constructor(private fb: FormBuilder, private router: Router,
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
     private messageService: MessageService,
     private service: IaPage3Service,
-    private cacheData: ClipBoardService) {
+    private cacheData: ClipBoardService
+  ) {
     this.selecteVetId = this.cacheData.get('selectedResidentVeteranId');
     console.log('sel', this.selecteVetId);
     this.setForm();
@@ -108,19 +117,69 @@ export class IaFormPageThreeComponent implements OnInit {
       this.greyingOut = false;
       this.data = res[0];
       this.buildForm();
+
+      console.log('this.data', this.data);
+      
       if (this.data) {
         this.mentalStatusAssessment.patchValue({
           date: this.data.orientation_date,
           time: this.data.orientation_time,
           person: this.data.orientation_person,
-          generalAppearance: this.data.general_appearance[0] ,
+          // generalAppearance: this.data.general_appearance,
           thoughtsOfSuicide: this.data.ideation,
           place: this.data.orientation_place,
-          affect: this.data.affect,
+          // affect: this.data.affect,
           recentMemory: this.data.intact_recent_memory,
-          remoteMemory: this.data.intact_remote_memory
+          remoteMemory: this.data.intact_remote_memory,
+          recentMemoComments: this.data.recent_memory_issues,
+          remoteMemoComments: this.data.remote_memory_issues,
+          answeredByClient: this.data.mood_as_expressed,
+          observedByInterviewer: this.data.mood_as_observed
         });
+        for(let i=0;i<this.generalAppearanceList.length;i++){
+        if(this.data.general_appearance.includes(this.generalAppearanceList[i].value)){
+          this.selectedgeneralAppearance.push(this.generalAppearanceList[i].value)
+          this.mentalStatusAssessment.patchValue({
+            generalAppearance: this.selectedgeneralAppearance
+          }); 
+        }
+      }
+      for(let i=0;i<this.affectList.length;i++){
+        if(this.data.affect.includes(this.affectList[i].value)){
+          this.selectedAffect.push(this.affectList[i].value)
+          this.mentalStatusAssessment.patchValue({
+            affect: this.selectedAffect
+          }); 
+        }
+      }
+      for(let i=0;i<this.thoughtForumList.length;i++){
+        if(this.data.thought_forum.includes(this.thoughtForumList[i].value)){
+          this.selectedThoughtForum.push(this.thoughtForumList[i].value)
+          this.mentalStatusAssessment.patchValue({
+            thoughtForum : this.selectedThoughtForum
+          }); 
+        }
+      }
 
+      for(let i=0;i<this.moodList.length;i++){
+        if(this.data.mood_as_expressed.includes(this.moodList[i].value)){
+          this.answeredByClient.push(this.moodList[i].value)
+          this.mentalStatusAssessment.patchValue({
+            answeredByClient : this.answeredByClient
+          }); 
+        }
+      }
+      for(let i=0;i<this.moodList.length;i++){
+        if(this.data.mood_as_observed.includes(this.moodList[i].value)){
+          this.observedByInterviewer.push(this.moodList[i].value)
+          this.mentalStatusAssessment.patchValue({
+            observedByInterviewer : this.observedByInterviewer
+          }); 
+        }
+      }
+      
+        console.log('ideation',this.ideation.controls);
+        
         this.medicalInformation.patchValue({
           primaryPhysicianName: this.data.primary_physician,
           phone: this.data.primary_physician_phone,
@@ -136,15 +195,12 @@ export class IaFormPageThreeComponent implements OnInit {
           underSpecialistCare: this.data.under_specialist_care,
           specialistType: this.data.specialist_type,
           specialistName: this.data.specialist_name,
-          currentTreatment: this.data.current_treatment
+          currentTreatment: this.data.current_treatment,
         });
-      }
-      else {
-
+      } else {
         this.mentalStatusAssessment.patchValue({
           generalAppearance: null,
           thoughtsOfSuicide: null,
-
         });
         this.medicalInformation.patchValue({
           primaryPhysicianName: null,
@@ -161,10 +217,10 @@ export class IaFormPageThreeComponent implements OnInit {
           underSpecialistCare: null,
           specialistType: null,
           specialistName: null,
-          currentTreatment: null
+          currentTreatment: null,
         });
       }
-    })
+    });
   }
 
   initializeFormGroups() {
@@ -185,15 +241,15 @@ export class IaFormPageThreeComponent implements OnInit {
       place: [''],
       person: [''],
       generalAppearance: [this.selectedgeneralAppearance, Validators.required],
-      thoughtForum: [this.selectdeThoughtForum, Validators.required],
-        answeredByClient: [this.answeredByClient, Validators.required],
-        observedByInterviewer: [this.observedByInterviewer, Validators.required],
+      thoughtForum: [this.selectedThoughtForum, Validators.required],
+      answeredByClient: [this.answeredByClient, Validators.required],
+      observedByInterviewer: [this.observedByInterviewer, Validators.required],
       affect: [this.selectedAffect, Validators.required],
       ideation: this.ideation,
-        recentMemory: [],
-        remoteMemory: [],
-        recentMemoComments: [],
-        remoteMemoComments: [],
+      recentMemory: [],
+      remoteMemory: [],
+      recentMemoComments: [],
+      remoteMemoComments: [],
     });
     this.medicalInformation = this.fb.group({
       primaryPhysicianName: ['', Validators.required],
@@ -211,7 +267,7 @@ export class IaFormPageThreeComponent implements OnInit {
       specialistType: ['', Validators.required],
       specialistName: ['', Validators.required],
       currentTreatment: ['', Validators.required],
-      veteranId: [this.selecteVetId]
+      veteranId: [this.selecteVetId],
     });
   }
 
@@ -220,19 +276,40 @@ export class IaFormPageThreeComponent implements OnInit {
       mentalStatusAssessment: this.mentalStatusAssessment,
       medicalInformation: this.medicalInformation,
     });
-    console.log('build form', this.page3Form.get(['mentalStatusAssessment', 'ideation']));
+    console.log(
+      'build form',
+      this.page3Form.get(['mentalStatusAssessment', 'ideation'])
+    );
   }
 
   onSubmit() {
     this.submitted = true;
+    this.ia3 = true;
+    this.greyingOut = true;
     let specialistType = this.medicalInformation.value.specialistType;
     let currMedications = this.medicalInformation.value.currentMedication;
-    this.medicalInformation.value.specialistType = "{" + specialistType + "}";
-    this.medicalInformation.value.currentMedication = "{" + currMedications + "}";
+    let recMemIsu = this.mentalStatusAssessment.value.recentMemoComments;
+    let remMemIsu = this.mentalStatusAssessment.value.remoteMemoComments;
+    this.medicalInformation.value.specialistType = '{' + specialistType + '}';
+    this.medicalInformation.value.currentMedication =
+      '{' + currMedications + '}';
+    this.mentalStatusAssessment.value.recentMemoComments =
+      '{' + recMemIsu + '}';
+    this.mentalStatusAssessment.value.remoteMemoComments =
+      '{' + remMemIsu + '}';
     this.service
       .initialTreatmentGoalsPage3(this.page3Form.value)
       .subscribe((data) => {
-        console.log('Submitted');
+        if (data.responseStatus === 'SUCCESS') {
+          this.ia3 = false;
+          this.greyingOut = false;
+          this.successMessage();
+          console.log('Submitted');
+        }
+        else if(data.responseStatus === 'FAILURE'){
+          this.errorMessage();
+        }
+        
       });
     // this.router.navigateByUrl(
     //   'case-worker/resident-search/initial-assessment/page-4'
@@ -242,29 +319,25 @@ export class IaFormPageThreeComponent implements OnInit {
 
   next() {
     console.log('clicked next');
-    if (this.submitted) {
+    if (!this.page3Form.touched) {
       this.router.navigateByUrl(
         'case-worker/resident-search/initial-assessment/page-4'
       );
-    }
-    else {
-      alert("Please save first")
+    } else {
+      this.infoMessage();
     }
   }
-  reset() {
+  reset() {}
 
-  }
 
   goBack() {
-    this.router.navigateByUrl(
-      'case-worker/resident-search/initial-assessment/page-2'
-    );
-  }
-
-  get ideationControls() {
-    return (
-      this.page3Form.get(['mentalStatusAssessment', 'ideation']) as FormGroup
-    ).controls;
+    if (!this.page3Form.touched) {
+      this.router.navigateByUrl(
+        'case-worker/resident-search/initial-assessment/page-2'
+      );
+    } else {
+      this.infoMessage();
+    }
   }
 
   get moodAnsweredByClient() {
@@ -283,6 +356,28 @@ export class IaFormPageThreeComponent implements OnInit {
     ]) as FormControl;
   }
 
+  successMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Successfully Updated Details',
+    });
+  }
+
+  errorMessage() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Failed',
+      detail: 'Something Went Wrong!',
+    });
+  }
+  infoMessage() {
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Save!',
+      detail: 'Please Save the Details Before Going to next Step',
+    });
+  }
 }
 
 @Pipe({ name: 'keys' })
