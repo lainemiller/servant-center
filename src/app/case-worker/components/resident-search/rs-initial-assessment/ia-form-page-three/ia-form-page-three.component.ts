@@ -201,6 +201,18 @@ export class IaFormPageThreeComponent implements OnInit {
         this.mentalStatusAssessment.patchValue({
           generalAppearance: null,
           thoughtsOfSuicide: null,
+          date: null,
+          time: null,
+          person: null,
+          place: null,
+          affect: null,
+          recentMemory: null,
+          remoteMemory: null,
+          recentMemoComments: null,
+          remoteMemoComments: null,
+          answeredByClient: null,
+          observedByInterviewer: null,
+          thoughtForum: null
         });
         this.medicalInformation.patchValue({
           primaryPhysicianName: null,
