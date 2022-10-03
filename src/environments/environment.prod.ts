@@ -42,7 +42,7 @@ export const environment = {
     getIAPage2Details: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/initialAssessment/page-2/',
     postIAPage2Details: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/initialAssessment/page-2/',
     getIAPage3Details: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/initialAssessment/page-3/',
-    // postIAPag34Details: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/initialAssessment/page-3/',
+    postIAPag34Details: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/initialAssessment/page-3/',
     getIAPage4Details: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/initialAssessment/page-4/',
     postIAPage4Details: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/initialAssessment/page-4',
     updateProfileImage: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/uploadImage/',
