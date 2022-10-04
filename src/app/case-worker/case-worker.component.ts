@@ -68,12 +68,12 @@ export class CaseWorkerComponent implements OnInit {
         styleClass: 'menu-items--text menu-item--3',
         routerLink: ['/case-worker/resident-search'],
       },
-      {
-        label: 'PROFILE',
-        icon: 'fa fa-user-circle',
-        styleClass: 'menu-items--text menu-item--5',
-        routerLink: ['/case-worker/profile'],
-      },
+      // {
+      //   label: 'PROFILE',
+      //   icon: 'fa fa-user-circle',
+      //   styleClass: 'menu-items--text menu-item--5',
+      //   routerLink: ['/case-worker/profile'],
+      // },
       {
         label: 'LOGOUT',
         icon: 'fas fa-sign-out-alt',

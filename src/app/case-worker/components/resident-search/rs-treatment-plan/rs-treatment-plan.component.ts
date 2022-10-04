@@ -1,4 +1,4 @@
-import { ViewportScroller } from '@angular/common';
+import { DatePipe, ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
@@ -26,13 +26,27 @@ export class RsTreatmentPlanComponent implements OnInit {
   public vetID!:any;
   showSpinner:boolean = true;
   grayOut:boolean = true;
+  intake_date: any;
+  date_of_birth: any;
+  header: any;
+  targetdate: any;
+  indexPh:number=0;
+  indexMh:number=0;
+  indexSu:number=0;
+  indexHo:number=0;
+  indexIn:number=0;
+  indexRe:number=0;
+  indexEd:number=0;
+  indexBe:number=0;
+  
 
   constructor(
     private formBuilder: FormBuilder,
     private service: DataService,
     private cacheData:ClipBoardService,
     private messageService: MessageService,
-    private scroller: ViewportScroller
+    private scroller: ViewportScroller,
+    private datepipe: DatePipe,
   ) {
     this.vetID=this.cacheData.get("selectedResidentVeteranId");
     this.setForm();
@@ -49,26 +63,111 @@ export class RsTreatmentPlanComponent implements OnInit {
         if(this.data){
           this.showSpinner=false;
           this.grayOut=false;
-        }      
+        }
+      this.header=this.data[0];
+      this.intake_date = this.datepipe.transform(this.header.intake_date, 'dd/MM/yyyy');
+      this.date_of_birth = this.datepipe.transform(this.header.date_of_birth, 'dd/MM/yyyy');  
+      this.treatmentArr = this.treatmentPlanForm.get('treatmentIssues')?.value;
+      console.log('data',this.data) 
+
       this.buildForm();
       this.treatmentPlanForm.patchValue({
-        firstName: this.data.first_name,
-        lastName: this.data.last_name,
-        recordNo: this.data.record_number,
-        dateOfBirth1: this.data.date_of_birth,
-        intakeDOB: this.data.intake_date,
-        hmisIdNo: this.data.hmis_id,
-        veteranDiagnosis: this.data.diagnosis,
-        veteranSupports: this.data.supports,
-        veteranStrengths: this.data.strengths,
-       
-        treatmentIssues:this.data.treatmentIssues,
-        
-        veteranNotes:this.data.notes
+        firstName: this.header.first_name,
+        lastName: this.header.last_name,
+        recordNo: this.header.record_number,
+        dateOfBirth1:this.date_of_birth,
+        intakeDOB: this.intake_date,
+        hmisIdNo: this.header.hmis_id,
+        veteranDiagnosis: this.header.diagnosis,
+        veteranSupports: this.header.supports,
+        veteranStrengths: this.header.strengths,
+        veteranNotes: this.header.notes,
       });
-      console.log(this.data);
+        for(let i=0;i<this.data.length;i++){
+          if(this.data[i].goal_type === 'physical health'){
+          let targetDate = this.datepipe.transform(this.data[i].targetdate, 'MM/dd/yyyy')
+          this.treatmentIssues.controls[0].get('physicalHealth.'+this.indexPh)?.patchValue({
+              goals: this.data[i].goal,
+              plans: this.data[i].plan,
+              strategies: this.data[i].strategy,
+              targetDate:targetDate,
+            });
+            this.indexPh++;
+          }	
+          if(this.data[i].goal_type === 'mental health'){
+            let targetDate = this.datepipe.transform(this.data[i].targetdate, 'MM/dd/yyyy')
+            this.treatmentIssues.controls[0].get('mentalHealth.'+this.indexMh)?.patchValue({
+                goals: this.data[i].goal,
+                plans: this.data[i].plan,
+                strategies: this.data[i].strategy,
+                targetDate:targetDate,
+              });
+            this.indexMh++;
+          }
+          if(this.data[i].goal_type === 'substance use'){
+            let targetDate = this.datepipe.transform(this.data[i].targetdate, 'MM/dd/yyyy')
+            this.treatmentIssues.controls[0].get('substanceUse.'+this.indexSu)?.patchValue({
+                goals: this.data[i].goal,
+                plans: this.data[i].plan,
+                strategies: this.data[i].strategy,
+                targetDate:targetDate,
+              });
+            this.indexSu++;
+          }
+          if(this.data[i].goal_type === 'housing'){
+            let targetDate = this.datepipe.transform(this.data[i].targetdate, 'MM/dd/yyyy')
+            this.treatmentIssues.controls[0].get('housing.'+this.indexHo)?.patchValue({
+                goals: this.data[i].goal,
+                plans: this.data[i].plan,
+                strategies: this.data[i].strategy,
+                targetDate:targetDate,
+              });
+            this.indexHo++;
+          }
+          if(this.data[i].goal_type === 'social'){
+            let targetDate = this.datepipe.transform(this.data[i].targetdate, 'MM/dd/yyyy')
+            this.treatmentIssues.controls[0].get('incomeLegal.'+this.indexIn)?.patchValue({
+                goals: this.data[i].goal,
+                plans: this.data[i].plan,
+                strategies: this.data[i].strategy,
+                targetDate:targetDate,
+              });
+            this.indexIn++;
+          }
+          if(this.data[i].goal_type === 'family'){
+            let targetDate = this.datepipe.transform(this.data[i].targetdate, 'MM/dd/yyyy')
+            this.treatmentIssues.controls[0].get('relationships.'+this.indexRe)?.patchValue({
+                goals: this.data[i].goal,
+                plans: this.data[i].plan,
+                strategies: this.data[i].strategy,
+                targetDate:targetDate,
+              });
+            this.indexRe++;
+          }
+          if(this.data[i].goal_type === 'career'){
+            let targetDate = this.datepipe.transform(this.data[i].targetdate, 'MM/dd/yyyy')
+            this.treatmentIssues.controls[0].get('education.'+this.indexEd)?.patchValue({
+                goals: this.data[i].goal,
+                plans: this.data[i].plan,
+                strategies: this.data[i].strategy,
+                targetDate:targetDate,
+              });
+            this.indexEd++;
+          }
+          if(this.data[i].goal_type === 'benefits'){
+            let targetDate = this.datepipe.transform(this.data[i].targetdate, 'MM/dd/yyyy')
+            this.treatmentIssues.controls[0].get('benefits.'+this.indexBe)?.patchValue({
+                goals: this.data[i].goal,
+                plans: this.data[i].plan,
+                strategies: this.data[i].strategy,
+                targetDate:targetDate,
+              });
+            this.indexBe++;
+          }
+        }
     });
-  }
+  };
+
   buildForm() {
     this.treatmentPlanForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -143,7 +242,7 @@ export class RsTreatmentPlanComponent implements OnInit {
     this.formView = false;
     this.showSpinner=true;
     this.grayOut=true;
-    //this.treatmentArr = this.treatmentPlanForm.get('treatmentIssues')?.value;
+    
     this.service.updateTreatmentPlanData(this.vetID,this.treatmentPlanForm.value).subscribe((response)=>{
       if (response.responseStatus === 'SUCCESS'){
         setTimeout(() => {
@@ -155,7 +254,8 @@ export class RsTreatmentPlanComponent implements OnInit {
       }else if (response.responseStatus === 'FAILURE'){
         this.errorMessage();
       }
-    })  
+    });
+    console.log("Form value =>>>>",this.treatmentPlanForm.value);  
   }
  
   initializeIssuesFormArray() {
