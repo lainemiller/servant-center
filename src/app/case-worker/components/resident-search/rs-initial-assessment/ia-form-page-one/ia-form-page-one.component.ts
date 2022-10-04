@@ -390,6 +390,9 @@ export class IaFormPageOneComponent implements OnInit {
   get iaPage1PD() {
     return this.personalDetails.controls;
   }
+  get iaPage1IR() {
+    return this.incomeAndResources.controls;
+  }
 
   onSubmit() {
     this.ia1 = true;

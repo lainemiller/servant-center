@@ -130,14 +130,14 @@ export class IaFormPageThreeComponent implements OnInit {
         this.orientationDate = new Date(
           new Date(this.data.orientation_date).toUTCString()
         );
-        this.orientationDate =
-        this.orientationDate.getMonth() +
-        1 +
-        '/' +
-        (this.orientationDate.getDate() +
-        1 )+
-        '/' +
-        this.orientationDate.getFullYear()
+        // this.orientationDate =
+        // this.orientationDate.getMonth() +
+        // 1 +
+        // '/' +
+        // (this.orientationDate.getDate() +
+        // 1 )+
+        // '/' +
+        // this.orientationDate.getFullYear()
         this.mentalStatusAssessment.patchValue({
           date: this.orientationDate,
           time: this.data.orientation_time,
@@ -252,6 +252,9 @@ export class IaFormPageThreeComponent implements OnInit {
           currentTreatment: null,
         });
       }
+
+     alert(this.orientationDate);
+      
     });
   }
 
@@ -268,10 +271,10 @@ export class IaFormPageThreeComponent implements OnInit {
 
     this.mentalStatusAssessment = this.fb.group({
       veteranId: [this.selecteVetId],
-      date: [''],
-      time: [''],
-      place: [''],
-      person: [''],
+      date: ['', Validators.required],
+      time: ['', Validators.required],
+      place: ['', Validators.required],
+      person: ['', Validators.required],
       generalAppearance: [this.selectedgeneralAppearance, Validators.required],
       thoughtForum: [this.selectedThoughtForum, Validators.required],
       answeredByClient: [this.answeredByClient, Validators.required],
@@ -347,6 +350,10 @@ export class IaFormPageThreeComponent implements OnInit {
     //   'case-worker/resident-search/initial-assessment/page-4'
     // );
     console.log('page 3 values', this.page3Form.value);
+  }
+
+  get iaPage2MA() {
+    return this.mentalStatusAssessment.controls;
   }
 
   next() {
