@@ -427,13 +427,14 @@ export class IaFormPageOneComponent implements OnInit {
         else if(data.responseStatus === 'FAILURE'){
           this.errorMessage();
         }
+
         console.log('Submitted');
       });
     // this.router.navigateByUrl(
     //   'case-worker/resident-search/initial-assessment/page-2'
     // );
     console.log('page 1 values', this.page1Form.value);
-  }
+}
   next() {
     console.log('clicked next');
     if (!this.page1Form.touched) {
@@ -511,6 +512,13 @@ export class IaFormPageOneComponent implements OnInit {
       severity: 'info',
       summary: 'Save!',
       detail: 'Please Save the Details Before Going to next Step',
+    });
+  }
+  warnMessage(){
+    this.messageService.add({
+      severity: 'warn',
+      summary: 'please fill!',
+      detail: 'Please fill the required fields!',
     });
   }
 }
