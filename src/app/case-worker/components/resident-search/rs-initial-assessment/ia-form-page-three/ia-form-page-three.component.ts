@@ -252,8 +252,6 @@ export class IaFormPageThreeComponent implements OnInit {
           currentTreatment: null,
         });
       }
-
-     alert(this.orientationDate);
       
     });
   }
