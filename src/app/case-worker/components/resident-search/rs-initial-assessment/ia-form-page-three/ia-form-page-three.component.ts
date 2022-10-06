@@ -68,14 +68,15 @@ export class IaFormPageThreeComponent implements OnInit {
   selectedAffect: any[] = [];
 
   ideationList = [
-    { label: 'Thoughts of Suicide', key: 'thoughtsOfSuicide', value: '' },
-    { label: 'Sucide Plan', key: 'suicidePlan', value: '' },
-    { label: 'Thoughts of Homicide', key: 'thoughtsOfHomicide', value: '' },
-    { label: 'Homicide Plan', key: 'homicidePlan', value: '' },
-    { label: 'Delusional', key: 'delusional', value: '' },
-    { label: 'Paranoid', key: 'paranoid', value: '' },
-    { label: 'Hallucinations', key: 'hallucinations', value: '' },
+    { label: 'Thoughts of Suicide', key: 'thoughtsOfSuicide' },
+    { label: 'Sucide Plan', key: 'suicidePlan' },
+    { label: 'Thoughts of Homicide', key: 'thoughtsOfHomicide' },
+    { label: 'Homicide Plan', key: 'homicidePlan' },
+    { label: 'Delusional', key: 'delusional' },
+    { label: 'Paranoid', key: 'paranoid' },
+    { label: 'Hallucinations', key: 'hallucinations' },
   ];
+  getIdeationList: any [] =[];
 
   recentMemory = [
     { label: 'Yes', value: true },
@@ -126,15 +127,12 @@ export class IaFormPageThreeComponent implements OnInit {
           time: this.data.orientation_time,
           person: this.data.orientation_person,
           // generalAppearance: this.data.general_appearance,
-          thoughtsOfSuicide: this.data.ideation,
           place: this.data.orientation_place,
           // affect: this.data.affect,
           recentMemory: this.data.intact_recent_memory,
           remoteMemory: this.data.intact_remote_memory,
           recentMemoComments: this.data.recent_memory_issues,
           remoteMemoComments: this.data.remote_memory_issues,
-          answeredByClient: this.data.mood_as_expressed,
-          observedByInterviewer: this.data.mood_as_observed
         });
         for(let i=0;i<this.generalAppearanceList.length;i++){
         if(this.data.general_appearance.includes(this.generalAppearanceList[i].value)){
@@ -177,8 +175,18 @@ export class IaFormPageThreeComponent implements OnInit {
           }); 
         }
       }
+      const vetObj = this.data.ideation;
+      for(let i=0;i<this.ideationList.length;i++){
+        if(this.data.ideation.includes(this.ideationList[i].key)){
+          this.getIdeationList.push(this.ideationList[i].key)
+          this.mentalStatusAssessment.patchValue({
+            // ideation : {'thoughtsOfSuicide': 'thoughtsOfSuicide','Paranoid':''}
+            ideation :this.getIdeationList
+          }); 
+        }
+      }
+      console.log('i list', this.getIdeationList);
       
-        console.log('ideation',this.ideation.controls);
         
         this.medicalInformation.patchValue({
           primaryPhysicianName: this.data.primary_physician,
