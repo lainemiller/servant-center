@@ -243,29 +243,51 @@
       </div>
     </div>
     <h3>Social and Family History <i>( <span style="color: red;">*</span> mandatory fields)</i></h3>
-    <div class="p-fluid p-formgrid p-grid" formGroupName="socialAndFamilyHistory">
-      <div class="p-field p-col-12 p-md-6">
-        <span class="label-title">Mother's Full Name</span>
-        <input type="text" pInputText formControlName=mothersFullName placeholder="Name">
+    <div class="p-fluid p-formgrid p-grid" formGroupName="familyMembers">
+      <div class="p-field p-col-12 p-md-3">
+        <span class="label-title">Name<span style="color: red;">*</span></span>
+        <input type="text" pInputText formControlName=name placeholder="Name">
       </div>
-      <div class="p-col-12 p-md-6 p-formgroup-inline" style="align-items: center;">
-        <div *ngFor="let motherStatus of familyStatusList; let i = index" class="p-field-radiobutton">
-          <p-radioButton name="motherStatus" formControlName=motherStatus [value]=motherStatus.value
-            inputId="motherStatus{{i}}"></p-radioButton>
-          <label for="motherStatus{{i}}" class="p-ml-3">{{motherStatus.label}}</label>
+      <div class="p-field p-col-12 p-md-2">
+        <span class="label-title">Age</span>
+        <input type="number" min="1" pInputText formControlName=age placeholder="Age">
+      </div>
+      <div class="p-field p-col-12 p-md-2">
+        <span class="label-title">Location</span>
+        <input type="text" pInputText formControlName=location placeholder="Location">
+      </div>
+      <div class="p-field p-col-12 p-md-2">
+        <span class="label-title">Relationship<span style="color: red;">*</span></span>
+        <input type="text" pInputText formControlName=relationship placeholder="Relationship">
+      </div>
+      <div class="p-col-12 p-md-3 p-formgroup-inline" style="align-items: center;">
+        <div *ngFor="let status of living; let i = index" class="p-field-radiobutton">
+          <p-radioButton name="living" formControlName=living [value]=status.value
+            inputId="living{{i}}"></p-radioButton>
+          <label for="living{{i}}" class="p-ml-3">{{status.label}}</label>
         </div>
       </div>
-      <div class="p-field p-col-12 p-md-6">
+      </div>
+      <div class="p-fluid p-formgrid p-grid" formGroupName="socialAndFamilyHistory">
+      <!-- <div class="p-field p-col-12 p-md-4">
         <span class="label-title">Father's Full Name</span>
         <input type="text" pInputText formControlName=fathersFullName placeholder="Name">
       </div>
-      <div class="p-col-12 p-md-6 p-formgroup-inline" style="align-items: center;">
+      <div class="p-field p-col-12 p-md-1">
+        <span class="label-title">Age</span>
+        <input type="text" pInputText formControlName=fatherAge placeholder="Age">
+      </div>
+      <div class="p-field p-col-12 p-md-4">
+        <span class="label-title">Location</span>
+        <input type="text" pInputText formControlName=fatherLocation placeholder="Location">
+      </div>
+      <div class="p-col-12 p-md-3 p-formgroup-inline" style="align-items: center;">
         <div *ngFor="let fatherStatus of familyStatusList; let i = index" class="p-field-radiobutton">
           <p-radioButton name="fatherStatus" formControlName=fatherStatus [value]=fatherStatus.value
             inputId="fatherStatus{{i}}"></p-radioButton>
           <label for="fatherStatus{{i}}" class="p-ml-3">{{fatherStatus.label}}</label>
         </div>
-      </div>
+      </div> -->
       <h4>Siblings:<span *ngIf="!siblings.controls.length"> None</span></h4>
       <div formArrayName="siblings" *ngFor="let sibling of siblings.controls; let i = index" class="p-col-12">
         <div [formGroupName]="i">

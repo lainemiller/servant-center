@@ -26,6 +26,8 @@ export class IaFormPageOneComponent implements OnInit {
   incomeAndResources!: FormGroup;
   benefits!: FormGroup;
   socialAndFamilyHistory!: FormGroup;
+  familyMembers!: FormGroup
+  members: any = [];
   everMarried = [
     { label: 'Yes', value: true },
     { label: 'No', value: false },
@@ -77,9 +79,9 @@ export class IaFormPageOneComponent implements OnInit {
     { label: 'Living Together', value: 'Living Together' },
   ];
 
-  familyStatusList = [
-    { label: 'Living', value: 'living' },
-    { label: 'Deceased', value: 'deceased' },
+  living = [
+    { label: 'Living', value: true },
+    { label: 'Deceased', value: false },
   ];
   sexualOrientation = [
     { label: 'Heterosexual', value: 'Heterosexual' },
@@ -110,6 +112,8 @@ export class IaFormPageOneComponent implements OnInit {
       this.greyingOut = false;
       this.data = res[0];
       console.log('dob', this.data.date_of_birth);
+      console.log('test', this.socialAndFamilyHistory.controls.siblings.value);
+      
       this.dateofbirth = this.datepipe.transform(
         this.data.date_of_birth,
         'MM/dd/yyyy'
@@ -130,16 +134,13 @@ export class IaFormPageOneComponent implements OnInit {
       const getAge = (birthDateString: any) => {
         const today = new Date();
         const birthDate = new Date(birthDateString);
-      
         const yearsDifference = today.getFullYear() - birthDate.getFullYear();
-      
         if (
           today.getMonth() < birthDate.getMonth() ||
           (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())
         ) {
           return yearsDifference - 1;
         }
-      
         return yearsDifference;
       };
       const currAge = getAge(this.age);
@@ -214,7 +215,15 @@ export class IaFormPageOneComponent implements OnInit {
         stdTestedDate: this.stdTestDate,
         stdTestedLocation: this.data.std_test_location,
         stdTestResult: this.data.std_test_results,
-        hivTestDesired: this.data.hiv_test_desired
+        hivTestDesired: this.data.hiv_test_desiredy,
+      });
+      this.familyMembers.patchValue({
+        
+        name:this.data.name,
+        age: this.data.age,
+        location: this.data.location,
+        relationship:this.data.relationship,
+        living: this.data.living
       });
     }
     else{
@@ -345,8 +354,12 @@ export class IaFormPageOneComponent implements OnInit {
     this.socialAndFamilyHistory = this.fb.group({
       veteranID: [this.selecteVetId, Validators.required],
       mothersFullName: ['', Validators.required],
+      motherAge: [],
+      motherLocation: [],
       motherStatus: ['', Validators.required],
       fathersFullName: ['', Validators.required],
+      fatherAge: [],
+      fatherLocation: [],
       fatherStatus: ['', Validators.required],
       siblings: new FormArray([]),
       everMarried: ['', Validators.required],
@@ -376,7 +389,13 @@ export class IaFormPageOneComponent implements OnInit {
       hivTestDesired: ['', Validators.required],
       substanceAbuse: ['', Validators.required]
     });
-    // this.buildForm();
+    this.familyMembers = this.fb.group({
+      name: [],
+      relationship: [],
+      age: [],
+      location: [],
+      living: []
+    });
   }
 
   buildForm() {
@@ -384,6 +403,7 @@ export class IaFormPageOneComponent implements OnInit {
       personalDetails: this.personalDetails,
       incomeAndResources: this.incomeAndResources,
       socialAndFamilyHistory: this.socialAndFamilyHistory,
+      familyMembers: this.familyMembers
     });
   }
 
@@ -452,9 +472,9 @@ export class IaFormPageOneComponent implements OnInit {
 
   getFamilyDetailFormGroup() {
     return this.fb.group({
-      name: ['', Validators.required],
-      age: ['', Validators.required],
-      location: ['', Validators.required],
+      name: ['test', Validators.required],
+      age: ['tage', Validators.required],
+      location: ['tloc', Validators.required],
     });
   }
 
