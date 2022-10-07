@@ -24,6 +24,7 @@ export class TreatmentPlanComponent implements OnInit {
   public data: any;
   public formView = true;
   public treatmentArr: any;
+  public isTreatmentArr: boolean = false;
   public formData:any;
   public vetID: number;
   public intake_date:any;
