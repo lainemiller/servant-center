@@ -22,6 +22,14 @@ export class IaPage1Service {
       return this.restcs.get(this.getIAPage1Details+vetID);
     }
   }
+
+  public getIAPage1FD(vetID:number): Observable<any> {
+    if (this.isDev){
+    return this.restcs.get(this.commonUrl+'initialAssessment/page-1FD/'+ vetID);
+    } else{
+      return this.restcs.get('env url goes here');
+    }
+  }
     
 
   public initialTreatmentGoalsPage1(data:any): Observable<any> {

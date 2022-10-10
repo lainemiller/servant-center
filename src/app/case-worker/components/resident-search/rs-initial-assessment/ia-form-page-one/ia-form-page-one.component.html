@@ -243,22 +243,27 @@
       </div>
     </div>
     <h3>Social and Family History <i>( <span style="color: red;">*</span> mandatory fields)</i></h3>
-    <div class="p-fluid p-formgrid p-grid" formGroupName="familyMembers">
+    <div class="p-fluid p-formgrid p-grid" formGroupName="familyMembers" *ngFor="let fDetails of familyDetails">
       <div class="p-field p-col-12 p-md-3">
         <span class="label-title">Name<span style="color: red;">*</span></span>
-        <input type="text" pInputText formControlName=name placeholder="Name">
+        <input type="text" pInputText formControlName=name placeholder="Name">{{ fDetails.name }}
+        <!-- <div>{{ fDetails.name }}</div> -->
       </div>
       <div class="p-field p-col-12 p-md-2">
         <span class="label-title">Age</span>
         <input type="number" min="1" pInputText formControlName=age placeholder="Age">
+        <div>{{ fDetails.age }}</div>
       </div>
       <div class="p-field p-col-12 p-md-2">
         <span class="label-title">Location</span>
         <input type="text" pInputText formControlName=location placeholder="Location">
+        <div>{{ fDetails.location }}</div>
       </div>
       <div class="p-field p-col-12 p-md-2">
         <span class="label-title">Relationship<span style="color: red;">*</span></span>
         <input type="text" pInputText formControlName=relationship placeholder="Relationship">
+        <div>{{ fDetails.relationship }}</div>
+        <!-- <div>{{ fDetails.veteran_family_id }}</div> -->
       </div>
       <div class="p-col-12 p-md-3 p-formgroup-inline" style="align-items: center;">
         <div *ngFor="let status of living; let i = index" class="p-field-radiobutton">

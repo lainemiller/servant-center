@@ -15,6 +15,8 @@ export class IaFormPageOneComponent implements OnInit {
   selecteVetId!: number;
   ia1: boolean = true;
   greyingOut: boolean = true;
+  details: any;
+  familyDetails: any = [];
   data: any;
   age: any;
   dateofbirth: any;
@@ -107,13 +109,48 @@ export class IaFormPageOneComponent implements OnInit {
     this.initializeFormGroups();
   }
   setForm() {
+    this.service.getIAPage1FD(this.selecteVetId).subscribe((result) => {
+      this.details = result;
+      for (let i = 0; i < this.details.length; i++) {
+        this.familyDetails.push(this.details[i]);
+      }
+      console.log('fam det', this.familyDetails);
+      
+      for(let fam of this.familyDetails){
+        console.log(fam.name);
+        console.log(fam.age);
+        console.log(fam.location);
+        console.log(fam.living);
+        console.log(fam.relationship);
+        this.familyMembers.patchValue({
+        name:fam.name,
+        age: fam.age,
+        location: fam.location,
+        relationship:fam.relationship,
+        living: fam.living
+      });
+    }
+
+      //   this.familyMembers.controls.patchValue({
+      //   name:fam.name,
+      //   age: fam.age,
+      //   location: fam.location,
+      //   relationship:fam.relationship,
+      //   living: fam.living
+      // });
+    console.log('fd controls',this.familyMembers.controls);
+      console.log('this.details', this.details);
+      console.log('this.details.length', this.details.length);
+      console.log('family details', this.familyDetails);
+    });
+    
+    
     this.service.getIAPage1(this.selecteVetId).subscribe((res) => {
       this.ia1 = false;
       this.greyingOut = false;
       this.data = res[0];
-      console.log('dob', this.data.date_of_birth);
-      console.log('test', this.socialAndFamilyHistory.controls.siblings.value);
-      
+      console.log('dob', this.data.date_of_birth);   
+         
       this.dateofbirth = this.datepipe.transform(
         this.data.date_of_birth,
         'MM/dd/yyyy'
@@ -217,14 +254,6 @@ export class IaFormPageOneComponent implements OnInit {
         stdTestResult: this.data.std_test_results,
         hivTestDesired: this.data.hiv_test_desiredy,
       });
-      this.familyMembers.patchValue({
-        
-        name:this.data.name,
-        age: this.data.age,
-        location: this.data.location,
-        relationship:this.data.relationship,
-        living: this.data.living
-      });
     }
     else{
       this.personalDetails.patchValue({
@@ -299,7 +328,7 @@ export class IaFormPageOneComponent implements OnInit {
         hivTestDesired: null
       });
     }
-      console.log('daaaata', this.data.first_name);
+      console.log('daaaata', this.data);
     });
   }
 
@@ -395,8 +424,10 @@ export class IaFormPageOneComponent implements OnInit {
       age: [],
       location: [],
       living: []
-    });
+    }); 
   }
+
+
 
   buildForm() {
     this.page1Form = this.fb.group({
