@@ -1,4 +1,4 @@
-import { Component, Input, isDevMode, OnInit } from '@angular/core';
+import { Component, isDevMode, OnInit, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MessageService } from 'primeng/api';
 import { DataService } from 'src/app/case-worker/services/data.service';
@@ -47,36 +47,51 @@ export class WelcomeHeaderComponent implements OnInit {
 
   changePhoto(imageInput: HTMLInputElement) {
     console.log('imageInput.files![0]', imageInput.files![0]);
-    const imageFile: File = imageInput.files![0];
-    this.imageObj = imageFile;
-    let imageForm = new FormData();
-    const regex = new RegExp('[^.]+$');
-    let extension = this.imageObj.name.match(regex);
-    let imageType = extension?.[0];
-    let currentDate = new Date();
-    let todayDate =
-      currentDate.getDate() +
-      '-' +
-      (currentDate.getMonth() + 1) +
-      '-' +
-      currentDate.getFullYear();
-    let fileName = this.loginId + '_' + todayDate + '.' + imageType;
-    imageForm.append('image', this.imageObj);
-    imageForm.append('imageName', fileName);
-    imageForm.append('userGroup', this.userGroup);
+    this.imageObj = imageInput.files![0];
+    console.log(this.imageObj.size);
+    if (this.imageObj.size > 5242880) {
+      this.photoMaxSizeErrorMessage();
+    } else {
+      if (
+        this.imageObj.type === 'image/jpeg' ||
+        this.imageObj.type === 'image/png'
+      ) {
+        let sanitizedFileName = this.sanitization.sanitize(
+          SecurityContext.HTML,
+          this.imageObj.name
+        );
+        let imageForm = new FormData();
+        const regex = new RegExp('[^.]+$');
+        let extension = sanitizedFileName?.match(regex);
+        let imageType = extension?.[0];
+        let currentDate = new Date();
+        let todayDate =
+          currentDate.getDate() +
+          '-' +
+          (currentDate.getMonth() + 1) +
+          '-' +
+          currentDate.getFullYear();
+        let fileName = this.loginId + '_' + todayDate + '.' + imageType;
+        imageForm.append('image', this.imageObj);
+        imageForm.append('imageName', fileName);
+        imageForm.append('userGroup', this.userGroup);
 
-    if (this.loginId) {
-      this.profileservice
-        .profileimageUpload(imageForm, this.loginId)
-        .subscribe((response) => {
-          console.log(response);
-          if (response.responseStatus == 'SUCCESS') {
-            this.sucessMessage();
-            this.displayImage();
-          } else if (response.responseStatus == 'FAILURE') {
-            this.errorMessage();
-          }
-        });
+        if (this.loginId) {
+          this.profileservice
+            .profileimageUpload(imageForm, this.loginId)
+            .subscribe((response) => {
+              console.log(response);
+              if (response.responseStatus == 'SUCCESS') {
+                this.sucessMessage();
+                this.displayImage();
+              } else if (response.responseStatus == 'FAILURE') {
+                this.errorMessage();
+              }
+            });
+        }
+      } else {
+        this.photoTypeErrorMessage();
+      }
     }
   }
 
@@ -113,9 +128,14 @@ export class WelcomeHeaderComponent implements OnInit {
   displayImageFromAWS(fileName: string) {
     this.profileservice.getProfileImage(fileName).subscribe((response: any) => {
       console.log(response);
-      var imageSrc = 'data:application/octet-stream;base64,' + response.data;
-      this.imageUrl = this.sanitization.bypassSecurityTrustUrl(imageSrc);
-      console.log('image', this.imageUrl);
+      if (response.responseStatus == 'SUCCESS') {
+        var imageSrc =
+          'data:application/' +
+          response.data.contentType +
+          ';base64,' +
+          response.data.imageBody;
+        this.imageUrl = this.sanitization.bypassSecurityTrustUrl(imageSrc);
+      }
     });
   }
 
@@ -132,6 +152,22 @@ export class WelcomeHeaderComponent implements OnInit {
       severity: 'error',
       summary: 'Error',
       detail: 'Photo not updated',
+    });
+  }
+
+  photoMaxSizeErrorMessage() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Photo upload max 5MB size allowed',
+    });
+  }
+
+  photoTypeErrorMessage() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Wrong file type, only file type JPEG, JPG and PNG are allowed',
     });
   }
 }
