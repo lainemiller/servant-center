@@ -38,6 +38,7 @@ export class RsTreatmentPlanComponent implements OnInit {
   indexRe:number=0;
   indexEd:number=0;
   indexBe:number=0;
+  public goalId!: number;
   
 
   constructor(
@@ -91,6 +92,7 @@ export class RsTreatmentPlanComponent implements OnInit {
               plans: this.data[i].plan,
               strategies: this.data[i].strategy,
               targetDate:targetDate,
+              goalid : this.data[i].goal_id
             });
             this.indexPh++;
           }	
@@ -101,6 +103,7 @@ export class RsTreatmentPlanComponent implements OnInit {
                 plans: this.data[i].plan,
                 strategies: this.data[i].strategy,
                 targetDate:targetDate,
+                goalid : this.data[i].goal_id
               });
             this.indexMh++;
           }
@@ -111,6 +114,7 @@ export class RsTreatmentPlanComponent implements OnInit {
                 plans: this.data[i].plan,
                 strategies: this.data[i].strategy,
                 targetDate:targetDate,
+                goalid : this.data[i].goal_id
               });
             this.indexSu++;
           }
@@ -121,6 +125,7 @@ export class RsTreatmentPlanComponent implements OnInit {
                 plans: this.data[i].plan,
                 strategies: this.data[i].strategy,
                 targetDate:targetDate,
+                goalid : this.data[i].goal_id
               });
             this.indexHo++;
           }
@@ -131,6 +136,7 @@ export class RsTreatmentPlanComponent implements OnInit {
                 plans: this.data[i].plan,
                 strategies: this.data[i].strategy,
                 targetDate:targetDate,
+                goalid : this.data[i].goal_id
               });
             this.indexIn++;
           }
@@ -141,6 +147,7 @@ export class RsTreatmentPlanComponent implements OnInit {
                 plans: this.data[i].plan,
                 strategies: this.data[i].strategy,
                 targetDate:targetDate,
+                goalid : this.data[i].goal_id
               });
             this.indexRe++;
           }
@@ -151,6 +158,7 @@ export class RsTreatmentPlanComponent implements OnInit {
                 plans: this.data[i].plan,
                 strategies: this.data[i].strategy,
                 targetDate:targetDate,
+                goalid : this.data[i].goal_id
               });
             this.indexEd++;
           }
@@ -161,6 +169,7 @@ export class RsTreatmentPlanComponent implements OnInit {
                 plans: this.data[i].plan,
                 strategies: this.data[i].strategy,
                 targetDate:targetDate,
+                goalid : this.data[i].goal_id
               });
             this.indexBe++;
           }
@@ -293,6 +302,7 @@ export class RsTreatmentPlanComponent implements OnInit {
       plans: ['', Validators.required],
       strategies: ['', Validators.required],
       targetDate: [null, Validators.required],
+      goalid:[''],
     });
   }
 
