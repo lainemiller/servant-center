@@ -115,7 +115,6 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
   }
 
   buildForm() {
-   // let newAappointmentDate=this.datePipe.transform(this.caseWorker.appointment_date,'yyyy-MM-dd')
     this.transportRequestForm = this.formbuilder.group({
       firstName: [this.firstName, Validators.required],
       lastName: [this.lastName, Validators.required],
@@ -216,17 +215,18 @@ let obj={
       });
     }
 
-    refreshRequestComponent() {
-      let currentUrl = this.router.url;
-      this.router.navigateByUrl('/',{skipLocationChange: true}).then(() => {
-      this.router.onSameUrlNavigation = 'reload';
-      this.router.navigate([currentUrl]);     
-      });
-   }
-    //   refreshRequestComponent(url:string){
-    //     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-    //     this.router.navigate([url]));
-    // }
+   refreshRequestComponent() {
+    const prev = this.router.routeReuseStrategy.shouldReuseRoute;
+    const prevOSN = this.router.onSameUrlNavigation;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+  
+    this.router.navigate([this.router.url]);
+    setTimeout(() => {
+      this.router.routeReuseStrategy.shouldReuseRoute = prev;
+      this.router.onSameUrlNavigation = prevOSN;      
+    }, 0);
+  }
 
   reset() {
     this.buildForm();
