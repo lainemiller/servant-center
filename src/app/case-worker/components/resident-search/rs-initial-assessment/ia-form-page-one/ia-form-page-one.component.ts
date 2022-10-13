@@ -588,6 +588,9 @@ export class IaFormPageOneComponent implements OnInit {
           this.errorMessage();
         }
       });
+    } else{
+      this.ia1 = false;
+      this.greyingOut = false;
     }
   }
 
@@ -636,6 +639,7 @@ export class IaFormPageOneComponent implements OnInit {
           this.ia1 = false;
           this.greyingOut = false;
           this.updateMemberDetails();
+          this.getFamilyMembers();
         } else if (data.responseStatus === 'FAILURE') {
           this.ia1 = false;
           this.greyingOut = false;
@@ -666,17 +670,6 @@ export class IaFormPageOneComponent implements OnInit {
       summary: 'Successfull',
       detail: 'Successfully Updates Family Member Details',
     });
-  }
-  onRowEditInit(product: any) {
-    console.log('onRowEditInit', product);
-  }
-
-  onRowEditSave(product: any) {
-    console.log('onRowEditSave', product);
-  }
-
-  onRowEditCancel(product: any, index: number) {
-    console.log('onRowEditCancel', product);
   }
 }
 

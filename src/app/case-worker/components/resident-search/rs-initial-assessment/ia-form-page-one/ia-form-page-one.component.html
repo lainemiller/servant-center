@@ -305,14 +305,14 @@
       </div>
       <div class="p-field p-col-12 p-md-1">
         <span class="label-title">.</span>
-        <button type="button" pButton class="famButton p-mr-1 text-center" (click)="saveNewMember()">Save</button>
+        <button type="button" pButton class="famButton p-mr-2 text-center" (click)="saveNewMember()">Save</button>
       </div>
       <div class="p-field p-col-12 p-md-1">
         <span class="label-title">.</span>
-        <button type="button" pButton class="famButtonR p-ml-1 text-center" (click)="cancelNewMember()">Cancel</button>
+        <button type="button" pButton class="famButtonCancel p-ml-1 text-center" (click)="cancelNewMember()">Cancel</button>
       </div>
     </div>
-    <p-table [value]="familyDetails" responsiveLayout="scroll">
+    <p-table [value]="familyDetails">
       <ng-template pTemplate="header">
         <tr>
           <th>Name</th>
@@ -378,7 +378,7 @@
             <div *ngIf="product.isEdit">
               <button pButton type="button" class="famButton p-mr-1"
                 (click)="updateFamMembersDetails(product.veteran_id,product.veteran_family_id)">Update</button>
-              <button pButton type="button" class="famButtonR p-ml-1" (click)="product.isEdit = false">Cancel</button>
+              <button pButton type="button" class="famButtonCancel p-ml-1" (click)="product.isEdit = false">Cancel</button>
             </div>
             <div *ngIf="!product.isEdit">
               <button pButton type="button" class="famButtonE p-mr-1" (click)="onEdit(product)">Edit</button>
