@@ -58,8 +58,8 @@ export class TreatmentPlanComponent implements OnInit {
         this.showSpinner=false;
         this.grayOut=false;
       }
-      this.intake_date = this.datepipe.transform(this.data.intake_date, 'dd/MM/yyyy');
-      this.date_of_birth = this.datepipe.transform(this.data.date_of_birth, 'dd/MM/yyyy');
+      this.intake_date = this.datepipe.transform(this.data.intake_date, 'MM/dd/yyyy');
+      this.date_of_birth = this.datepipe.transform(this.data.date_of_birth, 'MM/dd/yyyy');
       console.log('TP API data->',res);
       this.buildForm();
       this.treatmentPlanForm.patchValue({
