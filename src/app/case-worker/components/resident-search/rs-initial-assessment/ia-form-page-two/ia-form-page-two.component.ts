@@ -195,6 +195,7 @@ export class IaFormPageTwoComponent implements OnInit {
         this.greyingOut = false;
         this.successMessage();
         console.log('Submitted');
+        this.setForm();
         }
         else if(data.responseStatus === 'FAILURE'){
           this.errorMessage();

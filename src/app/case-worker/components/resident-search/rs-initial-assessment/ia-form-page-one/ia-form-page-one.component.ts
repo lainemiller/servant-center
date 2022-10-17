@@ -15,6 +15,7 @@ import { livingStatus } from 'src/app/veteran/app.constants';
 export class IaFormPageOneComponent implements OnInit {
   selecteVetId!: number;
   ia1: boolean = true;
+  hasFamMembers: boolean = false;
   greyingOut: boolean = true;
   details: any;
   livingStatus: any;
@@ -120,6 +121,9 @@ export class IaFormPageOneComponent implements OnInit {
     this.familyDetails = [];
     this.service.getIAPage1FD(this.selecteVetId).subscribe((result) => {
       this.details = result;
+      if(this.details.length == 0){
+        this.hasFamMembers = true;
+      }
       for (let i = 0; i < this.details.length; i++) {
         this.familyDetails.push(this.details[i]);
       }
@@ -458,6 +462,7 @@ export class IaFormPageOneComponent implements OnInit {
           this.ia1 = false;
           this.greyingOut = false;
           this.successMessage();
+          this.setForm();
         } else if (data.responseStatus === 'FAILURE') {
           this.errorMessage();
         }
