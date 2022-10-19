@@ -127,7 +127,11 @@ export class IaFormPageThreeComponent implements OnInit {
       console.log('this.data', this.data);
       
       if (this.data) {
-        this.orientationDate = new Date(this.data.orientation_date);
+        if(this.data.orientation_date === null){
+        this.orientationDate = null;
+        }else{
+          this.orientationDate = new Date(this.data.orientation_date);
+        }
         // this.orientationDate =
         // this.orientationDate.getMonth() +
         // 1 +
@@ -136,6 +140,8 @@ export class IaFormPageThreeComponent implements OnInit {
         // 1 )+
         // '/' +
         // this.orientationDate.getFullYear()
+        console.log('this.orientationdate', this.orientationDate);
+        
         this.mentalStatusAssessment.patchValue({
           date: this.orientationDate,
           time: this.data.orientation_time,
@@ -148,6 +154,9 @@ export class IaFormPageThreeComponent implements OnInit {
           recentMemoComments: this.data.recent_memory_issues,
           remoteMemoComments: this.data.remote_memory_issues,
         });
+
+        console.log('loging general_appearance',this.data.general_appearance);
+        if(this.data.general_appearance){
         for(let i=0;i<this.generalAppearanceList.length;i++){
         if(this.data.general_appearance.includes(this.generalAppearanceList[i].value)){
           this.selectedgeneralAppearance.push(this.generalAppearanceList[i].value)
@@ -156,6 +165,8 @@ export class IaFormPageThreeComponent implements OnInit {
           }); 
         }
       }
+    }
+    if(this.data.affect){
       for(let i=0;i<this.affectList.length;i++){
         if(this.data.affect.includes(this.affectList[i].value)){
           this.selectedAffect.push(this.affectList[i].value)
@@ -164,6 +175,8 @@ export class IaFormPageThreeComponent implements OnInit {
           }); 
         }
       }
+    }
+    if(this.data.thought_forum){
       for(let i=0;i<this.thoughtForumList.length;i++){
         if(this.data.thought_forum.includes(this.thoughtForumList[i].value)){
           this.selectedThoughtForum.push(this.thoughtForumList[i].value)
@@ -172,10 +185,10 @@ export class IaFormPageThreeComponent implements OnInit {
           }); 
         }
       }
-
+    }
       console.log('sel tf',this.selectedThoughtForum);
       
-
+if(this.data.mood_as_expressed){
       for(let i=0;i<this.moodList.length;i++){
         if(this.data.mood_as_expressed.includes(this.moodList[i].value)){
           this.answeredByClient.push(this.moodList[i].value)
@@ -184,6 +197,8 @@ export class IaFormPageThreeComponent implements OnInit {
           }); 
         }
       }
+    }
+    if(this.data.mood_as_observed){
       for(let i=0;i<this.moodList.length;i++){
         if(this.data.mood_as_observed.includes(this.moodList[i].value)){
           this.observedByInterviewer.push(this.moodList[i].value)
@@ -192,6 +207,7 @@ export class IaFormPageThreeComponent implements OnInit {
           }); 
         }
       }
+    }
           this.mentalStatusAssessment.patchValue({
             ideation : JSON.parse(this.data.ideation)
           }); 

@@ -32,7 +32,8 @@
       </div>
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">Date of Birth<span style="color: red;">*</span></span>
-        <input type="text" pInputText formControlName=dob placeholder="DateOfBirth" [readonly]="true">
+        <!-- <input type="text" pInputText formControlName=dob placeholder="DateOfBirth" [readonly]="true"> -->
+        <p-calendar formControlName=dob [inline]=false [showIcon]=true placeholder="Date"></p-calendar>
         <small class="error" *ngIf="iaPage1PD.dob.errors?.required && iaPage1PD.dob.touched">Date of birth is
           required.</small>
       </div>
@@ -534,9 +535,8 @@
       <!-- where when and results of STD's -->
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">STD's tested Date</span>
-        <!-- <p-calendar formControlName=stdTestedDate [inline]=false [showIcon]=true placeholder="Date">
-        </p-calendar> -->
-        <input type="text" pInputText formControlName=stdTestedDate placeholder="Date" [readonly]="true">
+        <!-- <input type="text" pInputText formControlName=stdTestedDate placeholder="Date" [readonly]="true"> -->
+        <p-calendar formControlName=stdTestedDate [inline]=false [showIcon]=true placeholder="Date"></p-calendar>
       </div>
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">STD's tested Location</span>
