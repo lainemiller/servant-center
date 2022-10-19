@@ -42,6 +42,7 @@ export class ResidentSearchComponent implements OnInit {
   public showSpinner: boolean = true;
   public grayOut: boolean=true;
   public isVeteranFound: boolean = false;
+  public isVeteranSelected: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private service: ResidentSearchService,
@@ -69,6 +70,7 @@ export class ResidentSearchComponent implements OnInit {
   }
 
   selectResident(event: any) {
+    this.isVeteranSelected = true
     console.log("selected veteran id",event.data.veteran_id)
     this.cacheData.set('selectedResidentVeteranId',event.data.veteran_id)
     this.router.navigateByUrl('case-worker/resident-search/initial-assessment/page-1', { skipLocationChange: false })
@@ -119,6 +121,7 @@ export class ResidentSearchComponent implements OnInit {
 
   onSubmit(formdata: any){  
     console.log(formdata)
+    this.isVeteranSelected = false;
     this.tableValues=this.allValues;
     if(formdata.birthDate){
       this.newDate = this.datepipe.transform(formdata.birthDate, 'yyyy/MM/dd');
