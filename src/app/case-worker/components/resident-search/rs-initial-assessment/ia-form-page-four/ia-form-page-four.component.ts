@@ -213,6 +213,7 @@ export class IaFormPageFourComponent implements OnInit {
           this.ia4 = false;
           this.greyingOut = false;
          this.successMessage();
+         this.setForm();
         // alert("success");
         } else if (data.responseStatus === 'FAILURE') {
           this.errorMessage();

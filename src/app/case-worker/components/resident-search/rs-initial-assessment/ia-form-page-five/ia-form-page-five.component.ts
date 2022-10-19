@@ -51,15 +51,27 @@ export class IaFormPageFiveComponent implements OnInit {
       console.log("PG 5 -",this.data);
       
       this.buildForm();
-      this.preliminaryTreatmentGoals.patchValue(
-        {
-          shortTermGoals:this.data.goal_plan_short_term,
-          longTermGoals:this.data.goal_plan_long_term,
-          strengthAndResources:this.data.strengths,
-          supports: this.data.supports,
-          additionalComments: this.data.notes,
+      if(this.data){
+        this.preliminaryTreatmentGoals.patchValue(
+          {
+            shortTermGoals:this.data.goal_plan_short_term,
+            longTermGoals:this.data.goal_plan_long_term,
+            strengthAndResources:this.data.strengths,
+            supports: this.data.supports,
+            additionalComments: this.data.notes,
+          }
+        )
+      }else{
+        this.preliminaryTreatmentGoals.patchValue(
+          {
+            shortTermGoals:null,
+            longTermGoals:null,
+            strengthAndResources:null,
+            supports: null,
+            additionalComments: null,
+          }
+        )
         }
-      )
       console.log("page 5 Data:",this.data);
       
     }
@@ -78,6 +90,7 @@ export class IaFormPageFiveComponent implements OnInit {
       console.log('Submitted');
     });
     console.log('page 5 values', this.page5Form.value);
+    this.setForm();
   }
 
   goBack() {
