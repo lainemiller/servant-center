@@ -379,7 +379,11 @@ if(this.data.mood_as_expressed){
       this.infoMessage();
     }
   }
-  reset() {}
+  reset() {
+    this.ia3 = true;
+    this.greyingOut = true;
+    this.setForm();
+  }
 
 
   goBack() {
