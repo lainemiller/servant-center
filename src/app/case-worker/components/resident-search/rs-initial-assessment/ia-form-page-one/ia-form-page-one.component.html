@@ -326,17 +326,10 @@
       </ng-template>
       <ng-template pTemplate="body" let-product>
         <tr>
-          <div *ngIf="hasFamMembers">
-            <p>No Records Found</p>
-          </div>
           <td>
             <div *ngIf="product.isEdit" formGroupName="familyMembers">
-              <!-- <div>
-                {{ product.name }}
-              </div> -->
               <input type="text" pInputText name="name" [(ngModel)]=product.name formControlName=name />
             </div>
-
             <div *ngIf="!product.isEdit">
               {{product.name | titlecase}}
             </div>
@@ -393,6 +386,10 @@
         </tr>
       </ng-template>
     </p-table>
+    <div *ngIf="hasFamMembers" style="text-align: center;">
+      <span class="label-title">No Data Found!</span>
+      <hr style="color: black;">
+    </div>
     <div>
       <br><br>
     </div>

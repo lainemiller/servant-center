@@ -574,7 +574,7 @@ export class IaFormPageOneComponent implements OnInit {
     this.removeMember = {
       memId,
     };
-    if (confirm('do you want to delete this member?') == true) {
+    if (confirm('Selected Member will be Removed from the Family List') === true) {
       this.service.deleteMember(this.selecteVetId, memId).subscribe((data) => {
         if (data.responseStatus === 'SUCCESS') {
           this.ia1 = false;
@@ -620,6 +620,7 @@ export class IaFormPageOneComponent implements OnInit {
         this.addedNewFamMember();
         this.getFamilyMembers();
         this.clearFields();
+        this.hasFamMembers = false;
       } else if (data.responseStatus === 'FAILURE') {
         this.errorMessage();
         this.ia1 = false;

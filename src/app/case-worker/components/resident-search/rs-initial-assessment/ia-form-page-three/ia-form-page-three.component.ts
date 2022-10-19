@@ -127,9 +127,7 @@ export class IaFormPageThreeComponent implements OnInit {
       console.log('this.data', this.data);
       
       if (this.data) {
-        this.orientationDate = new Date(
-          new Date(this.data.orientation_date).toUTCString()
-        );
+        this.orientationDate = new Date(this.data.orientation_date);
         // this.orientationDate =
         // this.orientationDate.getMonth() +
         // 1 +
