@@ -486,6 +486,8 @@ export class IaFormPageOneComponent implements OnInit {
   }
 
   reset() {
+    this.ia1 = true;
+    this.greyingOut = true;
     this.setForm();
   }
 

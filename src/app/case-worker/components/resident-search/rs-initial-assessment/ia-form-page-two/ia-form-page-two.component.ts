@@ -53,13 +53,12 @@ export class IaFormPageTwoComponent implements OnInit {
       this.greyingOut = false;
       this.data = res[0];
       console.log('this data',this.data);
-      
-      this.serviceDates = this.datepipe.transform(
-        this.data.service_dates,
-        'MM/dd/yyyy'
-      );
       this.buildForm();
       if(this.data){
+        this.serviceDates = this.datepipe.transform(
+          this.data.service_dates,
+          'MM/dd/yyyy'
+        );
       this.educationAndEmploymentHistory.patchValue({
         highestGradeCompleted: this.data.highest_education_grade,
         nameAndLocation: this.data.school_name,
@@ -228,6 +227,8 @@ export class IaFormPageTwoComponent implements OnInit {
   }
 
   reset(){
+    this.ia2 = true;
+    this.greyingOut = true;
     this.setForm();
   }
 
