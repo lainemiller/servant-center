@@ -22,7 +22,6 @@ import { ResidentSearchService } from '../../services/resident-search.service';
 export class ResidentSearchComponent implements OnInit {
   options = [
     { name: 'Veteran', code: 'VT' },
-   // { name: 'Option 2', code: 'OPT2' },
   ];
 
   public selectedResident: any;
