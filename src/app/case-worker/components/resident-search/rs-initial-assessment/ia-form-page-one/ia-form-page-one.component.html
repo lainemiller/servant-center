@@ -5,7 +5,21 @@
     fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
 </div>
 <div class="page1-form-container p-mt-4">
-  <form [formGroup]="page1Form" (ngSubmit)="onSubmit()" *ngIf="page1Form">
+  <form [formGroup]="page1Form" (ngSubmit)="onSubmit()" *ngIf="page1Form" ngNativeValidate>
+    <div class="p-fluid p-formgrid p-grid" formGroupName="personalDetails">
+      <div class="p-field p-col-12 p-md-3" >
+        <span class="label-title">Select Caseworker<span style="color: red;">*</span></span>
+        <p-dropdown [options]="cwNickName" placeholder="Select" formControlName="caseWorkerNickName"
+        optionLabel="label" optionValue="value" [showClear]="true" [required]="true"></p-dropdown>
+      </div>
+      <div class="p-field p-col-12 p-md-3" >
+        <span class="label-title">UserName<span style="color: red;">*</span></span>
+        <input type="text" [required]="true" name="caseWorkerUserName" minlength="8" pInputText formControlName=caseWorkerUserName placeholder="UserName" #username (blur)='validateCWUserName(username)'>
+        <small class="error" *ngIf="iaPage1PD.caseWorkerUserName.errors?.required && iaPage1PD.caseWorkerUserName.touched">Username is required.</small>
+        <small class="error" *ngIf="iaPage1PD.caseWorkerUserName.errors?.['minlength']">Username should be 8 or more characters.</small>
+        <small class="error" *ngIf="usernameInvalid">Username already exists.</small>  
+      </div> 
+    </div>
     <h3>Personal Details <i>( <span style="color: red;">*</span> mandatory fields)</i></h3>
     <div class="p-fluid p-formgrid p-grid" formGroupName="personalDetails">
       <div class="p-field p-col-12 p-md-3">

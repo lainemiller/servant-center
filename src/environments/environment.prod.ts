@@ -52,6 +52,8 @@ export const environment = {
     postFamilyMembersDetails: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/initialAssessment/page-1FD/',
     updateFamilyMembersDetails: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/initialAssessment/page-1FD/',
     deleteFamilyMembersDetails: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/initialAssessment/page-1FD/',
+    getCwNicknameDetails:'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/getCaseWorkerNickname',
+    getCwUserNameDetails: 'https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/getWebpartyUsername',
   },
   localUrl:''
 };

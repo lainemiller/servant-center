@@ -36,6 +36,10 @@ export class IaFormPageOneComponent implements OnInit {
   addNewMember: boolean = false;
   famMemberId!: number;
   removeMember: any = [];
+  cwNickName: any[] = [];
+  cwUserName: any[] = [];
+  usernameInvalid: boolean= false;
+
   everMarried = [
     { label: 'Yes', value: true },
     { label: 'No', value: false },
@@ -114,7 +118,8 @@ export class IaFormPageOneComponent implements OnInit {
   }
   ngOnInit(): void {
     this.initializeFormGroups();
-    // this.getFamilyMembers();
+    this.getCWNickName();
+    this.getCWUserName();
   }
 
   getFamilyMembers() {
@@ -350,6 +355,9 @@ export class IaFormPageOneComponent implements OnInit {
       religiousPreferences: ['', Validators.required],
       hobbiesInterests: ['', Validators.required],
       consent: ['', Validators.required],
+      caseWorkerNickName: ['',Validators.required],
+      caseWorkerUserName: ['',Validators.required],
+      
     });
     this.incomeAndResources = this.fb.group({
       veteranID: [this.selecteVetId, Validators.required],
@@ -469,9 +477,6 @@ export class IaFormPageOneComponent implements OnInit {
 
         console.log('Submitted');
       });
-    // this.router.navigateByUrl(
-    //   'case-worker/resident-search/initial-assessment/page-2'
-    // );
     console.log('page 1 values', this.page1Form.value);
   }
   next() {
@@ -495,6 +500,36 @@ export class IaFormPageOneComponent implements OnInit {
       age: ['tage', Validators.required],
       location: ['tloc', Validators.required],
     });
+  }
+
+  getCWNickName(){
+    this.service.getCwNickName().subscribe((res)=>{     
+      for(let i=0;i<res.data.length;i++){
+        this.cwNickName.push({label:res.data[i].nick_name, value:res.data[i].nick_name});
+      }
+        console.log(this.cwNickName);
+      });
+  }
+
+  getCWUserName(){
+    this.service.getCwUsername().subscribe((res)=>{     
+      for(let i=0;i<res.data.length;i++){
+        this.cwUserName.push({label:res.data[i].username, value:res.data[i].username});
+      }
+        console.log(this.cwUserName);
+      });
+  }
+
+  validateCWUserName(username:any){
+    for(let i=0;i<this.cwUserName.length;i++){
+      if(username.value==this.cwUserName[i].value){
+        this.usernameInvalid = true;
+        break;
+      } else {
+        this.usernameInvalid = false;
+      }
+    } 
+    console.log(this.usernameInvalid);    
   }
 
   addSibling() {
