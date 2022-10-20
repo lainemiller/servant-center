@@ -43,7 +43,6 @@ export class IaFormPageFiveComponent implements OnInit {
       longTermGoals: ['', Validators.required],
       admiredAboutMe: ['', Validators.required],
       talents: ['', Validators.required],
-      importantToMe: ['', Validators.required],
       people: ['', Validators.required],
       activities: ['', Validators.required],
       places: ['', Validators.required],
@@ -54,6 +53,8 @@ export class IaFormPageFiveComponent implements OnInit {
       activePartCommunity: ['', Validators.required],
       healthyAndSafe: ['', Validators.required],
       othersDoBest: ['', Validators.required],
+      whatAreMyStrengths: ['', Validators.required],
+      peopleSeeingMeAsImportant: ['', Validators.required],
     });
   }
   setForm() {
@@ -83,6 +84,8 @@ export class IaFormPageFiveComponent implements OnInit {
             activePartCommunity: this.data.things_needed_for_community_activity,
             healthyAndSafe: this.data.things_needed_for_health_and_safety,
             othersDoBest: this.data.support_needed,
+            whatAreMyStrengths: this.data.strengths,
+            peopleSeeingMeAsImportant: this.data.people_seeing_me_as_important,
           });
         } else {
           this.preliminaryTreatmentGoals.patchValue({
@@ -96,11 +99,13 @@ export class IaFormPageFiveComponent implements OnInit {
             places: null,
             peopleNotNeeded: null,
             thingsNotNeeded: null,
-            notWorkingInLife: this.data.tnull,
+            notWorkingInLife: null,
             changeAboutMyself: null,
             activePartCommunity: null,
             healthyAndSafe: null,
             othersDoBest: null,
+            whatAreMyStrengths: null,
+            peopleSeeingMeAsImportant: null,
           });
         }
         console.log('page 5 Data:', this.data);
@@ -116,6 +121,59 @@ export class IaFormPageFiveComponent implements OnInit {
   onSubmit() {
     this.ia5 = true;
     this.greyingOut = true;
+    let hppenedInMyLife =
+      this.preliminaryTreatmentGoals.value.hppenedInMyLifeLastYear;
+    this.preliminaryTreatmentGoals.value.hppenedInMyLifeLastYear =
+      '{' + hppenedInMyLife + '}';
+    let shortTermGoals = this.preliminaryTreatmentGoals.value.shortTermGoals;
+    this.preliminaryTreatmentGoals.value.shortTermGoals =
+      '{' + shortTermGoals + '}';
+    let longTermGoals = this.preliminaryTreatmentGoals.value.longTermGoals;
+    this.preliminaryTreatmentGoals.value.longTermGoals =
+      '{' + longTermGoals + '}';
+    let people = this.preliminaryTreatmentGoals.value.people;
+    this.preliminaryTreatmentGoals.value.people = '{' + people + '}';
+    let activities = this.preliminaryTreatmentGoals.value.activities;
+    this.preliminaryTreatmentGoals.value.activities = '{' + activities + '}';
+    let places = this.preliminaryTreatmentGoals.value.places;
+    this.preliminaryTreatmentGoals.value.places = '{' + places + '}';
+    let admiredAboutMe = this.preliminaryTreatmentGoals.value.admiredAboutMe;
+    this.preliminaryTreatmentGoals.value.admiredAboutMe =
+      '{' + admiredAboutMe + '}';
+    let talents = this.preliminaryTreatmentGoals.value.talents;
+    this.preliminaryTreatmentGoals.value.talents = '{' + talents + '}';
+    let peopleNotNeeded = this.preliminaryTreatmentGoals.value.peopleNotNeeded;
+    this.preliminaryTreatmentGoals.value.peopleNotNeeded =
+      '{' + peopleNotNeeded + '}';
+    let thingsNotNeeded = this.preliminaryTreatmentGoals.value.thingsNotNeeded;
+    this.preliminaryTreatmentGoals.value.thingsNotNeeded =
+      '{' + thingsNotNeeded + '}';
+    let notWorkingInLife =
+      this.preliminaryTreatmentGoals.value.notWorkingInLife;
+    this.preliminaryTreatmentGoals.value.notWorkingInLife =
+      '{' + notWorkingInLife + '}';
+    let changeAboutMyself =
+      this.preliminaryTreatmentGoals.value.changeAboutMyself;
+    this.preliminaryTreatmentGoals.value.changeAboutMyself =
+      '{' + changeAboutMyself + '}';
+    let activePartCommunity =
+      this.preliminaryTreatmentGoals.value.activePartCommunity;
+    this.preliminaryTreatmentGoals.value.activePartCommunity =
+      '{' + activePartCommunity + '}';
+    let healthyAndSafe = this.preliminaryTreatmentGoals.value.healthyAndSafe;
+    this.preliminaryTreatmentGoals.value.healthyAndSafe =
+      '{' + healthyAndSafe + '}';
+    let othersDoBest = this.preliminaryTreatmentGoals.value.othersDoBest;
+    this.preliminaryTreatmentGoals.value.othersDoBest =
+      '{' + othersDoBest + '}';
+    let whatAreMyStrengths =
+      this.preliminaryTreatmentGoals.value.whatAreMyStrengths;
+    this.preliminaryTreatmentGoals.value.whatAreMyStrengths =
+      '{' + whatAreMyStrengths + '}';
+    let peopleSeeingMeAsImportant =
+      this.preliminaryTreatmentGoals.value.peopleSeeingMeAsImportant;
+    this.preliminaryTreatmentGoals.value.peopleSeeingMeAsImportant =
+      '{' + peopleSeeingMeAsImportant + '}';
     this.service
       .initialTreatmentGoalsPage5(this.page5Form.value)
       .subscribe((data) => {
@@ -124,6 +182,7 @@ export class IaFormPageFiveComponent implements OnInit {
           this.successMessage();
           this.ia5 = false;
           this.greyingOut = false;
+          this.setForm();
         } else if (data.responseStatus === 'FAILURE') {
           this.errorMessage();
           this.ia5 = false;
