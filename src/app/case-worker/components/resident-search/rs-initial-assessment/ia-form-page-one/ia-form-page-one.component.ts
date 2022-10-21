@@ -436,8 +436,6 @@ export class IaFormPageOneComponent implements OnInit {
   onSubmit() {
     this.ia1 = true;
     this.greyingOut = true;
-    let jobType = this.incomeAndResources.value.type;
-    this.incomeAndResources.value.type = '{' + jobType + '}';
     let neededBeni = this.incomeAndResources.value.applyingBenefits;
     let othMedBenifits = this.incomeAndResources.value.othMedCoverage;
     this.incomeAndResources.value.applyingBenefits = '{' + neededBeni + '}';
