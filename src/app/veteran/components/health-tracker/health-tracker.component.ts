@@ -36,6 +36,7 @@ export class HealthTrackerComponent implements OnInit {
   isShowSpinner: boolean = true;
   showOverlay: boolean = true;
   isShowTable: boolean =false;
+  public customPatterns = { '0': { pattern: new RegExp('\[0-9.0-9\]')} };
 
   constructor(
     private formBuilder: FormBuilder,
