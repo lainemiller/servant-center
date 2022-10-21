@@ -94,7 +94,7 @@
       </div>
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">Address Line 2</span>
-        <input type="text" pInputText formControlName=addressLine2 placeholder="Address Line">
+        <input type="text" pInputText formControlName=addressLine2 placeholder="Address Line" [required]="true">
       </div>
       <div class="p-field p-col-12 p-md-3">
         <span class="label-title">City<span style="color: red;">*</span></span>
@@ -283,7 +283,7 @@
     <div class="p-fluid p-formgrid p-grid" formGroupName="familyMembers" *ngIf="addNewMember">
       <div class="p-field p-col-12 p-md-2">
         <span class="label-title">Name<span style="color: red;">*</span></span>
-        <input type="text" pInputText formControlName=name placeholder="Name">
+        <input type="text" pInputText formControlName=name placeholder="Name" [required]="true">
         <!-- <div>{{ fDetails.name }}</div> -->
       </div>
       <div class="p-field p-col-12 p-md-1">
@@ -295,10 +295,10 @@
         <input type="text" pInputText formControlName=relationship placeholder="Relationship" [required]="true">
       </div>
       <div class="p-field p-col-12 p-md-2">
-        <span class="label-title">Living Status<span style="color: red;">*</span></span>
+        <span class="label-title">Living Status</span>
         <!-- <input type="text" pInputText formControlName=living placeholder="Status"> -->
         <p-dropdown [options]="livingStatus" formControlName="living" placeholder="Select Status" optionLabel="label"
-          optionValue="value" [showClear]="true" [required]="true"></p-dropdown>
+          optionValue="value" [showClear]="true"></p-dropdown>
       </div>
       <div class="p-field p-col-12 p-md-2">
         <span class="label-title">Location</span>
@@ -336,8 +336,8 @@
             </div>
           </td>
           <td>
-            <div *ngIf="product.isEdit" formGroupName="familyMembers" class="editBox">
-              <input type="number" min="0" pInputText name="age" [(ngModel)]=product.age formControlName=age class="editCell"/>
+            <div *ngIf="product.isEdit" formGroupName="familyMembers">
+              <input type="number" min="1" pInputText name="age" [(ngModel)]=product.age formControlName=age class="editCell"/>
             </div>
             <div *ngIf="!product.isEdit">
               {{product.age}}
@@ -376,7 +376,7 @@
               <button pButton type="button" class="famButton p-mr-1"
                 (click)="updateFamMembersDetails(product.veteran_id,product.veteran_family_id)">Update</button>
               <button pButton type="button" class="famButtonCancel p-ml-1"
-                (click)="product.isEdit = false">Cancel</button>
+                (click)="product.isEdit = false; cancelUpdate()">Cancel</button>
             </div>
             <div *ngIf="!product.isEdit">
               <button pButton type="button" class="famButtonE p-mr-1" (click)="onEdit(product)">Edit</button>

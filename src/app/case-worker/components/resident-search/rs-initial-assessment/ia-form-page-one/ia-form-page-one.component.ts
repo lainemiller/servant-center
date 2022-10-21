@@ -563,6 +563,7 @@ export class IaFormPageOneComponent implements OnInit {
   userArray: any;
 
   onEdit(item: any) {
+    this.addNewMember = false;
     this.userArray.forEach((element: { isEdit: boolean }) => {
       element.isEdit = false;
     });
@@ -630,6 +631,11 @@ export class IaFormPageOneComponent implements OnInit {
   }
   cancelNewMember() {
     this.addNewMember = false;
+  }
+
+  cancelUpdate(){
+    this.getFamilyMembers();
+    this.clearFields();
   }
 
   updateFamMembersDetails(vetId: number, memId: number) {
