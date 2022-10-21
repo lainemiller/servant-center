@@ -336,8 +336,8 @@
             </div>
           </td>
           <td>
-            <div *ngIf="product.isEdit" formGroupName="familyMembers">
-              <input type="text" pInputText name="age" [(ngModel)]=product.age formControlName=age />
+            <div *ngIf="product.isEdit" formGroupName="familyMembers" class="editBox">
+              <input type="number" min="0" pInputText name="age" [(ngModel)]=product.age formControlName=age class="editCell"/>
             </div>
             <div *ngIf="!product.isEdit">
               {{product.age}}
