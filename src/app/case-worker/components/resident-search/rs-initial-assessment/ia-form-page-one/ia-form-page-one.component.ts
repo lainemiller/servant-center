@@ -632,10 +632,6 @@ export class IaFormPageOneComponent implements OnInit {
     this.addNewMember = false;
   }
 
-  cancelUpdate(){
-    this.getFamilyMembers();
-  }
-
   updateFamMembersDetails(vetId: number, memId: number) {
     console.log('update member', this.familyMembers.value);
     console.log(vetId, memId);
