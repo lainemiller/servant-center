@@ -596,6 +596,9 @@ export class IaFormPageOneComponent implements OnInit {
           this.greyingOut = false;
           this.errorMessage();
         }
+        this.table.sortOrder = 0;
+        this.table.sortField = '';
+        this.table.reset();
       });
     } else{
       this.ia1 = false;
