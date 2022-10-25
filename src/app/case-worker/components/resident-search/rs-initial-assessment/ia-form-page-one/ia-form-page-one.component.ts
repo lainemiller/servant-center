@@ -120,6 +120,8 @@ export class IaFormPageOneComponent implements OnInit {
   }
 
   getFamilyMembers() {
+    this.ia1 = false;
+    this.greyingOut = false;
     this.familyDetails = [];
     this.service.getIAPage1FD(this.selecteVetId).subscribe((result) => {
       this.details = result;
@@ -642,7 +644,11 @@ export class IaFormPageOneComponent implements OnInit {
   @ViewChild('table')
   table!: Table;
   cancelUpdate(){
-    this.getFamilyMembers();
+    this.ia1 = true;
+    this.greyingOut = true;
+    setTimeout(() => {
+      this.getFamilyMembers();
+    }, 500);
     this.clearFields();
     this.cancelUpdateButton = false;
     this.table.sortOrder = 0;
