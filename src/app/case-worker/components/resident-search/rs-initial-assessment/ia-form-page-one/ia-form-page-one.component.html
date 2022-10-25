@@ -278,7 +278,7 @@
     </div>
     <h3>Social and Family History <i>( <span style="color: red;">*</span> mandatory fields)</i></h3>
     <h4>Family Members Details:
-      <button type="button" pButton class="famButton p-mr-2" (click)="addNew()">+New Member</button>
+      <button type="button" pButton class="famButton p-mr-2" (click)="addNew()" [disabled]="this.cancelUpdateButton">+New Member</button>
     </h4>
     <div class="p-fluid p-formgrid p-grid" formGroupName="familyMembers" *ngIf="addNewMember">
       <div class="p-field p-col-12 p-md-2">
@@ -314,11 +314,11 @@
           (click)="cancelNewMember()">Cancel</button>
       </div>
     </div>
-    <p-table [value]="familyDetails">
+    <p-table #table [value]="familyDetails">
       <ng-template pTemplate="header">
         <tr>
-          <th>Name</th>
-          <th>Age</th>
+          <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
+          <th pSortableColumn="age">Age<p-sortIcon field="age"></p-sortIcon></th>
           <th>Relationship</th>
           <th>Status</th>
           <th>Location</th>
@@ -379,9 +379,9 @@
                 (click)="product.isEdit = false; cancelUpdate()">Cancel</button>
             </div>
             <div *ngIf="!product.isEdit">
-              <button pButton type="button" class="famButtonE p-mr-1" (click)="onEdit(product)">Edit</button>
+              <button pButton type="button" class="famButtonE p-mr-1" (click)="onEdit(product)" [disabled]="this.cancelUpdateButton">Edit</button>
               <button pButton type="button" class="famButtonR p-ml-1"
-                (click)="deleteMember(product.veteran_id,product.veteran_family_id)">Delete</button>
+                (click)="deleteMember(product.veteran_id,product.veteran_family_id)" [disabled]="this.cancelUpdateButton">Delete</button>
             </div>
           </td>
         </tr>
