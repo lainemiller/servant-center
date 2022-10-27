@@ -120,10 +120,12 @@ export class IaFormPageOneComponent implements OnInit {
   }
 
   getFamilyMembers() {
-    this.ia1 = false;
-    this.greyingOut = false;
+    this.ia1 = true;
+      this.greyingOut = true;
     this.familyDetails = [];
     this.service.getIAPage1FD(this.selecteVetId).subscribe((result) => {
+      this.ia1 = false;
+      this.greyingOut = false;
       this.details = result;
       if(this.details.length == 0){
         this.hasFamMembers = true;
