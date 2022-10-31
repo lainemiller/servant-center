@@ -39,6 +39,7 @@ export class IaFormPageOneComponent implements OnInit {
   cwNickName: any[] = [];
   cwUserName: any[] = [];
   usernameInvalid: boolean= false;
+  party_id!:number;
 
   everMarried = [
     { label: 'Yes', value: true },
@@ -113,12 +114,12 @@ export class IaFormPageOneComponent implements OnInit {
   ) {
     this.selecteVetId = this.cacheData.get('selectedResidentVeteranId');
     console.log('sel', this.selecteVetId);
+    this.getCWNickName();
     this.setForm();
     this.livingStatus = livingStatus;
   }
   ngOnInit(): void {
     this.initializeFormGroups();
-    this.getCWNickName();
     this.getCWUserName();
   }
 
@@ -176,6 +177,7 @@ export class IaFormPageOneComponent implements OnInit {
       };
       const currAge = getAge(this.age);
       this.buildForm();
+      console.log(this.personalDetails.value)
       if (this.data) {
         this.personalDetails.patchValue({
           firstName: this.data.first_name,
@@ -205,6 +207,7 @@ export class IaFormPageOneComponent implements OnInit {
           religiousPreferences: this.data.religious_preference,
           hobbiesInterests: this.data.hobbies,
           consent: this.data.consent_status,
+          caseWorkerId: this.data.case_worker_id
         });
         this.incomeAndResources.patchValue({
           income: this.data.income,
@@ -278,6 +281,7 @@ export class IaFormPageOneComponent implements OnInit {
           religiousPreferences: null,
           hobbiesInterests: null,
           consent: null,
+          caseWorkerId: null
         });
         this.incomeAndResources.patchValue({
           income: null,
@@ -327,7 +331,9 @@ export class IaFormPageOneComponent implements OnInit {
   }
 
   initializeFormGroups() {
+    this.party_id=Math.floor(100000 + Math.random() * 900000);
     this.personalDetails = this.fb.group({
+      party_id: [this.party_id],
       veteranID: [this.selecteVetId, Validators.required],
       firstName: ['', Validators.required],
       middleInitial: ['', Validators.required],
@@ -355,7 +361,7 @@ export class IaFormPageOneComponent implements OnInit {
       religiousPreferences: ['', Validators.required],
       hobbiesInterests: ['', Validators.required],
       consent: ['', Validators.required],
-      caseWorkerNickName: ['',Validators.required],
+      caseWorkerId: ['',Validators.required],
       caseWorkerUserName: ['',Validators.required],
       
     });
@@ -507,7 +513,7 @@ export class IaFormPageOneComponent implements OnInit {
   getCWNickName(){
     this.service.getCwNickName().subscribe((res)=>{     
       for(let i=0;i<res.data.length;i++){
-        this.cwNickName.push({label:res.data[i].nick_name, value:res.data[i].nick_name});
+        this.cwNickName.push({label:res.data[i].nick_name, value:res.data[i].case_worker_id || res.data[i].nick_name});
       }
         console.log(this.cwNickName);
       });
