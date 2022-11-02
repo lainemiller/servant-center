@@ -14,7 +14,7 @@ export class ResidentSearchService {
   private commonUrl=environment.localUrl;
   private getCwNicknameDetails = env.serviceUrl.getCwNicknameDetails;
   private getCwUserNameDetails = env.serviceUrl.getCwUserNameDetails;
-  private postIAPage1Details = env.serviceUrl.postIAPage1Details;
+  private postAddNewVeteran = env.serviceUrl.addNewVeteranRS;
   private residentSearchAPI= env.serviceUrl.getResidentSearchData;
 
   getResidentSearchData() {
@@ -46,7 +46,7 @@ public addnewVeteran(data: any): Observable<any> {
   if (this.isDev) {
     return this.http.post(this.commonUrl + 'addNewVeteran', data);
   } else {
-    return this.http.post(this.postIAPage1Details, data);
+    return this.http.post(this.postAddNewVeteran, data);
   }
 }
 }

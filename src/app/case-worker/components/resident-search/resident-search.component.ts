@@ -39,7 +39,6 @@ export class ResidentSearchComponent implements OnInit {
   ia1: boolean = true;
   details: any;
   livingStatus: any;
-  age: any;
   dateofbirth: any;
   submitted: boolean = false;
   personalDetails!: FormGroup; 
@@ -47,6 +46,7 @@ export class ResidentSearchComponent implements OnInit {
   cwUserName: any[] = [];
   usernameInvalid: boolean= false;
   party_id!:number;
+  party_type!: string;
   
 
   @Output() groupFilters: EventEmitter<any> = new EventEmitter<any>();
@@ -229,9 +229,11 @@ export class ResidentSearchComponent implements OnInit {
   }
 
   buildnewVeteranForm(){
+    this.party_type='veteran';
     this.party_id=Math.floor(100000 + Math.random() * 900000);
     this.personalDetails = this.formBuilder.group({
       party_id: [this.party_id],
+      party_type: [this.party_type],
       veteranID: [this.selecteVetId, Validators.required],
       pFirstName: ['', Validators.required],
       middleInitial: ['', Validators.required],
@@ -240,14 +242,13 @@ export class ResidentSearchComponent implements OnInit {
       pdob: ['', Validators.required],
       placeOfBirth: ['', Validators.required],
       ssn: ['', Validators.required],
-      age: ['', Validators.required],
       sex: ['', Validators.required],
       maritalStatus: ['', Validators.required],
       race: ['', Validators.required],
       primaryPhone: ['', Validators.required],
       primaryLanguage: ['', Validators.required],
       addressMain: ['', Validators.required],
-      addressLine2: ['', Validators.required],
+      addressLine2: [''],
       state: ['', Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
@@ -266,6 +267,7 @@ export class ResidentSearchComponent implements OnInit {
       this.showSpinner=false;
       this.grayOut=false;}
       ,500);
+      console.log(this.personalDetails.value);
   }
 
   getCWNickName(){
@@ -294,8 +296,7 @@ export class ResidentSearchComponent implements OnInit {
       } else {
         this.usernameInvalid = false;
       }
-    } 
-    console.log(this.usernameInvalid);    
+    }    
   }
 
   saveForm(){
@@ -311,7 +312,8 @@ export class ResidentSearchComponent implements OnInit {
       } else if (response.responseStatus === 'FAILURE') {
         this.errorMessage();
       }
-      console.log('Submitted');
+      this.addNewVeteran=false;
+      console.log('New veteran added Successfully');
     });
   }
 
@@ -319,7 +321,7 @@ export class ResidentSearchComponent implements OnInit {
     this.messageService.add({
       severity: 'success',
       summary: 'Success',
-      detail: 'Successfully Updated Details',
+      detail: 'Successfully Added Veteran Details',
     });
   }
 
@@ -338,9 +340,7 @@ export class ResidentSearchComponent implements OnInit {
     this.addNewVeteran=false;
   }
 
-  reset(){
-      this.ia1 = true;
-      this.grayOut = true;
-      this.setForm();
+  resetForm(){
+      this.personalDetails.reset();
   }
 }

@@ -1,3 +1,4 @@
+<p-toast position="top-center"></p-toast>
 <div *ngIf="grayOut" id="overlay">
   <div class="center-spinner">
     <p-progressSpinner *ngIf="showSpinner" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
@@ -117,13 +118,6 @@
   </div><br>
   <!-- Add new vetern page starts -->
   <div *ngIf="addNewVeteran">
-    <div>
-      <!-- <p-toast position="top-center"></p-toast>
-      <div *ngIf="grayOut" id="overlay"> </div>
-      <div class="center-spinner">
-        <p-progressSpinner *ngIf="showSpinner" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="5"
-          fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
-      </div> -->
     <div class="page1-form-container p-mt-4"> <br><br>
       <form [formGroup]="personalDetails" (ngSubmit)="saveForm()" *ngIf="personalDetails" ngNativeValidate>
           <div class="p-fluid p-formgrid p-grid">
@@ -183,23 +177,19 @@
           </div>
           <div class="p-field p-col-12 p-md-4">
             <span class="label-title">#SSN<span style="color: red;">*</span></span>
-            <input type="number" pInputText formControlName=ssn placeholder="SSN(number)" [required]="true">
+            <input type="number" pInputText formControlName=ssn placeholder="SSN" [required]="true">
             <small class="error" *ngIf="iaPage1PD.ssn.errors?.required && iaPage1PD.ssn.touched">SSN is required.</small>
           </div>
           <div class="p-field p-col-12 p-md-4">
             <span class="label-title">Primary phone</span>
-            <input type="text" pInputText formControlName=primaryPhone placeholder="Primary Phone">
+            <input type="number" pInputText formControlName=primaryPhone placeholder="Primary Phone">
             <small class="error" *ngIf="iaPage1PD.primaryPhone.errors?.required && iaPage1PD.primaryPhone.touched">Phone
               number is required.</small>
-          </div>
-          <div class="p-field p-col-12 p-md-4">
-            <span class="label-title">Age</span>
-            <input type="text" pInputText formControlName=age placeholder="Age" [readOnly]=true>
           </div>
           <div class="p-col-12 p-formgroup-inline">
             <label class="p-mr-3 radiobutton-group-label">Sex<span style="color: red;">*</span></label>
             <div *ngFor="let gender of genderList; let i = index" class="p-field-radiobutton">
-              <p-radioButton name="sex" formControlName=sex [value]=gender.value inputId="gender{{i}}" [disabled]="true" [required]="true">
+              <p-radioButton name="sex" formControlName=sex [value]=gender.value inputId="gender{{i}}" [disabled]=false [required]="true">
               </p-radioButton>
               <label for="gender{{i}}" class="p-ml-3">{{gender.label}}</label>
             </div>
@@ -208,7 +198,7 @@
             <label class="p-mr-3 radiobutton-group-label">Marital Status<span style="color: red;">*</span></label>
             <div *ngFor="let maritalStatus of maritalStatusList; let i = index" class="p-field-radiobutton">
               <p-radioButton name="maritalStatus" formControlName=maritalStatus [value]=maritalStatus.value
-                inputId="maritalStatus{{i}}" [disabled]="true" [required]="true"></p-radioButton>
+                inputId="maritalStatus{{i}}" [disabled]=false [required]="true"></p-radioButton>
               <label for="maritalStatus{{i}}" class="p-ml-3">{{maritalStatus.label}}</label>
             </div>
           </div>
@@ -225,6 +215,13 @@
               required.</small>
           </div>
           <div class="p-field p-col-12 p-md-6">
+            <span class="label-title">Religious preference<span style="color: red;">*</span></span>
+            <input type="text" pInputText formControlName=religiousPreferences placeholder="Religious preference" [required]="true">
+            <small class="error"
+              *ngIf="iaPage1PD.religiousPreferences.errors?.required && iaPage1PD.religiousPreferences.errors?.touched">Religious
+              preference is required.</small>
+          </div>
+          <div class="p-field p-col-12 p-md-6">
             <span class="label-title">Address Main<span style="color: red;">*</span></span>
             <input type="text" pInputText formControlName=addressMain placeholder="Address Main" [required]="true">
             <small class="error" *ngIf="iaPage1PD.addressMain.errors?.required && iaPage1PD.addressMain.touched">Main
@@ -232,7 +229,7 @@
           </div>
           <div class="p-field p-col-12 p-md-6">
             <span class="label-title">Address Line 2</span>
-            <input type="text" pInputText formControlName=addressLine2 placeholder="Address Line" [required]="true">
+            <input type="text" pInputText formControlName=addressLine2 placeholder="Address Line" >
           </div>
           <div class="p-field p-col-12 p-md-3">
             <span class="label-title">City<span style="color: red;">*</span></span>
@@ -247,7 +244,7 @@
           </div>
           <div class="p-field p-col-12 p-md-3">
             <span class="label-title">Zip Code<span style="color: red;">*</span></span>
-            <input type="number" pInputText formControlName=zipcode placeholder="Zip Code(number)" [required]="true">
+            <input type="number" pInputText formControlName=zipcode placeholder="Zip Code" [required]="true">
             <small class="error" *ngIf="iaPage1PD.zipcode.errors?.required && iaPage1PD.zipcode.touched">Zipcode is
               required.</small>
           </div>
@@ -264,19 +261,19 @@
               person name is required.</small>
           </div>
           <div class="p-field p-col-12 p-md-6">
-            <span class="label-title">Relationship<span style="color: red;">*</span></span>
+            <span class="label-title">Contact Person's Relationship<span style="color: red;">*</span></span>
             <input type="text" pInputText formControlName=relationship placeholder="Relationship" [required]="true">
             <small class="error"
               *ngIf="iaPage1PD.relationship.errors?.required && iaPage1PD.relationship.touched">Relationship is
               required.</small>
           </div>
-          <div class="p-field p-col-12">
+          <div class="p-field p-col-12 p-md-6">
             <span class="label-title">Contact Person's Address</span>
             <input type="text" pInputText formControlName=contactPersonAddress placeholder="Contact Person's Address">
           </div>
           <div class="p-field p-col-12 p-md-6">
             <span class="label-title">Contact Person's Phone<span style="color: red;">*</span></span>
-            <input type="text" pInputText formControlName=phone placeholder="Contact Person's Phone" [required]="true">
+            <input type="number" pInputText formControlName=phone placeholder="Contact Person's Phone" [required]="true">
             <small class="error" *ngIf="iaPage1PD.phone.errors?.required && iaPage1PD.phone.touched">Phone is
               required.</small>
           </div>
@@ -290,16 +287,15 @@
                 <label for="consent{{i}}" class="p-ml-3">{{consent.label}}</label>
               </div>
             </div>
-          </div>
-          <div class="p-d-flex button-container p-mt-4">
-            <div class="p-jc-start">
-              <button type="submit" pButton label="Save" [disabled]="!this.personalDetails.touched || usernameInvalid"></button>
-              <button type="button" pButton label="Cancel" (click)="reset()" class="p-button-outlined p-ml-3"></button>
-            </div>
+          </div> 
+        </div>
+        <div class="p-d-flex button-container p-mt-4">
+          <div class="p-jc-start">
+            <button type="submit" pButton label="Save" ></button>
+            <button type="button" pButton label="Cancel" (click)="resetForm()" class="p-button-outlined p-ml-3"></button>
           </div>
         </div>
       </form>
-    </div>
   </div>  
 </div>
 

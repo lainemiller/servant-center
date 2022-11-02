@@ -37,8 +37,6 @@ export class IaFormPageOneComponent implements OnInit {
   famMemberId!: number;
   removeMember: any = [];
   cwNickName: any[] = [];
-  cwUserName: any[] = [];
-  usernameInvalid: boolean= false;
   party_id!:number;
 
   everMarried = [
@@ -120,7 +118,6 @@ export class IaFormPageOneComponent implements OnInit {
   }
   ngOnInit(): void {
     this.initializeFormGroups();
-    this.getCWUserName();
   }
 
   getFamilyMembers() {
@@ -362,7 +359,6 @@ export class IaFormPageOneComponent implements OnInit {
       hobbiesInterests: ['', Validators.required],
       consent: ['', Validators.required],
       caseWorkerId: ['',Validators.required],
-      caseWorkerUserName: ['',Validators.required],
       
     });
     this.incomeAndResources = this.fb.group({
@@ -517,27 +513,6 @@ export class IaFormPageOneComponent implements OnInit {
       }
         console.log(this.cwNickName);
       });
-  }
-
-  getCWUserName(){
-    this.service.getCwUsername().subscribe((res)=>{     
-      for(let i=0;i<res.data.length;i++){
-        this.cwUserName.push({label:res.data[i].username, value:res.data[i].username});
-      }
-        console.log(this.cwUserName);
-      });
-  }
-
-  validateCWUserName(username:any){
-    for(let i=0;i<this.cwUserName.length;i++){
-      if(username.value==this.cwUserName[i].value){
-        this.usernameInvalid = true;
-        break;
-      } else {
-        this.usernameInvalid = false;
-      }
-    } 
-    console.log(this.usernameInvalid);    
   }
 
   addSibling() {
