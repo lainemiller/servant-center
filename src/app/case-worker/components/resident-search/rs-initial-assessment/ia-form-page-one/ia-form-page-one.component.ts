@@ -39,7 +39,6 @@ export class IaFormPageOneComponent implements OnInit {
   famMemberId!: number;
   removeMember: any = [];
   cwNickName: any[] = [];
-  party_id!:number;
 
   everMarried = [
     { label: 'Yes', value: true },
@@ -334,9 +333,7 @@ export class IaFormPageOneComponent implements OnInit {
   }
 
   initializeFormGroups() {
-    this.party_id=Math.floor(100000 + Math.random() * 900000);
     this.personalDetails = this.fb.group({
-      party_id: [this.party_id],
       veteranID: [this.selecteVetId, Validators.required],
       firstName: ['', Validators.required],
       middleInitial: ['', Validators.required],

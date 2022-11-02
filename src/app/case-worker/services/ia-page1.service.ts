@@ -30,15 +30,7 @@ export class IaPage1Service {
       return this.restcs.get(this.getCwNicknameDetails);
     }
   }
-
-  public getCwUsername(): Observable<any>{
-     if(this.isDev){
-      return this.restcs.get(this.commonUrl+ 'getWebpartyUsername');
-     } else {
-      return this.restcs.get(this.getCwUserNameDetails);
-    }
-  }
-
+  
   public getIAPage1(vetID: number): Observable<any> {
     if (this.isDev) {
       return this.restcs.get(
