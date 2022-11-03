@@ -44,9 +44,9 @@ public getCwUsername(): Observable<any>{
 
 public addnewVeteran(data: any): Observable<any> {
   if (this.isDev) {
-    return this.http.post(this.commonUrl + 'addNewVeteran', data);
+    return this.restcs.post(this.commonUrl + 'addNewVeteran/', data);
   } else {
-    return this.http.post(this.postAddNewVeteran, data);
+    return this.restcs.post(this.postAddNewVeteran, data);
   }
 }
 }
