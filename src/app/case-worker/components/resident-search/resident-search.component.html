@@ -133,9 +133,27 @@
               <small class="error"
                 *ngIf="iaPage1PD.caseWorkerUserName.errors?.required && iaPage1PD.caseWorkerUserName.touched">Username is
                 required.</small>
-              <small class="error" *ngIf="iaPage1PD.caseWorkerUserName.errors?.['minlength']">Username should be 8 or more
+              <small class="error" *ngIf="iaPage1PD.caseWorkerUserName.errors?.['minlength']">Username should be 8 to 12
                 characters.</small>
               <small class="error" *ngIf="usernameInvalid">Username already exists.</small>
+            </div>
+            <div class="p-field p-col-12 p-md-6">
+              <span class="label-title">Record#</span>
+              <input type="number" pInputText formControlName=recordNo placeholder="Record Number" [required]="true">
+              <small class="error" *ngIf="iaPage1PD.recordNo.errors?.required && iaPage1PD.recordNo.touched">Record No is
+                required.</small>
+            </div>
+            <div class="p-field p-col-12 p-md-6">
+              <span class="label-title">Intake Date<span style="color: red;">*</span></span>
+              <p-calendar formControlName=intakeDate [inline]=false [showIcon]=true placeholder="Intake date(mm/dd/yyyy)" [required]="true"></p-calendar>
+              <small class="error" *ngIf="iaPage1PD.intakeDate.errors?.required && iaPage1PD.intakeDate.touched">Intake date is
+                required.</small>
+            </div>
+            <div class="p-field p-col-12 p-md-6">
+              <span class="label-title">HMIS ID</span>
+              <input type="number" pInputText formControlName=hmisId placeholder="HMIS Id" [required]="true">
+              <small class="error" *ngIf="iaPage1PD.hmisId.errors?.required && iaPage1PD.hmisId.touched">HMIS Id is
+                required.</small>
             </div>
           </div>
         <h3>Personal Details <i>( <span style="color: red;">*</span> mandatory fields)</i></h3>
@@ -164,8 +182,7 @@
           </div>
           <div class="p-field p-col-12 p-md-6">
             <span class="label-title">Date of Birth<span style="color: red;">*</span></span>
-            <!-- <input type="text" pInputText formControlName=dob placeholder="DateOfBirth" [readonly]="true"> -->
-            <p-calendar formControlName=pdob [inline]=false [showIcon]=true placeholder="Date" [required]="true"></p-calendar>
+            <p-calendar formControlName=pdob [inline]=false [showIcon]=true placeholder="DOB(mm/dd/yyyy)" [required]="true"></p-calendar>
             <small class="error" *ngIf="iaPage1PD.pdob.errors?.required && iaPage1PD.pdob.touched">Date of birth is
               required.</small>
           </div>
@@ -175,16 +192,22 @@
             <small class="error" *ngIf="iaPage1PD.placeOfBirth.errors?.required && iaPage1PD.placeOfBirth.touched">Place of
               birth is required.</small>
           </div>
-          <div class="p-field p-col-12 p-md-4">
+          <div class="p-field p-col-12 p-md-6">
             <span class="label-title">#SSN<span style="color: red;">*</span></span>
             <input type="number" pInputText formControlName=ssn placeholder="SSN" [required]="true">
             <small class="error" *ngIf="iaPage1PD.ssn.errors?.required && iaPage1PD.ssn.touched">SSN is required.</small>
           </div>
-          <div class="p-field p-col-12 p-md-4">
+          <div class="p-field p-col-12 p-md-6">
             <span class="label-title">Primary phone</span>
             <input type="number" pInputText formControlName=primaryPhone placeholder="Primary Phone">
             <small class="error" *ngIf="iaPage1PD.primaryPhone.errors?.required && iaPage1PD.primaryPhone.touched">Phone
               number is required.</small>
+          </div>
+          <div class="p-field p-col-12 p-md-6">
+            <span class="label-title">Email</span>
+            <input type="text" pInputText formControlName=email placeholder="Email" [required]="true">
+            <small class="error" *ngIf="iaPage1PD.email.errors?.required && iaPage1PD.email.touched">Email is
+              required.</small>
           </div>
           <div class="p-col-12 p-formgroup-inline">
             <label class="p-mr-3 radiobutton-group-label">Sex<span style="color: red;">*</span></label>
@@ -283,7 +306,7 @@
               <label class="p-mr-3 radiobutton-group-label">Consent: <span style="color: red;">*</span></label>
               <div *ngFor="let consent of consent; let i = index" class="p-field-radiobutton">
                 <p-radioButton name="consent" formControlName=consent [value]=consent.value inputId="consent{{i}}"
-                  [disabled]=true [required]="true"></p-radioButton>
+                  [disabled]=false [required]="true"></p-radioButton>
                 <label for="consent{{i}}" class="p-ml-3">{{consent.label}}</label>
               </div>
             </div>
@@ -298,7 +321,7 @@
       </form>
   </div>  
 </div>
-
+<div *ngIf="!addNewVeteran">
   <div class="resident-detail" *ngIf="selectedResident && isVeteranSelected">
     <div class="search-header-details"><span>DETAILS </span></div>
     <div class="resident-detail-container card">
@@ -339,12 +362,11 @@
         </div>
       </p-card>
     </div>
-
-    <!-- <br><br><br><br> -->
-
-    <div class="p-mt-4 resident-search-nav">
-      <p-tabMenu [model]="tabMenuItems"></p-tabMenu>
-      <router-outlet></router-outlet>
+    
+      <div class="p-mt-4 resident-search-nav">
+        <p-tabMenu [model]="tabMenuItems"></p-tabMenu>
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
 </div>

@@ -234,7 +234,9 @@ export class ResidentSearchComponent implements OnInit {
     this.personalDetails = this.formBuilder.group({
       party_id: [this.party_id],
       party_type: [this.party_type],
-      veteranID: [this.selecteVetId, Validators.required],
+      recordNo: ['',Validators.required],
+      intakeDate: ['',Validators.required],
+      hmisId: ['',Validators.required],
       pFirstName: ['', Validators.required],
       middleInitial: ['', Validators.required],
       pLastName: ['', Validators.required],
@@ -246,6 +248,7 @@ export class ResidentSearchComponent implements OnInit {
       maritalStatus: ['', Validators.required],
       race: ['', Validators.required],
       primaryPhone: ['', Validators.required],
+      email: ['',Validators.required],
       primaryLanguage: ['', Validators.required],
       addressMain: ['', Validators.required],
       addressLine2: [''],
