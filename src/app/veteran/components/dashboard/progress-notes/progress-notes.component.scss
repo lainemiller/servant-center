@@ -94,9 +94,10 @@
 .status {
   display: flex;
 }
-// .goalStatus{
-//   display: flex;
-// }
+.fShrink{
+  display: flex;
+  flex-direction: row-reverse;
+}
 
 .flexmy {
   display: flex;
