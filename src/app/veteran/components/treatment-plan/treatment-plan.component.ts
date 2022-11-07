@@ -255,7 +255,9 @@ export class TreatmentPlanComponent implements OnInit {
       this.showSpinner=false;
       this.grayOut=false;
       this.successMessage();
-      this.refreshpage();
+      setTimeout(() => {
+        this.refreshpage();
+      }, 1500);
     } else if (response.responseStatus === 'FAILURE') {
       this.errorMessage();
     }
