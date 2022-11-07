@@ -291,15 +291,21 @@
       <div class="p-field p-col-12 p-md-2">
         <span class="label-title">Name<span style="color: red;">*</span></span>
         <input type="text" pInputText formControlName=name placeholder="Name" [required]="true">
+        <small class="error" *ngIf="famMembers.name.errors?.required && famMembers.name.touched"> Name is
+          required.</small>
         <!-- <div>{{ fDetails.name }}</div> -->
       </div>
       <div class="p-field p-col-12 p-md-1">
-        <span class="label-title">Age</span>
+        <span class="label-title">Age<span style="color: red;">*</span></span>
         <input type="number" min="1" pInputText formControlName=age placeholder="Age">
+        <small class="error" *ngIf="famMembers.age.errors?.required && famMembers.age.touched"> Age is
+          required.</small>
       </div>
       <div class="p-field p-col-12 p-md-2">
         <span class="label-title">Relationship<span style="color: red;">*</span></span>
         <input type="text" pInputText formControlName=relationship placeholder="Relationship" [required]="true">
+        <small class="error" *ngIf="famMembers.relationship.errors?.required && famMembers.relationship.touched"> Relationship is
+          required.</small>
       </div>
       <div class="p-field p-col-12 p-md-2">
         <span class="label-title">Living Status</span>
@@ -308,12 +314,14 @@
           optionValue="value" [showClear]="true"></p-dropdown>
       </div>
       <div class="p-field p-col-12 p-md-2">
-        <span class="label-title">Location</span>
+        <span class="label-title">Location<span style="color: red;">*</span></span>
         <input type="text" pInputText formControlName=location placeholder="Location">
+        <small class="error" *ngIf="famMembers.location.errors?.required && famMembers.location.touched"> Location is
+          required.</small>
       </div>
       <div class="p-field p-col-12 p-md-1">
         <span class="label-title">.</span>
-        <button type="button" pButton class="famButton p-mr-2 text-center" (click)="saveNewMember()">Save</button>
+        <button type="button" pButton class="famButton p-mr-2 text-center" (click)="saveNewMember()" [disabled]="familyMembers.invalid">Save</button>
       </div>
       <div class="p-field p-col-12 p-md-1">
         <span class="label-title">.</span>

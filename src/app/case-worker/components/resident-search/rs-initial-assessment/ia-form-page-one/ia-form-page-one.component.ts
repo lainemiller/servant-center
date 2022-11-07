@@ -426,8 +426,12 @@ export class IaFormPageOneComponent implements OnInit {
       relationship: ['', Validators.required],
       age: ['', Validators.required],
       location: ['', Validators.required],
-      living: ['', Validators.required],
+      living: [Boolean],
     });
+  }
+
+  get famMembers(){
+    return this.familyMembers.controls;
   }
 
   buildForm() {
@@ -654,6 +658,7 @@ export class IaFormPageOneComponent implements OnInit {
   }
   cancelNewMember() {
     this.addNewMember = false;
+    this.clearFields();
   }
 
   @ViewChild('table')
@@ -727,6 +732,10 @@ export class livingPipe implements PipeTransform {
     }
     if (value === false) {
       return 'Deceased';
+    }
+
+    if (value === null){
+      return '---';
     }
     return value;
   }
