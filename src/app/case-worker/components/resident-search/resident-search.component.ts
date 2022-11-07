@@ -238,7 +238,7 @@ export class ResidentSearchComponent implements OnInit {
       intakeDate: ['',Validators.required],
       hmisId: ['',Validators.required],
       pFirstName: ['', Validators.required],
-      middleInitial: ['', Validators.required],
+      middleInitial: [''],
       pLastName: ['', Validators.required],
       nickName: ['', Validators.required],
       pdob: ['', Validators.required],
@@ -316,6 +316,7 @@ export class ResidentSearchComponent implements OnInit {
         this.errorMessage();
       }
       this.addNewVeteran=false;
+      this.isVeteranSelected=false;
       console.log('New veteran added Successfully');
     });
   }

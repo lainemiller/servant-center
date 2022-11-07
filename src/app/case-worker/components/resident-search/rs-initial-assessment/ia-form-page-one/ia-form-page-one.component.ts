@@ -148,8 +148,7 @@ export class IaFormPageOneComponent implements OnInit {
       this.ia1 = false;
       this.greyingOut = false;
       this.data = res[0];
-      console.log('dob', this.data.date_of_birth);
-
+      console.log('dob', this.data.date_of_birth);      
       this.dateofbirth = this.datepipe.transform(
         this.data.date_of_birth,
         'MM/dd/yyyy'
@@ -426,8 +425,12 @@ export class IaFormPageOneComponent implements OnInit {
       relationship: ['', Validators.required],
       age: ['', Validators.required],
       location: ['', Validators.required],
-      living: ['', Validators.required],
+      living: [Boolean],
     });
+  }
+
+  get famMembers(){
+    return this.familyMembers.controls;
   }
 
   buildForm() {
@@ -654,6 +657,7 @@ export class IaFormPageOneComponent implements OnInit {
   }
   cancelNewMember() {
     this.addNewMember = false;
+    this.clearFields();
   }
 
   @ViewChild('table')
@@ -727,6 +731,10 @@ export class livingPipe implements PipeTransform {
     }
     if (value === false) {
       return 'Deceased';
+    }
+
+    if (value === null){
+      return '---';
     }
     return value;
   }
