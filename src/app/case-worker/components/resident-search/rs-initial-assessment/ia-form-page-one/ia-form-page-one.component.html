@@ -297,7 +297,7 @@
       </div>
       <div class="p-field p-col-12 p-md-1">
         <span class="label-title">Age<span style="color: red;">*</span></span>
-        <input type="number" pInputText formControlName=age placeholder="Age">
+        <input type="number" min="1" pInputText formControlName=age placeholder="Age">
         <small class="error" *ngIf="famMembers.age.errors?.required && famMembers.age.touched"> Age is
           required.</small>
       </div>
