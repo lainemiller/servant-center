@@ -306,6 +306,10 @@ export class ResidentSearchComponent implements OnInit {
     this.showSpinner=true;
     this.grayOut=true;
     console.log(this.personalDetails.value)
+    let birth_date= this.personalDetails.value.pdob;
+    this.personalDetails.value.pdob=birth_date.toLocaleDateString();
+    let intake_date=this.personalDetails.value.intakeDate;
+    this.personalDetails.value.intakeDate=intake_date.toLocaleDateString();
     this.service.addnewVeteran(this.personalDetails.value).subscribe((response) => {
       if (response.responseStatus === 'SUCCESS') {
         this.showSpinner = false;
