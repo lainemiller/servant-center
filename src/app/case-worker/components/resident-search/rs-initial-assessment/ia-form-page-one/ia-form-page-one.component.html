@@ -187,7 +187,9 @@
       <div class="p-field p-col-12 p-md-3">
         <!-- input type? -->
         <span class="label-title">Direct Deposit</span>
-        <input type="text" pInputText formControlName=directDeposit placeholder="Direct Deposit">
+        <!-- <input type="text" pInputText formControlName=directDeposit placeholder="Direct Deposit"> -->
+        <p-dropdown [options]="directDeposit" formControlName="directDeposit" placeholder="Select" optionLabel="label"
+          optionValue="value" [showClear]="true"></p-dropdown>
       </div>
       <div class="p-field p-col-12 p-md-3">
         <!-- input type? -->

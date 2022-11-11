@@ -103,6 +103,11 @@ export class IaFormPageOneComponent implements OnInit {
     { label: 'Transgender', value: 'Transgender' },
     { label: 'Other', value: 'Other' },
   ];
+
+  directDeposit = [
+    {label: "Yes", value: true},
+    {label: "No", value: false}
+  ];
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -370,7 +375,7 @@ export class IaFormPageOneComponent implements OnInit {
       type: ['', Validators.required],
       bankAccount: ['', Validators.required],
       bankName: ['', Validators.required],
-      directDeposit: ['', Validators.required],
+      directDeposit: [''],
       otherAssets: ['', Validators.required],
       medicaid: ['', Validators.required],
       vaCoverage: ['', Validators.required],
