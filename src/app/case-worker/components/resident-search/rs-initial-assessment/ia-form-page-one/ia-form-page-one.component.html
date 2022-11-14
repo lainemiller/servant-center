@@ -61,7 +61,7 @@
       </div>
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">Primary phone</span>
-        <input type="number" pInputText formControlName=primaryPhone placeholder="Primary Phone">
+        <input type="text" mask="(000) 000-0000" pInputText formControlName=primaryPhone placeholder="Primary Phone">
         <small class="error" *ngIf="iaPage1PD.primaryPhone.errors?.required && iaPage1PD.primaryPhone.touched">Phone
           number is required.</small>
       </div>
@@ -145,7 +145,7 @@
       </div>
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">Contact Person's Phone<span style="color: red;">*</span></span>
-        <input type="text" pInputText formControlName=phone placeholder="Contact Person's Phone" [required]="true">
+        <input type="text" mask="(000) 000-0000" pInputText formControlName=phone placeholder="Contact Person's Phone" [required]="true">
         <small class="error" *ngIf="iaPage1PD.phone.errors?.required && iaPage1PD.phone.touched">Phone is
           required.</small>
       </div>
@@ -165,7 +165,7 @@
     <div class="p-fluid p-formgrid p-grid" formGroupName="incomeAndResources">
       <div class="p-field p-col-12 p-md-3">
         <span class="label-title">Income<span style="color: red;">*</span></span>
-        <input type="text" pInputText formControlName=income placeholder="Income" [required]="true">
+        <input type="number" pInputText formControlName=income placeholder="Income" [required]="true">
         <small class="error" *ngIf="iaPage1IR.income.errors?.required && iaPage1IR.income.touched">Income is
           required.</small>
       </div>
