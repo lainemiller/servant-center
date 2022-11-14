@@ -6,6 +6,7 @@ import { IaPage1Service } from 'src/app/case-worker/services/ia-page1.service';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { MessageService } from 'primeng/api';
 import { livingStatus } from 'src/app/veteran/app.constants';
+import { states } from 'src/app/veteran/app.constants';
 import { Table } from 'primeng/table';
 @Component({
   selector: 'app-ia-form-page-one',
@@ -19,6 +20,7 @@ export class IaFormPageOneComponent implements OnInit {
   hasFamMembers: boolean = false;
   greyingOut: boolean = true;
   details: any;
+  States: any;
   livingStatus: any;
   familyDetails: any = [];
   data: any;
@@ -121,6 +123,7 @@ export class IaFormPageOneComponent implements OnInit {
     this.getCWNickName();
     this.setForm();
     this.livingStatus = livingStatus;
+    this.States = states;
   }
   ngOnInit(): void {
     this.initializeFormGroups();

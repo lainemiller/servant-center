@@ -56,7 +56,7 @@
       </div>
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">#SSN<span style="color: red;">*</span></span>
-        <input type="number" pInputText formControlName=ssn placeholder="SSN" [required]="true">
+        <input type="text" pInputText formControlName=ssn placeholder="SSN" [required]="true" mask="000-00-0000"> 
         <small class="error" *ngIf="iaPage1PD.ssn.errors?.required && iaPage1PD.ssn.touched">SSN is required.</small>
       </div>
       <div class="p-field p-col-12 p-md-6">
@@ -122,7 +122,9 @@
       </div>
       <div class="p-field p-col-12 p-md-3">
         <span class="label-title">State<span style="color: red;">*</span></span>
-        <input type="text" pInputText formControlName=state placeholder="state" [required]="true">
+        <!-- <input type="text" pInputText formControlName=state placeholder="state" [required]="true"> -->
+        <p-dropdown [options]="States" formControlName="state" placeholder="Select State" optionLabel="name"
+          optionValue="value" [showClear]="true" [required]="true"></p-dropdown>
         <small class="error" *ngIf="iaPage1PD.state.errors?.required && iaPage1PD.state.touched">State is
           required.</small>
       </div>
