@@ -153,8 +153,7 @@ export class IaFormPageOneComponent implements OnInit {
       this.ia1 = false;
       this.greyingOut = false;
       this.data = res[0];
-      console.log('dob', this.data.date_of_birth);
-
+      console.log('dob', this.data.date_of_birth);      
       this.dateofbirth = this.datepipe.transform(
         this.data.date_of_birth,
         'MM/dd/yyyy'
