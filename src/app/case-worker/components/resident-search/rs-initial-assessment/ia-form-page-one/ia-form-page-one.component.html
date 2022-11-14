@@ -585,7 +585,7 @@
         <button type="button" pButton label="Cancel" (click)="reset()" class="p-button-outlined p-ml-3"></button>
       </div>
       <div class="p-jc-end">
-        <button (click)="next()" type="button" pButton label="Next"></button>
+        <button (click)="next()" type="button" pButton label="Next" [disabled]="this.page1Form.touched"></button>
       </div>
     </div>
   </form>
