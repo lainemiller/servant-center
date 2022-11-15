@@ -56,12 +56,12 @@
       </div>
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">#SSN<span style="color: red;">*</span></span>
-        <input type="number" pInputText formControlName=ssn placeholder="SSN" [required]="true">
+        <input type="text" pInputText formControlName=ssn placeholder="SSN" [required]="true" mask="000-00-0000"> 
         <small class="error" *ngIf="iaPage1PD.ssn.errors?.required && iaPage1PD.ssn.touched">SSN is required.</small>
       </div>
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">Primary phone</span>
-        <input type="number" pInputText formControlName=primaryPhone placeholder="Primary Phone">
+        <input type="text" mask="(000) 000-0000" pInputText formControlName=primaryPhone placeholder="Primary Phone">
         <small class="error" *ngIf="iaPage1PD.primaryPhone.errors?.required && iaPage1PD.primaryPhone.touched">Phone
           number is required.</small>
       </div>
@@ -122,7 +122,9 @@
       </div>
       <div class="p-field p-col-12 p-md-3">
         <span class="label-title">State<span style="color: red;">*</span></span>
-        <input type="text" pInputText formControlName=state placeholder="state" [required]="true">
+        <!-- <input type="text" pInputText formControlName=state placeholder="state" [required]="true"> -->
+        <p-dropdown [options]="States" formControlName="state" placeholder="Select State" optionLabel="name"
+          optionValue="value" [showClear]="true" [required]="true"></p-dropdown>
         <small class="error" *ngIf="iaPage1PD.state.errors?.required && iaPage1PD.state.touched">State is
           required.</small>
       </div>
@@ -145,7 +147,7 @@
       </div>
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">Contact Person's Phone<span style="color: red;">*</span></span>
-        <input type="text" pInputText formControlName=phone placeholder="Contact Person's Phone" [required]="true">
+        <input type="text" mask="(000) 000-0000" pInputText formControlName=phone placeholder="Contact Person's Phone" [required]="true">
         <small class="error" *ngIf="iaPage1PD.phone.errors?.required && iaPage1PD.phone.touched">Phone is
           required.</small>
       </div>
@@ -165,7 +167,7 @@
     <div class="p-fluid p-formgrid p-grid" formGroupName="incomeAndResources">
       <div class="p-field p-col-12 p-md-3">
         <span class="label-title">Income<span style="color: red;">*</span></span>
-        <input type="text" pInputText formControlName=income placeholder="Income" [required]="true">
+        <input type="number" pInputText formControlName=income placeholder="Income" [required]="true">
         <small class="error" *ngIf="iaPage1IR.income.errors?.required && iaPage1IR.income.touched">Income is
           required.</small>
       </div>
@@ -187,7 +189,9 @@
       <div class="p-field p-col-12 p-md-3">
         <!-- input type? -->
         <span class="label-title">Direct Deposit</span>
-        <input type="text" pInputText formControlName=directDeposit placeholder="Direct Deposit">
+        <!-- <input type="text" pInputText formControlName=directDeposit placeholder="Direct Deposit"> -->
+        <p-dropdown [options]="directDeposit" formControlName="directDeposit" placeholder="Select" optionLabel="label"
+          optionValue="value" [showClear]="true"></p-dropdown>
       </div>
       <div class="p-field p-col-12 p-md-3">
         <!-- input type? -->
@@ -268,7 +272,7 @@
     <div class="p-fluid p-formgrid p-grid" formGroupName="incomeAndResources">
       <div class="p-field p-col-12">
         <!-- input type? multiselect dropdown/checkbox? -->
-        <span class="label-title">what Benefits are You Currently Receiving?<span style="color: red;">*</span></span>
+        <span class="label-title">What Benefits are You Currently Receiving?<span style="color: red;">*</span></span>
         <input type="text" pInputText formControlName=receivingBenefits placeholder="Currently Receiving Benefits" [required]="true">
         <small class="error"
           *ngIf="iaPage1IR.receivingBenefits.errors?.required && iaPage1IR.receivingBenefits.errors?.touched">Income
@@ -581,7 +585,7 @@
         <button type="button" pButton label="Cancel" (click)="reset()" class="p-button-outlined p-ml-3"></button>
       </div>
       <div class="p-jc-end">
-        <button (click)="next()" type="button" pButton label="Next"></button>
+        <button (click)="next()" type="button" pButton label="Next" [disabled]="this.page1Form.touched"></button>
       </div>
     </div>
   </form>
