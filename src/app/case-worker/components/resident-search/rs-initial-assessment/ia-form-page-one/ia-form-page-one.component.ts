@@ -6,6 +6,7 @@ import { IaPage1Service } from 'src/app/case-worker/services/ia-page1.service';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { MessageService } from 'primeng/api';
 import { livingStatus } from 'src/app/veteran/app.constants';
+import { states } from 'src/app/veteran/app.constants';
 import { Table } from 'primeng/table';
 @Component({
   selector: 'app-ia-form-page-one',
@@ -19,6 +20,7 @@ export class IaFormPageOneComponent implements OnInit {
   hasFamMembers: boolean = false;
   greyingOut: boolean = true;
   details: any;
+  States: any;
   livingStatus: any;
   familyDetails: any = [];
   data: any;
@@ -103,6 +105,11 @@ export class IaFormPageOneComponent implements OnInit {
     { label: 'Transgender', value: 'Transgender' },
     { label: 'Other', value: 'Other' },
   ];
+
+  directDeposit = [
+    {label: "Yes", value: true},
+    {label: "No", value: false}
+  ];
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -116,6 +123,7 @@ export class IaFormPageOneComponent implements OnInit {
     this.getCWNickName();
     this.setForm();
     this.livingStatus = livingStatus;
+    this.States = states;
   }
   ngOnInit(): void {
     this.initializeFormGroups();
@@ -148,8 +156,7 @@ export class IaFormPageOneComponent implements OnInit {
       this.ia1 = false;
       this.greyingOut = false;
       this.data = res[0];
-      console.log('dob', this.data.date_of_birth);
-
+      console.log('dob', this.data.date_of_birth);      
       this.dateofbirth = this.datepipe.transform(
         this.data.date_of_birth,
         'MM/dd/yyyy'
@@ -370,7 +377,7 @@ export class IaFormPageOneComponent implements OnInit {
       type: ['', Validators.required],
       bankAccount: ['', Validators.required],
       bankName: ['', Validators.required],
-      directDeposit: ['', Validators.required],
+      directDeposit: [''],
       otherAssets: ['', Validators.required],
       medicaid: ['', Validators.required],
       vaCoverage: ['', Validators.required],
@@ -426,8 +433,12 @@ export class IaFormPageOneComponent implements OnInit {
       relationship: ['', Validators.required],
       age: ['', Validators.required],
       location: ['', Validators.required],
-      living: ['', Validators.required],
+      living: [Boolean],
     });
+  }
+
+  get famMembers(){
+    return this.familyMembers.controls;
   }
 
   buildForm() {
@@ -654,6 +665,7 @@ export class IaFormPageOneComponent implements OnInit {
   }
   cancelNewMember() {
     this.addNewMember = false;
+    this.clearFields();
   }
 
   @ViewChild('table')
@@ -727,6 +739,10 @@ export class livingPipe implements PipeTransform {
     }
     if (value === false) {
       return 'Deceased';
+    }
+
+    if (value === null){
+      return '---';
     }
     return value;
   }

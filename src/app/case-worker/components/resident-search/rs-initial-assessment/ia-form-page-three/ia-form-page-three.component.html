@@ -148,7 +148,7 @@
       </div>
       <div class="p-field p-col-6">
         <span class="label-title">Physcian Phone Number</span>
-        <input type="text" pInputText formControlName=phone placeholder="Phone">
+        <input type="text" mask="(000) 000-0000" pInputText formControlName=phone placeholder="Phone">
       </div>
       <div class="p-field p-col-6">
         <span class="label-title">Clinic</span>
@@ -223,8 +223,8 @@
         <button type="button" pButton label="Cancel" class="p-button-outlined p-ml-2" (click)="reset()"></button>
       </div>
       <div class="p-jc-end">
-        <button type="button" pButton label="Back" (click)="goBack()"></button>
-        <button type="button" (click)="next()" pButton label="Next" class="p-button-inlined p-ml-2"></button>
+        <button type="button" pButton label="Back" (click)="goBack()" [disabled]="this.page3Form.touched"></button>
+        <button type="button" (click)="next()" pButton label="Next" class="p-button-inlined p-ml-2" [disabled]="this.page3Form.touched"></button>
       </div>
     </div>
   </form>

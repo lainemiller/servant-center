@@ -186,6 +186,9 @@ export class IaFormPageTwoComponent implements OnInit {
     this.educationAndEmploymentHistory.value.otherTrainingOrSkills = "{"+workSkill+"}"
     let othTrainEdu = this.educationAndEmploymentHistory.value.otherTrainingEducation;
     this.educationAndEmploymentHistory.value.otherTrainingEducation = "{"+othTrainEdu+"}"
+    let pastTreatments = this.mentalHealthInformation.value.pastTreatments;
+    this.mentalHealthInformation.value.pastTreatments = "{" +pastTreatments+"}"
+    this.submitted = true;
     this.service
       .initialTreatmentGoalsPage2(this.page2Form.value)
       .subscribe((data) => {

@@ -18,7 +18,7 @@
       </div>
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">Highest Grade Completed</span>
-        <input type="text" min="1" max="18" pInputText formControlName=highestGradeCompleted placeholder="Grade">
+        <input type="number" min="1" max="18" pInputText formControlName=highestGradeCompleted placeholder="Grade">
       </div>
       <div class="p-field p-col-12 p-md-6">
         <span class="label-title">Name and Location of Schooll</span>
@@ -140,7 +140,7 @@
       </div>
       <div class="p-field p-md-4">
         <span class="label-title">Zip Code</span>
-        <input type="text" pInputText formControlName=psychEvaluatorZipcode placeholder="Zipcode">
+        <input type="number" pInputText formControlName=psychEvaluatorZipcode placeholder="Zipcode">
       </div>
       <div class="p-field p-md-12">
         <span class="label-title">License of Physician Completing Psych Evaluation</span>
@@ -153,8 +153,8 @@
         <button type="button" pButton label="Cancel" class="p-button-outlined p-ml-2" (click)="reset()"></button>
       </div>
       <div class="p-jc-end">
-        <button type="button" pButton label="Back" (click)="goBack()"></button>
-        <button type="button" (click)="next()" pButton label="Next" class="p-button-inlined p-ml-2"></button>
+        <button type="button" pButton label="Back" (click)="goBack()" [disabled]="this.page2Form.touched"></button>
+        <button type="button" (click)="next()" pButton label="Next" class="p-button-inlined p-ml-2" [disabled]="this.page2Form.touched"></button>
       </div>
     </div>
   </form>
