@@ -13,7 +13,7 @@ export class FooterComponent implements OnInit {
     console.log('footer component');
   }
   onOpenWhatsApp(){
-   window.open('https://wa.me/919445108135'); 
+   window.open('https://wa.me/13362758585'); 
    //window.open('https://wa.me/'+this.phone); 
   }
 }
