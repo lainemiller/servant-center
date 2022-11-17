@@ -115,52 +115,52 @@ export class VeteranComponent implements OnInit {
         console.log('Authenticated nickName', this.nickName);
         setTimeout(() => {
         this.service
-        .getVeteranIdByUsername(this.username)
-        .subscribe((response) => {
-          console.log(response)
-          if (response.responseStatus == 'SUCCESS') {
-            if (response.data.length === 1) {
-              this.veteranId = response.data[0].party_id;
-              this.cacheData.set('veteranId', this.veteranId);
-              this.cacheData.set('loginId', this.veteranId);
-              if (this.veteranId) {
-                this.isShowComponent = true;
-              }
-            } else if (response.data.length === 0) {
-               console.log('username is not present')
-               this.party_id=Math.floor(100000 + Math.random() * 900000);
-               console.log("generated party Id",this.party_id);
-               if(this.userGroup.toUpperCase()==='VETERAN'){
-                this.userGroup="veteran"
-               }
-              const userDetails={
-                "userName": this.username,
-                "userGroup": this.userGroup,
-                "partyId": this.party_id
-              };
-              this.service.addUser(userDetails).subscribe((response)=>{
-                if (response.responseStatus == 'SUCCESS') {
-                    console.log(response);
-                    if(this.userGroup.toUpperCase()==='VETERAN'){
-                      const veteranDetails={
-                        "veteranId": this.party_id,
-                        "firstName": this.firstName,
-                        "lastName": this.lastName,
-                        "nickName":this.nickName,
-                        "email":this.email
-                      };
-                      this.service.addVeteran(veteranDetails).subscribe((response)=>{
-                        if (response.responseStatus == 'SUCCESS') {
-                          console.log(response);
-                        }
-                      })
-                    }
-                    this.getUserId();
+          .getVeteranIdByUsername(this.username)
+          .subscribe((response) => {
+            console.log(response)
+            if (response.responseStatus == 'SUCCESS') {
+              if (response.data.length === 1) {
+                this.veteranId = response.data[0].party_id;
+                this.cacheData.set('veteranId', this.veteranId);
+                this.cacheData.set('loginId', this.veteranId);
+                if (this.veteranId) {
+                  this.isShowComponent = true;
                 }
-              })
+              } else if (response.data.length === 0) {
+                 console.log('username is not present')
+                 this.party_id=Math.floor(100000 + Math.random() * 900000);
+                 console.log("generated party Id",this.party_id);
+                 if(this.userGroup.toUpperCase()==='VETERAN'){
+                  this.userGroup="veteran"
+                 }
+                const userDetails={
+                  "userName": this.username,
+                  "userGroup": this.userGroup,
+                  "partyId": this.party_id
+                };
+                this.service.addUser(userDetails).subscribe((response)=>{
+                  if (response.responseStatus == 'SUCCESS') {
+                      console.log(response);
+                      if(this.userGroup.toUpperCase()==='VETERAN'){
+                        const veteranDetails={
+                          "veteranId": this.party_id,
+                          "firstName": this.firstName,
+                          "lastName": this.lastName,
+                          "nickName":this.nickName,
+                          "email":this.email
+                        };
+                        this.service.addVeteran(veteranDetails).subscribe((response)=>{
+                          if (response.responseStatus == 'SUCCESS') {
+                            console.log(response);
+                          }
+                        })
+                      }
+                      this.getUserId();
+                  }
+                })
+              }
             }
-          }
-        });
+          });
        }, 2000);
       });
     }
