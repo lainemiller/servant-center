@@ -113,6 +113,7 @@ export class VeteranComponent implements OnInit {
         console.log('Authenticated firstName', this.firstName);
         console.log('Authenticated lastName', this.lastName);
         console.log('Authenticated nickName', this.nickName);
+        setTimeout(() => {
         this.service
           .getVeteranIdByUsername(this.username)
           .subscribe((response) => {
@@ -160,9 +161,10 @@ export class VeteranComponent implements OnInit {
               }
             }
           });
+       }, 2000);
       });
     }
-    }
+  }
 
     getUserId() {
       this.service.getVeteranIdByUsername(this.username).subscribe((response) => {
