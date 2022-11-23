@@ -111,6 +111,7 @@ export class CaseWorkerComponent implements OnInit {
         console.log('Authenticated firstName', this.firstName);
         console.log('Authenticated lastName', this.lastName);
         console.log('Authenticated nickName', this.nickName);
+        setTimeout(() => {
         this.dashboarDservice
           .getVeteranIdByUsername(this.username)
           .subscribe((response) => {
@@ -155,9 +156,10 @@ export class CaseWorkerComponent implements OnInit {
               }
             }
           });
+        }, 2000);
       });
     }
-    }
+  }
 
     getUserId() {
       this.dashboarDservice.getVeteranIdByUsername(this.username).subscribe((response) => {
