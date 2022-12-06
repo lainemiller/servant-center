@@ -17,21 +17,21 @@ export class LoginPageComponent {
 
   public title = 'LOGIN TO APPLICATION';
   public clientId = awsConfig.aws_user_pools_web_client_id;
-  public redirectUri = this.awsEnvConfig.oauth.redirect_uri
+  public redirectUri = this.awsEnvConfig.oauth.redirect_uri;
   public domain = this.awsEnvConfig.oauth.domain;
 
   constructor(
     private router: Router,
     private clipBoardService: ClipBoardService
   ) {
-    // Auth.currentAuthenticatedUser()
-    //   .then(() => {
-    //     this.clipBoardService.set('userData', { userName: 'something' });
-    //     this.router.navigate(['/veteran'], { replaceUrl: true });
-    //   })
-    //   .catch((err) => {
-    //     this.router.navigate(['/login'], { replaceUrl: true });
-    //     console.log(err);
-    //   });
+    Auth.currentAuthenticatedUser()
+      .then(() => {
+        this.clipBoardService.set('userData', { userName: 'something' });
+        this.router.navigate(['/veteran'], { replaceUrl: true });
+      })
+      .catch((err) => {
+        this.router.navigate(['/login'], { replaceUrl: true });
+        console.log(err);
+      });
   }
 }
