@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-secure-message-center',
   templateUrl: './secure-message-center.component.html',
   styleUrls: ['./secure-message-center.component.scss'],
 })
-export class SecureMessageCenterComponent implements OnInit {
+export class SecureMessageCenterComponent {
   // title = 'SECURE MESSAGE CENTER';
   // tabs = [
   //   { header: 'Inbox', id: 'inbox' },
@@ -22,9 +22,5 @@ export class SecureMessageCenterComponent implements OnInit {
   //   { header: 'From', field: 'from' },
   //   { header: 'Date', field: 'date' },
   // ];
-  // constructor() {}
-
-  ngOnInit(): void {
-    //console.log('secure message center component');
-  }
+  constructor() {}
 }
