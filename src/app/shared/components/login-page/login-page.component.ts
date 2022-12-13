@@ -24,14 +24,14 @@ export class LoginPageComponent {
     private router: Router,
     private clipBoardService: ClipBoardService
   ) {
-    Auth.currentAuthenticatedUser()
-      .then(() => {
-        this.clipBoardService.set('userData', { userName: 'something' });
-        this.router.navigate(['/veteran'], { replaceUrl: true });
-      })
-      .catch((err) => {
-        this.router.navigate(['/login'], { replaceUrl: true });
-        console.log(err);
-      });
+    // Auth.currentAuthenticatedUser()
+    //   .then(() => {
+    //     this.clipBoardService.set('userData', { userName: 'something' });
+    //     this.router.navigate(['/veteran'], { replaceUrl: true });
+    //   })
+    //   .catch((err) => {
+    //     this.router.navigate(['/login'], { replaceUrl: true });
+    //     console.log(err);
+    //   });
   }
 }
