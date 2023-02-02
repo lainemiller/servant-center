@@ -15,7 +15,7 @@ export const environment = {
     consentUpdateUser: ' https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/consentForm/acceptConsent/',
     veteranProfileGetUser:' https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/userProfile/getUserDetails/',
     caseWorkerUser:' https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/uiLayout/getCaseWorkerDetails/', 
-    getVeteranId:' https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/getVeteranId/',
+    getVeteranId:'https://vu8x499o3l.execute-api.us-east-1.amazonaws.com/test_v1/getVeteranId/',
     veteranProfileUpdateUser:' https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/userProfile/updateUserDetails/',
     getHealthTracker:' https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/healthTracker/getHealthTracker/',
     updateHealthTracker:' https://h0p82a84v8.execute-api.us-east-1.amazonaws.com/test_v1/healthTracker/updateHealthTracker/',
