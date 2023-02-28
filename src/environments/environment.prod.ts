@@ -56,7 +56,8 @@ export const environment = {
     getCwUserNameDetails: ' https://vu8x499o3l.execute-api.us-east-1.amazonaws.com/test_v1/getWebpartyUsername',
     postIAPage5Details: ' https://vu8x499o3l.execute-api.us-east-1.amazonaws.com/test_v1/initialAssessment/page-5/',
     addNewVeteranRS: ' https://vu8x499o3l.execute-api.us-east-1.amazonaws.com/test_v1/addNewVeteran/',
-    getConsent: ' https://vu8x499o3l.execute-api.us-east-1.amazonaws.com/test_v1/uiLayout/getUserDetails/'
+    getConsent: ' https://vu8x499o3l.execute-api.us-east-1.amazonaws.com/test_v1/uiLayout/getUserDetails/',
+    uploadMiscFile: ' https://vu8x499o3l.execute-api.us-east-1.amazonaws.com/test_v1/fileUpload'
   },
   localUrl:''
 };
