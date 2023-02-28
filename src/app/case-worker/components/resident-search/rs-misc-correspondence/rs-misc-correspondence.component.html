@@ -1,1 +1,8 @@
-<p>rs-misc-correspondence works!</p>
+<p-toast position="top-center"></p-toast>
+<div class="misc-container p-grid p-formgrid">
+    <div class="card">
+        <p-fileUpload [customUpload]=true accept="application/pdf,image/*" [multiple]="true" 
+        [maxFileSize]="3000000" (uploadHandler)="uploadFile($event)">
+        </p-fileUpload>
+    </div>
+</div>
