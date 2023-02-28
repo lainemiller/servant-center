@@ -27,6 +27,7 @@ import { StepsModule } from 'primeng/steps';
 import { TableModule } from 'primeng/table';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { TabViewModule } from 'primeng/tabview';
+import { FileUploadModule } from 'primeng/fileupload';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
     TableModule,
     TabMenuModule,
     TabViewModule,
+    FileUploadModule,
     NgxMaskModule.forRoot()
   ],
   exports: [CardModule, RadioButtonModule, StepsModule, TableModule,TabMenuModule,TabViewModule],
