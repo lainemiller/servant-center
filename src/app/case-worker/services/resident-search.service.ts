@@ -50,11 +50,11 @@ export class ResidentSearchService {
     }
   }
 
-  public uploadMiscFile(file: FormData): Observable<any> {
+  public uploadMiscFile(file: FormData, loginId: number): Observable<any> {
     if (this.isDev) {
-      return this.http.post(this.commonUrl + 'fileUpload', file);
+      return this.http.post(this.commonUrl + 'fileUpload/' + loginId, file);
     } else {
-      return this.http.post(this.uploadFileAPI, file);
+      return this.http.post(this.uploadFileAPI + loginId, file);
     }
   }
 }

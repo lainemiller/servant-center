@@ -1,7 +1,7 @@
-<p-toast position="top-center"></p-toast>
+<p-toast position="top-right"></p-toast>
 <div class="misc-container p-grid p-formgrid">
     <div class="card">
-        <p-fileUpload [customUpload]=true accept="application/pdf,image/*" [multiple]="true" 
+        <p-fileUpload [customUpload]=true accept="application/pdf,image/*" [multiple]="false" 
         [maxFileSize]="3000000" (uploadHandler)="uploadFile($event)">
         </p-fileUpload>
     </div>
