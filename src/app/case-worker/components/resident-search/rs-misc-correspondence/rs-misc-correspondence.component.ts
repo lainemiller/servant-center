@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ResidentSearchService } from 'src/app/case-worker/services/resident-search.service';
+import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 
 @Component({
   selector: 'app-rs-misc-correspondence',
@@ -9,21 +10,52 @@ import { ResidentSearchService } from 'src/app/case-worker/services/resident-sea
   providers: [MessageService],
 })
 export class RsMiscCorrespondenceComponent implements OnInit {
-  ngOnInit(): void {}
+  private loginId!: number;
 
-  constructor(private residentService: ResidentSearchService) {}
+  constructor(
+    private residentService: ResidentSearchService,
+    private cacheData: ClipBoardService,
+    private messageService: MessageService
+  ) {}
+
+  ngOnInit(): void {
+    this.loginId = this.cacheData.get('selectedResidentVeteranId');
+  }
 
   uploadFile(event: any) {
     let formData = new FormData();
     formData.append('image', event.files![0]);
     formData.append('imageName', event.files![0].name);
-    this.residentService.uploadMiscFile(formData).subscribe(
+    formData.append('userGroup', 'VETERAN');
+    this.residentService.uploadMiscFile(formData, this.loginId).subscribe(
       (response) => {
-        console.log('File upload response', response);
+        if(response.responseStatus === 'SUCCESS'){
+          this.successMessage();
+          console.log('File upload response', response);
+        } else{
+          this.errorMessage();
+        }
       },
       (error) => {
+        this.errorMessage();
         console.error('service file error', error);
       }
     );
+  }
+
+  successMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Updated',
+      detail: 'File Uploaded successfully!!',
+    });
+  }
+
+  errorMessage() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Unable to upload your file. Please try again!',
+    });
   }
 }
