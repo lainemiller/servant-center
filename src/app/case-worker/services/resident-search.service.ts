@@ -17,6 +17,7 @@ export class ResidentSearchService {
   private postAddNewVeteran = env.serviceUrl.addNewVeteranRS;
   private residentSearchAPI = env.serviceUrl.getResidentSearchData;
   private uploadFileAPI = env.serviceUrl.uploadMiscFile;
+  private getMiscFileAPI = env.serviceUrl.getMiscFile;
 
   getResidentSearchData() {
     if (this.isDev) {
@@ -55,6 +56,15 @@ export class ResidentSearchService {
       return this.http.post(this.commonUrl + 'fileUpload/' + loginId, file);
     } else {
       return this.http.post(this.uploadFileAPI + loginId, file);
+    }
+  }
+
+  public getUploadedMiscFiles(prefix: string): Observable<any> {
+    const payload = { prefix: prefix };
+    if (this.isDev) {
+      return this.http.post(this.commonUrl + 'getUploadedFiles', payload);
+    } else {
+      return this.http.post(this.getMiscFileAPI, payload);
     }
   }
 }

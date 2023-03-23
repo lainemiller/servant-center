@@ -20,6 +20,7 @@ export class RsMiscCorrespondenceComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginId = this.cacheData.get('selectedResidentVeteranId');
+    this.getUploadedFiles();
   }
 
   uploadFile(event: any) {
@@ -29,15 +30,27 @@ export class RsMiscCorrespondenceComponent implements OnInit {
     formData.append('userGroup', 'VETERAN');
     this.residentService.uploadMiscFile(formData, this.loginId).subscribe(
       (response) => {
-        if(response.responseStatus === 'SUCCESS'){
+        if (response.responseStatus === 'SUCCESS') {
           this.successMessage();
           console.log('File upload response', response);
-        } else{
+        } else {
           this.errorMessage();
         }
       },
       (error) => {
         this.errorMessage();
+        console.error('service file error', error);
+      }
+    );
+  }
+
+  getUploadedFiles() {
+    const prefix = 'VETERAN_' + this.loginId;
+    this.residentService.getUploadedMiscFiles(prefix).subscribe(
+      (response) => {
+        console.log('Retreived files : ', response);
+      },
+      (error) => {
         console.error('service file error', error);
       }
     );
