@@ -5,12 +5,41 @@
       [customUpload]="true"
       accept="application/pdf,image/*"
       chooseLabel="Browse"
-      invalidFileTypeMessageDetail= "Allowed file types: PDF, JPG, JPEG and PNG"
-      invalidFileTypeMessageSummary= "{0} Invalid file type! "
+      invalidFileTypeMessageDetail="Allowed file types: PDF, JPG, JPEG and PNG"
+      invalidFileTypeMessageSummary="{0} Invalid file type! "
       [multiple]="false"
       [maxFileSize]="3000000"
       (uploadHandler)="uploadFile($event)"
     >
     </p-fileUpload>
   </div>
+  <h3 >File Upload History</h3>
+  <br />
+  <div *ngIf="isFileUploaded" class="result-table card">
+    <p-table
+      [value]="tableValues"
+      selectionMode="single"
+      [scrollable]="true"
+      scrollHeight="30vh"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th [pSortableColumn]="col.field" *ngFor="let col of columns">
+            {{ col.header }}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-tableValue>
+        <tr [pSelectableRow]="tableValue">
+          <td *ngFor="let col of columns">
+            {{ tableValue[col.field] }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div *ngIf="!isFileUploaded" class="card">
+    <p style="color:red;text-align: center;">NO FILES UPLOADED YET</p>
+  </div>
+  <br />
 </div>
