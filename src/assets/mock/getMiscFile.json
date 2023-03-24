@@ -1,0 +1,47 @@
+{
+  "responseStatus": "SUCCESS",
+  "data": {
+    "IsTruncated": false,
+    "Contents": [
+      {
+        "Key": "VETERAN_4/Angular CLI.pdf",
+        "LastModified": "2023-03-23T15:46:32.000Z",
+        "ETag": "\"5aeb3186effc0c93f15632e3711c4ff1\"",
+        "ChecksumAlgorithm": [],
+        "Size": 167595,
+        "StorageClass": "STANDARD"
+      },
+      {
+        "Key": "VETERAN_4/IDM_screenshot.png",
+        "LastModified": "2023-03-23T15:28:20.000Z",
+        "ETag": "\"1731e2fbc63f25afd59a073432f6220a\"",
+        "ChecksumAlgorithm": [],
+        "Size": 58929,
+        "StorageClass": "STANDARD"
+      },
+      {
+        "Key": "VETERAN_4/Angular CLI.pdf",
+        "LastModified": "2023-03-23T15:46:32.000Z",
+        "ETag": "\"5aeb3186effc0c93f15632e3711c4ff1\"",
+        "ChecksumAlgorithm": [],
+        "Size": 167595,
+        "StorageClass": "STANDARD"
+      },
+      {
+        "Key": "VETERAN_4/Angular CLI.pdf",
+        "LastModified": "2023-03-23T15:46:32.000Z",
+        "ETag": "\"5aeb3186effc0c93f15632e3711c4ff1\"",
+        "ChecksumAlgorithm": [],
+        "Size": 167595,
+        "StorageClass": "STANDARD"
+      }
+    ],
+    "Name": "servant-center-miscfile-bucket",
+    "Prefix": "VETERAN_4/",
+    "Delimiter": "/",
+    "MaxKeys": 1000,
+    "CommonPrefixes": [],
+    "KeyCount": 2
+  },
+  "error": false
+}
