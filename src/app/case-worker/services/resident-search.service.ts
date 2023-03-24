@@ -62,7 +62,7 @@ export class ResidentSearchService {
   public getUploadedMiscFiles(prefix: string): Observable<any> {
     const payload = { prefix: prefix };
     if (this.isDev) {
-      return this.http.post(this.commonUrl + 'getUploadedFiles', payload);
+      return this.http.get("assets/mock/getMiscFile.json");
     } else {
       return this.http.post(this.getMiscFileAPI, payload);
     }

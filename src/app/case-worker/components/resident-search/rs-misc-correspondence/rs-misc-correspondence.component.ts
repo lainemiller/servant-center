@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ResidentSearchService } from 'src/app/case-worker/services/resident-search.service';
@@ -11,17 +12,25 @@ import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 })
 export class RsMiscCorrespondenceComponent implements OnInit {
   private loginId!: number;
+  public tableValues!: any;
+  public isFileUploaded: boolean = false;
 
   constructor(
     private residentService: ResidentSearchService,
     private cacheData: ClipBoardService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private datepipe: DatePipe
   ) {}
 
   ngOnInit(): void {
     this.loginId = this.cacheData.get('selectedResidentVeteranId');
     this.getUploadedFiles();
   }
+
+  columns = [
+    { header: 'File Name', field: 'file_name' },
+    { header: 'Last Modified', field: 'last_modified' },
+  ];
 
   uploadFile(event: any) {
     let formData = new FormData();
@@ -32,7 +41,7 @@ export class RsMiscCorrespondenceComponent implements OnInit {
       (response) => {
         if (response.responseStatus === 'SUCCESS') {
           this.successMessage();
-          console.log('File upload response', response);
+          this.getUploadedFiles();
         } else {
           this.errorMessage();
         }
@@ -48,12 +57,37 @@ export class RsMiscCorrespondenceComponent implements OnInit {
     const prefix = 'VETERAN_' + this.loginId;
     this.residentService.getUploadedMiscFiles(prefix).subscribe(
       (response) => {
-        console.log('Retreived files : ', response);
+        if (response.responseStatus === 'SUCCESS') {
+          if (response.data.KeyCount > 0) {
+            this.isFileUploaded = true;
+            const tableData = this.formatTableData(response.data.Contents);
+            this.tableValues = tableData;
+          } else {
+            this.isFileUploaded = false;
+          }
+        }
       },
       (error) => {
         console.error('service file error', error);
+        this.isFileUploaded = false;
       }
     );
+  }
+
+  formatTableData(Content: any[]): any {
+    let tableData: any[] = [];
+    const prefix = 'VETERAN_' + this.loginId;
+    for (let i = 0; i < Content.length; i++) {
+      const data = {
+        file_name: Content[i].Key.replace(prefix + '/', ''),
+        last_modified: this.datepipe.transform(
+          Content[i].LastModified,
+          'yyyy/MM/dd'
+        ),
+      };
+      tableData.push(data);
+    }
+    return tableData;
   }
 
   successMessage() {
