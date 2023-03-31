@@ -33,6 +33,7 @@ export class RsMiscCorrespondenceComponent implements OnInit {
   ];
 
   uploadFile(event: any) {
+    console.log("EVENT",event);
     let formData = new FormData();
     formData.append('image', event.files![0]);
     formData.append('imageName', event.files![0].name);
@@ -79,6 +80,7 @@ export class RsMiscCorrespondenceComponent implements OnInit {
     const prefix = 'VETERAN_' + this.loginId;
     for (let i = 0; i < Content.length; i++) {
       const data = {
+        key: Content[i].Key,
         file_name: Content[i].Key.replace(prefix + '/', ''),
         last_modified: this.datepipe.transform(
           Content[i].LastModified,
@@ -88,6 +90,17 @@ export class RsMiscCorrespondenceComponent implements OnInit {
       tableData.push(data);
     }
     return tableData;
+  }
+
+  selectFile(event: any) {
+    this.residentService.downloadMiscFile(event.data.key).subscribe(
+      (response) => {
+        console.log('Response==>', response);
+      },
+      (error) => {
+        console.error('service file error', error);
+      }
+    );
   }
 
   successMessage() {

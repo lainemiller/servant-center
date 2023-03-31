@@ -21,6 +21,7 @@
       selectionMode="single"
       [scrollable]="true"
       scrollHeight="30vh"
+      (onRowSelect)="selectFile($event)"
     >
       <ng-template pTemplate="header">
         <tr>
