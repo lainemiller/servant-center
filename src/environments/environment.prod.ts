@@ -58,7 +58,8 @@ export const environment = {
     addNewVeteranRS: ' https://vu8x499o3l.execute-api.us-east-1.amazonaws.com/test_v1/addNewVeteran/',
     getConsent: ' https://vu8x499o3l.execute-api.us-east-1.amazonaws.com/test_v1/uiLayout/getUserDetails/',
     uploadMiscFile: ' https://vu8x499o3l.execute-api.us-east-1.amazonaws.com/test_v1/fileUpload/',
-    getMiscFile: ' https://vu8x499o3l.execute-api.us-east-1.amazonaws.com/test_v1/getUploadedFiles'
+    getMiscFile: ' https://vu8x499o3l.execute-api.us-east-1.amazonaws.com/test_v1/getUploadedFiles',
+    downloadMiscFile: ' https://vu8x499o3l.execute-api.us-east-1.amazonaws.com/test_v1/downloadFile'
   },
   localUrl:''
 };

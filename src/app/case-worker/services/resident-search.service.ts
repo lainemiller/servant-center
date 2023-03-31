@@ -18,6 +18,7 @@ export class ResidentSearchService {
   private residentSearchAPI = env.serviceUrl.getResidentSearchData;
   private uploadFileAPI = env.serviceUrl.uploadMiscFile;
   private getMiscFileAPI = env.serviceUrl.getMiscFile;
+  private downloadFileAPI = env.serviceUrl.downloadMiscFile;
 
   getResidentSearchData() {
     if (this.isDev) {
@@ -62,9 +63,18 @@ export class ResidentSearchService {
   public getUploadedMiscFiles(prefix: string): Observable<any> {
     const payload = { prefix: prefix };
     if (this.isDev) {
-      return this.http.get("assets/mock/getMiscFile.json");
+      return this.http.get('assets/mock/getMiscFile.json');
     } else {
       return this.http.post(this.getMiscFileAPI, payload);
+    }
+  }
+
+  public downloadMiscFile(fileName: string): Observable<any> {
+    const payload = { key: fileName };
+    if (this.isDev) {
+      return this.http.post(this.commonUrl + 'downloadFile', payload);
+    } else {
+      return this.http.post(this.downloadFileAPI, payload);
     }
   }
 }
