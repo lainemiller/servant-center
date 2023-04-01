@@ -96,6 +96,14 @@ export class RsMiscCorrespondenceComponent implements OnInit {
     this.residentService.downloadMiscFile(event.data.key).subscribe(
       (response) => {
         console.log('Response==>', response);
+        if (response.responseStatus === 'SUCCESS') {
+          const dataBuffer = response?.data?.Body?.data;
+          const dataConType = response?.data?.ContentType;
+          const dataBlob = new Blob([new Uint8Array(dataBuffer).buffer], {type: dataConType});
+          const dataBlobUrl = window.URL.createObjectURL(dataBlob);
+          console.log('downloadMiscFile::base64String:', dataConType);
+          window.open(dataBlobUrl, '_blank');
+        }
       },
       (error) => {
         console.error('service file error', error);
