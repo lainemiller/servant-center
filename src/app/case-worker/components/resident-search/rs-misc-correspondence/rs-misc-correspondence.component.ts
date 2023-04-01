@@ -101,14 +101,15 @@ export class RsMiscCorrespondenceComponent implements OnInit {
         if (response.responseStatus === 'SUCCESS') {
           const dataBuffer = response?.data?.Body?.data;
           const dataConType = response?.data?.ContentType;
-          const dataBlob = new Blob(dataBuffer, {type: dataConType});
-          const dataBlobUrl = window.URL.createObjectURL(dataBlob);
+          // const dataBlob = new Blob(dataBuffer, {type: dataConType});
+          // const dataBlobUrl = window.URL.createObjectURL(dataBlob);
           // window.open(dataBlobUrl, '_blank');
           const windowOpenObj = window.open();
-          const dataFileFormat = 'data:' + dataConType + ';base64,' + dataBuffer.toString('base64');
-          const sanitizedURL = this.sanitization.bypassSecurityTrustUrl(dataFileFormat);
-          windowOpenObj?.document.write("<iframe src='"+ dataBlobUrl +"'></iframe>");
-          console.log('download misc file::body:', {dataFileFormat}, {sanitizedURL}, {dataBlob}, {dataBlobUrl});
+          const bs64DB = this.arrayBufferToBase64(dataBuffer);
+          const dataFileFormat = 'data:' + dataConType + ';base64,' + bs64DB;
+          // const sanitizedURL = this.sanitization.bypassSecurityTrustUrl(dataFileFormat);
+          windowOpenObj?.document.write("<iframe src='"+ dataFileFormat +"'></iframe>");
+          console.log('download misc file::body:', {dataFileFormat});
         }
       },
       (error) => {
@@ -131,5 +132,16 @@ export class RsMiscCorrespondenceComponent implements OnInit {
       summary: 'Error',
       detail: 'Unable to upload your file. Please try again!',
     });
+  }
+
+  arrayBufferToBase64(buffr: any): string {
+    const bufToBin = new Uint8Array(buffr);
+    let bas64Str = '';
+    let bina = '';
+    for (let buf=0; buf < bufToBin?.length; buf++) {
+      bina += String.fromCharCode(bufToBin[buf]);
+    }
+    bas64Str = window.btoa(bina);
+    return bas64Str;
   }
 }
