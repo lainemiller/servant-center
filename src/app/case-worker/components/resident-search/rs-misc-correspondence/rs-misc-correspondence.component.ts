@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { MessageService } from 'primeng/api';
 import { ResidentSearchService } from 'src/app/case-worker/services/resident-search.service';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
@@ -19,7 +20,8 @@ export class RsMiscCorrespondenceComponent implements OnInit {
     private residentService: ResidentSearchService,
     private cacheData: ClipBoardService,
     private messageService: MessageService,
-    private datepipe: DatePipe
+    private datepipe: DatePipe,
+    private sanitization: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -99,10 +101,14 @@ export class RsMiscCorrespondenceComponent implements OnInit {
         if (response.responseStatus === 'SUCCESS') {
           const dataBuffer = response?.data?.Body?.data;
           const dataConType = response?.data?.ContentType;
-          const dataBlob = new Blob([new Uint8Array(dataBuffer).buffer], {type: dataConType});
+          const dataBlob = new Blob(dataBuffer, {type: dataConType});
           const dataBlobUrl = window.URL.createObjectURL(dataBlob);
-          console.log('downloadMiscFile::base64String:', dataConType);
-          window.open(dataBlobUrl, '_blank');
+          // window.open(dataBlobUrl, '_blank');
+          const windowOpenObj = window.open();
+          const dataFileFormat = 'data:' + dataConType + ';base64,' + dataBuffer.toString('base64');
+          const sanitizedURL = this.sanitization.bypassSecurityTrustUrl(dataFileFormat);
+          windowOpenObj?.document.write("<iframe src='"+ dataBlobUrl +"'></iframe>");
+          console.log('download misc file::body:', {dataFileFormat}, {sanitizedURL}, {dataBlob}, {dataBlobUrl});
         }
       },
       (error) => {
