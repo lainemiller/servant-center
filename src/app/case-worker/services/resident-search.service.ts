@@ -72,7 +72,8 @@ export class ResidentSearchService {
   public downloadMiscFile(fileName: string): Observable<any> {
     const payload = { key: fileName };
     if (this.isDev) {
-      return this.http.post(this.commonUrl + 'downloadFile', payload);
+      // return this.http.post(this.commonUrl + 'downloadFile', payload);
+      return this.http.get('assets/mock/downloadFile-pdf.json');
     } else {
       return this.http.post(this.downloadFileAPI, payload);
     }
