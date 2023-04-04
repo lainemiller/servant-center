@@ -101,15 +101,21 @@ export class RsMiscCorrespondenceComponent implements OnInit {
         if (response.responseStatus === 'SUCCESS') {
           const dataBuffer = response?.data?.Body?.data;
           const dataConType = response?.data?.ContentType;
-          // const dataBlob = new Blob(dataBuffer, {type: dataConType});
-          // const dataBlobUrl = window.URL.createObjectURL(dataBlob);
+          const dataBlob = new Blob([new Uint8Array(dataBuffer)], {type: dataConType});
+          const dataBlobUrl = window.URL.createObjectURL(dataBlob);
           // window.open(dataBlobUrl, '_blank');
-          const windowOpenObj = window.open();
-          const bs64DB = this.arrayBufferToBase64(dataBuffer);
-          const dataFileFormat = 'data:' + dataConType + ';base64,' + bs64DB;
+          // const windowOpenObj = window.open();
+          // const bs64DB = this.arrayBufferToBase64(dataBuffer);
+          // const dataFileFormat = 'data:' + dataConType + ';base64,' + bs64DB;
           // const sanitizedURL = this.sanitization.bypassSecurityTrustUrl(dataFileFormat);
-          windowOpenObj?.document.write("<iframe src='"+ dataFileFormat +"'></iframe>");
-          console.log('download misc file::body:', {dataFileFormat});
+          // windowOpenObj?.document.write("<iframe src='"+ dataFileFormat +"'></iframe>");
+          const dLink = document.createElement('a');
+          dLink.href = dataBlobUrl;
+          dLink.target = '_blank';
+          document.body.appendChild(dLink);
+          dLink.click();
+          document.body.removeChild(dLink);
+          console.log('download misc file::body:', {dataBlob}, {dataBlobUrl});
         }
       },
       (error) => {
