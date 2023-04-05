@@ -121,8 +121,12 @@ export class RsMiscCorrespondenceComponent implements OnInit {
             const dataURLStr = response?.data;
             const dataImgObj = new Image();
             dataImgObj.src = dataURLStr;
-            const windowOpenObj = window.open();
-            windowOpenObj?.document.write("<iframe src='"+ dataImgObj +"' height='100%' width='100%'></iframe>");
+            const dataBlob = new Blob([new Uint8Array(dataURLStr)], {type: dataConType});
+            const dataBlobUrl = window.URL.createObjectURL(dataBlob);
+            // const windowOpenObj = window.open(dataBlobUrl);
+            // windowOpenObj?.document.write("<iframe src='"+ dataImgObj +"' height='100%' width='100%'></iframe>");
+            // windowOpenObj?.document.write(dataBlobUrl);
+            window.open(dataURLStr);
           }
         }
       },
