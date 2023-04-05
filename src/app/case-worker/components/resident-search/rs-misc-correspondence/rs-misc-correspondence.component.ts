@@ -122,7 +122,7 @@ export class RsMiscCorrespondenceComponent implements OnInit {
             const dataImgObj = new Image();
             dataImgObj.src = dataURLStr;
             const windowOpenObj = window.open();
-            windowOpenObj?.document.write("<iframe src='"+ dataImgObj +"'></iframe>");
+            windowOpenObj?.document.write("<iframe src='"+ dataImgObj +"' height='100%' width='100%'></iframe>");
           }
         }
       },
