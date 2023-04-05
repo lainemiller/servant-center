@@ -106,7 +106,7 @@ export class RsMiscCorrespondenceComponent implements OnInit {
           // const dataFileFormat = 'data:' + dataConType + ';base64,' + bs64DB;
           // const sanitizedURL = this.sanitization.bypassSecurityTrustUrl(dataFileFormat);
           // windowOpenObj?.document.write("<iframe src='"+ dataFileFormat +"'></iframe>");
-          if (dataConType.indexOf('pdf') > 0) {
+          if (dataConType?.indexOf('pdf') > 0) {
             const dataBuffer = response?.data?.Body?.data;
             const dataBlob = new Blob([new Uint8Array(dataBuffer)], {type: dataConType});
             const dataBlobUrl = window.URL.createObjectURL(dataBlob);
@@ -117,8 +117,8 @@ export class RsMiscCorrespondenceComponent implements OnInit {
             dLink.click();
             document.body.removeChild(dLink);
             console.log('download misc file::body:', {dataBlob}, {dataBlobUrl});
-          } else {
-            const dataURLStr = response;
+          } else if (typeof response?.data === 'string') {
+            const dataURLStr = response?.data;
             const dataImgObj = new Image();
             dataImgObj.src = dataURLStr;
             const windowOpenObj = window.open();
