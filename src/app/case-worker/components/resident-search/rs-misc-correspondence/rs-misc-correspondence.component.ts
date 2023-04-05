@@ -99,23 +99,31 @@ export class RsMiscCorrespondenceComponent implements OnInit {
       (response) => {
         console.log('Response==>', response);
         if (response.responseStatus === 'SUCCESS') {
-          const dataBuffer = response?.data?.Body?.data;
           const dataConType = response?.data?.ContentType;
-          const dataBlob = new Blob([new Uint8Array(dataBuffer)], {type: dataConType});
-          const dataBlobUrl = window.URL.createObjectURL(dataBlob);
           // window.open(dataBlobUrl, '_blank');
           // const windowOpenObj = window.open();
           // const bs64DB = this.arrayBufferToBase64(dataBuffer);
           // const dataFileFormat = 'data:' + dataConType + ';base64,' + bs64DB;
           // const sanitizedURL = this.sanitization.bypassSecurityTrustUrl(dataFileFormat);
           // windowOpenObj?.document.write("<iframe src='"+ dataFileFormat +"'></iframe>");
-          const dLink = document.createElement('a');
-          dLink.href = dataBlobUrl;
-          dLink.target = '_blank';
-          document.body.appendChild(dLink);
-          dLink.click();
-          document.body.removeChild(dLink);
-          console.log('download misc file::body:', {dataBlob}, {dataBlobUrl});
+          if (dataConType.indexOf('pdf') > 0) {
+            const dataBuffer = response?.data?.Body?.data;
+            const dataBlob = new Blob([new Uint8Array(dataBuffer)], {type: dataConType});
+            const dataBlobUrl = window.URL.createObjectURL(dataBlob);
+            const dLink = document.createElement('a');
+            dLink.href = dataBlobUrl;
+            dLink.target = '_blank';
+            document.body.appendChild(dLink);
+            dLink.click();
+            document.body.removeChild(dLink);
+            console.log('download misc file::body:', {dataBlob}, {dataBlobUrl});
+          } else {
+            const dataURLStr = response;
+            const dataImgObj = new Image();
+            dataImgObj.src = dataURLStr;
+            const windowOpenObj = window.open();
+            windowOpenObj?.document.write("<iframe src='"+ dataImgObj +"'></iframe>");
+          }
         }
       },
       (error) => {
