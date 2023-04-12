@@ -73,7 +73,7 @@ export class ResidentSearchService {
     const payload = { key: fileName };
     if (this.isDev) {
       // return this.http.post(this.commonUrl + 'downloadFile', payload);
-      return this.http.get('assets/mock/downloadFile.json');
+      return this.http.get('assets/mock/downloadFile-pdf.json');
     } else {
       return this.http.post(this.downloadFileAPI, payload);
     }

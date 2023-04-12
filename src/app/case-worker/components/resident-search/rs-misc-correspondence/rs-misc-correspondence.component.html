@@ -19,7 +19,7 @@
   </div>
   <h3 >File Upload History</h3>
   <br />
-  <div *ngIf="isFileUploaded === 'yes'" class="result-table card">
+  <div *ngIf="isFileUploaded === 'YES'" class="result-table card">
     <p-table
       [value]="tableValues"
       selectionMode="single"
@@ -43,7 +43,7 @@
       </ng-template>
     </p-table>
   </div>
-  <div *ngIf="isFileUploaded === 'no'" class="card">
+  <div *ngIf="isFileUploaded === 'NO'" class="card">
     <p style="color:red;text-align: center;">NO FILES UPLOADED YET</p>
   </div>
   <br />

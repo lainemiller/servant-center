@@ -67,7 +67,7 @@ export class RsMiscCorrespondenceComponent implements OnInit {
       (response) => {
         if (response.responseStatus === 'SUCCESS') {
           if (response.data.KeyCount > 0) {
-            this.isFileUploaded = 'YEs';
+            this.isFileUploaded = 'YES';
             const tableData = this.formatTableData(response.data.Contents);
             this.tableValues = tableData;
             this.showSpinner=false;
