@@ -14,7 +14,10 @@ import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 export class RsMiscCorrespondenceComponent implements OnInit {
   private loginId!: number;
   public tableValues!: any;
-  public isFileUploaded: boolean = false;
+  public isFileUploaded!: string;
+  public showSpinner:boolean = true;
+  public grayOut:boolean = true;
+  public imageURL = "";
 
   constructor(
     private residentService: ResidentSearchService,
@@ -35,6 +38,8 @@ export class RsMiscCorrespondenceComponent implements OnInit {
   ];
 
   uploadFile(event: any) {
+    this.showSpinner=true;
+    this.grayOut=true;
     console.log("EVENT",event);
     let formData = new FormData();
     formData.append('image', event.files![0]);
@@ -62,17 +67,19 @@ export class RsMiscCorrespondenceComponent implements OnInit {
       (response) => {
         if (response.responseStatus === 'SUCCESS') {
           if (response.data.KeyCount > 0) {
-            this.isFileUploaded = true;
+            this.isFileUploaded = 'YEs';
             const tableData = this.formatTableData(response.data.Contents);
             this.tableValues = tableData;
+            this.showSpinner=false;
+            this.grayOut=false;
           } else {
-            this.isFileUploaded = false;
+            this.isFileUploaded = 'NO';
           }
         }
       },
       (error) => {
         console.error('service file error', error);
-        this.isFileUploaded = false;
+        this.isFileUploaded = 'NO';
       }
     );
   }
@@ -99,6 +106,7 @@ export class RsMiscCorrespondenceComponent implements OnInit {
       (response) => {
         console.log('Response==>', response);
         if (response.responseStatus === 'SUCCESS') {
+          this.imageURL="data:image/png;base64,"+response.baseObj;
           const dataBuffer = response?.data?.Body?.data;
           const dataConType = response?.data?.ContentType;
           const dataBlob = new Blob([new Uint8Array(dataBuffer)], {type: dataConType});
