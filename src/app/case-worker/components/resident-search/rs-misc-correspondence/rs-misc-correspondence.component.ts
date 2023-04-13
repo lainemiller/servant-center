@@ -48,6 +48,7 @@ export class RsMiscCorrespondenceComponent implements OnInit {
     this.residentService.uploadMiscFile(formData, this.loginId).subscribe(
       (response) => {
         if (response.responseStatus === 'SUCCESS') {
+          this.showSpinner=false;
           this.successMessage();
           this.getUploadedFiles();
         } else {
@@ -55,6 +56,7 @@ export class RsMiscCorrespondenceComponent implements OnInit {
         }
       },
       (error) => {
+        this.showSpinner=false;
         this.errorMessage();
         console.error('service file error', error);
       }
@@ -74,12 +76,14 @@ export class RsMiscCorrespondenceComponent implements OnInit {
             this.grayOut=false;
           } else {
             this.isFileUploaded = 'NO';
+            this.showSpinner=false;
           }
         }
       },
       (error) => {
         console.error('service file error', error);
         this.isFileUploaded = 'NO';
+        this.showSpinner=false;
       }
     );
   }
