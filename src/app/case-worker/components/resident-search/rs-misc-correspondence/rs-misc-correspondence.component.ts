@@ -15,9 +15,9 @@ export class RsMiscCorrespondenceComponent implements OnInit {
   private loginId!: number;
   public tableValues!: any;
   public isFileUploaded!: string;
-  public showSpinner:boolean = true;
-  public grayOut:boolean = true;
-  public imageURL = "";
+  public showSpinner: boolean = true;
+  public grayOut: boolean = true;
+  public imageURL = '';
 
   constructor(
     private residentService: ResidentSearchService,
@@ -38,9 +38,9 @@ export class RsMiscCorrespondenceComponent implements OnInit {
   ];
 
   uploadFile(event: any) {
-    this.showSpinner=true;
-    this.grayOut=true;
-    console.log("EVENT",event);
+    this.showSpinner = true;
+    this.grayOut = true;
+    console.log('EVENT', event);
     let formData = new FormData();
     formData.append('image', event.files![0]);
     formData.append('imageName', event.files![0].name);
@@ -48,6 +48,7 @@ export class RsMiscCorrespondenceComponent implements OnInit {
     this.residentService.uploadMiscFile(formData, this.loginId).subscribe(
       (response) => {
         if (response.responseStatus === 'SUCCESS') {
+          this.showSpinner = false;
           this.successMessage();
           this.getUploadedFiles();
         } else {
@@ -55,6 +56,7 @@ export class RsMiscCorrespondenceComponent implements OnInit {
         }
       },
       (error) => {
+        this.showSpinner = this.grayOut = false;
         this.errorMessage();
         console.error('service file error', error);
       }
@@ -65,13 +67,12 @@ export class RsMiscCorrespondenceComponent implements OnInit {
     const prefix = 'VETERAN_' + this.loginId;
     this.residentService.getUploadedMiscFiles(prefix).subscribe(
       (response) => {
+        this.showSpinner = this.grayOut = false;
         if (response.responseStatus === 'SUCCESS') {
           if (response.data.KeyCount > 0) {
             this.isFileUploaded = 'YES';
             const tableData = this.formatTableData(response.data.Contents);
             this.tableValues = tableData;
-            this.showSpinner=false;
-            this.grayOut=false;
           } else {
             this.isFileUploaded = 'NO';
           }
@@ -80,6 +81,7 @@ export class RsMiscCorrespondenceComponent implements OnInit {
       (error) => {
         console.error('service file error', error);
         this.isFileUploaded = 'NO';
+        this.showSpinner = this.grayOut = false;
       }
     );
   }
@@ -115,7 +117,9 @@ export class RsMiscCorrespondenceComponent implements OnInit {
           // windowOpenObj?.document.write("<iframe src='"+ dataFileFormat +"'></iframe>");
           if (dataConType?.indexOf('pdf') > 0) {
             const dataBuffer = response?.data?.Body?.data;
-            const dataBlob = new Blob([new Uint8Array(dataBuffer)], {type: dataConType});
+            const dataBlob = new Blob([new Uint8Array(dataBuffer)], {
+              type: dataConType,
+            });
             const dataBlobUrl = window.URL.createObjectURL(dataBlob);
             const dLink = document.createElement('a');
             dLink.href = dataBlobUrl;
@@ -123,12 +127,18 @@ export class RsMiscCorrespondenceComponent implements OnInit {
             document.body.appendChild(dLink);
             dLink.click();
             document.body.removeChild(dLink);
-            console.log('download misc file::body:', {dataBlob}, {dataBlobUrl});
+            console.log(
+              'download misc file::body:',
+              { dataBlob },
+              { dataBlobUrl }
+            );
           } else if (typeof response?.data === 'string') {
             const dataURLStr = response?.data;
             const dataImgObj = new Image();
             dataImgObj.src = dataURLStr;
-            const dataBlob = new Blob([new Uint8Array(dataURLStr)], {type: dataConType});
+            const dataBlob = new Blob([new Uint8Array(dataURLStr)], {
+              type: dataConType,
+            });
             const dataBlobUrl = window.URL.createObjectURL(dataBlob);
             // const windowOpenObj = window.open(dataBlobUrl);
             // windowOpenObj?.document.write("<iframe src='"+ dataImgObj +"' height='100%' width='100%'></iframe>");
@@ -163,7 +173,7 @@ export class RsMiscCorrespondenceComponent implements OnInit {
     const bufToBin = new Uint8Array(buffr);
     let bas64Str = '';
     let bina = '';
-    for (let buf=0; buf < bufToBin?.length; buf++) {
+    for (let buf = 0; buf < bufToBin?.length; buf++) {
       bina += String.fromCharCode(bufToBin[buf]);
     }
     bas64Str = window.btoa(bina);
