@@ -18,6 +18,7 @@ export class RsMiscCorrespondenceComponent implements OnInit {
   public showSpinner: boolean = true;
   public grayOut: boolean = true;
   public imageURL = '';
+  public imageObj!: File;
 
   constructor(
     private residentService: ResidentSearchService,
@@ -178,5 +179,43 @@ export class RsMiscCorrespondenceComponent implements OnInit {
     }
     bas64Str = window.btoa(bina);
     return bas64Str;
+  }
+
+  changePhoto(imageInput: HTMLInputElement) {
+    console.log('imageInput.files![0]', imageInput.files![0]);
+    this.imageObj = imageInput.files![0];
+    console.log(this.imageObj.size);
+    if (this.imageObj.size > 5242880) {
+      //this.photoMaxSizeErrorMessage();
+    } else {
+      if (
+        this.imageObj.type === 'image/jpeg' ||
+        this.imageObj.type === 'image/png'
+      ) {
+        let imageForm = new FormData();
+        imageForm.append('image', this.imageObj);
+        imageForm.append('imageName', this.imageObj.name);
+        imageForm.append('userGroup', 'VETERAN');
+        console.log('iamgeform==> ', imageForm);
+        this.residentService.uploadMiscFile(imageForm, this.loginId).subscribe(
+          (response) => {
+            if (response.responseStatus === 'SUCCESS') {
+              this.showSpinner = false;
+              this.successMessage();
+              this.getUploadedFiles();
+            } else {
+              this.errorMessage();
+            }
+          },
+          (error) => {
+            this.showSpinner = this.grayOut = false;
+            this.errorMessage();
+            console.error('service file error', error);
+          }
+        );
+      } else {
+        //this.photoTypeErrorMessage();
+      }
+    }
   }
 }
