@@ -5,6 +5,9 @@
 </div>
 <div class="misc-container p-grid p-formgrid">
   <div class="card">
+    <input #inputFile id="file-input" type="file"  (change)="changePhoto(inputFile)" />
+  </div>
+  <div class="card">
     <p-fileUpload
       [customUpload]="true"
       accept="application/pdf,image/*"
