@@ -17,7 +17,7 @@ export class RsMiscCorrespondenceComponent implements OnInit {
   public isFileUploaded!: string;
   public showSpinner: boolean = true;
   public grayOut: boolean = true;
-  public imageURL = '';
+  public imageUrl!: any;
   public imageObj!: File;
 
   constructor(
@@ -108,45 +108,54 @@ export class RsMiscCorrespondenceComponent implements OnInit {
     this.residentService.downloadMiscFile(event.data.key).subscribe(
       (response) => {
         console.log('Response==>', response);
-        if (response.responseStatus === 'SUCCESS') {
-          const dataConType = response?.data?.ContentType;
-          // window.open(dataBlobUrl, '_blank');
-          // const windowOpenObj = window.open();
-          // const bs64DB = this.arrayBufferToBase64(dataBuffer);
-          // const dataFileFormat = 'data:' + dataConType + ';base64,' + bs64DB;
-          // const sanitizedURL = this.sanitization.bypassSecurityTrustUrl(dataFileFormat);
-          // windowOpenObj?.document.write("<iframe src='"+ dataFileFormat +"'></iframe>");
-          if (dataConType?.indexOf('pdf') > 0) {
-            const dataBuffer = response?.data?.Body?.data;
-            const dataBlob = new Blob([new Uint8Array(dataBuffer)], {
-              type: dataConType,
-            });
-            const dataBlobUrl = window.URL.createObjectURL(dataBlob);
-            const dLink = document.createElement('a');
-            dLink.href = dataBlobUrl;
-            dLink.target = '_blank';
-            document.body.appendChild(dLink);
-            dLink.click();
-            document.body.removeChild(dLink);
-            console.log(
-              'download misc file::body:',
-              { dataBlob },
-              { dataBlobUrl }
-            );
-          } else if (typeof response?.data === 'string') {
-            const dataURLStr = response?.data;
-            const dataImgObj = new Image();
-            dataImgObj.src = dataURLStr;
-            const dataBlob = new Blob([new Uint8Array(dataURLStr)], {
-              type: dataConType,
-            });
-            const dataBlobUrl = window.URL.createObjectURL(dataBlob);
-            // const windowOpenObj = window.open(dataBlobUrl);
-            // windowOpenObj?.document.write("<iframe src='"+ dataImgObj +"' height='100%' width='100%'></iframe>");
-            // windowOpenObj?.document.write(dataBlobUrl);
-            window.open(dataURLStr);
-          }
+        if (response.responseStatus == 'SUCCESS') {
+          var imageSrc =
+            'data:application/' +
+            response.data.contentType +
+            ';base64,' +
+            response.data.imageBody;
+          this.imageUrl = this.sanitization.bypassSecurityTrustUrl(imageSrc);
+          console.log('generated image url', this.imageUrl);
         }
+        // if (response.responseStatus === 'SUCCESS') {
+        //   const dataConType = response?.data?.ContentType;
+        //   // window.open(dataBlobUrl, '_blank');
+        //   // const windowOpenObj = window.open();
+        //   // const bs64DB = this.arrayBufferToBase64(dataBuffer);
+        //   // const dataFileFormat = 'data:' + dataConType + ';base64,' + bs64DB;
+        //   // const sanitizedURL = this.sanitization.bypassSecurityTrustUrl(dataFileFormat);
+        //   // windowOpenObj?.document.write("<iframe src='"+ dataFileFormat +"'></iframe>");
+        //   if (dataConType?.indexOf('pdf') > 0) {
+        //     const dataBuffer = response?.data?.Body?.data;
+        //     const dataBlob = new Blob([new Uint8Array(dataBuffer)], {
+        //       type: dataConType,
+        //     });
+        //     const dataBlobUrl = window.URL.createObjectURL(dataBlob);
+        //     const dLink = document.createElement('a');
+        //     dLink.href = dataBlobUrl;
+        //     dLink.target = '_blank';
+        //     document.body.appendChild(dLink);
+        //     dLink.click();
+        //     document.body.removeChild(dLink);
+        //     console.log(
+        //       'download misc file::body:',
+        //       { dataBlob },
+        //       { dataBlobUrl }
+        //     );
+        //   } else if (typeof response?.data === 'string') {
+        //     const dataURLStr = response?.data;
+        //     const dataImgObj = new Image();
+        //     dataImgObj.src = dataURLStr;
+        //     const dataBlob = new Blob([new Uint8Array(dataURLStr)], {
+        //       type: dataConType,
+        //     });
+        //     const dataBlobUrl = window.URL.createObjectURL(dataBlob);
+        //     // const windowOpenObj = window.open(dataBlobUrl);
+        //     // windowOpenObj?.document.write("<iframe src='"+ dataImgObj +"' height='100%' width='100%'></iframe>");
+        //     // windowOpenObj?.document.write(dataBlobUrl);
+        //     window.open(dataURLStr);
+        //   }
+        // }
       },
       (error) => {
         console.error('service file error', error);
@@ -179,43 +188,5 @@ export class RsMiscCorrespondenceComponent implements OnInit {
     }
     bas64Str = window.btoa(bina);
     return bas64Str;
-  }
-
-  changePhoto(imageInput: HTMLInputElement) {
-    console.log('imageInput.files![0]', imageInput.files![0]);
-    this.imageObj = imageInput.files![0];
-    console.log(this.imageObj.size);
-    if (this.imageObj.size > 5242880) {
-      //this.photoMaxSizeErrorMessage();
-    } else {
-      if (
-        this.imageObj.type === 'image/jpeg' ||
-        this.imageObj.type === 'image/png'
-      ) {
-        let imageForm = new FormData();
-        imageForm.append('image', this.imageObj);
-        imageForm.append('imageName', this.imageObj.name);
-        imageForm.append('userGroup', 'VETERAN');
-        console.log('iamgeform==> ', imageForm);
-        this.residentService.uploadMiscFile(imageForm, this.loginId).subscribe(
-          (response) => {
-            if (response.responseStatus === 'SUCCESS') {
-              this.showSpinner = false;
-              this.successMessage();
-              this.getUploadedFiles();
-            } else {
-              this.errorMessage();
-            }
-          },
-          (error) => {
-            this.showSpinner = this.grayOut = false;
-            this.errorMessage();
-            console.error('service file error', error);
-          }
-        );
-      } else {
-        //this.photoTypeErrorMessage();
-      }
-    }
   }
 }
