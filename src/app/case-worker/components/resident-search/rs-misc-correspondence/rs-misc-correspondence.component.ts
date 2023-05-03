@@ -108,54 +108,6 @@ export class RsMiscCorrespondenceComponent implements OnInit {
     this.residentService.downloadMiscFile(event.data.key).subscribe(
       (response) => {
         console.log('Response==>', response);
-        if (response.responseStatus == 'SUCCESS') {
-          var imageSrc =
-            'data:application/' +
-            response.data.contentType +
-            ';base64,' +
-            response.data.imageBody;
-          this.imageUrl = this.sanitization.bypassSecurityTrustUrl(imageSrc);
-          console.log('generated image url', this.imageUrl);
-        }
-        // if (response.responseStatus === 'SUCCESS') {
-        //   const dataConType = response?.data?.ContentType;
-        //   // window.open(dataBlobUrl, '_blank');
-        //   // const windowOpenObj = window.open();
-        //   // const bs64DB = this.arrayBufferToBase64(dataBuffer);
-        //   // const dataFileFormat = 'data:' + dataConType + ';base64,' + bs64DB;
-        //   // const sanitizedURL = this.sanitization.bypassSecurityTrustUrl(dataFileFormat);
-        //   // windowOpenObj?.document.write("<iframe src='"+ dataFileFormat +"'></iframe>");
-        //   if (dataConType?.indexOf('pdf') > 0) {
-        //     const dataBuffer = response?.data?.Body?.data;
-        //     const dataBlob = new Blob([new Uint8Array(dataBuffer)], {
-        //       type: dataConType,
-        //     });
-        //     const dataBlobUrl = window.URL.createObjectURL(dataBlob);
-        //     const dLink = document.createElement('a');
-        //     dLink.href = dataBlobUrl;
-        //     dLink.target = '_blank';
-        //     document.body.appendChild(dLink);
-        //     dLink.click();
-        //     document.body.removeChild(dLink);
-        //     console.log(
-        //       'download misc file::body:',
-        //       { dataBlob },
-        //       { dataBlobUrl }
-        //     );
-        //   } else if (typeof response?.data === 'string') {
-        //     const dataURLStr = response?.data;
-        //     const dataImgObj = new Image();
-        //     dataImgObj.src = dataURLStr;
-        //     const dataBlob = new Blob([new Uint8Array(dataURLStr)], {
-        //       type: dataConType,
-        //     });
-        //     const dataBlobUrl = window.URL.createObjectURL(dataBlob);
-        //     // const windowOpenObj = window.open(dataBlobUrl);
-        //     // windowOpenObj?.document.write("<iframe src='"+ dataImgObj +"' height='100%' width='100%'></iframe>");
-        //     // windowOpenObj?.document.write(dataBlobUrl);
-        //     window.open(dataURLStr);
-        //   }
-        // }
       },
       (error) => {
         console.error('service file error', error);
