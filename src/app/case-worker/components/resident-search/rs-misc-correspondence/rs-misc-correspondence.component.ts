@@ -1,6 +1,5 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { MessageService } from 'primeng/api';
 import { ResidentSearchService } from 'src/app/case-worker/services/resident-search.service';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
@@ -17,15 +16,13 @@ export class RsMiscCorrespondenceComponent implements OnInit {
   public isFileUploaded!: string;
   public showSpinner: boolean = true;
   public grayOut: boolean = true;
-  public imageUrl!: any;
   public imageObj!: File;
 
   constructor(
     private residentService: ResidentSearchService,
     private cacheData: ClipBoardService,
     private messageService: MessageService,
-    private datepipe: DatePipe,
-    private sanitization: DomSanitizer
+    private datepipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -108,6 +105,9 @@ export class RsMiscCorrespondenceComponent implements OnInit {
     this.residentService.downloadMiscFile(event.data.key).subscribe(
       (response) => {
         console.log('Response==>', response);
+        if (response.responseStatus === 'SUCCESS') {
+          window.open(response.data, '_blank');
+        }
       },
       (error) => {
         console.error('service file error', error);
@@ -129,16 +129,5 @@ export class RsMiscCorrespondenceComponent implements OnInit {
       summary: 'Error',
       detail: 'Unable to upload your file. Please try again!',
     });
-  }
-
-  arrayBufferToBase64(buffr: any): string {
-    const bufToBin = new Uint8Array(buffr);
-    let bas64Str = '';
-    let bina = '';
-    for (let buf = 0; buf < bufToBin?.length; buf++) {
-      bina += String.fromCharCode(bufToBin[buf]);
-    }
-    bas64Str = window.btoa(bina);
-    return bas64Str;
   }
 }
